@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--NavigationTabBar-->
+    <declare-styleable name="NavigationTabBar">
+        <!--是否带文字-->
+        <attr name="ntb_titled" format="boolean"/>
+        <!--是否显示badge-->
+        <attr name="ntb_badged" format="boolean"/>
+        <!--是否进行缩放（当宽高内容超出或点击选择某个tab时）-->
+        <attr name="ntb_scaled" format="boolean"/>
+        <!--badge中的文字是否使用特殊字体-->
+        <attr name="ntb_badge_use_typeface" format="boolean"/>
+        <!--标题的显示模式-->
+        <attr name="ntb_title_mode" format="enum">
+            <enum name="all" value="0"/>
+            <enum name="active" value="1"/>
+        </attr>
+        <!--badge的显示位置-->
+        <attr name="ntb_badge_position" format="enum">
+            <enum name="left" value="0"/>
+            <enum name="center" value="1"/>
+            <enum name="right" value="2"/>
+        </attr>
+        <!--badge的显示位置-->
+        <attr name="ntb_badge_gravity" format="enum">
+            <enum name="top" value="0"/>
+            <enum name="bottom" value="1"/>
+        </attr>
+        <!--badge背景色-->
+        <attr name="ntb_badge_bg_color" format="color"/>
+        <!--badge文字颜色-->
+        <attr name="ntb_badge_title_color" format="color"/>
+        <!--控件字体-->
+        <attr name="ntb_typeface" format="string"/>
+        <!--控件的圆角大小-->
+        <attr name="ntb_corners_radius" format="dimension"/>
+        <!--控件滑动动画的持续时间-->
+        <attr name="ntb_animation_duration" format="integer"/>
+        <!--tab的非激活颜色-->
+        <attr name="ntb_inactive_color" format="color"/>
+        <!--tab的激活颜色-->
+        <attr name="ntb_active_color" format="color"/>
+        <!--tab的预置色-->
+        <attr name="ntb_preview_colors" format="reference"/>
+    </declare-styleable>
+</resources>
