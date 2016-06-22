@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Rect;
+import android.os.Build;
 import android.telephony.TelephonyManager;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -20,6 +21,30 @@ public final class DensityUtils {
         return telephonyManager.getDeviceId();
     }
 
+
+    /**
+     * finger = getString("ro.product.brand") + '/' +
+     * getString("ro.product.name") + '/' +
+     * getString("ro.product.device") + ':' +
+     * getString("ro.build.version.release") + '/' +
+     * getString("ro.build.id") + '/' +
+     * getString("ro.build.version.incremental") + ':' +
+     * getString("ro.build.type") + '/' +
+     * getString("ro.build.tags");
+     *
+     * @return
+     */
+    public static String getReformatFingerprint() {
+        return "brand->" + Build.BOARD + "\n\t" +
+                "name->" + Build.PRODUCT + "\n\t" +
+                "device->" + Build.DEVICE + "\n\t" +
+                "release->" + Build.VERSION.RELEASE + "\n\t" +
+                "id->" + Build.ID + "\n\t" +
+                "incremental->" + Build.VERSION.INCREMENTAL + "\n\t" +
+                "type->" + Build.TYPE + "\n\t" +
+                "tags->" + Build.TAGS;
+    }
+
     /**
      * 打印设备信息（包括density、densityDpi、屏幕宽高）
      *
@@ -31,7 +56,8 @@ public final class DensityUtils {
                 "width = " + getScreenWidth(context) + "\n" +
                 "height = " + getScreenHeight(context) + "\n" +
                 "statusBarHeight = " + getStatusBarHeight(context) + "\n" +
-                "deviceId = " + getDeviceId(context));
+                "deviceId = " + getDeviceId(context) + "\n" +
+                "fingerprint = " + getReformatFingerprint());
     }
 
     /**
