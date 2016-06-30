@@ -1,5 +1,28 @@
 apply plugin: 'com.android.application'
 
+def releaseTime() {
+    return new Date().format("yyyy-MM-dd");
+}
+
+def apkName() {
+    return "SuperRandy"
+}
+
+//defaultConfig{} 默认配置，是ProductFlavor类型。它共享给其他ProductFlavor使用
+//sourceSets{ } 源文件目录设置，是AndroidSourceSet类型。
+//buildTypes{ } BuildType类型
+//signingConfigs{ } 签名配置，SigningConfig类型
+//productFlavors{ } 产品风格配置，ProductFlavor类型
+//testOptions{ } 测试配置，TestOptions类型
+//aaptOptions{ } aapt配置，AaptOptions类型
+//lintOptions{ } lint配置，LintOptions类型
+//dexOptions{ } dex配置，DexOptions类型
+//compileOptions{ } 编译配置，CompileOptions类型
+//packagingOptions{ } PackagingOptions类型
+//jacoco{ } JacocoExtension类型。 用于设定 jacoco版本
+//splits{ } Splits类型。
+
+
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.1"
@@ -9,18 +32,93 @@ android {
         minSdkVersion 14
         targetSdkVersion 23
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.0"
+        // dex 突破65535限制
+        multiDexEnabled true
+        //
+        manifestPlaceholders = [UMENG_CHANNEL_VALUE: "channel_name"]
+
     }
-    buildTypes {
+
+    android.applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            def outputFile = output.outputFile
+            if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                //这里修改apk文件名
+                def fileName = outputFile.name.replace("app", "${apkName()}_${defaultConfig.versionName}_${releaseTime()}")
+                output.outputFile = new File(outputFile.parent, fileName)
+            }
+        }
+    }
+
+    // 执行lint检查，有任何错误或警告提示都会终止build，设置为false即可将其关掉
+    lintOptions {
+        abortOnError false
+    }
+
+    // 签名配置
+    signingConfigs {
+        debug {
+
+        }
+
         release {
+            storeFile file("../SuperRandy.jks")
+            storePassword "zh7359431"
+            keyAlias "SuperRandy"
+            keyPassword "zh7359431"
+        }
+    }
+
+    buildTypes {
+        debug {
+            // 显示log
+            buildConfigField("boolean", "LOG_DEBUG", "true")
+            versionNameSuffix "-debug"
             minifyEnabled false
+            zipAlignEnabled false
+            shrinkResources false
+        }
+        release {
+            // 不显示log
+            buildConfigField("boolean", "LOG_DEBUG", "false")
+            // 控制是否进行混淆
+            minifyEnabled true
+            //
+            zipAlignEnabled true
+            // 移除无用的资源文件
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+    }
+
+    // 多渠道打包
+    productFlavors {
+        wandoujia {}
+        _360 {}
+        baidu {}
+        xiaomi {}
+        tencent {}
+        taobao {}
+    }
+
+    productFlavors.all {
+        flavor -> flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
         }
     }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:23.0.1'
     compile 'com.jakewharton:butterknife:7.0.1'
+    compile 'com.android.support:multidex:1.0.1'
+    compile files('libs/GetuiSDK2.9.0.0.jar')
+    compile files('libs/json_simple-1.1.jar')
 }
