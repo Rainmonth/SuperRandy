@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import com.igexin.sdk.PushManager;
 import com.rainmonth.R;
 import com.rainmonth.widgets.NavigationTabBar;
 
@@ -34,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        // 初始化个推
+        PushManager.getInstance().initialize(getApplicationContext());
         ButterKnife.bind(this);
         initUI();
     }
