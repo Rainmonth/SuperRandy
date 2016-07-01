@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements MainView{
         vpHorizontalNtb = (ViewPager) findViewById(R.id.vp_horizontal_ntb);
         ntbHorizontal = (NavigationTabBar) findViewById(R.id.ntb_horizontal);
         vpHorizontalNtb.setAdapter(new HomeViewPagerAdapter(getSupportFragmentManager(), fragments));
-        ntbHorizontal.setIsBadged(false);
+        ntbHorizontal.setIsBadged(true);
         ntbHorizontal.setModels(models);
         ntbHorizontal.setViewPager(vpHorizontalNtb, 2);
         ntbHorizontal.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {

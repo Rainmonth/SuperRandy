@@ -8,6 +8,7 @@ import com.rainmonth.fragment.BaseLazyFragment;
 import com.rainmonth.fragment.RanFragment;
 import com.rainmonth.fragment.RenFragment;
 import com.rainmonth.fragment.XunFragment;
+import com.rainmonth.fragment.YouFragment;
 import com.rainmonth.fragment.ZhuiFragment;
 import com.rainmonth.widgets.NavigationTabBar;
 
@@ -26,6 +27,7 @@ public class MainModelImpl implements MainModel {
         fragments.add(new RanFragment());
         fragments.add(new ZhuiFragment());
         fragments.add(new XunFragment());
+        fragments.add(new YouFragment());
         return fragments;
     }
 
@@ -66,6 +68,16 @@ public class MainModelImpl implements MainModel {
                         Color.parseColor(colors[3]))
 //                        .selectedIcon(getResources().getDrawable(R.drawable.ic_eighth))
                         .title(context.getString(R.string.xun))
+                        .badgeTitle("icon")
+                        .build()
+        );
+
+        models.add(
+                new NavigationTabBar.Model.Builder(
+                        context.getResources().getDrawable(R.drawable.ic_fourth),
+                        Color.parseColor(colors[3]))
+//                        .selectedIcon(getResources().getDrawable(R.drawable.ic_eighth))
+                        .title(context.getString(R.string.you))
                         .badgeTitle("icon")
                         .build()
         );

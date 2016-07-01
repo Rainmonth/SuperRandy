@@ -1,6 +1,7 @@
 package com.rainmonth.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -17,7 +18,7 @@ import butterknife.ButterKnife;
 /**
  * Created by RandyZhang on 16/6/30.
  */
-public abstract class BaseLazyFragment extends Fragment{
+public abstract class BaseLazyFragment extends Fragment {
     /**
      * Log tag
      */
@@ -30,6 +31,7 @@ public abstract class BaseLazyFragment extends Fragment{
     private boolean isFirstVisible = true;
     private boolean isFirstInvisible = true;
     private boolean isPrepared;
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -147,6 +149,56 @@ public abstract class BaseLazyFragment extends Fragment{
 
     private void onFirstUserInvisible() {
         // recommend do nothing
+    }
+
+    /**
+     * startActivity
+     *
+     * @param clazz class to start
+     */
+    protected void readyGo(Class<?> clazz) {
+        Intent intent = new Intent(getActivity(), clazz);
+        startActivity(intent);
+    }
+
+    /**
+     * startActivity with bundle
+     *
+     * @param clazz class to start
+     * @param bundle bundle to transport
+     */
+    protected void readyGo(Class<?> clazz, Bundle bundle) {
+        Intent intent = new Intent(getActivity(), clazz);
+        if (null != bundle) {
+            intent.putExtras(bundle);
+        }
+        startActivity(intent);
+    }
+
+    /**
+     * startActivityForResult
+     *
+     * @param clazz class to start
+     * @param requestCode request code
+     */
+    protected void readyGoForResult(Class<?> clazz, int requestCode) {
+        Intent intent = new Intent(getActivity(), clazz);
+        startActivityForResult(intent, requestCode);
+    }
+
+    /**
+     * startActivityForResult with bundle
+     *
+     * @param clazz class to start
+     * @param requestCode request code
+     * @param bundle bundle to transport
+     */
+    protected void readyGoForResult(Class<?> clazz, int requestCode, Bundle bundle) {
+        Intent intent = new Intent(getActivity(), clazz);
+        if (null != bundle) {
+            intent.putExtras(bundle);
+        }
+        startActivityForResult(intent, requestCode);
     }
 
     public abstract void onFirstUserVisible();
