@@ -8,4 +8,7 @@
         <item>#dd6495</item>
         <item>#72d3b4</item>
     </string-array>
+
+    <color name="bg_home">#423752</color>
+    <color name="bg_home_bottom_tab_bar">#605271</color>
 </resources>
