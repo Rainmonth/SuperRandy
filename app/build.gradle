@@ -56,20 +56,6 @@ android {
         abortOnError false
     }
 
-    // 签名配置
-    signingConfigs {
-        debug {
-
-        }
-
-        release {
-            storeFile file("../SuperRandy.jks")
-            storePassword "zh7359431"
-            keyAlias "SuperRandy"
-            keyPassword "zh7359431"
-        }
-    }
-
     buildTypes {
         debug {
             // 显示log
@@ -89,22 +75,8 @@ android {
             // 移除无用的资源文件
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.release
+//            signingConfig signingConfigs.release
         }
-    }
-
-    // 多渠道打包
-    productFlavors {
-        wandoujia {}
-        _360 {}
-        baidu {}
-        xiaomi {}
-        tencent {}
-        taobao {}
-    }
-
-    productFlavors.all {
-        flavor -> flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
     }
 
     sourceSets {
@@ -116,8 +88,10 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:appcompat-v7:23.0.1'
+    compile files('libs/GetuiSDK2.9.0.0.jar')
+    compile 'com.android.support:appcompat-v7:23.4.0'
     compile 'com.jakewharton:butterknife:7.0.1'
     compile 'com.android.support:multidex:1.0.1'
-    compile files('libs/GetuiSDK2.9.0.0.jar')
+    compile 'com.android.support:design:23.4.0'
+    compile 'com.android.support:support-v4:23.4.0'
 }
