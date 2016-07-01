@@ -21,14 +21,14 @@
         <View
             android:id="@+id/bg_ntb_horizontal"
             android:layout_width="match_parent"
-            android:layout_height="52dp"
+            android:layout_height="40dp"
             android:layout_gravity="bottom"
             android:background="#605271" />
 
         <com.rainmonth.widgets.NavigationTabBar
             android:id="@+id/ntb_horizontal"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="48dp"
             app:ntb_badge_gravity="top"
             app:ntb_badge_position="right"
             app:ntb_badged="true"
