@@ -7,4 +7,6 @@
     <string name="zhui">追</string>
     <string name="xun">寻</string>
     <string name="you">你</string>
+
+    <string name="default_splash_text">荏苒追寻</string>
 </resources>

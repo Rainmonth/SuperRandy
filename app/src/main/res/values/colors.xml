@@ -11,4 +11,5 @@
 
     <color name="bg_home">#423752</color>
     <color name="bg_home_bottom_tab_bar">#605271</color>
+    <color name="half_transparent_bg_home">#88000000</color>
 </resources>
