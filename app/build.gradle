@@ -40,16 +40,16 @@ android {
 
     }
 
-    android.applicationVariants.all { variant ->
-        variant.outputs.each { output ->
-            def outputFile = output.outputFile
-            if (outputFile != null && outputFile.name.endsWith('.apk')) {
-                //这里修改apk文件名
-                def fileName = outputFile.name.replace("app", "${apkName()}_${defaultConfig.versionName}_${releaseTime()}")
-                output.outputFile = new File(outputFile.parent, fileName)
-            }
-        }
-    }
+//    android.applicationVariants.all { variant ->
+//        variant.outputs.each { output ->
+//            def outputFile = output.outputFile
+//            if (outputFile != null && outputFile.name.endsWith('.apk')) {
+//                //这里修改apk文件名
+//                def fileName = outputFile.name.replace("app", "${apkName()}_${defaultConfig.versionName}_${releaseTime()}")
+//                output.outputFile = new File(outputFile.parent, fileName)
+//            }
+//        }
+//    }
 
     // 执行lint检查，有任何错误或警告提示都会终止build，设置为false即可将其关掉
     lintOptions {
