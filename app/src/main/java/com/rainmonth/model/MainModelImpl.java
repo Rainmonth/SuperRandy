@@ -75,7 +75,7 @@ public class MainModelImpl implements MainModel {
         models.add(
                 new NavigationTabBar.Model.Builder(
                         context.getResources().getDrawable(R.drawable.ic_fourth),
-                        Color.parseColor(colors[3]))
+                        Color.parseColor(colors[4]))
 //                        .selectedIcon(getResources().getDrawable(R.drawable.ic_eighth))
                         .title(context.getString(R.string.you))
                         .badgeTitle("icon")
