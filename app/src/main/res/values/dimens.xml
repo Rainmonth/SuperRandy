@@ -5,4 +5,10 @@
 
     <!-- Text Size-->
     <dimen name="text_large">22sp</dimen>
+
+    <!--Text Btn Padding-->
+    <dimen name="padding_normal">@dimen/activity_horizontal_margin</dimen>
+
+    <!--Text Btn Margin-->
+    <dimen name="margin_normal">@dimen/activity_horizontal_margin</dimen>
 </resources>

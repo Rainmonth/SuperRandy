@@ -7,9 +7,17 @@
         <item>#76afcf</item>
         <item>#dd6495</item>
         <item>#72d3b4</item>
+        <item>#379648</item>
     </string-array>
 
+    <!--normal color-->
+    <color name="black">@android:color/black</color>
+
+    <!--background color-->
     <color name="bg_home">#423752</color>
     <color name="bg_home_bottom_tab_bar">#605271</color>
-    <color name="half_transparent_bg_home">#88000000</color>
+    <color name="bg_half_transparent_black">#88000000</color>
+    <color name="bg_half_transparent_white">#88FFFFFF</color>
+
+    <!--text color-->
 </resources>
