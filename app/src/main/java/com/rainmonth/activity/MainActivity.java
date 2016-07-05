@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import com.igexin.sdk.PushManager;
-import com.rainmonth.HomeViewPagerAdapter;
+import com.rainmonth.adapter.HomeViewPagerAdapter;
 import com.rainmonth.R;
 import com.rainmonth.fragment.BaseLazyFragment;
 import com.rainmonth.presenter.BasePresenter;
