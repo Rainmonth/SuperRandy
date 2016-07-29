@@ -2,6 +2,7 @@ package com.rainmonth.presenter;
 
 import android.content.Context;
 
+import com.rainmonth.bean.XunNavigationInfo;
 import com.rainmonth.model.XunFragmentModel;
 import com.rainmonth.model.XunFragmentModelImpl;
 import com.rainmonth.view.XunFragmentView;
@@ -26,5 +27,9 @@ public class XunFragmentPresenter implements BasePresenter {
     @Override
     public void initialize() {
         xunFragmentView.initViews(xunFragmentModel.getXunNavigationList());
+    }
+
+    public void navToDetail(int type, XunNavigationInfo xunNavigationInfo) {
+        xunFragmentView.navToDetail(type, xunNavigationInfo);
     }
 }

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -13,7 +14,6 @@ import com.rainmonth.adapter.base.ListViewDataAdapter;
 import com.rainmonth.adapter.base.ViewHolderBase;
 import com.rainmonth.adapter.base.ViewHolderCreator;
 import com.rainmonth.bean.XunNavigationInfo;
-import com.rainmonth.model.XunFragmentModel;
 import com.rainmonth.presenter.XunFragmentPresenter;
 import com.rainmonth.view.XunFragmentView;
 
@@ -34,13 +34,14 @@ import butterknife.ButterKnife;
  * <p/>
  * Created by RandyZhang on 16/6/30.
  */
-public class XunFragment extends BaseLazyFragment implements XunFragmentView{
+public class XunFragment extends BaseLazyFragment implements XunFragmentView {
     @Bind(R.id.gv_content)
     GridView gvContent;
 
     private XunFragmentPresenter xunFragmentPresenter = null;
 
     private ListViewDataAdapter<XunNavigationInfo> mXunNavListAdapter = null;
+    public final static int TYPE_CARD = 1, TYPE_GRID = 2, TYPE_VIEW_PAGER = 3, TYPE_LIST = 4;
 
     @Override
     public void onFirstUserVisible() {
@@ -91,7 +92,7 @@ public class XunFragment extends BaseLazyFragment implements XunFragmentView{
 
                     @Override
                     public View createView(LayoutInflater layoutInflater) {
-                        View convertView = layoutInflater.inflate(R.layout.fragment_xun_gv_content_item, null);
+                        View convertView = layoutInflater.inflate(R.layout.adapter_xun_gv_content_item, null);
                         ivNavImg = ButterKnife.findById(convertView, R.id.iv_nav_img);
                         tvNavName = ButterKnife.findById(convertView, R.id.tv_nav_name);
                         return convertView;
@@ -108,5 +109,38 @@ public class XunFragment extends BaseLazyFragment implements XunFragmentView{
         });
         mXunNavListAdapter.getDataList().addAll(xunNavigationInfoList);
         gvContent.setAdapter(mXunNavListAdapter);
+        gvContent.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // todo nav to detail activity
+                int type = 1;
+                XunNavigationInfo xunNavigationInfo = mXunNavListAdapter.getDataList().get(position);
+                if (null != xunNavigationInfo) {
+                    xunFragmentPresenter.navToDetail(type, xunNavigationInfo);
+                }
+            }
+        });
+    }
+
+    @Override
+    public void navToDetail(int type, XunNavigationInfo xunNavigationInfo) {
+        switch (type) {
+            case TYPE_CARD:
+                // todo card 形式展现
+                break;
+
+            case TYPE_GRID:
+                // todo grid 形式展现
+                break;
+            case TYPE_LIST:
+                // todo list 形式展现
+                break;
+            case TYPE_VIEW_PAGER:
+            default:
+                // todo viewPager形式展现
+                break;
+
+        }
     }
 }

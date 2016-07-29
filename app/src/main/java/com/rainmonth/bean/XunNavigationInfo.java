@@ -7,12 +7,22 @@ import java.io.Serializable;
  */
 public class XunNavigationInfo implements Serializable{
 
+    private int type;
     private int navIconResId;
     private String navName;
 
-    public XunNavigationInfo(int navIconResId, String navName) {
+    public XunNavigationInfo(int type, int navIconResId, String navName) {
+        this.type = type;
         this.navIconResId = navIconResId;
         this.navName = navName;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 
     public int getNavIconResId() {

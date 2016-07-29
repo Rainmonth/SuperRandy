@@ -10,4 +10,6 @@ import java.util.List;
 public interface XunFragmentView {
 
     void initViews(List<XunNavigationInfo> xunNavigationInfoList);
+
+    void navToDetail(int type, XunNavigationInfo xunNavigationInfo);
 }
