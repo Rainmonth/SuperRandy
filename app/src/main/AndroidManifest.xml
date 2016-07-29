@@ -129,11 +129,6 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <!-- 个推SDK配置结束 -->
 
-
-        <activity
-            android:name=".activity.MainActivity"
-            android:label="@string/app_name"
-            android:launchMode="singleTop" />
         <!-- 在上面加入你的你的activity配置 -->
         <activity android:name=".activity.SplashActivity">
             <intent-filter>
@@ -141,6 +136,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".activity.MainActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.AppsExploreActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
