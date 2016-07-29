@@ -3,13 +3,12 @@ package com.rainmonth.fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.rainmonth.utils.DensityUtils;
 
 import java.lang.reflect.Field;
 
@@ -32,6 +31,8 @@ public abstract class BaseLazyFragment extends Fragment {
     private boolean isFirstInvisible = true;
     private boolean isPrepared;
 
+
+    protected Handler mHandler = new Handler();
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
