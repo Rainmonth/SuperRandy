@@ -2,13 +2,12 @@ package com.rainmonth.activity;
 
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.FrameLayout;
 
 import com.igexin.sdk.PushManager;
-import com.rainmonth.adapter.HomeViewPagerAdapter;
 import com.rainmonth.R;
+import com.rainmonth.adapter.HomeViewPagerAdapter;
 import com.rainmonth.fragment.BaseLazyFragment;
 import com.rainmonth.presenter.BasePresenter;
 import com.rainmonth.presenter.MainPresenter;
@@ -20,7 +19,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity implements MainView{
+public class MainActivity extends BaseActivity implements MainView{
 
     @Bind(R.id.vp_horizontal_ntb)
     ViewPager vpHorizontalNtb;
@@ -32,26 +31,25 @@ public class MainActivity extends AppCompatActivity implements MainView{
     FrameLayout flNtbHorizontalContainer;
 
     BasePresenter mainPresenter = null;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    public boolean isApplyTranslucentStatusBar() {
+        return false;
+    }
+
+    @Override
+    public int getContentViewLayoutId() {
+        return R.layout.activity_main;
+    }
+
+    @Override
+    public void initViewsAndEvent() {
         // 初始化个推
         PushManager.getInstance().initialize(getApplicationContext());
         ButterKnife.bind(this);
 
         mainPresenter = new MainPresenter(this, this);
         mainPresenter.initialize();
-    }
-
-    @Override
-    public void initializeViews(List<NavigationTabBar.Model> models, List<BaseLazyFragment> fragments) {
-        vpHorizontalNtb = (ViewPager) findViewById(R.id.vp_horizontal_ntb);
-        ntbHorizontal = (NavigationTabBar) findViewById(R.id.ntb_horizontal);
-        vpHorizontalNtb.setAdapter(new HomeViewPagerAdapter(getSupportFragmentManager(), fragments));
-        ntbHorizontal.setIsBadged(true);
-        ntbHorizontal.setModels(models);
-        ntbHorizontal.setViewPager(vpHorizontalNtb, 2);
         ntbHorizontal.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(final int position, final float positionOffset, final int positionOffsetPixels) {
@@ -68,6 +66,14 @@ public class MainActivity extends AppCompatActivity implements MainView{
 
             }
         });
+    }
+
+    @Override
+    public void initializeViews(List<NavigationTabBar.Model> models, List<BaseLazyFragment> fragments) {
+        vpHorizontalNtb.setAdapter(new HomeViewPagerAdapter(getSupportFragmentManager(), fragments));
+        ntbHorizontal.setIsBadged(true);
+        ntbHorizontal.setModels(models);
+        ntbHorizontal.setViewPager(vpHorizontalNtb, 2);
 
         ntbHorizontal.post(new Runnable() {
             @Override

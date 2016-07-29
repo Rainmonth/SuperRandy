@@ -1,8 +1,6 @@
 package com.rainmonth.activity;
 
 import android.content.Intent;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,14 +11,13 @@ import com.rainmonth.presenter.SplashPresenter;
 import com.rainmonth.view.SplashView;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 
 /**
  * 启动页主要负责以下工作：
  * 1、页面图片展示（默认的或网络的）
  * 2、页面逻辑跳转，
  */
-public class SplashActivity extends AppCompatActivity implements SplashView {
+public class SplashActivity extends BaseActivity implements SplashView {
 
     @Bind(R.id.tv_splash_text)
     TextView tvSplashText;
@@ -30,14 +27,19 @@ public class SplashActivity extends AppCompatActivity implements SplashView {
     private BasePresenter splashPresenter = null;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash);
-        ButterKnife.bind(this);
+    public boolean isApplyTranslucentStatusBar() {
+        return false;
+    }
 
+    @Override
+    public int getContentViewLayoutId() {
+        return R.layout.activity_splash;
+    }
+
+    @Override
+    public void initViewsAndEvent() {
         splashPresenter = new SplashPresenter(this, this);
         splashPresenter.initialize();
-
         /**
          *  todo 请求网络判断是否有新的Splash图片（即新的活动）:
          *  1、有，显示Splash图片，走有新Splash图片的逻辑（如点击图片进入相关活动页面、显示倒计时等）
