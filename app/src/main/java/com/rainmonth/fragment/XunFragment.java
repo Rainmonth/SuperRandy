@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.rainmonth.R;
+import com.rainmonth.activity.AppsExploreActivity;
 import com.rainmonth.adapter.base.ListViewDataAdapter;
 import com.rainmonth.adapter.base.ViewHolderBase;
 import com.rainmonth.adapter.base.ViewHolderCreator;
@@ -128,6 +129,7 @@ public class XunFragment extends BaseLazyFragment implements XunFragmentView {
         switch (type) {
             case TYPE_CARD:
                 // todo card 形式展现
+                readyGo(AppsExploreActivity.class);
                 break;
 
             case TYPE_GRID:
