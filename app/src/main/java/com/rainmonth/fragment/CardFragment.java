@@ -44,9 +44,9 @@ public class CardFragment extends BaseLazyFragment {
         super.onCreateView(inflater, container, savedInstanceState);
         View rootView = super.onCreateView(inflater, container, savedInstanceState);
         ButterKnife.bind(this, rootView);
+        initData();
         initViews(rootView);
         initActions(rootView);
-        initData();
         return rootView;
     }
 
