@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package com.rainmonth.widgets.ptr.extras.listfragment;
+package com.rainmonth.fragment.listfragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 
-import com.rainmonth.widgets.ptr.library.PullToRefreshListView;
+import com.rainmonth.widgets.library.PullToRefreshListView;
 
 
 /**

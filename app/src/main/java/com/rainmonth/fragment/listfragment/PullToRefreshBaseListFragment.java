@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package com.rainmonth.widgets.ptr.extras.listfragment;
+package com.rainmonth.fragment.listfragment;
 
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
@@ -23,7 +23,7 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.ListView;
 
-import com.rainmonth.widgets.ptr.library.PullToRefreshBase;
+import com.rainmonth.widgets.library.PullToRefreshBase;
 
 
 abstract class PullToRefreshBaseListFragment<T extends PullToRefreshBase<? extends AbsListView>> extends ListFragment {

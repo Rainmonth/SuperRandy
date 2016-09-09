@@ -13,14 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package com.rainmonth.widgets.ptr.library.extras;
+package com.rainmonth.widgets.library.extras;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.webkit.WebView;
 
-import com.rainmonth.widgets.ptr.library.PullToRefreshWebView;
+import com.rainmonth.widgets.library.PullToRefreshWebView;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -82,7 +81,6 @@ public class PullToRefreshWebView2 extends PullToRefreshWebView {
 	private final AtomicBoolean mIsReadyForPullDown = new AtomicBoolean(false);
 	private final AtomicBoolean mIsReadyForPullUp = new AtomicBoolean(false);
 
-	@SuppressLint("JavascriptInterface")
 	@Override
 	protected WebView createRefreshableView(Context context, AttributeSet attrs) {
 		WebView webView = super.createRefreshableView(context, attrs);

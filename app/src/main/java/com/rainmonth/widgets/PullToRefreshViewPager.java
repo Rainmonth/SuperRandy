@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package com.rainmonth.widgets.ptr.extras.viewpager;
+package com.rainmonth.widgets;
 
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
@@ -21,7 +21,8 @@ import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 
 import com.rainmonth.R;
-import com.rainmonth.widgets.ptr.library.PullToRefreshBase;
+
+import com.rainmonth.widgets.library.PullToRefreshBase;
 
 public class PullToRefreshViewPager extends PullToRefreshBase<ViewPager> {
 
@@ -34,7 +35,7 @@ public class PullToRefreshViewPager extends PullToRefreshBase<ViewPager> {
 	}
 
 	@Override
-	public final PullToRefreshBase.Orientation getPullToRefreshScrollDirection() {
+	public final Orientation getPullToRefreshScrollDirection() {
 		return Orientation.HORIZONTAL;
 	}
 

@@ -1,4 +1,4 @@
-package com.rainmonth.widgets.ptr.library.internal;
+package com.rainmonth.widgets.library.internal;
 
 import android.util.Log;
 

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package com.rainmonth.widgets.ptr.library;
+package com.rainmonth.widgets.library;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -32,9 +32,10 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 
+import com.rainmonth.widgets.library.internal.EmptyViewMethodAccessor;
+import com.rainmonth.widgets.library.internal.IndicatorLayout;
 import com.rainmonth.R;
-import com.rainmonth.widgets.ptr.library.internal.EmptyViewMethodAccessor;
-import com.rainmonth.widgets.ptr.library.internal.IndicatorLayout;
+
 
 public abstract class PullToRefreshAdapterViewBase<T extends AbsListView> extends PullToRefreshBase<T> implements
 		OnScrollListener {
@@ -91,7 +92,7 @@ public abstract class PullToRefreshAdapterViewBase<T extends AbsListView> extend
 	 * a state where a Pull-to-Refresh can happen. An example of this state is
 	 * when the Adapter View is scrolled to the top and the mode is set to
 	 * {@link Mode#PULL_FROM_START}. The default value is <var>true</var> if
-	 * {@link com.rainmonth.widgets.ptr.library.PullToRefreshBase#isPullToRefreshOverScrollEnabled()
+	 * {@link com.hrm.niceapp.pulltorefresh.library.PullToRefreshBase#isPullToRefreshOverScrollEnabled()
 	 * isPullToRefreshOverScrollEnabled()} returns false.
 	 *
 	 * @return true if the indicators will be shown
@@ -142,7 +143,7 @@ public abstract class PullToRefreshAdapterViewBase<T extends AbsListView> extend
 	}
 
 	/**
-	 * Pass-through method for {@link com.rainmonth.widgets.ptr.library.PullToRefreshBase#getRefreshableView()
+	 * Pass-through method for {@link com.hrm.niceapp.pulltorefresh.library.PullToRefreshBase#getRefreshableView()
 	 * getRefreshableView()}.
 	 * {@link AdapterView#setAdapter(Adapter)}
 	 * setAdapter(adapter)}. This is just for convenience!

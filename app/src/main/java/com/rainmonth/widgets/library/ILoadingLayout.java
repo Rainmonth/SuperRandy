@@ -1,4 +1,4 @@
-package com.rainmonth.widgets.ptr.library;
+package com.rainmonth.widgets.library;
 
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;

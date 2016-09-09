@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package com.rainmonth.widgets.ptr.library.internal;
+package com.rainmonth.widgets.library.internal;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -26,8 +26,8 @@ import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
 import android.widget.ImageView.ScaleType;
 
+import com.rainmonth.widgets.library.PullToRefreshBase;
 import com.rainmonth.R;
-import com.rainmonth.widgets.ptr.library.PullToRefreshBase;
 
 
 @SuppressLint("ViewConstructor")

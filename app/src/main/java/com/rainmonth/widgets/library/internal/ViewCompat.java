@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package com.rainmonth.widgets.ptr.library.internal;
+package com.rainmonth.widgets.library.internal;
 
 import android.annotation.TargetApi;
 import android.graphics.drawable.Drawable;

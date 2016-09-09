@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package com.rainmonth.widgets.ptr.library.internal;
+package com.rainmonth.widgets.library.internal;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -30,8 +30,8 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 
+import com.rainmonth.widgets.library.PullToRefreshBase;
 import com.rainmonth.R;
-import com.rainmonth.widgets.ptr.library.PullToRefreshBase;
 
 @SuppressLint("ViewConstructor")
 public class IndicatorLayout extends FrameLayout implements AnimationListener {

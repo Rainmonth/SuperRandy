@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package com.rainmonth.widgets.ptr.library;
+package com.rainmonth.widgets.library;
 
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -21,11 +21,11 @@ import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.util.AttributeSet;
-import android.util.FloatMath;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 
 import com.rainmonth.R;
+
 
 public class PullToRefreshWebView extends PullToRefreshBase<WebView> {
 

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package com.rainmonth.widgets.ptr.library;
+package com.rainmonth.widgets.library;
 
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -23,7 +23,8 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ExpandableListView;
 
-import com.rainmonth.widgets.ptr.library.internal.EmptyViewMethodAccessor;
+import com.rainmonth.widgets.library.internal.EmptyViewMethodAccessor;
+
 
 public class PullToRefreshExpandableListView extends PullToRefreshAdapterViewBase<ExpandableListView> {
 
