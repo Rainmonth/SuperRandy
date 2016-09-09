@@ -25,15 +25,15 @@ public class CardPagerAdapter extends FragmentStatePagerAdapter {
         this.mPostList = paramList;
     }
 
-    public void addCardList(List<CardInfo> cardList) {
+    public void addCardList(List<CardInfo> cardInfoList) {
         ArrayList localArrayList = new ArrayList();
-        Iterator localIterator = cardList.iterator();
+        Iterator localIterator = cardInfoList.iterator();
         while (localIterator.hasNext())
             localArrayList.add(CardFragment.getInstance((CardInfo) localIterator.next()));
         if (this.mFragments == null)
             this.mFragments = new ArrayList();
         this.mFragments.addAll(localArrayList);
-        this.mPostList.addAll(cardList);
+        this.mPostList.addAll(cardInfoList);
     }
 
     public List<CardInfo> getCardList() {
@@ -52,13 +52,13 @@ public class CardPagerAdapter extends FragmentStatePagerAdapter {
         return this.mFragments.get(paramInt);
     }
 
-    public void setCardList(List<CardInfo> cardList) {
+    public void setCardList(List<CardInfo> cardInfoList) {
         ArrayList localArrayList = new ArrayList();
-        Iterator localIterator = cardList.iterator();
+        Iterator localIterator = cardInfoList.iterator();
         while (localIterator.hasNext())
             localArrayList.add(CardFragment.getInstance((CardInfo) localIterator.next()));
         this.mFragments = localArrayList;
-        this.mPostList = cardList;
+        this.mPostList = cardInfoList;
     }
 
     public void setFragments(List<Fragment> paramList) {

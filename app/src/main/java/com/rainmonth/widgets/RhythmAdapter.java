@@ -24,39 +24,39 @@ public class RhythmAdapter extends BaseAdapter {
     /**
      * 数据源
      */
-    private List<CardInfo> mCardList;
+    private List<CardInfo> mCardInfoList;
 
     private LayoutInflater mInflater;
     private Context mContext;
     private RhythmLayout mRhythmLayout;
 
-    public RhythmAdapter(Context context, RhythmLayout rhythmLayout, List<CardInfo> cardList) {
+    public RhythmAdapter(Context context, RhythmLayout rhythmLayout, List<CardInfo> cardInfoList) {
         this.mContext = context;
         this.mRhythmLayout = rhythmLayout;
-        this.mCardList = new ArrayList();
-        this.mCardList.addAll(cardList);
+        this.mCardInfoList = new ArrayList();
+        this.mCardInfoList.addAll(cardInfoList);
         if (context != null)
             this.mInflater = LayoutInflater.from(context);
     }
 
     public List<CardInfo> getCardList() {
-        return this.mCardList;
+        return this.mCardInfoList;
     }
 
-    public void addCardList(List<CardInfo> cardList) {
-        mCardList.addAll(cardList);
+    public void addCardList(List<CardInfo> cardInfoList) {
+        mCardInfoList.addAll(cardInfoList);
     }
 
     public int getCount() {
-        return this.mCardList.size();
+        return this.mCardInfoList.size();
     }
 
     public Object getItem(int position) {
-        return this.mCardList.get(position);
+        return this.mCardInfoList.get(position);
     }
 
     public long getItemId(int paramInt) {
-        return (this.mCardList.get(paramInt)).getUid();
+        return (this.mCardInfoList.get(paramInt)).getUid();
     }
 
 
@@ -80,7 +80,7 @@ public class RhythmAdapter extends BaseAdapter {
         iconParams.height = iconSize;
         imageIcon.setLayoutParams(iconParams);
         //设置背景图片
-        imageIcon.setBackgroundResource(CommonUtils.getDrawableIdByName(mContext, mCardList.get(position).getIconUrl()));
+        imageIcon.setBackgroundResource(CommonUtils.getDrawableIdByName(mContext, mCardInfoList.get(position).getIconUrl()));
 
         return relativeLayout;
     }
@@ -91,7 +91,7 @@ public class RhythmAdapter extends BaseAdapter {
     }
 
     public void setCardList(List<CardInfo> paramList) {
-        this.mCardList = paramList;
+        this.mCardInfoList = paramList;
     }
 
     /**

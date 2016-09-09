@@ -19,7 +19,7 @@ import com.rainmonth.widgets.HtmlTextView;
 import butterknife.ButterKnife;
 
 public class CardFragment extends BaseLazyFragment {
-    protected CardInfo mCard;
+    protected CardInfo mCardInfo;
 
     protected TextView mAuthorText;
     protected ImageView mBottomEdgeImageView;
@@ -30,10 +30,10 @@ public class CardFragment extends BaseLazyFragment {
     protected TextView mSubTitleText;
     protected TextView mTitleText;
 
-    public static CardFragment getInstance(CardInfo CardInfo) {
+    public static CardFragment getInstance(CardInfo cardInfo) {
         CardFragment localCardFragment = new CardFragment();
         Bundle localBundle = new Bundle();
-        localBundle.putSerializable("card", CardInfo);
+        localBundle.putSerializable("cardInfo", cardInfo);
         localCardFragment.setArguments(localBundle);
         return localCardFragment;
     }
@@ -60,12 +60,12 @@ public class CardFragment extends BaseLazyFragment {
         mAuthorText = ((TextView) view.findViewById(R.id.text_author));
         mBravoNumText = ((TextView) view.findViewById(R.id.text_bravos));
 
-        if (null != mCard) {
-            mTitleText.setText(this.mCard.getTitle());
-            mSubTitleText.setText(this.mCard.getSubTitle());
-            this.mBravoNumText.setText("  " + this.mCard.getUpNum());
-            this.mDigestText.setTextViewHtml(mCard.getDigest());
-            this.mAuthorText.setText(Html.fromHtml("<B>" + this.mCard.getAuthorName() + "</B>"));
+        if (null != mCardInfo) {
+            mTitleText.setText(this.mCardInfo.getTitle());
+            mSubTitleText.setText(this.mCardInfo.getSubTitle());
+            this.mBravoNumText.setText("  " + this.mCardInfo.getUpNum());
+            this.mDigestText.setTextViewHtml(mCardInfo.getDigest());
+            this.mAuthorText.setText(Html.fromHtml("<B>" + this.mCardInfo.getAuthorName() + "</B>"));
             initAndDisplayCoverImage();
         }
 
@@ -78,12 +78,12 @@ public class CardFragment extends BaseLazyFragment {
         ViewGroup.LayoutParams localLayoutParams = this.mCoverImageView.getLayoutParams();
         localLayoutParams.height = Float.valueOf(coverHeight).intValue();
         //加载图片
-        int picResource = CommonUtils.getDrawableIdByName(getActivity(), mCard.getCoverImageUrl());
+        int picResource = CommonUtils.getDrawableIdByName(getActivity(), mCardInfo.getCoverImageUrl());
         mCoverImageView.setBackgroundResource(picResource);
     }
 
     protected void initData() {
-        this.mCard = (CardInfo) getArguments().getSerializable("card");
+        this.mCardInfo = (CardInfo) getArguments().getSerializable("cardInfo");
     }
 
     protected void initActions(View paramView) {
