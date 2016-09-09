@@ -55,7 +55,7 @@
             android:textSize="12.0sp" />
     </LinearLayout>
 
-    <com.rainmonth.widgets.ptr.extras.viewpager.PullToRefreshViewPager
+    <com.rainmonth.widgets.PullToRefreshViewPager
         android:id="@+id/pager"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
