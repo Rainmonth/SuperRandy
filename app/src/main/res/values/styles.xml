@@ -1,8 +1,13 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme" parent="Base.Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
+    </style>
+
+    <!--无ActionBar的Activity-->
+    <style name="ThemeNoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
+
     </style>
 
     <style name="text_btn_base" parent="@style/TextAppearance.AppCompat.Inverse">
