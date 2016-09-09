@@ -5,6 +5,7 @@
 - MaterialDesign以及常用工具类的整理; (under working)
 - MVP模式的运用 (done)
 - 简单的Php服务端（项目地址及说明见下面地址）(todo)
+- 修复AppExploreActivity 页面再次进入崩溃的bug（done）
 
 
 ##界面设计
