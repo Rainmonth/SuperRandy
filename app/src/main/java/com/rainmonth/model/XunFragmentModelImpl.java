@@ -17,9 +17,9 @@ public class XunFragmentModelImpl implements XunFragmentModel {
 
         List<XunNavigationInfo> xunNavigationInfoList = new ArrayList<XunNavigationInfo>();
         xunNavigationInfoList.add(new XunNavigationInfo(XunFragment.TYPE_VIEW_PAGER, R.drawable.bg_round_purple_rect, "文章"));
-        xunNavigationInfoList.add(new XunNavigationInfo(XunFragment.TYPE_VIEW_PAGER, R.drawable.bg_round_purple_rect, "图片"));
+        xunNavigationInfoList.add(new XunNavigationInfo(XunFragment.TYPE_LIST, R.drawable.bg_round_purple_rect, "图片"));
         xunNavigationInfoList.add(new XunNavigationInfo(XunFragment.TYPE_VIEW_PAGER, R.drawable.bg_round_purple_rect, "音乐"));
-        xunNavigationInfoList.add(new XunNavigationInfo(XunFragment.TYPE_VIEW_PAGER, R.drawable.bg_round_purple_rect, "电影"));
+        xunNavigationInfoList.add(new XunNavigationInfo(XunFragment.TYPE_GRID, R.drawable.bg_round_purple_rect, "电影"));
         xunNavigationInfoList.add(new XunNavigationInfo(XunFragment.TYPE_CARD, R.drawable.bg_round_purple_rect, "应用"));
 //        xunNavigationInfoList.add(new XunNavigationInfo(R.drawable.bg_round_purple_rect, "文章"));
 //        xunNavigationInfoList.add(new XunNavigationInfo(R.drawable.bg_round_purple_rect, "图片"));

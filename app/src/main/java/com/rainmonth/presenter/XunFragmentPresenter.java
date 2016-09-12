@@ -29,7 +29,7 @@ public class XunFragmentPresenter implements BasePresenter {
         xunFragmentView.initViews(xunFragmentModel.getXunNavigationList());
     }
 
-    public void navToDetail(int type, XunNavigationInfo xunNavigationInfo) {
-        xunFragmentView.navToDetail(type, xunNavigationInfo);
+    public void navToDetail(XunNavigationInfo xunNavigationInfo) {
+        xunFragmentView.navToDetail(xunNavigationInfo);
     }
 }

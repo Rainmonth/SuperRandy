@@ -10,7 +10,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.rainmonth.R;
-import com.rainmonth.activity.AppsExploreActivity;
+import com.rainmonth.activity.CardExploreActivity;
+import com.rainmonth.activity.GridExploreActivity;
+import com.rainmonth.activity.ListExploreActivity;
+import com.rainmonth.activity.ViewPagerExploreActivity;
 import com.rainmonth.adapter.base.ListViewDataAdapter;
 import com.rainmonth.adapter.base.ViewHolderBase;
 import com.rainmonth.adapter.base.ViewHolderCreator;
@@ -115,32 +118,35 @@ public class XunFragment extends BaseLazyFragment implements XunFragmentView {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 // todo nav to detail activity
-                int type = 1;
                 XunNavigationInfo xunNavigationInfo = mXunNavListAdapter.getDataList().get(position);
                 if (null != xunNavigationInfo) {
-                    xunFragmentPresenter.navToDetail(type, xunNavigationInfo);
+                    xunFragmentPresenter.navToDetail(xunNavigationInfo);
                 }
             }
         });
     }
 
     @Override
-    public void navToDetail(int type, XunNavigationInfo xunNavigationInfo) {
+    public void navToDetail(XunNavigationInfo xunNavigationInfo) {
+        int type = xunNavigationInfo.getType();
         switch (type) {
             case TYPE_CARD:
                 // todo card 形式展现
-                readyGo(AppsExploreActivity.class);
+                readyGo(CardExploreActivity.class);
                 break;
 
             case TYPE_GRID:
                 // todo grid 形式展现
+                readyGo(GridExploreActivity.class);
                 break;
             case TYPE_LIST:
                 // todo list 形式展现
+                readyGo(ListExploreActivity.class);
                 break;
             case TYPE_VIEW_PAGER:
             default:
                 // todo viewPager形式展现
+                readyGo(ViewPagerExploreActivity.class);
                 break;
 
         }
