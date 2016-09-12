@@ -6,7 +6,7 @@ import android.support.v4.app.FragmentTransaction;
 import com.rainmonth.R;
 import com.rainmonth.fragment.CardViewPagerFragment;
 
-public class AppsExploreActivity extends BaseActivity {
+public class CardExploreActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,7 +20,7 @@ public class AppsExploreActivity extends BaseActivity {
 
     @Override
     public int getContentViewLayoutId() {
-        return R.layout.activity_apps_explore;
+        return R.layout.activity_card_explore;
     }
 
     @Override
