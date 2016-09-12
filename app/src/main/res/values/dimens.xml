@@ -136,4 +136,6 @@
     <dimen name="user_title_size">18.0sp</dimen>
     <dimen name="why_promote">16.0sp</dimen>
     <dimen name="word_date">22.0sp</dimen>
+    <dimen name="navigator_margin">5dp</dimen>
+    <dimen name="navigator_common_height">48dp</dimen>
 </resources>
