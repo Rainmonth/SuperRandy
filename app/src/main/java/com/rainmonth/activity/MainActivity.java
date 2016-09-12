@@ -73,7 +73,7 @@ public class MainActivity extends BaseActivity implements MainView{
         vpHorizontalNtb.setAdapter(new HomeViewPagerAdapter(getSupportFragmentManager(), fragments));
         ntbHorizontal.setIsBadged(true);
         ntbHorizontal.setModels(models);
-        ntbHorizontal.setViewPager(vpHorizontalNtb, 2);
+        ntbHorizontal.setViewPager(vpHorizontalNtb, 0);
 
         ntbHorizontal.post(new Runnable() {
             @Override
