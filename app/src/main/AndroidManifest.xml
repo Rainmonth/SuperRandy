@@ -146,7 +146,16 @@
             android:screenOrientation="portrait"
             android:theme="@style/ThemeNoActionBar" />
         <activity
-            android:name=".activity.AppsExploreActivity"
+            android:name=".activity.CardExploreActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ViewPagerExploreActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ListExploreActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.GridExploreActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.LoginActivity"
