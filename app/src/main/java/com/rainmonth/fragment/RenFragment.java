@@ -1,7 +1,6 @@
 package com.rainmonth.fragment;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +14,6 @@ import com.rainmonth.adapter.base.ListViewDataAdapter;
 import com.rainmonth.adapter.base.ViewHolderBase;
 import com.rainmonth.adapter.base.ViewHolderCreator;
 import com.rainmonth.bean.RenContentInfo;
-import com.rainmonth.bean.RenContentInfo;
 import com.rainmonth.presenter.RenFragmentPresenter;
 import com.rainmonth.view.RenFragmentView;
 
@@ -27,7 +25,7 @@ import butterknife.ButterKnife;
 /**
  * Created by RandyZhang on 16/6/30.
  */
-public class RenFragment extends BaseLazyFragment implements RenFragmentView{
+public class RenFragment extends BaseLazyFragment implements RenFragmentView {
 
     @Bind(R.id.lv_content)
     ListView lvContent;
@@ -35,9 +33,8 @@ public class RenFragment extends BaseLazyFragment implements RenFragmentView{
     private RenFragmentPresenter renFragmentPresenter = null;
     private ListViewDataAdapter<RenContentInfo> mRenContentListAdapter = null;
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = super.onCreateView(inflater, container, savedInstanceState);
         ButterKnife.bind(this, rootView);
 
@@ -79,7 +76,7 @@ public class RenFragment extends BaseLazyFragment implements RenFragmentView{
             public ViewHolderBase<RenContentInfo> createViewHolder(int position) {
                 return new ViewHolderBase<RenContentInfo>() {
                     ImageView ivBg;
-//                    TextView tvTagType;
+                    //                    TextView tvTagType;
                     TextView tvTagName;
                     TextView tvTitle;
 

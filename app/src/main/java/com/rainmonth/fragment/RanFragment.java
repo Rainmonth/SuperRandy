@@ -1,7 +1,6 @@
 package com.rainmonth.fragment;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,10 +32,8 @@ public class RanFragment extends BaseLazyFragment implements RanFragmentView {
     private RanFragmentPresenter mRanFragmentPresenter = null;
     private ListViewDataAdapter<RanContentInfo> mRanContentListAdapter = null;
 
-
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = super.onCreateView(inflater, container, savedInstanceState);
         ButterKnife.bind(this, rootView);
 
@@ -72,7 +69,7 @@ public class RanFragment extends BaseLazyFragment implements RanFragmentView {
             public ViewHolderBase<RanContentInfo> createViewHolder(int position) {
                 return new ViewHolderBase<RanContentInfo>() {
                     ImageView ivAlbumFirstImage;
-                    TextView tvAlbumDescripton;
+                    TextView tvAlbumDescription;
                     TextView tvAlbumAuthor;
                     TextView tvAlbumPublishTime;
                     TextView tvAlbumLikeNum;
@@ -83,7 +80,7 @@ public class RanFragment extends BaseLazyFragment implements RanFragmentView {
                     public View createView(LayoutInflater layoutInflater) {
                         View convertView = layoutInflater.inflate(R.layout.adapter_ran_lv_content_item, null);
                         ivAlbumFirstImage = ButterKnife.findById(convertView, R.id.iv_album_first_image);
-                        tvAlbumDescripton = ButterKnife.findById(convertView, R.id.tv_album_des);
+                        tvAlbumDescription = ButterKnife.findById(convertView, R.id.tv_album_des);
                         tvAlbumAuthor = ButterKnife.findById(convertView, R.id.tv_album_author);
                         tvAlbumPublishTime = ButterKnife.findById(convertView, R.id.tv_album_publish_time);
                         tvAlbumLikeNum = ButterKnife.findById(convertView, R.id.tv_album_like_num);
@@ -96,7 +93,7 @@ public class RanFragment extends BaseLazyFragment implements RanFragmentView {
                     public void showData(int position, RanContentInfo itemData) {
                         if (null != itemData) {
                             ivAlbumFirstImage.setImageResource(itemData.getAlbumFirstImageResId());
-                            tvAlbumDescripton.setText(itemData.getAlbumDescription());
+                            tvAlbumDescription.setText(itemData.getAlbumDescription());
                             tvAlbumAuthor.setText(itemData.getAlbumAuthor());
                             tvAlbumPublishTime.setText(itemData.getAlbumPublishTime());
                             tvAlbumLikeNum.setText(itemData.getAlbumLikeNum() + "人喜欢");
