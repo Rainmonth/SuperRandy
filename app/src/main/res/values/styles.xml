@@ -10,6 +10,10 @@
 
     </style>
 
+    <style name="ThemeFullScreen" parent="@style/Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
     <style name="text_btn_base" parent="@style/TextAppearance.AppCompat.Inverse">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -187,5 +191,41 @@
             <enum name="mirror" value="2" />
         </attr>
     </declare-styleable>
+
+    <style name="green_trans_btn" parent="Base.TextAppearance.AppCompat.Button">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:layout_marginLeft">@dimen/activity_horizontal_margin</item>
+        <item name="android:layout_marginRight">@dimen/activity_horizontal_margin</item>
+        <item name="android:layout_marginTop">@dimen/text_button_vertical_margin</item>
+        <item name="android:layout_marginBottom">@dimen/text_button_vertical_margin</item>
+        <item name="android:paddingTop">@dimen/text_button_vertical_padding</item>
+        <item name="android:paddingBottom">@dimen/text_button_vertical_padding</item>
+        <item name="android:background">@drawable/selector_green_btn</item>
+
+    </style>
+
+    <style name="half_trans_white_bg_edit_text">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColorHint">@color/color_hint</item>
+        <item name="android:cursorVisible">true</item>
+        <item name="android:textCursorDrawable">
+            @drawable/half_trans_white_bg_edit_text_cursor_drawable
+        </item>
+        <item name="android:background">@drawable/selector_edit_text</item>
+        <item name="android:layout_marginLeft">@dimen/activity_horizontal_margin</item>
+        <item name="android:layout_marginRight">@dimen/activity_horizontal_margin</item>
+        <item name="android:layout_marginTop">@dimen/text_button_vertical_margin</item>
+        <item name="android:layout_marginBottom">@dimen/text_button_vertical_margin</item>
+    </style>
 
 </resources>
