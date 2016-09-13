@@ -18,4 +18,11 @@
     <string name="login">登录</string>
     <string name="psw_hint">请输入密码</string>
     <string name="username_hint">请输入用户名</string>
+    <string name="register">注册</string>
+    <string name="create_account">立即创建账户</string>
+    <string name="welcome">欢迎来到Super Randy</string>
+    <string name="email_hint">请输入邮箱</string>
+    <string name="phone_hint">请输入手机号</string>
+    <string name="register_tips_large">Enter your details</string>
+    <string name="register_tips_small">Welcome to our app</string>
 </resources>

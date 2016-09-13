@@ -17,7 +17,12 @@
     <color name="bg_home">#423752</color>
     <color name="bg_home_bottom_tab_bar">#605271</color>
     <color name="bg_half_transparent_black">#88000000</color>
-    <color name="bg_half_transparent_white">#88FFFFFF</color>
+    <color name="bg_half_transparent_white">#88ffffff</color>
+    <color name="bg_total_transparent_black">#ff000000</color>
+    <color name="bg_total_transparent_while">#ffffffff</color>
+    <color name="border_green">#e8529c50</color>
+    <color name="cursor_green">#E847C444</color>
+    <color name="color_hint">#E892D791</color>
 
     <!--text color-->
     <color name="backColor">#22000000</color>

@@ -11,6 +11,10 @@
 
     <!--Text Btn Margin-->
     <dimen name="margin_normal">@dimen/activity_horizontal_margin</dimen>
+    <dimen name="margin_large">40dp</dimen>
+    <dimen name="user_avatar_size">72dp</dimen>
+    <dimen name="text_button_vertical_padding">10dp</dimen>
+    <dimen name="text_button_vertical_margin">10dp</dimen>
 
     <dimen name="about_padding_horizontal">10.0dip</dimen>
     <dimen name="action_bar_height">48.0dip</dimen>
