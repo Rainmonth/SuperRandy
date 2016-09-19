@@ -1,8 +1,9 @@
-package com.rainmonth.utils;
+package com.rainmonth.utils.http;
 
 import android.util.Log;
 
 import com.rainmonth.SuperRandyApplication;
+import com.rainmonth.utils.NetWorkUtils;
 import com.socks.library.KLog;
 
 import java.io.File;
