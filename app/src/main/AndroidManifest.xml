@@ -162,12 +162,12 @@
             android:name=".activity.LoginActivity"
             android:screenOrientation="portrait"
             android:theme="@style/ThemeNoActionBar"
-            android:windowSoftInputMode="adjustPan|stateAlwaysVisible" />
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".activity.RegisterActivity"
             android:screenOrientation="portrait"
             android:theme="@style/ThemeNoActionBar"
-            android:windowSoftInputMode="adjustPan|stateAlwaysVisible" />
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".activity.WelcomeActivity"
             android:screenOrientation="portrait"
