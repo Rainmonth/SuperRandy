@@ -1,14 +1,20 @@
 package com.rainmonth.bean;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 
 /**
  * Created by RandyZhang on 16/8/2.
  */
 public class UserInfo implements Serializable {
+    @SerializedName("id")
     private int id;
+    @SerializedName("username")
     private String username;
+    @SerializedName("psw")
     private String psw;
+    @SerializedName("avatar")
     private String avatar;
 
     public int getId() {
