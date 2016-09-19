@@ -15,6 +15,7 @@ import butterknife.ButterKnife;
 public abstract class BaseActivity extends AppCompatActivity {
 
     protected Context mContext;
+    protected String Tag = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +27,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
         ButterKnife.bind(this);
         mContext = this;
-
+        Tag = this.getClass().getSimpleName();
         initViewsAndEvent();
     }
 
