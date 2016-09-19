@@ -5,26 +5,23 @@
 - MaterialDesign以及常用工具类的整理; (under working)
 - MVP模式的运用 (done)
 - 简单的Php服务端（项目地址及说明见下面地址）(todo)
-- 修复AppExploreActivity 页面再次进入崩溃的bug（done）
-
 
 ##界面设计
 - BaseActivity (todo)
-- MainActivity (done)
-- SplashActivity (done)
-- RenFragment (todo)
-- RanFragment (todo)
 - ZhuiFragment (todo)
 - XunFragment (已完成基本框架搭建)
-- YouFragment (todo)
+- YouFragment (doing)
 
 ##后台设计
+- 阅读模块可使用豆瓣读书API
+- 新闻模块可使用网易API
+- 图片模块可使用干货集中营API
 
 ##Widgets
 
 - NavigationTabBar (used)
 - FancyButton (to be used)
-- CircularProgressButton (to be userd)
+- CircularProgressButton (to be used)
 - ToggleButton (to be used)
 - RoundedImageView (to be used)
 - ListView
@@ -33,15 +30,12 @@
 
 ##Utils
 
-- DensityUtils.java ——尺寸处理工具类(added)
-- CacheUtils.java ——缓存处理工具类(added)
 - DateUtils.java ——日期处理工具类(added)
 - FileUtils (to be added)
 - LogUtils (to be added)
-- NetworkUtils (to be added)
+- NetworkUtils (added)
 - PreferencesUtils (to be added)
-- OkHttpUtils (to be added)
-- ToastUtils.java (to be added)
+- ToastUtils.java (added)
 - JsonUtils.java (to be added)
 - CrashLog处理 (to be added)
 
