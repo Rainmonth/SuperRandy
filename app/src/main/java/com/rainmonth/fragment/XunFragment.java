@@ -116,7 +116,7 @@ public class XunFragment extends BaseLazyFragment implements XunFragmentView {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                // todo nav to detail activity
+                // nav to detail activity
                 XunNavigationInfo xunNavigationInfo = mXunNavListAdapter.getDataList().get(position);
                 if (null != xunNavigationInfo) {
                     xunFragmentPresenter.navToDetail(xunNavigationInfo);
@@ -130,21 +130,21 @@ public class XunFragment extends BaseLazyFragment implements XunFragmentView {
         int type = xunNavigationInfo.getType();
         switch (type) {
             case TYPE_CARD:
-                // todo card 形式展现
+                // card 形式展现
                 readyGo(CardExploreActivity.class);
                 break;
 
             case TYPE_GRID:
-                // todo grid 形式展现
+                // grid 形式展现
                 readyGo(GridExploreActivity.class);
                 break;
             case TYPE_LIST:
-                // todo list 形式展现
+                // list 形式展现
                 readyGo(ListExploreActivity.class);
                 break;
             case TYPE_VIEW_PAGER:
             default:
-                // todo viewPager形式展现
+                // viewPager形式展现
                 readyGo(ViewPagerExploreActivity.class);
                 break;
 
