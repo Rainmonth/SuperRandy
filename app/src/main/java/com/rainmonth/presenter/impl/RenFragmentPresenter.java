@@ -1,10 +1,10 @@
-package com.rainmonth.presenter;
+package com.rainmonth.presenter.impl;
 
 import android.content.Context;
 
 import com.rainmonth.bean.RenContentInfo;
 import com.rainmonth.model.RenFragmentModel;
-import com.rainmonth.model.RenFragmentModelImpl;
+import com.rainmonth.model.impl.RenFragmentModelImpl;
 import com.rainmonth.base.mvp.BasePresenterImpl;
 import com.rainmonth.view.RenFragmentView;
 

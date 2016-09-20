@@ -1,11 +1,11 @@
-package com.rainmonth.presenter;
+package com.rainmonth.presenter.impl;
 
 import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
 
 import com.rainmonth.model.SplashModel;
-import com.rainmonth.model.SplashModelImpl;
+import com.rainmonth.model.impl.SplashModelImpl;
 import com.rainmonth.base.mvp.BasePresenterImpl;
 import com.rainmonth.view.SplashView;
 

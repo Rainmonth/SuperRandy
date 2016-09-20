@@ -1,4 +1,4 @@
-package com.rainmonth.model;
+package com.rainmonth.model.impl;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -10,6 +10,7 @@ import com.rainmonth.fragment.RenFragment;
 import com.rainmonth.fragment.XunFragment;
 import com.rainmonth.fragment.YouFragment;
 import com.rainmonth.fragment.ZhuiFragment;
+import com.rainmonth.model.MainModel;
 import com.rainmonth.widgets.NavigationTabBar;
 
 import java.util.ArrayList;

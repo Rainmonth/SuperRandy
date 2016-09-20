@@ -1,8 +1,9 @@
-package com.rainmonth.model;
+package com.rainmonth.model.impl;
 
 import com.rainmonth.R;
 import com.rainmonth.bean.XunNavigationInfo;
 import com.rainmonth.fragment.XunFragment;
+import com.rainmonth.model.XunFragmentModel;
 
 import java.util.ArrayList;
 import java.util.List;

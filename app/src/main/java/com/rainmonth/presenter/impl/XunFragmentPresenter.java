@@ -1,10 +1,10 @@
-package com.rainmonth.presenter;
+package com.rainmonth.presenter.impl;
 
 import android.content.Context;
 
 import com.rainmonth.bean.XunNavigationInfo;
 import com.rainmonth.model.XunFragmentModel;
-import com.rainmonth.model.XunFragmentModelImpl;
+import com.rainmonth.model.impl.XunFragmentModelImpl;
 import com.rainmonth.base.mvp.BasePresenterImpl;
 import com.rainmonth.view.XunFragmentView;
 

@@ -1,9 +1,9 @@
-package com.rainmonth.presenter;
+package com.rainmonth.presenter.impl;
 
 import android.content.Context;
 
 import com.rainmonth.model.MainModel;
-import com.rainmonth.model.MainModelImpl;
+import com.rainmonth.model.impl.MainModelImpl;
 import com.rainmonth.base.mvp.BasePresenterImpl;
 import com.rainmonth.view.MainView;
 

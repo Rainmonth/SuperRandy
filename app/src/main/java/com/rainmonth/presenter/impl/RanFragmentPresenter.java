@@ -1,8 +1,8 @@
-package com.rainmonth.presenter;
+package com.rainmonth.presenter.impl;
 
 import com.rainmonth.bean.RanContentInfo;
 import com.rainmonth.model.RanFragmentModel;
-import com.rainmonth.model.RanFragmentModelImpl;
+import com.rainmonth.model.impl.RanFragmentModelImpl;
 import com.rainmonth.base.mvp.BasePresenterImpl;
 import com.rainmonth.view.RanFragmentView;
 

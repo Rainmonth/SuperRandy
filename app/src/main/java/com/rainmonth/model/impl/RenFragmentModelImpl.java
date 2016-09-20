@@ -1,7 +1,8 @@
-package com.rainmonth.model;
+package com.rainmonth.model.impl;
 
 import com.rainmonth.R;
 import com.rainmonth.bean.RenContentInfo;
+import com.rainmonth.model.RenFragmentModel;
 
 import java.util.ArrayList;
 import java.util.List;
