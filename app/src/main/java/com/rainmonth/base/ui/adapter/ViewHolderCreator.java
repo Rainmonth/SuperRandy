@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.rainmonth.adapter.base;
+package com.rainmonth.base.ui.adapter;
 
 /**
  * A interface that defines what a View Holder Creator should do.

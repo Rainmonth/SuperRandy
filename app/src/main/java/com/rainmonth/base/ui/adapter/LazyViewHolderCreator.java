@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.rainmonth.adapter.base;
+package com.rainmonth.base.ui.adapter;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Modifier;

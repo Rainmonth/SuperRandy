@@ -2,8 +2,8 @@ package com.rainmonth.model;
 
 import com.rainmonth.service.UserService;
 import com.rainmonth.utils.http.Api;
-import com.rainmonth.utils.http.BaseSchedulerTransformer;
-import com.rainmonth.utils.http.BaseSubscriber;
+import com.rainmonth.base.mvp.BaseSchedulerTransformer;
+import com.rainmonth.base.mvp.BaseSubscriber;
 import com.rainmonth.utils.http.RequestCallback;
 import com.rainmonth.utils.http.ServiceFactory;
 import com.rainmonth.utils.http.UserLoginResponse;

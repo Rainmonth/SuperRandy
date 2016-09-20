@@ -5,7 +5,7 @@ import android.content.Context;
 import com.rainmonth.bean.XunNavigationInfo;
 import com.rainmonth.model.XunFragmentModel;
 import com.rainmonth.model.XunFragmentModelImpl;
-import com.rainmonth.utils.http.BasePresenterImpl;
+import com.rainmonth.base.mvp.BasePresenterImpl;
 import com.rainmonth.view.XunFragmentView;
 
 /**

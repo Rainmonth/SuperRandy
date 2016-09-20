@@ -11,6 +11,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.rainmonth.R;
+import com.rainmonth.base.ui.fragment.BaseLazyFragment;
 import com.rainmonth.bean.CardInfo;
 import com.rainmonth.utils.CommonUtils;
 import com.rainmonth.utils.DensityUtils;

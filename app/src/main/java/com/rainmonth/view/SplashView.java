@@ -1,7 +1,7 @@
 package com.rainmonth.view;
 
 import com.rainmonth.bean.SplashInfo;
-import com.rainmonth.utils.http.BaseView;
+import com.rainmonth.base.mvp.BaseView;
 
 /**
  * Created by RandyZhang on 16/7/1.

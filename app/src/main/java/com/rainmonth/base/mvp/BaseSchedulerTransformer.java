@@ -1,4 +1,4 @@
-package com.rainmonth.utils.http;
+package com.rainmonth.base.mvp;
 
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;

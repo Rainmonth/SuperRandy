@@ -1,6 +1,7 @@
 package com.rainmonth.utils.http;
 
 import com.google.gson.annotations.SerializedName;
+import com.rainmonth.base.mvp.BaseResponse;
 import com.rainmonth.bean.UserInfo;
 
 /**

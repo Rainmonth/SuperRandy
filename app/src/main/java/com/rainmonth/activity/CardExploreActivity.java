@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 
 import com.rainmonth.R;
+import com.rainmonth.base.ui.activity.BaseActivity;
 import com.rainmonth.fragment.CardViewPagerFragment;
 
 public class CardExploreActivity extends BaseActivity {

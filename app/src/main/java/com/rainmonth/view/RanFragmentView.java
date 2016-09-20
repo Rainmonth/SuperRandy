@@ -1,7 +1,7 @@
 package com.rainmonth.view;
 
 import com.rainmonth.bean.RanContentInfo;
-import com.rainmonth.utils.http.BaseView;
+import com.rainmonth.base.mvp.BaseView;
 
 import java.util.List;
 

@@ -6,6 +6,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.rainmonth.R;
+import com.rainmonth.base.ui.activity.BaseActivity;
 import com.rainmonth.presenter.ILoginPresenter;
 import com.rainmonth.presenter.LoginPresenterImpl;
 import com.rainmonth.utils.ToastUtils;

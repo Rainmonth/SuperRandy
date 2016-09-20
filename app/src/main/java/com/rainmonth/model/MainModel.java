@@ -2,7 +2,7 @@ package com.rainmonth.model;
 
 import android.content.Context;
 
-import com.rainmonth.fragment.BaseLazyFragment;
+import com.rainmonth.base.ui.fragment.BaseLazyFragment;
 import com.rainmonth.widgets.NavigationTabBar;
 
 import java.util.List;

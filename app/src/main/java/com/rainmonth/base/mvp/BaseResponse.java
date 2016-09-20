@@ -1,4 +1,4 @@
-package com.rainmonth.utils.http;
+package com.rainmonth.base.mvp;
 
 import com.google.gson.annotations.SerializedName;
 

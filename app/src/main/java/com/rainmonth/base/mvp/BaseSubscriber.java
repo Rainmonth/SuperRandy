@@ -1,9 +1,10 @@
-package com.rainmonth.utils.http;
+package com.rainmonth.base.mvp;
 
 import android.support.annotation.CallSuper;
 
 import com.rainmonth.SuperRandyApplication;
 import com.rainmonth.utils.NetWorkUtils;
+import com.rainmonth.utils.http.RequestCallback;
 import com.socks.library.KLog;
 
 import java.net.UnknownHostException;

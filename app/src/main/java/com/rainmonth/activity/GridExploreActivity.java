@@ -1,10 +1,9 @@
 package com.rainmonth.activity;
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
 
 import com.rainmonth.R;
-import com.rainmonth.fragment.CardViewPagerFragment;
+import com.rainmonth.base.ui.activity.BaseActivity;
 
 /**
  * 文章

@@ -6,6 +6,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.rainmonth.R;
+import com.rainmonth.base.ui.activity.BaseActivity;
 
 import butterknife.Bind;
 import butterknife.OnClick;

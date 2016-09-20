@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.rainmonth.adapter.base;
+package com.rainmonth.base.ui.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;

@@ -4,7 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 
 import com.rainmonth.R;
-import com.rainmonth.fragment.BaseLazyFragment;
+import com.rainmonth.base.ui.fragment.BaseLazyFragment;
 import com.rainmonth.fragment.RanFragment;
 import com.rainmonth.fragment.RenFragment;
 import com.rainmonth.fragment.XunFragment;

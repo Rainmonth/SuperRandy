@@ -1,4 +1,4 @@
-package com.rainmonth.fragment;
+package com.rainmonth.base.ui.fragment;
 
 import android.content.Context;
 import android.content.Intent;

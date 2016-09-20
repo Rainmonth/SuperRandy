@@ -4,7 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.rainmonth.fragment.BaseLazyFragment;
+import com.rainmonth.base.ui.fragment.BaseLazyFragment;
 
 import java.util.List;
 

@@ -6,7 +6,7 @@ import android.os.Message;
 
 import com.rainmonth.model.SplashModel;
 import com.rainmonth.model.SplashModelImpl;
-import com.rainmonth.utils.http.BasePresenterImpl;
+import com.rainmonth.base.mvp.BasePresenterImpl;
 import com.rainmonth.view.SplashView;
 
 /**

@@ -1,11 +1,12 @@
 package com.rainmonth.fragment;
 
 import com.rainmonth.R;
+import com.rainmonth.base.ui.fragment.BaseLazyFragment;
 
 /**
  * Created by RandyZhang on 16/6/30.
  */
-public class ZhuiFragment extends BaseLazyFragment{
+public class ZhuiFragment extends BaseLazyFragment {
     @Override
     public void onFirstUserVisible() {
 

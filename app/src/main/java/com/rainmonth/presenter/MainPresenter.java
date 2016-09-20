@@ -4,8 +4,7 @@ import android.content.Context;
 
 import com.rainmonth.model.MainModel;
 import com.rainmonth.model.MainModelImpl;
-import com.rainmonth.utils.http.BasePresenter;
-import com.rainmonth.utils.http.BasePresenterImpl;
+import com.rainmonth.base.mvp.BasePresenterImpl;
 import com.rainmonth.view.MainView;
 
 /**

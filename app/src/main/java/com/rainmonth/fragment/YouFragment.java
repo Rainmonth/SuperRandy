@@ -13,6 +13,7 @@ import com.rainmonth.R;
 import com.rainmonth.activity.LoginActivity;
 import com.rainmonth.activity.RegisterActivity;
 import com.rainmonth.activity.WelcomeActivity;
+import com.rainmonth.base.ui.fragment.BaseLazyFragment;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;

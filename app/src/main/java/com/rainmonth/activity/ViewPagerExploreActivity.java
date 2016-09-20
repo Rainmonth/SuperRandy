@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.rainmonth.R;
+import com.rainmonth.base.ui.activity.BaseActivity;
 import com.rainmonth.utils.DensityUtils;
 
 import net.lucode.hackware.magicindicator.MagicIndicator;

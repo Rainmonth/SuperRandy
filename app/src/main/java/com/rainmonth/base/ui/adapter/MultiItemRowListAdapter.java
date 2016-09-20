@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.rainmonth.adapter.base;
+package com.rainmonth.base.ui.adapter;
 
 import android.content.Context;
 import android.database.DataSetObserver;

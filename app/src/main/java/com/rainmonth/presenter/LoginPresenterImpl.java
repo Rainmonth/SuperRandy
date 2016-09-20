@@ -2,7 +2,7 @@ package com.rainmonth.presenter;
 
 import com.rainmonth.model.ILoginModel;
 import com.rainmonth.model.LoginModelImpl;
-import com.rainmonth.utils.http.BasePresenterImpl;
+import com.rainmonth.base.mvp.BasePresenterImpl;
 import com.rainmonth.utils.http.UserLoginResponse;
 import com.rainmonth.view.ILoginView;
 

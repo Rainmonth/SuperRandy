@@ -1,6 +1,6 @@
 package com.rainmonth.view;
 
-import com.rainmonth.utils.http.BaseView;
+import com.rainmonth.base.mvp.BaseView;
 import com.rainmonth.utils.http.UserLoginResponse;
 
 /**

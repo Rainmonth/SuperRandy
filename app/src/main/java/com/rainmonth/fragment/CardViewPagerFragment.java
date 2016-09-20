@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.rainmonth.R;
 import com.rainmonth.adapter.CardPagerAdapter;
+import com.rainmonth.base.ui.fragment.BaseLazyFragment;
 import com.rainmonth.bean.CardInfo;
 import com.rainmonth.utils.AnimatorUtils;
 import com.rainmonth.utils.HexUtils;
