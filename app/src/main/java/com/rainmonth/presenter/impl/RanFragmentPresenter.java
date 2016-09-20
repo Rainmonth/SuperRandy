@@ -20,6 +20,10 @@ public class RanFragmentPresenter extends BasePresenterImpl<RanFragmentView, Obj
         ranFragmentModel = new RanFragmentModelImpl();
     }
 
+    public void initialize() {
+        mView.initViews(ranFragmentModel.getRanContentList());
+    }
+
     public void navToDetail(RanContentInfo ranContentInfo) {
         mView.navToDetail(ranContentInfo);
     }
