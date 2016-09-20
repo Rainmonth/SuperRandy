@@ -32,11 +32,6 @@ public class LoginPresenterImpl extends BasePresenterImpl<ILoginView, Response<U
     }
 
     @Override
-    public void initialize() {
-
-    }
-
-    @Override
     public void beforeRequest() {
         super.beforeRequest();
     }

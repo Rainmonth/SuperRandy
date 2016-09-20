@@ -5,17 +5,19 @@ import android.content.Context;
 import com.rainmonth.bean.XunNavigationInfo;
 import com.rainmonth.model.XunFragmentModel;
 import com.rainmonth.model.XunFragmentModelImpl;
+import com.rainmonth.utils.http.BasePresenterImpl;
 import com.rainmonth.view.XunFragmentView;
 
 /**
  * Created by RandyZhang on 16/7/5.
  */
-public class XunFragmentPresenter implements BasePresenter {
+public class XunFragmentPresenter extends BasePresenterImpl<XunFragmentView, Object> {
     private Context context = null;
     private XunFragmentView xunFragmentView = null;
     private XunFragmentModel xunFragmentModel = null;
 
     public XunFragmentPresenter(Context context, XunFragmentView xunFragmentView) {
+        super(xunFragmentView);
         if (null == xunFragmentView) {
             throw new IllegalArgumentException("View should not be null");
         }
@@ -24,7 +26,6 @@ public class XunFragmentPresenter implements BasePresenter {
         xunFragmentModel = new XunFragmentModelImpl();
     }
 
-    @Override
     public void initialize() {
         xunFragmentView.initViews(xunFragmentModel.getXunNavigationList());
     }

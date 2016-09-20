@@ -4,28 +4,38 @@ import android.content.Context;
 
 import com.rainmonth.model.MainModel;
 import com.rainmonth.model.MainModelImpl;
+import com.rainmonth.utils.http.BasePresenter;
+import com.rainmonth.utils.http.BasePresenterImpl;
 import com.rainmonth.view.MainView;
 
 /**
  * Created by RandyZhang on 16/6/30.
  */
-public class MainPresenter implements BasePresenter{
+public class MainPresenter extends BasePresenterImpl<MainView, Object> {
 
     private Context context = null;
-    private MainView mainView = null;
     private MainModel mainModel = null;
 
-    public MainPresenter(Context context, MainView mainView) {
+    public MainPresenter(MainView mainView, Context context) {
+        super(mainView);
         if (null == mainView) {
             throw new IllegalArgumentException("View should not be null");
         }
         this.context = context;
-        this.mainView = mainView;
         mainModel = new MainModelImpl();
     }
 
     @Override
+    public void onResume() {
+
+    }
+
+    @Override
+    public void onDestroy() {
+
+    }
+
     public void initialize() {
-        mainView.initializeViews(mainModel.getNavigationModels(context), mainModel.getNavigationFragments());
+        mView.initializeViews(mainModel.getNavigationModels(context), mainModel.getNavigationFragments());
     }
 }

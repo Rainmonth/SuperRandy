@@ -32,11 +32,6 @@ public class BasePresenterImpl<T extends BaseView, V> implements BasePresenter, 
     }
 
     @Override
-    public void initialize() {
-        mView.initialize();
-    }
-
-    @Override
     public void beforeRequest() {
         mView.showProgress();
     }

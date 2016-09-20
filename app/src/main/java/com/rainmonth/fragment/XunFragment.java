@@ -150,4 +150,19 @@ public class XunFragment extends BaseLazyFragment implements XunFragmentView {
 
         }
     }
+
+    @Override
+    public void toast(String msg) {
+
+    }
+
+    @Override
+    public void showProgress() {
+
+    }
+
+    @Override
+    public void hideProgress() {
+
+    }
 }

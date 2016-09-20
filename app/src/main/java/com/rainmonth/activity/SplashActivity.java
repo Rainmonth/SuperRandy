@@ -6,7 +6,6 @@ import android.widget.TextView;
 
 import com.rainmonth.R;
 import com.rainmonth.bean.SplashInfo;
-import com.rainmonth.presenter.BasePresenter;
 import com.rainmonth.presenter.SplashPresenter;
 import com.rainmonth.view.SplashView;
 
@@ -24,7 +23,7 @@ public class SplashActivity extends BaseActivity implements SplashView {
     @Bind(R.id.iv_splash)
     ImageView ivSplash;
 
-    private BasePresenter splashPresenter = null;
+    private SplashPresenter splashPresenter = null;
 
     @Override
     public boolean isApplyTranslucentStatusBar() {
@@ -69,5 +68,20 @@ public class SplashActivity extends BaseActivity implements SplashView {
             startActivity(intent);
             finish();
         }
+    }
+
+    @Override
+    public void toast(String msg) {
+
+    }
+
+    @Override
+    public void showProgress() {
+
+    }
+
+    @Override
+    public void hideProgress() {
+
     }
 }

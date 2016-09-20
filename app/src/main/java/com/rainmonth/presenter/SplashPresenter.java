@@ -6,17 +6,19 @@ import android.os.Message;
 
 import com.rainmonth.model.SplashModel;
 import com.rainmonth.model.SplashModelImpl;
+import com.rainmonth.utils.http.BasePresenterImpl;
 import com.rainmonth.view.SplashView;
 
 /**
  * Created by RandyZhang on 16/7/1.
  */
-public class SplashPresenter implements BasePresenter {
+public class SplashPresenter extends BasePresenterImpl<SplashView, Object> {
     private Context context = null;
     private SplashModel splashModel = null;
     private SplashView splashView = null;
 
     public SplashPresenter(Context context, SplashView splashView) {
+        super(splashView);
         if (null == splashView) {
             throw new IllegalArgumentException("splash view should not be null");
         }
@@ -25,7 +27,6 @@ public class SplashPresenter implements BasePresenter {
         splashModel = new SplashModelImpl();
     }
 
-    @Override
     public void initialize() {
         /**
          * todo 先采用splashModel去获取信息:

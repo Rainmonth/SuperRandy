@@ -37,8 +37,8 @@ public class RanFragment extends BaseLazyFragment implements RanFragmentView {
         View rootView = super.onCreateView(inflater, container, savedInstanceState);
         ButterKnife.bind(this, rootView);
 
-        mRanFragmentPresenter = new RanFragmentPresenter(mContext, this);
-        mRanFragmentPresenter.initialize();
+        mRanFragmentPresenter = new RanFragmentPresenter(this);
+//        mRanFragmentPresenter.initialize();
         return rootView;
     }
 
@@ -129,5 +129,20 @@ public class RanFragment extends BaseLazyFragment implements RanFragmentView {
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
+    }
+
+    @Override
+    public void toast(String msg) {
+
+    }
+
+    @Override
+    public void showProgress() {
+
+    }
+
+    @Override
+    public void hideProgress() {
+
     }
 }

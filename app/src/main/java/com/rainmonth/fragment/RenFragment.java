@@ -118,4 +118,19 @@ public class RenFragment extends BaseLazyFragment implements RenFragmentView {
     public void navToDetail(RenContentInfo xunNavigationInfo) {
         // todo 进入二级界面
     }
+
+    @Override
+    public void toast(String msg) {
+
+    }
+
+    @Override
+    public void showProgress() {
+
+    }
+
+    @Override
+    public void hideProgress() {
+
+    }
 }

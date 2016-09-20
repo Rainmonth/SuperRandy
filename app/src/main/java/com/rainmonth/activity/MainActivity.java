@@ -1,6 +1,5 @@
 package com.rainmonth.activity;
 
-import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -9,7 +8,6 @@ import com.igexin.sdk.PushManager;
 import com.rainmonth.R;
 import com.rainmonth.adapter.HomeViewPagerAdapter;
 import com.rainmonth.fragment.BaseLazyFragment;
-import com.rainmonth.presenter.BasePresenter;
 import com.rainmonth.presenter.MainPresenter;
 import com.rainmonth.view.MainView;
 import com.rainmonth.widgets.NavigationTabBar;
@@ -30,7 +28,7 @@ public class MainActivity extends BaseActivity implements MainView{
     @Bind(R.id.fl_ntb_horizontal_container)
     FrameLayout flNtbHorizontalContainer;
 
-    BasePresenter mainPresenter = null;
+    MainPresenter mainPresenter = null;
 
     @Override
     public boolean isApplyTranslucentStatusBar() {
@@ -98,5 +96,20 @@ public class MainActivity extends BaseActivity implements MainView{
                 }
             }
         }, 500);
+    }
+
+    @Override
+    public void toast(String msg) {
+
+    }
+
+    @Override
+    public void showProgress() {
+
+    }
+
+    @Override
+    public void hideProgress() {
+
     }
 }
