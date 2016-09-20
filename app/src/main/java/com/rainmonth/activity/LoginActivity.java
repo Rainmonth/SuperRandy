@@ -1,29 +1,24 @@
 package com.rainmonth.activity;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.gson.GsonBuilder;
 import com.rainmonth.R;
-import com.rainmonth.service.UserService;
+import com.rainmonth.presenter.ILoginPresenter;
+import com.rainmonth.presenter.LoginPresenterImpl;
 import com.rainmonth.utils.ToastUtils;
-import com.rainmonth.utils.http.Api;
-import com.rainmonth.utils.http.ServiceFactory;
 import com.rainmonth.utils.http.UserLoginResponse;
+import com.rainmonth.view.ILoginView;
 
 import butterknife.Bind;
 import butterknife.OnClick;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 /**
  * 登录页面
  */
-public class LoginActivity extends BaseActivity {
+public class LoginActivity extends BaseActivity implements ILoginView {
 
     @Bind(R.id.iv_user_avatar)
     ImageView ivUserAvatar;
@@ -40,6 +35,8 @@ public class LoginActivity extends BaseActivity {
     @Bind(R.id.iv_sina)
     ImageView ivSina;
 
+    private ILoginPresenter mPresenter;
+
     @Override
     public boolean isApplyTranslucentStatusBar() {
         return false;
@@ -55,6 +52,7 @@ public class LoginActivity extends BaseActivity {
         // todo to be delete
         etUserName.setText("15601949629");
         etPsw.setText("m123456");
+        mPresenter = new LoginPresenterImpl(this);
 
 
     }
@@ -66,26 +64,7 @@ public class LoginActivity extends BaseActivity {
 
                 break;
             case R.id.tv_login:
-                Call<UserLoginResponse> call = ServiceFactory.createService(Api.baseUrl, UserService.class).login(etUserName.getText().toString(), etPsw.getText().toString());
-                call.enqueue(new Callback<UserLoginResponse>() {
-                    @Override
-                    public void onResponse(Call<UserLoginResponse> call, Response<UserLoginResponse> response) {
-                        UserLoginResponse userLoginResponse = response.body();
-                        Log.i(Tag, new GsonBuilder().create().toJson(userLoginResponse));
-                        if (userLoginResponse.getCode().equals("1")) {
-                            readyGo(MainActivity.class);
-                            finish();
-                        } else {
-                            ToastUtils.showLongToast(mContext, userLoginResponse.getMessage());
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<UserLoginResponse> call, Throwable t) {
-                        Log.e("result", "response----失败");
-                    }
-                });
-
+                mPresenter.login(etUserName.getText().toString(), etPsw.getText().toString());
                 break;
             case R.id.tv_no_account:
                 break;
@@ -94,5 +73,30 @@ public class LoginActivity extends BaseActivity {
             case R.id.iv_sina:
                 break;
         }
+    }
+
+    // implements from ILoginView
+    @Override
+    public void naveToAfterLogin(UserLoginResponse response) {
+        if (response.getCode().equals("1")) {
+            readyGo(MainActivity.class);
+            finish();
+        } else {
+            ToastUtils.showLongToast(mContext, response.getMessage());
+        }
+    }
+
+    // implements from BaseView
+    @Override
+    public void toast(String msg) {
+        ToastUtils.showLongToast(mContext, msg);
+    }
+
+    @Override
+    public void showProgress() {
+    }
+
+    @Override
+    public void hideProgress() {
     }
 }
