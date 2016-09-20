@@ -1,13 +1,14 @@
 package com.rainmonth.view;
 
 import com.rainmonth.bean.RanContentInfo;
+import com.rainmonth.utils.http.BaseView;
 
 import java.util.List;
 
 /**
  * Created by RandyZhang on 16/7/5.
  */
-public interface RanFragmentView {
+public interface RanFragmentView extends BaseView{
 
     void initViews(List<RanContentInfo> ranContentInfoList);
 
