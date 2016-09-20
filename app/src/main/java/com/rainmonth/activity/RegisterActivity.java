@@ -7,6 +7,12 @@ import android.widget.TextView;
 
 import com.rainmonth.R;
 import com.rainmonth.base.ui.activity.BaseActivity;
+import com.rainmonth.bean.UserInfo;
+import com.rainmonth.presenter.IRegisterPresenter;
+import com.rainmonth.presenter.impl.RegisterPresenterImpl;
+import com.rainmonth.utils.ToastUtils;
+import com.rainmonth.utils.http.UserLoginResponse;
+import com.rainmonth.view.IRegisterView;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -14,9 +20,7 @@ import butterknife.OnClick;
 /**
  * 注册页面
  */
-public class RegisterActivity extends BaseActivity {
-
-
+public class RegisterActivity extends BaseActivity implements IRegisterView{
     @Bind(R.id.iv_user_avatar)
     ImageView ivUserAvatar;
     @Bind(R.id.et_phone)
@@ -30,6 +34,8 @@ public class RegisterActivity extends BaseActivity {
     @Bind(R.id.tv_create_account)
     TextView tvCreateAccount;
 
+    IRegisterPresenter mPresenter;
+
     @Override
     public boolean isApplyTranslucentStatusBar() {
         return false;
@@ -42,6 +48,7 @@ public class RegisterActivity extends BaseActivity {
 
     @Override
     public void initViewsAndEvent() {
+        mPresenter = new RegisterPresenterImpl(this);
     }
 
     @OnClick({R.id.iv_user_avatar, R.id.tv_create_account})
@@ -50,7 +57,38 @@ public class RegisterActivity extends BaseActivity {
             case R.id.iv_user_avatar:
                 break;
             case R.id.tv_create_account:
+                UserInfo userInfo = new UserInfo();
+                userInfo.setMobile(etPhone.getText().toString());
+                userInfo.setUsername(etUserName.getText().toString());
+                userInfo.setEmail(etEmail.getText().toString());
+                userInfo.setPsw(etPsw.getText().toString());
+                mPresenter.register(userInfo);
                 break;
         }
+    }
+
+    @Override
+    public void naveToAfterRegister(UserLoginResponse response) {
+        if (response.getCode().equals("1")) {
+            readyGo(MainActivity.class);
+            finish();
+        } else {
+            ToastUtils.showLongToast(mContext, response.getMessage());
+        }
+    }
+
+    @Override
+    public void toast(String msg) {
+        ToastUtils.showLongToast(mContext, msg);
+    }
+
+    @Override
+    public void showProgress() {
+
+    }
+
+    @Override
+    public void hideProgress() {
+
     }
 }

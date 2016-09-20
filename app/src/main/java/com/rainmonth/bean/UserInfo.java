@@ -10,10 +10,14 @@ import java.io.Serializable;
 public class UserInfo implements Serializable {
     @SerializedName("id")
     private int id;
+    @SerializedName("mobile")
+    private String mobile;
     @SerializedName("username")
     private String username;
     @SerializedName("psw")
     private String psw;
+    @SerializedName("email")
+    private String email;
     @SerializedName("avatar")
     private String avatar;
 
@@ -23,6 +27,14 @@ public class UserInfo implements Serializable {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
     }
 
     public String getUsername() {
@@ -39,6 +51,14 @@ public class UserInfo implements Serializable {
 
     public void setPsw(String psw) {
         this.psw = psw;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getAvatar() {

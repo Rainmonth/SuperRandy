@@ -21,7 +21,8 @@ public class RegisterModelImpl implements IRegisterModel<Response<UserLoginRespo
 
     @Override
     public Subscription register(RequestCallback<Response<UserLoginResponse>> callback, UserInfo userInfo) {
-        return ServiceFactory.createService(Api.baseUrl, UserService.class).registerRx(userInfo)
+        return ServiceFactory.createService(Api.baseUrl, UserService.class)
+                .registerRx(userInfo.getMobile(), userInfo.getUsername(), userInfo.getPsw(), userInfo.getEmail())
                 .compose(new BaseSchedulerTransformer<Response<UserLoginResponse>>())
                 .subscribe(new BaseSubscriber<Response<UserLoginResponse>>(callback));
     }

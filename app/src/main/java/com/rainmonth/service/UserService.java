@@ -32,8 +32,9 @@ public interface UserService {
     Observable<Response<UserLoginResponse>> loginRx(@Field("username") String username, @Field("psw") String psw);
 
     @FormUrlEncoded
-    @POST("User/Register")
-    Observable<Response<UserLoginResponse>> registerRx(@Body UserInfo userInfo);
+    @POST("User/register")
+    Observable<Response<UserLoginResponse>> registerRx(@Field("mobile") String mobile, @Field("username") String username,
+                                                       @Field("psw") String psw, @Field("email") String email);
 
     @GET("User/getUserInfo")
     Observable<Response<UserLoginResponse>> getUserInfoRx(@Query("id") int id);
