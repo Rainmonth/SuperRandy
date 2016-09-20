@@ -19,7 +19,7 @@ import com.rainmonth.base.ui.adapter.ViewHolderBase;
 import com.rainmonth.base.ui.adapter.ViewHolderCreator;
 import com.rainmonth.base.ui.fragment.BaseLazyFragment;
 import com.rainmonth.bean.XunNavigationInfo;
-import com.rainmonth.presenter.XunFragmentPresenter;
+import com.rainmonth.presenter.impl.XunFragmentPresenter;
 import com.rainmonth.view.XunFragmentView;
 
 import java.util.List;

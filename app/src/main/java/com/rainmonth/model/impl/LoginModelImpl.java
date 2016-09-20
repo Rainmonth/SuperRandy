@@ -1,5 +1,6 @@
-package com.rainmonth.model;
+package com.rainmonth.model.impl;
 
+import com.rainmonth.model.ILoginModel;
 import com.rainmonth.service.UserService;
 import com.rainmonth.utils.http.Api;
 import com.rainmonth.base.mvp.BaseSchedulerTransformer;

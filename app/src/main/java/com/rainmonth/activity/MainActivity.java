@@ -9,7 +9,7 @@ import com.rainmonth.R;
 import com.rainmonth.adapter.HomeViewPagerAdapter;
 import com.rainmonth.base.ui.activity.BaseActivity;
 import com.rainmonth.base.ui.fragment.BaseLazyFragment;
-import com.rainmonth.presenter.MainPresenter;
+import com.rainmonth.presenter.impl.MainPresenter;
 import com.rainmonth.view.MainView;
 import com.rainmonth.widgets.NavigationTabBar;
 

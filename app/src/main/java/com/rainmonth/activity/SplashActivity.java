@@ -7,7 +7,7 @@ import android.widget.TextView;
 import com.rainmonth.R;
 import com.rainmonth.base.ui.activity.BaseActivity;
 import com.rainmonth.bean.SplashInfo;
-import com.rainmonth.presenter.SplashPresenter;
+import com.rainmonth.presenter.impl.SplashPresenter;
 import com.rainmonth.view.SplashView;
 
 import butterknife.Bind;
