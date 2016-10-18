@@ -4,7 +4,7 @@ def releaseTime() {
     return new Date().format("yyyy-MM-dd");
 }
 
-def apkName() {
+def appName() {
     return "SuperRandy"
 }
 
@@ -29,7 +29,7 @@ android {
 
     defaultConfig {
         applicationId "com.rainmonth"
-        minSdkVersion 14
+        minSdkVersion 15
         targetSdkVersion 23
         versionCode 1
         versionName "1.0.0"
@@ -40,12 +40,26 @@ android {
 
     }
 
-//    android.applicationVariants.all { variant ->
+    productFlavors {
+        yijiajiao {
+        }
+        yingyongbao {
+        }
+        xiaomi {
+        }
+        wandoujia {
+        }
+        productFlavors.all { flavors ->
+            flavors.manifestPlaceholders = [CHANNEL_VALUE: name]
+        }
+    }
+//    applicationVariants.all { variant ->
 //        variant.outputs.each { output ->
 //            def outputFile = output.outputFile
-//            if (outputFile != null && outputFile.name.endsWith('.apk')) {
-//                //这里修改apk文件名
-//                def fileName = outputFile.name.replace("app", "${apkName()}_${defaultConfig.versionName}_${releaseTime()}")
+//            if (outputFile != null && outputFile.name.endsWith('release.apk')) {
+//                //def fileName = "${variant.productFlavors[0].name}_V${defaultConfig.versionName}_${releaseTime()}.apk"
+//                def productFlavorsName = variant.productFlavors[0].name;
+//                def fileName = "${appName()}.V${defaultConfig.versionName}.${releaseTime()}.release."+productFlavorsName+".apk"
 //                output.outputFile = new File(outputFile.parent, fileName)
 //            }
 //        }
@@ -64,6 +78,17 @@ android {
             minifyEnabled false
             zipAlignEnabled false
             shrinkResources false
+            applicationVariants.all { variant ->
+                variant.outputs.each { output ->
+                    def outputFile = output.outputFile
+                    if (outputFile != null && outputFile.name.endsWith('debug.apk')) {
+                        //def fileName = "${variant.productFlavors[0].name}_V${defaultConfig.versionName}_${releaseTime()}.apk"
+                        def productFlavorsName = variant.productFlavors[0].name;
+                        def fileName = "${appName()}.V${defaultConfig.versionName}.${releaseTime()}.alpha." + productFlavorsName + ".apk"
+                        output.outputFile = new File(outputFile.parent, fileName)
+                    }
+                }
+            }
         }
         release {
             // 不显示log
@@ -76,6 +101,17 @@ android {
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 //            signingConfig signingConfigs.release
+            applicationVariants.all { variant ->
+                variant.outputs.each { output ->
+                    def outputFile = output.outputFile
+                    if (outputFile != null && outputFile.name.endsWith('release.apk')) {
+                        //def fileName = "${variant.productFlavors[0].name}_V${defaultConfig.versionName}_${releaseTime()}.apk"
+                        def productFlavorsName = variant.productFlavors[0].name;
+                        def fileName = "${appName()}.V${defaultConfig.versionName}.${releaseTime()}.release." + productFlavorsName + ".apk"
+                        output.outputFile = new File(outputFile.parent, fileName)
+                    }
+                }
+            }
         }
     }
 
@@ -90,11 +126,9 @@ android {
         }
     }
 }
-
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile files('libs/GetuiSDK2.9.0.0.jar')
-    compile 'com.android.support:appcompat-v7:23.4.0'
     compile 'com.android.support:design:23.4.0'
     compile 'com.android.support:support-v4:23.4.0'
     // ButterKnife
