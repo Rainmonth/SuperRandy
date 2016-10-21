@@ -134,7 +134,7 @@
         <activity
             android:name=".activity.SplashActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/ThemeNoActionBar">
+            android:theme="@style/FullScreenTransparentTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -145,33 +145,37 @@
             android:label="@string/app_name"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
-            android:theme="@style/ThemeNoActionBar" />
+            android:theme="@style/TransparentTheme" />
         <activity
             android:name=".activity.CardExploreActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/TransparentTheme" />
         <activity
             android:name=".activity.ViewPagerExploreActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/TransparentTheme" />
         <activity
             android:name=".activity.ListExploreActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/TransparentTheme" />
         <activity
             android:name=".activity.GridExploreActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/TransparentTheme" />
         <activity
             android:name=".activity.LoginActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/ThemeNoActionBar"
+            android:theme="@style/TransparentTheme"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".activity.RegisterActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/ThemeNoActionBar"
+            android:theme="@style/TransparentTheme"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".activity.WelcomeActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/ThemeNoActionBar" />
+            android:theme="@style/TransparentTheme" />
     </application>
 
 </manifest>
