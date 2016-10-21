@@ -2,15 +2,17 @@ package com.rainmonth.base.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-
-import com.rainmonth.R;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
 
 import butterknife.ButterKnife;
 
 /**
- *  Activity 基类
+ * Activity 基类
  */
 public abstract class BaseActivity extends AppCompatActivity {
 
@@ -22,6 +24,13 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         if (getContentViewLayoutId() != 0) {
             setContentView(getContentViewLayoutId());
+            // 以代码的形式为每个Activity对应的布局文件添加fitsSystemWindows属性
+            ViewGroup contentFrameLayout = (ViewGroup) findViewById(Window.ID_ANDROID_CONTENT);
+            assert contentFrameLayout != null;
+            View parentView = contentFrameLayout.getChildAt(0);
+            if (parentView != null && Build.VERSION.SDK_INT >= 14) {
+                parentView.setFitsSystemWindows(true);
+            }
         } else {
             throw new IllegalArgumentException("You must return a right contentView layout resource Id");
         }
@@ -57,7 +66,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     /**
      * startActivity with bundle
      *
-     * @param clazz class to start
+     * @param clazz  class to start
      * @param bundle bundle to transport
      */
     protected void readyGo(Class<?> clazz, Bundle bundle) {
@@ -71,7 +80,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     /**
      * startActivityForResult
      *
-     * @param clazz class to start
+     * @param clazz       class to start
      * @param requestCode request code
      */
     protected void readyGoForResult(Class<?> clazz, int requestCode) {
@@ -82,9 +91,9 @@ public abstract class BaseActivity extends AppCompatActivity {
     /**
      * startActivityForResult with bundle
      *
-     * @param clazz class to start
+     * @param clazz       class to start
      * @param requestCode request code
-     * @param bundle bundle to transport
+     * @param bundle      bundle to transport
      */
     protected void readyGoForResult(Class<?> clazz, int requestCode, Bundle bundle) {
         Intent intent = new Intent(mContext, clazz);
@@ -93,6 +102,4 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
         startActivityForResult(intent, requestCode);
     }
-
-
 }
