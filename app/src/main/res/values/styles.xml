@@ -1,16 +1,16 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Base.Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Base.Theme.AppCompat.Light">
         <!-- Customize your theme here. -->
     </style>
 
     <!--无ActionBar的Activity-->
-    <style name="ThemeNoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="TransparentTheme" parent="Theme.AppCompat.Light.NoActionBar">
 
     </style>
 
-    <style name="ThemeFullScreen" parent="@style/Theme.AppCompat.Light.NoActionBar">
+    <style name="FullScreenTransparentTheme" parent="@style/Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowFullscreen">true</item>
     </style>
 
@@ -227,5 +227,7 @@
         <item name="android:layout_marginTop">@dimen/text_button_vertical_margin</item>
         <item name="android:layout_marginBottom">@dimen/text_button_vertical_margin</item>
     </style>
+
+
 
 </resources>
