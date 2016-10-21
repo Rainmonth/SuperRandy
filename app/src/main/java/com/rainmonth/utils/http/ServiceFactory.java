@@ -1,8 +1,11 @@
 package com.rainmonth.utils.http;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.rainmonth.SuperRandyApplication;
+import com.rainmonth.utils.CommonUtils;
 import com.rainmonth.utils.NetWorkUtils;
 import com.socks.library.KLog;
 
@@ -25,11 +28,13 @@ import okio.BufferedSource;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+import rx.Observable;
+import rx.functions.Action1;
+import rx.functions.Func1;
 
 /**
- * Created by RandyZhang on 16/9/19.
- *
- * @Description Service 工厂类，用于创建请求数据所需要的Service
+ * @author RandyZhang
+ * @description Service 工厂类，用于创建请求数据所需要的Service
  */
 public class ServiceFactory {
     private volatile static OkHttpClient okHttpClient;
@@ -40,7 +45,71 @@ public class ServiceFactory {
     private static final int DEFAULT_MAX_STALE_ONLINE = DEFAULT_MAX_AGE * 24;// 默认在线缓存时间
     private static final int DEFAULT_MAX_STALE_OFFLINE = DEFAULT_MAX_AGE * 24 * 7;// 默认离线缓存时间
 
-    // request 拦截器定义
+    /**
+     * 保存cookies拦截器
+     */
+    private static Interceptor SAVE_COOKIES_INTERCEPTOR = new Interceptor() {
+        @Override
+        public Response intercept(Chain chain) throws IOException {
+            SharedPreferences sharedPreferences = SuperRandyApplication.getApplication()
+                    .getSharedPreferences("cookie_sp", Context.MODE_PRIVATE);
+            Response originalResponse = chain.proceed(chain.request());
+            // 如果cookie为空，保存cookie到sp文件
+            if (CommonUtils.isNullOrEmpty(sharedPreferences.getString("cookie", ""))) {
+                // 获取请求返回的cookies
+                if (!CommonUtils.isNullOrEmpty(originalResponse.header("Set-Cookie")) &&
+                        !originalResponse.header("Set-Cookie").isEmpty()) {
+                    final StringBuffer cookieBuffer = new StringBuffer();
+                    Observable.from(originalResponse.headers("Set-Cookie"))
+                            .map(new Func1<String, String>() {
+                                @Override
+                                public String call(String s) {
+                                    String[] cookieArray = s.split(";");
+                                    return cookieArray[0];
+                                }
+                            })
+                            .subscribe(new Action1<String>() {
+                                @Override
+                                public void call(String s) {
+                                    cookieBuffer.append(s).append(";");
+                                }
+                            });
+                    KLog.e("save_cookie", cookieBuffer.toString());
+                    // 保存cookies到sp文件
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("cookie", cookieBuffer.deleteCharAt(cookieBuffer.length() - 1).toString());
+                    editor.apply();
+                }
+            }
+
+            return originalResponse;
+        }
+    };
+
+    /**
+     * 添加cookies拦截器
+     */
+    private static Interceptor ADD_COOKIES_INTERCEPTOR = new Interceptor() {
+        @Override
+        public Response intercept(Chain chain) throws IOException {
+            final Request.Builder builder = chain.request().newBuilder();
+            SharedPreferences sharedPreferences = SuperRandyApplication.getApplication()
+                    .getSharedPreferences("cookie_sp", Context.MODE_PRIVATE);
+            Observable.just(sharedPreferences.getString("cookie", ""))
+                    .subscribe(new Action1<String>() {
+                        @Override
+                        public void call(String s) {
+                            builder.addHeader("Cookie", s);
+                        }
+                    });
+            KLog.e("add_cookie", sharedPreferences.getString("cookie", ""));
+            return chain.proceed(builder.build());
+        }
+    };
+
+    /**
+     * request 拦截器定义
+     */
     private static final Interceptor REQUEST_INTERCEPTOR = new Interceptor() {
         @Override
         public Response intercept(Chain chain) throws IOException {
@@ -58,7 +127,9 @@ public class ServiceFactory {
         }
     };
 
-    // response 拦截器定义
+    /**
+     * response 拦截器定义
+     */
     private static final Interceptor RESPONSE_INTERCEPTOR = new Interceptor() {
         @Override
         public Response intercept(Chain chain) throws IOException {
@@ -80,7 +151,9 @@ public class ServiceFactory {
                     .build();
         }
     };
-    // 打印返回的json数据拦截器
+    /**
+     * 打印返回的json数据拦截器
+     */
     private static final Interceptor LOGGING_INTERCEPTOR = new Interceptor() {
         @Override
         public Response intercept(Chain chain) throws IOException {
@@ -121,7 +194,12 @@ public class ServiceFactory {
         }
     };
 
-    public static OkHttpClient getOkHttpClient() {
+    /**
+     * 获取OkHttpClient实例
+     *
+     * @return OkHttpClient实例
+     */
+    private static OkHttpClient getOkHttpClient() {
         if (okHttpClient == null) {
             synchronized (OkHttpClient.class) {// 同步访问
                 if (okHttpClient == null) {
@@ -131,6 +209,8 @@ public class ServiceFactory {
                     okHttpClient = new OkHttpClient.Builder()
                             .cache(cache)
                             // 添加相关拦截器
+                            .addInterceptor(SAVE_COOKIES_INTERCEPTOR)
+                            .addInterceptor(ADD_COOKIES_INTERCEPTOR)
                             .addNetworkInterceptor(RESPONSE_INTERCEPTOR)
                             .addInterceptor(REQUEST_INTERCEPTOR)
                             .addInterceptor(LOGGING_INTERCEPTOR)
@@ -141,6 +221,12 @@ public class ServiceFactory {
         return okHttpClient;
     }
 
+    /**
+     * 获取retrofit实例
+     *
+     * @param baseUrl baseURL
+     * @return retrofit实例
+     */
     public static Retrofit getRetrofit(String baseUrl) {
         if (retrofit == null) {
             synchronized (Retrofit.class) {
