@@ -33,4 +33,9 @@ public class GridExploreActivity extends BaseActivity {
 //        transaction.add(R.id.frameLayout, fragment);
 //        transaction.commit();
     }
+
+    @Override
+    public void initToolbar() {
+
+    }
 }

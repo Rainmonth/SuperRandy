@@ -32,7 +32,8 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * 图片
+ * @author RandyZhang
+ * @description 图片
  */
 public class ViewPagerExploreActivity extends BaseActivity {
 
@@ -176,5 +177,12 @@ public class ViewPagerExploreActivity extends BaseActivity {
             }
         }, 5000);
 
+    }
+
+    @Override
+    public void initToolbar() {
+        mToolbar.setLogo(R.mipmap.ic_launcher);
+        mToolbar.setTitle("新闻浏览");
+        mToolbar.setBackgroundResource(R.color.bg_home);
     }
 }

@@ -20,7 +20,7 @@ import butterknife.OnClick;
 /**
  * 注册页面
  */
-public class RegisterActivity extends BaseActivity implements IRegisterView{
+public class RegisterActivity extends BaseActivity implements IRegisterView {
     @Bind(R.id.iv_user_avatar)
     ImageView ivUserAvatar;
     @Bind(R.id.et_phone)
@@ -49,6 +49,13 @@ public class RegisterActivity extends BaseActivity implements IRegisterView{
     @Override
     public void initViewsAndEvent() {
         mPresenter = new RegisterPresenterImpl(this);
+    }
+
+    @Override
+    public void initToolbar() {
+        mToolbar.setLogo(R.mipmap.ic_launcher);
+        mToolbar.setTitle("注册");
+        mToolbar.setBackgroundResource(R.color.transparent);
     }
 
     @OnClick({R.id.iv_user_avatar, R.id.tv_create_account})

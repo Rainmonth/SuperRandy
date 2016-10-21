@@ -5,9 +5,12 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+
+import com.rainmonth.R;
 
 import butterknife.ButterKnife;
 
@@ -18,6 +21,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     protected Context mContext;
     protected String Tag = "";
+    protected Toolbar mToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +39,10 @@ public abstract class BaseActivity extends AppCompatActivity {
             throw new IllegalArgumentException("You must return a right contentView layout resource Id");
         }
         ButterKnife.bind(this);
+        mToolbar = ButterKnife.findById(this, R.id.toolbar);
+        if (null != mToolbar) {
+            initToolbar();
+        }
         mContext = this;
         Tag = this.getClass().getSimpleName();
         initViewsAndEvent();
@@ -52,6 +60,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     public abstract void initViewsAndEvent();
 
+    public abstract void initToolbar();
 
     /**
      * startActivity

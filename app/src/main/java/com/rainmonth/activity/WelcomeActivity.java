@@ -18,7 +18,8 @@ import butterknife.Bind;
 import butterknife.OnClick;
 
 /**
- * 欢迎页面
+ * @author RandyZhang
+ * @description 欢迎页面
  */
 public class WelcomeActivity extends BaseActivity {
 
@@ -75,6 +76,11 @@ public class WelcomeActivity extends BaseActivity {
     @Override
     public void initViewsAndEvent() {
         vpWelcome.setAdapter(mAdapter);
+    }
+
+    @Override
+    public void initToolbar() {
+
     }
 
     @OnClick({R.id.btn_login, R.id.btn_register})

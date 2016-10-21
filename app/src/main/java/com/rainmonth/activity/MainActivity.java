@@ -18,7 +18,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class MainActivity extends BaseActivity implements MainView{
+public class MainActivity extends BaseActivity implements MainView {
 
     @Bind(R.id.vp_horizontal_ntb)
     ViewPager vpHorizontalNtb;
@@ -65,6 +65,13 @@ public class MainActivity extends BaseActivity implements MainView{
 
             }
         });
+    }
+
+    @Override
+    public void initToolbar() {
+        mToolbar.setTitle("主页");
+        mToolbar.setSubtitle("主页说明");
+        mToolbar.setLogo(R.mipmap.ic_launcher);
     }
 
     @Override

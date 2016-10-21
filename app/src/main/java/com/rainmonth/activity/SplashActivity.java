@@ -49,6 +49,11 @@ public class SplashActivity extends BaseActivity implements SplashView {
     }
 
     @Override
+    public void initToolbar() {
+
+    }
+
+    @Override
     public void initWithSplashInfo(SplashInfo splashInfo) {
         if (null != splashInfo) {
             if (splashInfo.isHasRemoteSplash()) {

@@ -1,100 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_welcome0"
+    android:orientation="vertical"
     tools:context="com.rainmonth.activity.LoginActivity">
 
-    <LinearLayout
+    <include layout="@layout/toolbar_layout" />
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingBottom="@dimen/activity_vertical_margin"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin">
-
-        <ImageView
-            android:id="@+id/iv_user_avatar"
-            android:layout_width="@dimen/user_avatar_size"
-            android:layout_height="@dimen/user_avatar_size"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="@dimen/text_button_vertical_margin"
-            android:layout_marginTop="@dimen/margin_large"
-            android:contentDescription="@string/app_name"
-            android:src="@mipmap/ic_launcher" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="@dimen/text_button_vertical_margin"
-            android:text="@string/register_tips_large"
-            android:textColor="@color/white"
-            android:textSize="24sp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="@dimen/text_button_vertical_margin"
-            android:text="@string/register_tips_small"
-            android:textColor="@color/white"
-            android:textSize="12sp" />
-
-        <EditText
-            android:id="@+id/et_user_name"
-            style="@style/half_trans_white_bg_edit_text"
-            android:hint="@string/username_hint"
-            android:inputType="text" />
-
-        <EditText
-            android:id="@+id/et_psw"
-            style="@style/half_trans_white_bg_edit_text"
-            android:hint="@string/psw_hint"
-            android:inputType="textPassword" />
-
-        <TextView
-            android:id="@+id/tv_login"
-            style="@style/green_trans_btn"
-            android:text="@string/login" />
-
-
-        <TextView
-            android:id="@+id/tv_no_account"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center_horizontal"
-            android:layout_marginBottom="@dimen/text_button_vertical_margin"
-            android:layout_marginTop="@dimen/text_button_vertical_margin"
-            android:text="没有账户，立即注册"
-            android:textColor="@color/white" />
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:paddingBottom="@dimen/padding_normal"
-            android:paddingTop="@dimen/padding_normal">
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin">
 
             <ImageView
-                android:id="@+id/iv_qq"
+                android:id="@+id/iv_user_avatar"
                 android:layout_width="@dimen/user_avatar_size"
                 android:layout_height="@dimen/user_avatar_size"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="@dimen/text_button_vertical_margin"
+                android:layout_marginTop="@dimen/margin_large"
                 android:contentDescription="@string/app_name"
-                android:src="@drawable/login_by_qq" />
+                android:src="@mipmap/ic_launcher" />
 
-            <ImageView
-                android:id="@+id/iv_sina"
-                android:layout_width="@dimen/user_avatar_size"
-                android:layout_height="@dimen/user_avatar_size"
-                android:contentDescription="@string/app_name"
-                android:src="@drawable/login_by_sina" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="@dimen/text_button_vertical_margin"
+                android:text="@string/register_tips_large"
+                android:textColor="@color/white"
+                android:textSize="24sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="@dimen/text_button_vertical_margin"
+                android:text="@string/register_tips_small"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+
+            <EditText
+                android:id="@+id/et_user_name"
+                style="@style/half_trans_white_bg_edit_text"
+                android:hint="@string/username_hint"
+                android:inputType="text" />
+
+            <EditText
+                android:id="@+id/et_psw"
+                style="@style/half_trans_white_bg_edit_text"
+                android:hint="@string/psw_hint"
+                android:inputType="textPassword" />
+
+            <TextView
+                android:id="@+id/tv_login"
+                style="@style/green_trans_btn"
+                android:text="@string/login" />
 
 
+            <TextView
+                android:id="@+id/tv_no_account"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center_horizontal"
+                android:layout_marginBottom="@dimen/text_button_vertical_margin"
+                android:layout_marginTop="@dimen/text_button_vertical_margin"
+                android:text="没有账户，立即注册"
+                android:textColor="@color/white" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/padding_normal"
+                android:paddingTop="@dimen/padding_normal">
+
+                <ImageView
+                    android:id="@+id/iv_qq"
+                    android:layout_width="@dimen/user_avatar_size"
+                    android:layout_height="@dimen/user_avatar_size"
+                    android:contentDescription="@string/app_name"
+                    android:src="@drawable/login_by_qq" />
+
+                <ImageView
+                    android:id="@+id/iv_sina"
+                    android:layout_width="@dimen/user_avatar_size"
+                    android:layout_height="@dimen/user_avatar_size"
+                    android:contentDescription="@string/app_name"
+                    android:src="@drawable/login_by_sina" />
+
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
-</ScrollView>
+    </ScrollView>
+</LinearLayout>
 
