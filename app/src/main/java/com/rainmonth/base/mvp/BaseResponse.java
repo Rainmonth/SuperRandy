@@ -5,11 +5,13 @@ import com.google.gson.annotations.SerializedName;
 /**
  * Created by RandyZhang on 16/9/19.
  */
-public class BaseResponse {
-    @SerializedName("code")
-    String code;
+public class BaseResponse<T> {
+    @SerializedName(value = "code", alternate = {"boolen"})
+    private String code;
     @SerializedName("message")
-    String message;
+    private String message;
+    @SerializedName("data")
+    private T data;
 
     public BaseResponse() {
     }
@@ -33,5 +35,13 @@ public class BaseResponse {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public T getData() {
+        return data;
+    }
+
+    public void setData(T data) {
+        this.data = data;
     }
 }
