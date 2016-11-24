@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">library</string>
+    <string name="library">library</string>
     <string name="common_loading_message">Loading&#82830;</string>
     <string name="common_empty_msg">Oops, failed to resolve data\nPlease hit the screen and try again~</string>
     <string name="common_error_msg">Oops, something wrong!\nPlease hit the screen and try again~</string>

@@ -7,9 +7,11 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -48,6 +50,7 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
      */
     protected Context mContext = null;
 
+    protected Toolbar mToolbar = null;
     /**
      * network status
      */
@@ -100,7 +103,18 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
             EventBus.getDefault().register(this);
         }
         SmartBarUtils.hide(getWindow().getDecorView());
-        setTranslucentStatus(isApplyStatusBarTranslucency());
+        setTranslucentStatus(isApplyStatusBarTranslucency());if (getContentViewLayoutID() != 0) {
+            setContentView(getContentViewLayoutID());
+            // 以代码的形式为每个Activity对应的布局文件添加fitsSystemWindows属性
+            ViewGroup contentFrameLayout = (ViewGroup) findViewById(Window.ID_ANDROID_CONTENT);
+            assert contentFrameLayout != null;
+            View parentView = contentFrameLayout.getChildAt(0);
+            if (parentView != null && Build.VERSION.SDK_INT >= 14) {
+                parentView.setFitsSystemWindows(true);
+            }
+        } else {
+            throw new IllegalArgumentException("You must return a right contentView layout resource Id");
+        }
 
         mContext = this;
         TAG = this.getClass().getSimpleName();
