@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <!-- SwipeBackLayout -->
+    <declare-styleable name="SwipeBackLayout">
+        <attr name="edge_size" format="dimension" />
+        <attr name="edge_flag">
+            <enum name="left" value="0" />
+            <enum name="right" value="1" />
+            <enum name="bottom" value="2" />
+            <enum name="all" value="3" />
+        </attr>
+        <attr name="shadow_left" format="reference" />
+        <attr name="shadow_right" format="reference" />
+        <attr name="shadow_bottom" format="reference" />
+    </declare-styleable>
+
+    <attr name="SwipeBackLayoutStyle" format="reference" />
+    <!-- SmartTabLayout -->
+    <declare-styleable name="stl_SmartTabLayout">
+        <attr name="stl_indicatorAlwaysInCenter" format="boolean" />
+        <attr name="stl_indicatorInFront" format="boolean" />
+        <attr name="stl_indicatorInterpolation" format="enum">
+            <enum name="smart" value="0" />
+            <enum name="linear" value="1" />
+        </attr>
+        <attr name="stl_indicatorColor" format="color" />
+        <attr name="stl_indicatorColors" format="reference" />
+        <attr name="stl_indicatorThickness" format="dimension" />
+        <attr name="stl_indicatorCornerRadius" format="dimension" />
+        <attr name="stl_underlineColor" format="color" />
+        <attr name="stl_underlineThickness" format="dimension" />
+        <attr name="stl_dividerColor" format="color" />
+        <attr name="stl_dividerColors" format="reference" />
+        <attr name="stl_dividerThickness" format="dimension" />
+        <attr name="stl_defaultTabTextAllCaps" format="boolean" />
+        <attr name="stl_defaultTabTextColor" format="color" />
+        <attr name="stl_defaultTabTextSize" format="dimension" />
+        <attr name="stl_defaultTabTextHorizontalPadding" format="dimension" />
+        <attr name="stl_defaultTabTextMinWidth" format="dimension" />
+        <attr name="stl_customTabTextLayoutId" format="reference" />
+        <attr name="stl_customTabTextViewId" format="reference" />
+        <attr name="stl_distributeEvenly" format="boolean" />
+    </declare-styleable>
+
+    <!-- CircularProgressBar -->
+    <declare-styleable name="CircularProgressBar">
+        <attr name="cpbStyle" format="reference" />
+        <attr name="cpb_color" format="color" />
+        <attr name="cpb_colors" format="reference" />
+        <attr name="cpb_stroke_width" format="dimension" />
+        <attr name="cpb_min_sweep_angle" format="integer" />
+        <attr name="cpb_max_sweep_angle" format="integer" />
+        <attr name="cpb_sweep_speed" format="float" />
+        <attr name="cpb_rotation_speed" format="float" />
+    </declare-styleable>
+
+    <!-- PLA_ListView -->
+    <attr name="absListViewStyle" format="reference" />
+    <attr name="listViewStyle" format="reference" />
+
+    <declare-styleable name="PLAMultiColumnListView">
+        <attr name="plaColumnNumber" format="integer" />
+        <attr name="plaLandscapeColumnNumber" format="integer" />
+        <attr name="plaColumnPaddingLeft" format="dimension" />
+        <attr name="plaColumnPaddingRight" format="dimension" />
+    </declare-styleable>
+    <!--
+         Attributes that can be used with a {@link android.view.ViewGroup} or any
+         of its subclasses.  Also see {@link #ViewGroup_Layout} for
+         attributes that this class processes in its children.
+    -->
+    <declare-styleable name="ViewGroup">
+
+        <!--
+             Defines whether changes in layout (caused by adding and removing items) should
+             cause a LayoutTransition to run. When this flag is set to true, a default
+             LayoutTransition object will be set on the ViewGroup container and default
+             animations will run when these layout changes occur.
+        -->
+        <attr name="animateLayoutChanges" format="boolean" />
+        <!--
+             Defines whether a child is limited to draw inside of its bounds or not.
+             This is useful with animations that scale the size of the children to more
+             than 100% for instance. In such a case, this property should be set to false
+             to allow the children to draw outside of their bounds. The default value of
+             this property is true.
+        -->
+        <attr name="clipChildren" format="boolean" />
+        <!--
+             Defines whether the ViewGroup will clip its drawing surface so as to exclude
+             the padding area. This property is set to true by default.
+        -->
+        <attr name="clipToPadding" format="boolean" />
+        <!--
+             Defines the layout animation to use the first time the ViewGroup is laid out.
+             Layout animations can also be started manually after the first layout.
+        -->
+        <attr name="layoutAnimation" format="reference" />
+        <!--
+             Defines whether layout animations should create a drawing cache for their
+             children. Enabling the animation cache consumes more memory and requires
+             a longer initialization but provides better performance. The animation
+             cache is enabled by default.
+        -->
+        <attr name="animationCache" format="boolean" />
+        <!--
+             Defines the persistence of the drawing cache. The drawing cache might be
+             enabled by a ViewGroup for all its children in specific situations (for
+             instance during a scrolling.) This property lets you persist the cache
+             in memory after its initial usage. Persisting the cache consumes more
+             memory but may prevent frequent garbage collection is the cache is created
+             over and over again. By default the persistence is set to scrolling.
+        -->
+        <attr name="persistentDrawingCache">
+
+            <!-- The drawing cache is not persisted after use. -->
+            <flag name="none" value="0x0" />
+            <!-- The drawing cache is persisted after a layout animation. -->
+            <flag name="animation" value="0x1" />
+            <!-- The drawing cache is persisted after a scroll. -->
+            <flag name="scrolling" value="0x2" />
+            <!-- The drawing cache is always persisted. -->
+            <flag name="all" value="0x3" />
+        </attr>
+        <!--
+             Defines whether the ViewGroup should always draw its children using their
+             drawing cache or not. The default value is true.
+        -->
+        <attr name="alwaysDrawnWithCache" format="boolean" />
+        <!--
+             Sets whether this ViewGroup's drawable states also include
+             its children's drawable states.  This is used, for example, to
+             make a group appear to be focused when its child EditText or button
+             is focused.
+        -->
+        <attr name="addStatesFromChildren" format="boolean" />
+
+        <!--
+             Defines the relationship between the ViewGroup and its descendants
+             when looking for a View to take focus.
+        -->
+        <attr name="descendantFocusability">
+
+            <!-- The ViewGroup will get focus before any of its descendants. -->
+            <enum name="beforeDescendants" value="0" />
+            <!-- The ViewGroup will get focus only if none of its descendants want it. -->
+            <enum name="afterDescendants" value="1" />
+            <!-- The ViewGroup will block its descendants from receiving focus. -->
+            <enum name="blocksDescendants" value="2" />
+        </attr>
+
+        <!--
+             Sets whether this ViewGroup should split MotionEvents
+             to separate child views during touch event dispatch.
+             If false (default), touch events will be dispatched to
+             the child view where the first pointer went down until
+             the last pointer goes up.
+             If true, touch events may be dispatched to multiple children.
+             MotionEvents for each pointer will be dispatched to the child
+             view where the initial ACTION_DOWN event happened.
+             See {@link android.view.ViewGroup#setMotionEventSplittingEnabled(boolean)}
+             for more information.
+        -->
+        <attr name="splitMotionEvents" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="AbsListView">
+
+        <!-- Drawable used to indicate the currently selected item in the list. -->
+        <attr name="listSelector" format="color|reference" />
+        <!--
+             When set to true, the selector will be drawn over the selected item.
+             Otherwise the selector is drawn behind the selected item. The default
+             value is false.
+        -->
+        <attr name="drawSelectorOnTop" format="boolean" />
+        <!-- Used by ListView and GridView to stack their content from the bottom. -->
+        <attr name="stackFromBottom" format="boolean" />
+        <!--
+             When set to true, the list uses a drawing cache during scrolling.
+             This makes the rendering faster but uses more memory. The default
+             value is true.
+        -->
+        <attr name="scrollingCache" format="boolean" />
+        <!--
+             When set to true, the list will filter results as the user types. The
+             List's adapter must support the Filterable interface for this to work.
+        -->
+        <attr name="textFilterEnabled" format="boolean" />
+        <!--
+             Sets the transcript mode for the list. In transcript mode, the list
+             scrolls to the bottom to make new items visible when they are added.
+        -->
+        <attr name="transcriptMode">
+
+            <!-- Disables transcript mode. This is the default value. -->
+            <enum name="disabled" value="0" />
+            <!--
+                 The list will automatically scroll to the bottom when
+                 a data set change notification is received and only if the last item is
+                 already visible on screen.
+            -->
+            <enum name="normal" value="1" />
+            <!--
+                 The list will automatically scroll to the bottom, no matter what items
+                 are currently visible.
+            -->
+            <enum name="alwaysScroll" value="2" />
+        </attr>
+        <!--
+             Indicates that this list will always be drawn on top of solid, single-color
+             opaque background. This allows the list to optimize drawing.
+        -->
+        <attr name="cacheColorHint" format="color" />
+        <!--
+             Enables the fast scroll thumb that can be dragged to quickly scroll through
+             the list.
+        -->
+        <attr name="fastScrollEnabled" format="boolean" />
+        <!--
+             When set to true, the list will use a more refined calculation
+             method based on the pixels height of the items visible on screen. This
+             property is set to true by default but should be set to false if your adapter
+             will display items of varying heights. When this property is set to true and
+             your adapter displays items of varying heights, the scrollbar thumb will
+             change size as the user scrolls through the list. When set to fale, the list
+             will use only the number of items in the adapter and the number of items visible
+             on screen to determine the scrollbar's properties.
+        -->
+        <attr name="smoothScrollbar" format="boolean" />
+        <!--
+             Defines the choice behavior for the view. By default, lists do not have
+             any choice behavior. By setting the choiceMode to singleChoice, the list
+             allows up to one item to be in a chosen state. By setting the choiceMode to
+             multipleChoice, the list allows any number of items to be chosen.
+             Finally, by setting the choiceMode to multipleChoiceModal the list allows
+             any number of items to be chosen in a special selection mode.
+             The application will supply a
+             {@link android.widget.AbsListView.MultiChoiceModeListener} using
+             {@link android.widget.AbsListView#setMultiChoiceModeListener} to control the
+             selection mode. This uses the {@link android.view.ActionMode} API.
+        -->
+        <attr name="choiceMode">
+
+            <!-- Normal list that does not indicate choices. -->
+            <enum name="none" value="0" />
+            <!-- The list allows up to one choice. -->
+            <enum name="singleChoice" value="1" />
+            <!-- The list allows multiple choices. -->
+            <enum name="multipleChoice" value="2" />
+            <!-- The list allows multiple choices in a custom selection mode. -->
+            <enum name="multipleChoiceModal" value="3" />
+        </attr>
+
+        <!--
+             When set to true, the list will always show the fast scroll interface.
+             This setting implies fastScrollEnabled.
+        -->
+        <attr name="fastScrollAlwaysVisible" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="ListView">
+
+        <!-- Drawable or color to draw between list items. -->
+        <!-- <attr name="divider" format="reference|color" /> -->
+        <!--
+             Height of the divider. Will use the intrinsic height of the divider if this
+             is not specified.
+        -->
+        <attr name="dividerHeight" format="dimension" />
+        <!--
+             When set to false, the ListView will not draw the divider after each header view.
+             The default value is true.
+        -->
+        <attr name="headerDividersEnabled" format="boolean" />
+        <!--
+             When set to false, the ListView will not draw the divider before each footer view.
+             The default value is true.
+        -->
+        <attr name="footerDividersEnabled" format="boolean" />
+        <!-- Drawable to draw above list content. -->
+        <attr name="overScrollHeader" format="reference|color" />
+        <!-- Drawable to draw below list content. -->
+
+        <attr name="overScrollFooter" format="reference|color" />
+
+        <attr name="plaContentBackground" format="color" />
+    </declare-styleable>
+
+</resources>

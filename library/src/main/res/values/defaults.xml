@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="cpb_default_sweep_speed" format="float" type="string">1</item>
+    <item name="cpb_default_rotation_speed" format="float" type="string">1</item>
+</resources>
