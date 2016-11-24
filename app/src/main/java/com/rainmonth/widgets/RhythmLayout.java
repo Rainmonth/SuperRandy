@@ -12,8 +12,8 @@ import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 
 import com.rainmonth.R;
+import com.rainmonth.library.utils.DensityUtils;
 import com.rainmonth.utils.AnimatorUtils;
-import com.rainmonth.utils.DensityUtils;
 
 import java.util.ArrayList;
 import java.util.List;

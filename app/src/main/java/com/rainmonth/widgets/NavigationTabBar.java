@@ -670,7 +670,7 @@ public class NavigationTabBar extends View implements ViewPager.OnPageChangeList
         if (mViewPager == viewPager) return;
         if (mViewPager != null) mViewPager.setOnPageChangeListener(null);
         if (viewPager.getAdapter() == null)
-            throw new IllegalStateException("ViewPager does not provide adapter instance.");
+            throw new IllegalStateException("ViewPager does not provide com.rainmonth.library.adapter instance.");
 
         mIsViewPagerMode = true;
         mViewPager = viewPager;

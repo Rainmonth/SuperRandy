@@ -3,7 +3,7 @@ package com.rainmonth.base.mvp;
 import android.support.annotation.CallSuper;
 
 import com.rainmonth.SuperRandyApplication;
-import com.rainmonth.utils.NetWorkUtils;
+import com.rainmonth.library.utils.NetworkUtils;
 import com.rainmonth.utils.http.RequestCallback;
 import com.socks.library.KLog;
 
@@ -52,7 +52,7 @@ public class BaseSubscriber<T> extends Subscriber<T> {
                         errorMsg = "没有权限访问此链接！";
                         break;
                     case 504:
-                        if (!NetWorkUtils.isConnected(SuperRandyApplication.getApplication())) {
+                        if (!NetworkUtils.isConnected(SuperRandyApplication.getApplication())) {
                             errorMsg = "没有联网哦！";
                         } else {
                             errorMsg = "网络连接超时！";

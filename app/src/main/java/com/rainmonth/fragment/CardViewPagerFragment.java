@@ -19,6 +19,7 @@ import com.rainmonth.R;
 import com.rainmonth.adapter.CardPagerAdapter;
 import com.rainmonth.base.ui.fragment.BaseLazyFragment;
 import com.rainmonth.bean.CardInfo;
+import com.rainmonth.library.utils.NetworkUtils;
 import com.rainmonth.utils.AnimatorUtils;
 import com.rainmonth.utils.HexUtils;
 import com.rainmonth.widgets.IRhythmItemListener;
@@ -121,7 +122,7 @@ public class CardViewPagerFragment extends BaseLazyFragment implements PullToRef
 
         public void onPageSelected(int position) {
             onAppPagerChange(position);
-            if (mHasNext && (position > -10 + mCardInfoList.size()) && !mIsRequesting && NetWorkUtils.isWifiDataEnable(getActivity())) {
+            if (mHasNext && (position > -10 + mCardInfoList.size()) && !mIsRequesting && NetworkUtils.isWifiDataEnable(getActivity())) {
                 fetchData();
             }
         }
