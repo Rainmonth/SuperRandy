@@ -3,23 +3,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:clipToPadding="true"
     android:gravity="center"
     android:orientation="vertical"
     tools:context="com.rainmonth.activity.WelcomeActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="top|center"
-        android:text="@string/welcome"
-        android:textColor="@color/white"
-        android:textSize="24sp" />
 
     <android.support.v4.view.ViewPager
         android:id="@+id/vp_welcome"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:contentDescription="@string/app_name" />
+        android:contentDescription="@string/app_name"
+        android:fitsSystemWindows="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|center"
+        android:layout_marginTop="30dp"
+        android:text="@string/welcome"
+        android:textColor="@color/white"
+        android:textSize="24sp" />
 
     <LinearLayout
         android:id="@+id/ll_action_container"

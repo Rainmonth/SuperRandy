@@ -13,6 +13,9 @@ import android.widget.TextView;
 
 import com.rainmonth.R;
 import com.rainmonth.base.ui.activity.BaseActivity;
+import com.rainmonth.library.base.BaseAppCompatActivity;
+import com.rainmonth.library.eventbus.EventCenter;
+import com.rainmonth.library.utils.NetworkUtils;
 import com.rainmonth.utils.DensityUtils;
 
 import net.lucode.hackware.magicindicator.MagicIndicator;
@@ -91,17 +94,27 @@ public class ViewPagerExploreActivity extends BaseActivity {
     }
 
     @Override
-    public boolean isApplyTranslucentStatusBar() {
-        return false;
+    protected void getBundleExtras(Bundle extras) {
+
     }
 
     @Override
-    public int getContentViewLayoutId() {
+    protected int getContentViewLayoutID() {
         return R.layout.activity_view_pager_explore;
     }
 
     @Override
-    public void initViewsAndEvent() {
+    protected void onEventComing(EventCenter eventCenter) {
+
+    }
+
+    @Override
+    protected View getLoadingTargetView() {
+        return null;
+    }
+
+    @Override
+    protected void initViewsAndEvents() {
         mViewPager = (ViewPager) findViewById(R.id.view_pager);
         mViewPager.setAdapter(mAdapter);
 
@@ -176,7 +189,36 @@ public class ViewPagerExploreActivity extends BaseActivity {
                 });
             }
         }, 5000);
+    }
 
+    @Override
+    protected void onNetworkConnected(NetworkUtils.NetType type) {
+
+    }
+
+    @Override
+    protected void onNetworkDisConnected() {
+
+    }
+
+    @Override
+    protected boolean isApplyStatusBarTranslucency() {
+        return true;
+    }
+
+    @Override
+    protected boolean isBindEventBusHere() {
+        return false;
+    }
+
+    @Override
+    protected boolean toggleOverridePendingTransition() {
+        return false;
+    }
+
+    @Override
+    protected TransitionMode getOverridePendingTransitionMode() {
+        return null;
     }
 
     @Override

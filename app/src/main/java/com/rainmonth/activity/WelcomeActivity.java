@@ -1,5 +1,6 @@
 package com.rainmonth.activity;
 
+import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
@@ -10,6 +11,9 @@ import android.widget.LinearLayout;
 
 import com.rainmonth.R;
 import com.rainmonth.base.ui.activity.BaseActivity;
+import com.rainmonth.library.base.BaseAppCompatActivity;
+import com.rainmonth.library.eventbus.EventCenter;
+import com.rainmonth.library.utils.NetworkUtils;
 
 import java.util.Arrays;
 import java.util.List;
@@ -51,7 +55,8 @@ public class WelcomeActivity extends BaseActivity {
         public Object instantiateItem(ViewGroup container, int position) {
             ImageView imageView = new ImageView(container.getContext());
             imageView.setImageResource(mDataList.get(position));
-            imageView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+            imageView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.MATCH_PARENT));
             imageView.setScaleType(ImageView.ScaleType.FIT_XY);
             container.addView(imageView);
             return imageView;
@@ -62,21 +67,6 @@ public class WelcomeActivity extends BaseActivity {
             container.removeView((View) object);
         }
     };
-
-    @Override
-    public boolean isApplyTranslucentStatusBar() {
-        return false;
-    }
-
-    @Override
-    public int getContentViewLayoutId() {
-        return R.layout.activity_welcome;
-    }
-
-    @Override
-    public void initViewsAndEvent() {
-        vpWelcome.setAdapter(mAdapter);
-    }
 
     @Override
     public void initToolbar() {
@@ -93,5 +83,60 @@ public class WelcomeActivity extends BaseActivity {
                 readyGo(RegisterActivity.class);
                 break;
         }
+    }
+
+    @Override
+    protected void getBundleExtras(Bundle extras) {
+
+    }
+
+    @Override
+    protected int getContentViewLayoutID() {
+        return R.layout.activity_welcome;
+    }
+
+    @Override
+    protected void onEventComing(EventCenter eventCenter) {
+
+    }
+
+    @Override
+    protected View getLoadingTargetView() {
+        return null;
+    }
+
+    @Override
+    protected void initViewsAndEvents() {
+
+    }
+
+    @Override
+    protected void onNetworkConnected(NetworkUtils.NetType type) {
+
+    }
+
+    @Override
+    protected void onNetworkDisConnected() {
+
+    }
+
+    @Override
+    protected boolean isApplyStatusBarTranslucency() {
+        return true;
+    }
+
+    @Override
+    protected boolean isBindEventBusHere() {
+        return false;
+    }
+
+    @Override
+    protected boolean toggleOverridePendingTransition() {
+        return false;
+    }
+
+    @Override
+    protected TransitionMode getOverridePendingTransitionMode() {
+        return null;
     }
 }

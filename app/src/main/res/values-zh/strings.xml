@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">SuperRandy</string>
+
+    <!--Main Activity-->
+    <string name="ren">荏</string>
+    <string name="ran">苒</string>
+    <string name="zhui">追</string>
+    <string name="xun">寻</string>
+    <string name="you">你</string>
+
+    <string name="default_splash_text">荏苒追寻</string>
+    <string name="pull_to_refresh_from_bottom_pull_label">@string/pull_to_refresh_pull_label</string>
+    <string name="pull_to_refresh_from_bottom_refreshing_label">@string/pull_to_refresh_refreshing_label</string>
+    <string name="pull_to_refresh_from_bottom_release_label">@string/pull_to_refresh_release_label</string>
+    <string name="pull_to_refresh_pull_label">下拉刷新…</string>
+    <string name="pull_to_refresh_refreshing_label">正在载入…</string>
+    <string name="pull_to_refresh_release_label">放开以刷新…</string>
+    <string name="login">登录</string>
+    <string name="psw_hint">请输入密码</string>
+    <string name="username_hint">请输入用户名</string>
+    <string name="register">注册</string>
+    <string name="create_account">立即创建账户</string>
+    <string name="welcome">欢迎来到Super Randy</string>
+    <string name="email_hint">请输入邮箱</string>
+    <string name="phone_hint">请输入手机号</string>
+    <string name="register_tips_large">Enter your details</string>
+    <string name="register_tips_small">Welcome to our app</string>
+</resources>

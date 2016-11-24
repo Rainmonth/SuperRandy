@@ -22,7 +22,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 /**
- * A adapter using View Holder to display the item of a list view;
+ * A com.rainmonth.library.adapter using View Holder to display the item of a list view;
  *
  * @param <ItemDataType>
  * @author http://www.liaohuqiu.net

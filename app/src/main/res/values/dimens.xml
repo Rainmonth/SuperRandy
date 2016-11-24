@@ -142,4 +142,5 @@
     <dimen name="word_date">22.0sp</dimen>
     <dimen name="navigator_margin">5dp</dimen>
     <dimen name="navigator_common_height">48dp</dimen>
+    <dimen name="toolbar_padding_top">0dp</dimen>
 </resources>

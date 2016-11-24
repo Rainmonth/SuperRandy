@@ -1,5 +1,6 @@
 package com.rainmonth.activity;
 
+import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -8,6 +9,9 @@ import android.widget.TextView;
 import com.rainmonth.R;
 import com.rainmonth.base.ui.activity.BaseActivity;
 import com.rainmonth.bean.UserInfo;
+import com.rainmonth.library.base.BaseAppCompatActivity;
+import com.rainmonth.library.eventbus.EventCenter;
+import com.rainmonth.library.utils.NetworkUtils;
 import com.rainmonth.presenter.IRegisterPresenter;
 import com.rainmonth.presenter.impl.RegisterPresenterImpl;
 import com.rainmonth.utils.ToastUtils;
@@ -35,21 +39,6 @@ public class RegisterActivity extends BaseActivity implements IRegisterView {
     TextView tvCreateAccount;
 
     IRegisterPresenter mPresenter;
-
-    @Override
-    public boolean isApplyTranslucentStatusBar() {
-        return false;
-    }
-
-    @Override
-    public int getContentViewLayoutId() {
-        return R.layout.activity_register;
-    }
-
-    @Override
-    public void initViewsAndEvent() {
-        mPresenter = new RegisterPresenterImpl(this);
-    }
 
     @Override
     public void initToolbar() {
@@ -97,5 +86,60 @@ public class RegisterActivity extends BaseActivity implements IRegisterView {
     @Override
     public void hideProgress() {
 
+    }
+
+    @Override
+    protected void getBundleExtras(Bundle extras) {
+
+    }
+
+    @Override
+    protected int getContentViewLayoutID() {
+        return R.layout.activity_register;
+    }
+
+    @Override
+    protected void onEventComing(EventCenter eventCenter) {
+
+    }
+
+    @Override
+    protected View getLoadingTargetView() {
+        return null;
+    }
+
+    @Override
+    protected void initViewsAndEvents() {
+        mPresenter = new RegisterPresenterImpl(this);
+    }
+
+    @Override
+    protected void onNetworkConnected(NetworkUtils.NetType type) {
+
+    }
+
+    @Override
+    protected void onNetworkDisConnected() {
+
+    }
+
+    @Override
+    protected boolean isApplyStatusBarTranslucency() {
+        return true;
+    }
+
+    @Override
+    protected boolean isBindEventBusHere() {
+        return false;
+    }
+
+    @Override
+    protected boolean toggleOverridePendingTransition() {
+        return false;
+    }
+
+    @Override
+    protected TransitionMode getOverridePendingTransitionMode() {
+        return null;
     }
 }

@@ -1,5 +1,6 @@
 package com.rainmonth.activity;
 
+import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -9,6 +10,8 @@ import com.rainmonth.R;
 import com.rainmonth.adapter.HomeViewPagerAdapter;
 import com.rainmonth.base.ui.activity.BaseActivity;
 import com.rainmonth.base.ui.fragment.BaseLazyFragment;
+import com.rainmonth.library.eventbus.EventCenter;
+import com.rainmonth.library.utils.NetworkUtils;
 import com.rainmonth.presenter.impl.MainPresenter;
 import com.rainmonth.view.MainView;
 import com.rainmonth.widgets.NavigationTabBar;
@@ -30,42 +33,6 @@ public class MainActivity extends BaseActivity implements MainView {
     FrameLayout flNtbHorizontalContainer;
 
     MainPresenter mainPresenter = null;
-
-    @Override
-    public boolean isApplyTranslucentStatusBar() {
-        return false;
-    }
-
-    @Override
-    public int getContentViewLayoutId() {
-        return R.layout.activity_main;
-    }
-
-    @Override
-    public void initViewsAndEvent() {
-        // 初始化个推
-        PushManager.getInstance().initialize(getApplicationContext());
-        ButterKnife.bind(this);
-
-        mainPresenter = new MainPresenter(this, this);
-        mainPresenter.initialize();
-        ntbHorizontal.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(final int position, final float positionOffset, final int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(final int position) {
-                ntbHorizontal.getModels().get(position).hideBadge();
-            }
-
-            @Override
-            public void onPageScrollStateChanged(final int state) {
-
-            }
-        });
-    }
 
     @Override
     public void initToolbar() {
@@ -119,5 +86,81 @@ public class MainActivity extends BaseActivity implements MainView {
     @Override
     public void hideProgress() {
 
+    }
+
+    @Override
+    protected void getBundleExtras(Bundle extras) {
+
+    }
+
+    @Override
+    protected int getContentViewLayoutID() {
+        return R.layout.activity_main;
+    }
+
+    @Override
+    protected void onEventComing(EventCenter eventCenter) {
+
+    }
+
+    @Override
+    protected View getLoadingTargetView() {
+        return null;
+    }
+
+    @Override
+    protected void initViewsAndEvents() {
+        // 初始化个推
+        PushManager.getInstance().initialize(getApplicationContext());
+        ButterKnife.bind(this);
+
+        mainPresenter = new MainPresenter(this, this);
+        mainPresenter.initialize();
+        ntbHorizontal.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(final int position, final float positionOffset, final int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(final int position) {
+                ntbHorizontal.getModels().get(position).hideBadge();
+            }
+
+            @Override
+            public void onPageScrollStateChanged(final int state) {
+
+            }
+        });
+    }
+
+    @Override
+    protected void onNetworkConnected(NetworkUtils.NetType type) {
+
+    }
+
+    @Override
+    protected void onNetworkDisConnected() {
+
+    }
+
+    @Override
+    protected boolean isApplyStatusBarTranslucency() {
+        return true;
+    }
+
+    @Override
+    protected boolean isBindEventBusHere() {
+        return false;
+    }
+
+    @Override
+    protected boolean toggleOverridePendingTransition() {
+        return false;
+    }
+
+    @Override
+    protected TransitionMode getOverridePendingTransitionMode() {
+        return null;
     }
 }

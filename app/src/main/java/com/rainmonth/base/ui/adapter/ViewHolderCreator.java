@@ -23,5 +23,5 @@ package com.rainmonth.base.ui.adapter;
  * @author http://www.liaohuqiu.net
  */
 public interface ViewHolderCreator<ItemDataType> {
-    public ViewHolderBase<ItemDataType> createViewHolder(int position);
+    ViewHolderBase<ItemDataType> createViewHolder(int position);
 }

@@ -21,7 +21,6 @@ import com.rainmonth.base.ui.fragment.BaseLazyFragment;
 import com.rainmonth.bean.CardInfo;
 import com.rainmonth.utils.AnimatorUtils;
 import com.rainmonth.utils.HexUtils;
-import com.rainmonth.utils.NetWorkUtils;
 import com.rainmonth.widgets.IRhythmItemListener;
 import com.rainmonth.widgets.ProgressHUD;
 import com.rainmonth.widgets.PullToRefreshViewPager;

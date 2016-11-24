@@ -134,7 +134,7 @@ public class MultiItemRowListAdapter implements WrapperListAdapter {
         LinearLayout view = null;
         if (convertView == null
                 || !(convertView instanceof LinearLayout)
-                || !((Integer)convertView.getTag()).equals(mItemsPerRow)) {
+                || !convertView.getTag().equals(mItemsPerRow)) {
             // create a linear Layout
             view = new LinearLayout(c);
             view.setPadding(0, 0, mCellSpacing, 0);
