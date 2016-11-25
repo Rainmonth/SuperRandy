@@ -1,4 +1,4 @@
-package com.rainmonth.utils;
+package com.rainmonth.library.utils;
 
 import android.util.Log;
 
@@ -328,10 +328,7 @@ public class DateUtils {
         if ((year % 400) == 0)
             return true;
         else if ((year % 4) == 0) {
-            if ((year % 100) == 0)
-                return false;
-            else
-                return true;
+            return (year % 100) != 0;
         } else
             return false;
     }
@@ -563,7 +560,6 @@ public class DateUtils {
     public static boolean rightDate(String date) {
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-        ;
         if (date == null)
             return false;
         if (date.length() > 10) {
