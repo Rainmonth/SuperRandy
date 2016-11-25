@@ -1,6 +1,8 @@
 package com.rainmonth.service;
 
+import com.rainmonth.base.mvp.BaseResponse;
 import com.rainmonth.bean.UserInfo;
+import com.rainmonth.bean.UserLoginBean;
 import com.rainmonth.utils.http.UserLoginResponse;
 
 import retrofit2.Call;
@@ -38,4 +40,18 @@ public interface UserService {
 
     @GET("User/getUserInfo")
     Observable<Response<UserLoginResponse>> getUserInfoRx(@Query("id") int id);
+
+    @FormUrlEncoded
+    @POST("Mobile2/ShareBonus/login")
+    Call<BaseResponse<UserLoginBean>> loginRx(@Field("mobile") String mobile,
+                                @Field("password") String password,
+                                @Field("code") String code);
+    @GET("Mobile2/Auth/logout")
+    Call<BaseResponse<Object>> logoutRx();
+
+    @POST("Mobile2/Escrow/hasEscrowed")
+    Call<BaseResponse<Object>> isEsc();
+
+    @POST("Mobile2/User/account")
+    Call<BaseResponse<Object>> getAccountInfo();
 }

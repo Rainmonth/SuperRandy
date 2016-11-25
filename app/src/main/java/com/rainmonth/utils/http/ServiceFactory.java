@@ -5,8 +5,8 @@ import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.rainmonth.SuperRandyApplication;
-import com.rainmonth.utils.CommonUtils;
-import com.rainmonth.utils.NetWorkUtils;
+import com.rainmonth.library.utils.CommonUtils;
+import com.rainmonth.library.utils.NetworkUtils;
 import com.socks.library.KLog;
 
 import java.io.File;
@@ -139,7 +139,7 @@ public class ServiceFactory {
             Response originalResponse = chain.proceed(request);
             int maxAge;
             // 缓存的数据
-            if (!NetWorkUtils.isConnected(SuperRandyApplication.getApplication())) {
+            if (!NetworkUtils.isConnected(SuperRandyApplication.getApplication())) {
                 maxAge = DEFAULT_MAX_STALE_OFFLINE;
             } else {
                 maxAge = DEFAULT_MAX_STALE_ONLINE;
