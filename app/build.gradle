@@ -1,73 +1,126 @@
 apply plugin: 'com.android.application'
 
-def releaseTime() {
-    return new Date().format("yyyy-MM-dd");
+def debugTime(boolean isDirTime) {
+    if (isDirTime) {
+        return new Date().format("yyyy_MM_dd");
+    } else {
+        return new Date().format("HH_mm_ss")
+    }
 }
 
-def appName() {
-    return "SuperRandy"
+def releaseTime(boolean isDirTime) {
+    if (isDirTime) {
+        return new Date().format("yyyy_MM_dd");
+    } else {
+        return new Date().format("HH_mm_ss");
+    }
 }
 
-//defaultConfig{} 默认配置，是ProductFlavor类型。它共享给其他ProductFlavor使用
-//sourceSets{ } 源文件目录设置，是AndroidSourceSet类型。
-//buildTypes{ } BuildType类型
-//signingConfigs{ } 签名配置，SigningConfig类型
-//productFlavors{ } 产品风格配置，ProductFlavor类型
-//testOptions{ } 测试配置，TestOptions类型
-//aaptOptions{ } aapt配置，AaptOptions类型
-//lintOptions{ } lint配置，LintOptions类型
-//dexOptions{ } dex配置，DexOptions类型
-//compileOptions{ } 编译配置，CompileOptions类型
-//packagingOptions{ } PackagingOptions类型
-//jacoco{ } JacocoExtension类型。 用于设定 jacoco版本
-//splits{ } Splits类型。
+// 默认版本号
+ext.appVersionCode = 1
+// 默认版本名
+ext.appVersionName = "1.0.0"
+// 默认release apk输出路径
+ext.appReleaseDir = "/Users/RandyZhang/Documents/WorkFiles/SuperRandy/releaseApk"
+// 默认debug apk输出路径
+ext.appDebugDir = "/Users/RandyZhang/Documents/WorkFiles/SuperRandy/debugApk"
+// 默认正式包后缀名
+ext.appReleaseSuffixName = "_release.apk"
+// 默认debug包后缀名
+ext.appDebugSuffixName = "_debug.apk"
+// 默认的名称
+ext.appName = "SuperRandy"
 
+def loadProperties() {
+    def proFile = file("release.properties")
+    Properties pro = new Properties()
+    proFile.withInputStream { stream ->
+        pro.load(stream)
+    }
+    appReleaseDir = pro.appReleaseDir + File.separator + releaseTime(true);
+    appDebugDir = pro.appDebugDir + File.separator + debugTime(true);
+    appVersionCode = Integer.valueOf(pro.appVersionCode)
+    appVersionName = pro.appVersionName
+    appReleaseSuffixName = pro.appReleaseSuffixName
+    appDebugSuffixName = pro.appDebugSuffixName
+    appName = pro.appName
+}
+
+//加载信息
+loadProperties()
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.1"
+    compileSdkVersion 24
+    buildToolsVersion "24.0.3"
 
     defaultConfig {
         applicationId "com.rainmonth"
         minSdkVersion 15
         targetSdkVersion 23
-        versionCode 1
-        versionName "1.0.0"
+        versionCode appVersionCode
+        versionName appVersionName
         // dex 突破65535限制
         multiDexEnabled true
-        //
-        manifestPlaceholders = [UMENG_CHANNEL_VALUE: "channel_name"]
+        aaptOptions.cruncherEnabled = false
+        aaptOptions.useNewCruncher = false
+    }
 
+    lintOptions {
+        abortOnError false
+        ignoreWarnings true;
     }
 
     productFlavors {
-        yijiajiao {
-        }
-        yingyongbao {
-        }
-        xiaomi {
-        }
-        wandoujia {
-        }
+        mk10086 {}
+        mk360 {}
+        mk91 {}
+        mkanzh {}
+        mkaqy {}
+        mkaz {}
+        mkazs {}
+        mkazy {}
+        mkbd {}
+        mkchuizi {}
+        mkhw {}
+        mkhx {}
+        mkjf {}
+        mkjinli {}
+        mkkuan {}
+        mkles {}
+        mkliqu {}
+        mklx {}
+        mkmb {}
+        mkmianfei {}
+        mkmmy {}
+        mkmz {}
+        mknd {}
+        mkoppo {}
+        mksamsung {}
+        mksg {}
+        mksun {}
+        mkuc {}
+        mkuc1 {}
+        mkvivo {}
+        mkwdj {}
+        mkwo {}
+        mkwy {}
+        mkxm {}
+        mkyiyh {}
+        mkyouyi {}
+        mkyunos {}
+        mkyyb {}
+        mkyyb1 {}
+        mkyyh {}
+        mkyyjia {}
+        mkzhuole {}
+        mkzy {}
+        "sc-6pc" {}
+        "sc-qb" {}
+        "sc-trj" {}
+        "sc-ssj" {}
         productFlavors.all { flavors ->
-            flavors.manifestPlaceholders = [CHANNEL_VALUE: name]
+            flavors.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
         }
-    }
-//    applicationVariants.all { variant ->
-//        variant.outputs.each { output ->
-//            def outputFile = output.outputFile
-//            if (outputFile != null && outputFile.name.endsWith('release.apk')) {
-//                //def fileName = "${variant.productFlavors[0].name}_V${defaultConfig.versionName}_${releaseTime()}.apk"
-//                def productFlavorsName = variant.productFlavors[0].name;
-//                def fileName = "${appName()}.V${defaultConfig.versionName}.${releaseTime()}.release."+productFlavorsName+".apk"
-//                output.outputFile = new File(outputFile.parent, fileName)
-//            }
-//        }
-//    }
-
-    // 执行lint检查，有任何错误或警告提示都会终止build，设置为false即可将其关掉
-    lintOptions {
-        abortOnError false
     }
 
     buildTypes {
@@ -76,16 +129,20 @@ android {
             buildConfigField("boolean", "LOG_DEBUG", "true")
             versionNameSuffix "-debug"
             minifyEnabled false
-            zipAlignEnabled false
+            zipAlignEnabled true
             shrinkResources false
             applicationVariants.all { variant ->
                 variant.outputs.each { output ->
                     def outputFile = output.outputFile
                     if (outputFile != null && outputFile.name.endsWith('debug.apk')) {
-                        //def fileName = "${variant.productFlavors[0].name}_V${defaultConfig.versionName}_${releaseTime()}.apk"
-                        def productFlavorsName = variant.productFlavors[0].name;
-                        def fileName = "${appName()}.V${defaultConfig.versionName}.${releaseTime()}.alpha." + productFlavorsName + ".apk"
-                        output.outputFile = new File(outputFile.parent, fileName)
+                        if (variant.productFlavors[0] != null) {
+                            def productFlavorsName = variant.productFlavors[0].name;
+                            def fileName = appName + "V${defaultConfig.versionName}.${debugTime(false)}" + productFlavorsName + appDebugSuffixName;
+                            output.outputFile = new File(appDebugDir, fileName)
+                        } else {
+                            def fileName = appName + "V${defaultConfig.versionName}.${debugTime(false)}" + appDebugSuffixName;
+                            output.outputFile = new File(appDebugDir, fileName);
+                        }
                     }
                 }
             }
@@ -105,36 +162,43 @@ android {
                 variant.outputs.each { output ->
                     def outputFile = output.outputFile
                     if (outputFile != null && outputFile.name.endsWith('release.apk')) {
-                        //def fileName = "${variant.productFlavors[0].name}_V${defaultConfig.versionName}_${releaseTime()}.apk"
-                        def productFlavorsName = variant.productFlavors[0].name;
-                        def fileName = "${appName()}.V${defaultConfig.versionName}.${releaseTime()}.release." + productFlavorsName + ".apk"
-                        output.outputFile = new File(outputFile.parent, fileName)
+                        if (variant.productFlavors[0] != null) {
+                            def productFlavorsName = variant.productFlavors[0].name;
+                            def fileName = appName + "V${defaultConfig.versionName}.${releaseTime(false)}" + productFlavorsName + appReleaseSuffixName;
+                            output.outputFile = new File(appReleaseDir, fileName)
+                        } else {
+                            def fileName = appName + "V${defaultConfig.versionName}.${releaseTime(false)}" + appReleaseSuffixName;
+                            output.outputFile = new File(appReleaseDir, fileName);
+                        }
                     }
+
                 }
             }
         }
     }
-
-    sourceSets {
-        main {
-            jniLibs.srcDirs = ['libs']
-        }
+    packagingOptions {
+        exclude 'META-INF/NOTICE' // will not include NOTICE file
+        exclude 'META-INF/LICENSE' // will not include LICENSE file
+        // as noted by @Vishnuvathsan you may also need to include
+        // variations on the file name. It depends on your dependencies.
+        // Some other common variations on notice and license file names
+        exclude 'META-INF/notice'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/license'
+        exclude 'META-INF/license.txt'
     }
-    repositories {
-        maven {
-            url "https://jitpack.io"
-        }
+    dexOptions {
+        javaMaxHeapSize "2048m"
     }
 }
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile files('libs/GetuiSDK2.9.0.0.jar')
-    compile 'com.android.support:design:23.4.0'
-    compile 'com.android.support:support-v4:23.4.0'
+    compile 'com.android.support:design:24.2.1'
+    compile 'com.android.support:support-v4:24.2.1'
     // ButterKnife
     compile 'com.jakewharton:butterknife:7.0.1'
     compile 'com.android.support:multidex:1.0.1'
-    compile 'com.github.hackware1993:MagicIndicator:1.3.1'
     // Retrofit
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
@@ -148,4 +212,9 @@ dependencies {
     compile 'com.squareup.okio:okio:1.9.0'
     // KLog
     compile 'com.github.zhaokaiqiang.klog:library:1.5.0'
+
+    compile 'com.readystatesoftware.systembartint:systembartint:1.0.3'
+
+    compile project(':library')
+    compile project(':magicindicator')
 }

@@ -96,6 +96,10 @@
                 <action android:name="com.igexin.sdk.action.pushmanager" />
             </intent-filter>
         </receiver>
+        <!--渠道配置相关-->
+        <meta-data
+            android:name="TD_CHANNEL_ID"
+            android:value="${UMENG_CHANNEL_VALUE}" />
 
         <activity
             android:name="com.igexin.sdk.PushActivity"
