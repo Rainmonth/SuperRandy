@@ -13,8 +13,8 @@ import android.widget.TextView;
 import com.rainmonth.R;
 import com.rainmonth.base.ui.fragment.BaseLazyFragment;
 import com.rainmonth.bean.CardInfo;
+import com.rainmonth.library.utils.CommonUtils;
 import com.rainmonth.library.utils.DensityUtils;
-import com.rainmonth.utils.CommonUtils;
 import com.rainmonth.widgets.HtmlTextView;
 
 import butterknife.ButterKnife;

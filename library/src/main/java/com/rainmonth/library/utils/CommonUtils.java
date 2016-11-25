@@ -177,4 +177,16 @@ public class CommonUtils {
 
         return toolbarHeight;
     }
+
+    public static int getDrawableIdByName(Context context, String drawableName) {
+
+        return context.getResources().getIdentifier(drawableName, "drawable", context.getPackageName());
+    }
+
+    /**
+     * 判断字符串是否为null或空
+     */
+    public static boolean isNullOrEmpty(String string) {
+        return null == string || string.isEmpty() || string.equals("null");
+    }
 }
