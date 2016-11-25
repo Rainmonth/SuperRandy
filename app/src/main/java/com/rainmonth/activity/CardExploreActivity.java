@@ -59,7 +59,7 @@ public class CardExploreActivity extends BaseActivity {
 
     @Override
     protected boolean isApplyStatusBarTranslucency() {
-        return false;
+        return true;
     }
 
     @Override
@@ -81,6 +81,5 @@ public class CardExploreActivity extends BaseActivity {
     public void initToolbar() {
         mToolbar.setTitle("最美应用");
         mToolbar.setLogo(R.mipmap.ic_launcher);
-        mToolbar.setBackgroundResource(R.color.bg_home);
     }
 }
