@@ -3,11 +3,21 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Base.Theme.AppCompat.Light">
         <!-- Customize your theme here. -->
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
     </style>
 
     <!--无ActionBar的Activity-->
     <style name="TransparentTheme" parent="Theme.AppCompat.Light.NoActionBar">
 
+    </style>
+
+    <style name="SplashTheme" parent="@style/FullScreenTransparentTheme">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@null</item>
     </style>
 
     <style name="FullScreenTransparentTheme" parent="@style/Theme.AppCompat.Light.NoActionBar">
@@ -227,7 +237,6 @@
         <item name="android:layout_marginTop">@dimen/text_button_vertical_margin</item>
         <item name="android:layout_marginBottom">@dimen/text_button_vertical_margin</item>
     </style>
-
 
 
 </resources>

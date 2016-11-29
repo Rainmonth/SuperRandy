@@ -96,7 +96,7 @@
                 <action android:name="com.igexin.sdk.action.pushmanager" />
             </intent-filter>
         </receiver>
-        <!--渠道配置相关-->
+        <!-- 渠道配置相关 -->
         <meta-data
             android:name="TD_CHANNEL_ID"
             android:value="${UMENG_CHANNEL_VALUE}" />
@@ -134,13 +134,15 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <!-- 个推SDK配置结束 -->
 
+
         <!-- 在上面加入你的你的activity配置 -->
         <activity
             android:name=".activity.SplashActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/FullScreenTransparentTheme">
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -180,6 +182,12 @@
             android:name=".activity.WelcomeActivity"
             android:screenOrientation="portrait"
             android:theme="@style/TransparentTheme" />
+        <activity
+            android:name=".activity.MusicPlayerActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.MusicHomeActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
