@@ -16,6 +16,7 @@
 - 阅读模块可使用豆瓣读书API
 - 新闻模块可使用网易API
 - 图片模块可使用干货集中营API
+- DiyCode Api也可以参考
 
 ##Widgets
 
@@ -38,6 +39,11 @@
 - ToastUtils.java (added)
 - JsonUtils.java (to be added)
 - CrashLog处理 (to be added)
+
+
+##签到功能设计
+
+- todo 进入时做引导，签到后给予签到成功的反馈(如显示今日格言啊，显示今日推荐的文章链接，显示今日推荐的音乐视频等)，注意用户签到或者不签到都要给予操作上的引导
 
 ##补充说明
 	
