@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:clipToPadding="true"
     android:gravity="center"
     android:orientation="vertical"
@@ -13,7 +14,6 @@
         android:id="@+id/vp_welcome"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:contentDescription="@string/app_name"
         android:fitsSystemWindows="true" />
 
     <TextView
@@ -43,6 +43,5 @@
             style="@style/green_trans_btn"
             android:text="@string/register" />
     </LinearLayout>
-
 
 </FrameLayout>

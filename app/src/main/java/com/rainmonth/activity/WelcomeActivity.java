@@ -107,7 +107,7 @@ public class WelcomeActivity extends BaseActivity {
 
     @Override
     protected void initViewsAndEvents() {
-
+        vpWelcome.setAdapter(mAdapter);
     }
 
     @Override
