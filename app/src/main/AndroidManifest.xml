@@ -21,11 +21,11 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <!-- 浮动通知权限 -->
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-    <!-- 自定义权限 -->
-    <uses-permission android:name="getui.permission.GetuiService.com.rainmonth" />
+    <!-- 个推自定义权限 -->
+    <uses-permission android:name="getui.permission.GetuiService.${applicationId}" />
 
     <permission
-        android:name="getui.permission.GetuiService.com.rainmonth"
+        android:name="getui.permission.GetuiService.${applicationId}"
         android:protectionLevel="normal" />
 
     <!-- 个推SDK权限配置结束 -->
@@ -45,22 +45,13 @@
         <!-- 配置的第三方参数属性 -->
         <meta-data
             android:name="PUSH_APPID"
-            android:value="ozDCiowuZa5h2IxPdiCtB" />
+            android:value="${GETUI_APP_ID}" />
         <meta-data
             android:name="PUSH_APPKEY"
-            android:value="E35xIsmoim8YNTo6w46z98" />
+            android:value="${GETUI_APP_KEY}" />
         <meta-data
             android:name="PUSH_APPSECRET"
-            android:value="XDS2Jyg7nW8pJiU1hJN196" />
-
-        <!-- 配置第三方Receiver -->
-        <receiver
-            android:name=".receiver.PushDemoReceiver"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="com.igexin.sdk.action.ozDCiowuZa5h2IxPdiCtB" />
-            </intent-filter>
-        </receiver>
+            android:value="${GETUI_APP_SECRET}" />
 
         <!-- 配置SDK核心服务 -->
         <service
@@ -72,10 +63,6 @@
                 <action android:name="com.igexin.sdk.action.service.message" />
             </intent-filter>
         </service>
-        <service
-            android:name="com.igexin.sdk.PushServiceUser"
-            android:exported="true"
-            android:label="NotificationCenterUser" />
 
         <receiver android:name="com.igexin.sdk.PushReceiver">
             <intent-filter>
@@ -89,17 +76,6 @@
                 <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
             </intent-filter>
         </receiver>
-        <receiver
-            android:name="com.igexin.sdk.PushManagerReceiver"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="com.igexin.sdk.action.pushmanager" />
-            </intent-filter>
-        </receiver>
-        <!-- 渠道配置相关 -->
-        <meta-data
-            android:name="TD_CHANNEL_ID"
-            android:value="${UMENG_CHANNEL_VALUE}" />
 
         <activity
             android:name="com.igexin.sdk.PushActivity"
@@ -121,7 +97,7 @@
 
         <provider
             android:name="com.igexin.download.DownloadProvider"
-            android:authorities="downloads.com.rainmonth"
+            android:authorities="downloads.${applicationId}"
             android:exported="true"
             android:process=":pushservice" />
 
@@ -132,8 +108,27 @@
             android:process=":pushservice"
             android:taskAffinity="com.igexin.sdk.PushActivityTask"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-        <!-- 个推SDK配置结束 -->
 
+        <!--个推配置第三方Receiver -->
+        <receiver
+            android:name=".receiver.PushDemoReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.igexin.sdk.action.${GETUI_APP_ID}" />
+            </intent-filter>
+        </receiver>
+
+        <!--个推DemoPushService-->
+        <service
+            android:name="com.rainmonth.getui.DemoPushService"
+            android:exported="true"
+            android:label="PushService"
+            android:process=":pushservice" />
+
+        <!--个推DemoIntentService-->
+        <service android:name="com.rainmonth.getui.DemoIntentService" />
+
+        <!-- 个推SDK配置结束 -->
 
         <!-- 在上面加入你的你的activity配置 -->
         <activity

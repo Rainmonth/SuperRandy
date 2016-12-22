@@ -13,6 +13,7 @@ import com.rainmonth.R;
 import com.rainmonth.activity.CardExploreActivity;
 import com.rainmonth.activity.GridExploreActivity;
 import com.rainmonth.activity.ListExploreActivity;
+import com.rainmonth.activity.MusicHomeActivity;
 import com.rainmonth.activity.ViewPagerExploreActivity;
 import com.rainmonth.base.ui.adapter.ListViewDataAdapter;
 import com.rainmonth.base.ui.adapter.ViewHolderBase;
@@ -46,7 +47,7 @@ public class XunFragment extends BaseLazyFragment implements XunFragmentView {
     private XunFragmentPresenter xunFragmentPresenter = null;
 
     private ListViewDataAdapter<XunNavigationInfo> mXunNavListAdapter = null;
-    public final static int TYPE_CARD = 1, TYPE_GRID = 2, TYPE_VIEW_PAGER = 3, TYPE_LIST = 4;
+    public final static int TYPE_ARTICLE = 1, TYPE_IMAGE = 2, TYPE_MUSIC = 3, TYPE_FILM = 4, TYPE_APP = 5;
 
     @Override
     public void onFirstUserVisible() {
@@ -130,20 +131,26 @@ public class XunFragment extends BaseLazyFragment implements XunFragmentView {
     public void navToDetail(XunNavigationInfo xunNavigationInfo) {
         int type = xunNavigationInfo.getType();
         switch (type) {
-            case TYPE_CARD:
-                // card 形式展现
-                readyGo(CardExploreActivity.class);
+            case TYPE_ARTICLE:
+                readyGo(ViewPagerExploreActivity.class);
                 break;
-
-            case TYPE_GRID:
-                // grid 形式展现
+            case TYPE_IMAGE:
+                // 图片首页
                 readyGo(GridExploreActivity.class);
                 break;
-            case TYPE_LIST:
-                // list 形式展现
+
+            case TYPE_MUSIC:
+                // 音乐首页
+                readyGo(MusicHomeActivity.class);
+                break;
+            case TYPE_FILM:
+                // 电影首页
                 readyGo(ListExploreActivity.class);
                 break;
-            case TYPE_VIEW_PAGER:
+            case TYPE_APP:
+                // app首页
+                readyGo(CardExploreActivity.class);
+                break;
             default:
                 // viewPager形式展现
                 readyGo(ViewPagerExploreActivity.class);

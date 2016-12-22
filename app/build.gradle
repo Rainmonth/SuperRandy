@@ -63,6 +63,12 @@ android {
         multiDexEnabled true
         aaptOptions.cruncherEnabled = false
         aaptOptions.useNewCruncher = false
+
+        manifestPlaceholders = [
+                GETUI_APP_ID    : "ozDCiowuZa5h2IxPdiCtB",
+                GETUI_APP_KEY   : "E35xIsmoim8YNTo6w46z98",
+                GETUI_APP_SECRET: "XDS2Jyg7nW8pJiU1hJN196"
+        ]
     }
 
     lintOptions {
@@ -176,6 +182,7 @@ android {
             }
         }
     }
+
     packagingOptions {
         exclude 'META-INF/NOTICE' // will not include NOTICE file
         exclude 'META-INF/LICENSE' // will not include LICENSE file
@@ -193,7 +200,7 @@ android {
 }
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile files('libs/GetuiSDK2.9.0.0.jar')
+    compile files('libs/GetuiSDK2.9.5.0.jar')
     compile 'com.android.support:design:24.2.1'
     compile 'com.android.support:support-v4:24.2.1'
     // ButterKnife

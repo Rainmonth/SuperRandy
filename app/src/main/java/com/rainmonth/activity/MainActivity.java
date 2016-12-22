@@ -10,6 +10,7 @@ import com.rainmonth.R;
 import com.rainmonth.adapter.HomeViewPagerAdapter;
 import com.rainmonth.base.ui.activity.BaseActivity;
 import com.rainmonth.base.ui.fragment.BaseLazyFragment;
+import com.rainmonth.getui.DemoPushService;
 import com.rainmonth.library.eventbus.EventCenter;
 import com.rainmonth.library.utils.NetworkUtils;
 import com.rainmonth.presenter.impl.MainPresenter;
@@ -111,8 +112,15 @@ public class MainActivity extends BaseActivity implements MainView {
     @Override
     protected void initViewsAndEvents() {
         // 初始化个推
-        PushManager.getInstance().initialize(getApplicationContext());
+        PushManager.getInstance().initialize(getApplicationContext(), DemoPushService.class);
         ButterKnife.bind(this);
+
+        /**
+         * 关于原有广播方式和新的IntentService方式兼容性说明：
+         * 1. 如果调用了registerPushIntentService方法注册自定义IntentService，则SDK仅通过IntentService回调推送服务事件；
+         * 2. 如果未调用registerPushIntentService方法进行注册，则原有的广播接收器仍然可以继续使用。
+         */
+//        PushManager.getInstance().registerPushIntentService(this.getApplicationContext(), com.rainmonth.getui.DemoIntentService.class);
 
         mainPresenter = new MainPresenter(this, this);
         mainPresenter.initialize();

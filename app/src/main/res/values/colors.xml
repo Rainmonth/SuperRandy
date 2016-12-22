@@ -1,15 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--default color array for NavigationTabBar-->
-    <string-array name="default_preview">
-        <item>#df5a55</item>
-        <item>#f9bb72</item>
-        <item>#76afcf</item>
-        <item>#dd6495</item>
-        <item>#72d3b4</item>
-        <item>#379648</item>
-    </string-array>
-
     <!--normal color-->
     <color name="black">@android:color/black</color>
 
