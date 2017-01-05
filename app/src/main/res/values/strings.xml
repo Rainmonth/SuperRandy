@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SuperRandy</string>
+    <string name="app_name">荏苒追寻</string>
 
     <!--default color array for NavigationTabBar-->
     <string-array name="default_preview">

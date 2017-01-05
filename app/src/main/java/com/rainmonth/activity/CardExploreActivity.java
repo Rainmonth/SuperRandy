@@ -80,6 +80,6 @@ public class CardExploreActivity extends BaseActivity {
     @Override
     public void initToolbar() {
         mToolbar.setTitle("最美应用");
-        mToolbar.setLogo(R.mipmap.ic_launcher);
+        mToolbar.setLogo(R.drawable.ic_launcher);
     }
 }

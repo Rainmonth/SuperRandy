@@ -42,7 +42,7 @@ public class RegisterActivity extends BaseActivity implements IRegisterView {
 
     @Override
     public void initToolbar() {
-        mToolbar.setLogo(R.mipmap.ic_launcher);
+        mToolbar.setLogo(R.drawable.ic_launcher);
         mToolbar.setTitle("注册");
         mToolbar.setBackgroundResource(R.color.transparent);
     }

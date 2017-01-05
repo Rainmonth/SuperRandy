@@ -2,6 +2,7 @@ package com.rainmonth.activity;
 
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 
@@ -39,7 +40,7 @@ public class MainActivity extends BaseActivity implements MainView {
     public void initToolbar() {
         mToolbar.setTitle("主页");
         mToolbar.setSubtitle("主页说明");
-        mToolbar.setLogo(R.mipmap.ic_launcher);
+        mToolbar.setLogo(R.drawable.ic_launcher);
     }
 
     @Override
@@ -120,8 +121,11 @@ public class MainActivity extends BaseActivity implements MainView {
          * 1. 如果调用了registerPushIntentService方法注册自定义IntentService，则SDK仅通过IntentService回调推送服务事件；
          * 2. 如果未调用registerPushIntentService方法进行注册，则原有的广播接收器仍然可以继续使用。
          */
-//        PushManager.getInstance().registerPushIntentService(this.getApplicationContext(), com.rainmonth.getui.DemoIntentService.class);
-
+        PushManager.getInstance().registerPushIntentService(this.getApplicationContext(), com.rainmonth.getui.DemoIntentService.class);
+        String cid = PushManager.getInstance().getClientid(getApplicationContext());
+        if (cid != null) {
+            Log.e("client id=", cid);
+        }
         mainPresenter = new MainPresenter(this, this);
         mainPresenter.initialize();
         ntbHorizontal.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {

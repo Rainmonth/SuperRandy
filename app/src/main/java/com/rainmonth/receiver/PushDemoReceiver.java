@@ -204,20 +204,20 @@ public class PushDemoReceiver extends BroadcastReceiver {
         NotificationManager nManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         // todo 待完善
         RemoteViews smallRemoteView = new RemoteViews(context.getPackageName(), R.layout.notification_custom_builder);
-        smallRemoteView.setImageViewBitmap(R.id.notification_icon, BitmapFactory.decodeResource(context.getResources(), R.mipmap.ic_launcher));
+        smallRemoteView.setImageViewBitmap(R.id.notification_icon, BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_launcher));
         smallRemoteView.setTextViewText(R.id.notification_title, title);
         smallRemoteView.setTextViewText(R.id.notification_text, content);
         smallRemoteView.setTextViewText(R.id.notification_time, notifyTime);
         // todo 待完善
         RemoteViews bigRemoteView = new RemoteViews(context.getPackageName(), R.layout.notification_custom_builder);
-        bigRemoteView.setImageViewBitmap(R.id.notification_icon, BitmapFactory.decodeResource(context.getResources(), R.mipmap.ic_launcher));
+        bigRemoteView.setImageViewBitmap(R.id.notification_icon, BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_launcher));
         bigRemoteView.setTextViewText(R.id.notification_title, title);
         bigRemoteView.setTextViewText(R.id.notification_text, content);
         bigRemoteView.setTextViewText(R.id.notification_time, notifyTime);
         //4.2以下版本
         if (android.os.Build.VERSION.SDK_INT >= 16) {
             Notification.Builder mBuilder = new Notification.Builder(context)
-                    .setSmallIcon(R.mipmap.ic_launcher)
+                    .setSmallIcon(R.drawable.ic_launcher)
                     .setContentTitle(title)
                     .setContentText(content)
                     .setContentIntent(pendingIntent)
@@ -230,7 +230,7 @@ public class PushDemoReceiver extends BroadcastReceiver {
             nManager.notify(0, mBuilder.build());
         } else {
             NotificationCompat.Builder ncBuilder = new NotificationCompat.Builder(context)
-                    .setSmallIcon(R.mipmap.ic_launcher)
+                    .setSmallIcon(R.drawable.ic_launcher)
                     .setContentTitle(title)
                     .setContentText(content)
                     .setContentIntent(pendingIntent)

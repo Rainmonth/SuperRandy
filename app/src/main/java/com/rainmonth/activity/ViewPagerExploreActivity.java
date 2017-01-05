@@ -222,7 +222,7 @@ public class ViewPagerExploreActivity extends BaseActivity {
 
     @Override
     public void initToolbar() {
-        mToolbar.setLogo(R.mipmap.ic_launcher);
+        mToolbar.setLogo(R.drawable.ic_launcher);
         mToolbar.setTitle("新闻浏览");
         mToolbar.setBackgroundResource(R.color.bg_home);
     }

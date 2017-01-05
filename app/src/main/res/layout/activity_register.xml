@@ -25,7 +25,7 @@
                 android:layout_marginBottom="@dimen/text_button_vertical_margin"
                 android:layout_marginTop="@dimen/margin_large"
                 android:contentDescription="@string/app_name"
-                android:src="@mipmap/ic_launcher" />
+                android:src="@drawable/ic_launcher" />
 
             <TextView
                 android:layout_width="wrap_content"

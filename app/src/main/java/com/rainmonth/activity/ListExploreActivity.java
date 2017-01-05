@@ -78,7 +78,7 @@ public class ListExploreActivity extends BaseActivity {
     @Override
     public void initToolbar() {
         if (null != mToolbar) {
-            mToolbar.setLogo(R.mipmap.ic_launcher);
+            mToolbar.setLogo(R.drawable.ic_launcher);
             mToolbar.setTitle("列表新闻浏览");
             mToolbar.setBackgroundResource(R.color.bg_home);
         }
