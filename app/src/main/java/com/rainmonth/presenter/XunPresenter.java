@@ -11,12 +11,12 @@ import com.rainmonth.view.XunFragmentView;
 /**
  * Created by RandyZhang on 16/7/5.
  */
-public class XunFragmentPresenter extends BasePresenter<XunFragmentView, Object> {
+public class XunPresenter extends BasePresenter<XunFragmentView, Object> {
     private Context context = null;
     private XunFragmentView xunFragmentView = null;
     private IXunFragmentModel xunFragmentModel = null;
 
-    public XunFragmentPresenter(Context context, XunFragmentView xunFragmentView) {
+    public XunPresenter(Context context, XunFragmentView xunFragmentView) {
         super(xunFragmentView);
         if (null == xunFragmentView) {
             throw new IllegalArgumentException("View should not be null");

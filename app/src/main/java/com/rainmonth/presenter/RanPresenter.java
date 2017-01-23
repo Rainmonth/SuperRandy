@@ -9,10 +9,10 @@ import com.rainmonth.view.RanFragmentView;
 /**
  * Created by RandyZhang on 16/7/5.
  */
-public class RanFragmentPresenter extends BasePresenter<RanFragmentView, Object> {
+public class RanPresenter extends BasePresenter<RanFragmentView, Object> {
     private IRanFragmentModel ranFragmentModel = null;
 
-    public RanFragmentPresenter(RanFragmentView ranFragmentView) {
+    public RanPresenter(RanFragmentView ranFragmentView) {
         super(ranFragmentView);
         if (null == ranFragmentView) {
             throw new IllegalArgumentException("View should not be null");
