@@ -1,7 +1,7 @@
 package com.rainmonth.view;
 
+import com.rainmonth.base.mvp.IBaseView;
 import com.rainmonth.base.ui.fragment.BaseLazyFragment;
-import com.rainmonth.base.mvp.BaseView;
 import com.rainmonth.widgets.NavigationTabBar;
 
 import java.util.List;
@@ -9,6 +9,6 @@ import java.util.List;
 /**
  * Created by RandyZhang on 16/6/30.
  */
-public interface MainView extends BaseView{
+public interface MainView extends IBaseView {
     void initializeViews(List<NavigationTabBar.Model> models, List<BaseLazyFragment> fragments);
 }

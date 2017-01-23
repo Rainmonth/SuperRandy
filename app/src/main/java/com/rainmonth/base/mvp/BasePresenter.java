@@ -11,7 +11,7 @@ import rx.Subscription;
  * @param <T> view class inherit from BaseView
  * @param <V> response data from request
  */
-public class BasePresenter<T extends BaseView, V> implements IBasePresenter, RequestCallback<V> {
+public class BasePresenter<T extends IBaseView, V> implements IBasePresenter, RequestCallback<V> {
     protected Subscription mSubscription;
     protected T mView;
 
