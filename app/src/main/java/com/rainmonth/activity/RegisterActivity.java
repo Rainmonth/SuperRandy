@@ -7,15 +7,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.rainmonth.R;
+import com.rainmonth.base.mvp.BaseResponse;
 import com.rainmonth.base.ui.activity.BaseActivity;
 import com.rainmonth.bean.UserInfo;
-import com.rainmonth.library.base.BaseAppCompatActivity;
 import com.rainmonth.library.eventbus.EventCenter;
 import com.rainmonth.library.utils.NetworkUtils;
 import com.rainmonth.presenter.IRegisterPresenter;
 import com.rainmonth.presenter.impl.RegisterPresenterImpl;
 import com.rainmonth.utils.ToastUtils;
-import com.rainmonth.utils.http.UserLoginResponse;
 import com.rainmonth.view.IRegisterView;
 
 import butterknife.Bind;
@@ -42,7 +41,7 @@ public class RegisterActivity extends BaseActivity implements IRegisterView {
 
     @Override
     public void initToolbar() {
-        mToolbar.setLogo(R.drawable.ic_launcher);
+        mToolbar.setLogo(R.drawable.ic_action_bar_logo);
         mToolbar.setTitle("注册");
         mToolbar.setBackgroundResource(R.color.transparent);
     }
@@ -64,7 +63,7 @@ public class RegisterActivity extends BaseActivity implements IRegisterView {
     }
 
     @Override
-    public void naveToAfterRegister(UserLoginResponse response) {
+    public void naveToAfterRegister(BaseResponse response) {
         if (response.getCode().equals("1")) {
             readyGo(MainActivity.class);
             finish();

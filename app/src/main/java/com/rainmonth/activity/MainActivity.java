@@ -40,7 +40,7 @@ public class MainActivity extends BaseActivity implements MainView {
     public void initToolbar() {
         mToolbar.setTitle("主页");
         mToolbar.setSubtitle("主页说明");
-        mToolbar.setLogo(R.drawable.ic_launcher);
+        mToolbar.setLogo(R.drawable.ic_action_bar_logo);
     }
 
     @Override
@@ -112,6 +112,7 @@ public class MainActivity extends BaseActivity implements MainView {
 
     @Override
     protected void initViewsAndEvents() {
+        printDiviceInfo();
         // 初始化个推
         PushManager.getInstance().initialize(getApplicationContext(), DemoPushService.class);
         ButterKnife.bind(this);
@@ -126,7 +127,7 @@ public class MainActivity extends BaseActivity implements MainView {
         if (cid != null) {
             Log.e("client id=", cid);
         }
-        mainPresenter = new MainPresenter(this, this);
+        mainPresenter = new MainPresenter(this);
         mainPresenter.initialize();
         ntbHorizontal.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override

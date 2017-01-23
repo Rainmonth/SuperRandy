@@ -77,7 +77,7 @@ public class MusicHomeActivity extends BaseActivity implements View.OnClickListe
     @Override
     public void initToolbar() {
         mToolbar.setTitle("音乐主页");
-        mToolbar.setLogo(R.drawable.ic_launcher);
+        mToolbar.setLogo(R.drawable.ic_action_bar_logo);
     }
 
     @Override

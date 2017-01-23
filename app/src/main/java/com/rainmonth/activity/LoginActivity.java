@@ -12,7 +12,6 @@ import com.rainmonth.R;
 import com.rainmonth.base.mvp.BaseResponse;
 import com.rainmonth.base.ui.activity.BaseActivity;
 import com.rainmonth.bean.UserLoginBean;
-import com.rainmonth.library.base.BaseAppCompatActivity;
 import com.rainmonth.library.eventbus.EventCenter;
 import com.rainmonth.library.utils.NetworkUtils;
 import com.rainmonth.presenter.ILoginPresenter;
@@ -21,7 +20,6 @@ import com.rainmonth.service.UserService;
 import com.rainmonth.utils.ToastUtils;
 import com.rainmonth.utils.http.Api;
 import com.rainmonth.utils.http.ServiceFactory;
-import com.rainmonth.utils.http.UserLoginResponse;
 import com.rainmonth.view.ILoginView;
 import com.socks.library.KLog;
 
@@ -55,7 +53,7 @@ public class LoginActivity extends BaseActivity implements ILoginView {
 
     @Override
     public void initToolbar() {
-        mToolbar.setLogo(R.drawable.ic_launcher);
+        mToolbar.setLogo(R.drawable.ic_action_bar_logo);
         mToolbar.setTitle("登录");
         mToolbar.setBackgroundResource(R.color.transparent);
     }
@@ -137,7 +135,7 @@ public class LoginActivity extends BaseActivity implements ILoginView {
 
     // implements from ILoginView
     @Override
-    public void naveToAfterLogin(UserLoginResponse response) {
+    public void naveToAfterLogin(BaseResponse response) {
         if (response.getCode().equals("1")) {
             readyGo(MainActivity.class);
             finish();

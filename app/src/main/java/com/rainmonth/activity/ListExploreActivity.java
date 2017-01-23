@@ -5,7 +5,6 @@ import android.view.View;
 
 import com.rainmonth.R;
 import com.rainmonth.base.ui.activity.BaseActivity;
-import com.rainmonth.library.base.BaseAppCompatActivity;
 import com.rainmonth.library.eventbus.EventCenter;
 import com.rainmonth.library.utils.NetworkUtils;
 
@@ -78,7 +77,7 @@ public class ListExploreActivity extends BaseActivity {
     @Override
     public void initToolbar() {
         if (null != mToolbar) {
-            mToolbar.setLogo(R.drawable.ic_launcher);
+            mToolbar.setLogo(R.drawable.ic_action_bar_logo);
             mToolbar.setTitle("列表新闻浏览");
             mToolbar.setBackgroundResource(R.color.bg_home);
         }
