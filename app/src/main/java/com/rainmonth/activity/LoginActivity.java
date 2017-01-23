@@ -39,7 +39,7 @@ public class LoginActivity extends BaseActivity implements ILoginView {
     @Bind(R.id.iv_sina)
     ImageView ivSina;
 
-    private ILoginPresenter mPresenter;
+    private ILoginPresenter loginPresenter;
 
     @Override
     public void initToolbar() {
@@ -55,7 +55,7 @@ public class LoginActivity extends BaseActivity implements ILoginView {
 
                 break;
             case R.id.tv_login:
-                mPresenter.login(etUserName.getText().toString(), etPsw.getText().toString());
+                loginPresenter.login(etUserName.getText().toString(), etPsw.getText().toString());
                 break;
             case R.id.tv_no_account:
 
@@ -119,7 +119,7 @@ public class LoginActivity extends BaseActivity implements ILoginView {
         // todo to be delete
         etUserName.setText("15601949622");
         etPsw.setText("m123456");
-        mPresenter = new LoginPresenter(this);
+        loginPresenter = new LoginPresenter(this);
     }
 
     @Override

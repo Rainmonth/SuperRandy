@@ -37,7 +37,7 @@ public class RegisterActivity extends BaseActivity implements IRegisterView {
     @Bind(R.id.tv_create_account)
     TextView tvCreateAccount;
 
-    IRegisterPresenter mPresenter;
+    IRegisterPresenter registerPresenter;
 
     @Override
     public void initToolbar() {
@@ -57,7 +57,7 @@ public class RegisterActivity extends BaseActivity implements IRegisterView {
                 userBean.setUsername(etUserName.getText().toString());
                 userBean.setEmail(etEmail.getText().toString());
                 userBean.setPsw(etPsw.getText().toString());
-                mPresenter.register(userBean);
+                registerPresenter.register(userBean);
                 break;
         }
     }
@@ -109,7 +109,7 @@ public class RegisterActivity extends BaseActivity implements IRegisterView {
 
     @Override
     protected void initViewsAndEvents() {
-        mPresenter = new RegisterPresenter(this);
+        registerPresenter = new RegisterPresenter(this);
     }
 
     @Override
