@@ -3,7 +3,6 @@ package com.rainmonth.model.impl;
 import com.rainmonth.base.mvp.BaseSchedulerTransformer;
 import com.rainmonth.base.mvp.BaseSubscriber;
 import com.rainmonth.bean.UserInfo;
-import com.rainmonth.model.ILoginModel;
 import com.rainmonth.model.IRegisterModel;
 import com.rainmonth.service.UserService;
 import com.rainmonth.utils.http.Api;
@@ -24,6 +23,6 @@ public class RegisterModelImpl implements IRegisterModel<Response<UserLoginRespo
         return ServiceFactory.createService(Api.baseUrl, UserService.class)
                 .registerRx(userInfo.getMobile(), userInfo.getUsername(), userInfo.getPsw(), userInfo.getEmail())
                 .compose(new BaseSchedulerTransformer<Response<UserLoginResponse>>())
-                .subscribe(new BaseSubscriber<Response<UserLoginResponse>>(callback));
+                .subscribe(new BaseSubscriber<>(callback));
     }
 }
