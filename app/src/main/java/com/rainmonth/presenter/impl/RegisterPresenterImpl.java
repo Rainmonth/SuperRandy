@@ -2,11 +2,8 @@ package com.rainmonth.presenter.impl;
 
 import com.rainmonth.base.mvp.BasePresenterImpl;
 import com.rainmonth.bean.UserInfo;
-import com.rainmonth.model.ILoginModel;
 import com.rainmonth.model.IRegisterModel;
-import com.rainmonth.model.impl.LoginModelImpl;
 import com.rainmonth.model.impl.RegisterModelImpl;
-import com.rainmonth.presenter.ILoginPresenter;
 import com.rainmonth.presenter.IRegisterPresenter;
 import com.rainmonth.utils.http.UserLoginResponse;
 import com.rainmonth.view.IRegisterView;

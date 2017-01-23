@@ -1,7 +1,5 @@
 package com.rainmonth.model;
 
-import android.content.Context;
-
 import com.rainmonth.base.ui.fragment.BaseLazyFragment;
 import com.rainmonth.widgets.NavigationTabBar;
 
@@ -16,8 +14,7 @@ public interface MainModel {
     /**
      * 获取底部导航栏models
      *
-     * @param context context
      * @return models列表
      */
-    List<NavigationTabBar.Model> getNavigationModels(Context context);
+    List<NavigationTabBar.Model> getNavigationModels();
 }

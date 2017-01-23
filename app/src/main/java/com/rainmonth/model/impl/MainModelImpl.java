@@ -1,9 +1,9 @@
 package com.rainmonth.model.impl;
 
-import android.content.Context;
 import android.graphics.Color;
 
 import com.rainmonth.R;
+import com.rainmonth.SuperRandyApplication;
 import com.rainmonth.base.ui.fragment.BaseLazyFragment;
 import com.rainmonth.fragment.RanFragment;
 import com.rainmonth.fragment.RenFragment;
@@ -33,52 +33,52 @@ public class MainModelImpl implements MainModel {
     }
 
     @Override
-    public List<NavigationTabBar.Model> getNavigationModels(Context context) {
-        final String[] colors = context.getResources().getStringArray(R.array.default_preview);
+    public List<NavigationTabBar.Model> getNavigationModels() {
+        final String[] colors = SuperRandyApplication.getApplication().getResources().getStringArray(R.array.default_preview);
         final ArrayList<NavigationTabBar.Model> models = new ArrayList<NavigationTabBar.Model>();
         models.add(
                 new NavigationTabBar.Model.Builder(
-                        context.getResources().getDrawable(R.drawable.ic_first),
+                        SuperRandyApplication.getApplication().getResources().getDrawable(R.drawable.ic_first),
                         Color.parseColor(colors[0]))
 //                        .selectedIcon(getResources().getDrawable(R.drawable.ic_sixth))
-                        .title(context.getString(R.string.ren))
+                        .title(SuperRandyApplication.getApplication().getString(R.string.ren))
                         .badgeTitle("NTB")
                         .build()
         );
         models.add(
                 new NavigationTabBar.Model.Builder(
-                        context.getResources().getDrawable(R.drawable.ic_second),
+                        SuperRandyApplication.getApplication().getResources().getDrawable(R.drawable.ic_second),
                         Color.parseColor(colors[1]))
 //                        .selectedIcon(getResources().getDrawable(R.drawable.ic_eighth))
-                        .title(context.getString(R.string.ran))
+                        .title(SuperRandyApplication.getApplication().getString(R.string.ran))
                         .badgeTitle("with")
                         .build()
         );
         models.add(
                 new NavigationTabBar.Model.Builder(
-                        context.getResources().getDrawable(R.drawable.ic_third),
+                        SuperRandyApplication.getApplication().getResources().getDrawable(R.drawable.ic_third),
                         Color.parseColor(colors[2]))
 //                        .selectedIcon(getResources().getDrawable(R.drawable.ic_seventh))
-                        .title(context.getString(R.string.zhui))
+                        .title(SuperRandyApplication.getApplication().getString(R.string.zhui))
                         .badgeTitle("state")
                         .build()
         );
         models.add(
                 new NavigationTabBar.Model.Builder(
-                        context.getResources().getDrawable(R.drawable.ic_fourth),
+                        SuperRandyApplication.getApplication().getResources().getDrawable(R.drawable.ic_fourth),
                         Color.parseColor(colors[3]))
 //                        .selectedIcon(getResources().getDrawable(R.drawable.ic_eighth))
-                        .title(context.getString(R.string.xun))
+                        .title(SuperRandyApplication.getApplication().getString(R.string.xun))
                         .badgeTitle("icon")
                         .build()
         );
 
         models.add(
                 new NavigationTabBar.Model.Builder(
-                        context.getResources().getDrawable(R.drawable.ic_fourth),
+                        SuperRandyApplication.getApplication().getResources().getDrawable(R.drawable.ic_fourth),
                         Color.parseColor(colors[4]))
 //                        .selectedIcon(getResources().getDrawable(R.drawable.ic_eighth))
-                        .title(context.getString(R.string.you))
+                        .title(SuperRandyApplication.getApplication().getString(R.string.you))
                         .badgeTitle("icon")
                         .build()
         );
