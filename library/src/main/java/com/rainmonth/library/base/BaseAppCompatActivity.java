@@ -9,6 +9,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,6 +42,7 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
     protected int mScreenWidth = 0;
     protected int mScreenHeight = 0;
     protected float mScreenDensity = 0.0f;
+    protected int mDpi = 160;
 
     /**
      * context
@@ -125,6 +127,7 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
         mScreenDensity = displayMetrics.density;
         mScreenHeight = displayMetrics.heightPixels;
         mScreenWidth = displayMetrics.widthPixels;
+        mDpi = (int) (160 * mScreenDensity);
 
         mNetChangeObserver = new NetChangeObserver() {
             @Override
@@ -474,5 +477,11 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
             }
             win.setAttributes(winParams);
         }
+    }
+
+    protected void printDeviceInfo() {
+        Log.e("DEVICE_INFO", "mDpi = " + mDpi + "\n" +
+                "mScreenDensity=" + mScreenDensity + "\n" + "mScreenWidth=" + mScreenWidth
+                + "\n" + "mScreenHeight=" + mScreenHeight + "\n");
     }
 }
