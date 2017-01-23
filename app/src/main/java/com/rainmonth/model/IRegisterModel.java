@@ -1,6 +1,6 @@
 package com.rainmonth.model;
 
-import com.rainmonth.bean.UserInfo;
+import com.rainmonth.bean.UserBean;
 import com.rainmonth.utils.http.RequestCallback;
 
 import rx.Subscription;
@@ -11,5 +11,5 @@ import rx.Subscription;
  */
 public interface IRegisterModel<T> {
 
-    Subscription register(RequestCallback<T> callback, UserInfo userInfo);
+    Subscription register(RequestCallback<T> callback, UserBean userBean);
 }

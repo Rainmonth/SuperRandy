@@ -1,20 +1,20 @@
-package com.rainmonth.presenter.impl;
+package com.rainmonth.presenter;
 
 import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
 
+import com.rainmonth.model.ISplashModel;
 import com.rainmonth.model.SplashModel;
-import com.rainmonth.model.impl.SplashModelImpl;
-import com.rainmonth.base.mvp.BasePresenterImpl;
+import com.rainmonth.base.mvp.BasePresenter;
 import com.rainmonth.view.SplashView;
 
 /**
  * Created by RandyZhang on 16/7/1.
  */
-public class SplashPresenter extends BasePresenterImpl<SplashView, Object> {
+public class SplashPresenter extends BasePresenter<SplashView, Object> {
     private Context context = null;
-    private SplashModel splashModel = null;
+    private ISplashModel splashModel = null;
     private SplashView splashView = null;
 
     public SplashPresenter(Context context, SplashView splashView) {
@@ -24,7 +24,7 @@ public class SplashPresenter extends BasePresenterImpl<SplashView, Object> {
         }
         this.context = context;
         this.splashView = splashView;
-        splashModel = new SplashModelImpl();
+        splashModel = new SplashModel();
     }
 
     public void initialize() {

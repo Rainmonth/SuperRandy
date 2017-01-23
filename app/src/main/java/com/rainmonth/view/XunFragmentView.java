@@ -1,6 +1,6 @@
 package com.rainmonth.view;
 
-import com.rainmonth.bean.XunNavigationInfo;
+import com.rainmonth.bean.XunNavigationBean;
 import com.rainmonth.base.mvp.BaseView;
 
 import java.util.List;
@@ -10,7 +10,7 @@ import java.util.List;
  */
 public interface XunFragmentView extends BaseView {
 
-    void initViews(List<XunNavigationInfo> xunNavigationInfoList);
+    void initViews(List<XunNavigationBean> xunNavigationBeanList);
 
-    void navToDetail(XunNavigationInfo xunNavigationInfo);
+    void navToDetail(XunNavigationBean xunNavigationBean);
 }

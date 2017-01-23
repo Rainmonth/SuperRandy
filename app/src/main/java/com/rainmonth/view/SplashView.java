@@ -1,6 +1,6 @@
 package com.rainmonth.view;
 
-import com.rainmonth.bean.SplashInfo;
+import com.rainmonth.bean.SplashBean;
 import com.rainmonth.base.mvp.BaseView;
 
 /**
@@ -8,7 +8,7 @@ import com.rainmonth.base.mvp.BaseView;
  */
 public interface SplashView extends BaseView{
 
-    void initWithSplashInfo(SplashInfo splashInfo);
+    void initWithSplashInfo(SplashBean splashBean);
 
     /**
      *

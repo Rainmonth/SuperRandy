@@ -15,7 +15,7 @@ import com.rainmonth.base.ui.adapter.ViewHolderBase;
 import com.rainmonth.base.ui.adapter.ViewHolderCreator;
 import com.rainmonth.base.ui.fragment.BaseLazyFragment;
 import com.rainmonth.bean.RanContentInfo;
-import com.rainmonth.presenter.impl.RanFragmentPresenter;
+import com.rainmonth.presenter.RanFragmentPresenter;
 import com.rainmonth.view.RanFragmentView;
 
 import java.util.List;

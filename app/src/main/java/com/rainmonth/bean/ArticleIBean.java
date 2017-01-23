@@ -6,7 +6,7 @@ import java.io.Serializable;
  * 文章实体
  * Created by RandyZhang on 16/9/9.
  */
-public class ArticleInfo implements Serializable {
+public class ArticleIBean implements Serializable {
     // id
     private String id;
 

@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.rainmonth.R;
-import com.rainmonth.bean.CardInfo;
+import com.rainmonth.bean.CardBean;
 import com.rainmonth.library.utils.CommonUtils;
 
 import java.util.ArrayList;
@@ -24,39 +24,39 @@ public class RhythmAdapter extends BaseAdapter {
     /**
      * 数据源
      */
-    private List<CardInfo> mCardInfoList;
+    private List<CardBean> mCardBeanList;
 
     private LayoutInflater mInflater;
     private Context mContext;
     private RhythmLayout mRhythmLayout;
 
-    public RhythmAdapter(Context context, RhythmLayout rhythmLayout, List<CardInfo> cardInfoList) {
+    public RhythmAdapter(Context context, RhythmLayout rhythmLayout, List<CardBean> cardBeanList) {
         this.mContext = context;
         this.mRhythmLayout = rhythmLayout;
-        this.mCardInfoList = new ArrayList();
-        this.mCardInfoList.addAll(cardInfoList);
+        this.mCardBeanList = new ArrayList();
+        this.mCardBeanList.addAll(cardBeanList);
         if (context != null)
             this.mInflater = LayoutInflater.from(context);
     }
 
-    public List<CardInfo> getCardList() {
-        return this.mCardInfoList;
+    public List<CardBean> getCardList() {
+        return this.mCardBeanList;
     }
 
-    public void addCardList(List<CardInfo> cardInfoList) {
-        mCardInfoList.addAll(cardInfoList);
+    public void addCardList(List<CardBean> cardBeanList) {
+        mCardBeanList.addAll(cardBeanList);
     }
 
     public int getCount() {
-        return this.mCardInfoList.size();
+        return this.mCardBeanList.size();
     }
 
     public Object getItem(int position) {
-        return this.mCardInfoList.get(position);
+        return this.mCardBeanList.get(position);
     }
 
     public long getItemId(int paramInt) {
-        return (this.mCardInfoList.get(paramInt)).getUid();
+        return (this.mCardBeanList.get(paramInt)).getUid();
     }
 
 
@@ -80,7 +80,7 @@ public class RhythmAdapter extends BaseAdapter {
         iconParams.height = iconSize;
         imageIcon.setLayoutParams(iconParams);
         //设置背景图片
-        imageIcon.setBackgroundResource(CommonUtils.getDrawableIdByName(mContext, mCardInfoList.get(position).getIconUrl()));
+        imageIcon.setBackgroundResource(CommonUtils.getDrawableIdByName(mContext, mCardBeanList.get(position).getIconUrl()));
 
         return relativeLayout;
     }
@@ -90,8 +90,8 @@ public class RhythmAdapter extends BaseAdapter {
         this.mRhythmLayout.invalidateData();
     }
 
-    public void setCardList(List<CardInfo> paramList) {
-        this.mCardInfoList = paramList;
+    public void setCardList(List<CardBean> paramList) {
+        this.mCardBeanList = paramList;
     }
 
     /**

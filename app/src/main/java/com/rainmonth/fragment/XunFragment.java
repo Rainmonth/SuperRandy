@@ -19,8 +19,8 @@ import com.rainmonth.base.ui.adapter.ListViewDataAdapter;
 import com.rainmonth.base.ui.adapter.ViewHolderBase;
 import com.rainmonth.base.ui.adapter.ViewHolderCreator;
 import com.rainmonth.base.ui.fragment.BaseLazyFragment;
-import com.rainmonth.bean.XunNavigationInfo;
-import com.rainmonth.presenter.impl.XunFragmentPresenter;
+import com.rainmonth.bean.XunNavigationBean;
+import com.rainmonth.presenter.XunFragmentPresenter;
 import com.rainmonth.view.XunFragmentView;
 
 import java.util.List;
@@ -46,7 +46,7 @@ public class XunFragment extends BaseLazyFragment implements XunFragmentView {
 
     private XunFragmentPresenter xunFragmentPresenter = null;
 
-    private ListViewDataAdapter<XunNavigationInfo> mXunNavListAdapter = null;
+    private ListViewDataAdapter<XunNavigationBean> mXunNavListAdapter = null;
     public final static int TYPE_ARTICLE = 1, TYPE_IMAGE = 2, TYPE_MUSIC = 3, TYPE_FILM = 4, TYPE_APP = 5;
 
     @Override
@@ -87,11 +87,11 @@ public class XunFragment extends BaseLazyFragment implements XunFragmentView {
     }
 
     @Override
-    public void initViews(List<XunNavigationInfo> xunNavigationInfoList) {
-        mXunNavListAdapter = new ListViewDataAdapter<XunNavigationInfo>(new ViewHolderCreator<XunNavigationInfo>() {
+    public void initViews(List<XunNavigationBean> xunNavigationBeanList) {
+        mXunNavListAdapter = new ListViewDataAdapter<XunNavigationBean>(new ViewHolderCreator<XunNavigationBean>() {
             @Override
-            public ViewHolderBase<XunNavigationInfo> createViewHolder(int position) {
-                return new ViewHolderBase<XunNavigationInfo>() {
+            public ViewHolderBase<XunNavigationBean> createViewHolder(int position) {
+                return new ViewHolderBase<XunNavigationBean>() {
                     ImageView ivNavImg;
                     TextView tvNavName;
 
@@ -104,7 +104,7 @@ public class XunFragment extends BaseLazyFragment implements XunFragmentView {
                     }
 
                     @Override
-                    public void showData(int position, XunNavigationInfo itemData) {
+                    public void showData(int position, XunNavigationBean itemData) {
                         ivNavImg.setImageResource(itemData.getNavIconResId());
                         tvNavName.setText(itemData.getNavName());
 
@@ -112,24 +112,24 @@ public class XunFragment extends BaseLazyFragment implements XunFragmentView {
                 };
             }
         });
-        mXunNavListAdapter.getDataList().addAll(xunNavigationInfoList);
+        mXunNavListAdapter.getDataList().addAll(xunNavigationBeanList);
         gvContent.setAdapter(mXunNavListAdapter);
         gvContent.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 // nav to detail activity
-                XunNavigationInfo xunNavigationInfo = mXunNavListAdapter.getDataList().get(position);
-                if (null != xunNavigationInfo) {
-                    xunFragmentPresenter.navToDetail(xunNavigationInfo);
+                XunNavigationBean xunNavigationBean = mXunNavListAdapter.getDataList().get(position);
+                if (null != xunNavigationBean) {
+                    xunFragmentPresenter.navToDetail(xunNavigationBean);
                 }
             }
         });
     }
 
     @Override
-    public void navToDetail(XunNavigationInfo xunNavigationInfo) {
-        int type = xunNavigationInfo.getType();
+    public void navToDetail(XunNavigationBean xunNavigationBean) {
+        int type = xunNavigationBean.getType();
         switch (type) {
             case TYPE_ARTICLE:
                 readyGo(ViewPagerExploreActivity.class);

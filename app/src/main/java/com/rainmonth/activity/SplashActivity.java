@@ -8,10 +8,10 @@ import android.widget.TextView;
 
 import com.rainmonth.R;
 import com.rainmonth.base.ui.activity.BaseActivity;
-import com.rainmonth.bean.SplashInfo;
+import com.rainmonth.bean.SplashBean;
 import com.rainmonth.library.eventbus.EventCenter;
 import com.rainmonth.library.utils.NetworkUtils;
-import com.rainmonth.presenter.impl.SplashPresenter;
+import com.rainmonth.presenter.SplashPresenter;
 import com.rainmonth.view.SplashView;
 
 import butterknife.Bind;
@@ -36,12 +36,12 @@ public class SplashActivity extends BaseActivity implements SplashView {
     }
 
     @Override
-    public void initWithSplashInfo(SplashInfo splashInfo) {
-        if (null != splashInfo) {
-            if (splashInfo.isHasRemoteSplash()) {
+    public void initWithSplashInfo(SplashBean splashBean) {
+        if (null != splashBean) {
+            if (splashBean.isHasRemoteSplash()) {
                 // todo replace with UIL 显示图片
-                ivSplash.setImageDrawable(getResources().getDrawable(splashInfo.getRemoteSplashUrl()));
-                tvSplashText.setText(splashInfo.getRemoteSplashText());
+                ivSplash.setImageDrawable(getResources().getDrawable(splashBean.getRemoteSplashUrl()));
+                tvSplashText.setText(splashBean.getRemoteSplashText());
             } else {
                 ivSplash.setImageDrawable(getResources().getDrawable(R.drawable.default_splash));
                 tvSplashText.setText(getString(R.string.default_splash_text));

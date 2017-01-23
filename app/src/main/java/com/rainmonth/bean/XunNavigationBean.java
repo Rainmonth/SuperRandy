@@ -5,13 +5,13 @@ import java.io.Serializable;
 /**
  * Created by RandyZhang on 16/7/5.
  */
-public class XunNavigationInfo implements Serializable{
+public class XunNavigationBean implements Serializable{
 
     private int type;
     private int navIconResId;
     private String navName;
 
-    public XunNavigationInfo(int type, int navIconResId, String navName) {
+    public XunNavigationBean(int type, int navIconResId, String navName) {
         this.type = type;
         this.navIconResId = navIconResId;
         this.navName = navName;

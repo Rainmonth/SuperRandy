@@ -14,7 +14,7 @@ import com.rainmonth.base.ui.fragment.BaseLazyFragment;
 import com.rainmonth.getui.DemoPushService;
 import com.rainmonth.library.eventbus.EventCenter;
 import com.rainmonth.library.utils.NetworkUtils;
-import com.rainmonth.presenter.impl.MainPresenter;
+import com.rainmonth.presenter.MainPresenter;
 import com.rainmonth.view.MainView;
 import com.rainmonth.widgets.NavigationTabBar;
 

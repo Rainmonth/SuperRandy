@@ -1,20 +1,20 @@
-package com.rainmonth.presenter.impl;
+package com.rainmonth.presenter;
 
 import android.content.Context;
 
-import com.rainmonth.bean.XunNavigationInfo;
+import com.rainmonth.bean.XunNavigationBean;
+import com.rainmonth.model.IXunFragmentModel;
 import com.rainmonth.model.XunFragmentModel;
-import com.rainmonth.model.impl.XunFragmentModelImpl;
-import com.rainmonth.base.mvp.BasePresenterImpl;
+import com.rainmonth.base.mvp.BasePresenter;
 import com.rainmonth.view.XunFragmentView;
 
 /**
  * Created by RandyZhang on 16/7/5.
  */
-public class XunFragmentPresenter extends BasePresenterImpl<XunFragmentView, Object> {
+public class XunFragmentPresenter extends BasePresenter<XunFragmentView, Object> {
     private Context context = null;
     private XunFragmentView xunFragmentView = null;
-    private XunFragmentModel xunFragmentModel = null;
+    private IXunFragmentModel xunFragmentModel = null;
 
     public XunFragmentPresenter(Context context, XunFragmentView xunFragmentView) {
         super(xunFragmentView);
@@ -23,14 +23,14 @@ public class XunFragmentPresenter extends BasePresenterImpl<XunFragmentView, Obj
         }
         this.context = context;
         this.xunFragmentView = xunFragmentView;
-        xunFragmentModel = new XunFragmentModelImpl();
+        xunFragmentModel = new XunFragmentModel();
     }
 
     public void initialize() {
         xunFragmentView.initViews(xunFragmentModel.getXunNavigationList());
     }
 
-    public void navToDetail(XunNavigationInfo xunNavigationInfo) {
-        xunFragmentView.navToDetail(xunNavigationInfo);
+    public void navToDetail(XunNavigationBean xunNavigationBean) {
+        xunFragmentView.navToDetail(xunNavigationBean);
     }
 }

@@ -1,10 +1,9 @@
-package com.rainmonth.presenter.impl;
+package com.rainmonth.presenter;
 
-import com.rainmonth.base.mvp.BasePresenterImpl;
-import com.rainmonth.bean.UserInfo;
+import com.rainmonth.base.mvp.BasePresenter;
+import com.rainmonth.bean.UserBean;
 import com.rainmonth.model.IRegisterModel;
-import com.rainmonth.model.impl.RegisterModelImpl;
-import com.rainmonth.presenter.IRegisterPresenter;
+import com.rainmonth.model.RegisterModel;
 import com.rainmonth.utils.http.UserLoginResponse;
 import com.rainmonth.view.IRegisterView;
 
@@ -13,14 +12,14 @@ import retrofit2.Response;
 /**
  * Created by RandyZhang on 16/9/19.
  */
-public class RegisterPresenterImpl extends BasePresenterImpl<IRegisterView, Response<UserLoginResponse>>
+public class RegisterPresenter extends BasePresenter<IRegisterView, Response<UserLoginResponse>>
         implements IRegisterPresenter {
 
     private IRegisterModel<Response<UserLoginResponse>> mUserModel;
 
-    public RegisterPresenterImpl(IRegisterView mView) {
+    public RegisterPresenter(IRegisterView mView) {
         super(mView);
-        mUserModel = new RegisterModelImpl();
+        mUserModel = new RegisterModel();
     }
 
     @Override
@@ -56,7 +55,7 @@ public class RegisterPresenterImpl extends BasePresenterImpl<IRegisterView, Resp
     }
 
     @Override
-    public void register(UserInfo userInfo) {
-        mSubscription = mUserModel.register(this, userInfo);
+    public void register(UserBean userBean) {
+        mSubscription = mUserModel.register(this, userBean);
     }
 }

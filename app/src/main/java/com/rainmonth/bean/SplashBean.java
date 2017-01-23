@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * Created by RandyZhang on 16/7/1.
  */
-public class SplashInfo implements Serializable {
+public class SplashBean implements Serializable {
     private boolean hasRemoteSplash;
     // todo update with url later
     private int remoteSplashUrl;

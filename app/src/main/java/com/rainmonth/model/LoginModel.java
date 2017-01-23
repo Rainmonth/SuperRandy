@@ -1,5 +1,6 @@
-package com.rainmonth.model.impl;
+package com.rainmonth.model;
 
+import com.rainmonth.base.mvp.BaseResponse;
 import com.rainmonth.model.ILoginModel;
 import com.rainmonth.service.UserService;
 import com.rainmonth.utils.http.Api;
@@ -15,23 +16,23 @@ import rx.Subscription;
 /**
  * Created by RandyZhang on 16/9/19.
  */
-public class LoginModelImpl implements ILoginModel<Response<UserLoginResponse>> {
+public class LoginModel implements ILoginModel<Response<BaseResponse>> {
     @Override
-    public Subscription login(RequestCallback<Response<UserLoginResponse>> callback, String username, String psw) {
+    public Subscription login(RequestCallback<Response<BaseResponse>> callback, String username, String psw) {
         return ServiceFactory.createService(Api.baseUrl, UserService.class).loginRx(username, psw)
-                .compose(new BaseSchedulerTransformer<Response<UserLoginResponse>>())
-                .subscribe(new BaseSubscriber<Response<UserLoginResponse>>(callback));
+                .compose(new BaseSchedulerTransformer<Response<BaseResponse>>())
+                .subscribe(new BaseSubscriber<Response<BaseResponse>>(callback));
     }
 
 //    @Override
-//    public Subscription register(RequestCallback<Response<UserLoginResponse>> callback, UserInfo userInfo) {
-//        return ServiceFactory.createService(Api.baseUrl, UserService.class).registerRx(userInfo)
+//    public Subscription register(RequestCallback<Response<UserLoginResponse>> callback, UserBean userBean) {
+//        return ServiceFactory.createService(Api.baseUrl, UserService.class).registerRx(userBean)
 //                .compose(new BaseSchedulerTransformer<Response<UserLoginResponse>>())
 //                .subscribe(new BaseSubscriber<Response<UserLoginResponse>>(callback));
 //    }
 //
 //    @Override
-//    public Subscription getUserInfo(RequestCallback<Response<UserLoginResponse>> callback, int id) {
+//    public Subscription getUserBean(RequestCallback<Response<UserLoginResponse>> callback, int id) {
 //        return ServiceFactory.createService(Api.baseUrl, UserService.class).getUserInfoRx(id)
 //                .compose(new BaseSchedulerTransformer<Response<UserLoginResponse>>())
 //                .subscribe(new BaseSubscriber<Response<UserLoginResponse>>(callback));

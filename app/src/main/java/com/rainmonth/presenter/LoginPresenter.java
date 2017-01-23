@@ -1,9 +1,10 @@
-package com.rainmonth.presenter.impl;
+package com.rainmonth.presenter;
 
+import com.rainmonth.base.mvp.BaseResponse;
+import com.rainmonth.bean.UserBean;
 import com.rainmonth.model.ILoginModel;
-import com.rainmonth.model.impl.LoginModelImpl;
-import com.rainmonth.base.mvp.BasePresenterImpl;
-import com.rainmonth.presenter.ILoginPresenter;
+import com.rainmonth.model.LoginModel;
+import com.rainmonth.base.mvp.BasePresenter;
 import com.rainmonth.utils.http.UserLoginResponse;
 import com.rainmonth.view.ILoginView;
 
@@ -12,14 +13,14 @@ import retrofit2.Response;
 /**
  * Created by RandyZhang on 16/9/19.
  */
-public class LoginPresenterImpl extends BasePresenterImpl<ILoginView, Response<UserLoginResponse>>
+public class LoginPresenter extends BasePresenter<ILoginView, Response<BaseResponse>>
         implements ILoginPresenter {
 
-    private ILoginModel<Response<UserLoginResponse>> mUserModel;
+    private ILoginModel<Response<BaseResponse>> mUserModel;
 
-    public LoginPresenterImpl(ILoginView mView) {
+    public LoginPresenter(ILoginView mView) {
         super(mView);
-        mUserModel = new LoginModelImpl();
+        mUserModel = new LoginModel();
     }
 
     @Override
@@ -49,9 +50,10 @@ public class LoginPresenterImpl extends BasePresenterImpl<ILoginView, Response<U
     }
 
     @Override
-    public void requestSuccess(Response<UserLoginResponse> data) {
+    public void requestSuccess(Response<BaseResponse> data) {
         super.requestSuccess(data);
         mView.naveToAfterLogin(data.body());
+        UserBean userBean = (UserBean) data.body().getData();
     }
 
     @Override

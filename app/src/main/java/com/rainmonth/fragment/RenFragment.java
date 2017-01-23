@@ -15,7 +15,7 @@ import com.rainmonth.base.ui.adapter.ViewHolderBase;
 import com.rainmonth.base.ui.adapter.ViewHolderCreator;
 import com.rainmonth.base.ui.fragment.BaseLazyFragment;
 import com.rainmonth.bean.RenContentInfo;
-import com.rainmonth.presenter.impl.RenFragmentPresenter;
+import com.rainmonth.presenter.RenFragmentPresenter;
 import com.rainmonth.view.RenFragmentView;
 
 import java.util.List;
@@ -39,7 +39,7 @@ public class RenFragment extends BaseLazyFragment implements RenFragmentView {
         View rootView = super.onCreateView(inflater, container, savedInstanceState);
         ButterKnife.bind(this, rootView);
 
-        renFragmentPresenter = new RenFragmentPresenter(mContext, this);
+        renFragmentPresenter = new RenFragmentPresenter(this);
         renFragmentPresenter.initialize();
         return rootView;
     }
@@ -118,6 +118,11 @@ public class RenFragment extends BaseLazyFragment implements RenFragmentView {
     @Override
     public void navToDetail(RenContentInfo xunNavigationInfo) {
         // todo 进入二级界面
+    }
+
+    @Override
+    public void getHomeBanner() {
+        //
     }
 
     @Override

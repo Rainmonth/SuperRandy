@@ -2,7 +2,7 @@ package com.rainmonth.bean;
 
 import java.io.Serializable;
 
-public class CardInfo implements Serializable {
+public class CardBean implements Serializable {
     private static final long serialVersionUID = -5376313495678563362L;
 
     private int id;

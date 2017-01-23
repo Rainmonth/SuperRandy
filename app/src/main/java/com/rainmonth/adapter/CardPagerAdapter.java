@@ -4,7 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.rainmonth.bean.CardInfo;
+import com.rainmonth.bean.CardBean;
 import com.rainmonth.fragment.CardFragment;
 
 import java.util.ArrayList;
@@ -12,31 +12,31 @@ import java.util.Iterator;
 import java.util.List;
 
 public class CardPagerAdapter extends FragmentStatePagerAdapter {
-    private List<CardInfo> mPostList;
+    private List<CardBean> mPostList;
     private List<Fragment> mFragments = new ArrayList();
 
-    public CardPagerAdapter(FragmentManager paramFragmentManager, List<CardInfo> paramList) {
+    public CardPagerAdapter(FragmentManager paramFragmentManager, List<CardBean> paramList) {
         super(paramFragmentManager);
         Iterator localIterator = paramList.iterator();
         while (localIterator.hasNext()) {
-            CardInfo localAppModel = (CardInfo) localIterator.next();
+            CardBean localAppModel = (CardBean) localIterator.next();
             this.mFragments.add(CardFragment.getInstance(localAppModel));
         }
         this.mPostList = paramList;
     }
 
-    public void addCardList(List<CardInfo> cardInfoList) {
+    public void addCardList(List<CardBean> cardBeanList) {
         ArrayList localArrayList = new ArrayList();
-        Iterator localIterator = cardInfoList.iterator();
+        Iterator localIterator = cardBeanList.iterator();
         while (localIterator.hasNext())
-            localArrayList.add(CardFragment.getInstance((CardInfo) localIterator.next()));
+            localArrayList.add(CardFragment.getInstance((CardBean) localIterator.next()));
         if (this.mFragments == null)
             this.mFragments = new ArrayList();
         this.mFragments.addAll(localArrayList);
-        this.mPostList.addAll(cardInfoList);
+        this.mPostList.addAll(cardBeanList);
     }
 
-    public List<CardInfo> getCardList() {
+    public List<CardBean> getCardList() {
         return this.mPostList;
     }
 
@@ -52,13 +52,13 @@ public class CardPagerAdapter extends FragmentStatePagerAdapter {
         return this.mFragments.get(paramInt);
     }
 
-    public void setCardList(List<CardInfo> cardInfoList) {
+    public void setCardList(List<CardBean> cardBeanList) {
         ArrayList localArrayList = new ArrayList();
-        Iterator localIterator = cardInfoList.iterator();
+        Iterator localIterator = cardBeanList.iterator();
         while (localIterator.hasNext())
-            localArrayList.add(CardFragment.getInstance((CardInfo) localIterator.next()));
+            localArrayList.add(CardFragment.getInstance((CardBean) localIterator.next()));
         this.mFragments = localArrayList;
-        this.mPostList = cardInfoList;
+        this.mPostList = cardBeanList;
     }
 
     public void setFragments(List<Fragment> paramList) {

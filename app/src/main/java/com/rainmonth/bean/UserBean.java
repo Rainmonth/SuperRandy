@@ -7,7 +7,7 @@ import java.io.Serializable;
 /**
  * Created by RandyZhang on 16/8/2.
  */
-public class UserInfo implements Serializable {
+public class UserBean implements Serializable {
     @SerializedName("id")
     private int id;
     @SerializedName("mobile")

@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.rainmonth.R;
 import com.rainmonth.base.ui.fragment.BaseLazyFragment;
-import com.rainmonth.bean.CardInfo;
+import com.rainmonth.bean.CardBean;
 import com.rainmonth.library.utils.CommonUtils;
 import com.rainmonth.library.utils.DensityUtils;
 import com.rainmonth.widgets.HtmlTextView;
@@ -20,7 +20,7 @@ import com.rainmonth.widgets.HtmlTextView;
 import butterknife.ButterKnife;
 
 public class CardFragment extends BaseLazyFragment {
-    protected CardInfo mCardInfo;
+    protected CardBean mCardBean;
 
     protected TextView mAuthorText;
     protected ImageView mBottomEdgeImageView;
@@ -31,10 +31,10 @@ public class CardFragment extends BaseLazyFragment {
     protected TextView mSubTitleText;
     protected TextView mTitleText;
 
-    public static CardFragment getInstance(CardInfo cardInfo) {
+    public static CardFragment getInstance(CardBean cardBean) {
         CardFragment localCardFragment = new CardFragment();
         Bundle localBundle = new Bundle();
-        localBundle.putSerializable("cardInfo", cardInfo);
+        localBundle.putSerializable("cardBean", cardBean);
         localCardFragment.setArguments(localBundle);
         return localCardFragment;
     }
@@ -61,12 +61,12 @@ public class CardFragment extends BaseLazyFragment {
         mAuthorText = ((TextView) view.findViewById(R.id.text_author));
         mBravoNumText = ((TextView) view.findViewById(R.id.text_bravos));
 
-        if (null != mCardInfo) {
-            mTitleText.setText(this.mCardInfo.getTitle());
-            mSubTitleText.setText(this.mCardInfo.getSubTitle());
-            this.mBravoNumText.setText("  " + this.mCardInfo.getUpNum());
-            this.mDigestText.setTextViewHtml(mCardInfo.getDigest());
-            this.mAuthorText.setText(Html.fromHtml("<B>" + this.mCardInfo.getAuthorName() + "</B>"));
+        if (null != mCardBean) {
+            mTitleText.setText(this.mCardBean.getTitle());
+            mSubTitleText.setText(this.mCardBean.getSubTitle());
+            this.mBravoNumText.setText("  " + this.mCardBean.getUpNum());
+            this.mDigestText.setTextViewHtml(mCardBean.getDigest());
+            this.mAuthorText.setText(Html.fromHtml("<B>" + this.mCardBean.getAuthorName() + "</B>"));
             initAndDisplayCoverImage();
         }
 
@@ -79,12 +79,12 @@ public class CardFragment extends BaseLazyFragment {
         ViewGroup.LayoutParams localLayoutParams = this.mCoverImageView.getLayoutParams();
         localLayoutParams.height = Float.valueOf(coverHeight).intValue();
         //加载图片
-        int picResource = CommonUtils.getDrawableIdByName(getActivity(), mCardInfo.getCoverImageUrl());
+        int picResource = CommonUtils.getDrawableIdByName(getActivity(), mCardBean.getCoverImageUrl());
         mCoverImageView.setBackgroundResource(picResource);
     }
 
     protected void initData() {
-        this.mCardInfo = (CardInfo) getArguments().getSerializable("cardInfo");
+        this.mCardBean = (CardBean) getArguments().getSerializable("cardInfo");
     }
 
     protected void initActions(View paramView) {

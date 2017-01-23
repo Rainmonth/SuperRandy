@@ -9,11 +9,11 @@ import android.widget.TextView;
 import com.rainmonth.R;
 import com.rainmonth.base.mvp.BaseResponse;
 import com.rainmonth.base.ui.activity.BaseActivity;
-import com.rainmonth.bean.UserInfo;
+import com.rainmonth.bean.UserBean;
 import com.rainmonth.library.eventbus.EventCenter;
 import com.rainmonth.library.utils.NetworkUtils;
 import com.rainmonth.presenter.IRegisterPresenter;
-import com.rainmonth.presenter.impl.RegisterPresenterImpl;
+import com.rainmonth.presenter.RegisterPresenter;
 import com.rainmonth.utils.ToastUtils;
 import com.rainmonth.view.IRegisterView;
 
@@ -52,12 +52,12 @@ public class RegisterActivity extends BaseActivity implements IRegisterView {
             case R.id.iv_user_avatar:
                 break;
             case R.id.tv_create_account:
-                UserInfo userInfo = new UserInfo();
-                userInfo.setMobile(etPhone.getText().toString());
-                userInfo.setUsername(etUserName.getText().toString());
-                userInfo.setEmail(etEmail.getText().toString());
-                userInfo.setPsw(etPsw.getText().toString());
-                mPresenter.register(userInfo);
+                UserBean userBean = new UserBean();
+                userBean.setMobile(etPhone.getText().toString());
+                userBean.setUsername(etUserName.getText().toString());
+                userBean.setEmail(etEmail.getText().toString());
+                userBean.setPsw(etPsw.getText().toString());
+                mPresenter.register(userBean);
                 break;
         }
     }
@@ -109,7 +109,7 @@ public class RegisterActivity extends BaseActivity implements IRegisterView {
 
     @Override
     protected void initViewsAndEvents() {
-        mPresenter = new RegisterPresenterImpl(this);
+        mPresenter = new RegisterPresenter(this);
     }
 
     @Override

@@ -18,7 +18,7 @@ import android.widget.TextView;
 import com.rainmonth.R;
 import com.rainmonth.adapter.CardPagerAdapter;
 import com.rainmonth.base.ui.fragment.BaseLazyFragment;
-import com.rainmonth.bean.CardInfo;
+import com.rainmonth.bean.CardBean;
 import com.rainmonth.library.utils.NetworkUtils;
 import com.rainmonth.utils.AnimatorUtils;
 import com.rainmonth.utils.HexUtils;
@@ -83,7 +83,7 @@ public class CardViewPagerFragment extends BaseLazyFragment implements PullToRef
     private int mCurrentViewPagerPage;
 
 
-    private List<CardInfo> mCardInfoList;
+    private List<CardBean> mCardBeanList;
 
     private ProgressHUD mProgressHUD;
 
@@ -122,7 +122,7 @@ public class CardViewPagerFragment extends BaseLazyFragment implements PullToRef
 
         public void onPageSelected(int position) {
             onAppPagerChange(position);
-            if (mHasNext && (position > -10 + mCardInfoList.size()) && !mIsRequesting && NetworkUtils.isWifiDataEnable(getActivity())) {
+            if (mHasNext && (position > -10 + mCardBeanList.size()) && !mIsRequesting && NetworkUtils.isWifiDataEnable(getActivity())) {
                 fetchData();
             }
         }
@@ -186,7 +186,7 @@ public class CardViewPagerFragment extends BaseLazyFragment implements PullToRef
     }
 
     protected void initData() {
-        mCardInfoList = new ArrayList<>();
+        mCardBeanList = new ArrayList<>();
     }
 
     /**
@@ -218,7 +218,7 @@ public class CardViewPagerFragment extends BaseLazyFragment implements PullToRef
         //执行动画，改变升起的钢琴按钮
         mRhythmLayout.showRhythmAtPosition(position);
         toggleRocketBtn(position);
-        CardInfo post = this.mCardInfoList.get(position);
+        CardBean post = this.mCardBeanList.get(position);
         //得到当前的背景颜色
         int currColor = HexUtils.getHexColor(post.getBackgroundColor());
         //执行颜色转换动画
@@ -258,18 +258,18 @@ public class CardViewPagerFragment extends BaseLazyFragment implements PullToRef
      * 加载数据
      */
     private void fetchData() {
-        ArrayList<CardInfo> cardInfoList = new ArrayList<>();
+        ArrayList<CardBean> cardBeanList = new ArrayList<>();
         for (int i = 0; i < 30; i++) {
             int m = i % 8;
-            CardInfo cardInfo = addData(m);
-            cardInfoList.add(cardInfo);
+            CardBean cardBean = addData(m);
+            cardBeanList.add(cardBean);
         }
-        mPreColor = HexUtils.getHexColor(cardInfoList.get(0).getBackgroundColor());
-        updateAppAdapter(cardInfoList);
+        mPreColor = HexUtils.getHexColor(cardBeanList.get(0).getBackgroundColor());
+        updateAppAdapter(cardBeanList);
     }
 
 
-    private void updateAppAdapter(List<CardInfo> cardInfoList) {
+    private void updateAppAdapter(List<CardBean> cardBeanList) {
         if ((getActivity() == null) || (getActivity().isFinishing())) {
             return;
         }
@@ -277,44 +277,44 @@ public class CardViewPagerFragment extends BaseLazyFragment implements PullToRef
             this.mProgressHUD.dismiss();
             this.isAdapterUpdated = true;
         }
-        if (cardInfoList.isEmpty()) {
+        if (cardBeanList.isEmpty()) {
             this.mMainView.setBackgroundColor(this.mPreColor);
             return;
         }
-        int size = mCardInfoList.size();
+        int size = mCardBeanList.size();
 
         if (mCardPagerAdapter == null) {
             mCurrentViewPagerPage = 0;
-            mCardPagerAdapter = new CardPagerAdapter(getActivity().getSupportFragmentManager(), cardInfoList);
+            mCardPagerAdapter = new CardPagerAdapter(getActivity().getSupportFragmentManager(), cardBeanList);
             mViewPager.setAdapter(mCardPagerAdapter);
         } else {
-            mCardPagerAdapter.addCardList(cardInfoList);
+            mCardPagerAdapter.addCardList(cardBeanList);
             mCardPagerAdapter.notifyDataSetChanged();
         }
-        addCardIconsToDock(cardInfoList);
+        addCardIconsToDock(cardBeanList);
 
-        this.mCardInfoList = mCardPagerAdapter.getCardList();
+        this.mCardBeanList = mCardPagerAdapter.getCardList();
 
         if (mViewPager.getCurrentItem() == size - 1)
             mViewPager.setCurrentItem(1 + mViewPager.getCurrentItem(), true);
     }
 
-    private void addCardIconsToDock(final List<CardInfo> cardInfoList) {
+    private void addCardIconsToDock(final List<CardBean> cardBeanList) {
         if (mRhythmAdapter == null) {
-            resetRhythmLayout(cardInfoList);
+            resetRhythmLayout(cardBeanList);
             return;
         }
-        mRhythmAdapter.addCardList(cardInfoList);
+        mRhythmAdapter.addCardList(cardBeanList);
         mRhythmAdapter.notifyDataSetChanged();
     }
 
     //重置钢琴控件数据源
-    private void resetRhythmLayout(List<CardInfo> cardInfoList) {
+    private void resetRhythmLayout(List<CardBean> cardBeanList) {
         if (getActivity() == null)
             return;
-        if (cardInfoList == null)
-            cardInfoList = new ArrayList<>();
-        mRhythmAdapter = new RhythmAdapter(getActivity(), mRhythmLayout, cardInfoList);
+        if (cardBeanList == null)
+            cardBeanList = new ArrayList<>();
+        mRhythmAdapter = new RhythmAdapter(getActivity(), mRhythmLayout, cardBeanList);
         mRhythmLayout.setAdapter(mRhythmAdapter);
     }
 
@@ -385,90 +385,90 @@ public class CardViewPagerFragment extends BaseLazyFragment implements PullToRef
         mFragment = null;
     }
 
-    private CardInfo addData(int i) {
-        CardInfo cardInfo = new CardInfo();
+    private CardBean addData(int i) {
+        CardBean cardBean = new CardBean();
         switch (i) {
             case 0:
-                cardInfo.setTitle("God of Light");
-                cardInfo.setSubTitle("点亮世界之光");
-                cardInfo.setDigest("当下制造精致的游戏往往超越了常规概念中对游戏的界定。通关的过程更像是在欣赏一部电影大片。通过镜片反射，即使只有一道光芒，我们也能点亮世界");
-                cardInfo.setUpNum(124);
-                cardInfo.setAuthorName("小美");
-                cardInfo.setBackgroundColor("#00aac6");
-                cardInfo.setCoverImageUrl("card_cover1");
-                cardInfo.setIconUrl("card_icon1");
+                cardBean.setTitle("God of Light");
+                cardBean.setSubTitle("点亮世界之光");
+                cardBean.setDigest("当下制造精致的游戏往往超越了常规概念中对游戏的界定。通关的过程更像是在欣赏一部电影大片。通过镜片反射，即使只有一道光芒，我们也能点亮世界");
+                cardBean.setUpNum(124);
+                cardBean.setAuthorName("小美");
+                cardBean.setBackgroundColor("#00aac6");
+                cardBean.setCoverImageUrl("card_cover1");
+                cardBean.setIconUrl("card_icon1");
                 break;
             case 1:
-                cardInfo.setTitle("我的手机与众不同");
-                cardInfo.setSubTitle("专题");
-                cardInfo.setDigest("谁说美化一定要Root?选对了应用一样可以美美哒～有个性，爱折腾，我们不爱啃苹果，我们是大安卓用户!都说「世界上没有相同的叶子」，想让自己的手机与众不同?让小美告诉你");
-                cardInfo.setUpNum(299);
-                cardInfo.setAuthorName("小美");
-                cardInfo.setBackgroundColor("#dc4e97");
-                cardInfo.setCoverImageUrl("card_cover2");
-                cardInfo.setIconUrl("card_icon2");
+                cardBean.setTitle("我的手机与众不同");
+                cardBean.setSubTitle("专题");
+                cardBean.setDigest("谁说美化一定要Root?选对了应用一样可以美美哒～有个性，爱折腾，我们不爱啃苹果，我们是大安卓用户!都说「世界上没有相同的叶子」，想让自己的手机与众不同?让小美告诉你");
+                cardBean.setUpNum(299);
+                cardBean.setAuthorName("小美");
+                cardBean.setBackgroundColor("#dc4e97");
+                cardBean.setCoverImageUrl("card_cover2");
+                cardBean.setIconUrl("card_icon2");
                 break;
             case 2:
-                cardInfo.setTitle("BlackLight");
-                cardInfo.setSubTitle("做最纯粹的微博客户端");
-                cardInfo.setDigest("Android的官方微博客户端显得太过臃肿，这让不少人转而投向第三方客户端。「Fuubo」、「四次元」、「Smooth」，一个个耳熟能详的名字，它们各有千秋，也吸引了一大票追随者，而今天推荐的BlackLight，又是一个被重复造出的「轮子」，然而这个后来者可不一般");
-                cardInfo.setUpNum(241);
-                cardInfo.setAuthorName("小最");
-                cardInfo.setBackgroundColor("#00aac6");
-                cardInfo.setCoverImageUrl("card_cover3");
-                cardInfo.setIconUrl("card_icon3");
+                cardBean.setTitle("BlackLight");
+                cardBean.setSubTitle("做最纯粹的微博客户端");
+                cardBean.setDigest("Android的官方微博客户端显得太过臃肿，这让不少人转而投向第三方客户端。「Fuubo」、「四次元」、「Smooth」，一个个耳熟能详的名字，它们各有千秋，也吸引了一大票追随者，而今天推荐的BlackLight，又是一个被重复造出的「轮子」，然而这个后来者可不一般");
+                cardBean.setUpNum(241);
+                cardBean.setAuthorName("小最");
+                cardBean.setBackgroundColor("#00aac6");
+                cardBean.setCoverImageUrl("card_cover3");
+                cardBean.setIconUrl("card_icon3");
                 break;
             case 3:
-                cardInfo.setTitle("BuzzFeed");
-                cardInfo.setSubTitle("最好玩的新闻在这里");
-                cardInfo.setDigest("BuzzFeed是一款聚合新闻阅读应用，这款应用来自美国用户增长流量最快，内容最能吸引大众眼球的互联网新闻网站，当然我们不必知道BuzzFeed的创始人多么流弊，BuzzFeed本身是多么具有颠覆性，我们只需要知道这款应用的内容绝对有料，而去也是十分精致，简洁");
-                cardInfo.setUpNum(119);
-                cardInfo.setAuthorName("小最");
-                cardInfo.setBackgroundColor("#e76153");
-                cardInfo.setCoverImageUrl("card_cover4");
-                cardInfo.setIconUrl("card_icon4");
+                cardBean.setTitle("BuzzFeed");
+                cardBean.setSubTitle("最好玩的新闻在这里");
+                cardBean.setDigest("BuzzFeed是一款聚合新闻阅读应用，这款应用来自美国用户增长流量最快，内容最能吸引大众眼球的互联网新闻网站，当然我们不必知道BuzzFeed的创始人多么流弊，BuzzFeed本身是多么具有颠覆性，我们只需要知道这款应用的内容绝对有料，而去也是十分精致，简洁");
+                cardBean.setUpNum(119);
+                cardBean.setAuthorName("小最");
+                cardBean.setBackgroundColor("#e76153");
+                cardBean.setCoverImageUrl("card_cover4");
+                cardBean.setIconUrl("card_icon4");
                 break;
             case 4:
-                cardInfo.setTitle("Nester");
-                cardInfo.setSubTitle("专治各种熊孩子");
-                cardInfo.setDigest("Nester简单的说是一款用于家长限制孩子玩手机的应用，这只可爱的圆滚滚的小鸟不仅可以设置孩子可以使用的应用，还可以用定时器控释孩子玩手机的时长。在小最看来，Nester最直白的描述就是专治各种熊孩子");
-                cardInfo.setUpNum(97);
-                cardInfo.setAuthorName("小最");
-                cardInfo.setBackgroundColor("#9a6dbb");
-                cardInfo.setCoverImageUrl("card_cover5");
-                cardInfo.setIconUrl("card_icon5");
+                cardBean.setTitle("Nester");
+                cardBean.setSubTitle("专治各种熊孩子");
+                cardBean.setDigest("Nester简单的说是一款用于家长限制孩子玩手机的应用，这只可爱的圆滚滚的小鸟不仅可以设置孩子可以使用的应用，还可以用定时器控释孩子玩手机的时长。在小最看来，Nester最直白的描述就是专治各种熊孩子");
+                cardBean.setUpNum(97);
+                cardBean.setAuthorName("小最");
+                cardBean.setBackgroundColor("#9a6dbb");
+                cardBean.setCoverImageUrl("card_cover5");
+                cardBean.setIconUrl("card_icon5");
                 break;
             case 5:
-                cardInfo.setTitle("二次元专题");
-                cardInfo.setSubTitle("啊喂，别总想去四维空间啦");
-                cardInfo.setDigest("为了满足美友中不少二次元少年的需求，小最前几日特(bei)意(po)被拍扁为二维状，去那个神奇的世界走了一遭。在被深深震撼之后，为大家带来本次「二次元专题」");
-                cardInfo.setUpNum(317);
-                cardInfo.setAuthorName("小最");
-                cardInfo.setBackgroundColor("#51aa53");
-                cardInfo.setCoverImageUrl("card_cover6");
-                cardInfo.setIconUrl("card_icon6");
+                cardBean.setTitle("二次元专题");
+                cardBean.setSubTitle("啊喂，别总想去四维空间啦");
+                cardBean.setDigest("为了满足美友中不少二次元少年的需求，小最前几日特(bei)意(po)被拍扁为二维状，去那个神奇的世界走了一遭。在被深深震撼之后，为大家带来本次「二次元专题」");
+                cardBean.setUpNum(317);
+                cardBean.setAuthorName("小最");
+                cardBean.setBackgroundColor("#51aa53");
+                cardBean.setCoverImageUrl("card_cover6");
+                cardBean.setIconUrl("card_icon6");
                 break;
             case 6:
-                cardInfo.setTitle("Music Player");
-                cardInfo.setSubTitle("闻其名，余音绕梁");
-                cardInfo.setDigest("一款App，纯粹到极致，便是回到原点「Music Player」，一款音乐播放器，一个干净到显得敷衍的名字。它所打动的，是哪些需要音乐，才可以慰借心灵的人。");
-                cardInfo.setUpNum(385);
-                cardInfo.setAuthorName("小最");
-                cardInfo.setBackgroundColor("#ea5272");
-                cardInfo.setCoverImageUrl("card_cover7");
-                cardInfo.setIconUrl("card_icon7");
+                cardBean.setTitle("Music Player");
+                cardBean.setSubTitle("闻其名，余音绕梁");
+                cardBean.setDigest("一款App，纯粹到极致，便是回到原点「Music Player」，一款音乐播放器，一个干净到显得敷衍的名字。它所打动的，是哪些需要音乐，才可以慰借心灵的人。");
+                cardBean.setUpNum(385);
+                cardBean.setAuthorName("小最");
+                cardBean.setBackgroundColor("#ea5272");
+                cardBean.setCoverImageUrl("card_cover7");
+                cardBean.setIconUrl("card_icon7");
                 break;
             case 7:
-                cardInfo.setTitle("el");
-                cardInfo.setSubTitle("剪纸人の唯美旅程");
-                cardInfo.setDigest("断崖之上，孤牢中醒来的他，意外地得到一把能乘风翱翔的伞，于是在悠扬的钢琴曲中，剪纸人开始了漫无目的的漂泊之旅。脚下的重峦叠嶂，飞行中遇到的种种障碍，不日又遇到了他，将会有一段怎样的旅程?");
-                cardInfo.setUpNum(622);
-                cardInfo.setAuthorName("小美");
-                cardInfo.setBackgroundColor("#e76153");
-                cardInfo.setCoverImageUrl("card_cover8");
-                cardInfo.setIconUrl("card_icon8");
+                cardBean.setTitle("el");
+                cardBean.setSubTitle("剪纸人の唯美旅程");
+                cardBean.setDigest("断崖之上，孤牢中醒来的他，意外地得到一把能乘风翱翔的伞，于是在悠扬的钢琴曲中，剪纸人开始了漫无目的的漂泊之旅。脚下的重峦叠嶂，飞行中遇到的种种障碍，不日又遇到了他，将会有一段怎样的旅程?");
+                cardBean.setUpNum(622);
+                cardBean.setAuthorName("小美");
+                cardBean.setBackgroundColor("#e76153");
+                cardBean.setCoverImageUrl("card_cover8");
+                cardBean.setIconUrl("card_icon8");
                 break;
         }
-        return cardInfo;
+        return cardBean;
     }
 }

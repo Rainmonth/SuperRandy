@@ -3,10 +3,10 @@ package com.rainmonth.bean;
 import java.io.Serializable;
 
 /**
- * BannerInfo 实体定义
+ * BannerBean 实体定义
  * Created by RandyZhang on 2017/1/23.
  */
-public class BannerInfo implements Serializable {
+public class BannerBean implements Serializable {
 
     /**
      * id : 10001
@@ -22,7 +22,7 @@ public class BannerInfo implements Serializable {
     private String url;
     private String banner_thumb_url;
 
-    public BannerInfo(String id, String type, String title, String url, String banner_thumb_url) {
+    public BannerBean(String id, String type, String title, String url, String banner_thumb_url) {
         this.id = id;
         this.type = type;
         this.title = title;
