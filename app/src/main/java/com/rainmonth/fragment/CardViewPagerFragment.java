@@ -17,8 +17,9 @@ import android.widget.TextView;
 
 import com.rainmonth.R;
 import com.rainmonth.adapter.CardPagerAdapter;
-import com.rainmonth.base.ui.fragment.BaseLazyFragment;
 import com.rainmonth.bean.CardBean;
+import com.rainmonth.library.base.BaseLazyFragment;
+import com.rainmonth.library.eventbus.EventCenter;
 import com.rainmonth.library.utils.NetworkUtils;
 import com.rainmonth.utils.AnimatorUtils;
 import com.rainmonth.utils.HexUtils;
@@ -245,12 +246,32 @@ public class CardViewPagerFragment extends BaseLazyFragment implements PullToRef
     }
 
     @Override
+    protected void onEventComing(EventCenter eventCenter) {
+
+    }
+
+    @Override
+    protected boolean isBindEventBusHere() {
+        return false;
+    }
+
+    @Override
     public void onUserVisible() {
 
     }
 
     @Override
     public void onUserInvisible() {
+
+    }
+
+    @Override
+    protected View getLoadingTargetView() {
+        return null;
+    }
+
+    @Override
+    protected void initViewsAndEvents(View view) {
 
     }
 

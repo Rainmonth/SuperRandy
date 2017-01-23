@@ -13,9 +13,10 @@ import com.rainmonth.R;
 import com.rainmonth.base.ui.adapter.ListViewDataAdapter;
 import com.rainmonth.base.ui.adapter.ViewHolderBase;
 import com.rainmonth.base.ui.adapter.ViewHolderCreator;
-import com.rainmonth.base.ui.fragment.BaseLazyFragment;
 import com.rainmonth.bean.RenContentInfo;
-import com.rainmonth.presenter.RenFragmentPresenter;
+import com.rainmonth.library.base.BaseLazyFragment;
+import com.rainmonth.library.eventbus.EventCenter;
+import com.rainmonth.presenter.RenPresenter;
 import com.rainmonth.view.RenFragmentView;
 
 import java.util.List;
@@ -31,7 +32,7 @@ public class RenFragment extends BaseLazyFragment implements RenFragmentView {
     @Bind(R.id.lv_content)
     ListView lvContent;
 
-    private RenFragmentPresenter renFragmentPresenter = null;
+    private RenPresenter renPresenter = null;
     private ListViewDataAdapter<RenContentInfo> mRenContentListAdapter = null;
 
     @Override
@@ -39,8 +40,8 @@ public class RenFragment extends BaseLazyFragment implements RenFragmentView {
         View rootView = super.onCreateView(inflater, container, savedInstanceState);
         ButterKnife.bind(this, rootView);
 
-        renFragmentPresenter = new RenFragmentPresenter(this);
-        renFragmentPresenter.initialize();
+        renPresenter = new RenPresenter(this);
+        renPresenter.init();
         return rootView;
     }
 
@@ -55,12 +56,32 @@ public class RenFragment extends BaseLazyFragment implements RenFragmentView {
     }
 
     @Override
+    protected void onEventComing(EventCenter eventCenter) {
+
+    }
+
+    @Override
+    protected boolean isBindEventBusHere() {
+        return false;
+    }
+
+    @Override
     public void onUserVisible() {
 
     }
 
     @Override
     public void onUserInvisible() {
+
+    }
+
+    @Override
+    protected View getLoadingTargetView() {
+        return null;
+    }
+
+    @Override
+    protected void initViewsAndEvents(View view) {
 
     }
 
@@ -109,7 +130,7 @@ public class RenFragment extends BaseLazyFragment implements RenFragmentView {
                 // todo nav to detail activity
                 RenContentInfo renContentInfo = mRenContentListAdapter.getDataList().get(position);
                 if (null != renContentInfo) {
-                    renFragmentPresenter.navToDetail(renContentInfo);
+                    renPresenter.navToDetail(renContentInfo);
                 }
             }
         });

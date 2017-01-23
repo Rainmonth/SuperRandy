@@ -13,8 +13,9 @@ import com.rainmonth.R;
 import com.rainmonth.base.ui.adapter.ListViewDataAdapter;
 import com.rainmonth.base.ui.adapter.ViewHolderBase;
 import com.rainmonth.base.ui.adapter.ViewHolderCreator;
-import com.rainmonth.base.ui.fragment.BaseLazyFragment;
 import com.rainmonth.bean.RanContentInfo;
+import com.rainmonth.library.base.BaseLazyFragment;
+import com.rainmonth.library.eventbus.EventCenter;
 import com.rainmonth.presenter.RanFragmentPresenter;
 import com.rainmonth.view.RanFragmentView;
 
@@ -54,12 +55,32 @@ public class RanFragment extends BaseLazyFragment implements RanFragmentView {
     }
 
     @Override
+    protected void onEventComing(EventCenter eventCenter) {
+
+    }
+
+    @Override
+    protected boolean isBindEventBusHere() {
+        return false;
+    }
+
+    @Override
     public void onUserVisible() {
 
     }
 
     @Override
     public void onUserInvisible() {
+
+    }
+
+    @Override
+    protected View getLoadingTargetView() {
+        return null;
+    }
+
+    @Override
+    protected void initViewsAndEvents(View view) {
 
     }
 

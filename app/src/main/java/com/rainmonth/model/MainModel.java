@@ -4,13 +4,12 @@ import android.graphics.Color;
 
 import com.rainmonth.R;
 import com.rainmonth.SuperRandyApplication;
-import com.rainmonth.base.ui.fragment.BaseLazyFragment;
 import com.rainmonth.fragment.RanFragment;
 import com.rainmonth.fragment.RenFragment;
 import com.rainmonth.fragment.XunFragment;
 import com.rainmonth.fragment.YouFragment;
 import com.rainmonth.fragment.ZhuiFragment;
-import com.rainmonth.model.IMainModel;
+import com.rainmonth.library.base.BaseLazyFragment;
 import com.rainmonth.widgets.NavigationTabBar;
 
 import java.util.ArrayList;

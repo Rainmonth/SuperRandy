@@ -13,7 +13,8 @@ import com.rainmonth.R;
 import com.rainmonth.activity.LoginActivity;
 import com.rainmonth.activity.RegisterActivity;
 import com.rainmonth.activity.WelcomeActivity;
-import com.rainmonth.base.ui.fragment.BaseLazyFragment;
+import com.rainmonth.library.base.BaseLazyFragment;
+import com.rainmonth.library.eventbus.EventCenter;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -47,12 +48,32 @@ public class YouFragment extends BaseLazyFragment implements View.OnClickListene
     }
 
     @Override
+    protected void onEventComing(EventCenter eventCenter) {
+
+    }
+
+    @Override
+    protected boolean isBindEventBusHere() {
+        return false;
+    }
+
+    @Override
     public void onUserVisible() {
 
     }
 
     @Override
     public void onUserInvisible() {
+
+    }
+
+    @Override
+    protected View getLoadingTargetView() {
+        return null;
+    }
+
+    @Override
+    protected void initViewsAndEvents(View view) {
 
     }
 

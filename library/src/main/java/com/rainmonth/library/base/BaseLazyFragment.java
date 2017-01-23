@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -47,6 +48,7 @@ public abstract class BaseLazyFragment extends Fragment {
     private boolean isPrepared;
 
     private VaryViewHelperController mVaryViewHelperController = null;
+    protected Handler mHandler = new Handler();
 
     @Override
     public void onAttach(Context context) {
@@ -88,7 +90,7 @@ public abstract class BaseLazyFragment extends Fragment {
         mScreenHeight = displayMetrics.heightPixels;
         mScreenWidth = displayMetrics.widthPixels;
 
-        initViewsAndEvents();
+        initViewsAndEvents(view);
     }
 
     @Override
@@ -204,7 +206,7 @@ public abstract class BaseLazyFragment extends Fragment {
     /**
      * init all views and add events
      */
-    protected abstract void initViewsAndEvents();
+    protected abstract void initViewsAndEvents(View view);
 
     /**
      * bind layout resource file

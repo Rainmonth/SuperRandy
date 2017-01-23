@@ -1,7 +1,7 @@
 package com.rainmonth.view;
 
 import com.rainmonth.base.mvp.IBaseView;
-import com.rainmonth.base.ui.fragment.BaseLazyFragment;
+import com.rainmonth.library.base.BaseLazyFragment;
 import com.rainmonth.widgets.NavigationTabBar;
 
 import java.util.List;

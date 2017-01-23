@@ -18,8 +18,9 @@ import com.rainmonth.activity.ViewPagerExploreActivity;
 import com.rainmonth.base.ui.adapter.ListViewDataAdapter;
 import com.rainmonth.base.ui.adapter.ViewHolderBase;
 import com.rainmonth.base.ui.adapter.ViewHolderCreator;
-import com.rainmonth.base.ui.fragment.BaseLazyFragment;
 import com.rainmonth.bean.XunNavigationBean;
+import com.rainmonth.library.base.BaseLazyFragment;
+import com.rainmonth.library.eventbus.EventCenter;
 import com.rainmonth.presenter.XunFragmentPresenter;
 import com.rainmonth.view.XunFragmentView;
 
@@ -60,12 +61,32 @@ public class XunFragment extends BaseLazyFragment implements XunFragmentView {
     }
 
     @Override
+    protected void onEventComing(EventCenter eventCenter) {
+
+    }
+
+    @Override
+    protected boolean isBindEventBusHere() {
+        return false;
+    }
+
+    @Override
     public void onUserVisible() {
 
     }
 
     @Override
     public void onUserInvisible() {
+
+    }
+
+    @Override
+    protected View getLoadingTargetView() {
+        return null;
+    }
+
+    @Override
+    protected void initViewsAndEvents(View view) {
 
     }
 

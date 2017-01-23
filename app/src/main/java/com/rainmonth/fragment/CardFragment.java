@@ -11,8 +11,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.rainmonth.R;
-import com.rainmonth.base.ui.fragment.BaseLazyFragment;
 import com.rainmonth.bean.CardBean;
+import com.rainmonth.library.base.BaseLazyFragment;
+import com.rainmonth.library.eventbus.EventCenter;
 import com.rainmonth.library.utils.CommonUtils;
 import com.rainmonth.library.utils.DensityUtils;
 import com.rainmonth.widgets.HtmlTextView;
@@ -45,9 +46,7 @@ public class CardFragment extends BaseLazyFragment {
         super.onCreateView(inflater, container, savedInstanceState);
         View rootView = super.onCreateView(inflater, container, savedInstanceState);
         ButterKnife.bind(this, rootView);
-        initData();
-        initViews(rootView);
-        initActions(rootView);
+
         return rootView;
     }
 
@@ -106,6 +105,16 @@ public class CardFragment extends BaseLazyFragment {
     }
 
     @Override
+    protected void onEventComing(EventCenter eventCenter) {
+
+    }
+
+    @Override
+    protected boolean isBindEventBusHere() {
+        return false;
+    }
+
+    @Override
     public void onUserVisible() {
 
     }
@@ -113,6 +122,18 @@ public class CardFragment extends BaseLazyFragment {
     @Override
     public void onUserInvisible() {
 
+    }
+
+    @Override
+    protected View getLoadingTargetView() {
+        return null;
+    }
+
+    @Override
+    public void initViewsAndEvents(View view) {
+        initData();
+        initViews(view);
+        initActions(view);
     }
 
     public void onDestroyView() {
