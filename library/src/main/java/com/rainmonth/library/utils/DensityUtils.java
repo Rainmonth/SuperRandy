@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.content.res.TypedArray;
 import android.graphics.Rect;
 import android.os.Build;
 import android.telephony.TelephonyManager;
@@ -370,5 +371,20 @@ public class DensityUtils {
             navigationHeight = resources.getDimensionPixelSize(resourceId);
         }
         return navigationHeight;
+    }
+
+    /**
+     * get toolbar height
+     *
+     * @param context context
+     * @return toolbar height
+     */
+    public static int getToolbarHeight(Context context) {
+        final TypedArray styledAttributes = context.getTheme().obtainStyledAttributes(
+                new int[]{android.R.attr.actionBarSize});
+        int toolbarHeight = (int) styledAttributes.getDimension(0, 0);
+        styledAttributes.recycle();
+
+        return toolbarHeight;
     }
 }

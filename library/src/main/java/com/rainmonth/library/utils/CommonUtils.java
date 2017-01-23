@@ -25,18 +25,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.regex.Pattern;
 
-/**
- * Author:  Tau.Chen
- * Email:   1076559197@qq.com | tauchen1990@gmail.com
- * Date:    2015/3/10.
- * Description:
- */
 public class CommonUtils {
 
     /**
      * return if str is empty
      *
-     * @param str
+     * @param str 带判断string
      * @return
      */
     public static boolean isEmpty(String str) {
@@ -46,22 +40,22 @@ public class CommonUtils {
     /**
      * get format date
      *
-     * @param timemillis
-     * @return
+     * @param millisTimes 毫秒时间
+     * @return 格式化输出时间
      */
-    public static String getFormatDate(long timemillis) {
-        return new SimpleDateFormat("yyyy年MM月dd日").format(new Date(timemillis));
+    public static String getFormatDate(long millisTimes) {
+        return new SimpleDateFormat("yyyy年MM月dd日").format(new Date(millisTimes));
     }
 
     /**
      * decode Unicode string
      *
-     * @param s
-     * @return
+     * @param unicode unicode编码字符串
+     * @return 普通字符串
      */
-    public static String decodeUnicodeStr(String s) {
-        StringBuilder sb = new StringBuilder(s.length());
-        char[] chars = s.toCharArray();
+    public static String decodeUnicodeStr(String unicode) {
+        StringBuilder sb = new StringBuilder(unicode.length());
+        char[] chars = unicode.toCharArray();
         for (int i = 0; i < chars.length; i++) {
             char c = chars[i];
             if (c == '\\' && chars[i + 1] == 'u') {
@@ -89,7 +83,7 @@ public class CommonUtils {
     /**
      * encode Unicode string
      *
-     * @param s
+     * @param s 带转化string
      * @return
      */
     public static String encodeUnicodeStr(String s) {
@@ -111,7 +105,7 @@ public class CommonUtils {
     /**
      * convert time str
      *
-     * @param time
+     * @param time 待转时间
      * @return
      */
     public static String convertTime(int time) {
@@ -126,8 +120,8 @@ public class CommonUtils {
     /**
      * url is usable
      *
-     * @param url
-     * @return
+     * @param url 待判断url
+     * @return true if url is usable
      */
     public static boolean isUrlUsable(String url) {
         if (CommonUtils.isEmpty(url)) {
@@ -155,8 +149,8 @@ public class CommonUtils {
     /**
      * is url
      *
-     * @param url
-     * @return
+     * @param url 待判断url
+     * @return true if is url
      */
     public static boolean isUrl(String url) {
         Pattern pattern = Pattern.compile("^([hH][tT]{2}[pP]://|[hH][tT]{2}[pP][sS]://)(([A-Za-z0-9-~]+).)+([A-Za-z0-9-~\\/])+$");
@@ -164,20 +158,12 @@ public class CommonUtils {
     }
 
     /**
-     * get toolbar height
+     * get drawable id
      *
-     * @param context
-     * @return
+     * @param context      context
+     * @param drawableName drawable file's name
+     * @return integer value of specified drawable file
      */
-    public static int getToolbarHeight(Context context) {
-        final TypedArray styledAttributes = context.getTheme().obtainStyledAttributes(
-                new int[]{android.R.attr.actionBarSize});
-        int toolbarHeight = (int) styledAttributes.getDimension(0, 0);
-        styledAttributes.recycle();
-
-        return toolbarHeight;
-    }
-
     public static int getDrawableIdByName(Context context, String drawableName) {
 
         return context.getResources().getIdentifier(drawableName, "drawable", context.getPackageName());
@@ -185,7 +171,11 @@ public class CommonUtils {
 
     /**
      * 判断字符串是否为null或空
+     *
+     * @param string 待判断string
+     * @return true if is null or empty
      */
+
     public static boolean isNullOrEmpty(String string) {
         return null == string || string.isEmpty() || string.equals("null");
     }
