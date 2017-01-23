@@ -1,10 +1,8 @@
 package com.rainmonth.presenter.impl;
 
-import android.content.Context;
-
+import com.rainmonth.base.mvp.BasePresenterImpl;
 import com.rainmonth.model.MainModel;
 import com.rainmonth.model.impl.MainModelImpl;
-import com.rainmonth.base.mvp.BasePresenterImpl;
 import com.rainmonth.view.MainView;
 
 /**
@@ -12,15 +10,13 @@ import com.rainmonth.view.MainView;
  */
 public class MainPresenter extends BasePresenterImpl<MainView, Object> {
 
-    private Context context = null;
     private MainModel mainModel = null;
 
-    public MainPresenter(MainView mainView, Context context) {
+    public MainPresenter(MainView mainView) {
         super(mainView);
         if (null == mainView) {
             throw new IllegalArgumentException("View should not be null");
         }
-        this.context = context;
         mainModel = new MainModelImpl();
     }
 
@@ -35,6 +31,6 @@ public class MainPresenter extends BasePresenterImpl<MainView, Object> {
     }
 
     public void initialize() {
-        mView.initializeViews(mainModel.getNavigationModels(context), mainModel.getNavigationFragments());
+        mView.initializeViews(mainModel.getNavigationModels(), mainModel.getNavigationFragments());
     }
 }

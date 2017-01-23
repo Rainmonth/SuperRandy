@@ -112,7 +112,7 @@ public class MainActivity extends BaseActivity implements MainView {
 
     @Override
     protected void initViewsAndEvents() {
-        printDiviceInfo();
+        printDeviceInfo();
         // 初始化个推
         PushManager.getInstance().initialize(getApplicationContext(), DemoPushService.class);
         ButterKnife.bind(this);
