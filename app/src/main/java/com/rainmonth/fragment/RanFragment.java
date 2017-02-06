@@ -16,7 +16,7 @@ import com.rainmonth.base.ui.adapter.ViewHolderCreator;
 import com.rainmonth.bean.RanContentInfo;
 import com.rainmonth.library.base.BaseLazyFragment;
 import com.rainmonth.library.eventbus.EventCenter;
-import com.rainmonth.presenter.RanFragmentPresenter;
+import com.rainmonth.presenter.RanPresenter;
 import com.rainmonth.view.RanFragmentView;
 
 import java.util.List;
@@ -31,7 +31,7 @@ public class RanFragment extends BaseLazyFragment implements RanFragmentView {
 
     @Bind(R.id.lv_content)
     ListView lvContent;
-    private RanFragmentPresenter mRanFragmentPresenter = null;
+    private RanPresenter mRanPresenter = null;
     private ListViewDataAdapter<RanContentInfo> mRanContentListAdapter = null;
 
     @Override
@@ -39,8 +39,8 @@ public class RanFragment extends BaseLazyFragment implements RanFragmentView {
         View rootView = super.onCreateView(inflater, container, savedInstanceState);
         ButterKnife.bind(this, rootView);
 
-        mRanFragmentPresenter = new RanFragmentPresenter(this);
-        mRanFragmentPresenter.initialize();
+        mRanPresenter = new RanPresenter(this);
+        mRanPresenter.initialize();
         return rootView;
     }
 
@@ -136,7 +136,7 @@ public class RanFragment extends BaseLazyFragment implements RanFragmentView {
                 // todo nav to detail activity
                 RanContentInfo ranContentInfo = mRanContentListAdapter.getDataList().get(position);
                 if (null != ranContentInfo) {
-                    mRanFragmentPresenter.navToDetail(ranContentInfo);
+                    mRanPresenter.navToDetail(ranContentInfo);
                 }
             }
         });

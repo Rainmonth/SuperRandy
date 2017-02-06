@@ -41,7 +41,6 @@ public class RenFragment extends BaseLazyFragment implements RenFragmentView {
         ButterKnife.bind(this, rootView);
 
         renPresenter = new RenPresenter(this);
-        renPresenter.init();
         return rootView;
     }
 
@@ -82,7 +81,8 @@ public class RenFragment extends BaseLazyFragment implements RenFragmentView {
 
     @Override
     protected void initViewsAndEvents(View view) {
-
+        initViews(renPresenter.getContentList());
+        renPresenter.getHomeBanner();
     }
 
     @Override
@@ -127,7 +127,7 @@ public class RenFragment extends BaseLazyFragment implements RenFragmentView {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                // todo nav to detail activity
+                // nav to detail activity
                 RenContentInfo renContentInfo = mRenContentListAdapter.getDataList().get(position);
                 if (null != renContentInfo) {
                     renPresenter.navToDetail(renContentInfo);
@@ -139,11 +139,6 @@ public class RenFragment extends BaseLazyFragment implements RenFragmentView {
     @Override
     public void navToDetail(RenContentInfo xunNavigationInfo) {
         // todo 进入二级界面
-    }
-
-    @Override
-    public void getHomeBanner() {
-        //
     }
 
     @Override

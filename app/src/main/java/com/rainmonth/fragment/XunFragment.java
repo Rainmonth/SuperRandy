@@ -21,7 +21,7 @@ import com.rainmonth.base.ui.adapter.ViewHolderCreator;
 import com.rainmonth.bean.XunNavigationBean;
 import com.rainmonth.library.base.BaseLazyFragment;
 import com.rainmonth.library.eventbus.EventCenter;
-import com.rainmonth.presenter.XunFragmentPresenter;
+import com.rainmonth.presenter.XunPresenter;
 import com.rainmonth.view.XunFragmentView;
 
 import java.util.List;
@@ -45,7 +45,7 @@ public class XunFragment extends BaseLazyFragment implements XunFragmentView {
     @Bind(R.id.gv_content)
     GridView gvContent;
 
-    private XunFragmentPresenter xunFragmentPresenter = null;
+    private XunPresenter xunPresenter = null;
 
     private ListViewDataAdapter<XunNavigationBean> mXunNavListAdapter = null;
     public final static int TYPE_ARTICLE = 1, TYPE_IMAGE = 2, TYPE_MUSIC = 3, TYPE_FILM = 4, TYPE_APP = 5;
@@ -95,8 +95,8 @@ public class XunFragment extends BaseLazyFragment implements XunFragmentView {
         View rootView = super.onCreateView(inflater, container, savedInstanceState);
         ButterKnife.bind(this, rootView);
 
-        xunFragmentPresenter = new XunFragmentPresenter(mContext, this);
-        xunFragmentPresenter.initialize();
+        xunPresenter = new XunPresenter(mContext, this);
+        xunPresenter.initialize();
 
         return rootView;
     }
@@ -142,7 +142,7 @@ public class XunFragment extends BaseLazyFragment implements XunFragmentView {
                 // nav to detail activity
                 XunNavigationBean xunNavigationBean = mXunNavListAdapter.getDataList().get(position);
                 if (null != xunNavigationBean) {
-                    xunFragmentPresenter.navToDetail(xunNavigationBean);
+                    xunPresenter.navToDetail(xunNavigationBean);
                 }
             }
         });

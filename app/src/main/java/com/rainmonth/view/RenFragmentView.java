@@ -13,6 +13,4 @@ public interface RenFragmentView extends IBaseView {
     void initViews(List<RenContentInfo> renContentInfoList);
 
     void navToDetail(RenContentInfo renContentInfo);
-
-    void getHomeBanner();
 }
