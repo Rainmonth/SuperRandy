@@ -1,9 +1,6 @@
 package com.rainmonth.presenter;
 
-import com.rainmonth.bean.BannerBean;
 import com.rainmonth.bean.RenContentInfo;
-
-import java.util.List;
 
 /**
  * Created by RandyZhang on 2017/1/23.
@@ -11,9 +8,9 @@ import java.util.List;
 
 public interface IRenPresenter {
 
-    List<RenContentInfo> getContentList();
+    void getContentList();
 
-    List<BannerBean> getHomeBanner();
+    void getHomeBanner();
 
     void navToDetail(RenContentInfo renContentInfo);
 }

@@ -13,6 +13,7 @@ import com.rainmonth.R;
 import com.rainmonth.base.ui.adapter.ListViewDataAdapter;
 import com.rainmonth.base.ui.adapter.ViewHolderBase;
 import com.rainmonth.base.ui.adapter.ViewHolderCreator;
+import com.rainmonth.bean.BannerBean;
 import com.rainmonth.bean.RenContentInfo;
 import com.rainmonth.library.base.BaseLazyFragment;
 import com.rainmonth.library.eventbus.EventCenter;
@@ -81,7 +82,7 @@ public class RenFragment extends BaseLazyFragment implements RenFragmentView {
 
     @Override
     protected void initViewsAndEvents(View view) {
-        initViews(renPresenter.getContentList());
+        renPresenter.getContentList();
         renPresenter.getHomeBanner();
     }
 
@@ -92,7 +93,12 @@ public class RenFragment extends BaseLazyFragment implements RenFragmentView {
     }
 
     @Override
-    public void initViews(List<RenContentInfo> renContentInfoList) {
+    public void initHomeBanners(List<BannerBean> bannerBeanList) {
+
+    }
+
+    @Override
+    public void initContentList(List<RenContentInfo> renContentInfoList) {
         mRenContentListAdapter = new ListViewDataAdapter<RenContentInfo>(new ViewHolderCreator<RenContentInfo>() {
             @Override
             public ViewHolderBase<RenContentInfo> createViewHolder(int position) {
