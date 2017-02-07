@@ -95,7 +95,7 @@ public class SplashActivity extends BaseActivity implements SplashView {
 
     @Override
     protected void initViewsAndEvents() {
-        splashPresenter = new SplashPresenter(this, this);
+        splashPresenter = new SplashPresenter(this);
         splashPresenter.initialize();
         /**
          *  todo 请求网络判断是否有新的Splash图片（即新的活动）:
