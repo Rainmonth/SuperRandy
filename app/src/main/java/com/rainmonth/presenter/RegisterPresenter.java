@@ -1,6 +1,7 @@
 package com.rainmonth.presenter;
 
 import com.rainmonth.base.mvp.BasePresenter;
+import com.rainmonth.base.mvp.BaseResponse;
 import com.rainmonth.bean.UserBean;
 import com.rainmonth.model.IRegisterModel;
 import com.rainmonth.model.RegisterModel;
@@ -12,10 +13,10 @@ import retrofit2.Response;
 /**
  * Created by RandyZhang on 16/9/19.
  */
-public class RegisterPresenter extends BasePresenter<IRegisterView, Response<UserLoginResponse>>
+public class RegisterPresenter extends BasePresenter<IRegisterView, Response<BaseResponse>>
         implements IRegisterPresenter {
 
-    private IRegisterModel<Response<UserLoginResponse>> mUserModel;
+    private IRegisterModel<Response<BaseResponse>> mUserModel;
 
     public RegisterPresenter(IRegisterView mView) {
         super(mView);
@@ -49,7 +50,7 @@ public class RegisterPresenter extends BasePresenter<IRegisterView, Response<Use
     }
 
     @Override
-    public void requestSuccess(Response<UserLoginResponse> data) {
+    public void requestSuccess(Response<BaseResponse> data) {
         super.requestSuccess(data);
         mView.naveToAfterRegister(data.body());
     }

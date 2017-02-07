@@ -5,11 +5,14 @@
 
     <!-- Text Size-->
     <dimen name="text_large">22sp</dimen>
+    <dimen name="text_normal">16sp</dimen>
+    <dimen name="text_small">12sp</dimen>
 
     <!--Text Btn Padding-->
     <dimen name="padding_normal">@dimen/activity_horizontal_margin</dimen>
 
     <!--Text Btn Margin-->
+    <dimen name="margin_small">8dp</dimen>
     <dimen name="margin_normal">@dimen/activity_horizontal_margin</dimen>
     <dimen name="margin_large">40dp</dimen>
     <dimen name="user_avatar_size">72dp</dimen>

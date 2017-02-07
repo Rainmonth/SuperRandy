@@ -1,8 +1,8 @@
 package com.rainmonth.view;
 
 import com.rainmonth.base.mvp.IBaseView;
+import com.rainmonth.bean.ArticleBean;
 import com.rainmonth.bean.BannerBean;
-import com.rainmonth.bean.RenContentBean;
 
 import java.util.List;
 
@@ -21,14 +21,14 @@ public interface RenFragmentView extends IBaseView {
     /**
      * 初始化首页内容列表
      *
-     * @param renContentBeanList renContentBeanList
+     * @param articleBeanList renContentBeanList
      */
-    void initContentList(List<RenContentBean> renContentBeanList);
+    void initContentList(List<ArticleBean> articleBeanList);
 
     /**
      * 进入content详情页
      *
-     * @param renContentBean renContentBean
+     * @param articleBean articleBean
      */
-    void navToDetail(RenContentBean renContentBean);
+    void navToDetail(ArticleBean articleBean);
 }

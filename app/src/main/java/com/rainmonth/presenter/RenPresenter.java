@@ -1,11 +1,11 @@
 package com.rainmonth.presenter;
 
 import com.google.gson.Gson;
-import com.rainmonth.R;
+import com.google.gson.reflect.TypeToken;
 import com.rainmonth.base.mvp.BasePresenter;
 import com.rainmonth.base.mvp.BaseResponse;
+import com.rainmonth.bean.ArticleBean;
 import com.rainmonth.bean.BannerBean;
-import com.rainmonth.bean.RenContentBean;
 import com.rainmonth.model.IRenFragmentModel;
 import com.rainmonth.model.RenFragmentModel;
 import com.rainmonth.view.RenFragmentView;
@@ -39,6 +39,10 @@ public class RenPresenter extends BasePresenter<RenFragmentView, Response<BaseRe
         mSubscription = renFragmentModel.getRenContentList(this);
     }
 
+    public List<ArticleBean> getContentListFake() {
+        return renFragmentModel.getRenContentListFake();
+    }
+
     @Override
     public void getHomeBanner() {
         requestUrl = "Banner/getHomeBanner";
@@ -46,9 +50,13 @@ public class RenPresenter extends BasePresenter<RenFragmentView, Response<BaseRe
         mSubscription = renFragmentModel.getHomeBannerList(this);
     }
 
+    public List<BannerBean> getHomeBannerFake() {
+        return renFragmentModel.getHomeBannerListFake();
+    }
+
     @Override
-    public void navToDetail(RenContentBean renContentBean) {
-        renFragmentView.navToDetail(renContentBean);
+    public void navToDetail(ArticleBean articleBean) {
+        renFragmentView.navToDetail(articleBean);
     }
 
     @Override
@@ -96,16 +104,13 @@ public class RenPresenter extends BasePresenter<RenFragmentView, Response<BaseRe
             mView.initHomeBanners(bannerInfoList);
         }
         if ("getContentList".equals(requestUrl)) {
-//            List<RenContentBean> renContentBeanList = (List<RenContentBean>) data.body();
-            List<RenContentBean> renContentBeanList = new ArrayList<RenContentBean>();
-            renContentBeanList.add(new RenContentBean(1, R.drawable.ren_bg_walk, "1", "旅行", "行走的力量"));
-            renContentBeanList.add(new RenContentBean(2, R.drawable.ren_bg_sing, "2", "音乐", "音乐的力量"));
-            renContentBeanList.add(new RenContentBean(3, R.drawable.ren_bg_sport, "3", "运动", "运动的力量"));
-            renContentBeanList.add(new RenContentBean(4, R.drawable.ren_bg_read, "4", "阅读", "阅读的力量"));
-            renContentBeanList.add(new RenContentBean(5, R.drawable.ren_bg_stay, "5", "坚持", "坚持的力量"));
-            renContentBeanList.add(new RenContentBean(6, R.drawable.ren_bg_game, "6", "游戏", "游戏的力量"));
-            renContentBeanList.add(new RenContentBean(7, R.drawable.ren_bg_share, "7", "分享", "分享的力量"));
-            mView.initContentList(renContentBeanList);
+            List<ArticleBean> articleBeanList;
+            String articleListStr = "[{\"type\":\"0\",\"type_name\":\"热门推荐\",\"list\":[{\"id\":\"10011\",\"type\":\"1\",\"type_name\":\"行走的力量\",\"title\":\"行走\",\"summarize\":\"you can you up,no can no bb\",\"thumb_url\":\"http://okzwnw2rn.bkt.clouddn.com/image/bannerren_bg_walk.jpg\",\"url\":\"https://www.baidu.com\",\"publish_time\":\"2017-02-07\",\"author\":\"Randy Zhang\",\"like_num\":\"0\",\"view_num\":\"0\",\"collect_num\":\"0\"},{\"id\":\"10021\",\"type\":\"2\",\"type_name\":\"分享的力量\",\"title\":\"分享\",\"summarize\":\"you can you up,no can no bb\",\"thumb_url\":\"http://okzwnw2rn.bkt.clouddn.com/image/bannerren_bg_share.jpg\",\"url\":\"https://www.baidu.com\",\"publish_time\":\"2017-02-07\",\"author\":\"Randy Zhang\",\"like_num\":\"0\",\"view_num\":\"0\",\"collect_num\":\"0\"},{\"id\":\"10031\",\"type\":\"3\",\"type_name\":\"阅读的力量\",\"title\":\"阅读\",\"summarize\":\"you can you up,no can no bb\",\"thumb_url\":\"http://okzwnw2rn.bkt.clouddn.com/image/bannerren_bg_read.jpg\",\"url\":\"https://www.baidu.com\",\"publish_time\":\"2017-02-07\",\"author\":\"Randy Zhang\",\"like_num\":\"0\",\"view_num\":\"0\",\"collect_num\":\"0\"},{\"id\":\"10041\",\"type\":\"4\",\"type_name\":\"音乐的力量\",\"title\":\"音乐\",\"summarize\":\"you can you up,no can no bb\",\"thumb_url\":\"http://okzwnw2rn.bkt.clouddn.com/image/bannerren_bg_sing.jpg\",\"url\":\"https://www.baidu.com\",\"publish_time\":\"2017-02-07\",\"author\":\"Randy Zhang\",\"like_num\":\"0\",\"view_num\":\"0\",\"collect_num\":\"0\"}]},{\"type\":\"1\",\"type_name\":\"行走的力量\",\"list\":[{\"id\":\"10011\",\"type\":\"1\",\"type_name\":\"行走的力量\",\"title\":\"话语\",\"summarize\":\"you can you up,no can no bb\",\"thumb_url\":\"http://okzwnw2rn.bkt.clouddn.com/image/bannerren_bg_walk.jpg\",\"url\":\"https://www.baidu.com\",\"publish_time\":\"2017-02-07\",\"author\":\"Randy Zhang\",\"like_num\":\"0\",\"view_num\":\"0\",\"collect_num\":\"0\"},{\"id\":\"10012\",\"type\":\"1\",\"type_name\":\"行走的力量\",\"title\":\"话语\",\"summarize\":\"you can you up,no can no bb\",\"thumb_url\":\"http://okzwnw2rn.bkt.clouddn.com/image/bannerren_bg_walk.jpg\",\"url\":\"https://www.baidu.com\",\"publish_time\":\"2017-02-07\",\"author\":\"Randy Zhang\",\"like_num\":\"0\",\"view_num\":\"0\",\"collect_num\":\"0\"},{\"id\":\"10013\",\"type\":\"1\",\"type_name\":\"行走的力量\",\"title\":\"话语\",\"summarize\":\"you can you up,no can no bb\",\"thumb_url\":\"http://okzwnw2rn.bkt.clouddn.com/image/bannerren_bg_walk.jpg\",\"url\":\"https://www.baidu.com\",\"publish_time\":\"2017-02-07\",\"author\":\"Randy Zhang\",\"like_num\":\"0\",\"view_num\":\"0\",\"collect_num\":\"0\"},{\"id\":\"10014\",\"type\":\"1\",\"type_name\":\"行走的力量\",\"title\":\"话语\",\"summarize\":\"you can you up,no can no bb\",\"thumb_url\":\"http://okzwnw2rn.bkt.clouddn.com/image/bannerren_bg_walk.jpg\",\"url\":\"https://www.baidu.com\",\"publish_time\":\"2017-02-07\",\"author\":\"Randy Zhang\",\"like_num\":\"0\",\"view_num\":\"0\",\"collect_num\":\"0\"}]},{\"type\":\"2\",\"type_name\":\"分享的力量\",\"list\":[{\"id\":\"10021\",\"type\":\"2\",\"type_name\":\"分享的力量\",\"title\":\"话语\",\"summarize\":\"you can you up,no can no bb\",\"thumb_url\":\"http://okzwnw2rn.bkt.clouddn.com/image/bannerren_bg_walk.jpg\",\"url\":\"https://www.baidu.com\",\"publish_time\":\"2017-02-07\",\"author\":\"Randy Zhang\",\"like_num\":\"0\",\"view_num\":\"0\",\"collect_num\":\"0\"},{\"id\":\"10022\",\"type\":\"2\",\"type_name\":\"分享的力量\",\"title\":\"话语\",\"summarize\":\"you can you up,no can no bb\",\"thumb_url\":\"http://okzwnw2rn.bkt.clouddn.com/image/bannerren_bg_walk.jpg\",\"url\":\"https://www.baidu.com\",\"publish_time\":\"2017-02-07\",\"author\":\"Randy Zhang\",\"like_num\":\"0\",\"view_num\":\"0\",\"collect_num\":\"0\"},{\"id\":\"10023\",\"type\":\"2\",\"type_name\":\"分享的力量\",\"title\":\"话语\",\"summarize\":\"you can you up,no can no bb\",\"thumb_url\":\"http://okzwnw2rn.bkt.clouddn.com/image/bannerren_bg_walk.jpg\",\"url\":\"https://www.baidu.com\",\"publish_time\":\"2017-02-07\"},{\"id\":\"10024\",\"type\":\"2\",\"type_name\":\"分享的力量\",\"title\":\"话语\",\"summarize\":\"you can you up,no can no bb\",\"thumb_url\":\"http://okzwnw2rn.bkt.clouddn.com/image/bannerren_bg_walk.jpg\",\"url\":\"https://www.baidu.com\",\"publish_time\":\"2017-02-07\",\"author\":\"Randy Zhang\",\"like_num\":\"0\",\"view_num\":\"0\",\"collect_num\":\"0\"}]},{\"type\":\"3\",\"type_name\":\"阅读的力量\",\"list\":[{\"id\":\"10031\",\"type\":\"3\",\"type_name\":\"阅读的力量\",\"title\":\"话语\",\"summarize\":\"you can you up,no can no bb\",\"thumb_url\":\"http://okzwnw2rn.bkt.clouddn.com/image/bannerren_bg_walk.jpg\",\"url\":\"https://www.baidu.com\",\"publish_time\":\"2017-02-07\"},{\"id\":\"10032\",\"type\":\"3\",\"type_name\":\"阅读的力量\",\"title\":\"话语\",\"summarize\":\"you can you up,no can no bb\",\"thumb_url\":\"http://okzwnw2rn.bkt.clouddn.com/image/bannerren_bg_walk.jpg\",\"url\":\"https://www.baidu.com\",\"publish_time\":\"2017-02-07\",\"author\":\"Randy Zhang\",\"like_num\":\"0\",\"view_num\":\"0\",\"collect_num\":\"0\"},{\"id\":\"10033\",\"type\":\"3\",\"type_name\":\"阅读的力量\",\"title\":\"话语\",\"summarize\":\"you can you up,no can no bb\",\"thumb_url\":\"http://okzwnw2rn.bkt.clouddn.com/image/bannerren_bg_walk.jpg\",\"url\":\"https://www.baidu.com\",\"publish_time\":\"2017-02-07\",\"author\":\"Randy Zhang\",\"like_num\":\"0\",\"view_num\":\"0\",\"collect_num\":\"0\"},{\"id\":\"10034\",\"type\":\"3\",\"type_name\":\"阅读的力量\",\"title\":\"话语\",\"summarize\":\"you can you up,no can no bb\",\"thumb_url\":\"http://okzwnw2rn.bkt.clouddn.com/image/bannerren_bg_walk.jpg\",\"url\":\"https://www.baidu.com\",\"publish_time\":\"2017-02-07\",\"author\":\"Randy Zhang\",\"like_num\":\"0\",\"view_num\":\"0\",\"collect_num\":\"0\"}]},{\"type\":\"4\",\"type_name\":\"音乐的力量\",\"list\":[{\"id\":\"10041\",\"type\":\"4\",\"type_name\":\"音乐的力量\",\"title\":\"话语\",\"summarize\":\"you can you up,no can no bb\",\"thumb_url\":\"http://okzwnw2rn.bkt.clouddn.com/image/bannerren_bg_walk.jpg\",\"url\":\"https://www.baidu.com\",\"publish_time\":\"2017-02-07\",\"author\":\"Randy Zhang\",\"like_num\":\"0\",\"view_num\":\"0\",\"collect_num\":\"0\"},{\"id\":\"10042\",\"type\":\"4\",\"type_name\":\"音乐的力量\",\"title\":\"话语\",\"summarize\":\"you can you up,no can no bb\",\"thumb_url\":\"http://okzwnw2rn.bkt.clouddn.com/image/bannerren_bg_walk.jpg\",\"url\":\"https://www.baidu.com\",\"publish_time\":\"2017-02-07\",\"author\":\"Randy Zhang\",\"like_num\":\"0\",\"view_num\":\"0\",\"collect_num\":\"0\"},{\"id\":\"10043\",\"type\":\"4\",\"type_name\":\"音乐的力量\",\"title\":\"话语\",\"summarize\":\"you can you up,no can no bb\",\"thumb_url\":\"http://okzwnw2rn.bkt.clouddn.com/image/bannerren_bg_walk.jpg\",\"url\":\"https://www.baidu.com\",\"publish_time\":\"2017-02-07\",\"author\":\"Randy Zhang\",\"like_num\":\"0\",\"view_num\":\"0\",\"collect_num\":\"0\"},{\"id\":\"10044\",\"type\":\"4\",\"type_name\":\"音乐的力量\",\"title\":\"话语\",\"summarize\":\"you can you up,no can no bb\",\"thumb_url\":\"http://okzwnw2rn.bkt.clouddn.com/image/bannerren_bg_walk.jpg\",\"url\":\"https://www.baidu.com\",\"publish_time\":\"2017-02-07\",\"author\":\"Randy Zhang\",\"like_num\":\"0\",\"view_num\":\"0\",\"collect_num\":\"0\"}]}]";
+            Gson gson = new Gson();
+
+            articleBeanList = gson.fromJson(articleListStr, new TypeToken<List<ArticleBean>>() {
+            }.getType());
+            mView.initContentList(articleBeanList);
         }
     }
 }

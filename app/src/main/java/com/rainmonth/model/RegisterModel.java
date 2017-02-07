@@ -1,5 +1,6 @@
 package com.rainmonth.model;
 
+import com.rainmonth.base.mvp.BaseResponse;
 import com.rainmonth.base.mvp.BaseSchedulerTransformer;
 import com.rainmonth.base.mvp.BaseSubscriber;
 import com.rainmonth.bean.UserBean;
@@ -15,13 +16,13 @@ import rx.Subscription;
 /**
  * Created by RandyZhang on 16/9/19.
  */
-public class RegisterModel implements IRegisterModel<Response<UserLoginResponse>> {
+public class RegisterModel implements IRegisterModel<Response<BaseResponse>> {
 
     @Override
-    public Subscription register(RequestCallback<Response<UserLoginResponse>> callback, UserBean userBean) {
+    public Subscription register(RequestCallback<Response<BaseResponse>> callback, UserBean userBean) {
         return ServiceFactory.createService(Api.baseUrl, UserService.class)
-                .registerRx(userBean.getMobile(), userBean.getUsername(), userBean.getPsw(), userBean.getEmail())
-                .compose(new BaseSchedulerTransformer<Response<UserLoginResponse>>())
+                .register(userBean)
+                .compose(new BaseSchedulerTransformer<Response<BaseResponse>>())
                 .subscribe(new BaseSubscriber<>(callback));
     }
 }
