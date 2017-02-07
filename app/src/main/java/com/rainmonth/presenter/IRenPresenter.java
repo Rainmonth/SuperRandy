@@ -1,6 +1,6 @@
 package com.rainmonth.presenter;
 
-import com.rainmonth.bean.RenContentInfo;
+import com.rainmonth.bean.RenContentBean;
 
 /**
  * Created by RandyZhang on 2017/1/23.
@@ -12,5 +12,5 @@ public interface IRenPresenter {
 
     void getHomeBanner();
 
-    void navToDetail(RenContentInfo renContentInfo);
+    void navToDetail(RenContentBean renContentBean);
 }

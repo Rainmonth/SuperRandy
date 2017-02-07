@@ -1,6 +1,6 @@
 package com.rainmonth.presenter;
 
-import com.rainmonth.bean.RanContentInfo;
+import com.rainmonth.bean.RanContentBean;
 import com.rainmonth.model.IRanFragmentModel;
 import com.rainmonth.model.RanFragmentModel;
 import com.rainmonth.base.mvp.BasePresenter;
@@ -24,7 +24,7 @@ public class RanPresenter extends BasePresenter<RanFragmentView, Object> {
         mView.initViews(ranFragmentModel.getRanContentList());
     }
 
-    public void navToDetail(RanContentInfo ranContentInfo) {
-        mView.navToDetail(ranContentInfo);
+    public void navToDetail(RanContentBean ranContentBean) {
+        mView.navToDetail(ranContentBean);
     }
 }

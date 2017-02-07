@@ -1,6 +1,5 @@
 package com.rainmonth.presenter;
 
-import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
 
@@ -13,16 +12,14 @@ import com.rainmonth.view.SplashView;
  * Created by RandyZhang on 16/7/1.
  */
 public class SplashPresenter extends BasePresenter<SplashView, Object> {
-    private Context context = null;
     private ISplashModel splashModel = null;
     private SplashView splashView = null;
 
-    public SplashPresenter(Context context, SplashView splashView) {
+    public SplashPresenter(SplashView splashView) {
         super(splashView);
         if (null == splashView) {
             throw new IllegalArgumentException("splash view should not be null");
         }
-        this.context = context;
         this.splashView = splashView;
         splashModel = new SplashModel();
     }
@@ -48,7 +45,7 @@ public class SplashPresenter extends BasePresenter<SplashView, Object> {
         }.start();
     }
 
-    public Handler mHandler = new Handler() {
+    private Handler mHandler = new Handler() {
         public void handleMessage(Message msg) {
             if (msg.what == 0) {
                 splashView.navigateTo(splashModel.getSplashInfo().getNaveTo());

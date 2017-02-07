@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * Created by RandyZhang on 16/7/5.
  */
-public class RanContentInfo implements Serializable {
+public class RanContentBean implements Serializable {
 
     private int id;
     private int albumId;// 专辑id
@@ -17,7 +17,7 @@ public class RanContentInfo implements Serializable {
     private String albumType;//所属分类
     private int albumLikeNum;//
 
-    public RanContentInfo(int id, int albumId, String albumAuthor, int albumFirstImageResId, int albumTotalNum, String albumPublishTime,
+    public RanContentBean(int id, int albumId, String albumAuthor, int albumFirstImageResId, int albumTotalNum, String albumPublishTime,
                           String albumDescription, String albumType, int albumLikeNum) {
         this.id = id;
         this.albumId = albumId;

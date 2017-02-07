@@ -14,7 +14,7 @@ import com.rainmonth.base.ui.adapter.ListViewDataAdapter;
 import com.rainmonth.base.ui.adapter.ViewHolderBase;
 import com.rainmonth.base.ui.adapter.ViewHolderCreator;
 import com.rainmonth.bean.BannerBean;
-import com.rainmonth.bean.RenContentInfo;
+import com.rainmonth.bean.RenContentBean;
 import com.rainmonth.library.base.BaseLazyFragment;
 import com.rainmonth.library.eventbus.EventCenter;
 import com.rainmonth.presenter.RenPresenter;
@@ -34,7 +34,7 @@ public class RenFragment extends BaseLazyFragment implements RenFragmentView {
     ListView lvContent;
 
     private RenPresenter renPresenter = null;
-    private ListViewDataAdapter<RenContentInfo> mRenContentListAdapter = null;
+    private ListViewDataAdapter<RenContentBean> mRenContentListAdapter = null;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -98,11 +98,11 @@ public class RenFragment extends BaseLazyFragment implements RenFragmentView {
     }
 
     @Override
-    public void initContentList(List<RenContentInfo> renContentInfoList) {
-        mRenContentListAdapter = new ListViewDataAdapter<RenContentInfo>(new ViewHolderCreator<RenContentInfo>() {
+    public void initContentList(List<RenContentBean> renContentBeanList) {
+        mRenContentListAdapter = new ListViewDataAdapter<RenContentBean>(new ViewHolderCreator<RenContentBean>() {
             @Override
-            public ViewHolderBase<RenContentInfo> createViewHolder(int position) {
-                return new ViewHolderBase<RenContentInfo>() {
+            public ViewHolderBase<RenContentBean> createViewHolder(int position) {
+                return new ViewHolderBase<RenContentBean>() {
                     ImageView ivBg;
                     //                    TextView tvTagType;
                     TextView tvTagName;
@@ -118,7 +118,7 @@ public class RenFragment extends BaseLazyFragment implements RenFragmentView {
                     }
 
                     @Override
-                    public void showData(int position, RenContentInfo itemData) {
+                    public void showData(int position, RenContentBean itemData) {
                         ivBg.setImageResource(itemData.getImageResId());
                         tvTagName.setText(itemData.getTagName());
                         tvTitle.setText(itemData.getTitle());
@@ -127,23 +127,23 @@ public class RenFragment extends BaseLazyFragment implements RenFragmentView {
                 };
             }
         });
-        mRenContentListAdapter.getDataList().addAll(renContentInfoList);
+        mRenContentListAdapter.getDataList().addAll(renContentBeanList);
         lvContent.setAdapter(mRenContentListAdapter);
         lvContent.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 // nav to detail activity
-                RenContentInfo renContentInfo = mRenContentListAdapter.getDataList().get(position);
-                if (null != renContentInfo) {
-                    renPresenter.navToDetail(renContentInfo);
+                RenContentBean renContentBean = mRenContentListAdapter.getDataList().get(position);
+                if (null != renContentBean) {
+                    renPresenter.navToDetail(renContentBean);
                 }
             }
         });
     }
 
     @Override
-    public void navToDetail(RenContentInfo xunNavigationInfo) {
+    public void navToDetail(RenContentBean xunNavigationInfo) {
         // todo 进入二级界面
     }
 

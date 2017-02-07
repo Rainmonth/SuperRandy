@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * Created by RandyZhang on 16/7/5.
  */
-public class RenContentInfo implements Serializable{
+public class RenContentBean implements Serializable{
 
     private int id;
     private int imageResId;
@@ -13,7 +13,7 @@ public class RenContentInfo implements Serializable{
     private String tagName;
     private String title;
 
-    public RenContentInfo(int id, int imageResId, String tagType, String tagName, String title) {
+    public RenContentBean(int id, int imageResId, String tagType, String tagName, String title) {
         this.id = id;
         this.imageResId = imageResId;
         this.tagType = tagType;

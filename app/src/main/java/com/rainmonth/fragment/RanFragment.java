@@ -13,7 +13,7 @@ import com.rainmonth.R;
 import com.rainmonth.base.ui.adapter.ListViewDataAdapter;
 import com.rainmonth.base.ui.adapter.ViewHolderBase;
 import com.rainmonth.base.ui.adapter.ViewHolderCreator;
-import com.rainmonth.bean.RanContentInfo;
+import com.rainmonth.bean.RanContentBean;
 import com.rainmonth.library.base.BaseLazyFragment;
 import com.rainmonth.library.eventbus.EventCenter;
 import com.rainmonth.presenter.RanPresenter;
@@ -32,7 +32,7 @@ public class RanFragment extends BaseLazyFragment implements RanFragmentView {
     @Bind(R.id.lv_content)
     ListView lvContent;
     private RanPresenter mRanPresenter = null;
-    private ListViewDataAdapter<RanContentInfo> mRanContentListAdapter = null;
+    private ListViewDataAdapter<RanContentBean> mRanContentListAdapter = null;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -85,11 +85,11 @@ public class RanFragment extends BaseLazyFragment implements RanFragmentView {
     }
 
     @Override
-    public void initViews(List<RanContentInfo> ranContentInfoList) {
-        mRanContentListAdapter = new ListViewDataAdapter<>(new ViewHolderCreator<RanContentInfo>() {
+    public void initViews(List<RanContentBean> ranContentBeanList) {
+        mRanContentListAdapter = new ListViewDataAdapter<>(new ViewHolderCreator<RanContentBean>() {
             @Override
-            public ViewHolderBase<RanContentInfo> createViewHolder(int position) {
-                return new ViewHolderBase<RanContentInfo>() {
+            public ViewHolderBase<RanContentBean> createViewHolder(int position) {
+                return new ViewHolderBase<RanContentBean>() {
                     ImageView ivAlbumFirstImage;
                     TextView tvAlbumDescription;
                     TextView tvAlbumAuthor;
@@ -112,7 +112,7 @@ public class RanFragment extends BaseLazyFragment implements RanFragmentView {
                     }
 
                     @Override
-                    public void showData(int position, RanContentInfo itemData) {
+                    public void showData(int position, RanContentBean itemData) {
                         if (null != itemData) {
                             ivAlbumFirstImage.setImageResource(itemData.getAlbumFirstImageResId());
                             tvAlbumDescription.setText(itemData.getAlbumDescription());
@@ -127,23 +127,23 @@ public class RanFragment extends BaseLazyFragment implements RanFragmentView {
             }
         });
 
-        mRanContentListAdapter.getDataList().addAll(ranContentInfoList);
+        mRanContentListAdapter.getDataList().addAll(ranContentBeanList);
         lvContent.setAdapter(mRanContentListAdapter);
         lvContent.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 // todo nav to detail activity
-                RanContentInfo ranContentInfo = mRanContentListAdapter.getDataList().get(position);
-                if (null != ranContentInfo) {
-                    mRanPresenter.navToDetail(ranContentInfo);
+                RanContentBean ranContentBean = mRanContentListAdapter.getDataList().get(position);
+                if (null != ranContentBean) {
+                    mRanPresenter.navToDetail(ranContentBean);
                 }
             }
         });
     }
 
     @Override
-    public void navToDetail(RanContentInfo ranContentInfo) {
+    public void navToDetail(RanContentBean ranContentBean) {
 
     }
 

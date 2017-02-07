@@ -1,7 +1,7 @@
 package com.rainmonth.model;
 
 import com.rainmonth.bean.BannerBean;
-import com.rainmonth.bean.RenContentInfo;
+import com.rainmonth.bean.RenContentBean;
 import com.rainmonth.utils.http.RequestCallback;
 
 import java.util.List;
@@ -26,5 +26,5 @@ public interface IRenFragmentModel<T> {
      * @param callback callback
      * @return subscription 对象
      */
-    Subscription getRenContentList(RequestCallback<Response<List<RenContentInfo>>> callback);
+    Subscription getRenContentList(RequestCallback<Response<List<RenContentBean>>> callback);
 }

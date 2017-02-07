@@ -5,7 +5,7 @@ import com.rainmonth.R;
 import com.rainmonth.base.mvp.BasePresenter;
 import com.rainmonth.base.mvp.BaseResponse;
 import com.rainmonth.bean.BannerBean;
-import com.rainmonth.bean.RenContentInfo;
+import com.rainmonth.bean.RenContentBean;
 import com.rainmonth.model.IRenFragmentModel;
 import com.rainmonth.model.RenFragmentModel;
 import com.rainmonth.view.RenFragmentView;
@@ -47,8 +47,8 @@ public class RenPresenter extends BasePresenter<RenFragmentView, Response<BaseRe
     }
 
     @Override
-    public void navToDetail(RenContentInfo renContentInfo) {
-        renFragmentView.navToDetail(renContentInfo);
+    public void navToDetail(RenContentBean renContentBean) {
+        renFragmentView.navToDetail(renContentBean);
     }
 
     @Override
@@ -96,16 +96,16 @@ public class RenPresenter extends BasePresenter<RenFragmentView, Response<BaseRe
             mView.initHomeBanners(bannerInfoList);
         }
         if ("getContentList".equals(requestUrl)) {
-//            List<RenContentInfo> renContentInfoList = (List<RenContentInfo>) data.body();
-            List<RenContentInfo> renContentInfoList = new ArrayList<RenContentInfo>();
-            renContentInfoList.add(new RenContentInfo(1, R.drawable.ren_bg_walk, "1", "旅行", "行走的力量"));
-            renContentInfoList.add(new RenContentInfo(2, R.drawable.ren_bg_sing, "2", "音乐", "音乐的力量"));
-            renContentInfoList.add(new RenContentInfo(3, R.drawable.ren_bg_sport, "3", "运动", "运动的力量"));
-            renContentInfoList.add(new RenContentInfo(4, R.drawable.ren_bg_read, "4", "阅读", "阅读的力量"));
-            renContentInfoList.add(new RenContentInfo(5, R.drawable.ren_bg_stay, "5", "坚持", "坚持的力量"));
-            renContentInfoList.add(new RenContentInfo(6, R.drawable.ren_bg_game, "6", "游戏", "游戏的力量"));
-            renContentInfoList.add(new RenContentInfo(7, R.drawable.ren_bg_share, "7", "分享", "分享的力量"));
-            mView.initContentList(renContentInfoList);
+//            List<RenContentBean> renContentBeanList = (List<RenContentBean>) data.body();
+            List<RenContentBean> renContentBeanList = new ArrayList<RenContentBean>();
+            renContentBeanList.add(new RenContentBean(1, R.drawable.ren_bg_walk, "1", "旅行", "行走的力量"));
+            renContentBeanList.add(new RenContentBean(2, R.drawable.ren_bg_sing, "2", "音乐", "音乐的力量"));
+            renContentBeanList.add(new RenContentBean(3, R.drawable.ren_bg_sport, "3", "运动", "运动的力量"));
+            renContentBeanList.add(new RenContentBean(4, R.drawable.ren_bg_read, "4", "阅读", "阅读的力量"));
+            renContentBeanList.add(new RenContentBean(5, R.drawable.ren_bg_stay, "5", "坚持", "坚持的力量"));
+            renContentBeanList.add(new RenContentBean(6, R.drawable.ren_bg_game, "6", "游戏", "游戏的力量"));
+            renContentBeanList.add(new RenContentBean(7, R.drawable.ren_bg_share, "7", "分享", "分享的力量"));
+            mView.initContentList(renContentBeanList);
         }
     }
 }

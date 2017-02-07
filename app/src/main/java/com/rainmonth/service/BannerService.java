@@ -1,7 +1,7 @@
 package com.rainmonth.service;
 
 import com.rainmonth.bean.BannerBean;
-import com.rainmonth.bean.RenContentInfo;
+import com.rainmonth.bean.RenContentBean;
 import com.rainmonth.utils.http.UserLoginResponse;
 
 import java.util.List;
@@ -23,5 +23,5 @@ public interface BannerService {
     Observable<Response<List<BannerBean>>> getHomeBannerList();
 
     @GET("Content/getContentList")
-    Observable<Response<List<RenContentInfo>>> getContentList();
+    Observable<Response<List<RenContentBean>>> getContentList();
 }
