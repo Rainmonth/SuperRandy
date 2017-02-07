@@ -20,23 +20,29 @@ import rx.Observable;
 public interface UserService {
     @FormUrlEncoded
     @POST("User/login")
-    Call<UserLoginResponse> login(@Field("username") String username, @Field("psw") String psw);
+    Call<UserLoginResponse> loginCall(@Field("username") String username, @Field("psw") String psw);
 
     @POST("User/register")
-    Call<UserBean> register(@Body UserBean userBean);
+    Call<UserBean> registerCall(@Body UserBean userBean);
 
     @GET("User/getUserBean")
-    Call<UserBean> getUserInfo(@Query("id") int id);
+    Call<UserBean> getUserInfoCall(@Query("id") int id);
 
     @FormUrlEncoded
     @POST("User/login")
-    Observable<Response<BaseResponse>> loginRx(@Field("username") String username, @Field("psw") String psw);
+    Observable<Response<BaseResponse>> login(@Field("username") String username, @Field("psw") String psw);
+
+    @FormUrlEncoded
+    @POST("User/logout")
+    Observable<Response<BaseResponse>> logout();
 
     @FormUrlEncoded
     @POST("User/register")
-    Observable<Response<UserLoginResponse>> registerRx(@Field("mobile") String mobile, @Field("username") String username,
-                                                       @Field("psw") String psw, @Field("email") String email);
+    Observable<Response<BaseResponse>> register(@Body UserBean userBean);
 
-    @GET("User/getUserBean")
-    Observable<Response<UserLoginResponse>> getUserInfoRx(@Query("id") int id);
+    @GET("User/getUserInfo")
+    Observable<Response<BaseResponse>> getUserInfo(@Query("id") String id);
+
+    @POST("User/updateUserInfo")
+    Observable<Response<BaseResponse>> updateUserInfo(@Body UserBean userBean);
 }

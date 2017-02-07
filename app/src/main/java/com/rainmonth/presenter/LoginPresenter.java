@@ -2,10 +2,9 @@ package com.rainmonth.presenter;
 
 import com.rainmonth.base.mvp.BaseResponse;
 import com.rainmonth.bean.UserBean;
-import com.rainmonth.model.ILoginModel;
-import com.rainmonth.model.LoginModel;
+import com.rainmonth.model.IUserModel;
+import com.rainmonth.model.UserModel;
 import com.rainmonth.base.mvp.BasePresenter;
-import com.rainmonth.utils.http.UserLoginResponse;
 import com.rainmonth.view.ILoginView;
 
 import retrofit2.Response;
@@ -16,11 +15,11 @@ import retrofit2.Response;
 public class LoginPresenter extends BasePresenter<ILoginView, Response<BaseResponse>>
         implements ILoginPresenter {
 
-    private ILoginModel<Response<BaseResponse>> mUserModel;
+    private IUserModel<Response<BaseResponse>> mUserModel;
 
     public LoginPresenter(ILoginView mView) {
         super(mView);
-        mUserModel = new LoginModel();
+        mUserModel = new UserModel();
     }
 
     @Override
