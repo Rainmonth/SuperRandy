@@ -20,28 +20,10 @@ import rx.Subscription;
 public class RenFragmentModel implements IRenFragmentModel {
     @Override
     public Subscription getRenContentList(RequestCallback callback) {
-//        List<RenContentBean> renContentInfoList = new ArrayList<RenContentBean>();
-//
-//        renContentInfoList.add(new RenContentBean(1, R.drawable.ren_bg_walk, "1", "旅行", "行走的力量"));
-//        renContentInfoList.add(new RenContentBean(2, R.drawable.ren_bg_sing, "2", "音乐", "音乐的力量"));
-//        renContentInfoList.add(new RenContentBean(3, R.drawable.ren_bg_sport, "3", "运动", "运动的力量"));
-//        renContentInfoList.add(new RenContentBean(4, R.drawable.ren_bg_read, "4", "阅读", "阅读的力量"));
-//        renContentInfoList.add(new RenContentBean(5, R.drawable.ren_bg_stay, "5", "坚持", "坚持的力量"));
-//        renContentInfoList.add(new RenContentBean(6, R.drawable.ren_bg_game, "6", "游戏", "游戏的力量"));
-//        renContentInfoList.add(new RenContentBean(7, R.drawable.ren_bg_share, "7", "分享", "分享的力量"));
-//
-//        return renContentInfoList;
-
         return ServiceFactory.createService(Api.baseUrl, BannerService.class).getContentList()
                 .compose(new BaseSchedulerTransformer<Response<List<RenContentBean>>>())
                 .subscribe(new BaseSubscriber<>(callback));
     }
-
-//    public Subscription login(RequestCallback<Response<BaseResponse>> callback, String username, String psw) {
-//        return ServiceFactory.createService(Api.baseUrl, UserService.class).loginRx(username, psw)
-//                .compose(new BaseSchedulerTransformer<Response<BaseResponse>>())
-//                .subscribe(new BaseSubscriber<Response<BaseResponse>>(callback));
-//    }
 
     @Override
     public Subscription getHomeBannerList(RequestCallback callback) {
