@@ -29,20 +29,20 @@ public interface UserService {
     Call<UserBean> getUserInfoCall(@Query("id") int id);
 
     @FormUrlEncoded
-    @POST("User/login")
+    @POST("api/User/login")
     Observable<Response<BaseResponse>> login(@Field("username") String username, @Field("psw") String psw);
 
     @FormUrlEncoded
-    @POST("User/logout")
+    @POST("api/User/logout")
     Observable<Response<BaseResponse>> logout();
 
     @FormUrlEncoded
-    @POST("User/register")
+    @POST("api/User/register")
     Observable<Response<BaseResponse>> register(@Body UserBean userBean);
 
-    @GET("User/getUserInfo")
+    @GET("api/User/getUserInfo")
     Observable<Response<BaseResponse>> getUserInfo(@Query("id") String id);
 
-    @POST("User/updateUserInfo")
+    @POST("api/User/updateUserInfo")
     Observable<Response<BaseResponse>> updateUserInfo(@Body UserBean userBean);
 }
