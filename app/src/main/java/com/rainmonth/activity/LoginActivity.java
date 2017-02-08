@@ -74,6 +74,7 @@ public class LoginActivity extends BaseActivity implements ILoginView {
     public void naveToAfterLogin(BaseResponse response) {
         if (response.getCode().equals("1")) {
             readyGo(MainActivity.class);
+            ToastUtils.showLongToast(mContext, response.getMessage());
             finish();
         } else {
             ToastUtils.showLongToast(mContext, response.getMessage());
@@ -117,8 +118,8 @@ public class LoginActivity extends BaseActivity implements ILoginView {
     @Override
     protected void initViewsAndEvents() {
         // todo to be delete
-        etUserName.setText("15601949622");
-        etPsw.setText("m123456");
+        etUserName.setText("randy");
+        etPsw.setText("123456");
         loginPresenter = new LoginPresenter(this);
     }
 
