@@ -35,4 +35,8 @@
     <color name="white_15_alpha">#26ffffff</color>
     <color name="white_60_alpha">#99ffffff</color>
     <color name="white_80_alpha">#bbffffff</color>
+
+    <color name="theme_color">#50E3C2</color>
+    <color name="article_title">@color/black</color>
+    <color name="article_summarise">#46000000</color>
 </resources>
