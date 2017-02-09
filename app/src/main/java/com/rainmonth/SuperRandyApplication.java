@@ -2,9 +2,6 @@ package com.rainmonth;
 
 import android.app.Application;
 
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
-
 /**
  * Created by RandyZhang on 16/9/19.
  */
@@ -18,7 +15,7 @@ public class SuperRandyApplication extends Application {
         super.onCreate();
         application = this;
         mainThreadId = android.os.Process.myTid();
-        ImageLoader.getInstance().init(ImageLoaderConfiguration.createDefault(this));
+        configEnv();
         // todo activity 管理
     }
 
@@ -28,5 +25,12 @@ public class SuperRandyApplication extends Application {
 
     public static int getMainThreadId() {
         return mainThreadId;
+    }
+
+    /**
+     * 配置环境
+     */
+    private void configEnv() {
+        // todo 环境相关变量管理
     }
 }

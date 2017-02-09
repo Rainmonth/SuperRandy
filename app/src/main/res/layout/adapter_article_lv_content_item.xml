@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_item_container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="@dimen/margin_normal">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/iv_article_avatar"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_alignParentLeft="true"
+            android:contentDescription="@string/app_name"
+            android:scaleType="fitXY" />
+
+        <TextView
+            android:id="@+id/tv_article_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_small"
+            android:layout_toRightOf="@+id/iv_article_avatar"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="行走的力量系列文章之生命不息行走不止"
+            android:textColor="@color/article_title"
+            android:textSize="@dimen/text_normal" />
+
+        <TextView
+            android:id="@+id/tv_article_summarize"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_article_title"
+            android:layout_marginLeft="@dimen/margin_small"
+            android:layout_marginTop="@dimen/margin_small"
+            android:layout_toRightOf="@+id/iv_article_avatar"
+            android:ellipsize="end"
+            android:maxLines="3"
+            android:text="体验行走，感受on the way 不一样的精彩。一个热爱生活的人，肯定是一个有趣的人。迈开青春的步伐，感受行走的力量吧！"
+            android:textColor="@color/article_summarise"
+            android:textSize="@dimen/text_small" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_action_btn_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_small"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/tv_btn_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="浏览" />
+
+        <TextView
+            android:id="@+id/tv_btn_collect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="收藏" />
+
+        <TextView
+            android:id="@+id/tv_btn_like"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="喜欢" />
+
+    </LinearLayout>
+
+</LinearLayout>

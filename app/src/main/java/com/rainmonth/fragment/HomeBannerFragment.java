@@ -8,12 +8,12 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.nostra13.universalimageloader.core.ImageLoader;
 import com.rainmonth.R;
 import com.rainmonth.bean.BannerBean;
 import com.rainmonth.library.base.BaseLazyFragment;
 import com.rainmonth.library.eventbus.EventCenter;
 import com.rainmonth.utils.ToastUtils;
+import com.squareup.picasso.Picasso;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -55,7 +55,7 @@ public class HomeBannerFragment extends BaseLazyFragment {
         Bundle bundle = getArguments();
         if (null != bundle) {
             final BannerBean bannerBean = (BannerBean) bundle.getSerializable(RenFragment.BANNER_BEAN);
-            ImageLoader.getInstance().displayImage(bannerBean.getBanner_thumb_url(), ivBannerImage);
+            Picasso.with(getActivity()).load(bannerBean.getBanner_thumb_url()).into(ivBannerImage);
             tvTitle.setText(bannerBean.getTitle());
             flBannerContainer.setOnClickListener(new View.OnClickListener() {
                 @Override
