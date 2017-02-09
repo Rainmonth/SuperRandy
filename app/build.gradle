@@ -143,10 +143,10 @@ android {
                     if (outputFile != null && outputFile.name.endsWith('debug.apk')) {
                         if (variant.productFlavors[0] != null) {
                             def productFlavorsName = variant.productFlavors[0].name;
-                            def fileName = appName + "V${defaultConfig.versionName}.${debugTime(false)}" + productFlavorsName + appDebugSuffixName;
+                            def fileName = appName + "V${defaultConfig.versionName}." + productFlavorsName + appDebugSuffixName;
                             output.outputFile = new File(appDebugDir, fileName)
                         } else {
-                            def fileName = appName + "V${defaultConfig.versionName}.${debugTime(false)}" + appDebugSuffixName;
+                            def fileName = appName + "V${defaultConfig.versionName}." + appDebugSuffixName;
                             output.outputFile = new File(appDebugDir, fileName);
                         }
                     }
@@ -222,5 +222,5 @@ dependencies {
     compile 'com.readystatesoftware.systembartint:systembartint:1.0.3'
     compile project(':library')
     compile project(':magicindicator')
-    compile files('libs/universal-image-loader-1.9.5.jar')
+    compile 'com.squareup.picasso:picasso:2.5.2'
 }
