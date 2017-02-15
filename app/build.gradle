@@ -26,9 +26,9 @@ dependencies {
     compile project(':magicindicator')
     compile 'com.squareup.picasso:picasso:2.5.2'
     //可选，用于生成application类
-    compile('com.tencent.tinker:tinker-android-anno:1.6.2')
+    compile("com.tencent.tinker:tinker-android-lib:${TINKER_VERSION}") { changing = true }
     //tinker的核心库
-    compile('com.tencent.tinker:tinker-android-lib:1.6.2')
+    provided("com.tencent.tinker:tinker-android-anno:${TINKER_VERSION}") { changing = true }
     compile('com.android.support:multidex:1.0.1')
 }
 
