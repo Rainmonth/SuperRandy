@@ -2,7 +2,6 @@ package com.rainmonth.service;
 
 import com.rainmonth.base.mvp.BaseResponse;
 import com.rainmonth.bean.UserBean;
-import com.rainmonth.utils.http.UserLoginResponse;
 
 import retrofit2.Call;
 import retrofit2.Response;
@@ -20,7 +19,7 @@ import rx.Observable;
 public interface UserService {
     @FormUrlEncoded
     @POST("User/login")
-    Call<UserLoginResponse> loginCall(@Field("username") String username, @Field("psw") String psw);
+    Call<BaseResponse> loginCall(@Field("username") String username, @Field("psw") String psw);
 
     @POST("User/register")
     Call<UserBean> registerCall(@Body UserBean userBean);

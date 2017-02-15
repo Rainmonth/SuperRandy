@@ -5,7 +5,6 @@ import com.rainmonth.base.mvp.BaseResponse;
 import com.rainmonth.bean.UserBean;
 import com.rainmonth.model.IRegisterModel;
 import com.rainmonth.model.RegisterModel;
-import com.rainmonth.utils.http.UserLoginResponse;
 import com.rainmonth.view.IRegisterView;
 
 import retrofit2.Response;

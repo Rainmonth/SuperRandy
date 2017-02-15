@@ -8,7 +8,6 @@ import com.rainmonth.service.UserService;
 import com.rainmonth.utils.http.Api;
 import com.rainmonth.utils.http.RequestCallback;
 import com.rainmonth.utils.http.ServiceFactory;
-import com.rainmonth.utils.http.UserLoginResponse;
 
 import retrofit2.Response;
 import rx.Subscription;

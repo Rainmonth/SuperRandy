@@ -4,9 +4,10 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
-import com.rainmonth.SuperRandyApplication;
+import com.rainmonth.app.SuperRandyApplicationLike;
 import com.rainmonth.library.utils.CommonUtils;
 import com.rainmonth.library.utils.NetworkUtils;
+import com.rainmonth.tinker.util.SuperRandyApplicationContext;
 import com.socks.library.KLog;
 
 import java.io.File;
@@ -51,7 +52,7 @@ public class ServiceFactory {
     private static Interceptor SAVE_COOKIES_INTERCEPTOR = new Interceptor() {
         @Override
         public Response intercept(Chain chain) throws IOException {
-            SharedPreferences sharedPreferences = SuperRandyApplication.getApplication()
+            SharedPreferences sharedPreferences = SuperRandyApplicationContext.context
                     .getSharedPreferences("cookie_sp", Context.MODE_PRIVATE);
             Response originalResponse = chain.proceed(chain.request());
             // 如果cookie为空，保存cookie到sp文件
@@ -93,7 +94,7 @@ public class ServiceFactory {
         @Override
         public Response intercept(Chain chain) throws IOException {
             final Request.Builder builder = chain.request().newBuilder();
-            SharedPreferences sharedPreferences = SuperRandyApplication.getApplication()
+            SharedPreferences sharedPreferences = SuperRandyApplicationContext.context
                     .getSharedPreferences("cookie_sp", Context.MODE_PRIVATE);
             Observable.just(sharedPreferences.getString("cookie", ""))
                     .subscribe(new Action1<String>() {
@@ -139,7 +140,7 @@ public class ServiceFactory {
             Response originalResponse = chain.proceed(request);
             int maxAge;
             // 缓存的数据
-            if (!NetworkUtils.isConnected(SuperRandyApplication.getApplication())) {
+            if (!NetworkUtils.isConnected(SuperRandyApplicationContext.context)) {
                 maxAge = DEFAULT_MAX_STALE_OFFLINE;
             } else {
                 maxAge = DEFAULT_MAX_STALE_ONLINE;
@@ -204,7 +205,7 @@ public class ServiceFactory {
             synchronized (OkHttpClient.class) {// 同步访问
                 if (okHttpClient == null) {
                     // 网络请求相关缓存
-                    File cacheFile = new File(SuperRandyApplication.getApplication().getCacheDir(), "responses");
+                    File cacheFile = new File(SuperRandyApplicationContext.application.getCacheDir(), "responses");
                     Cache cache = new Cache(cacheFile, DEFAULT_CACHE_SIZE);
                     okHttpClient = new OkHttpClient.Builder()
                             .cache(cache)
