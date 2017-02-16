@@ -7,10 +7,12 @@ import android.content.Intent;
 import android.os.Build;
 import android.support.multidex.MultiDex;
 
+import com.rainmonth.library.utils.CrashHandler;
 import com.rainmonth.tinker.Log.MyLogImp;
 import com.rainmonth.tinker.util.SuperRandyApplicationContext;
 import com.rainmonth.tinker.util.TinkerManager;
 import com.tencent.tinker.anno.DefaultLifeCycle;
+import com.tencent.tinker.lib.BuildConfig;
 import com.tencent.tinker.lib.tinker.Tinker;
 import com.tencent.tinker.lib.tinker.TinkerInstaller;
 import com.tencent.tinker.loader.app.DefaultApplicationLike;
@@ -51,6 +53,9 @@ public class SuperRandyApplicationLike extends DefaultApplicationLike {
         //or you can put com.tencent.tinker.** to main dex
         TinkerManager.installTinker(this);
         Tinker tinker = Tinker.with(getApplication());
+        if (BuildConfig.DEBUG) {
+            CrashHandler.getInstance().init(getApplication());
+        }
     }
 
     @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
