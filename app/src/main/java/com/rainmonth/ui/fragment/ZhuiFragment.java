@@ -1,4 +1,4 @@
-package com.rainmonth.fragment;
+package com.rainmonth.ui.fragment;
 
 import android.view.View;
 

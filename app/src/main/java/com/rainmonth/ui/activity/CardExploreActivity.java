@@ -6,7 +6,7 @@ import android.view.View;
 
 import com.rainmonth.R;
 import com.rainmonth.base.ui.activity.BaseActivity;
-import com.rainmonth.fragment.CardViewPagerFragment;
+import com.rainmonth.ui.fragment.CardViewPagerFragment;
 import com.rainmonth.library.eventbus.EventCenter;
 import com.rainmonth.library.utils.NetworkUtils;
 

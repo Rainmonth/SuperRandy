@@ -2,7 +2,7 @@ package com.rainmonth.model;
 
 import com.rainmonth.R;
 import com.rainmonth.bean.XunNavigationBean;
-import com.rainmonth.fragment.XunFragment;
+import com.rainmonth.ui.fragment.XunFragment;
 
 import java.util.ArrayList;
 import java.util.List;

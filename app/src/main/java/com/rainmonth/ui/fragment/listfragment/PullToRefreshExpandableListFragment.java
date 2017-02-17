@@ -13,32 +13,34 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package com.rainmonth.fragment.listfragment;
+package com.rainmonth.ui.fragment.listfragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 
-import com.rainmonth.widgets.library.PullToRefreshListView;
+import com.rainmonth.widgets.library.PullToRefreshExpandableListView;
 
 
 /**
- * A sample implementation of how to use {@link PullToRefreshListView} with
- * {@link android.support.v4.app.ListFragment}. This implementation simply replaces the ListView that
- * {@code ListFragment} creates with a new PullToRefreshListView. This means
- * that ListFragment still works 100% (e.g. <code>setListShown(...)</code> ).
+ * A sample implementation of how to use {@link PullToRefreshExpandableListView}
+ * with {@link android.support.v4.app.ListFragment}. This implementation simply replaces the ListView
+ * that {@code ListFragment} creates with a new
+ * {@code PullToRefreshExpandableListView}. This means that ListFragment still
+ * works 100% (e.g. <code>setListShown(...)</code> ).
  * <p/>
  * The new PullToRefreshListView is created in the method
  * {@link #onCreatePullToRefreshListView(LayoutInflater, Bundle)}. If you wish
- * to customise the {@code PullToRefreshListView} then override this method and
- * return your customised instance.
- * 
+ * to customise the {@code PullToRefreshExpandableListView} then override this
+ * method and return your customised instance.
+ *
  * @author Chris Banes
- * 
+ *
  */
-public class PullToRefreshListFragment extends PullToRefreshBaseListFragment<PullToRefreshListView> {
+public class PullToRefreshExpandableListFragment extends PullToRefreshBaseListFragment<PullToRefreshExpandableListView> {
 
-	protected PullToRefreshListView onCreatePullToRefreshListView(LayoutInflater inflater, Bundle savedInstanceState) {
-		return new PullToRefreshListView(getActivity());
+	protected PullToRefreshExpandableListView onCreatePullToRefreshListView(LayoutInflater inflater,
+			Bundle savedInstanceState) {
+		return new PullToRefreshExpandableListView(getActivity());
 	}
 
 }

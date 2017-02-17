@@ -1,4 +1,4 @@
-package com.rainmonth.fragment;
+package com.rainmonth.ui.fragment;
 
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
