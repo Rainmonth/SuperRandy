@@ -1,4 +1,4 @@
-package com.rainmonth.activity;
+package com.rainmonth.ui.activity;
 
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -8,7 +8,7 @@ import android.widget.FrameLayout;
 
 import com.igexin.sdk.PushManager;
 import com.rainmonth.R;
-import com.rainmonth.adapter.HomeViewPagerAdapter;
+import com.rainmonth.ui.adapter.HomeViewPagerAdapter;
 import com.rainmonth.base.ui.activity.BaseActivity;
 import com.rainmonth.getui.DemoPushService;
 import com.rainmonth.library.base.BaseLazyFragment;

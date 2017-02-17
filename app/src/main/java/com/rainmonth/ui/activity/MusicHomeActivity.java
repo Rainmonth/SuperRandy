@@ -1,21 +1,23 @@
-package com.rainmonth.activity;
+package com.rainmonth.ui.activity;
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
 import android.view.View;
+import android.widget.TextView;
 
 import com.rainmonth.R;
 import com.rainmonth.base.ui.activity.BaseActivity;
-import com.rainmonth.fragment.CardViewPagerFragment;
 import com.rainmonth.library.eventbus.EventCenter;
 import com.rainmonth.library.utils.NetworkUtils;
 
-public class CardExploreActivity extends BaseActivity {
+import butterknife.Bind;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
+/**
+ * 音乐主页面
+ */
+public class MusicHomeActivity extends BaseActivity implements View.OnClickListener {
+
+    @Bind(R.id.tv_play_music)
+    TextView tvPlayMusic;
 
     @Override
     protected void getBundleExtras(Bundle extras) {
@@ -24,7 +26,7 @@ public class CardExploreActivity extends BaseActivity {
 
     @Override
     protected int getContentViewLayoutID() {
-        return R.layout.activity_card_explore;
+        return R.layout.activity_music_home;
     }
 
     @Override
@@ -39,11 +41,7 @@ public class CardExploreActivity extends BaseActivity {
 
     @Override
     protected void initViewsAndEvents() {
-        CardViewPagerFragment fragment = CardViewPagerFragment.getInstance();
-
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.add(R.id.frameLayout, fragment);
-        transaction.commit();
+        tvPlayMusic.setOnClickListener(this);
     }
 
     @Override
@@ -78,7 +76,19 @@ public class CardExploreActivity extends BaseActivity {
 
     @Override
     public void initToolbar() {
-        mToolbar.setTitle("最美应用");
+        mToolbar.setTitle("音乐主页");
         mToolbar.setLogo(R.drawable.ic_action_bar_logo);
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.tv_play_music:
+                readyGo(MusicPlayerActivity.class);
+                break;
+            default:
+
+                break;
+        }
     }
 }

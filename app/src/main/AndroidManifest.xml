@@ -133,7 +133,7 @@
 
         <!-- 在上面加入你的你的activity配置 -->
         <activity
-            android:name=".activity.SplashActivity"
+            android:name=".ui.activity.SplashActivity"
             android:screenOrientation="portrait"
             android:theme="@style/SplashTheme">
             <intent-filter>
@@ -143,46 +143,46 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.MainActivity"
+            android:name=".ui.activity.MainActivity"
             android:label="@string/app_name"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/TransparentTheme" />
         <activity
-            android:name=".activity.CardExploreActivity"
+            android:name=".ui.activity.CardExploreActivity"
             android:screenOrientation="portrait"
             android:theme="@style/TransparentTheme" />
         <activity
-            android:name=".activity.ViewPagerExploreActivity"
+            android:name=".ui.activity.ViewPagerExploreActivity"
             android:screenOrientation="portrait"
             android:theme="@style/TransparentTheme" />
         <activity
-            android:name=".activity.ListExploreActivity"
+            android:name=".ui.activity.ListExploreActivity"
             android:screenOrientation="portrait"
             android:theme="@style/TransparentTheme" />
         <activity
-            android:name=".activity.GridExploreActivity"
+            android:name=".ui.activity.GridExploreActivity"
             android:screenOrientation="portrait"
             android:theme="@style/TransparentTheme" />
         <activity
-            android:name=".activity.LoginActivity"
+            android:name=".ui.activity.LoginActivity"
             android:screenOrientation="portrait"
             android:theme="@style/TransparentTheme"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".activity.RegisterActivity"
+            android:name=".ui.activity.RegisterActivity"
             android:screenOrientation="portrait"
             android:theme="@style/TransparentTheme"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".activity.WelcomeActivity"
+            android:name=".ui.activity.WelcomeActivity"
             android:screenOrientation="portrait"
             android:theme="@style/TransparentTheme" />
         <activity
-            android:name=".activity.MusicPlayerActivity"
+            android:name=".ui.activity.MusicPlayerActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.MusicHomeActivity"
+            android:name=".ui.activity.MusicHomeActivity"
             android:screenOrientation="portrait" />
     </application>
 

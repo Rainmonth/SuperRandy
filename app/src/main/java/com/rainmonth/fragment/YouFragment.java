@@ -10,9 +10,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.rainmonth.R;
-import com.rainmonth.activity.LoginActivity;
-import com.rainmonth.activity.RegisterActivity;
-import com.rainmonth.activity.WelcomeActivity;
+import com.rainmonth.ui.activity.LoginActivity;
+import com.rainmonth.ui.activity.RegisterActivity;
+import com.rainmonth.ui.activity.WelcomeActivity;
 import com.rainmonth.library.base.BaseLazyFragment;
 import com.rainmonth.library.eventbus.EventCenter;
 

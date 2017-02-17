@@ -8,7 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.rainmonth.activity.MainActivity;
+import com.rainmonth.ui.activity.MainActivity;
 
 import java.util.ArrayList;
 import java.util.List;

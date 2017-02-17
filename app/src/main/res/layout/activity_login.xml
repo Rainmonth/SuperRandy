@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg_welcome0"
     android:orientation="vertical"
-    tools:context="com.rainmonth.activity.LoginActivity">
+    tools:context=".ui.activity.LoginActivity">
 
     <include layout="@layout/toolbar_layout" />
 

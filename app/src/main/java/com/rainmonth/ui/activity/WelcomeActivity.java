@@ -1,4 +1,4 @@
-package com.rainmonth.activity;
+package com.rainmonth.ui.activity;
 
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
@@ -11,7 +11,6 @@ import android.widget.LinearLayout;
 
 import com.rainmonth.R;
 import com.rainmonth.base.ui.activity.BaseActivity;
-import com.rainmonth.library.base.BaseAppCompatActivity;
 import com.rainmonth.library.eventbus.EventCenter;
 import com.rainmonth.library.utils.NetworkUtils;
 

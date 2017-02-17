@@ -7,7 +7,7 @@
     android:clipToPadding="true"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context="com.rainmonth.activity.WelcomeActivity">
+    tools:context=".ui.activity.WelcomeActivity">
 
 
     <android.support.v4.view.ViewPager

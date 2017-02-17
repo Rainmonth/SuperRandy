@@ -1,4 +1,4 @@
-package com.rainmonth.activity;
+package com.rainmonth.ui.activity;
 
 import android.os.Bundle;
 import android.view.View;
@@ -9,69 +9,79 @@ import android.widget.TextView;
 import com.rainmonth.R;
 import com.rainmonth.base.mvp.BaseResponse;
 import com.rainmonth.base.ui.activity.BaseActivity;
-import com.rainmonth.bean.UserBean;
 import com.rainmonth.library.eventbus.EventCenter;
 import com.rainmonth.library.utils.NetworkUtils;
-import com.rainmonth.presenter.IRegisterPresenter;
-import com.rainmonth.presenter.RegisterPresenter;
+import com.rainmonth.presenter.ILoginPresenter;
+import com.rainmonth.presenter.LoginPresenter;
 import com.rainmonth.utils.ToastUtils;
-import com.rainmonth.view.IRegisterView;
+import com.rainmonth.view.ILoginView;
 
 import butterknife.Bind;
 import butterknife.OnClick;
 
 /**
- * 注册页面
+ * 登录页面
  */
-public class RegisterActivity extends BaseActivity implements IRegisterView {
+public class LoginActivity extends BaseActivity implements ILoginView {
+
     @Bind(R.id.iv_user_avatar)
     ImageView ivUserAvatar;
-    @Bind(R.id.et_phone)
-    EditText etPhone;
     @Bind(R.id.et_user_name)
     EditText etUserName;
-    @Bind(R.id.et_email)
-    EditText etEmail;
     @Bind(R.id.et_psw)
     EditText etPsw;
-    @Bind(R.id.tv_create_account)
-    TextView tvCreateAccount;
+    @Bind(R.id.tv_login)
+    TextView tvLogin;
+    @Bind(R.id.tv_no_account)
+    TextView tvNoAccount;
+    @Bind(R.id.iv_qq)
+    ImageView ivQq;
+    @Bind(R.id.iv_sina)
+    ImageView ivSina;
 
-    IRegisterPresenter registerPresenter;
+    private ILoginPresenter loginPresenter;
 
     @Override
     public void initToolbar() {
         mToolbar.setLogo(R.drawable.ic_action_bar_logo);
-        mToolbar.setTitle("注册");
+        mToolbar.setTitle("登录");
         mToolbar.setBackgroundResource(R.color.transparent);
     }
 
-    @OnClick({R.id.iv_user_avatar, R.id.tv_create_account})
+    @OnClick({R.id.iv_user_avatar, R.id.tv_login, R.id.tv_no_account, R.id.iv_qq, R.id.iv_sina})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.iv_user_avatar:
+
                 break;
-            case R.id.tv_create_account:
-                UserBean userBean = new UserBean();
-                userBean.setMobile(etPhone.getText().toString());
-                userBean.setUsername(etUserName.getText().toString());
-                userBean.setEmail(etEmail.getText().toString());
-                userBean.setPsw(etPsw.getText().toString());
-                registerPresenter.register(userBean);
+            case R.id.tv_login:
+                loginPresenter.login(etUserName.getText().toString(), etPsw.getText().toString());
+                break;
+            case R.id.tv_no_account:
+
+                break;
+            case R.id.iv_qq:
+
+                break;
+            case R.id.iv_sina:
+
                 break;
         }
     }
 
+    // implements from ILoginView
     @Override
-    public void naveToAfterRegister(BaseResponse response) {
+    public void naveToAfterLogin(BaseResponse response) {
         if (response.getCode().equals("1")) {
             readyGo(MainActivity.class);
+            ToastUtils.showLongToast(mContext, response.getMessage());
             finish();
         } else {
             ToastUtils.showLongToast(mContext, response.getMessage());
         }
     }
 
+    // implements from BaseView
     @Override
     public void toast(String msg) {
         ToastUtils.showLongToast(mContext, msg);
@@ -79,12 +89,10 @@ public class RegisterActivity extends BaseActivity implements IRegisterView {
 
     @Override
     public void showProgress() {
-
     }
 
     @Override
     public void hideProgress() {
-
     }
 
     @Override
@@ -94,7 +102,7 @@ public class RegisterActivity extends BaseActivity implements IRegisterView {
 
     @Override
     protected int getContentViewLayoutID() {
-        return R.layout.activity_register;
+        return R.layout.activity_login;
     }
 
     @Override
@@ -109,7 +117,10 @@ public class RegisterActivity extends BaseActivity implements IRegisterView {
 
     @Override
     protected void initViewsAndEvents() {
-        registerPresenter = new RegisterPresenter(this);
+        // todo to be delete
+        etUserName.setText("randy");
+        etPsw.setText("123456");
+        loginPresenter = new LoginPresenter(this);
     }
 
     @Override
@@ -124,7 +135,7 @@ public class RegisterActivity extends BaseActivity implements IRegisterView {
 
     @Override
     protected boolean isApplyStatusBarTranslucency() {
-        return true;
+        return false;
     }
 
     @Override

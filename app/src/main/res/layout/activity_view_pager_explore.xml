@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/bg_home"
     android:orientation="vertical"
-    tools:context="com.rainmonth.activity.ViewPagerExploreActivity">
+    tools:context=".ui.activity.ViewPagerExploreActivity">
 
     <include layout="@layout/toolbar_layout" />
 

@@ -10,11 +10,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.rainmonth.R;
-import com.rainmonth.activity.CardExploreActivity;
-import com.rainmonth.activity.GridExploreActivity;
-import com.rainmonth.activity.ListExploreActivity;
-import com.rainmonth.activity.MusicHomeActivity;
-import com.rainmonth.activity.ViewPagerExploreActivity;
+import com.rainmonth.ui.activity.CardExploreActivity;
+import com.rainmonth.ui.activity.GridExploreActivity;
+import com.rainmonth.ui.activity.ListExploreActivity;
+import com.rainmonth.ui.activity.MusicHomeActivity;
+import com.rainmonth.ui.activity.ViewPagerExploreActivity;
 import com.rainmonth.base.ui.adapter.ListViewDataAdapter;
 import com.rainmonth.base.ui.adapter.ViewHolderBase;
 import com.rainmonth.base.ui.adapter.ViewHolderCreator;

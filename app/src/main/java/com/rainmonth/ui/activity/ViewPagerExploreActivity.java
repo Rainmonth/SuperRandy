@@ -1,4 +1,4 @@
-package com.rainmonth.activity;
+package com.rainmonth.ui.activity;
 
 import android.content.Context;
 import android.graphics.Color;

@@ -1,18 +1,16 @@
-package com.rainmonth.activity;
+package com.rainmonth.ui.activity;
 
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 
 import com.rainmonth.R;
 import com.rainmonth.base.ui.activity.BaseActivity;
-import com.rainmonth.library.base.BaseAppCompatActivity;
+import com.rainmonth.fragment.CardViewPagerFragment;
 import com.rainmonth.library.eventbus.EventCenter;
 import com.rainmonth.library.utils.NetworkUtils;
 
-/**
- * 文章
- */
-public class GridExploreActivity extends BaseActivity {
+public class CardExploreActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +24,7 @@ public class GridExploreActivity extends BaseActivity {
 
     @Override
     protected int getContentViewLayoutID() {
-        return R.layout.activity_grid_explore;
+        return R.layout.activity_card_explore;
     }
 
     @Override
@@ -41,7 +39,11 @@ public class GridExploreActivity extends BaseActivity {
 
     @Override
     protected void initViewsAndEvents() {
+        CardViewPagerFragment fragment = CardViewPagerFragment.getInstance();
 
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.add(R.id.frameLayout, fragment);
+        transaction.commit();
     }
 
     @Override
@@ -76,6 +78,7 @@ public class GridExploreActivity extends BaseActivity {
 
     @Override
     public void initToolbar() {
-
+        mToolbar.setTitle("最美应用");
+        mToolbar.setLogo(R.drawable.ic_action_bar_logo);
     }
 }

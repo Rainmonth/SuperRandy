@@ -16,7 +16,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.rainmonth.R;
-import com.rainmonth.adapter.CardPagerAdapter;
+import com.rainmonth.ui.adapter.CardPagerAdapter;
 import com.rainmonth.bean.CardBean;
 import com.rainmonth.library.base.BaseLazyFragment;
 import com.rainmonth.library.eventbus.EventCenter;

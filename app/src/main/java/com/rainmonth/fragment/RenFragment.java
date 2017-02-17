@@ -12,7 +12,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.rainmonth.R;
-import com.rainmonth.adapter.BannerViewPagerAdapter;
+import com.rainmonth.ui.adapter.BannerViewPagerAdapter;
 import com.rainmonth.base.ui.adapter.ListViewDataAdapter;
 import com.rainmonth.base.ui.adapter.ViewHolderBase;
 import com.rainmonth.base.ui.adapter.ViewHolderCreator;

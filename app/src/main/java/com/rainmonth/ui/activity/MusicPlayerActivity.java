@@ -1,4 +1,4 @@
-package com.rainmonth.activity;
+package com.rainmonth.ui.activity;
 
 import android.os.Bundle;
 import android.view.View;
@@ -9,14 +9,9 @@ import com.rainmonth.library.eventbus.EventCenter;
 import com.rainmonth.library.utils.NetworkUtils;
 
 /**
- * 文章
+ * 音乐播放界面
  */
-public class ListExploreActivity extends BaseActivity {
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
+public class MusicPlayerActivity extends BaseActivity {
 
     @Override
     protected void getBundleExtras(Bundle extras) {
@@ -25,7 +20,7 @@ public class ListExploreActivity extends BaseActivity {
 
     @Override
     protected int getContentViewLayoutID() {
-        return R.layout.activity_list_explore;
+        return R.layout.activity_music_player;
     }
 
     @Override
@@ -73,13 +68,8 @@ public class ListExploreActivity extends BaseActivity {
         return null;
     }
 
-
     @Override
     public void initToolbar() {
-        if (null != mToolbar) {
-            mToolbar.setLogo(R.drawable.ic_action_bar_logo);
-            mToolbar.setTitle("列表新闻浏览");
-            mToolbar.setBackgroundResource(R.color.bg_home);
-        }
+        mToolbar.setTitle("音乐播放界面");
     }
 }
