@@ -24,7 +24,7 @@ import com.rainmonth.library.eventbus.EventCenter;
 import com.rainmonth.presenter.RenPresenter;
 import com.rainmonth.utils.ToastUtils;
 import com.rainmonth.view.RenFragmentView;
-import com.rainmonth.widgets.InnerListView;
+import com.rainmonth.ui.widgets.InnerListView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;

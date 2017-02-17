@@ -16,7 +16,7 @@ import com.rainmonth.library.base.BaseLazyFragment;
 import com.rainmonth.library.eventbus.EventCenter;
 import com.rainmonth.library.utils.CommonUtils;
 import com.rainmonth.library.utils.DensityUtils;
-import com.rainmonth.widgets.HtmlTextView;
+import com.rainmonth.ui.widgets.HtmlTextView;
 
 import butterknife.ButterKnife;
 

@@ -18,7 +18,7 @@ package com.rainmonth.ui.fragment.listfragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 
-import com.rainmonth.widgets.library.PullToRefreshListView;
+import com.rainmonth.ui.widgets.library.PullToRefreshListView;
 
 
 /**

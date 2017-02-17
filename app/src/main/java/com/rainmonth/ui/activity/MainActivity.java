@@ -10,13 +10,13 @@ import com.igexin.sdk.PushManager;
 import com.rainmonth.R;
 import com.rainmonth.ui.adapter.HomeViewPagerAdapter;
 import com.rainmonth.base.ui.activity.BaseActivity;
-import com.rainmonth.getui.DemoPushService;
+import com.rainmonth.support.getui.DemoPushService;
 import com.rainmonth.library.base.BaseLazyFragment;
 import com.rainmonth.library.eventbus.EventCenter;
 import com.rainmonth.library.utils.NetworkUtils;
 import com.rainmonth.presenter.MainPresenter;
 import com.rainmonth.view.MainView;
-import com.rainmonth.widgets.NavigationTabBar;
+import com.rainmonth.ui.widgets.NavigationTabBar;
 
 import java.util.List;
 
@@ -122,7 +122,7 @@ public class MainActivity extends BaseActivity implements MainView {
          * 1. 如果调用了registerPushIntentService方法注册自定义IntentService，则SDK仅通过IntentService回调推送服务事件；
          * 2. 如果未调用registerPushIntentService方法进行注册，则原有的广播接收器仍然可以继续使用。
          */
-        PushManager.getInstance().registerPushIntentService(this.getApplicationContext(), com.rainmonth.getui.DemoIntentService.class);
+        PushManager.getInstance().registerPushIntentService(this.getApplicationContext(), com.rainmonth.support.getui.DemoIntentService.class);
         String cid = PushManager.getInstance().getClientid(getApplicationContext());
         if (cid != null) {
             Log.e("client id=", cid);

@@ -121,13 +121,13 @@
 
         <!--个推DemoPushService-->
         <service
-            android:name="com.rainmonth.getui.DemoPushService"
+            android:name=".support.getui.DemoPushService"
             android:exported="true"
             android:label="PushService"
             android:process=":pushservice" />
 
         <!--个推DemoIntentService-->
-        <service android:name="com.rainmonth.getui.DemoIntentService" />
+        <service android:name=".support.getui.DemoIntentService" />
 
         <!-- 个推SDK配置结束 -->
 

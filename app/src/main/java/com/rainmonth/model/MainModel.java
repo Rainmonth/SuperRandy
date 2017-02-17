@@ -9,8 +9,8 @@ import com.rainmonth.ui.fragment.XunFragment;
 import com.rainmonth.ui.fragment.YouFragment;
 import com.rainmonth.ui.fragment.ZhuiFragment;
 import com.rainmonth.library.base.BaseLazyFragment;
-import com.rainmonth.tinker.util.SuperRandyApplicationContext;
-import com.rainmonth.widgets.NavigationTabBar;
+import com.rainmonth.support.tinker.util.SuperRandyApplicationContext;
+import com.rainmonth.ui.widgets.NavigationTabBar;
 
 import java.util.ArrayList;
 import java.util.List;

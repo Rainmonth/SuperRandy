@@ -3,7 +3,7 @@ package com.rainmonth.base.mvp;
 import android.support.annotation.CallSuper;
 
 import com.rainmonth.library.utils.NetworkUtils;
-import com.rainmonth.tinker.util.SuperRandyApplicationContext;
+import com.rainmonth.support.tinker.util.SuperRandyApplicationContext;
 import com.rainmonth.utils.http.RequestCallback;
 import com.socks.library.KLog;
 

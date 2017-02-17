@@ -8,9 +8,9 @@ import android.os.Build;
 import android.support.multidex.MultiDex;
 
 import com.rainmonth.library.utils.CrashHandler;
-import com.rainmonth.tinker.Log.MyLogImp;
-import com.rainmonth.tinker.util.SuperRandyApplicationContext;
-import com.rainmonth.tinker.util.TinkerManager;
+import com.rainmonth.support.tinker.Log.MyLogImp;
+import com.rainmonth.support.tinker.util.SuperRandyApplicationContext;
+import com.rainmonth.support.tinker.util.TinkerManager;
 import com.tencent.tinker.anno.DefaultLifeCycle;
 import com.tencent.tinker.lib.BuildConfig;
 import com.tencent.tinker.lib.tinker.Tinker;

@@ -23,7 +23,7 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.ListView;
 
-import com.rainmonth.widgets.library.PullToRefreshBase;
+import com.rainmonth.ui.widgets.library.PullToRefreshBase;
 
 
 abstract class PullToRefreshBaseListFragment<T extends PullToRefreshBase<? extends AbsListView>> extends ListFragment {
