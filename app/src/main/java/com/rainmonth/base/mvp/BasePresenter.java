@@ -1,6 +1,6 @@
 package com.rainmonth.base.mvp;
 
-import com.rainmonth.utils.http.RequestCallback;
+import com.rainmonth.base.http.RequestCallback;
 import com.socks.library.KLog;
 
 import rx.Subscription;

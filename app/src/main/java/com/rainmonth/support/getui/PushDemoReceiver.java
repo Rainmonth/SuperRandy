@@ -1,4 +1,4 @@
-package com.rainmonth.receiver;
+package com.rainmonth.support.getui;
 
 import android.app.Notification;
 import android.app.NotificationManager;

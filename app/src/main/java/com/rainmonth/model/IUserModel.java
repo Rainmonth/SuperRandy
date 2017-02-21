@@ -1,7 +1,7 @@
 package com.rainmonth.model;
 
 import com.rainmonth.bean.UserBean;
-import com.rainmonth.utils.http.RequestCallback;
+import com.rainmonth.base.http.RequestCallback;
 
 import rx.Subscription;
 

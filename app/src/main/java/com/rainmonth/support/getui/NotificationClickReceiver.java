@@ -1,4 +1,4 @@
-package com.rainmonth.receiver;
+package com.rainmonth.support.getui;
 
 import android.app.ActivityManager;
 import android.app.ActivityManager.RunningTaskInfo;

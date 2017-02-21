@@ -1,4 +1,4 @@
-package com.rainmonth.utils.http;
+package com.rainmonth.base.http;
 
 /**
  * Created by RandyZhang on 16/9/19.

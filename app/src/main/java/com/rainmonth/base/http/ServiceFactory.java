@@ -1,4 +1,4 @@
-package com.rainmonth.utils.http;
+package com.rainmonth.base.http;
 
 import android.content.Context;
 import android.content.SharedPreferences;

@@ -2,7 +2,7 @@ package com.rainmonth.model;
 
 import com.rainmonth.bean.ArticleBean;
 import com.rainmonth.bean.BannerBean;
-import com.rainmonth.utils.http.RequestCallback;
+import com.rainmonth.base.http.RequestCallback;
 
 import java.util.List;
 

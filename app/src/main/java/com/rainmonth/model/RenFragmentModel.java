@@ -8,9 +8,9 @@ import com.rainmonth.bean.ArticleBean;
 import com.rainmonth.bean.ArticleGroupBean;
 import com.rainmonth.bean.BannerBean;
 import com.rainmonth.service.BannerService;
-import com.rainmonth.utils.http.Api;
-import com.rainmonth.utils.http.RequestCallback;
-import com.rainmonth.utils.http.ServiceFactory;
+import com.rainmonth.base.http.Api;
+import com.rainmonth.base.http.RequestCallback;
+import com.rainmonth.base.http.ServiceFactory;
 
 import java.util.List;
 

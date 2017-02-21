@@ -4,7 +4,7 @@ import android.support.annotation.CallSuper;
 
 import com.rainmonth.library.utils.NetworkUtils;
 import com.rainmonth.support.tinker.util.SuperRandyApplicationContext;
-import com.rainmonth.utils.http.RequestCallback;
+import com.rainmonth.base.http.RequestCallback;
 import com.socks.library.KLog;
 
 import java.net.UnknownHostException;

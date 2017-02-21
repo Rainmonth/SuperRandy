@@ -112,7 +112,7 @@
 
         <!--个推配置第三方Receiver -->
         <receiver
-            android:name=".receiver.PushDemoReceiver"
+            android:name=".support.getui.PushDemoReceiver"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.igexin.sdk.action.${GETUI_APP_ID}" />
