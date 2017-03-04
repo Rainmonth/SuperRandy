@@ -83,7 +83,7 @@ public class CardFragment extends BaseLazyFragment {
     }
 
     protected void initData() {
-        this.mCardBean = (CardBean) getArguments().getSerializable("cardInfo");
+        this.mCardBean = (CardBean) getArguments().getSerializable("cardBean");
     }
 
     protected void initActions(View paramView) {
