@@ -55,7 +55,7 @@
             android:textSize="12.0sp" />
     </LinearLayout>
 
-    <com.rainmonth.widgets.PullToRefreshViewPager
+    <com.rainmonth.ui.widgets.PullToRefreshViewPager
         android:id="@+id/pager"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
@@ -66,7 +66,7 @@
         ptr:ptrMode="both"
         ptr:ptrScrollingWhileRefreshingEnabled="false" />
 
-    <com.rainmonth.widgets.RhythmLayout
+    <com.rainmonth.ui.widgets.RhythmLayout
         android:id="@+id/box_rhythm"
         android:layout_width="fill_parent"
         android:layout_height="@dimen/rhythm_layout_height"
@@ -77,5 +77,5 @@
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:orientation="horizontal" />
-    </com.rainmonth.widgets.RhythmLayout>
+    </com.rainmonth.ui.widgets.RhythmLayout>
 </RelativeLayout>

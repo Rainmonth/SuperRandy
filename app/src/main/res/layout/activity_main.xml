@@ -30,7 +30,7 @@
             android:layout_gravity="bottom"
             android:background="@color/bg_home_bottom_tab_bar" />
 
-        <com.rainmonth.widgets.NavigationTabBar
+        <com.rainmonth.ui.widgets.NavigationTabBar
             android:id="@+id/ntb_horizontal"
             android:layout_width="match_parent"
             android:layout_height="48dp"
