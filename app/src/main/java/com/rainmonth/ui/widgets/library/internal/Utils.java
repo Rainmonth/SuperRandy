@@ -1,4 +1,4 @@
-package com.rainmonth.widgets.library.internal;
+package com.rainmonth.ui.widgets.library.internal;
 
 import android.util.Log;
 

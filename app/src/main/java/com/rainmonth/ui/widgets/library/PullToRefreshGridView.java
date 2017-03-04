@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package com.rainmonth.widgets.library;
+package com.rainmonth.ui.widgets.library;
 
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -23,7 +23,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.GridView;
 
-import com.rainmonth.widgets.library.internal.EmptyViewMethodAccessor;
+import com.rainmonth.ui.widgets.library.internal.EmptyViewMethodAccessor;
 import com.rainmonth.R;
 
 

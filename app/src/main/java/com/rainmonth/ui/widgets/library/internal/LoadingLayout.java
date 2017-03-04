@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package com.rainmonth.widgets.library.internal;
+package com.rainmonth.ui.widgets.library.internal;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -37,8 +37,8 @@ import android.widget.TextView;
 
 import com.rainmonth.R;
 
-import com.rainmonth.widgets.library.ILoadingLayout;
-import com.rainmonth.widgets.library.PullToRefreshBase;
+import com.rainmonth.ui.widgets.library.ILoadingLayout;
+import com.rainmonth.ui.widgets.library.PullToRefreshBase;
 
 @SuppressLint("ViewConstructor")
 public abstract class LoadingLayout extends FrameLayout implements ILoadingLayout {

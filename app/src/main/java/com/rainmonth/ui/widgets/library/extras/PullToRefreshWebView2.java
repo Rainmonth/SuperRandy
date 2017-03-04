@@ -13,13 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package com.rainmonth.widgets.library.extras;
+package com.rainmonth.ui.widgets.library.extras;
 
 import android.content.Context;
 import android.util.AttributeSet;
 import android.webkit.WebView;
 
-import com.rainmonth.widgets.library.PullToRefreshWebView;
+import com.rainmonth.ui.widgets.library.PullToRefreshWebView;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 

@@ -13,13 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package com.rainmonth.widgets.library.extras;
+package com.rainmonth.ui.widgets.library.extras;
 
 import android.content.Context;
 import android.media.MediaPlayer;
 import android.view.View;
 
-import com.rainmonth.widgets.library.PullToRefreshBase;
+import com.rainmonth.ui.widgets.library.PullToRefreshBase;
 
 import java.util.HashMap;
 

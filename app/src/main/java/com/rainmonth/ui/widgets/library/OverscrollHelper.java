@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package com.rainmonth.widgets.library;
+package com.rainmonth.ui.widgets.library;
 
 import android.annotation.TargetApi;
 import android.util.Log;
@@ -46,7 +46,7 @@ public final class OverscrollHelper {
 	 * @param isTouchEvent - true if this scroll operation is the result of a
 	 *            touch event, passed through from from overScrollBy call
 	 */
-	public static void overScrollBy(final com.rainmonth.widgets.library.PullToRefreshBase<?> view, final int deltaX, final int scrollX,
+	public static void overScrollBy(final PullToRefreshBase<?> view, final int deltaX, final int scrollX,
 									final int deltaY, final int scrollY, final boolean isTouchEvent) {
 		overScrollBy(view, deltaX, scrollX, deltaY, scrollY, 0, isTouchEvent);
 	}
@@ -70,7 +70,7 @@ public final class OverscrollHelper {
 	 * @param isTouchEvent - true if this scroll operation is the result of a
 	 *            touch event, passed through from from overScrollBy call
 	 */
-	public static void overScrollBy(final com.rainmonth.widgets.library.PullToRefreshBase<?> view, final int deltaX, final int scrollX,
+	public static void overScrollBy(final PullToRefreshBase<?> view, final int deltaX, final int scrollX,
 									final int deltaY, final int scrollY, final int scrollRange, final boolean isTouchEvent) {
 		overScrollBy(view, deltaX, scrollX, deltaY, scrollY, scrollRange, 0, DEFAULT_OVERSCROLL_SCALE, isTouchEvent);
 	}
@@ -97,7 +97,7 @@ public final class OverscrollHelper {
 	 * @param isTouchEvent - true if this scroll operation is the result of a
 	 *            touch event, passed through from from overScrollBy call
 	 */
-	public static void overScrollBy(final com.rainmonth.widgets.library.PullToRefreshBase<?> view, final int deltaX, final int scrollX,
+	public static void overScrollBy(final PullToRefreshBase<?> view, final int deltaX, final int scrollX,
 									final int deltaY, final int scrollY, final int scrollRange, final int fuzzyThreshold,
 									final float scaleFactor, final boolean isTouchEvent) {
 
@@ -126,7 +126,7 @@ public final class OverscrollHelper {
 			if (mode.permitsPullToRefresh() && !isTouchEvent && deltaValue != 0) {
 				final int newScrollValue = (deltaValue + scrollValue);
 
-				if (com.rainmonth.widgets.library.PullToRefreshBase.DEBUG) {
+				if (PullToRefreshBase.DEBUG) {
 					Log.d(LOG_TAG, "OverScroll. DeltaX: " + deltaX + ", ScrollX: " + scrollX + ", DeltaY: " + deltaY
 							+ ", ScrollY: " + scrollY + ", NewY: " + newScrollValue + ", ScrollRange: " + scrollRange
 							+ ", CurrentScroll: " + currentScrollValue);

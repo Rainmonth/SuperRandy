@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package com.rainmonth.widgets.library.internal;
+package com.rainmonth.ui.widgets.library.internal;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -25,7 +25,7 @@ import android.widget.ImageView.ScaleType;
 
 import com.rainmonth.R;
 
-import com.rainmonth.widgets.library.PullToRefreshBase;
+import com.rainmonth.ui.widgets.library.PullToRefreshBase;
 
 public class RotateLoadingLayout extends LoadingLayout {
 

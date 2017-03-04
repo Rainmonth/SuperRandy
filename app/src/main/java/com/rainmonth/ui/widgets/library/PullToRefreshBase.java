@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package com.rainmonth.widgets.library;
+package com.rainmonth.ui.widgets.library;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -35,9 +35,14 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import com.rainmonth.R;
+import com.rainmonth.ui.widgets.library.internal.FlipLoadingLayout;
+import com.rainmonth.ui.widgets.library.internal.LoadingLayout;
+import com.rainmonth.ui.widgets.library.internal.RotateLoadingLayout;
+import com.rainmonth.ui.widgets.library.internal.Utils;
+import com.rainmonth.ui.widgets.library.internal.ViewCompat;
 
 
-public abstract class PullToRefreshBase<T extends View> extends LinearLayout implements com.rainmonth.widgets.library.IPullToRefresh<T> {
+public abstract class PullToRefreshBase<T extends View> extends LinearLayout implements IPullToRefresh<T> {
 
 	// ===========================================================
 	// Constants
@@ -87,8 +92,8 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
 	private Interpolator mScrollAnimationInterpolator;
 	private AnimationStyle mLoadingAnimationStyle = AnimationStyle.getDefault();
 
-	private com.rainmonth.widgets.library.internal.LoadingLayout mHeaderLayout;
-	private com.rainmonth.widgets.library.internal.LoadingLayout mFooterLayout;
+	private LoadingLayout mHeaderLayout;
+	private LoadingLayout mFooterLayout;
 
 	private OnRefreshListener<T> mOnRefreshListener;
 	private OnRefreshListener2<T> mOnRefreshListener2;
@@ -167,7 +172,7 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
 	}
 
 	@Override
-	public final com.rainmonth.widgets.library.ILoadingLayout getLoadingLayoutProxy(boolean includeStart, boolean includeEnd) {
+	public final ILoadingLayout getLoadingLayoutProxy(boolean includeStart, boolean includeEnd) {
 		return createLoadingLayoutProxy(includeStart, includeEnd);
 	}
 
@@ -206,7 +211,7 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
 	@Override
 	public final boolean isPullToRefreshOverScrollEnabled() {
 		return VERSION.SDK_INT >= VERSION_CODES.GINGERBREAD && mOverScrollEnabled
-				&& com.rainmonth.widgets.library.OverscrollHelper.isAndroidOverScrollEnabled(mRefreshableView);
+				&& OverscrollHelper.isAndroidOverScrollEnabled(mRefreshableView);
 	}
 
 	@Override
@@ -580,8 +585,8 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
 		super.addView(child, -1, params);
 	}
 
-	protected com.rainmonth.widgets.library.internal.LoadingLayout createLoadingLayout(Context context, Mode mode, TypedArray attrs) {
-		com.rainmonth.widgets.library.internal.LoadingLayout layout = mLoadingAnimationStyle.createLoadingLayout(context, mode,
+	protected LoadingLayout createLoadingLayout(Context context, Mode mode, TypedArray attrs) {
+		LoadingLayout layout = mLoadingAnimationStyle.createLoadingLayout(context, mode,
 				getPullToRefreshScrollDirection(), attrs);
 		layout.setVisibility(View.INVISIBLE);
 		return layout;
@@ -591,8 +596,8 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
 	 * Used internally for {@link #getLoadingLayoutProxy(boolean, boolean)}.
 	 * Allows derivative classes to include any extra LoadingLayouts.
 	 */
-	protected com.rainmonth.widgets.library.LoadingLayoutProxy createLoadingLayoutProxy(final boolean includeStart, final boolean includeEnd) {
-		com.rainmonth.widgets.library.LoadingLayoutProxy proxy = new com.rainmonth.widgets.library.LoadingLayoutProxy();
+	protected LoadingLayoutProxy createLoadingLayoutProxy(final boolean includeStart, final boolean includeEnd) {
+		LoadingLayoutProxy proxy = new LoadingLayoutProxy();
 
 		if (includeStart && mMode.showHeaderLoadingLayout()) {
 			proxy.addLayout(mHeaderLayout);
@@ -624,7 +629,7 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
 		mLayoutVisibilityChangesEnabled = false;
 	}
 
-	protected final com.rainmonth.widgets.library.internal.LoadingLayout getFooterLayout() {
+	protected final LoadingLayout getFooterLayout() {
 		return mFooterLayout;
 	}
 
@@ -632,7 +637,7 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
 		return mFooterLayout.getContentSize();
 	}
 
-	protected final com.rainmonth.widgets.library.internal.LoadingLayout getHeaderLayout() {
+	protected final LoadingLayout getHeaderLayout() {
 		return mHeaderLayout;
 	}
 
@@ -968,7 +973,7 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
 			 * all. We don't use them on the Header/Footer Views as they change
 			 * often, which would negate any HW layer performance boost.
 			 */
-			com.rainmonth.widgets.library.internal.ViewCompat.setLayerType(mRefreshableViewWrapper, value != 0 ? View.LAYER_TYPE_HARDWARE
+			ViewCompat.setLayerType(mRefreshableViewWrapper, value != 0 ? View.LAYER_TYPE_HARDWARE
 					: View.LAYER_TYPE_NONE);
 		}
 
@@ -1114,7 +1119,7 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
 				mRefreshableView.setBackgroundDrawable(background);
 			}
 		} else if (a.hasValue(R.styleable.PullToRefresh_ptrAdapterViewBackground)) {
-			com.rainmonth.widgets.library.internal.Utils.warnDeprecation("ptrAdapterViewBackground", "ptrRefreshableViewBackground");
+			Utils.warnDeprecation("ptrAdapterViewBackground", "ptrRefreshableViewBackground");
 			Drawable background = a.getDrawable(R.styleable.PullToRefresh_ptrAdapterViewBackground);
 			if (null != background) {
 				mRefreshableView.setBackgroundDrawable(background);
@@ -1318,13 +1323,13 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
 			}
 		}
 
-		com.rainmonth.widgets.library.internal.LoadingLayout createLoadingLayout(Context context, Mode mode, Orientation scrollDirection, TypedArray attrs) {
+		LoadingLayout createLoadingLayout(Context context, Mode mode, Orientation scrollDirection, TypedArray attrs) {
 			switch (this) {
 				case ROTATE:
 				default:
-					return new com.rainmonth.widgets.library.internal.RotateLoadingLayout(context, mode, scrollDirection, attrs);
+					return new RotateLoadingLayout(context, mode, scrollDirection, attrs);
 				case FLIP:
-					return new com.rainmonth.widgets.library.internal.FlipLoadingLayout(context, mode, scrollDirection, attrs);
+					return new FlipLoadingLayout(context, mode, scrollDirection, attrs);
 			}
 		}
 	}
@@ -1436,7 +1441,7 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
 	/**
 	 * Simple Listener that allows you to be notified when the user has scrolled
 	 * to the end of the AdapterView. See (
-	 * {@link com.rainmonth.widgets.library.PullToRefreshAdapterViewBase#setOnLastItemVisibleListener}.
+	 * {@link com.rainmonth.ui.widgets.library.PullToRefreshAdapterViewBase#setOnLastItemVisibleListener}.
 	 *
 	 * @author Chris Banes
 	 */
@@ -1453,7 +1458,7 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
 	 * Listener that allows you to be notified when the user has started or
 	 * finished a touch event. Useful when you want to append extra UI events
 	 * (such as sounds). See (
-	 * {@link com.rainmonth.widgets.library.PullToRefreshAdapterViewBase#setOnPullEventListener}.
+	 * {@link com.rainmonth.ui.widgets.library.PullToRefreshAdapterViewBase#setOnPullEventListener}.
 	 *
 	 * @author Chris Banes
 	 */
@@ -1629,7 +1634,7 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
 
 			// If we're not at the target Y, keep going...
 			if (mContinueRunning && mScrollToY != mCurrentY) {
-				com.rainmonth.widgets.library.internal.ViewCompat.postOnAnimation(PullToRefreshBase.this, this);
+				ViewCompat.postOnAnimation(PullToRefreshBase.this, this);
 			} else {
 				if (null != mListener) {
 					mListener.onSmoothScrollFinished();
