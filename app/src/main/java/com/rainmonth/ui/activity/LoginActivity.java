@@ -45,7 +45,7 @@ public class LoginActivity extends BaseActivity implements ILoginView {
     public void initToolbar() {
         mToolbar.setLogo(R.drawable.ic_action_bar_logo);
         mToolbar.setTitle("登录");
-        mToolbar.setBackgroundResource(R.color.transparent);
+//        mToolbar.setBackgroundResource(R.color.transparent);
     }
 
     @OnClick({R.id.iv_user_avatar, R.id.tv_login, R.id.tv_no_account, R.id.iv_qq, R.id.iv_sina})
@@ -135,7 +135,7 @@ public class LoginActivity extends BaseActivity implements ILoginView {
 
     @Override
     protected boolean isApplyStatusBarTranslucency() {
-        return false;
+        return true;
     }
 
     @Override

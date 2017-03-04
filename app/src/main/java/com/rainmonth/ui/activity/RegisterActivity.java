@@ -43,7 +43,7 @@ public class RegisterActivity extends BaseActivity implements IRegisterView {
     public void initToolbar() {
         mToolbar.setLogo(R.drawable.ic_action_bar_logo);
         mToolbar.setTitle("注册");
-        mToolbar.setBackgroundResource(R.color.transparent);
+//        mToolbar.setBackgroundResource(R.color.transparent);
     }
 
     @OnClick({R.id.iv_user_avatar, R.id.tv_create_account})
