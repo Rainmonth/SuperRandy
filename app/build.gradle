@@ -86,7 +86,7 @@ def loadProperties() {
 loadProperties()
 android {
     compileSdkVersion 24
-    buildToolsVersion "24.0.3"
+    buildToolsVersion "25.0.2"
     compileOptions {
         sourceCompatibility javaVersion
         targetCompatibility javaVersion
