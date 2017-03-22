@@ -3,11 +3,6 @@ apply plugin: 'com.android.application'
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile files('libs/GetuiSDK2.9.5.0.jar')
-    compile 'com.android.support:design:24.2.1'
-    compile 'com.android.support:support-v4:24.2.1'
-    // ButterKnife
-    compile 'com.jakewharton:butterknife:7.0.1'
-    compile 'com.android.support:multidex:1.0.1'
     // Retrofit
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
@@ -30,6 +25,8 @@ dependencies {
     //tinker的核心库
     provided("com.tencent.tinker:tinker-android-anno:${TINKER_VERSION}") { changing = true }
     compile('com.android.support:multidex:1.0.1')
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+
 }
 
 // 获取git 提交版本号，来设置TinkerID
@@ -85,7 +82,7 @@ def loadProperties() {
 //加载信息
 loadProperties()
 android {
-    compileSdkVersion 24
+    compileSdkVersion 25
     buildToolsVersion "25.0.2"
     compileOptions {
         sourceCompatibility javaVersion
@@ -113,8 +110,8 @@ android {
 
     defaultConfig {
         applicationId "com.rainmonth"
-        minSdkVersion 15
-        targetSdkVersion 21
+        minSdkVersion 14
+        targetSdkVersion 25
         versionCode appVersionCode
         versionName appVersionName
         // dex 突破65535限制
@@ -148,52 +145,7 @@ android {
 
     productFlavors {
         mk10086 {}
-        mk360 {}
-        mk91 {}
-        mkanzh {}
-        mkaqy {}
-        mkaz {}
-        mkazs {}
-        mkazy {}
-        mkbd {}
-        mkchuizi {}
-        mkhw {}
-        mkhx {}
-        mkjf {}
-        mkjinli {}
-        mkkuan {}
-        mkles {}
-        mkliqu {}
-        mklx {}
-        mkmb {}
-        mkmianfei {}
-        mkmmy {}
-        mkmz {}
-        mknd {}
-        mkoppo {}
-        mksamsung {}
-        mksg {}
-        mksun {}
-        mkuc {}
-        mkuc1 {}
-        mkvivo {}
-        mkwdj {}
-        mkwo {}
-        mkwy {}
-        mkxm {}
-        mkyiyh {}
-        mkyouyi {}
-        mkyunos {}
-        mkyyb {}
-        mkyyb1 {}
-        mkyyh {}
-        mkyyjia {}
-        mkzhuole {}
-        mkzy {}
-        "sc-6pc" {}
-        "sc-qb" {}
-        "sc-trj" {}
-        "sc-ssj" {}
+
         productFlavors.all { flavors ->
             flavors.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
         }
