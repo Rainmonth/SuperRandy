@@ -58,7 +58,7 @@ public class LoginActivity extends BaseActivity implements ILoginView {
                 loginPresenter.login(etUserName.getText().toString(), etPsw.getText().toString());
                 break;
             case R.id.tv_no_account:
-
+                readyGo(TestActivity.class);
                 break;
             case R.id.iv_qq:
 
