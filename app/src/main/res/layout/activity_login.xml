@@ -33,13 +33,13 @@
                 android:src="@drawable/ic_launcher" />
 
 
-            <EditText
+            <com.rainmonth.library.widgets.ClearEditText
                 android:id="@+id/et_user_name"
                 style="@style/half_trans_white_bg_edit_text"
                 android:hint="@string/username_hint"
                 android:inputType="text" />
 
-            <EditText
+            <com.rainmonth.library.widgets.ClearEditText
                 android:id="@+id/et_psw"
                 style="@style/half_trans_white_bg_edit_text"
                 android:hint="@string/psw_hint"

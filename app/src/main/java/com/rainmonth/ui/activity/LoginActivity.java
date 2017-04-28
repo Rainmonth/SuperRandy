@@ -11,6 +11,7 @@ import com.rainmonth.base.mvp.BaseResponse;
 import com.rainmonth.base.ui.activity.BaseActivity;
 import com.rainmonth.library.eventbus.EventCenter;
 import com.rainmonth.library.utils.NetworkUtils;
+import com.rainmonth.library.widgets.ClearEditText;
 import com.rainmonth.presenter.ILoginPresenter;
 import com.rainmonth.presenter.LoginPresenter;
 import com.rainmonth.utils.ToastUtils;
@@ -27,9 +28,9 @@ public class LoginActivity extends BaseActivity implements ILoginView {
     @Bind(R.id.iv_user_avatar)
     ImageView ivUserAvatar;
     @Bind(R.id.et_user_name)
-    EditText etUserName;
+    ClearEditText etUserName;
     @Bind(R.id.et_psw)
-    EditText etPsw;
+    ClearEditText etPsw;
     @Bind(R.id.tv_login)
     TextView tvLogin;
     @Bind(R.id.tv_no_account)
