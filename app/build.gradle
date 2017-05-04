@@ -4,22 +4,8 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile files('libs/GetuiSDK2.9.5.0.jar')
     // Retrofit
-    compile 'com.squareup.retrofit2:retrofit:2.1.0'
-    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
-    //    compile 'com.squareup.retrofit2:converter-jackson:2.1.0'
-    compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
-    // RxJava and RxAndroid
-    compile 'io.reactivex:rxandroid:1.2.1'
-    compile 'io.reactivex:rxjava:1.1.6'
-    // OkHttp
-    compile 'com.squareup.okhttp3:okhttp:3.4.1'
-    compile 'com.squareup.okio:okio:1.9.0'
-    // KLog
-    compile 'com.github.zhaokaiqiang.klog:library:1.5.0'
-    compile 'com.readystatesoftware.systembartint:systembartint:1.0.3'
     compile project(':library')
     compile project(':magicindicator')
-    compile 'com.squareup.picasso:picasso:2.5.2'
     //可选，用于生成application类
     compile("com.tencent.tinker:tinker-android-lib:${TINKER_VERSION}") { changing = true }
     //tinker的核心库
