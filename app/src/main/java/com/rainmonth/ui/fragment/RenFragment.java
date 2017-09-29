@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.rainmonth.R;
 import com.rainmonth.ui.adapter.BannerViewPagerAdapter;
 import com.rainmonth.base.ui.adapter.ListViewDataAdapter;
@@ -25,7 +26,6 @@ import com.rainmonth.presenter.RenPresenter;
 import com.rainmonth.utils.ToastUtils;
 import com.rainmonth.view.RenFragmentView;
 import com.rainmonth.ui.widgets.InnerListView;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -167,7 +167,7 @@ public class RenFragment extends BaseLazyFragment implements RenFragmentView {
 
                                     @Override
                                     public void showData(int position, ArticleBean itemData) {
-                                        Picasso.with(getActivity()).load(itemData.getThumb_url()).into(ivArticleAvatar);
+                                        Glide.with(getActivity()).load(itemData.getThumb_url()).into(ivArticleAvatar);
                                         tvArticleTitle.setText(itemData.getTitle());
                                         tvArticleSummarize.setText(itemData.getSummarize());
                                         tvLike.setText(String.format("%s喜欢", itemData.getLike_num()));
