@@ -1,0 +1,2 @@
+apply from: "../base_component.gradle"
+

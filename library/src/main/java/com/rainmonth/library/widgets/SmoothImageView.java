@@ -59,7 +59,7 @@ public class SmoothImageView extends PhotoView {
         init();
     }
 
-    private void init() {
+    protected void init() {
         mSmoothMatrix = new Matrix();
         mPaint = new Paint();
         mPaint.setColor(mBgColor);

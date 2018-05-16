@@ -1,1 +1,3 @@
-include ':app', ':library', ':magicindicator'
+include ':app'
+include ':library', ':magicindicator'
+include ':component-movie', ':component-music', ':component-app', ':component-read', ':component-image'

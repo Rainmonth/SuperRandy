@@ -1,17 +1,25 @@
+// 表明为一个库
 apply plugin: 'com.android.library'
+// 应用其他plugin
+
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.3"
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolVersion
 
     defaultConfig {
-        minSdkVersion 14
-        targetSdkVersion 25
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
         versionCode 1
         versionName "1.0"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
+        javaCompileOptions {
+            annotationProcessorOptions {
+                includeCompileClasspath true
+            }
+        }
     }
     buildTypes {
         release {
@@ -28,32 +36,48 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    testCompile 'junit:junit:4.12'
 
-    compile 'com.jakewharton:butterknife:7.0.1'
-    compile 'com.android.support:design:25.3.1'
+    // base
+    api rootProject.ext.dependencies["appcompat-v7"]
+    api rootProject.ext.dependencies["design"]
+    api rootProject.ext.dependencies["cardview-v7"]
+    api rootProject.ext.dependencies["recyclerview-v7"]
+    api rootProject.ext.dependencies["constraintlayout"]
+    api rootProject.ext.dependencies["support-annotations"]
+    api(rootProject.ext.dependencies["base-rcv-helper"]) {
+        exclude module: 'support-v4'
+        exclude module: 'appcompat-v7'
+        exclude module: 'support-annotations'
+    }
+    // test
+    testApi rootProject.ext.dependencies['junit']
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
+    // butter knife
+    api rootProject.ext.dependencies["butterknife"]
     compile 'de.greenrobot:eventbus:2.4.0'
     compile 'com.readystatesoftware.systembartint:systembartint:1.0.3'
     compile 'com.nineoldandroids:library:2.4.0'
-    compile 'com.github.chrisbanes.photoview:library:1.2.2'
-    compile 'com.squareup.okhttp:okhttp:2.4.0'
-    compile 'com.github.bumptech.glide:glide:3.7.0'
-    compile 'com.github.bumptech.glide:okhttp3-integration:1.4.0@aar'
+    compile 'com.github.chrisbanes.photoview:library:1.2.4'
 
-    compile 'com.squareup.retrofit2:retrofit:2.1.0'
-    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
+    // 网络请求 okHttp和retrofit
+    api rootProject.ext.dependencies["okhttp"]
+    api rootProject.ext.dependencies["okio"]
+    api rootProject.ext.dependencies["retrofit"]
+    api rootProject.ext.dependencies["retrofit-converter-gson"]
     //    compile 'com.squareup.retrofit2:converter-jackson:2.1.0'
-    compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
+    api rootProject.ext.dependencies["retrofit-adapter-rxjava2"]
+
     // RxJava and RxAndroid
-    compile 'io.reactivex:rxandroid:1.2.1'
-    compile 'io.reactivex:rxjava:1.1.6'
-    // OkHttp
-    compile 'com.squareup.okhttp3:okhttp:3.4.1'
-    compile 'com.squareup.okio:okio:1.9.0'
+    api rootProject.ext.dependencies["rxjava"]
+    api rootProject.ext.dependencies["rxandroid"]
+
+    // 图片加载
+    api rootProject.ext.dependencies["glide"]
+    api rootProject.ext.dependencies["glide-compiler"]
+    api rootProject.ext.dependencies["glide-loader-okhttp3"]
+
     // KLog
     compile 'com.github.zhaokaiqiang.klog:library:1.5.0'
     compile 'com.readystatesoftware.systembartint:systembartint:1.0.3'

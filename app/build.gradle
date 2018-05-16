@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
@@ -10,8 +11,11 @@ dependencies {
     compile("com.tencent.tinker:tinker-android-lib:${TINKER_VERSION}") { changing = true }
     //tinker的核心库
     provided("com.tencent.tinker:tinker-android-anno:${TINKER_VERSION}") { changing = true }
+    annotationProcessor ("com.tencent.tinker:tinker-android-anno:${TINKER_VERSION}")
     compile('com.android.support:multidex:1.0.1')
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    compile 'com.android.support:support-annotations:27.1.1'
 
 }
 
@@ -69,7 +73,7 @@ def loadProperties() {
 loadProperties()
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.3"
+    buildToolsVersion '26.0.2'
     compileOptions {
         sourceCompatibility javaVersion
         targetCompatibility javaVersion
@@ -116,12 +120,18 @@ android {
         buildConfigField "String", "PLATFORM", "\"all\""
         aaptOptions.cruncherEnabled = false
         aaptOptions.useNewCruncher = false
+        flavorDimensions appVersionCode + ""
 
         manifestPlaceholders = [
                 GETUI_APP_ID    : "ozDCiowuZa5h2IxPdiCtB",
                 GETUI_APP_KEY   : "E35xIsmoim8YNTo6w46z98",
                 GETUI_APP_SECRET: "XDS2Jyg7nW8pJiU1hJN196"
         ]
+        javaCompileOptions {
+            annotationProcessorOptions {
+                includeCompileClasspath true
+            }
+        }
     }
 
     lintOptions {
@@ -152,11 +162,10 @@ android {
                     if (outputFile != null && outputFile.name.endsWith('debug.apk')) {
                         if (variant.productFlavors[0] != null) {
                             def productFlavorsName = variant.productFlavors[0].name;
-                            def fileName = appName + "V${defaultConfig.versionName}." + "${dateTime}" + productFlavorsName + appDebugSuffixName;
-                            output.outputFile = new File(appDebugDir, fileName)
+                            output.outputFileName = appName + "V${defaultConfig.versionName}." + "${dateTime}" + productFlavorsName + appDebugSuffixName
+
                         } else {
-                            def fileName = appName + "V${defaultConfig.versionName}." + "${dateTime}" + appDebugSuffixName;
-                            output.outputFile = new File(appDebugDir, fileName);
+                            output.outputFileName = appName + "V${defaultConfig.versionName}." + "${dateTime}" + appDebugSuffixName
                         }
                     }
                 }
@@ -180,11 +189,9 @@ android {
                     if (outputFile != null && outputFile.name.endsWith('release.apk')) {
                         if (variant.productFlavors[0] != null) {
                             def productFlavorsName = variant.productFlavors[0].name;
-                            def fileName = appName + "V${defaultConfig.versionName}." + "${dateTime}" + productFlavorsName + appReleaseSuffixName;
-                            output.outputFile = new File(appReleaseDir, fileName)
+                            output.outputFileName = appName + "V${defaultConfig.versionName}." + "${dateTime}" + productFlavorsName + appReleaseSuffixName;
                         } else {
-                            def fileName = appName + "V${defaultConfig.versionName}." + "${dateTime}" + appReleaseSuffixName;
-                            output.outputFile = new File(appReleaseDir, fileName);
+                            output.outputFileName = appName + "V${defaultConfig.versionName}." + "${dateTime}" + appReleaseSuffixName;
                         }
                     }
 
@@ -536,5 +543,8 @@ if (buildWithTinker()) {
             }
         }
     }
+}
+repositories {
+    mavenCentral()
 }
 
