@@ -1,6 +1,6 @@
 package com.rainmonth.model;
 
-import com.rainmonth.library.base.BaseLazyFragment;
+import com.rainmonth.common.base.BaseLazyFragment;
 import com.rainmonth.ui.widgets.NavigationTabBar;
 
 import java.util.List;

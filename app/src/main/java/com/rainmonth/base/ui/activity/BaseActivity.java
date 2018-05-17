@@ -3,7 +3,7 @@ package com.rainmonth.base.ui.activity;
 import android.os.Bundle;
 
 import com.rainmonth.R;
-import com.rainmonth.library.base.BaseAppCompatActivity;
+import com.rainmonth.common.base.BaseAppCompatActivity;
 
 import butterknife.ButterKnife;
 

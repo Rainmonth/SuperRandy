@@ -12,10 +12,10 @@ import android.widget.TextView;
 
 import com.rainmonth.R;
 import com.rainmonth.bean.CardBean;
-import com.rainmonth.library.base.BaseLazyFragment;
-import com.rainmonth.library.eventbus.EventCenter;
-import com.rainmonth.library.utils.CommonUtils;
-import com.rainmonth.library.utils.DensityUtils;
+import com.rainmonth.common.base.BaseLazyFragment;
+import com.rainmonth.common.eventbus.EventCenter;
+import com.rainmonth.common.utils.CommonUtils;
+import com.rainmonth.common.utils.DensityUtils;
 import com.rainmonth.ui.widgets.HtmlTextView;
 
 import butterknife.ButterKnife;

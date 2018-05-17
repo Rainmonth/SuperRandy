@@ -4,8 +4,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
-import com.rainmonth.library.utils.CommonUtils;
-import com.rainmonth.library.utils.NetworkUtils;
+import com.rainmonth.common.utils.CommonUtils;
+import com.rainmonth.common.utils.NetworkUtils;
 import com.rainmonth.support.tinker.util.SuperRandyApplicationContext;
 import com.socks.library.KLog;
 

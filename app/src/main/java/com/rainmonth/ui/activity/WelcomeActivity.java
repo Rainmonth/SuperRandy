@@ -11,8 +11,8 @@ import android.widget.LinearLayout;
 
 import com.rainmonth.R;
 import com.rainmonth.base.ui.activity.BaseActivity;
-import com.rainmonth.library.eventbus.EventCenter;
-import com.rainmonth.library.utils.NetworkUtils;
+import com.rainmonth.common.eventbus.EventCenter;
+import com.rainmonth.common.utils.NetworkUtils;
 
 import java.util.Arrays;
 import java.util.List;

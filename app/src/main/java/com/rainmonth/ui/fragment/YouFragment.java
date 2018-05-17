@@ -13,8 +13,8 @@ import com.rainmonth.R;
 import com.rainmonth.ui.activity.LoginActivity;
 import com.rainmonth.ui.activity.RegisterActivity;
 import com.rainmonth.ui.activity.WelcomeActivity;
-import com.rainmonth.library.base.BaseLazyFragment;
-import com.rainmonth.library.eventbus.EventCenter;
+import com.rainmonth.common.base.BaseLazyFragment;
+import com.rainmonth.common.eventbus.EventCenter;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;

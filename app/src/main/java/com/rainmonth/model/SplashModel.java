@@ -2,7 +2,7 @@ package com.rainmonth.model;
 
 import com.rainmonth.R;
 import com.rainmonth.bean.SplashBean;
-import com.rainmonth.library.utils.DateUtils;
+import com.rainmonth.common.utils.DateUtils;
 
 /**
  * Created by RandyZhang on 16/7/1.

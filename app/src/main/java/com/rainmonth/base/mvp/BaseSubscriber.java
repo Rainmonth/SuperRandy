@@ -2,7 +2,7 @@ package com.rainmonth.base.mvp;
 
 import android.support.annotation.CallSuper;
 
-import com.rainmonth.library.utils.NetworkUtils;
+import com.rainmonth.common.utils.NetworkUtils;
 import com.rainmonth.support.tinker.util.SuperRandyApplicationContext;
 import com.rainmonth.base.http.RequestCallback;
 import com.socks.library.KLog;

@@ -2,16 +2,15 @@ package com.rainmonth.ui.activity;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.rainmonth.R;
 import com.rainmonth.base.mvp.BaseResponse;
 import com.rainmonth.base.ui.activity.BaseActivity;
-import com.rainmonth.library.eventbus.EventCenter;
-import com.rainmonth.library.utils.NetworkUtils;
-import com.rainmonth.library.widgets.ClearEditText;
+import com.rainmonth.common.eventbus.EventCenter;
+import com.rainmonth.common.utils.NetworkUtils;
+import com.rainmonth.common.widgets.ClearEditText;
 import com.rainmonth.presenter.ILoginPresenter;
 import com.rainmonth.presenter.LoginPresenter;
 import com.rainmonth.utils.ToastUtils;

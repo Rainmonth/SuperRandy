@@ -9,8 +9,8 @@ import android.widget.TextView;
 import com.rainmonth.R;
 import com.rainmonth.base.ui.activity.BaseActivity;
 import com.rainmonth.bean.SplashBean;
-import com.rainmonth.library.eventbus.EventCenter;
-import com.rainmonth.library.utils.NetworkUtils;
+import com.rainmonth.common.eventbus.EventCenter;
+import com.rainmonth.common.utils.NetworkUtils;
 import com.rainmonth.presenter.SplashPresenter;
 import com.rainmonth.view.SplashView;
 

@@ -10,7 +10,7 @@ import android.widget.RelativeLayout;
 
 import com.rainmonth.R;
 import com.rainmonth.bean.CardBean;
-import com.rainmonth.library.utils.CommonUtils;
+import com.rainmonth.common.utils.CommonUtils;
 
 import java.util.ArrayList;
 import java.util.List;

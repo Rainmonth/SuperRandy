@@ -3,8 +3,8 @@ package com.rainmonth.ui.fragment;
 import android.view.View;
 
 import com.rainmonth.R;
-import com.rainmonth.library.base.BaseLazyFragment;
-import com.rainmonth.library.eventbus.EventCenter;
+import com.rainmonth.common.base.BaseLazyFragment;
+import com.rainmonth.common.eventbus.EventCenter;
 
 /**
  * Created by RandyZhang on 16/6/30.

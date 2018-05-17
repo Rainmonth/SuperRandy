@@ -8,7 +8,7 @@ import com.rainmonth.ui.fragment.RenFragment;
 import com.rainmonth.ui.fragment.XunFragment;
 import com.rainmonth.ui.fragment.YouFragment;
 import com.rainmonth.ui.fragment.ZhuiFragment;
-import com.rainmonth.library.base.BaseLazyFragment;
+import com.rainmonth.common.base.BaseLazyFragment;
 import com.rainmonth.support.tinker.util.SuperRandyApplicationContext;
 import com.rainmonth.ui.widgets.NavigationTabBar;
 

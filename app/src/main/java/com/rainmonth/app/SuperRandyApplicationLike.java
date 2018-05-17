@@ -7,7 +7,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.support.multidex.MultiDex;
 
-import com.rainmonth.library.utils.CrashHandler;
+import com.rainmonth.common.utils.CrashHandler;
 import com.rainmonth.support.tinker.Log.MyLogImp;
 import com.rainmonth.support.tinker.util.SuperRandyApplicationContext;
 import com.rainmonth.support.tinker.util.TinkerManager;
