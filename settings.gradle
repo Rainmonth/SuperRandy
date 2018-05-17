@@ -1,3 +1,4 @@
-include ':app'
-include ':library', ':magicindicator'
+include ':app', ':common-res'
+include ':common'
+include ':magicindicator'
 include ':component-movie', ':component-music', ':component-app', ':component-read', ':component-image'

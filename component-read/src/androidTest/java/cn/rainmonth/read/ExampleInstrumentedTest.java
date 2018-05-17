@@ -1,4 +1,4 @@
-package cn.rainmonth.read;
+package com.rainmonth.read;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("cn.rainmonth.read", appContext.getPackageName());
+        assertEquals("com.rainmonth.read", appContext.getPackageName());
     }
 }

@@ -11,6 +11,7 @@ if (isRunAlone) {
 
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
 
     defaultConfig {
         minSdkVersion rootProject.ext.android.minSdkVersion
@@ -21,6 +22,7 @@ android {
         }
         javaCompileOptions {
             annotationProcessorOptions {
+//                includeCompileClasspath true
                 arguments = [moduleName: project.getName()]
             }
         }
@@ -56,6 +58,6 @@ android {
 
     // 配置组件项目依赖
     dependencies {
-        implementation project(':library')
+        implementation project(':common')
     }
 }

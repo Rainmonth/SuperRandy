@@ -1,0 +1,10 @@
+//apply plugin: 'realm-android'
+// 设计到注解的需要单独声明（或设置defaultConfig.annotationProcessorOptions.includeCompileClasspath=true
+android {
+    dependencies {
+        //di
+        annotationProcessor rootProject.ext.dependencies["dagger2-compiler"]
+        annotationProcessor rootProject.ext.dependencies["butterknife-compiler"]
+//        annotationProcessor rootProject.ext.dependencies["router-compiler"]
+    }
+}

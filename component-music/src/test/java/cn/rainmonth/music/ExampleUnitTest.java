@@ -1,4 +1,4 @@
-package cn.rainmonth.music;
+package com.rainmonth.music;
 
 import org.junit.Test;
 

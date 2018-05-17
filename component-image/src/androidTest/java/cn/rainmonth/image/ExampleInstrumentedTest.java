@@ -1,4 +1,4 @@
-package cn.rainmonth.image;
+package com.rainmonth.image;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("cn.rainmonth.image", appContext.getPackageName());
+        assertEquals("com.rainmonth.image", appContext.getPackageName());
     }
 }

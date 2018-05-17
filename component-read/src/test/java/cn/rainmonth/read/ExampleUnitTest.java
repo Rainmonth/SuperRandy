@@ -1,4 +1,4 @@
-package cn.rainmonth.read;
+package com.rainmonth.read;
 
 import org.junit.Test;
 

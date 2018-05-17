@@ -6,7 +6,7 @@ ext {
     android = [
             organization     : "${organization}",
             applicationId    : "${organization}",
-            buildToolVersion : "26.0.2",
+            buildToolsVersion: "26.0.2",
             compileSdkVersion: 26,
             minSdkVersion    : 14,
             targetSdkVersion : 26,
