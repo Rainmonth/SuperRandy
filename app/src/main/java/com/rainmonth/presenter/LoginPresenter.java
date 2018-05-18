@@ -2,8 +2,6 @@ package com.rainmonth.presenter;
 
 import com.rainmonth.base.mvp.BaseResponse;
 import com.rainmonth.bean.UserBean;
-import com.rainmonth.model.IUserModel;
-import com.rainmonth.model.UserModel;
 import com.rainmonth.base.mvp.BasePresenter;
 import com.rainmonth.view.ILoginView;
 
@@ -15,11 +13,11 @@ import retrofit2.Response;
 public class LoginPresenter extends BasePresenter<ILoginView, Response<BaseResponse>>
         implements ILoginPresenter {
 
-    private IUserModel<Response<BaseResponse>> mUserModel;
+//    private IUserModel<Response<BaseResponse>> mUserModel;
 
     public LoginPresenter(ILoginView mView) {
         super(mView);
-        mUserModel = new UserModel();
+//        mUserModel = new UserModel();
     }
 
     @Override
@@ -57,6 +55,6 @@ public class LoginPresenter extends BasePresenter<ILoginView, Response<BaseRespo
 
     @Override
     public void login(String username, String psw) {
-        mSubscription = mUserModel.login(this, username, psw);
+//        mSubscription = mUserModel.login(this, username, psw);
     }
 }

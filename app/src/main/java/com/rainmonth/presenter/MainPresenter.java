@@ -1,8 +1,6 @@
 package com.rainmonth.presenter;
 
 import com.rainmonth.base.mvp.BasePresenter;
-import com.rainmonth.model.IMainModel;
-import com.rainmonth.model.MainModel;
 import com.rainmonth.view.MainView;
 
 /**
@@ -10,14 +8,14 @@ import com.rainmonth.view.MainView;
  */
 public class MainPresenter extends BasePresenter<MainView, Object> {
 
-    private IMainModel mainModel = null;
+//    private IMainModel mainModel = null;
 
     public MainPresenter(MainView mainView) {
         super(mainView);
         if (null == mainView) {
             throw new IllegalArgumentException("View should not be null");
         }
-        mainModel = new MainModel();
+//        mainModel = new MainModel();
     }
 
     @Override
@@ -31,6 +29,6 @@ public class MainPresenter extends BasePresenter<MainView, Object> {
     }
 
     public void initialize() {
-        mView.initializeViews(mainModel.getNavigationModels(), mainModel.getNavigationFragments());
+//        mView.initializeViews(mainModel.getNavigationModels(), mainModel.getNavigationFragments());
     }
 }

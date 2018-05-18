@@ -14,7 +14,7 @@ import com.rainmonth.common.utils.NetworkUtils;
 import com.rainmonth.presenter.SplashPresenter;
 import com.rainmonth.view.SplashView;
 
-import butterknife.Bind;
+import butterknife.BindView;
 
 /**
  * 启动页主要负责以下工作：
@@ -23,9 +23,9 @@ import butterknife.Bind;
  */
 public class SplashActivity extends BaseActivity implements SplashView {
 
-    @Bind(R.id.tv_splash_text)
+    @BindView(R.id.tv_splash_text)
     TextView tvSplashText;
-    @Bind(R.id.iv_splash)
+    @BindView(R.id.iv_splash)
     ImageView ivSplash;
 
     private SplashPresenter splashPresenter = null;

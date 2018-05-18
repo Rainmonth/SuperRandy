@@ -7,8 +7,6 @@ import com.rainmonth.base.mvp.BaseResponse;
 import com.rainmonth.bean.ArticleBean;
 import com.rainmonth.bean.ArticleGroupBean;
 import com.rainmonth.bean.BannerBean;
-import com.rainmonth.model.IRenFragmentModel;
-import com.rainmonth.model.RenFragmentModel;
 import com.rainmonth.view.RenFragmentView;
 
 import java.util.ArrayList;
@@ -21,7 +19,7 @@ import retrofit2.Response;
  */
 public class RenPresenter extends BasePresenter<RenFragmentView, Response<BaseResponse>> implements IRenPresenter {
     private RenFragmentView renFragmentView = null;
-    private IRenFragmentModel renFragmentModel = null;
+    //    private IRenFragmentModel renFragmentModel = null;
     private String requestUrl = "";//用以区分不同接口，方便对不同接口做不同处理
 
     public RenPresenter(RenFragmentView renFragmentView) {
@@ -30,29 +28,31 @@ public class RenPresenter extends BasePresenter<RenFragmentView, Response<BaseRe
             throw new IllegalArgumentException("View should not be null");
         }
         this.renFragmentView = renFragmentView;
-        renFragmentModel = new RenFragmentModel();
+//        renFragmentModel = new RenFragmentModel();
     }
 
     @Override
     public void getContentList() {
         requestUrl = "getContentList";
 //        renFragmentModel.getRenContentList(this);
-        mSubscription = renFragmentModel.getRenContentList(this);
+//        mSubscription = renFragmentModel.getRenContentList(this);
     }
 
     public List<ArticleGroupBean> getContentListFake() {
-        return renFragmentModel.getRenContentListFake();
+//        return renFragmentModel.getRenContentListFake();
+        return new ArrayList<>();
     }
 
     @Override
     public void getHomeBanner() {
         requestUrl = "Banner/getHomeBanner";
 //        renFragmentModel.getHomeBannerList(this);
-        mSubscription = renFragmentModel.getHomeBannerList(this);
+//        mSubscription = renFragmentModel.getHomeBannerList(this);
     }
 
     public List<BannerBean> getHomeBannerFake() {
-        return renFragmentModel.getHomeBannerListFake();
+//        return renFragmentModel.getHomeBannerListFake();
+        return new ArrayList<>();
     }
 
     @Override

@@ -9,14 +9,14 @@ import com.rainmonth.base.ui.activity.BaseActivity;
 import com.rainmonth.common.eventbus.EventCenter;
 import com.rainmonth.common.utils.NetworkUtils;
 
-import butterknife.Bind;
+import butterknife.BindView;
 
 /**
  * 音乐主页面
  */
 public class MusicHomeActivity extends BaseActivity implements View.OnClickListener {
 
-    @Bind(R.id.tv_play_music)
+    @BindView(R.id.tv_play_music)
     TextView tvPlayMusic;
 
     @Override

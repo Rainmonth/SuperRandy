@@ -13,7 +13,6 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.rainmonth.R;
-import com.rainmonth.ui.adapter.BannerViewPagerAdapter;
 import com.rainmonth.base.ui.adapter.ListViewDataAdapter;
 import com.rainmonth.base.ui.adapter.ViewHolderBase;
 import com.rainmonth.base.ui.adapter.ViewHolderCreator;
@@ -23,14 +22,15 @@ import com.rainmonth.bean.BannerBean;
 import com.rainmonth.common.base.BaseLazyFragment;
 import com.rainmonth.common.eventbus.EventCenter;
 import com.rainmonth.presenter.RenPresenter;
+import com.rainmonth.ui.adapter.BannerViewPagerAdapter;
+import com.rainmonth.ui.widgets.InnerListView;
 import com.rainmonth.utils.ToastUtils;
 import com.rainmonth.view.RenFragmentView;
-import com.rainmonth.ui.widgets.InnerListView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -39,7 +39,7 @@ import butterknife.ButterKnife;
 public class RenFragment extends BaseLazyFragment implements RenFragmentView {
 
     public static final String BANNER_BEAN = "banner_bean";
-    @Bind(R.id.lv_content)
+    @BindView(R.id.lv_content)
     ListView lvContent;
 
     private RenPresenter renPresenter = null;
@@ -98,7 +98,6 @@ public class RenFragment extends BaseLazyFragment implements RenFragmentView {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ButterKnife.unbind(this);
     }
 
     @Override

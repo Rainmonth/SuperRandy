@@ -3,8 +3,6 @@ package com.rainmonth.presenter;
 import android.content.Context;
 
 import com.rainmonth.bean.XunNavigationBean;
-import com.rainmonth.model.IXunFragmentModel;
-import com.rainmonth.model.XunFragmentModel;
 import com.rainmonth.base.mvp.BasePresenter;
 import com.rainmonth.view.XunFragmentView;
 
@@ -14,7 +12,7 @@ import com.rainmonth.view.XunFragmentView;
 public class XunPresenter extends BasePresenter<XunFragmentView, Object> {
     private Context context = null;
     private XunFragmentView xunFragmentView = null;
-    private IXunFragmentModel xunFragmentModel = null;
+//    private IXunFragmentModel xunFragmentModel = null;
 
     public XunPresenter(Context context, XunFragmentView xunFragmentView) {
         super(xunFragmentView);
@@ -23,11 +21,11 @@ public class XunPresenter extends BasePresenter<XunFragmentView, Object> {
         }
         this.context = context;
         this.xunFragmentView = xunFragmentView;
-        xunFragmentModel = new XunFragmentModel();
+//        xunFragmentModel = new XunFragmentModel();
     }
 
     public void initialize() {
-        xunFragmentView.initViews(xunFragmentModel.getXunNavigationList());
+//        xunFragmentView.initViews(xunFragmentModel.getXunNavigationList());
     }
 
     public void navToDetail(XunNavigationBean xunNavigationBean) {

@@ -10,11 +10,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.rainmonth.R;
-import com.rainmonth.ui.activity.CardExploreActivity;
-import com.rainmonth.ui.activity.GridExploreActivity;
-import com.rainmonth.ui.activity.ListExploreActivity;
-import com.rainmonth.ui.activity.MusicHomeActivity;
-import com.rainmonth.ui.activity.ViewPagerExploreActivity;
 import com.rainmonth.base.ui.adapter.ListViewDataAdapter;
 import com.rainmonth.base.ui.adapter.ViewHolderBase;
 import com.rainmonth.base.ui.adapter.ViewHolderCreator;
@@ -22,11 +17,16 @@ import com.rainmonth.bean.XunNavigationBean;
 import com.rainmonth.common.base.BaseLazyFragment;
 import com.rainmonth.common.eventbus.EventCenter;
 import com.rainmonth.presenter.XunPresenter;
+import com.rainmonth.ui.activity.CardExploreActivity;
+import com.rainmonth.ui.activity.GridExploreActivity;
+import com.rainmonth.ui.activity.ListExploreActivity;
+import com.rainmonth.ui.activity.MusicHomeActivity;
+import com.rainmonth.ui.activity.ViewPagerExploreActivity;
 import com.rainmonth.view.XunFragmentView;
 
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -42,7 +42,7 @@ import butterknife.ButterKnife;
  * Created by RandyZhang on 16/6/30.
  */
 public class XunFragment extends BaseLazyFragment implements XunFragmentView {
-    @Bind(R.id.gv_content)
+    @BindView(R.id.gv_content)
     GridView gvContent;
 
     private XunPresenter xunPresenter = null;
@@ -104,7 +104,6 @@ public class XunFragment extends BaseLazyFragment implements XunFragmentView {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ButterKnife.unbind(this);
     }
 
     @Override

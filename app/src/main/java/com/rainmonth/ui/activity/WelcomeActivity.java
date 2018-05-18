@@ -17,7 +17,7 @@ import com.rainmonth.common.utils.NetworkUtils;
 import java.util.Arrays;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
@@ -26,13 +26,13 @@ import butterknife.OnClick;
  */
 public class WelcomeActivity extends BaseActivity {
 
-    @Bind(R.id.vp_welcome)
+    @BindView(R.id.vp_welcome)
     ViewPager vpWelcome;
-    @Bind(R.id.btn_login)
+    @BindView(R.id.btn_login)
     Button btnLogin;
-    @Bind(R.id.btn_register)
+    @BindView(R.id.btn_register)
     Button btnRegister;
-    @Bind(R.id.ll_action_container)
+    @BindView(R.id.ll_action_container)
     LinearLayout llActionContainer;
     Integer[] channels = new Integer[]{R.drawable.bg_welcome0, R.drawable.bg_welcome1, R.drawable.bg_welcome2,
             R.drawable.bg_welcome3, R.drawable.bg_welcome4};

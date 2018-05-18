@@ -8,30 +8,30 @@ import android.widget.FrameLayout;
 
 import com.igexin.sdk.PushManager;
 import com.rainmonth.R;
-import com.rainmonth.ui.adapter.HomeViewPagerAdapter;
 import com.rainmonth.base.ui.activity.BaseActivity;
-import com.rainmonth.support.getui.DemoPushService;
 import com.rainmonth.common.base.BaseLazyFragment;
 import com.rainmonth.common.eventbus.EventCenter;
 import com.rainmonth.common.utils.NetworkUtils;
 import com.rainmonth.presenter.MainPresenter;
-import com.rainmonth.view.MainView;
+import com.rainmonth.support.getui.DemoPushService;
+import com.rainmonth.ui.adapter.HomeViewPagerAdapter;
 import com.rainmonth.ui.widgets.NavigationTabBar;
+import com.rainmonth.view.MainView;
 
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MainActivity extends BaseActivity implements MainView {
 
-    @Bind(R.id.vp_horizontal_ntb)
+    @BindView(R.id.vp_horizontal_ntb)
     ViewPager vpHorizontalNtb;
-    @Bind(R.id.bg_ntb_horizontal)
+    @BindView(R.id.bg_ntb_horizontal)
     View bgNtbHorizontal;
-    @Bind(R.id.ntb_horizontal)
+    @BindView(R.id.ntb_horizontal)
     NavigationTabBar ntbHorizontal;
-    @Bind(R.id.fl_ntb_horizontal_container)
+    @BindView(R.id.fl_ntb_horizontal_container)
     FrameLayout flNtbHorizontalContainer;
 
     MainPresenter mainPresenter = null;

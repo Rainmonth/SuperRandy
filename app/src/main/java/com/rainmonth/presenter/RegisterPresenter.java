@@ -3,8 +3,6 @@ package com.rainmonth.presenter;
 import com.rainmonth.base.mvp.BasePresenter;
 import com.rainmonth.base.mvp.BaseResponse;
 import com.rainmonth.bean.UserBean;
-import com.rainmonth.model.IRegisterModel;
-import com.rainmonth.model.RegisterModel;
 import com.rainmonth.view.IRegisterView;
 
 import retrofit2.Response;
@@ -15,11 +13,11 @@ import retrofit2.Response;
 public class RegisterPresenter extends BasePresenter<IRegisterView, Response<BaseResponse>>
         implements IRegisterPresenter {
 
-    private IRegisterModel<Response<BaseResponse>> mUserModel;
+//    private IRegisterModel<Response<BaseResponse>> mUserModel;
 
     public RegisterPresenter(IRegisterView mView) {
         super(mView);
-        mUserModel = new RegisterModel();
+//        mUserModel = new RegisterModel();
     }
 
     @Override
@@ -56,6 +54,6 @@ public class RegisterPresenter extends BasePresenter<IRegisterView, Response<Bas
 
     @Override
     public void register(UserBean userBean) {
-        mSubscription = mUserModel.register(this, userBean);
+//        mSubscription = mUserModel.register(this, userBean);
     }
 }

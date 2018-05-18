@@ -15,7 +15,7 @@ import com.rainmonth.common.base.BaseLazyFragment;
 import com.rainmonth.common.eventbus.EventCenter;
 import com.rainmonth.utils.ToastUtils;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -23,11 +23,11 @@ import butterknife.ButterKnife;
  */
 
 public class HomeBannerFragment extends BaseLazyFragment {
-    @Bind(R.id.iv_banner_image)
+    @BindView(R.id.iv_banner_image)
     ImageView ivBannerImage;
-    @Bind(R.id.tv_title)
+    @BindView(R.id.tv_title)
     TextView tvTitle;
-    @Bind(R.id.fl_banner_container)
+    @BindView(R.id.fl_banner_container)
     FrameLayout flBannerContainer;
 
     @Override
@@ -97,6 +97,5 @@ public class HomeBannerFragment extends BaseLazyFragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ButterKnife.unbind(this);
     }
 }

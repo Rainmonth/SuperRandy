@@ -21,7 +21,7 @@ import com.rainmonth.view.RanFragmentView;
 
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -29,7 +29,7 @@ import butterknife.ButterKnife;
  */
 public class RanFragment extends BaseLazyFragment implements RanFragmentView {
 
-    @Bind(R.id.lv_content)
+    @BindView(R.id.lv_content)
     ListView lvContent;
     private RanPresenter mRanPresenter = null;
     private ListViewDataAdapter<RanContentBean> mRanContentListAdapter = null;
@@ -150,7 +150,6 @@ public class RanFragment extends BaseLazyFragment implements RanFragmentView {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ButterKnife.unbind(this);
     }
 
     @Override

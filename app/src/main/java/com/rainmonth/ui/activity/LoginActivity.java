@@ -16,7 +16,7 @@ import com.rainmonth.presenter.LoginPresenter;
 import com.rainmonth.utils.ToastUtils;
 import com.rainmonth.view.ILoginView;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
@@ -24,19 +24,19 @@ import butterknife.OnClick;
  */
 public class LoginActivity extends BaseActivity implements ILoginView {
 
-    @Bind(R.id.iv_user_avatar)
+    @BindView(R.id.iv_user_avatar)
     ImageView ivUserAvatar;
-    @Bind(R.id.et_user_name)
+    @BindView(R.id.et_user_name)
     ClearEditText etUserName;
-    @Bind(R.id.et_psw)
+    @BindView(R.id.et_psw)
     ClearEditText etPsw;
-    @Bind(R.id.tv_login)
+    @BindView(R.id.tv_login)
     TextView tvLogin;
-    @Bind(R.id.tv_no_account)
+    @BindView(R.id.tv_no_account)
     TextView tvNoAccount;
-    @Bind(R.id.iv_qq)
+    @BindView(R.id.iv_qq)
     ImageView ivQq;
-    @Bind(R.id.iv_sina)
+    @BindView(R.id.iv_sina)
     ImageView ivSina;
 
     private ILoginPresenter loginPresenter;

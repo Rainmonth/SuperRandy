@@ -7,38 +7,23 @@ import com.rainmonth.support.tinker.util.SuperRandyApplicationContext;
 import com.rainmonth.base.http.RequestCallback;
 import com.socks.library.KLog;
 
+import org.reactivestreams.Subscriber;
+import org.reactivestreams.Subscription;
+
 import java.net.UnknownHostException;
 
-import retrofit2.adapter.rxjava.HttpException;
-import rx.Subscriber;
+import retrofit2.adapter.rxjava2.HttpException;
 
 /**
  * Created by Administrator on 2016/8/24 0024.
  * 把回调各个方法统一处理，并且这里对返回错误做了统一处理
  */
-public class BaseSubscriber<T> extends Subscriber<T> {
+public class BaseSubscriber<T> implements Subscriber<T> {
 
     private RequestCallback<T> mRequestCallback;
 
     public BaseSubscriber(RequestCallback<T> requestCallback) {
         mRequestCallback = requestCallback;
-    }
-
-    @CallSuper
-    @Override
-    public void onStart() {
-        super.onStart();
-        if (mRequestCallback != null) {
-            mRequestCallback.beforeRequest();
-        }
-    }
-
-    @CallSuper
-    @Override
-    public void onCompleted() {
-        if (mRequestCallback != null) {
-            mRequestCallback.requestComplete();
-        }
     }
 
     @CallSuper
@@ -70,7 +55,20 @@ public class BaseSubscriber<T> extends Subscriber<T> {
         }
     }
 
-    @CallSuper
+    @Override
+    public void onComplete() {
+        if (mRequestCallback != null) {
+            mRequestCallback.requestComplete();
+        }
+    }
+
+    @Override
+    public void onSubscribe(Subscription s) {
+        if (mRequestCallback != null) {
+            mRequestCallback.beforeRequest();
+        }
+    }
+
     @Override
     public void onNext(T t) {
         if (mRequestCallback != null) {

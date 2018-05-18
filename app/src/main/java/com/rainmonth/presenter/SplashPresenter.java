@@ -3,8 +3,6 @@ package com.rainmonth.presenter;
 import android.os.Handler;
 import android.os.Message;
 
-import com.rainmonth.model.ISplashModel;
-import com.rainmonth.model.SplashModel;
 import com.rainmonth.base.mvp.BasePresenter;
 import com.rainmonth.view.SplashView;
 
@@ -12,7 +10,7 @@ import com.rainmonth.view.SplashView;
  * Created by RandyZhang on 16/7/1.
  */
 public class SplashPresenter extends BasePresenter<SplashView, Object> {
-    private ISplashModel splashModel = null;
+//    private ISplashModel splashModel = null;
     private SplashView splashView = null;
 
     public SplashPresenter(SplashView splashView) {
@@ -21,7 +19,7 @@ public class SplashPresenter extends BasePresenter<SplashView, Object> {
             throw new IllegalArgumentException("splash view should not be null");
         }
         this.splashView = splashView;
-        splashModel = new SplashModel();
+//        splashModel = new SplashModel();
     }
 
     public void initialize() {
@@ -31,7 +29,7 @@ public class SplashPresenter extends BasePresenter<SplashView, Object> {
          * b.获取失败，在失败回调中构造一个默认的SplashInfo来初始化
          */
 
-        splashView.initWithSplashInfo(splashModel.getSplashInfo());
+//        splashView.initWithSplashInfo(splashModel.getSplashInfo());
         new Thread() {
             @Override
             public void run() {
@@ -48,7 +46,7 @@ public class SplashPresenter extends BasePresenter<SplashView, Object> {
     private Handler mHandler = new Handler() {
         public void handleMessage(Message msg) {
             if (msg.what == 0) {
-                splashView.navigateTo(splashModel.getSplashInfo().getNaveTo());
+//                splashView.navigateTo(splashModel.getSplashInfo().getNaveTo());
             }
         }
     };

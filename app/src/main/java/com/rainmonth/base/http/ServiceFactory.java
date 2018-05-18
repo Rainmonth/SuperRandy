@@ -26,11 +26,8 @@ import okhttp3.ResponseBody;
 import okio.Buffer;
 import okio.BufferedSource;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
-import rx.Observable;
-import rx.functions.Action1;
-import rx.functions.Func1;
 
 /**
  * @author RandyZhang
@@ -60,20 +57,23 @@ public class ServiceFactory {
                 if (!CommonUtils.isNullOrEmpty(originalResponse.header("Set-Cookie")) &&
                         !originalResponse.header("Set-Cookie").isEmpty()) {
                     final StringBuffer cookieBuffer = new StringBuffer();
-                    Observable.from(originalResponse.headers("Set-Cookie"))
-                            .map(new Func1<String, String>() {
-                                @Override
-                                public String call(String s) {
-                                    String[] cookieArray = s.split(";");
-                                    return cookieArray[0];
-                                }
-                            })
-                            .subscribe(new Action1<String>() {
-                                @Override
-                                public void call(String s) {
-                                    cookieBuffer.append(s).append(";");
-                                }
-                            });
+
+                    //todo save cookies
+//                    Observable.fromArray(originalResponse.headers("Set-Cookie")).map()
+//                    Observable.from(originalResponse.headers("Set-Cookie"))
+//                            .map(new Func1<String, String>() {
+//                                @Override
+//                                public String call(String s) {
+//                                    String[] cookieArray = s.split(";");
+//                                    return cookieArray[0];
+//                                }
+//                            })
+//                            .subscribe(new Action1<String>() {
+//                                @Override
+//                                public void call(String s) {
+//                                    cookieBuffer.append(s).append(";");
+//                                }
+//                            });
                     KLog.e("save_cookie", cookieBuffer.toString());
                     // 保存cookies到sp文件
                     SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -95,13 +95,14 @@ public class ServiceFactory {
             final Request.Builder builder = chain.request().newBuilder();
             SharedPreferences sharedPreferences = SuperRandyApplicationContext.context
                     .getSharedPreferences("cookie_sp", Context.MODE_PRIVATE);
-            Observable.just(sharedPreferences.getString("cookie", ""))
-                    .subscribe(new Action1<String>() {
-                        @Override
-                        public void call(String s) {
-                            builder.addHeader("Cookie", s);
-                        }
-                    });
+            // todo add cookies
+//            Observable.just(sharedPreferences.getString("cookie", ""))
+//                    .subscribe(new Action1<String>() {
+//                        @Override
+//                        public void call(String s) {
+//                            builder.addHeader("Cookie", s);
+//                        }
+//                    });
             KLog.e("add_cookie", sharedPreferences.getString("cookie", ""));
             return chain.proceed(builder.build());
         }
@@ -235,7 +236,7 @@ public class ServiceFactory {
                             .client(getOkHttpClient())
                             .baseUrl(baseUrl)
                             .addConverterFactory(GsonConverterFactory.create())
-                            .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                             .build();
                 }
             }
@@ -256,7 +257,7 @@ public class ServiceFactory {
                 .client(getOkHttpClient())
                 .baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
 
         return retrofit.create(serviceClazz);

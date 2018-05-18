@@ -16,7 +16,7 @@ import com.rainmonth.ui.activity.WelcomeActivity;
 import com.rainmonth.common.base.BaseLazyFragment;
 import com.rainmonth.common.eventbus.EventCenter;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -24,17 +24,17 @@ import butterknife.OnClick;
  * Created by RandyZhang on 16/6/30.
  */
 public class YouFragment extends BaseLazyFragment implements View.OnClickListener {
-    @Bind(R.id.iv_user_avatar)
+    @BindView(R.id.iv_user_avatar)
     ImageView ivUserAvatar;
-    @Bind(R.id.tv_user_latest_state)
+    @BindView(R.id.tv_user_latest_state)
     TextView tvUserLatestState;
-    @Bind(R.id.ll_user_info_container)
+    @BindView(R.id.ll_user_info_container)
     LinearLayout llUserInfoContainer;
-    @Bind(R.id.btn_register)
+    @BindView(R.id.btn_register)
     Button btnRegister;
-    @Bind(R.id.btn_login)
+    @BindView(R.id.btn_login)
     Button btnLogin;
-    @Bind(R.id.btn_welcome)
+    @BindView(R.id.btn_welcome)
     Button btnWelcome;
 
     @Override
@@ -90,7 +90,6 @@ public class YouFragment extends BaseLazyFragment implements View.OnClickListene
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ButterKnife.unbind(this);
     }
 
 

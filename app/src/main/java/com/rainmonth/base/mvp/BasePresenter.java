@@ -3,7 +3,7 @@ package com.rainmonth.base.mvp;
 import com.rainmonth.base.http.RequestCallback;
 import com.socks.library.KLog;
 
-import rx.Subscription;
+import org.reactivestreams.Subscription;
 
 /**
  * Created by RandyZhang on 16/9/20.
@@ -26,8 +26,8 @@ public class BasePresenter<T extends IBaseView, V> implements IBasePresenter, Re
 
     @Override
     public void onDestroy() {
-        if (mSubscription != null && !mSubscription.isUnsubscribed()) {
-            mSubscription.unsubscribe();
+        if (mSubscription != null) {
+            mSubscription.cancel();
         }
         mView = null;
     }

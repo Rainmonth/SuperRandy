@@ -17,24 +17,24 @@ import com.rainmonth.presenter.RegisterPresenter;
 import com.rainmonth.utils.ToastUtils;
 import com.rainmonth.view.IRegisterView;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
  * 注册页面
  */
 public class RegisterActivity extends BaseActivity implements IRegisterView {
-    @Bind(R.id.iv_user_avatar)
+    @BindView(R.id.iv_user_avatar)
     ImageView ivUserAvatar;
-    @Bind(R.id.et_phone)
+    @BindView(R.id.et_phone)
     EditText etPhone;
-    @Bind(R.id.et_user_name)
+    @BindView(R.id.et_user_name)
     EditText etUserName;
-    @Bind(R.id.et_email)
+    @BindView(R.id.et_email)
     EditText etEmail;
-    @Bind(R.id.et_psw)
+    @BindView(R.id.et_psw)
     EditText etPsw;
-    @Bind(R.id.tv_create_account)
+    @BindView(R.id.tv_create_account)
     TextView tvCreateAccount;
 
     IRegisterPresenter registerPresenter;
