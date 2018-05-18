@@ -8,6 +8,6 @@ public class MovieMainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_movie_main);
+        setContentView(R.layout.movie_activity_main);
     }
 }
