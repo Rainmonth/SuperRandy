@@ -5,7 +5,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 
 import com.rainmonth.R;
-import com.rainmonth.base.ui.activity.BaseActivity;
+import com.rainmonth.common.base.BaseActivity;
 import com.rainmonth.ui.fragment.CardViewPagerFragment;
 import com.rainmonth.common.eventbus.EventCenter;
 import com.rainmonth.common.utils.NetworkUtils;

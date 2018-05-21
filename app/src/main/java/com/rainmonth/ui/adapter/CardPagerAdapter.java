@@ -4,7 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.rainmonth.bean.CardBean;
+import com.rainmonth.mvp.model.bean.CardBean;
 import com.rainmonth.ui.fragment.CardFragment;
 
 import java.util.ArrayList;

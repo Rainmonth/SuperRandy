@@ -11,7 +11,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.rainmonth.R;
-import com.rainmonth.bean.CardBean;
+import com.rainmonth.mvp.model.bean.CardBean;
 import com.rainmonth.common.base.BaseLazyFragment;
 import com.rainmonth.common.eventbus.EventCenter;
 import com.rainmonth.common.utils.CommonUtils;

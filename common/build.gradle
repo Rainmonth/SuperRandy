@@ -61,6 +61,10 @@ dependencies {
     compile 'com.nineoldandroids:library:2.4.0'
     compile 'com.github.chrisbanes.photoview:library:1.2.4'
 
+    //di
+    api rootProject.ext.dependencies["dagger2"]
+    annotationProcessor rootProject.ext.dependencies["dagger2-compiler"]
+
     // 网络请求 okHttp和retrofit
     api rootProject.ext.dependencies["okhttp"]
     api rootProject.ext.dependencies["okio"]

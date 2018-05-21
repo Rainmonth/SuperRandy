@@ -3,10 +3,10 @@ package com.rainmonth.common.base;
 import android.os.Bundle;
 import android.view.View;
 
-import com.rainmonth.common.swipeback.SwipeBackActivityBase;
-import com.rainmonth.common.swipeback.SwipeBackActivityHelper;
-import com.rainmonth.common.swipeback.SwipeBackLayout;
-import com.rainmonth.common.swipeback.Utils;
+import com.rainmonth.common.widgets.swipeback.SwipeBackActivityBase;
+import com.rainmonth.common.widgets.swipeback.SwipeBackActivityHelper;
+import com.rainmonth.common.widgets.swipeback.SwipeBackLayout;
+import com.rainmonth.common.widgets.swipeback.Utils;
 
 public abstract class BaseSwipeBackFragmentActivity extends BaseFragmentActivity implements SwipeBackActivityBase {
     private SwipeBackActivityHelper mHelper;

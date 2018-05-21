@@ -8,15 +8,15 @@ import android.widget.FrameLayout;
 
 import com.igexin.sdk.PushManager;
 import com.rainmonth.R;
-import com.rainmonth.base.ui.activity.BaseActivity;
+import com.rainmonth.common.base.BaseActivity;
 import com.rainmonth.common.base.BaseLazyFragment;
 import com.rainmonth.common.eventbus.EventCenter;
 import com.rainmonth.common.utils.NetworkUtils;
-import com.rainmonth.presenter.MainPresenter;
+import com.rainmonth.mvp.presenter.MainPresenter;
 import com.rainmonth.support.getui.DemoPushService;
 import com.rainmonth.ui.adapter.HomeViewPagerAdapter;
 import com.rainmonth.ui.widgets.NavigationTabBar;
-import com.rainmonth.view.MainView;
+import com.rainmonth.mvp.view.MainView;
 
 import java.util.List;
 

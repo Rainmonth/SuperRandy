@@ -6,15 +6,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.rainmonth.R;
-import com.rainmonth.base.mvp.BaseResponse;
-import com.rainmonth.base.ui.activity.BaseActivity;
+import com.rainmonth.common.base.mvp.BaseResponse;
+import com.rainmonth.common.base.BaseActivity;
 import com.rainmonth.common.eventbus.EventCenter;
 import com.rainmonth.common.utils.NetworkUtils;
 import com.rainmonth.common.widgets.ClearEditText;
-import com.rainmonth.presenter.ILoginPresenter;
-import com.rainmonth.presenter.LoginPresenter;
-import com.rainmonth.utils.ToastUtils;
-import com.rainmonth.view.ILoginView;
+import com.rainmonth.mvp.presenter.ILoginPresenter;
+import com.rainmonth.mvp.presenter.LoginPresenter;
+import com.rainmonth.common.utils.ToastUtils;
+import com.rainmonth.mvp.view.ILoginView;
 
 import butterknife.BindView;
 import butterknife.OnClick;

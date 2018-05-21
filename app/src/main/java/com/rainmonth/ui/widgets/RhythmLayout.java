@@ -13,7 +13,7 @@ import android.widget.LinearLayout;
 
 import com.rainmonth.R;
 import com.rainmonth.common.utils.DensityUtils;
-import com.rainmonth.utils.AnimatorUtils;
+import com.rainmonth.common.utils.AnimatorUtils;
 
 import java.util.ArrayList;
 import java.util.List;

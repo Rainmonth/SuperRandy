@@ -17,12 +17,12 @@ import android.widget.TextView;
 
 import com.rainmonth.R;
 import com.rainmonth.ui.adapter.CardPagerAdapter;
-import com.rainmonth.bean.CardBean;
+import com.rainmonth.mvp.model.bean.CardBean;
 import com.rainmonth.common.base.BaseLazyFragment;
 import com.rainmonth.common.eventbus.EventCenter;
 import com.rainmonth.common.utils.NetworkUtils;
-import com.rainmonth.utils.AnimatorUtils;
-import com.rainmonth.utils.HexUtils;
+import com.rainmonth.common.utils.AnimatorUtils;
+import com.rainmonth.common.utils.HexUtils;
 import com.rainmonth.ui.widgets.IRhythmItemListener;
 import com.rainmonth.ui.widgets.ProgressHUD;
 import com.rainmonth.ui.widgets.PullToRefreshViewPager;

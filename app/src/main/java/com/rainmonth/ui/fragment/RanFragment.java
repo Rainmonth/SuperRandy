@@ -10,14 +10,14 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.rainmonth.R;
-import com.rainmonth.base.ui.adapter.ListViewDataAdapter;
-import com.rainmonth.base.ui.adapter.ViewHolderBase;
-import com.rainmonth.base.ui.adapter.ViewHolderCreator;
-import com.rainmonth.bean.RanContentBean;
+import com.rainmonth.mvp.model.bean.RanContentBean;
+import com.rainmonth.common.adapter.ListViewDataAdapter;
+import com.rainmonth.common.adapter.ViewHolderBase;
+import com.rainmonth.common.adapter.ViewHolderCreator;
 import com.rainmonth.common.base.BaseLazyFragment;
 import com.rainmonth.common.eventbus.EventCenter;
-import com.rainmonth.presenter.RanPresenter;
-import com.rainmonth.view.RanFragmentView;
+import com.rainmonth.mvp.presenter.RanPresenter;
+import com.rainmonth.mvp.view.RanFragmentView;
 
 import java.util.List;
 

@@ -13,19 +13,19 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.rainmonth.R;
-import com.rainmonth.base.ui.adapter.ListViewDataAdapter;
-import com.rainmonth.base.ui.adapter.ViewHolderBase;
-import com.rainmonth.base.ui.adapter.ViewHolderCreator;
-import com.rainmonth.bean.ArticleBean;
-import com.rainmonth.bean.ArticleGroupBean;
-import com.rainmonth.bean.BannerBean;
+import com.rainmonth.mvp.model.bean.ArticleBean;
+import com.rainmonth.mvp.model.bean.ArticleGroupBean;
+import com.rainmonth.mvp.model.bean.BannerBean;
+import com.rainmonth.common.adapter.ListViewDataAdapter;
+import com.rainmonth.common.adapter.ViewHolderBase;
+import com.rainmonth.common.adapter.ViewHolderCreator;
 import com.rainmonth.common.base.BaseLazyFragment;
 import com.rainmonth.common.eventbus.EventCenter;
-import com.rainmonth.presenter.RenPresenter;
+import com.rainmonth.mvp.presenter.RenPresenter;
 import com.rainmonth.ui.adapter.BannerViewPagerAdapter;
 import com.rainmonth.ui.widgets.InnerListView;
-import com.rainmonth.utils.ToastUtils;
-import com.rainmonth.view.RenFragmentView;
+import com.rainmonth.common.utils.ToastUtils;
+import com.rainmonth.mvp.view.RenFragmentView;
 
 import java.util.ArrayList;
 import java.util.List;

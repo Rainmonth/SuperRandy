@@ -10,10 +10,10 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.rainmonth.R;
-import com.rainmonth.bean.BannerBean;
+import com.rainmonth.mvp.model.bean.BannerBean;
 import com.rainmonth.common.base.BaseLazyFragment;
 import com.rainmonth.common.eventbus.EventCenter;
-import com.rainmonth.utils.ToastUtils;
+import com.rainmonth.common.utils.ToastUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

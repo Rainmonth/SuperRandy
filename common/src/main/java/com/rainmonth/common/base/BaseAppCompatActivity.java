@@ -18,7 +18,7 @@ import android.view.WindowManager;
 
 import com.rainmonth.common.R;
 import com.rainmonth.common.eventbus.EventCenter;
-import com.rainmonth.common.loading.VaryViewHelperController;
+import com.rainmonth.common.widgets.loading.VaryViewHelperController;
 import com.rainmonth.common.netstatus.NetChangeObserver;
 import com.rainmonth.common.netstatus.NetStateReceiver;
 import com.rainmonth.common.utils.CommonUtils;

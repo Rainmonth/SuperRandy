@@ -1,7 +1,7 @@
 package com.rainmonth.service;
 
-import com.rainmonth.base.mvp.BaseResponse;
-import com.rainmonth.bean.UserBean;
+import com.rainmonth.common.base.mvp.BaseResponse;
+import com.rainmonth.mvp.model.bean.UserBean;
 
 import io.reactivex.Observable;
 import retrofit2.Call;

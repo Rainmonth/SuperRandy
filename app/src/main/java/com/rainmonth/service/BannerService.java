@@ -1,7 +1,7 @@
 package com.rainmonth.service;
 
-import com.rainmonth.bean.ArticleBean;
-import com.rainmonth.bean.BannerBean;
+import com.rainmonth.mvp.model.bean.ArticleBean;
+import com.rainmonth.mvp.model.bean.BannerBean;
 
 import java.util.List;
 

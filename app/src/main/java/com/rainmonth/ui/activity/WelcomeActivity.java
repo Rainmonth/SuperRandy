@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.rainmonth.R;
-import com.rainmonth.base.ui.activity.BaseActivity;
+import com.rainmonth.common.base.BaseActivity;
 import com.rainmonth.common.eventbus.EventCenter;
 import com.rainmonth.common.utils.NetworkUtils;
 

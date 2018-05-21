@@ -7,15 +7,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.rainmonth.R;
-import com.rainmonth.base.mvp.BaseResponse;
-import com.rainmonth.base.ui.activity.BaseActivity;
-import com.rainmonth.bean.UserBean;
+import com.rainmonth.common.base.mvp.BaseResponse;
+import com.rainmonth.common.base.BaseActivity;
+import com.rainmonth.mvp.model.bean.UserBean;
 import com.rainmonth.common.eventbus.EventCenter;
 import com.rainmonth.common.utils.NetworkUtils;
-import com.rainmonth.presenter.IRegisterPresenter;
-import com.rainmonth.presenter.RegisterPresenter;
-import com.rainmonth.utils.ToastUtils;
-import com.rainmonth.view.IRegisterView;
+import com.rainmonth.mvp.presenter.IRegisterPresenter;
+import com.rainmonth.mvp.presenter.RegisterPresenter;
+import com.rainmonth.common.utils.ToastUtils;
+import com.rainmonth.mvp.view.IRegisterView;
 
 import butterknife.BindView;
 import butterknife.OnClick;

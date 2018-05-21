@@ -15,7 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.rainmonth.common.eventbus.EventCenter;
-import com.rainmonth.common.loading.VaryViewHelperController;
+import com.rainmonth.common.widgets.loading.VaryViewHelperController;
 import com.rainmonth.common.utils.CommonUtils;
 
 import java.lang.reflect.Field;

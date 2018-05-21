@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.rainmonth.R;
-import com.rainmonth.bean.CardBean;
+import com.rainmonth.mvp.model.bean.CardBean;
 import com.rainmonth.common.utils.CommonUtils;
 
 import java.util.ArrayList;
