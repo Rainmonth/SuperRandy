@@ -7,6 +7,10 @@
         android:label="@string/app_name"
         tools:replace="android:label">
 
+        <activity android:name=".MusicHomeActivity" />
+
+        <activity android:name=".MusicPlayerActivity" />
+
     </application>
 
 </manifest>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="app_rhythm_edge_size_for_shift">50.0dip</dimen>
+    <dimen name="app_rhythm_icon_margin">2.0dip</dimen>
+    <dimen name="app_rhythm_item_height">100.0dip</dimen>
+    <dimen name="app_rhythm_layout_height">60.0dip</dimen>
+    <dimen name="app_rhythm_max_translation_y">40.0dip</dimen>
+    <dimen name="app_rhythm_view_init_translation_y">50.0dip</dimen>
+</resources>

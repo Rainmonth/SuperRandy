@@ -3,9 +3,4 @@
 
     <dimen name="cpb_default_stroke_width">4dp</dimen>
 
-    <dimen name="common_load_more_progress_size">30dp</dimen>
-    <dimen name="common_load_more_padding">20dp</dimen>
-    <dimen name="common_loading_progress_size">35dp</dimen>
-    <dimen name="common_loading_text_margin">10dp</dimen>
-    <dimen name="common_loading_text_lines_spacing">5dp</dimen>
 </resources>

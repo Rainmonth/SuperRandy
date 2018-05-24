@@ -1,60 +1,17 @@
 package com.rainmonth.mvp.presenter;
 
-import com.rainmonth.common.base.mvp.BaseResponse;
-import com.rainmonth.mvp.model.bean.UserBean;
+import com.rainmonth.mvp.contract.LoginContract;
 import com.rainmonth.common.base.mvp.BasePresenter;
-import com.rainmonth.mvp.view.ILoginView;
-
-import retrofit2.Response;
 
 /**
  * Created by RandyZhang on 16/9/19.
  */
-public class LoginPresenter extends BasePresenter<ILoginView, Response<BaseResponse>>
-        implements ILoginPresenter {
+public class LoginPresenter extends BasePresenter<LoginContract.Model, LoginContract.View> {
 
 //    private IUserModel<Response<BaseResponse>> mUserModel;
 
-    public LoginPresenter(ILoginView mView) {
-        super(mView);
+    public LoginPresenter() {
+        super();
 //        mUserModel = new UserModel();
-    }
-
-    @Override
-    public void onResume() {
-
-    }
-
-    @Override
-    public void onDestroy() {
-
-    }
-
-    @Override
-    public void beforeRequest() {
-        super.beforeRequest();
-    }
-
-    @Override
-    public void requestError(String msg) {
-        super.requestError(msg);
-        mView.toast(msg);
-    }
-
-    @Override
-    public void requestComplete() {
-        super.requestComplete();
-    }
-
-    @Override
-    public void requestSuccess(Response<BaseResponse> data) {
-        super.requestSuccess(data);
-        mView.naveToAfterLogin(data.body());
-        UserBean userBean = (UserBean) data.body().getData();
-    }
-
-    @Override
-    public void login(String username, String psw) {
-//        mSubscription = mUserModel.login(this, username, psw);
     }
 }

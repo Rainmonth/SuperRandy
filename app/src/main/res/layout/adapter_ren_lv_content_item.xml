@@ -46,7 +46,7 @@
         android:background="#979797" />
 
 
-    <com.rainmonth.ui.widgets.InnerListView
+    <com.rainmonth.mvp.ui.widgets.InnerListView
         android:id="@+id/lv_article"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

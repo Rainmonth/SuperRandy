@@ -2,26 +2,18 @@ package com.rainmonth.mvp.presenter;
 
 import android.content.Context;
 
-import com.rainmonth.mvp.model.bean.XunNavigationBean;
 import com.rainmonth.common.base.mvp.BasePresenter;
-import com.rainmonth.mvp.view.XunFragmentView;
+import com.rainmonth.mvp.contract.XunContract;
+import com.rainmonth.mvp.model.bean.XunNavigationBean;
 
 /**
  * Created by RandyZhang on 16/7/5.
  */
-public class XunPresenter extends BasePresenter<XunFragmentView, Object> {
+public class XunPresenter extends BasePresenter<XunContract.Model, XunContract.View> {
     private Context context = null;
-    private XunFragmentView xunFragmentView = null;
 //    private IXunFragmentModel xunFragmentModel = null;
 
-    public XunPresenter(Context context, XunFragmentView xunFragmentView) {
-        super(xunFragmentView);
-        if (null == xunFragmentView) {
-            throw new IllegalArgumentException("View should not be null");
-        }
-        this.context = context;
-        this.xunFragmentView = xunFragmentView;
-//        xunFragmentModel = new XunFragmentModel();
+    public XunPresenter(Context context) {
     }
 
     public void initialize() {
@@ -29,6 +21,6 @@ public class XunPresenter extends BasePresenter<XunFragmentView, Object> {
     }
 
     public void navToDetail(XunNavigationBean xunNavigationBean) {
-        xunFragmentView.navToDetail(xunNavigationBean);
+//        xunFragmentView.navToDetail(xunNavigationBean);
     }
 }

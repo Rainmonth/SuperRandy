@@ -34,10 +34,10 @@
             android:ellipsize="marquee"
             android:focusable="true"
             android:focusableInTouchMode="true"
-            android:maxLines="1"
             android:padding="10dp"
             android:textColor="#ffffff"
-            android:visibility="gone" />
+            android:visibility="gone"
+            android:singleLine="true" />
 
         <TextView
             android:id="@+id/numIndicator"

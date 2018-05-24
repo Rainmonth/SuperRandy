@@ -8,7 +8,8 @@ import com.rainmonth.common.widgets.swipeback.SwipeBackActivityHelper;
 import com.rainmonth.common.widgets.swipeback.SwipeBackLayout;
 import com.rainmonth.common.widgets.swipeback.Utils;
 
-public abstract class BaseSwipeBackCompatActivity extends BaseAppCompatActivity implements SwipeBackActivityBase {
+public abstract class BaseSwipeBackCompatActivity extends BaseAppCompatActivity
+        implements SwipeBackActivityBase {
     private SwipeBackActivityHelper mHelper;
 
     @Override

@@ -4,8 +4,8 @@ apply plugin: 'kotlin-android'
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile files('libs/GetuiSDK2.9.5.0.jar')
-    implementation project(':common')
-    compile project(':magicindicator')
+    api project(':common')
+    api project(':magicindicator')
     //可选，用于生成application类
     compile("com.tencent.tinker:tinker-android-lib:${TINKER_VERSION}") { changing = true }
     //tinker的核心库

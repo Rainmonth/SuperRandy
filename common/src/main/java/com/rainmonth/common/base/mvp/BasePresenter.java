@@ -1,55 +1,23 @@
 package com.rainmonth.common.base.mvp;
 
-import com.socks.library.KLog;
 
-import org.reactivestreams.Subscription;
+public class BasePresenter<M extends IBaseModel, V extends IBaseView> {
 
-/**
- * Created by RandyZhang on 16/9/20.
- *
- * @param <T> view class inherit from BaseView
- * @param <V> response data from request
- */
-public class BasePresenter<T extends IBaseView, V> implements IBasePresenter, RequestCallback<V> {
-    protected Subscription mSubscription;
-    protected T mView;
+    protected final String TAG = this.getClass().getSimpleName();
 
-    public BasePresenter(T mView) {
-        this.mView = mView;
+    protected M mModel;
+    protected V mView;
+
+
+    public BasePresenter(M model, V rootView) {
+        this.mModel = model;
+        this.mView = rootView;
     }
 
-    @Override
-    public void onResume() {
-
+    public BasePresenter(V rootView) {
+        this.mView = rootView;
     }
 
-    @Override
-    public void onDestroy() {
-        if (mSubscription != null) {
-            mSubscription.cancel();
-        }
-        mView = null;
-    }
-
-    @Override
-    public void beforeRequest() {
-        mView.showProgress();
-    }
-
-    @Override
-    public void requestError(String msg) {
-        KLog.e(msg);
-        mView.toast(msg);
-        mView.hideProgress();
-    }
-
-    @Override
-    public void requestComplete() {
-        mView.hideProgress();
-    }
-
-    @Override
-    public void requestSuccess(V data) {
-
+    public BasePresenter() {
     }
 }

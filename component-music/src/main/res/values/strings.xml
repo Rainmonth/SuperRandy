@@ -1,4 +1,4 @@
 <resources>
-    <string name="app_name">compent-music</string>
+    <string name="music_app_name">compent-music</string>
     <string name="music_welcome_label">欢迎进入音乐模块</string>
 </resources>

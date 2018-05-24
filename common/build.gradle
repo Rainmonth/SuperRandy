@@ -33,6 +33,8 @@ android {
 }
 
 dependencies {
+    //res
+    api project(":common-res")
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
     // base
@@ -76,6 +78,8 @@ dependencies {
     // RxJava and RxAndroid
     api rootProject.ext.dependencies["rxjava"]
     api rootProject.ext.dependencies["rxandroid"]
+    api rootProject.ext.dependencies["rxcache"]
+    api rootProject.ext.dependencies["rxcache-jolyglot"]
 
     // 图片加载
     api rootProject.ext.dependencies["glide"]

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#423752"
+    android:paddingBottom="@dimen/m16"
+    android:paddingLeft="@dimen/m16"
+    android:paddingRight="@dimen/m16"
+    android:paddingTop="@dimen/m16"
+    tools:context=".MusicHomeActivity">
+
+    <TextView
+        android:id="@+id/tv_play_music"
+        android:layout_centerInParent="true"
+        style="@style/green_trans_btn"
+        android:text="播放音乐" />
+
+</RelativeLayout>

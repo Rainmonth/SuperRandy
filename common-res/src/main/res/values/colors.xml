@@ -3,4 +3,41 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <!--text color-->
+    <color name="backColor">#22000000</color>
+    <color name="black_50_alpha">#88000000</color>
+    <color name="blue">#ff33b5e5</color>
+    <color name="border_gray">#ffcccccc</color>
+    <color name="category_app_divider">#ffc5c5c5</color>
+    <color name="color_cihei">#ff333333</color>
+    <color name="color_hei">#ff000000</color>
+    <color name="color_hei_8">#00000000</color>
+    <color name="color_shenhui">#ff999999</color>
+    <color name="color_zhonghui">#ff798089</color>
+
+
+    <color name="translucent">#e0000000</color>
+    <color name="transparent">#00000000</color>
+
+    <color name="white">#ffffffff</color>
+    <color name="white_10_alpha">#1affffff</color>
+    <color name="white_15_alpha">#26ffffff</color>
+    <color name="white_60_alpha">#99ffffff</color>
+    <color name="white_80_alpha">#bbffffff</color>
+
+    <color name="theme_color">#50E3C2</color>
+    <color name="article_title">@android:color/black</color>
+    <color name="article_summarise">#46000000</color>
+
+    <!--background color-->
+    <color name="bg_home">#423752</color>
+    <color name="bg_home_bottom_tab_bar">#605271</color>
+    <color name="bg_half_transparent_black">#88000000</color>
+    <color name="bg_half_transparent_white">#88ffffff</color>
+    <color name="bg_total_transparent_black">#ff000000</color>
+    <color name="bg_total_transparent_while">#ffffffff</color>
+    <color name="border_green">#e8529c50</color>
+    <color name="cursor_green">#E847C444</color>
+    <color name="color_hint">#E892D791</color>
 </resources>

@@ -31,10 +31,6 @@
     <dimen name="behind_list_height">50.0dip</dimen>
     <dimen name="behind_list_text_size">20.0sp</dimen>
     <dimen name="bottom_button_height">45.0dip</dimen>
-    <dimen name="card_half_margin">3.0dip</dimen>
-    <dimen name="card_margin">5.0dip</dimen>
-    <dimen name="card_title_and_bottom">33.0dip</dimen>
-    <dimen name="card_topic_image_margin">5.0dip</dimen>
     <dimen name="charge_icon_height">15.0dip</dimen>
     <dimen name="charge_icon_width">15.0dip</dimen>
     <dimen name="color_bg_grid_spacing">10.0dip</dimen>
@@ -81,8 +77,6 @@
     <dimen name="font_size_middle">16.0sp</dimen>
     <dimen name="font_size_small">14.0sp</dimen>
     <dimen name="grid_space">1.0dip</dimen>
-    <dimen name="header_footer_left_right_padding">24.0dip</dimen>
-    <dimen name="header_footer_top_bottom_padding">12.0dip</dimen>
     <dimen name="headline">22.0sp</dimen>
     <dimen name="icon_height">55.0dip</dimen>
     <dimen name="icon_height_medium">42.0dip</dimen>
@@ -92,10 +86,6 @@
     <dimen name="icon_width_medium">42.0dip</dimen>
     <dimen name="icon_width_small">35.0dip</dimen>
     <dimen name="icon_width_small_x">30.0dip</dimen>
-    <dimen name="indicator_corner_radius">12.0dip</dimen>
-    <dimen name="indicator_h">2.0dip</dimen>
-    <dimen name="indicator_internal_padding">4.0dip</dimen>
-    <dimen name="indicator_right_padding">10.0dip</dimen>
     <dimen name="list_app_h">60.0dip</dimen>
     <dimen name="list_downloads_h">80.0dip</dimen>
     <dimen name="list_item_sub_title">14.0sp</dimen>
@@ -104,16 +94,9 @@
     <dimen name="list_padding">10.0dip</dimen>
     <dimen name="meiyixia">15.0sp</dimen>
     <dimen name="menu_left">15.0dip</dimen>
-    <dimen name="num_date">36.0sp</dimen>
     <dimen name="popupWindow_margin">20.0dip</dimen>
     <dimen name="popupWindow_width">120.0dip</dimen>
     <dimen name="publish_grid_space">3.0dip</dimen>
-    <dimen name="rhythm_edge_size_for_shift">50.0dip</dimen>
-    <dimen name="rhythm_icon_margin">2.0dip</dimen>
-    <dimen name="rhythm_item_height">100.0dip</dimen>
-    <dimen name="rhythm_layout_height">60.0dip</dimen>
-    <dimen name="rhythm_max_translation_y">40.0dip</dimen>
-    <dimen name="rhythm_view_init_translation_y">50.0dip</dimen>
     <dimen name="shadow_width">15.0dip</dimen>
     <dimen name="shake_spacing">5.0dip</dimen>
     <dimen name="share_to">16.0sp</dimen>
@@ -142,7 +125,6 @@
     <dimen name="user_photos_spacing">10.0dip</dimen>
     <dimen name="user_title_size">18.0sp</dimen>
     <dimen name="why_promote">16.0sp</dimen>
-    <dimen name="word_date">22.0sp</dimen>
     <dimen name="navigator_margin">5dp</dimen>
     <dimen name="navigator_common_height">48dp</dimen>
     <dimen name="toolbar_padding_top">0dp</dimen>

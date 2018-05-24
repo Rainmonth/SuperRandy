@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="m4">4dp</dimen>
+    <dimen name="m8">8dp</dimen>
+    <dimen name="m16">16dp</dimen>
+    <dimen name="m24">24dp</dimen>
+    <dimen name="m32">32dp</dimen>
+
+    <dimen name="common_load_more_progress_size">30dp</dimen>
+    <dimen name="common_load_more_padding">20dp</dimen>
+    <dimen name="common_loading_progress_size">35dp</dimen>
+    <dimen name="common_loading_text_margin">10dp</dimen>
+    <dimen name="common_loading_text_lines_spacing">5dp</dimen>
+
+
+    <dimen name="header_footer_left_right_padding">24.0dip</dimen>
+    <dimen name="header_footer_top_bottom_padding">12.0dip</dimen>
+
+    <dimen name="indicator_corner_radius">12.0dip</dimen>
+    <dimen name="indicator_h">2.0dip</dimen>
+    <dimen name="indicator_internal_padding">4.0dip</dimen>
+    <dimen name="indicator_right_padding">10.0dip</dimen>
+
+    <dimen name="f22">22sp</dimen>
+    <dimen name="f36">36sp</dimen>
+</resources>

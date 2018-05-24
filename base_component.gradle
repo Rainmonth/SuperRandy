@@ -58,6 +58,6 @@ android {
 
     // 配置组件项目依赖
     dependencies {
-        implementation project(':common')
+        api project(":common")
     }
 }

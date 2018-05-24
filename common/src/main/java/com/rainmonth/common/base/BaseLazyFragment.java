@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.rainmonth.common.base.mvp.IBaseView;
 import com.rainmonth.common.eventbus.EventCenter;
 import com.rainmonth.common.widgets.loading.VaryViewHelperController;
 import com.rainmonth.common.utils.CommonUtils;
@@ -23,7 +24,7 @@ import java.lang.reflect.Field;
 import butterknife.ButterKnife;
 import de.greenrobot.event.EventBus;
 
-public abstract class BaseLazyFragment extends Fragment {
+public abstract class BaseLazyFragment extends Fragment implements IBaseView{
 
     /**
      * Log tag
@@ -371,5 +372,20 @@ public abstract class BaseLazyFragment extends Fragment {
         if (null != eventCenter) {
             onEventComing(eventCenter);
         }
+    }
+
+    @Override
+    public void toast(String msg) {
+
+    }
+
+    @Override
+    public void showProgress() {
+
+    }
+
+    @Override
+    public void hideProgress() {
+
     }
 }
