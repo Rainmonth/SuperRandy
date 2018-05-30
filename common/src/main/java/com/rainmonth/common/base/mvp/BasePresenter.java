@@ -1,7 +1,7 @@
 package com.rainmonth.common.base.mvp;
 
 
-public class BasePresenter<M extends IBaseModel, V extends IBaseView> {
+public class BasePresenter<M extends IBaseModel, V extends IBaseView> implements IBasePresenter{
 
     protected final String TAG = this.getClass().getSimpleName();
 
@@ -19,5 +19,15 @@ public class BasePresenter<M extends IBaseModel, V extends IBaseView> {
     }
 
     public BasePresenter() {
+    }
+
+    @Override
+    public void onStart() {
+
+    }
+
+    @Override
+    public void onDestroy() {
+
     }
 }

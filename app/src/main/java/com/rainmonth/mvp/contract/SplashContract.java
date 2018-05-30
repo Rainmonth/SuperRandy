@@ -4,6 +4,8 @@ import com.rainmonth.common.base.mvp.IBaseModel;
 import com.rainmonth.common.base.mvp.IBaseView;
 import com.rainmonth.mvp.model.bean.SplashBean;
 
+import io.reactivex.Flowable;
+
 /**
  * Created by RandyZhang on 2018/5/21.
  */
@@ -19,7 +21,9 @@ public interface SplashContract {
     }
 
     interface Model extends IBaseModel {
+//        Flowable<SplashBean> getSplashInfo();
 
+        SplashBean getSplashInfo();
     }
 
 }

@@ -10,6 +10,9 @@ import dagger.Module;
 import dagger.Provides;
 
 
+/**
+ * 用来提供一些全局配置的单例对象，如网络请求、图片加载、Json解析等
+ */
 @Module
 public class AppModule {
 

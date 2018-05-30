@@ -6,6 +6,7 @@ import android.view.View;
 
 import com.rainmonth.app.R;
 import com.rainmonth.common.base.BaseActivity;
+import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.common.eventbus.EventCenter;
 import com.rainmonth.common.utils.NetworkUtils;
 
@@ -79,5 +80,10 @@ public class CardExploreActivity extends BaseActivity {
     public void initToolbar() {
         mToolbar.setTitle("最美应用");
         mToolbar.setLogo(R.drawable.ic_action_bar_logo);
+    }
+
+    @Override
+    protected void setupActivityComponent(AppComponent appComponent) {
+
     }
 }

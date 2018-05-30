@@ -5,7 +5,7 @@ package com.rainmonth.common.base.mvp;
  * <p>用于对请求过程中产生的Subscription 进行处理</p>
  */
 public interface IBasePresenter {
-    void onResume();
+    void onStart();
 
     void onDestroy();
 }

@@ -8,6 +8,7 @@ import android.widget.TextView;
 import com.rainmonth.R;
 import com.rainmonth.common.base.mvp.BaseResponse;
 import com.rainmonth.common.base.BaseActivity;
+import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.common.eventbus.EventCenter;
 import com.rainmonth.common.utils.NetworkUtils;
 import com.rainmonth.common.widgets.ClearEditText;
@@ -47,6 +48,11 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
 //        mToolbar.setBackgroundResource(R.color.transparent);
     }
 
+    @Override
+    protected void setupActivityComponent(AppComponent appComponent) {
+
+    }
+
     @OnClick({R.id.iv_user_avatar, R.id.tv_login, R.id.tv_no_account, R.id.iv_qq, R.id.iv_sina})
     public void onClick(View view) {
         switch (view.getId()) {
@@ -57,7 +63,6 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
 //                loginPresenter.login(etUserName.getText().toString(), etPsw.getText().toString());
                 break;
             case R.id.tv_no_account:
-                readyGo(TestActivity.class);
                 break;
             case R.id.iv_qq:
 
@@ -91,50 +96,10 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
     }
 
     @Override
-    protected void onEventComing(EventCenter eventCenter) {
-
-    }
-
-    @Override
-    protected View getLoadingTargetView() {
-        return null;
-    }
-
-    @Override
     protected void initViewsAndEvents() {
         // todo to be delete
         etUserName.setText("randy");
         etPsw.setText("123456");
 //        loginPresenter = new LoginPresenter(this);
-    }
-
-    @Override
-    protected void onNetworkConnected(NetworkUtils.NetType type) {
-
-    }
-
-    @Override
-    protected void onNetworkDisConnected() {
-
-    }
-
-    @Override
-    protected boolean isApplyStatusBarTranslucency() {
-        return true;
-    }
-
-    @Override
-    protected boolean isBindEventBusHere() {
-        return false;
-    }
-
-    @Override
-    protected boolean toggleOverridePendingTransition() {
-        return false;
-    }
-
-    @Override
-    protected TransitionMode getOverridePendingTransitionMode() {
-        return null;
     }
 }

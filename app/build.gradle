@@ -6,6 +6,11 @@ dependencies {
     compile files('libs/GetuiSDK2.9.5.0.jar')
     api project(':common')
     api project(':magicindicator')
+
+    //di
+    annotationProcessor rootProject.ext.dependencies["dagger2-compiler"]
+    annotationProcessor rootProject.ext.dependencies["butterknife-compiler"]
+//    annotationProcessor rootProject.ext.dependencies["router-compiler"]
     //可选，用于生成application类
     compile("com.tencent.tinker:tinker-android-lib:${TINKER_VERSION}") { changing = true }
     //tinker的核心库

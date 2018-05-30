@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.rainmonth.common.base.BaseActivity;
+import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.common.eventbus.EventCenter;
 import com.rainmonth.common.utils.NetworkUtils;
 
@@ -44,39 +45,14 @@ public class MusicHomeActivity extends BaseActivity implements View.OnClickListe
     }
 
     @Override
-    protected void onNetworkConnected(NetworkUtils.NetType type) {
-
-    }
-
-    @Override
-    protected void onNetworkDisConnected() {
-
-    }
-
-    @Override
-    protected boolean isApplyStatusBarTranslucency() {
-        return true;
-    }
-
-    @Override
-    protected boolean isBindEventBusHere() {
-        return false;
-    }
-
-    @Override
-    protected boolean toggleOverridePendingTransition() {
-        return false;
-    }
-
-    @Override
-    protected TransitionMode getOverridePendingTransitionMode() {
-        return null;
-    }
-
-    @Override
     public void initToolbar() {
         mToolbar.setTitle("音乐主页");
         mToolbar.setLogo(R.drawable.ic_action_bar_logo);
+    }
+
+    @Override
+    protected void setupActivityComponent(AppComponent appComponent) {
+
     }
 
     @Override

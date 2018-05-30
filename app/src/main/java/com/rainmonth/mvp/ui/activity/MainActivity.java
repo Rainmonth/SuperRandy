@@ -1,5 +1,6 @@
 package com.rainmonth.mvp.ui.activity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.View;
@@ -8,19 +9,28 @@ import android.widget.FrameLayout;
 import com.rainmonth.R;
 import com.rainmonth.common.base.BaseActivity;
 import com.rainmonth.common.base.BaseLazyFragment;
+import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.common.eventbus.EventCenter;
 import com.rainmonth.common.utils.NetworkUtils;
+import com.rainmonth.di.component.DaggerMainComponent;
+import com.rainmonth.di.module.MainModule;
 import com.rainmonth.mvp.contract.MainContract;
 import com.rainmonth.mvp.presenter.MainPresenter;
 import com.rainmonth.mvp.ui.adapter.HomeViewPagerAdapter;
+import com.rainmonth.mvp.ui.fragment.RanFragment;
+import com.rainmonth.mvp.ui.fragment.RenFragment;
+import com.rainmonth.mvp.ui.fragment.XunFragment;
+import com.rainmonth.mvp.ui.fragment.YouFragment;
+import com.rainmonth.mvp.ui.fragment.ZhuiFragment;
 import com.rainmonth.mvp.ui.widgets.NavigationTabBar;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends BaseActivity implements MainContract.View {
+public class MainActivity extends BaseActivity<MainPresenter> implements MainContract.View {
 
     @BindView(R.id.vp_horizontal_ntb)
     ViewPager vpHorizontalNtb;
@@ -31,13 +41,21 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     @BindView(R.id.fl_ntb_horizontal_container)
     FrameLayout flNtbHorizontalContainer;
 
-    MainPresenter mainPresenter = null;
-
     @Override
     public void initToolbar() {
         mToolbar.setTitle("主页");
         mToolbar.setSubtitle("主页说明");
         mToolbar.setLogo(R.drawable.ic_action_bar_logo);
+    }
+
+    @Override
+    protected void setupActivityComponent(AppComponent appComponent) {
+        DaggerMainComponent
+                .builder()
+                .appComponent(appComponent)
+                .mainModule(new MainModule(this))
+                .build()
+                .inject(this);
     }
 
     @Override
@@ -83,20 +101,12 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     }
 
     @Override
-    protected void onEventComing(EventCenter eventCenter) {
-
-    }
-
-    @Override
-    protected View getLoadingTargetView() {
-        return null;
-    }
-
-    @Override
     protected void initViewsAndEvents() {
         printDeviceInfo();
         // 初始化个推
         ButterKnife.bind(this);
+
+        mPresenter.init(getNavigationListModels(), getNavigationFragments());
 
         ntbHorizontal.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -116,33 +126,66 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         });
     }
 
-    @Override
-    protected void onNetworkConnected(NetworkUtils.NetType type) {
+    private List<NavigationTabBar.Model> getNavigationListModels() {
+        final String[] colors = getResources().getStringArray(R.array.default_preview);
+        final ArrayList<NavigationTabBar.Model> models = new ArrayList<NavigationTabBar.Model>();
+        models.add(
+                new NavigationTabBar.Model.Builder(
+                        getResources().getDrawable(R.drawable.ic_first),
+                        Color.parseColor(colors[0]))
+//                        .selectedIcon(getResources().getDrawable(R.drawable.ic_sixth))
+                        .title(getResources().getString(R.string.ren))
+                        .badgeTitle("NTB")
+                        .build()
+        );
+        models.add(
+                new NavigationTabBar.Model.Builder(
+                        getResources().getDrawable(R.drawable.ic_second),
+                        Color.parseColor(colors[1]))
+//                        .selectedIcon(getResources().getDrawable(R.drawable.ic_eighth))
+                        .title(getResources().getString(R.string.ran))
+                        .badgeTitle("with")
+                        .build()
+        );
+        models.add(
+                new NavigationTabBar.Model.Builder(
+                        getResources().getDrawable(R.drawable.ic_third),
+                        Color.parseColor(colors[2]))
+//                        .selectedIcon(getResources().getDrawable(R.drawable.ic_seventh))
+                        .title(getResources().getString(R.string.zhui))
+                        .badgeTitle("state")
+                        .build()
+        );
+        models.add(
+                new NavigationTabBar.Model.Builder(
+                        getResources().getDrawable(R.drawable.ic_fourth),
+                        Color.parseColor(colors[3]))
+//                        .selectedIcon(getResources().getDrawable(R.drawable.ic_eighth))
+                        .title(getResources().getString(R.string.xun))
+                        .badgeTitle("icon")
+                        .build()
+        );
 
+        models.add(
+                new NavigationTabBar.Model.Builder(
+                        getResources().getDrawable(R.drawable.ic_fourth),
+                        Color.parseColor(colors[4]))
+//                        .selectedIcon(getResources().getDrawable(R.drawable.ic_eighth))
+                        .title(getResources().getString(R.string.you))
+                        .badgeTitle("icon")
+                        .build()
+        );
+
+        return models;
     }
 
-    @Override
-    protected void onNetworkDisConnected() {
-
-    }
-
-    @Override
-    protected boolean isApplyStatusBarTranslucency() {
-        return true;
-    }
-
-    @Override
-    protected boolean isBindEventBusHere() {
-        return false;
-    }
-
-    @Override
-    protected boolean toggleOverridePendingTransition() {
-        return false;
-    }
-
-    @Override
-    protected TransitionMode getOverridePendingTransitionMode() {
-        return null;
+    private List<BaseLazyFragment> getNavigationFragments() {
+        final ArrayList<BaseLazyFragment> fragments = new ArrayList<BaseLazyFragment>();
+        fragments.add(new RenFragment());
+        fragments.add(new RanFragment());
+        fragments.add(new ZhuiFragment());
+        fragments.add(new XunFragment());
+        fragments.add(new YouFragment());
+        return fragments;
     }
 }

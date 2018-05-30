@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.rainmonth.R;
 import com.rainmonth.common.base.BaseActivity;
+import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.common.eventbus.EventCenter;
 import com.rainmonth.common.utils.DensityUtils;
 import com.rainmonth.common.utils.NetworkUtils;
@@ -103,16 +104,6 @@ public class ViewPagerExploreActivity extends BaseActivity {
     }
 
     @Override
-    protected void onEventComing(EventCenter eventCenter) {
-
-    }
-
-    @Override
-    protected View getLoadingTargetView() {
-        return null;
-    }
-
-    @Override
     protected void initViewsAndEvents() {
         mViewPager = (ViewPager) findViewById(R.id.view_pager);
         mViewPager.setAdapter(mAdapter);
@@ -191,39 +182,14 @@ public class ViewPagerExploreActivity extends BaseActivity {
     }
 
     @Override
-    protected void onNetworkConnected(NetworkUtils.NetType type) {
-
-    }
-
-    @Override
-    protected void onNetworkDisConnected() {
-
-    }
-
-    @Override
-    protected boolean isApplyStatusBarTranslucency() {
-        return true;
-    }
-
-    @Override
-    protected boolean isBindEventBusHere() {
-        return false;
-    }
-
-    @Override
-    protected boolean toggleOverridePendingTransition() {
-        return false;
-    }
-
-    @Override
-    protected TransitionMode getOverridePendingTransitionMode() {
-        return null;
-    }
-
-    @Override
     public void initToolbar() {
         mToolbar.setLogo(R.drawable.ic_action_bar_logo);
         mToolbar.setTitle("新闻浏览");
         mToolbar.setBackgroundResource(R.color.bg_home);
+    }
+
+    @Override
+    protected void setupActivityComponent(AppComponent appComponent) {
+
     }
 }

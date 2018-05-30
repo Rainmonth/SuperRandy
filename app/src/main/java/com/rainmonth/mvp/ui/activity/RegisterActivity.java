@@ -9,11 +9,13 @@ import android.widget.TextView;
 import com.rainmonth.R;
 import com.rainmonth.common.base.BaseActivity;
 import com.rainmonth.common.base.mvp.BaseResponse;
+import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.common.eventbus.EventCenter;
 import com.rainmonth.common.utils.NetworkUtils;
 import com.rainmonth.common.utils.ToastUtils;
 import com.rainmonth.mvp.contract.RegisterContract;
 import com.rainmonth.mvp.model.bean.UserBean;
+import com.rainmonth.mvp.presenter.RegisterPresenter;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -21,7 +23,8 @@ import butterknife.OnClick;
 /**
  * 注册页面
  */
-public class RegisterActivity extends BaseActivity implements RegisterContract.View {
+public class RegisterActivity extends BaseActivity<RegisterPresenter>
+        implements RegisterContract.View {
     @BindView(R.id.iv_user_avatar)
     ImageView ivUserAvatar;
     @BindView(R.id.et_phone)
@@ -55,7 +58,6 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
                 userBean.setUsername(etUserName.getText().toString());
                 userBean.setEmail(etEmail.getText().toString());
                 userBean.setPsw(etPsw.getText().toString());
-//                registerPresenter.register(userBean);
                 break;
         }
     }
@@ -71,17 +73,7 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
     }
 
     @Override
-    public void toast(String msg) {
-        ToastUtils.showLongToast(mContext, msg);
-    }
-
-    @Override
-    public void showProgress() {
-
-    }
-
-    @Override
-    public void hideProgress() {
+    protected void setupActivityComponent(AppComponent appComponent) {
 
     }
 
@@ -108,35 +100,5 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
     @Override
     protected void initViewsAndEvents() {
 //        registerPresenter = new RegisterPresenter(this);
-    }
-
-    @Override
-    protected void onNetworkConnected(NetworkUtils.NetType type) {
-
-    }
-
-    @Override
-    protected void onNetworkDisConnected() {
-
-    }
-
-    @Override
-    protected boolean isApplyStatusBarTranslucency() {
-        return true;
-    }
-
-    @Override
-    protected boolean isBindEventBusHere() {
-        return false;
-    }
-
-    @Override
-    protected boolean toggleOverridePendingTransition() {
-        return false;
-    }
-
-    @Override
-    protected TransitionMode getOverridePendingTransitionMode() {
-        return null;
     }
 }

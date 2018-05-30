@@ -17,7 +17,9 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.rainmonth.common.R;
+import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.common.eventbus.EventCenter;
+import com.rainmonth.common.utils.ComponentUtils;
 import com.rainmonth.common.widgets.loading.VaryViewHelperController;
 import com.rainmonth.common.netstatus.NetChangeObserver;
 import com.rainmonth.common.netstatus.NetStateReceiver;
@@ -44,6 +46,8 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
     protected float mScreenDensity = 0.0f;
     protected int mDpi = 160;
 
+
+    protected AppComponent mAppComponent;
     /**
      * context
      */
@@ -118,6 +122,7 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
         }
 
         mContext = this;
+        mAppComponent = ComponentUtils.getAppComponent();
         TAG = this.getClass().getSimpleName();
         BaseAppManager.getInstance().addActivity(this);
 
@@ -145,7 +150,7 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
 
         NetStateReceiver.registerObserver(mNetChangeObserver);
 
-        initViewsAndEvents();
+//        initViewsAndEvents();
     }
 
     @Override

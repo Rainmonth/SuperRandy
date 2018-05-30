@@ -5,6 +5,7 @@ import android.view.View;
 
 import com.rainmonth.R;
 import com.rainmonth.common.base.BaseActivity;
+import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.common.eventbus.EventCenter;
 import com.rainmonth.common.utils.NetworkUtils;
 
@@ -12,11 +13,6 @@ import com.rainmonth.common.utils.NetworkUtils;
  * 文章
  */
 public class ListExploreActivity extends BaseActivity {
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
 
     @Override
     protected void getBundleExtras(Bundle extras) {
@@ -29,50 +25,9 @@ public class ListExploreActivity extends BaseActivity {
     }
 
     @Override
-    protected void onEventComing(EventCenter eventCenter) {
-
-    }
-
-    @Override
-    protected View getLoadingTargetView() {
-        return null;
-    }
-
-    @Override
     protected void initViewsAndEvents() {
 
     }
-
-    @Override
-    protected void onNetworkConnected(NetworkUtils.NetType type) {
-
-    }
-
-    @Override
-    protected void onNetworkDisConnected() {
-
-    }
-
-    @Override
-    protected boolean isApplyStatusBarTranslucency() {
-        return true;
-    }
-
-    @Override
-    protected boolean isBindEventBusHere() {
-        return false;
-    }
-
-    @Override
-    protected boolean toggleOverridePendingTransition() {
-        return false;
-    }
-
-    @Override
-    protected TransitionMode getOverridePendingTransitionMode() {
-        return null;
-    }
-
 
     @Override
     public void initToolbar() {
@@ -81,5 +36,10 @@ public class ListExploreActivity extends BaseActivity {
             mToolbar.setTitle("列表新闻浏览");
             mToolbar.setBackgroundResource(R.color.bg_home);
         }
+    }
+
+    @Override
+    protected void setupActivityComponent(AppComponent appComponent) {
+
     }
 }

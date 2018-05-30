@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 
 import com.rainmonth.R;
 import com.rainmonth.common.base.BaseActivity;
+import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.common.eventbus.EventCenter;
 import com.rainmonth.common.utils.NetworkUtils;
 
@@ -72,6 +73,11 @@ public class WelcomeActivity extends BaseActivity {
 
     }
 
+    @Override
+    protected void setupActivityComponent(AppComponent appComponent) {
+
+    }
+
     @OnClick({R.id.btn_login, R.id.btn_register})
     public void onClick(View view) {
         switch (view.getId()) {
@@ -95,11 +101,6 @@ public class WelcomeActivity extends BaseActivity {
     }
 
     @Override
-    protected void onEventComing(EventCenter eventCenter) {
-
-    }
-
-    @Override
     protected View getLoadingTargetView() {
         return null;
     }
@@ -109,33 +110,4 @@ public class WelcomeActivity extends BaseActivity {
         vpWelcome.setAdapter(mAdapter);
     }
 
-    @Override
-    protected void onNetworkConnected(NetworkUtils.NetType type) {
-
-    }
-
-    @Override
-    protected void onNetworkDisConnected() {
-
-    }
-
-    @Override
-    protected boolean isApplyStatusBarTranslucency() {
-        return true;
-    }
-
-    @Override
-    protected boolean isBindEventBusHere() {
-        return false;
-    }
-
-    @Override
-    protected boolean toggleOverridePendingTransition() {
-        return false;
-    }
-
-    @Override
-    protected TransitionMode getOverridePendingTransitionMode() {
-        return null;
-    }
 }

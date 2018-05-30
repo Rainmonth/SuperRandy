@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.google.gson.Gson;
 import com.rainmonth.common.base.BaseApplication;
+import com.rainmonth.common.base.IBaseApplicationDelegate;
 import com.rainmonth.common.di.module.AppModule;
 import com.rainmonth.common.di.module.ClientModule;
 import com.rainmonth.common.di.module.GlobeConfigModule;
@@ -15,7 +16,9 @@ import javax.inject.Singleton;
 import dagger.Component;
 import okhttp3.OkHttpClient;
 
-
+/**
+ * 该接口用来
+ */
 @Singleton
 @Component(modules = {AppModule.class,
         ClientModule.class,
@@ -47,5 +50,5 @@ public interface AppComponent {
 
     HashMap<String, Integer> statusBarAttr();
 
-    void inject(BaseApplication delegate);
+    void inject(IBaseApplicationDelegate delegate);
 }

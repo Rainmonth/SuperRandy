@@ -40,7 +40,7 @@ public class RanFragment extends BaseLazyFragment implements RanContract.View {
         ButterKnife.bind(this, rootView);
 
 //        mRanPresenter = new RanPresenter(this);
-        mRanPresenter.initialize();
+//        mRanPresenter.initialize();
         return rootView;
     }
 

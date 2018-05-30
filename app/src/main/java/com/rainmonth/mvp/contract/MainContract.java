@@ -17,5 +17,8 @@ public interface MainContract {
     }
 
     interface Model extends IBaseModel {
+        List<NavigationTabBar.Model> getNavigationListModels();
+
+        List<BaseLazyFragment> getNavigationFragments();
     }
 }

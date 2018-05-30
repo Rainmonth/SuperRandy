@@ -1,22 +1,41 @@
 package com.rainmonth.common.base;
 
 import android.os.Bundle;
+import android.view.View;
 
+import com.rainmonth.common.base.mvp.BasePresenter;
 import com.rainmonth.common.base.mvp.IBaseView;
+import com.rainmonth.common.di.component.AppComponent;
+import com.rainmonth.common.di.component.DaggerAppComponent;
+import com.rainmonth.common.eventbus.EventCenter;
+import com.rainmonth.common.utils.ComponentUtils;
+import com.rainmonth.common.utils.NetworkUtils;
+
+import javax.inject.Inject;
 
 /**
  * Activity 基类
  */
-public abstract class BaseActivity extends BaseAppCompatActivity implements IBaseView{
+public abstract class BaseActivity<P extends BasePresenter> extends BaseAppCompatActivity
+        implements IBaseView {
+
+    @Inject
+    protected P mPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setupActivityComponent(mAppComponent);
+        initViewsAndEvents();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        if (mPresenter != null) {
+            mPresenter.onDestroy();
+        }
+        this.mPresenter = null;
     }
 
     public abstract void initToolbar();
@@ -33,6 +52,49 @@ public abstract class BaseActivity extends BaseAppCompatActivity implements IBas
 
     @Override
     public void hideProgress() {
+
+    }
+
+    protected abstract void setupActivityComponent(AppComponent appComponent);
+
+
+    @Override
+    protected boolean isApplyStatusBarTranslucency() {
+        return false;
+    }
+
+    @Override
+    protected void onNetworkConnected(NetworkUtils.NetType type) {
+
+    }
+
+    @Override
+    protected void onNetworkDisConnected() {
+
+    }
+
+    @Override
+    protected boolean isBindEventBusHere() {
+        return false;
+    }
+
+    @Override
+    protected boolean toggleOverridePendingTransition() {
+        return false;
+    }
+
+    @Override
+    protected TransitionMode getOverridePendingTransitionMode() {
+        return null;
+    }
+
+    @Override
+    protected View getLoadingTargetView() {
+        return null;
+    }
+
+    @Override
+    protected void onEventComing(EventCenter eventCenter) {
 
     }
 }
