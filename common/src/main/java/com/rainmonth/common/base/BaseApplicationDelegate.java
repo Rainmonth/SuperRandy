@@ -2,6 +2,8 @@ package com.rainmonth.common.base;
 
 import android.app.Application;
 
+import com.alibaba.android.arouter.launcher.ARouter;
+import com.rainmonth.common.BuildConfig;
 import com.rainmonth.common.R;
 import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.common.di.component.DaggerAppComponent;
@@ -38,6 +40,13 @@ public class BaseApplicationDelegate implements IBaseApplicationDelegate {
         ComponentUtils.initAppComponent(mAppComponent);
 
         // 进行其他操作
+        //router
+        if (BuildConfig.DEBUG) {
+            ARouter.openLog();
+            ARouter.openDebug();
+            ARouter.printStackTrace();
+        }
+        ARouter.init(mApplication);
     }
 
     public void onTerminate() {

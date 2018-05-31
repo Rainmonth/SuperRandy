@@ -43,7 +43,8 @@ public class CardFragment extends BaseLazyFragment {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         View rootView = super.onCreateView(inflater, container, savedInstanceState);
         ButterKnife.bind(this, rootView);
@@ -52,7 +53,7 @@ public class CardFragment extends BaseLazyFragment {
     }
 
     protected View initViews(View view) {
-        mCardLayout = ((RelativeLayout) view.findViewById(R.id.box_card));
+        mCardLayout = (RelativeLayout) view.findViewById(R.id.box_card);
         mBottomEdgeImageView = ((ImageView) view.findViewById(R.id.image_bottom_edge));
         mCoverImageView = ((ImageView) view.findViewById(R.id.image_cover));
         mTitleText = ((TextView) view.findViewById(R.id.text_title));

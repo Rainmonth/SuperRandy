@@ -8,6 +8,8 @@ if (isRunAlone) {
 } else {
     apply plugin: "com.android.library"
 }
+apply plugin: 'com.jakewharton.butterknife'
+apply plugin: 'com.alibaba.arouter'
 
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
@@ -58,6 +60,7 @@ android {
 
     // 配置组件项目依赖
     dependencies {
-        api project(":common")
+//        api project(":common")
+        implementation project(":common")
     }
 }

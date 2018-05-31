@@ -6,9 +6,7 @@ import android.view.View;
 import com.rainmonth.common.base.mvp.BasePresenter;
 import com.rainmonth.common.base.mvp.IBaseView;
 import com.rainmonth.common.di.component.AppComponent;
-import com.rainmonth.common.di.component.DaggerAppComponent;
 import com.rainmonth.common.eventbus.EventCenter;
-import com.rainmonth.common.utils.ComponentUtils;
 import com.rainmonth.common.utils.NetworkUtils;
 
 import javax.inject.Inject;

@@ -4,9 +4,6 @@ import android.app.ActivityManager;
 import android.app.Application;
 import android.content.Context;
 
-import com.rainmonth.common.di.component.AppComponent;
-import com.rainmonth.common.di.component.DaggerAppComponent;
-import com.rainmonth.common.di.module.AppModule;
 import com.rainmonth.common.utils.ComponentUtils;
 
 /**

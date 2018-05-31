@@ -4,20 +4,21 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.rainmonth.common.base.BaseActivity;
 import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.common.eventbus.EventCenter;
-import com.rainmonth.common.utils.NetworkUtils;
-
-import butterknife.BindView;
+import com.rainmonth.router.RouterConstant;
+import com.rainmonth.router.RouterUtils;
 
 /**
  * 音乐主页面
  */
+@Route(path = RouterConstant.PATH_MUSIC_HOME)
 public class MusicHomeActivity extends BaseActivity implements View.OnClickListener {
 
-    @BindView(R.id.tv_play_music)
     TextView tvPlayMusic;
+    TextView tvGoApp;
 
     @Override
     protected void getBundleExtras(Bundle extras) {
@@ -41,7 +42,10 @@ public class MusicHomeActivity extends BaseActivity implements View.OnClickListe
 
     @Override
     protected void initViewsAndEvents() {
+        tvPlayMusic = findViewById(R.id.tv_play_music);
+        tvGoApp = findViewById(R.id.tv_go_app);
         tvPlayMusic.setOnClickListener(this);
+        tvGoApp.setOnClickListener(this);
     }
 
     @Override
@@ -57,13 +61,12 @@ public class MusicHomeActivity extends BaseActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.tv_play_music:
-                readyGo(MusicPlayerActivity.class);
-                break;
-            default:
-
-                break;
+        int id = view.getId();
+        if (id == R.id.tv_play_music) {
+            readyGo(MusicPlayerActivity.class);
+        } else if(id == R.id.tv_go_app) {
+            // do nothing
+            RouterUtils.getInstance().build(RouterConstant.PATH_APP_HOME).navigation();
         }
     }
 }

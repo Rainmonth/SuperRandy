@@ -22,6 +22,8 @@ import com.rainmonth.mvp.presenter.XunPresenter;
 import com.rainmonth.mvp.ui.activity.GridExploreActivity;
 import com.rainmonth.mvp.ui.activity.ListExploreActivity;
 import com.rainmonth.mvp.ui.activity.ViewPagerExploreActivity;
+import com.rainmonth.router.RouterConstant;
+import com.rainmonth.router.RouterUtils;
 import com.socks.library.KLog;
 
 import java.util.List;
@@ -161,6 +163,7 @@ public class XunFragment extends BaseLazyFragment<XunPresenter> implements XunCo
             case TYPE_MUSIC:
                 // 音乐首页
 //                readyGo(MusicHomeActivity.class);
+                RouterUtils.getInstance().build(RouterConstant.PATH_MUSIC_HOME).navigation();
                 break;
             case TYPE_FILM:
                 // 电影首页
@@ -169,6 +172,7 @@ public class XunFragment extends BaseLazyFragment<XunPresenter> implements XunCo
             case TYPE_APP:
                 // app首页
 //                readyGo(CardExploreActivity.class);
+                RouterUtils.getInstance().build(RouterConstant.PATH_APP_HOME).navigation();
                 break;
             default:
                 // viewPager形式展现

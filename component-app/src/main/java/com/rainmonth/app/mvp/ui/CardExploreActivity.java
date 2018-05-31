@@ -4,12 +4,15 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.rainmonth.app.R;
 import com.rainmonth.common.base.BaseActivity;
 import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.common.eventbus.EventCenter;
 import com.rainmonth.common.utils.NetworkUtils;
+import com.rainmonth.router.RouterConstant;
 
+@Route(path= RouterConstant.PATH_APP_HOME)
 public class CardExploreActivity extends BaseActivity {
 
     @Override
