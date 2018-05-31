@@ -2,6 +2,7 @@ package com.rainmonth.mvp.model;
 
 import com.rainmonth.R;
 import com.rainmonth.common.base.mvp.BaseModel;
+import com.rainmonth.common.di.scope.ActivityScope;
 import com.rainmonth.common.utils.DateUtils;
 import com.rainmonth.mvp.contract.SplashContract;
 import com.rainmonth.mvp.model.bean.SplashBean;
@@ -14,7 +15,7 @@ import io.reactivex.Flowable;
  * 获取启动页数据
  * Created by RandyZhang on 2018/5/30.
  */
-
+@ActivityScope
 public class SplashModel extends BaseModel implements SplashContract.Model {
     @Inject
     public SplashModel() {

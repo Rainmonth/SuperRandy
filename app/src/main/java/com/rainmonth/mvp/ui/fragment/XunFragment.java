@@ -1,26 +1,28 @@
 package com.rainmonth.mvp.ui.fragment;
 
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.rainmonth.R;
-import com.rainmonth.mvp.contract.XunContract;
-import com.rainmonth.mvp.model.bean.XunNavigationBean;
 import com.rainmonth.common.adapter.ListViewDataAdapter;
 import com.rainmonth.common.adapter.ViewHolderBase;
 import com.rainmonth.common.adapter.ViewHolderCreator;
 import com.rainmonth.common.base.BaseLazyFragment;
+import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.common.eventbus.EventCenter;
+import com.rainmonth.di.component.DaggerXunComponent;
+import com.rainmonth.di.module.XunModule;
+import com.rainmonth.mvp.contract.XunContract;
+import com.rainmonth.mvp.model.bean.XunNavigationBean;
 import com.rainmonth.mvp.presenter.XunPresenter;
 import com.rainmonth.mvp.ui.activity.GridExploreActivity;
 import com.rainmonth.mvp.ui.activity.ListExploreActivity;
 import com.rainmonth.mvp.ui.activity.ViewPagerExploreActivity;
+import com.socks.library.KLog;
 
 import java.util.List;
 
@@ -39,14 +41,14 @@ import butterknife.ButterKnife;
  * <p/>
  * Created by RandyZhang on 16/6/30.
  */
-public class XunFragment extends BaseLazyFragment implements XunContract.View {
+public class XunFragment extends BaseLazyFragment<XunPresenter> implements XunContract.View {
     @BindView(R.id.gv_content)
     GridView gvContent;
 
-    private XunPresenter xunPresenter = null;
-
     private ListViewDataAdapter<XunNavigationBean> mXunNavListAdapter = null;
-    public final static int TYPE_ARTICLE = 1, TYPE_IMAGE = 2, TYPE_MUSIC = 3, TYPE_FILM = 4, TYPE_APP = 5;
+    public final static int TYPE_ARTICLE = 1,
+            TYPE_IMAGE = 2, TYPE_MUSIC = 3,
+            TYPE_FILM = 4, TYPE_APP = 5;
 
     @Override
     public void onFirstUserVisible() {
@@ -79,24 +81,22 @@ public class XunFragment extends BaseLazyFragment implements XunContract.View {
     }
 
     @Override
+    protected void setupFragmentComponent(AppComponent appComponent) {
+        DaggerXunComponent.builder()
+                .appComponent(appComponent)
+                .xunModule(new XunModule(this))
+                .build()
+                .inject(this);
+    }
+
+    @Override
     protected View getLoadingTargetView() {
         return null;
     }
 
     @Override
     protected void initViewsAndEvents(View view) {
-
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = super.onCreateView(inflater, container, savedInstanceState);
-        ButterKnife.bind(this, rootView);
-
-//        xunPresenter = new XunPresenter(mContext, this);
-//        xunPresenter.initialize();
-
-        return rootView;
+        mPresenter.initialize();
     }
 
     @Override
@@ -106,7 +106,7 @@ public class XunFragment extends BaseLazyFragment implements XunContract.View {
 
     @Override
     public void initViews(List<XunNavigationBean> xunNavigationBeanList) {
-        mXunNavListAdapter = new ListViewDataAdapter<XunNavigationBean>(new ViewHolderCreator<XunNavigationBean>() {
+        mXunNavListAdapter = new ListViewDataAdapter<>(new ViewHolderCreator<XunNavigationBean>() {
             @Override
             public ViewHolderBase<XunNavigationBean> createViewHolder(int position) {
                 return new ViewHolderBase<XunNavigationBean>() {
@@ -139,7 +139,7 @@ public class XunFragment extends BaseLazyFragment implements XunContract.View {
                 // nav to detail activity
                 XunNavigationBean xunNavigationBean = mXunNavListAdapter.getDataList().get(position);
                 if (null != xunNavigationBean) {
-                    xunPresenter.navToDetail(xunNavigationBean);
+                    mPresenter.navToDetail(xunNavigationBean);
                 }
             }
         });
@@ -148,6 +148,7 @@ public class XunFragment extends BaseLazyFragment implements XunContract.View {
     @Override
     public void navToDetail(XunNavigationBean xunNavigationBean) {
         int type = xunNavigationBean.getType();
+        KLog.e("Randy", type);
         switch (type) {
             case TYPE_ARTICLE:
                 readyGo(ViewPagerExploreActivity.class);

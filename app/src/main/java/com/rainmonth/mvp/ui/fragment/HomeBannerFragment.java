@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.rainmonth.R;
+import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.mvp.model.bean.BannerBean;
 import com.rainmonth.common.base.BaseLazyFragment;
 import com.rainmonth.common.eventbus.EventCenter;
@@ -42,6 +43,11 @@ public class HomeBannerFragment extends BaseLazyFragment {
 
     @Override
     protected void onUserInvisible() {
+
+    }
+
+    @Override
+    protected void setupFragmentComponent(AppComponent appComponent) {
 
     }
 

@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.rainmonth.R;
+import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.mvp.ui.activity.LoginActivity;
 import com.rainmonth.mvp.ui.activity.RegisterActivity;
 import com.rainmonth.mvp.ui.activity.WelcomeActivity;
@@ -64,6 +65,11 @@ public class YouFragment extends BaseLazyFragment implements View.OnClickListene
 
     @Override
     public void onUserInvisible() {
+
+    }
+
+    @Override
+    protected void setupFragmentComponent(AppComponent appComponent) {
 
     }
 

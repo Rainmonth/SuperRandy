@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.rainmonth.app.R;
 import com.rainmonth.app.mvp.model.bean.CardBean;
 import com.rainmonth.common.base.BaseLazyFragment;
+import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.common.eventbus.EventCenter;
 import com.rainmonth.common.utils.AnimatorUtils;
 import com.rainmonth.common.utils.HexUtils;
@@ -258,6 +259,11 @@ public class CardViewPagerFragment extends BaseLazyFragment implements PullToRef
 
     @Override
     public void onUserInvisible() {
+
+    }
+
+    @Override
+    protected void setupFragmentComponent(AppComponent appComponent) {
 
     }
 

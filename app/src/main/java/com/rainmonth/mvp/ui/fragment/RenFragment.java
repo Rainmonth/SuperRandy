@@ -1,6 +1,7 @@
 package com.rainmonth.mvp.ui.fragment;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,9 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.rainmonth.R;
+import com.rainmonth.common.di.component.AppComponent;
+import com.rainmonth.di.component.DaggerRenComponent;
+import com.rainmonth.di.module.RenModule;
 import com.rainmonth.mvp.contract.RenContract;
 import com.rainmonth.mvp.model.bean.ArticleBean;
 import com.rainmonth.mvp.model.bean.ArticleGroupBean;
@@ -36,23 +40,13 @@ import butterknife.ButterKnife;
 /**
  * Created by RandyZhang on 16/6/30.
  */
-public class RenFragment extends BaseLazyFragment implements RenContract.View {
+public class RenFragment extends BaseLazyFragment<RenPresenter> implements RenContract.View {
 
     public static final String BANNER_BEAN = "banner_bean";
     @BindView(R.id.lv_content)
     ListView lvContent;
 
-    private RenPresenter renPresenter = null;
     private ListViewDataAdapter<ArticleGroupBean> mRenContentListAdapter = null;
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = super.onCreateView(inflater, container, savedInstanceState);
-        ButterKnife.bind(this, rootView);
-
-//        renPresenter = new RenPresenter(this);
-        return rootView;
-    }
 
     @Override
     public void onFirstUserVisible() {
@@ -69,10 +63,6 @@ public class RenFragment extends BaseLazyFragment implements RenContract.View {
 
     }
 
-    @Override
-    protected boolean isBindEventBusHere() {
-        return false;
-    }
 
     @Override
     public void onUserVisible() {
@@ -85,6 +75,15 @@ public class RenFragment extends BaseLazyFragment implements RenContract.View {
     }
 
     @Override
+    protected void setupFragmentComponent(AppComponent appComponent) {
+        DaggerRenComponent.builder()
+                .appComponent(appComponent)
+                .renModule(new RenModule(this))
+                .build()
+                .inject(this);
+    }
+
+    @Override
     protected View getLoadingTargetView() {
         return null;
     }
@@ -93,6 +92,7 @@ public class RenFragment extends BaseLazyFragment implements RenContract.View {
     protected void initViewsAndEvents(View view) {
 //        initContentList(renPresenter.getContentListFake());
 //        initHomeBanners(renPresenter.getHomeBannerFake());
+        mPresenter.init();
     }
 
     @Override

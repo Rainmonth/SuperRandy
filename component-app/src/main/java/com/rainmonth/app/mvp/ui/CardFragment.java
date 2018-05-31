@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.rainmonth.app.R;
 import com.rainmonth.app.mvp.model.bean.CardBean;
 import com.rainmonth.common.base.BaseLazyFragment;
+import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.common.eventbus.EventCenter;
 import com.rainmonth.common.utils.CommonUtils;
 import com.rainmonth.common.utils.DensityUtils;
@@ -121,6 +122,11 @@ public class CardFragment extends BaseLazyFragment {
 
     @Override
     public void onUserInvisible() {
+
+    }
+
+    @Override
+    protected void setupFragmentComponent(AppComponent appComponent) {
 
     }
 

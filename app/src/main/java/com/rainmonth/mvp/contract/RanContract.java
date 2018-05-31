@@ -12,7 +12,7 @@ import java.util.List;
 
 public interface RanContract {
     interface Model extends IBaseModel {
-
+        public List<RanContentBean> getRanContentList();
     }
 
     interface View extends IBaseView {

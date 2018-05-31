@@ -82,7 +82,7 @@ public class SplashActivity extends BaseActivity<SplashPresenter> implements Spl
     protected void initViewsAndEvents() {
 //        splashPresenter = new SplashPresenter(this);
 //        splashPresenter.initialize();
-        /**
+        /*
          *  todo 请求网络判断是否有新的Splash图片（即新的活动）:
          *  1、有，显示Splash图片，走有新Splash图片的逻辑（如点击图片进入相关活动页面、显示倒计时等）
          *  2、没有，显示默认Splash图片，走默认逻辑（即一段时间后进入主页）

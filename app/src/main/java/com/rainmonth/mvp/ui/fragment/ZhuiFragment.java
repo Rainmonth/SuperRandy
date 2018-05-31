@@ -4,6 +4,7 @@ import android.view.View;
 
 import com.rainmonth.R;
 import com.rainmonth.common.base.BaseLazyFragment;
+import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.common.eventbus.EventCenter;
 
 /**
@@ -37,6 +38,11 @@ public class ZhuiFragment extends BaseLazyFragment {
 
     @Override
     public void onUserInvisible() {
+
+    }
+
+    @Override
+    protected void setupFragmentComponent(AppComponent appComponent) {
 
     }
 

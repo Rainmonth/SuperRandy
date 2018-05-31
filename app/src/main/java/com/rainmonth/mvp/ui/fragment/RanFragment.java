@@ -1,22 +1,23 @@
 package com.rainmonth.mvp.ui.fragment;
 
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.rainmonth.R;
-import com.rainmonth.mvp.contract.RanContract;
-import com.rainmonth.mvp.model.bean.RanContentBean;
 import com.rainmonth.common.adapter.ListViewDataAdapter;
 import com.rainmonth.common.adapter.ViewHolderBase;
 import com.rainmonth.common.adapter.ViewHolderCreator;
 import com.rainmonth.common.base.BaseLazyFragment;
+import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.common.eventbus.EventCenter;
+import com.rainmonth.di.component.DaggerRanComponent;
+import com.rainmonth.di.module.RanModule;
+import com.rainmonth.mvp.contract.RanContract;
+import com.rainmonth.mvp.model.bean.RanContentBean;
 import com.rainmonth.mvp.presenter.RanPresenter;
 
 import java.util.List;
@@ -27,22 +28,11 @@ import butterknife.ButterKnife;
 /**
  * Created by RandyZhang on 16/6/30.
  */
-public class RanFragment extends BaseLazyFragment implements RanContract.View {
+public class RanFragment extends BaseLazyFragment<RanPresenter> implements RanContract.View {
 
     @BindView(R.id.lv_content)
     ListView lvContent;
-    private RanPresenter mRanPresenter = null;
     private ListViewDataAdapter<RanContentBean> mRanContentListAdapter = null;
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = super.onCreateView(inflater, container, savedInstanceState);
-        ButterKnife.bind(this, rootView);
-
-//        mRanPresenter = new RanPresenter(this);
-//        mRanPresenter.initialize();
-        return rootView;
-    }
 
     @Override
     public void onFirstUserVisible() {
@@ -75,13 +65,22 @@ public class RanFragment extends BaseLazyFragment implements RanContract.View {
     }
 
     @Override
+    protected void setupFragmentComponent(AppComponent appComponent) {
+        DaggerRanComponent.builder()
+                .appComponent(appComponent)
+                .ranModule(new RanModule(this))
+                .build()
+                .inject(this);
+    }
+
+    @Override
     protected View getLoadingTargetView() {
         return null;
     }
 
     @Override
     protected void initViewsAndEvents(View view) {
-
+        mPresenter.initialize();
     }
 
     @Override
@@ -133,10 +132,9 @@ public class RanFragment extends BaseLazyFragment implements RanContract.View {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                // todo nav to detail activity
                 RanContentBean ranContentBean = mRanContentListAdapter.getDataList().get(position);
                 if (null != ranContentBean) {
-                    mRanPresenter.navToDetail(ranContentBean);
+                    mPresenter.navToDetail(ranContentBean);
                 }
             }
         });
@@ -150,20 +148,5 @@ public class RanFragment extends BaseLazyFragment implements RanContract.View {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-    }
-
-    @Override
-    public void toast(String msg) {
-
-    }
-
-    @Override
-    public void showProgress() {
-
-    }
-
-    @Override
-    public void hideProgress() {
-
     }
 }

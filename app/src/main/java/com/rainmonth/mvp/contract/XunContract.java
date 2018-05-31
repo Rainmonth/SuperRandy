@@ -12,7 +12,7 @@ import java.util.List;
 
 public interface XunContract {
     interface Model extends IBaseModel {
-
+        List<XunNavigationBean> getNavigationBeanList();
     }
 
     interface View extends IBaseView {
