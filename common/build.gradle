@@ -91,8 +91,9 @@ dependencies {
 
     // 图片加载
     api rootProject.ext.dependencies["glide"]
-    api rootProject.ext.dependencies["glide-compiler"]
     api rootProject.ext.dependencies["glide-loader-okhttp3"]
+    annotationProcessor rootProject.ext.dependencies["glide-compiler"]
+//    api rootProject.ext.dependencies["glide-compiler"]
 
     // KLog
     compile 'com.github.zhaokaiqiang.klog:library:1.5.0'
