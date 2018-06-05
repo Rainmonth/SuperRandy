@@ -5,5 +5,5 @@ package com.rainmonth.common.base.mvp;
  */
 
 public interface IBaseModel {
-
+    void onDestroy();
 }

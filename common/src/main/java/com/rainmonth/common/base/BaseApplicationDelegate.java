@@ -10,6 +10,7 @@ import com.rainmonth.common.di.component.DaggerAppComponent;
 import com.rainmonth.common.di.module.AppModule;
 import com.rainmonth.common.di.module.ClientModule;
 import com.rainmonth.common.di.module.GlobeConfigModule;
+import com.rainmonth.common.di.module.ImageModule;
 import com.rainmonth.common.utils.ComponentUtils;
 
 /**
@@ -33,6 +34,7 @@ public class BaseApplicationDelegate implements IBaseApplicationDelegate {
                 .builder()
                 .appModule(new AppModule(mApplication)) // 提供application
                 .clientModule(new ClientModule())       // 提供网络请求相关单例
+                .imageModule(new ImageModule())
                 .globeConfigModule(getGlobeConfigModule(mApplication))
                 .build();
         mAppComponent.inject(this);
@@ -77,5 +79,12 @@ public class BaseApplicationDelegate implements IBaseApplicationDelegate {
 //        }
 
         return builder.build();
+    }
+
+    public interface Lifecycle {
+
+        void onCreate(Application application);
+
+        void onTerminate(Application application);
     }
 }

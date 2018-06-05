@@ -3,6 +3,8 @@ package com.rainmonth.common.di.module;
 import android.app.Application;
 
 import com.google.gson.Gson;
+import com.rainmonth.common.integration.IRepositoryManager;
+import com.rainmonth.common.integration.RepositoryManager;
 
 import javax.inject.Singleton;
 
@@ -34,11 +36,11 @@ public class AppModule {
     return new Gson();
   }
 
-//  @Singleton
-//  @Provides
-//  public IRepositoryManager provideRepositoryManager(RepositoryManager repositoryManager) {
-//    return repositoryManager;
-//  }
+  @Singleton
+  @Provides
+  public IRepositoryManager provideRepositoryManager(RepositoryManager repositoryManager) {
+    return repositoryManager;
+  }
 
 //  @Provides
 //  public RxPermissions provideRxPermissions(AppManager appManager) {

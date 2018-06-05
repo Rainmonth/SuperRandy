@@ -124,7 +124,7 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
         mContext = this;
         mAppComponent = ComponentUtils.getAppComponent();
         TAG = this.getClass().getSimpleName();
-        BaseAppManager.getInstance().addActivity(this);
+        mAppComponent.appManager().addActivity(this);
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
@@ -174,7 +174,7 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
     @Override
     public void finish() {
         super.finish();
-        BaseAppManager.getInstance().removeActivity(this);
+        mAppComponent.appManager().removeActivity(this);
         if (toggleOverridePendingTransition()) {
             switch (getOverridePendingTransitionMode()) {
                 case LEFT:

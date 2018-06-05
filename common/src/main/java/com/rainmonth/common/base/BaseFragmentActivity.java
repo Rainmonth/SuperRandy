@@ -16,7 +16,9 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.rainmonth.common.R;
+import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.common.eventbus.EventCenter;
+import com.rainmonth.common.utils.ComponentUtils;
 import com.rainmonth.common.widgets.loading.VaryViewHelperController;
 import com.rainmonth.common.netstatus.NetChangeObserver;
 import com.rainmonth.common.netstatus.NetStateReceiver;
@@ -43,6 +45,8 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
     protected int mScreenWidth = 0;
     protected int mScreenHeight = 0;
     protected float mScreenDensity = 0.0f;
+
+    protected AppComponent mAppComponent;
 
     /**
      * context
@@ -117,8 +121,9 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
         }
 
         mContext = this;
+        mAppComponent = ComponentUtils.getAppComponent();
         TAG = this.getClass().getSimpleName();
-        BaseAppManager.getInstance().addActivity(this);
+        mAppComponent.appManager().addActivity(this);
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
@@ -173,7 +178,7 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
     @Override
     public void finish() {
         super.finish();
-        BaseAppManager.getInstance().removeActivity(this);
+        mAppComponent.appManager().removeActivity(this);
         if (toggleOverridePendingTransition()) {
             switch (getOverridePendingTransitionMode()) {
                 case LEFT:
