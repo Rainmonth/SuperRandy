@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.rainmonth.common.base.mvp.BaseModel;
 import com.rainmonth.common.di.scope.FragmentScope;
+import com.rainmonth.common.integration.IRepositoryManager;
 import com.rainmonth.mvp.contract.RenContract;
 import com.rainmonth.mvp.model.bean.ArticleBean;
 import com.rainmonth.mvp.model.bean.ArticleGroupBean;
@@ -20,7 +21,8 @@ import javax.inject.Inject;
 @FragmentScope
 public class RenModel extends BaseModel implements RenContract.Model {
     @Inject
-    public RenModel() {
+    public RenModel(IRepositoryManager repositoryManager) {
+        super(repositoryManager);
     }
 
     @Override

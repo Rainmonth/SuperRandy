@@ -3,13 +3,12 @@ package com.rainmonth.mvp.model;
 import com.rainmonth.R;
 import com.rainmonth.common.base.mvp.BaseModel;
 import com.rainmonth.common.di.scope.ActivityScope;
+import com.rainmonth.common.integration.IRepositoryManager;
 import com.rainmonth.common.utils.DateUtils;
 import com.rainmonth.mvp.contract.SplashContract;
 import com.rainmonth.mvp.model.bean.SplashBean;
 
 import javax.inject.Inject;
-
-import io.reactivex.Flowable;
 
 /**
  * 获取启动页数据
@@ -18,7 +17,8 @@ import io.reactivex.Flowable;
 @ActivityScope
 public class SplashModel extends BaseModel implements SplashContract.Model {
     @Inject
-    public SplashModel() {
+    public SplashModel(IRepositoryManager repositoryManager) {
+        super(repositoryManager);
     }
 
 

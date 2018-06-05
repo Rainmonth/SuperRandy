@@ -3,6 +3,7 @@ package com.rainmonth.mvp.model;
 import com.rainmonth.common.base.BaseLazyFragment;
 import com.rainmonth.common.base.mvp.BaseModel;
 import com.rainmonth.common.di.scope.ActivityScope;
+import com.rainmonth.common.integration.IRepositoryManager;
 import com.rainmonth.mvp.contract.MainContract;
 import com.rainmonth.mvp.ui.widgets.NavigationTabBar;
 
@@ -17,7 +18,8 @@ import javax.inject.Inject;
 @ActivityScope
 public class MainModel extends BaseModel implements MainContract.Model {
     @Inject
-    public MainModel() {
+    public MainModel(IRepositoryManager repositoryManager) {
+        super(repositoryManager);
     }
 
 

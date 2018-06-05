@@ -3,6 +3,7 @@ package com.rainmonth.mvp.model;
 import com.rainmonth.R;
 import com.rainmonth.common.base.mvp.BaseModel;
 import com.rainmonth.common.di.scope.FragmentScope;
+import com.rainmonth.common.integration.IRepositoryManager;
 import com.rainmonth.mvp.contract.XunContract;
 import com.rainmonth.mvp.model.bean.XunNavigationBean;
 import com.rainmonth.mvp.ui.fragment.XunFragment;
@@ -13,12 +14,14 @@ import java.util.List;
 import javax.inject.Inject;
 
 /**
+ * XunFragment 数据获取
  * Created by RandyZhang on 2018/5/31.
  */
 @FragmentScope
 public class XunModel extends BaseModel implements XunContract.Model {
     @Inject
-    public XunModel() {
+    public XunModel(IRepositoryManager repositoryManager) {
+        super(repositoryManager);
     }
 
     @Override

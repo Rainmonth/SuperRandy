@@ -3,6 +3,7 @@ package com.rainmonth.mvp.model;
 import com.rainmonth.R;
 import com.rainmonth.common.base.mvp.BaseModel;
 import com.rainmonth.common.di.scope.FragmentScope;
+import com.rainmonth.common.integration.IRepositoryManager;
 import com.rainmonth.mvp.contract.RanContract;
 import com.rainmonth.mvp.model.bean.RanContentBean;
 
@@ -12,12 +13,14 @@ import java.util.List;
 import javax.inject.Inject;
 
 /**
+ * RanFragment 数据获取
  * Created by RandyZhang on 2018/5/31.
  */
 @FragmentScope
 public class RanModel extends BaseModel implements RanContract.Model {
     @Inject
-    public RanModel() {
+    public RanModel(IRepositoryManager repositoryManager) {
+        super(repositoryManager);
     }
 
     @Override
