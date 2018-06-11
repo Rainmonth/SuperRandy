@@ -1,4 +1,4 @@
-package com.rainmonth.common.base;
+package com.rainmonth.common.http;
 
 /**
  * 基本网络返回数据
