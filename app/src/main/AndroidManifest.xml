@@ -37,6 +37,10 @@
         android:persistent="true"
         android:theme="@style/AppTheme">
 
+        <meta-data
+            android:name="com.rainmonth.config.MainAppConfig"
+            android:value="ConfigModule" />
+
         <!-- 第三方应用配置 -->
 
         <!-- 在上面加入你的你的activity配置 -->
