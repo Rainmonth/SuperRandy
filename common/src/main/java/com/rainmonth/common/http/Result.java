@@ -6,7 +6,7 @@ package com.rainmonth.common.http;
  */
 
 public class Result<T> extends BaseResponse {
-    T data;
+    private T data;
 
     public T getData() {
         return data;
