@@ -22,80 +22,79 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
- * @author Rabtman
+ * 提供网咯请求相关的示例，如Retrofit、OKHttpClient、RxCache
  */
 @Module
 public class ClientModule {
 
-  private static final int TIME_OUT = 30;
+    private static final int TIME_OUT = 30;
 
-  @Singleton
-  @Provides
-  Retrofit provideRetrofit(Retrofit.Builder builder, OkHttpClient client, HttpUrl httpUrl) {
-    return builder
-        .baseUrl(httpUrl)//域名
-        .client(client)//设置okhttp
-        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())//使用rxjava
-        .addConverterFactory(GsonConverterFactory.create())//使用Gson
-        .build();
-  }
-
-  /**
-   * 提供OkhttpClient
-   */
-  @Singleton
-  @Provides
-  OkHttpClient provideClient(OkHttpClient.Builder okHttpClient, List<Interceptor> interceptors) {
-    OkHttpClient.Builder builder = okHttpClient
-        .connectTimeout(TIME_OUT, TimeUnit.SECONDS)
-        .readTimeout(TIME_OUT, TimeUnit.SECONDS);
-    if (interceptors != null && interceptors.size() > 0) {//如果外部提供了interceptor的数组则遍历添加
-      for (Interceptor interceptor : interceptors) {
-        builder.addInterceptor(interceptor);
-      }
+    @Singleton
+    @Provides
+    Retrofit provideRetrofit(Retrofit.Builder builder, OkHttpClient client, HttpUrl httpUrl) {
+        return builder
+                .baseUrl(httpUrl)//域名
+                .client(client)//设置okhttp
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())//使用rxjava
+                .addConverterFactory(GsonConverterFactory.create())//使用Gson
+                .build();
     }
-    return builder
-        .build();
-  }
+
+    /**
+     * 提供OkhttpClient
+     */
+    @Singleton
+    @Provides
+    OkHttpClient provideClient(OkHttpClient.Builder okHttpClient, List<Interceptor> interceptors) {
+        OkHttpClient.Builder builder = okHttpClient
+                .connectTimeout(TIME_OUT, TimeUnit.SECONDS)
+                .readTimeout(TIME_OUT, TimeUnit.SECONDS);
+        if (interceptors != null && interceptors.size() > 0) {//如果外部提供了interceptor的数组则遍历添加
+            for (Interceptor interceptor : interceptors) {
+                builder.addInterceptor(interceptor);
+            }
+        }
+        return builder.build();
+    }
 
 
-  @Singleton
-  @Provides
-  Retrofit.Builder provideRetrofitBuilder() {
-    return new Retrofit.Builder();
-  }
+    @Singleton
+    @Provides
+    Retrofit.Builder provideRetrofitBuilder() {
+        return new Retrofit.Builder();
+    }
 
 
-  @Singleton
-  @Provides
-  OkHttpClient.Builder provideClientBuilder() {
-    return new OkHttpClient.Builder();
-  }
+    @Singleton
+    @Provides
+    OkHttpClient.Builder provideClientBuilder() {
+        return new OkHttpClient.Builder();
+    }
 
-  /**
-   * 提供RXCache客户端
-   *
-   * @param cacheDirectory RxCache缓存路径
-   */
-  @Singleton
-  @Provides
-  RxCache provideRxCache(@Named("RxCacheDirectory") File cacheDirectory) {
-    return new RxCache
-        .Builder()
-        .persistence(cacheDirectory, new GsonSpeaker());
-  }
+    /**
+     * 提供RXCache客户端
+     *
+     * @param cacheDirectory RxCache缓存路径
+     */
+    @Singleton
+    @Provides
+    RxCache provideRxCache(@Named("RxCacheDirectory") File cacheDirectory) {
+        return new RxCache
+                .Builder()
+                .persistence(cacheDirectory, new GsonSpeaker());
+    }
 
 
-  /**
-   * 需要单独给RxCache提供缓存路径
-   * 提供RxCache缓存地址
-   */
-  @Singleton
-  @Provides
-  @Named("RxCacheDirectory")
-  File provideRxCacheDirectory(File cacheDir) {
-    File cacheDirectory = new File(cacheDir, "RxCache");
-    return FileUtils.makeDirs(cacheDirectory);
-  }
+    /**
+     * 需要单独给RxCache提供缓存路径
+     * 提供RxCache缓存地址
+     */
+    @Singleton
+    @Provides
+    @Named("RxCacheDirectory")
+    File provideRxCacheDirectory(File cacheDir) {
+        File cacheDirectory = new File(cacheDir, "RxCache");
+        return FileUtils.makeDirs(cacheDirectory);
+    }
 
 }

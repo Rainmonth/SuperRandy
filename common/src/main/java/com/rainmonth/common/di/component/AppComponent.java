@@ -44,7 +44,8 @@ public interface AppComponent {
     //gson
     Gson gson();
 
-    //缓存文件根目录(RxCache和Glide的的缓存都已经作为子文件夹在这个目录里),应该将所有缓存放到这个根目录里,便于管理和清理,可在GlobeConfigModule里配置
+    //缓存文件根目录(RxCache和Glide的的缓存都已经作为子文件夹在这个目录里),应该将所有缓存放到这个根目录里,
+    //便于管理和清理,可在GlobeConfigModule里配置
     File cacheFile();
 
     //用于管理所有activity

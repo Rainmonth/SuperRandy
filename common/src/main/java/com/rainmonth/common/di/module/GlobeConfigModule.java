@@ -3,6 +3,7 @@ package com.rainmonth.common.di.module;
 import android.app.Application;
 import android.text.TextUtils;
 
+import com.rainmonth.common.http.GlobalHttpHandler;
 import com.rainmonth.common.utils.FileUtils;
 import com.rainmonth.common.utils.constant.StatusBarConstants;
 
@@ -26,7 +27,7 @@ import static dagger.internal.Preconditions.checkNotNull;
 public class GlobeConfigModule {
 
     private HttpUrl mApiUrl;
-    //  private GlobeHttpHandler mHandler;
+    private GlobalHttpHandler mHandler;
     private List<Interceptor> mInterceptors;
     private File mCacheFile;
     private HashMap<String, Integer> mStatusBarAttr;
@@ -38,7 +39,7 @@ public class GlobeConfigModule {
      */
     private GlobeConfigModule(Builder builder) {
         this.mApiUrl = builder.apiUrl;
-//    this.mHandler = builder.handler;
+        this.mHandler = builder.handler;
         this.mInterceptors = builder.interceptors;
         this.mCacheFile = builder.cacheFile;
         this.mStatusBarAttr = builder.statusBarAttr;
@@ -63,11 +64,11 @@ public class GlobeConfigModule {
     }
 
 
-//  @Singleton
-//  @Provides
-//  GlobeHttpHandler provideGlobeHttpHandler() {
-//    return mHandler == null ? GlobeHttpHandler.EMPTY : mHandler;//打印请求信息
-//  }
+    @Singleton
+    @Provides
+    GlobalHttpHandler provideGlobalHttpHandler() {
+        return mHandler == null ? GlobalHttpHandler.EMPTY : mHandler;//打印请求信息
+    }
 
 
     /**
@@ -91,7 +92,7 @@ public class GlobeConfigModule {
     public static final class Builder {
 
         private HttpUrl apiUrl = HttpUrl.parse("https://api.github.com/");
-        //    private GlobeHttpHandler handler;
+        private GlobalHttpHandler handler;
         private List<Interceptor> interceptors = new ArrayList<>();
         private File cacheFile;
         private HashMap<String, Integer> statusBarAttr = new HashMap<>();
@@ -99,18 +100,18 @@ public class GlobeConfigModule {
         private Builder() {
         }
 
-        public Builder baseurl(String baseurl) {//基础url
-            if (TextUtils.isEmpty(baseurl)) {
-                throw new IllegalArgumentException("baseurl can not be empty");
+        public Builder baseUrl(String baseUrl) {//基础url
+            if (TextUtils.isEmpty(baseUrl)) {
+                throw new IllegalArgumentException("baseUrl can not be empty");
             }
-            this.apiUrl = HttpUrl.parse(baseurl);
+            this.apiUrl = HttpUrl.parse(baseUrl);
             return this;
         }
 
-//    public Builder globeHttpHandler(GlobeHttpHandler handler) {//用来处理http响应结果
-//      this.handler = handler;
-//      return this;
-//    }
+        public Builder globalHttpHandler(GlobalHttpHandler handler) {//用来处理http响应结果
+            this.handler = handler;
+            return this;
+        }
 
         public Builder addInterceptor(Interceptor interceptor) {//动态添加任意个interceptor
             this.interceptors.add(interceptor);
@@ -134,12 +135,8 @@ public class GlobeConfigModule {
         }
 
         public GlobeConfigModule build() {
-            checkNotNull(apiUrl, "baseurl is required");
+            checkNotNull(apiUrl, "baseUrl is required");
             return new GlobeConfigModule(this);
         }
-
-
     }
-
-
 }
