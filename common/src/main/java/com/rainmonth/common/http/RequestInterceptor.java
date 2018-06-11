@@ -1,6 +1,7 @@
 package com.rainmonth.common.http;
 
 import com.rainmonth.common.utils.ZipHelper;
+import com.socks.library.KLog;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -64,6 +65,7 @@ public class RequestInterceptor implements Interceptor {
                 charset = contentType.charset(charset);
             }
             bodyString = clone.readString(charset);
+            KLog.json("Randy", bodyString);
         }
         if (mHandler != null) {
             return mHandler.onHttpResultResponse(bodyString, chain, originalResponse);
