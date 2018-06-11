@@ -61,7 +61,7 @@ public class HomeBannerFragment extends BaseLazyFragment {
         Bundle bundle = getArguments();
         if (null != bundle) {
             final BannerBean bannerBean = (BannerBean) bundle.getSerializable(RenFragment.BANNER_BEAN);
-            Glide.with(getActivity()).load(bannerBean.getBanner_thumb_url()).into(ivBannerImage);
+            Glide.with(getActivity()).load(bannerBean.getThumb()).into(ivBannerImage);
             tvTitle.setText(bannerBean.getTitle());
             flBannerContainer.setOnClickListener(new View.OnClickListener() {
                 @Override

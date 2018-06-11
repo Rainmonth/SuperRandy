@@ -8,42 +8,27 @@ import java.io.Serializable;
  */
 public class BannerBean implements Serializable {
 
+
     /**
-     * id : 10001
-     * type : 1
-     * title : 活动主页一
-     * url : https://www.baidu.com
-     * banner_thumb_url : http://pic2.cxtuku.com/00/02/31/b945758fd74d.jpg
+     * id : 1
+     * title : 端午节2
+     * type : 6
+     * thumb : http://rainmonth.cn/public/assets/banner/346373.jpg
+     * url : http://rainmonth.cn/public/assets/banner/346373.jpg
      */
 
-    private String id;
-    private String type;
+    private int id;
     private String title;
+    private int type;
+    private String thumb;
     private String url;
-    private String banner_thumb_url;
 
-    public BannerBean(String id, String type, String title, String url, String banner_thumb_url) {
-        this.id = id;
-        this.type = type;
-        this.title = title;
-        this.url = url;
-        this.banner_thumb_url = banner_thumb_url;
-    }
-
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 
     public String getTitle() {
@@ -54,19 +39,27 @@ public class BannerBean implements Serializable {
         this.title = title;
     }
 
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public String getThumb() {
+        return thumb;
+    }
+
+    public void setThumb(String thumb) {
+        this.thumb = thumb;
+    }
+
     public String getUrl() {
         return url;
     }
 
     public void setUrl(String url) {
         this.url = url;
-    }
-
-    public String getBanner_thumb_url() {
-        return banner_thumb_url;
-    }
-
-    public void setBanner_thumb_url(String banner_thumb_url) {
-        this.banner_thumb_url = banner_thumb_url;
     }
 }

@@ -2,17 +2,22 @@ package com.rainmonth.mvp.model;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.rainmonth.api.BannerService;
 import com.rainmonth.common.base.mvp.BaseModel;
 import com.rainmonth.common.di.scope.FragmentScope;
 import com.rainmonth.common.integration.IRepositoryManager;
 import com.rainmonth.mvp.contract.RenContract;
-import com.rainmonth.mvp.model.bean.ArticleBean;
 import com.rainmonth.mvp.model.bean.ArticleGroupBean;
 import com.rainmonth.mvp.model.bean.BannerBean;
+import com.rainmonth.common.http.Result;
 
 import java.util.List;
 
 import javax.inject.Inject;
+
+import io.reactivex.Flowable;
+import io.reactivex.functions.Function;
+import retrofit2.Response;
 
 /**
  * 荏Fragment数据获取
@@ -26,19 +31,15 @@ public class RenModel extends BaseModel implements RenContract.Model {
     }
 
     @Override
-    public List<BannerBean> getBannerList() {
-        List<BannerBean> bannerBeanList;
-        /*
-         * 1、如果有网络，则请求网络数据；
-         * 2、没有网络，则读取本地缓存数据
-         */
-        Gson gson = new Gson();
-
-        String jsonStr = "[{\"id\":\"10001\",\"type\":\"1\",\"title\":\"端午节活动\",\"url\":\"https://www.baidu.com\",\"banner_thumb_url\":\"http://okzwnw2rn.bkt.clouddn.com/image/banner/ren_bg_sport.jpg\"},{\"id\":\"10001\",\"type\":\"1\",\"title\":\"儿童节活动\",\"url\":\"https://www.baidu.com\",\"banner_thumb_url\":\"http://okzwnw2rn.bkt.clouddn.com/image/banner/ren_bg_game.jpg\"},{\"id\":\"10001\",\"type\":\"1\",\"title\":\"七夕情人节活动\",\"url\":\"https://www.baidu.com\",\"banner_thumb_url\":\"http://okzwnw2rn.bkt.clouddn.com/image/banner/ren_bg_sing.jpg\"},{\"id\":\"10001\",\"type\":\"1\",\"title\":\"中秋节活动\",\"url\":\"https://www.baidu.com\",\"banner_thumb_url\":\"http://okzwnw2rn.bkt.clouddn.com/image/banner/ren_bg_walk.jpg\"}]";
-        bannerBeanList = gson.fromJson(jsonStr, new TypeToken<List<BannerBean>>() {
-        }.getType());
-
-        return bannerBeanList;
+    public Flowable<Result<List<BannerBean>>> getBannerList() {
+        return mRepositoryManager.obtainRetrofitService(BannerService.class).
+                getHomeBannerList(0, 10, 6)
+                .map(new Function<Response<Result<List<BannerBean>>>, Result<List<BannerBean>>>() {
+                    @Override
+                    public Result<List<BannerBean>> apply(Response<Result<List<BannerBean>>> resultResponse) throws Exception {
+                        return resultResponse.body();
+                    }
+                });
     }
 
     @Override
