@@ -8,7 +8,7 @@ import com.rainmonth.common.base.BaseActivity;
 import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.router.RouterConstant;
 
-@Route(path= RouterConstant.PATH_APP_HOME)
+@Route(path = RouterConstant.PATH_APP_HOME)
 public class CardExploreActivity extends BaseActivity {
 
     @Override
@@ -31,8 +31,10 @@ public class CardExploreActivity extends BaseActivity {
     }
 
     @Override
-    public void initToolbar() {
-        mActionBar.setTitle("最美应用");
-        mActionBar.setLogo(R.drawable.ic_action_bar_logo);
+    public void initToolbar(int colorResId) {
+        if (null != mActionBar) {
+            mActionBar.setTitle("最美应用");
+            mActionBar.setLogo(R.drawable.ic_action_bar_logo);
+        }
     }
 }

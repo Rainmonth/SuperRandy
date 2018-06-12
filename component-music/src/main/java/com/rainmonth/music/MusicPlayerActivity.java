@@ -35,8 +35,10 @@ public class MusicPlayerActivity extends BaseActivity {
     }
 
     @Override
-    public void initToolbar() {
-        mActionBar.setTitle("音乐播放界面");
+    public void initToolbar(int colorResId) {
+        if (null != mActionBar) {
+            mActionBar.setTitle("音乐播放界面");
+        }
     }
 
     @Override

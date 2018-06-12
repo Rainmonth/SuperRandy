@@ -18,7 +18,7 @@ public class MovieHomeActivity extends BaseActivity<MovieHomePresenter>
         implements MovieHomeContract.View {
 
     @Override
-    public void initToolbar() {
+    public void initToolbar(int colorResId) {
 
     }
 

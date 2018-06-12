@@ -1,14 +1,21 @@
 package com.rainmonth.common.utils;
 
 import android.app.ActionBar;
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.support.annotation.ColorRes;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.FrameLayout;
+
+import com.rainmonth.common.R;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -225,8 +232,9 @@ public class SmartBarUtils {
 
     private static int getStatusBarHeight(Context context) {
         int result = 0;
-        int resourceId = context.getResources().getIdentifier(
-                "status_bar_height", "dimen", "android");
+        Resources res = context.getResources();
+        int resourceId = res.getIdentifier("status_bar_height", "dimen",
+                "android");
         if (resourceId > 0) {
             result = context.getResources().getDimensionPixelSize(resourceId);
         }
@@ -278,4 +286,26 @@ public class SmartBarUtils {
         return false;
     }
 
+    /**
+     * 设置状态栏颜色
+     *
+     * @param activity   Activity
+     * @param colorResId 颜色资源
+     */
+    public static void setStatusBarColor(Activity activity, @ColorRes int colorResId) {
+        Window window = activity.getWindow();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            window.setStatusBarColor(activity.getResources().getColor(colorResId));
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            ViewGroup decorViewGroup = (ViewGroup) window.getDecorView();
+            View statusBarView = new View(window.getContext());
+            int statusBarHeight = getStatusBarHeight(window.getContext());
+            FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
+                    FrameLayout.LayoutParams.MATCH_PARENT, statusBarHeight);
+            params.gravity = Gravity.TOP;
+            statusBarView.setLayoutParams(params);
+            statusBarView.setBackgroundColor(activity.getResources().getColor(android.R.color.holo_red_dark));
+            decorViewGroup.addView(statusBarView);
+        }
+    }
 }

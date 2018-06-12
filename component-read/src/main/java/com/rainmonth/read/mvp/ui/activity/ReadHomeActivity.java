@@ -15,11 +15,10 @@ import com.rainmonth.read.mvp.presenter.ReadHomePresenter;
 import com.rainmonth.read.R;
 
 
-
 public class ReadHomeActivity extends BaseActivity<ReadHomePresenter> implements ReadHomeContract.View {
 
     @Override
-    public void initToolbar() {
+    public void initToolbar(int colorResId) {
 
     }
 

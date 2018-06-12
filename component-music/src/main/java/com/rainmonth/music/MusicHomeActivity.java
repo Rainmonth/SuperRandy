@@ -37,7 +37,7 @@ public class MusicHomeActivity extends BaseActivity implements View.OnClickListe
     }
 
     @Override
-    public void initToolbar() {
+    public void initToolbar(int colorResId) {
         if (null != mActionBar) {
             mActionBar.setTitle("音乐主页");
             mActionBar.setLogo(R.drawable.ic_action_bar_logo);
