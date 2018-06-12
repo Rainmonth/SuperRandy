@@ -1,8 +1,13 @@
 <resources>
     <!--无ActionBar的Activity-->
-    <style name="TransparentTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="BaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
 
     </style>
+
+    <style name="BaseTheme.FullScreen" parent="@style/BaseTheme">
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
@@ -17,7 +22,7 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="NoSpaceActionBarTheme" parent="Base.Widget.AppCompat.Toolbar">
+    <style name="Toolbar.NoSpace" parent="Base.Widget.AppCompat.Toolbar">
         <item name="contentInsetStart">0dp</item>
         <item name="contentInsetStartWithNavigation">0dp</item>
     </style>
@@ -30,16 +35,12 @@
         <item name="android:scaleType">centerInside</item>
     </style>
 
-    <style name="SplashTheme" parent="@style/FullScreenTransparentTheme">
+    <style name="SplashTheme" parent="@style/BaseTheme.FullScreen">
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowBackground">@null</item>
-    </style>
-
-    <style name="FullScreenTransparentTheme" parent="@style/TransparentTheme">
-        <item name="android:windowFullscreen">true</item>
     </style>
 
     <style name="Theme.SmoothProgressBarDefaults" parent="Theme.AppCompat">

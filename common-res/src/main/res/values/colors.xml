@@ -40,4 +40,25 @@
     <color name="border_green">#e8529c50</color>
     <color name="cursor_green">#E847C444</color>
     <color name="color_hint">#E892D791</color>
+
+    <color name="cpb_default_color">#33b5e5</color>
+    <color name="sr_color_primary">#FF4E3E7F</color>
+    <color name="sr_color_primary_dark">#FF4E3E7F</color>
+    <color name="sr_window_background">#FFFEFEFE</color>
+
+    <color name="default_image_background">#FFDEDEDE</color>
+
+    <integer-array name="gplus_colors">
+        <item>@color/gplus_color_1</item>
+        <item>@color/gplus_color_2</item>
+        <item>@color/gplus_color_3</item>
+        <item>@color/gplus_color_4</item>
+    </integer-array>
+
+    <color name="base_bg">#ffeeeeee</color>
+    <color name="base_msg_color">#ff999999</color>
+    <color name="gplus_color_1">#3e802f</color>
+    <color name="gplus_color_2">#f4b400</color>
+    <color name="gplus_color_3">#427fed</color>
+    <color name="gplus_color_4">#b23424</color>
 </resources>
