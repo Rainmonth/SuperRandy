@@ -16,7 +16,7 @@ import io.reactivex.Flowable;
  */
 public interface RenContract {
     interface Model extends IBaseModel {
-        Flowable<Result<List<BannerBean>>> getBannerList();
+        Flowable<Result<List<BannerBean>>> getBannerList(int page, int pageSize, int type);
 
         List<ArticleGroupBean> getArticleList();
     }

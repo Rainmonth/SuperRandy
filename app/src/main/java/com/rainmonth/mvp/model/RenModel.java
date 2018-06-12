@@ -31,9 +31,9 @@ public class RenModel extends BaseModel implements RenContract.Model {
     }
 
     @Override
-    public Flowable<Result<List<BannerBean>>> getBannerList() {
+    public Flowable<Result<List<BannerBean>>> getBannerList(int page, int pageSize, int type) {
         return mRepositoryManager.obtainRetrofitService(BannerService.class).
-                getHomeBannerList(0, 10, 6)
+                getHomeBannerList(page, pageSize, type)
                 .map(new Function<Response<Result<List<BannerBean>>>, Result<List<BannerBean>>>() {
                     @Override
                     public Result<List<BannerBean>> apply(Response<Result<List<BannerBean>>> resultResponse) throws Exception {

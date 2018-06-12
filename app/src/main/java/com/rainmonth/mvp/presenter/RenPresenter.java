@@ -19,14 +19,14 @@ import javax.inject.Inject;
 public class RenPresenter extends BasePresenter<RenContract.Model, RenContract.View> {
 
     @Inject
-    public RenPresenter(RenContract.Model model, RenContract.View view) {
+    RenPresenter(RenContract.Model model, RenContract.View view) {
         super(model, view);
     }
 
     public void init() {
 
         mView.initContentList(mModel.getArticleList());
-        addSubscribe(mModel.getBannerList()
+        addSubscribe(mModel.getBannerList(0, 10, 6)
                 .compose(RxUtils.<Result<List<BannerBean>>>getFlowableTransformer())// 进行线程切换
                 .subscribeWith(new CommonSubscriber<Result<List<BannerBean>>>(mView) {
                     @Override

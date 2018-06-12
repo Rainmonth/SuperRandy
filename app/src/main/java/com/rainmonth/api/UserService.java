@@ -1,8 +1,10 @@
 package com.rainmonth.api;
 
 import com.rainmonth.common.base.mvp.BaseResponse;
+import com.rainmonth.common.http.Result;
 import com.rainmonth.mvp.model.bean.UserBean;
 
+import io.reactivex.Flowable;
 import io.reactivex.Observable;
 import retrofit2.Call;
 import retrofit2.Response;
@@ -19,7 +21,7 @@ import retrofit2.http.Query;
 public interface UserService {
     @FormUrlEncoded
     @POST("User/login")
-    Call<BaseResponse> loginCall(@Field("username") String username, @Field("psw") String psw);
+    Call<BaseResponse> loginCall(@Field("username") String username, @Field("password") String psw);
 
     @POST("User/register")
     Call<UserBean> registerCall(@Body UserBean userBean);
@@ -29,7 +31,8 @@ public interface UserService {
 
     @FormUrlEncoded
     @POST("api/User/login")
-    Observable<Response<BaseResponse>> login(@Field("username") String username, @Field("psw") String psw);
+    Flowable<Response<Result>> login(@Field("username") String username,
+                                     @Field("password") String psw);
 
     @FormUrlEncoded
     @POST("api/User/logout")
