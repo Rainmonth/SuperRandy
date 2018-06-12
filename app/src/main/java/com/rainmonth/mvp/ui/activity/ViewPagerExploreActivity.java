@@ -174,9 +174,11 @@ public class ViewPagerExploreActivity extends BaseActivity {
     }
 
     @Override
-    public void initToolbar() {
-        mActionBar.setLogo(R.drawable.ic_action_bar_logo);
-        mActionBar.setTitle("新闻浏览");
+    public void initToolbar(int colorResId) {
+        if (null != mActionBar) {
+            mActionBar.setLogo(R.drawable.ic_action_bar_logo);
+            mActionBar.setTitle("新闻浏览");
 //        mActionBar.setBackgroundResource(R.color.bg_home);
+        }
     }
 }

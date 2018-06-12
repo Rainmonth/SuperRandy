@@ -29,7 +29,7 @@ public class SplashActivity extends BaseActivity<SplashPresenter> implements Spl
     ImageView ivSplash;
 
     @Override
-    public void initToolbar() {
+    public void initToolbar(int colorResId) {
 
     }
 
@@ -65,11 +65,6 @@ public class SplashActivity extends BaseActivity<SplashPresenter> implements Spl
             startActivity(intent);
             finish();
         }
-    }
-
-    @Override
-    protected void getBundleExtras(Bundle extras) {
-
     }
 
     @Override

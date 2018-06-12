@@ -1,16 +1,20 @@
 package com.rainmonth.mvp.ui.activity;
 
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import com.rainmonth.R;
 import com.rainmonth.common.base.BaseActivity;
 import com.rainmonth.common.base.BaseLazyFragment;
 import com.rainmonth.common.di.component.AppComponent;
+import com.rainmonth.common.utils.SmartBarUtils;
 import com.rainmonth.di.component.DaggerMainComponent;
 import com.rainmonth.di.module.MainModule;
 import com.rainmonth.mvp.contract.MainContract;
@@ -27,7 +31,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class MainActivity extends BaseActivity<MainPresenter> implements MainContract.View {
 
@@ -41,6 +44,13 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     FrameLayout flNtbHorizontalContainer;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        SmartBarUtils.setStatusBarColor(this, R.color.theme_color);
+
+    }
 
     @Override
     protected int getContentViewLayoutID() {
@@ -81,10 +91,11 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     }
 
     @Override
-    public void initToolbar() {
+    public void initToolbar(int colorResId) {
         if (toolbar != null) {
             // 如果采用的时有ActionBar的主题，那么就不能调用这个方法
             setSupportActionBar(toolbar);
+            toolbar.setBackgroundColor(getResources().getColor(colorResId));
             toolbar.setNavigationOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

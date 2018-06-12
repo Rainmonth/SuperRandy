@@ -62,7 +62,7 @@ public class LoginActivity extends BaseActivity<UserPresenter> implements UserCo
     }
 
     @Override
-    public void initToolbar() {
+    public void initToolbar(int colorResId) {
         if (toolbar != null) {
             setSupportActionBar(toolbar);
             mActionBar = getSupportActionBar();

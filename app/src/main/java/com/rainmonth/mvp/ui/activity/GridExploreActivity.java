@@ -31,7 +31,7 @@ public class GridExploreActivity extends BaseActivity {
 
 
     @Override
-    public void initToolbar() {
+    public void initToolbar(int colorResId) {
 
     }
 

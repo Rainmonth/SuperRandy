@@ -12,8 +12,6 @@ import android.widget.LinearLayout;
 import com.rainmonth.R;
 import com.rainmonth.common.base.BaseActivity;
 import com.rainmonth.common.di.component.AppComponent;
-import com.rainmonth.common.eventbus.EventCenter;
-import com.rainmonth.common.utils.NetworkUtils;
 
 import java.util.Arrays;
 import java.util.List;
@@ -69,7 +67,7 @@ public class WelcomeActivity extends BaseActivity {
     };
 
     @Override
-    public void initToolbar() {
+    public void initToolbar(int colorResId) {
 
     }
 

@@ -51,10 +51,12 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter>
     }
 
     @Override
-    public void initToolbar() {
-        mActionBar.setLogo(R.drawable.ic_action_bar_logo);
-        mActionBar.setTitle("注册");
-//        mActionBar.setBackgroundResource(R.color.transparent);
+    public void initToolbar(int colorResId) {
+        if (null != mActionBar) {
+            mActionBar.setLogo(R.drawable.ic_action_bar_logo);
+            mActionBar.setTitle("注册");
+//            mActionBar.setBackgroundResource(R.color.transparent);
+        }
     }
 
     @OnClick({R.id.iv_user_avatar, R.id.tv_create_account})

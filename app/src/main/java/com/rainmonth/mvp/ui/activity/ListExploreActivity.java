@@ -32,7 +32,7 @@ public class ListExploreActivity extends BaseActivity {
     }
 
     @Override
-    public void initToolbar() {
+    public void initToolbar(int colorResId) {
         if (null != mActionBar) {
             mActionBar.setLogo(R.drawable.ic_action_bar_logo);
             mActionBar.setTitle("列表新闻浏览");
