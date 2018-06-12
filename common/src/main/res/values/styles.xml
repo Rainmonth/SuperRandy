@@ -1,6 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!--无ActionBar的Activity-->
+    <style name="TransparentTheme" parent="Theme.AppCompat.Light.NoActionBar">
+
+    </style>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorPrimaryDark</item>
+        <item name="toolbarNavigationButtonStyle">@style/ToolbarNavButtonStyle</item>
+    </style>
+
+    <style name="NoSpaceActionBarTheme" parent="Base.Widget.AppCompat.Toolbar">
+        <item name="contentInsetStart">0dp</item>
+        <item name="contentInsetStartWithNavigation">0dp</item>
+    </style>
+
+    <!--Toolbar 内Button显示的样式-->
+    <style name="ToolbarNavButtonStyle" parent="@style/Widget.AppCompat.Toolbar.Button.Navigation">
+        <item name="android:minWidth">0dp</item>
+        <item name="android:paddingLeft">@dimen/m16</item>
+        <item name="android:paddingRight">0dp</item>
+        <item name="android:scaleType">centerInside</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar" parent="AppTheme">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="SplashTheme" parent="@style/FullScreenTransparentTheme">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@null</item>
+    </style>
+
+    <style name="FullScreenTransparentTheme" parent="@style/Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
     <style name="Theme.SmoothProgressBarDefaults" parent="Theme.AppCompat">
         <item name="cpbStyle">@style/CircularProgressBar</item>
     </style>
@@ -30,27 +73,4 @@
         <item name="android:windowSoftInputMode">adjustPan</item>
     </style>
 
-    <declare-styleable name="RoundedImageView">
-        <attr name="riv_corner_radius" format="dimension" />
-        <attr name="riv_border_width" format="dimension" />
-        <attr name="riv_border_color" format="color" />
-        <attr name="riv_mutate_background" format="boolean" />
-        <attr name="riv_oval" format="boolean" />
-        <attr name="android:scaleType" />
-        <attr name="riv_tile_mode">
-            <enum name="clamp" value="0" />
-            <enum name="repeat" value="1" />
-            <enum name="mirror" value="2" />
-        </attr>
-        <attr name="riv_tile_mode_x">
-            <enum name="clamp" value="0" />
-            <enum name="repeat" value="1" />
-            <enum name="mirror" value="2" />
-        </attr>
-        <attr name="riv_tile_mode_y">
-            <enum name="clamp" value="0" />
-            <enum name="repeat" value="1" />
-            <enum name="mirror" value="2" />
-        </attr>
-    </declare-styleable>
 </resources>
