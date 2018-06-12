@@ -6,10 +6,8 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,13 +17,13 @@ import android.view.WindowManager;
 import com.rainmonth.common.R;
 import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.common.eventbus.EventCenter;
-import com.rainmonth.common.utils.ComponentUtils;
-import com.rainmonth.common.widgets.loading.VaryViewHelperController;
 import com.rainmonth.common.netstatus.NetChangeObserver;
 import com.rainmonth.common.netstatus.NetStateReceiver;
 import com.rainmonth.common.utils.CommonUtils;
+import com.rainmonth.common.utils.ComponentUtils;
 import com.rainmonth.common.utils.NetworkUtils;
 import com.rainmonth.common.utils.SmartBarUtils;
+import com.rainmonth.common.widgets.loading.VaryViewHelperController;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 import butterknife.ButterKnife;
@@ -38,22 +36,13 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
      */
     protected static String TAG = null;
 
-    /**
-     * Screen information
-     */
-    protected int mScreenWidth = 0;
-    protected int mScreenHeight = 0;
-    protected float mScreenDensity = 0.0f;
-    protected int mDpi = 160;
-
-
     protected AppComponent mAppComponent;
     /**
      * context
      */
     protected Context mContext = null;
 
-    protected Toolbar mToolbar = null;
+    protected ActionBar mActionBar = null;
 
     /**
      * network status
@@ -111,28 +100,21 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
         if (getContentViewLayoutID() != 0) {
             setContentView(getContentViewLayoutID());
             // 以代码的形式为每个Activity对应的布局文件添加fitsSystemWindows属性
-            ViewGroup contentFrameLayout = (ViewGroup) findViewById(Window.ID_ANDROID_CONTENT);
+            ViewGroup contentFrameLayout = findViewById(Window.ID_ANDROID_CONTENT);
             assert contentFrameLayout != null;
             View parentView = contentFrameLayout.getChildAt(0);
             if (parentView != null && Build.VERSION.SDK_INT >= 14) {
                 parentView.setFitsSystemWindows(true);
             }
         } else {
-            throw new IllegalArgumentException("You must return a right contentView layout resource Id");
+            throw new IllegalArgumentException("You must return a right contentView " +
+                    "layout resource Id");
         }
 
         mContext = this;
         mAppComponent = ComponentUtils.getAppComponent();
         TAG = this.getClass().getSimpleName();
         mAppComponent.appManager().addActivity(this);
-
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-
-        mScreenDensity = displayMetrics.density;
-        mScreenHeight = displayMetrics.heightPixels;
-        mScreenWidth = displayMetrics.widthPixels;
-        mDpi = (int) (160 * mScreenDensity);
 
         mNetChangeObserver = new NetChangeObserver() {
             @Override
@@ -361,7 +343,11 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
     protected void showToast(String msg) {
         //防止遮盖虚拟按键
         if (null != msg && !CommonUtils.isEmpty(msg)) {
-            Snackbar.make(getLoadingTargetView(), msg, Snackbar.LENGTH_SHORT).show();
+            if (getLoadingTargetView() != null) {
+                Snackbar.make(getLoadingTargetView(), msg, Snackbar.LENGTH_SHORT).show();
+            } else {
+                Snackbar.make(getWindow().getDecorView(), msg, Snackbar.LENGTH_SHORT).show();
+            }
         }
     }
 
@@ -481,11 +467,5 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
             }
             win.setAttributes(winParams);
         }
-    }
-
-    protected void printDeviceInfo() {
-        Log.e("DEVICE_INFO", "mDpi = " + mDpi + "\n" +
-                "mScreenDensity=" + mScreenDensity + "\n" + "mScreenWidth=" + mScreenWidth
-                + "\n" + "mScreenHeight=" + mScreenHeight + "\n");
     }
 }

@@ -1,6 +1,5 @@
 package com.rainmonth.mvp.ui.activity;
 
-import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -10,8 +9,6 @@ import com.rainmonth.R;
 import com.rainmonth.common.base.BaseActivity;
 import com.rainmonth.common.base.mvp.BaseResponse;
 import com.rainmonth.common.di.component.AppComponent;
-import com.rainmonth.common.eventbus.EventCenter;
-import com.rainmonth.common.utils.NetworkUtils;
 import com.rainmonth.common.utils.ToastUtils;
 import com.rainmonth.mvp.contract.RegisterContract;
 import com.rainmonth.mvp.model.bean.UserBean;
@@ -38,13 +35,26 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter>
     @BindView(R.id.tv_create_account)
     TextView tvCreateAccount;
 
-//    IRegisterPresenter registerPresenter;
+    @Override
+    protected int getContentViewLayoutID() {
+        return R.layout.activity_register;
+    }
+
+    @Override
+    protected void setupActivityComponent(AppComponent appComponent) {
+
+    }
+
+    @Override
+    protected void initViewsAndEvents() {
+//        registerPresenter = new RegisterPresenter(this);
+    }
 
     @Override
     public void initToolbar() {
-        mToolbar.setLogo(R.drawable.ic_action_bar_logo);
-        mToolbar.setTitle("注册");
-//        mToolbar.setBackgroundResource(R.color.transparent);
+        mActionBar.setLogo(R.drawable.ic_action_bar_logo);
+        mActionBar.setTitle("注册");
+//        mActionBar.setBackgroundResource(R.color.transparent);
     }
 
     @OnClick({R.id.iv_user_avatar, R.id.tv_create_account})
@@ -70,35 +80,5 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter>
         } else {
             ToastUtils.showLongToast(mContext, response.getMessage());
         }
-    }
-
-    @Override
-    protected void setupActivityComponent(AppComponent appComponent) {
-
-    }
-
-    @Override
-    protected void getBundleExtras(Bundle extras) {
-
-    }
-
-    @Override
-    protected int getContentViewLayoutID() {
-        return R.layout.activity_register;
-    }
-
-    @Override
-    protected void onEventComing(EventCenter eventCenter) {
-
-    }
-
-    @Override
-    protected View getLoadingTargetView() {
-        return null;
-    }
-
-    @Override
-    protected void initViewsAndEvents() {
-//        registerPresenter = new RegisterPresenter(this);
     }
 }

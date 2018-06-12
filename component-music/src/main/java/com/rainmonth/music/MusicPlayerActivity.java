@@ -1,13 +1,11 @@
 package com.rainmonth.music;
 
 import android.os.Bundle;
-import android.view.View;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.rainmonth.common.base.BaseActivity;
 import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.common.eventbus.EventCenter;
-import com.rainmonth.common.utils.NetworkUtils;
 import com.rainmonth.router.RouterConstant;
 
 /**
@@ -38,7 +36,7 @@ public class MusicPlayerActivity extends BaseActivity {
 
     @Override
     public void initToolbar() {
-        mToolbar.setTitle("音乐播放界面");
+        mActionBar.setTitle("音乐播放界面");
     }
 
     @Override

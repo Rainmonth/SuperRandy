@@ -3,6 +3,7 @@ package com.rainmonth.mvp.ui.activity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.FrameLayout;
 
@@ -10,8 +11,6 @@ import com.rainmonth.R;
 import com.rainmonth.common.base.BaseActivity;
 import com.rainmonth.common.base.BaseLazyFragment;
 import com.rainmonth.common.di.component.AppComponent;
-import com.rainmonth.common.eventbus.EventCenter;
-import com.rainmonth.common.utils.NetworkUtils;
 import com.rainmonth.di.component.DaggerMainComponent;
 import com.rainmonth.di.module.MainModule;
 import com.rainmonth.mvp.contract.MainContract;
@@ -40,12 +39,12 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     NavigationTabBar ntbHorizontal;
     @BindView(R.id.fl_ntb_horizontal_container)
     FrameLayout flNtbHorizontalContainer;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
 
     @Override
-    public void initToolbar() {
-        mToolbar.setTitle("主页");
-        mToolbar.setSubtitle("主页说明");
-        mToolbar.setLogo(R.drawable.ic_action_bar_logo);
+    protected int getContentViewLayoutID() {
+        return R.layout.activity_main;
     }
 
     @Override
@@ -59,7 +58,51 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     }
 
     @Override
-    public void initializeViews(List<NavigationTabBar.Model> models, List<BaseLazyFragment> fragments) {
+    protected void initViewsAndEvents() {
+        mPresenter.init(getNavigationListModels(), getNavigationFragments());
+
+        ntbHorizontal.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(final int position, final float positionOffset,
+                                       final int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(final int position) {
+                ntbHorizontal.getModels().get(position).hideBadge();
+            }
+
+            @Override
+            public void onPageScrollStateChanged(final int state) {
+
+            }
+        });
+    }
+
+    @Override
+    public void initToolbar() {
+        if (toolbar != null) {
+            // 如果采用的时有ActionBar的主题，那么就不能调用这个方法
+            setSupportActionBar(toolbar);
+            toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showToast("返回");
+                }
+            });
+            mActionBar = getSupportActionBar();
+            if (null != mActionBar) {
+                mActionBar.setTitle("主页");
+                // 设置为true的时候，如果不设置navigationIcon，则显示向左箭头，
+                mActionBar.setDisplayHomeAsUpEnabled(false);
+            }
+        }
+    }
+
+    @Override
+    public void initializeViews(List<NavigationTabBar.Model> models,
+                                List<BaseLazyFragment> fragments) {
         vpHorizontalNtb.setAdapter(new HomeViewPagerAdapter(getSupportFragmentManager(), fragments));
         ntbHorizontal.setIsBadged(true);
         ntbHorizontal.setModels(models);
@@ -93,37 +136,6 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     @Override
     protected void getBundleExtras(Bundle extras) {
 
-    }
-
-    @Override
-    protected int getContentViewLayoutID() {
-        return R.layout.activity_main;
-    }
-
-    @Override
-    protected void initViewsAndEvents() {
-        printDeviceInfo();
-        // 初始化个推
-        ButterKnife.bind(this);
-
-        mPresenter.init(getNavigationListModels(), getNavigationFragments());
-
-        ntbHorizontal.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(final int position, final float positionOffset, final int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(final int position) {
-                ntbHorizontal.getModels().get(position).hideBadge();
-            }
-
-            @Override
-            public void onPageScrollStateChanged(final int state) {
-
-            }
-        });
     }
 
     private List<NavigationTabBar.Model> getNavigationListModels() {

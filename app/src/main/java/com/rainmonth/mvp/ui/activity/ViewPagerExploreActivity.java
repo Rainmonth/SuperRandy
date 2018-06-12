@@ -2,7 +2,6 @@ package com.rainmonth.mvp.ui.activity;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.Gravity;
@@ -14,9 +13,7 @@ import android.widget.TextView;
 import com.rainmonth.R;
 import com.rainmonth.common.base.BaseActivity;
 import com.rainmonth.common.di.component.AppComponent;
-import com.rainmonth.common.eventbus.EventCenter;
 import com.rainmonth.common.utils.DensityUtils;
-import com.rainmonth.common.utils.NetworkUtils;
 
 import net.lucode.hackware.magicindicator.MagicIndicator;
 import net.lucode.hackware.magicindicator.ViewPagerHelper;
@@ -89,18 +86,13 @@ public class ViewPagerExploreActivity extends BaseActivity {
     };
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
-    protected void getBundleExtras(Bundle extras) {
-
-    }
-
-    @Override
     protected int getContentViewLayoutID() {
         return R.layout.activity_view_pager_explore;
+    }
+
+    @Override
+    protected void setupActivityComponent(AppComponent appComponent) {
+
     }
 
     @Override
@@ -183,13 +175,8 @@ public class ViewPagerExploreActivity extends BaseActivity {
 
     @Override
     public void initToolbar() {
-        mToolbar.setLogo(R.drawable.ic_action_bar_logo);
-        mToolbar.setTitle("新闻浏览");
-        mToolbar.setBackgroundResource(R.color.bg_home);
-    }
-
-    @Override
-    protected void setupActivityComponent(AppComponent appComponent) {
-
+        mActionBar.setLogo(R.drawable.ic_action_bar_logo);
+        mActionBar.setTitle("新闻浏览");
+//        mActionBar.setBackgroundResource(R.color.bg_home);
     }
 }

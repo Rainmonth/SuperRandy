@@ -1,20 +1,20 @@
 package com.rainmonth.mvp.ui.activity;
 
-import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.rainmonth.R;
-import com.rainmonth.common.base.mvp.BaseResponse;
 import com.rainmonth.common.base.BaseActivity;
 import com.rainmonth.common.di.component.AppComponent;
-import com.rainmonth.common.eventbus.EventCenter;
-import com.rainmonth.common.utils.NetworkUtils;
-import com.rainmonth.common.widgets.ClearEditText;
-import com.rainmonth.mvp.contract.LoginContract;
-import com.rainmonth.mvp.presenter.LoginPresenter;
+import com.rainmonth.common.http.Result;
 import com.rainmonth.common.utils.ToastUtils;
+import com.rainmonth.common.widgets.ClearEditText;
+import com.rainmonth.di.component.DaggerLoginComponent;
+import com.rainmonth.di.module.LoginModule;
+import com.rainmonth.mvp.contract.UserContract;
+import com.rainmonth.mvp.presenter.UserPresenter;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -22,8 +22,10 @@ import butterknife.OnClick;
 /**
  * 登录页面
  */
-public class LoginActivity extends BaseActivity implements LoginContract.View {
+public class LoginActivity extends BaseActivity<UserPresenter> implements UserContract.View {
 
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
     @BindView(R.id.iv_user_avatar)
     ImageView ivUserAvatar;
     @BindView(R.id.et_user_name)
@@ -39,18 +41,36 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
     @BindView(R.id.iv_sina)
     ImageView ivSina;
 
-    private LoginPresenter loginPresenter;
-
     @Override
-    public void initToolbar() {
-        mToolbar.setLogo(R.drawable.ic_action_bar_logo);
-        mToolbar.setTitle("登录");
-//        mToolbar.setBackgroundResource(R.color.transparent);
+    protected int getContentViewLayoutID() {
+        return R.layout.activity_login;
     }
 
     @Override
     protected void setupActivityComponent(AppComponent appComponent) {
+        DaggerLoginComponent.builder()
+                .appComponent(appComponent)
+                .loginModule(new LoginModule(this))
+                .build()
+                .inject(this);
+    }
 
+    @Override
+    protected void initViewsAndEvents() {
+        etUserName.setText("randy");
+        etPsw.setText("randy123");
+    }
+
+    @Override
+    public void initToolbar() {
+        if (toolbar != null) {
+            setSupportActionBar(toolbar);
+            mActionBar = getSupportActionBar();
+            if (null != mActionBar) {
+                mActionBar.setLogo(R.drawable.ic_action_bar_logo);
+                mActionBar.setTitle("登录");
+            }
+        }
     }
 
     @OnClick({R.id.iv_user_avatar, R.id.tv_login, R.id.tv_no_account, R.id.iv_qq, R.id.iv_sina})
@@ -60,7 +80,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
 
                 break;
             case R.id.tv_login:
-//                loginPresenter.login(etUserName.getText().toString(), etPsw.getText().toString());
+                mPresenter.login(etUserName.getText().toString(), etPsw.getText().toString());
                 break;
             case R.id.tv_no_account:
                 break;
@@ -75,31 +95,13 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
 
     // implements from ILoginView
     @Override
-    public void naveToAfterLogin(BaseResponse response) {
-        if (response.getCode().equals("1")) {
+    public void naveToAfterLogin(Result response) {
+        if (response.getCode() == 1) {
             readyGo(MainActivity.class);
             ToastUtils.showLongToast(mContext, response.getMessage());
             finish();
         } else {
             ToastUtils.showLongToast(mContext, response.getMessage());
         }
-    }
-
-    @Override
-    protected void getBundleExtras(Bundle extras) {
-
-    }
-
-    @Override
-    protected int getContentViewLayoutID() {
-        return R.layout.activity_login;
-    }
-
-    @Override
-    protected void initViewsAndEvents() {
-        // todo to be delete
-        etUserName.setText("randy");
-        etPsw.setText("123456");
-//        loginPresenter = new LoginPresenter(this);
     }
 }

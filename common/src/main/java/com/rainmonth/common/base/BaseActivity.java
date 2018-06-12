@@ -25,7 +25,12 @@ public abstract class BaseActivity<P extends BasePresenter> extends BaseAppCompa
         super.onCreate(savedInstanceState);
         setupActivityComponent(mAppComponent);
         initViewsAndEvents();
+        initToolbar();
     }
+
+    protected abstract void setupActivityComponent(AppComponent appComponent);
+
+    public abstract void initToolbar();
 
     @Override
     protected void onDestroy() {
@@ -35,8 +40,6 @@ public abstract class BaseActivity<P extends BasePresenter> extends BaseAppCompa
         }
         this.mPresenter = null;
     }
-
-    public abstract void initToolbar();
 
     @Override
     public void toast(String msg) {
@@ -52,9 +55,6 @@ public abstract class BaseActivity<P extends BasePresenter> extends BaseAppCompa
     public void hideProgress() {
 
     }
-
-    protected abstract void setupActivityComponent(AppComponent appComponent);
-
 
     @Override
     protected boolean isApplyStatusBarTranslucency() {
@@ -93,6 +93,11 @@ public abstract class BaseActivity<P extends BasePresenter> extends BaseAppCompa
 
     @Override
     protected void onEventComing(EventCenter eventCenter) {
+
+    }
+
+    @Override
+    protected void getBundleExtras(Bundle extras) {
 
     }
 }

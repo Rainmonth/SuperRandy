@@ -1,13 +1,11 @@
 package com.rainmonth.music;
 
-import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.rainmonth.common.base.BaseActivity;
 import com.rainmonth.common.di.component.AppComponent;
-import com.rainmonth.common.eventbus.EventCenter;
 import com.rainmonth.router.RouterConstant;
 import com.rainmonth.router.RouterUtils;
 
@@ -21,23 +19,13 @@ public class MusicHomeActivity extends BaseActivity implements View.OnClickListe
     TextView tvGoApp;
 
     @Override
-    protected void getBundleExtras(Bundle extras) {
-
-    }
-
-    @Override
     protected int getContentViewLayoutID() {
         return R.layout.music_activity_home;
     }
 
     @Override
-    protected void onEventComing(EventCenter eventCenter) {
+    protected void setupActivityComponent(AppComponent appComponent) {
 
-    }
-
-    @Override
-    protected View getLoadingTargetView() {
-        return null;
     }
 
     @Override
@@ -50,13 +38,10 @@ public class MusicHomeActivity extends BaseActivity implements View.OnClickListe
 
     @Override
     public void initToolbar() {
-        mToolbar.setTitle("音乐主页");
-        mToolbar.setLogo(R.drawable.ic_action_bar_logo);
-    }
-
-    @Override
-    protected void setupActivityComponent(AppComponent appComponent) {
-
+        if (null != mActionBar) {
+            mActionBar.setTitle("音乐主页");
+            mActionBar.setLogo(R.drawable.ic_action_bar_logo);
+        }
     }
 
     @Override
@@ -64,7 +49,7 @@ public class MusicHomeActivity extends BaseActivity implements View.OnClickListe
         int id = view.getId();
         if (id == R.id.tv_play_music) {
             readyGo(MusicPlayerActivity.class);
-        } else if(id == R.id.tv_go_app) {
+        } else if (id == R.id.tv_go_app) {
             // do nothing
             RouterUtils.getInstance().build(RouterConstant.PATH_APP_HOME).navigation();
         }
