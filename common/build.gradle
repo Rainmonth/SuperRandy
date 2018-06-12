@@ -97,4 +97,6 @@ dependencies {
 
     // KLog
     compile 'com.github.zhaokaiqiang.klog:library:1.5.0'
+    // multidex 解决4.4以下频繁出现的NoClassDefFoundError
+    api rootProject.ext.dependencies["multidex"]
 }

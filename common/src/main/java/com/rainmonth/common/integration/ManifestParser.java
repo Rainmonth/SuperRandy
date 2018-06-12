@@ -12,7 +12,7 @@ import java.util.List;
  * Created by RandyZhang on 2018/6/1.
  */
 
-public class ManifestParser {
+public final class ManifestParser {
     private static final String MODULE_VALUE = "ConfigModule";
     private final Context context;
 
