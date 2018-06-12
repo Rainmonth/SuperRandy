@@ -1,5 +1,21 @@
 <resources>
 
+    <style name="green_trans_btn" parent="Base.TextAppearance.AppCompat.Button">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:layout_marginLeft">@dimen/m16</item>
+        <item name="android:layout_marginRight">@dimen/m16</item>
+        <item name="android:layout_marginTop">@dimen/m8</item>
+        <item name="android:layout_marginBottom">@dimen/m8</item>
+        <item name="android:paddingTop">@dimen/m8</item>
+        <item name="android:paddingBottom">@dimen/m8</item>
+        <item name="android:background">@drawable/selector_green_btn</item>
+    </style>
+
     <style name="text_btn_base" parent="@style/TextAppearance.AppCompat.Inverse">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
