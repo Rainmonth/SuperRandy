@@ -3,13 +3,11 @@ package com.rainmonth.common.base;
 import android.os.Bundle;
 import android.view.View;
 
-import com.rainmonth.common.R;
 import com.rainmonth.common.base.mvp.BasePresenter;
 import com.rainmonth.common.base.mvp.IBaseView;
 import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.common.eventbus.EventCenter;
 import com.rainmonth.common.utils.NetworkUtils;
-import com.rainmonth.common.utils.SmartBarUtils;
 
 import javax.inject.Inject;
 
@@ -27,8 +25,7 @@ public abstract class BaseActivity<P extends BasePresenter> extends BaseAppCompa
         super.onCreate(savedInstanceState);
         setupActivityComponent(mAppComponent);
         initViewsAndEvents();
-        initToolbar(R.color.theme_color);
-        SmartBarUtils.setStatusBarColor(this, R.color.theme_color);
+        initToolbar(mStatusBarColor);
     }
 
     protected abstract void setupActivityComponent(AppComponent appComponent);
@@ -62,6 +59,11 @@ public abstract class BaseActivity<P extends BasePresenter> extends BaseAppCompa
     @Override
     protected boolean isApplyStatusBarTranslucency() {
         return false;
+    }
+
+    @Override
+    protected boolean isChangeStatusBarColor() {
+        return true;
     }
 
     @Override

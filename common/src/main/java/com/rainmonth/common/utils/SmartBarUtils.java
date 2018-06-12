@@ -5,9 +5,13 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.annotation.ColorRes;
+import android.support.annotation.RequiresApi;
+import android.support.v4.view.ViewCompat;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +26,10 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 public class SmartBarUtils {
+
+    private static final String TAG_FOR_FAKE_STATUS_BAR_VIEW = "fakeStatusBarView";
+
+    private static final String TAG_FOR_ADD_CONTENT_MARGIN = "addContentMargin";
 
     /**
      * 调用 ActionBar.setTabsShowAtBottom(boolean) 方法。 如果
@@ -293,19 +301,204 @@ public class SmartBarUtils {
      * @param colorResId 颜色资源
      */
     public static void setStatusBarColor(Activity activity, @ColorRes int colorResId) {
-        Window window = activity.getWindow();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            window.setStatusBarColor(activity.getResources().getColor(colorResId));
+            setStatusBarColorForLollipop(activity, colorResId);
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            ViewGroup decorViewGroup = (ViewGroup) window.getDecorView();
-            View statusBarView = new View(window.getContext());
-            int statusBarHeight = getStatusBarHeight(window.getContext());
-            FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
-                    FrameLayout.LayoutParams.MATCH_PARENT, statusBarHeight);
-            params.gravity = Gravity.TOP;
-            statusBarView.setLayoutParams(params);
-            statusBarView.setBackgroundColor(activity.getResources().getColor(android.R.color.holo_red_dark));
-            decorViewGroup.addView(statusBarView);
+            setStatusBarColorForKitKat(activity, colorResId);
+        }
+    }
+
+    /**
+     * 4.4.2到5.0设置状态栏颜色
+     *
+     * @param activity
+     * @param colorResId
+     */
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    private static void setStatusBarColorForKitKat(Activity activity, @ColorRes int colorResId) {
+        Window window = activity.getWindow();
+        //设置Window为全透明
+        window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        ViewGroup mContentView = (ViewGroup) window.findViewById(Window.ID_ANDROID_CONTENT);
+        //获取父布局
+        View mContentChild = mContentView.getChildAt(0);
+        //获取状态栏高度
+        int statusBarHeight = getStatusBarHeight(activity);
+        //如果存在假的statusBarView则先移除，防止重复添加
+        removeFakeStatusBarViewIfExist(activity);
+        //设置颜色
+        setFakeStatusBarViewWithColor(activity, statusBarHeight, colorResId);
+        //添加ContentMargin，如果不添加这个，则要设置fitSystemWindow属性为true
+        addMarginTopToContentChild(mContentChild, statusBarHeight);
+        if (null != mContentChild) {
+            ViewCompat.setFitsSystemWindows(mContentChild, false);
+        }
+
+        int action_bar_id = activity.getResources().getIdentifier("action_bar",
+                "id", activity.getPackageName());
+        View view = activity.findViewById(action_bar_id);
+        if (view != null) {
+            TypedValue typedValue = new TypedValue();
+            if (activity.getTheme().resolveAttribute(R.attr.actionBarSize,
+                    typedValue, true)) {
+                int actionBarHeight = TypedValue.complexToDimensionPixelSize(typedValue.data,
+                        activity.getResources().getDisplayMetrics());
+                setContentTopPadding(activity, actionBarHeight);
+            }
+        }
+    }
+
+    /**
+     * 5.0以上设置状态栏颜色处理
+     *
+     * @param activity
+     * @param colorResId
+     */
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    private static void setStatusBarColorForLollipop(Activity activity, @ColorRes int colorResId) {
+        Window window = activity.getWindow();
+        //取消状态栏透明
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        //添加Flag把状态栏设为可绘制模式
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        //设置状态栏颜色
+        window.setStatusBarColor(activity.getResources().getColor(colorResId));
+        //设置系统状态栏处于可见状态
+        window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
+        //让view不根据系统窗口来调整自己的布局
+        ViewGroup mContentView = (ViewGroup) window.findViewById(Window.ID_ANDROID_CONTENT);
+        View mChildView = mContentView.getChildAt(0);
+        if (mChildView != null) {
+            ViewCompat.setFitsSystemWindows(mChildView, false);
+            ViewCompat.requestApplyInsets(mChildView);
+        }
+    }
+
+    /**
+     * 移除假的状态View
+     *
+     * @param activity
+     */
+    private static void removeFakeStatusBarViewIfExist(Activity activity) {
+        Window window = activity.getWindow();
+        ViewGroup decorView = (ViewGroup) window.getDecorView();
+        View fakeView = decorView.findViewWithTag(TAG_FOR_FAKE_STATUS_BAR_VIEW);
+        if (null != fakeView) {
+            decorView.removeView(fakeView);
+        }
+    }
+
+    private static void setFakeStatusBarViewWithColor(Activity activity,
+                                                      int statusBarHeight,
+                                                      int colorResId) {
+        Window window = activity.getWindow();
+        ViewGroup decorViewGroup = (ViewGroup) window.getDecorView();
+        View statusBarView = new View(window.getContext());
+
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
+                FrameLayout.LayoutParams.MATCH_PARENT, statusBarHeight);
+        params.gravity = Gravity.TOP;
+        statusBarView.setLayoutParams(params);
+        statusBarView.setTag(TAG_FOR_FAKE_STATUS_BAR_VIEW);
+        statusBarView.setBackgroundColor(activity.getResources().getColor(colorResId));
+        decorViewGroup.addView(statusBarView);
+    }
+
+    /**
+     * 为ContentView添加到状态栏的Margin（避免使用fitSystemWindow属性）
+     */
+    private static void addMarginTopToContentChild(View mContentChild, int statusBarHeight) {
+        if (mContentChild == null) {
+            return;
+        }
+        if (!TAG_FOR_ADD_CONTENT_MARGIN.equals(mContentChild.getTag())) {
+            FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) mContentChild.getLayoutParams();
+            lp.topMargin += statusBarHeight;
+            mContentChild.setLayoutParams(lp);
+            mContentChild.setTag(TAG_FOR_ADD_CONTENT_MARGIN);
+        }
+    }
+
+    private static void setContentTopPadding(Activity activity, int padding) {
+        ViewGroup mContentView = (ViewGroup) activity.getWindow()
+                .findViewById(Window.ID_ANDROID_CONTENT);
+        mContentView.setPadding(0, padding, 0, 0);
+    }
+
+    public static void translucentStatusBar(Activity activity, boolean hideStatusBarBackground) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            translucentStatusBarForLollipop(activity, hideStatusBarBackground);
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            translucentStatusBarForKitKat(activity);
+        }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    private static void translucentStatusBarForKitKat(Activity activity) {
+        Window window = activity.getWindow();
+        //设置Window为透明
+        window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+
+        ViewGroup mContentView = (ViewGroup) activity.findViewById(Window.ID_ANDROID_CONTENT);
+        View mContentChild = mContentView.getChildAt(0);
+
+        //移除已经存在假状态栏则,并且取消它的Margin间距
+        removeFakeStatusBarViewIfExist(activity);
+        removeMarginTopOfContentChild(mContentChild, getStatusBarHeight(activity));
+        if (mContentChild != null) {
+            //fitsSystemWindow 为 false, 不预留系统栏位置.
+            ViewCompat.setFitsSystemWindows(mContentChild, false);
+        }
+    }
+
+    private static void removeMarginTopOfContentChild(View contentChild, int statusBarHeight) {
+        if (contentChild == null) {
+            return;
+        }
+        if (TAG_FOR_ADD_CONTENT_MARGIN.equals(contentChild.getTag())) {
+            FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) contentChild.getLayoutParams();
+            lp.topMargin -= statusBarHeight;
+            contentChild.setLayoutParams(lp);
+        }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    private static void translucentStatusBarForLollipop(Activity activity,
+                                                        boolean hideStatusBarBackground) {
+        Window window = activity.getWindow();
+        //添加Flag把状态栏设为可绘制模式
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        if (hideStatusBarBackground) {
+            //如果为全透明模式，取消设置Window半透明的Flag
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            //设置状态栏为透明
+            window.setStatusBarColor(Color.TRANSPARENT);
+            //设置window的状态栏不可见
+            window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                    | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+        } else {
+            //如果为半透明模式，添加设置Window半透明的Flag
+            window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            //设置系统状态栏处于可见状态
+            window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
+        }
+        //view不根据系统窗口来调整自己的布局
+        ViewGroup mContentView = (ViewGroup) window.findViewById(Window.ID_ANDROID_CONTENT);
+        View mChildView = mContentView.getChildAt(0);
+        if (mChildView != null) {
+            ViewCompat.setFitsSystemWindows(mChildView, false);
+            ViewCompat.requestApplyInsets(mChildView);
+        }
+    }
+
+    private static View getFakeStatusBarView(Activity activity) {
+        Window window = activity.getWindow();
+        ViewGroup decorView = (ViewGroup) window.getDecorView();
+        View fakeView = decorView.findViewWithTag(TAG_FOR_FAKE_STATUS_BAR_VIEW);
+        if (fakeView != null) {
+            return fakeView;
+        } else {
+            return null;
         }
     }
 }

@@ -23,6 +23,7 @@ import com.rainmonth.common.utils.CommonUtils;
 import com.rainmonth.common.utils.ComponentUtils;
 import com.rainmonth.common.utils.NetworkUtils;
 import com.rainmonth.common.utils.SmartBarUtils;
+import com.rainmonth.common.utils.constant.StatusBarConstants;
 import com.rainmonth.common.widgets.loading.VaryViewHelperController;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
@@ -41,6 +42,8 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
      * context
      */
     protected Context mContext = null;
+    // 状态栏颜色
+    protected int mStatusBarColor;
 
     protected ActionBar mActionBar = null;
 
@@ -95,7 +98,7 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
         if (isBindEventBusHere()) {
             EventBus.getDefault().register(this);
         }
-        SmartBarUtils.hide(getWindow().getDecorView());
+//        SmartBarUtils.hide(getWindow().getDecorView());
         setTranslucentStatus(isApplyStatusBarTranslucency());
         if (getContentViewLayoutID() != 0) {
             setContentView(getContentViewLayoutID());
@@ -113,6 +116,10 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
 
         mContext = this;
         mAppComponent = ComponentUtils.getAppComponent();
+        mStatusBarColor = mAppComponent.statusBarAttr().get(StatusBarConstants.COLOR);
+        if (isChangeStatusBarColor()) {
+            SmartBarUtils.setStatusBarColor(this, mStatusBarColor);
+        }
         TAG = this.getClass().getSimpleName();
         mAppComponent.appManager().addActivity(this);
 
@@ -237,6 +244,8 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
      * @return true if applyStatusBarTranslucency
      */
     protected abstract boolean isApplyStatusBarTranslucency();
+
+    protected abstract boolean isChangeStatusBarColor();
 
     /**
      * is bind eventBus
@@ -447,7 +456,6 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
                 mTintManager.setTintDrawable(null);
             }
         }
-
     }
 
     /**

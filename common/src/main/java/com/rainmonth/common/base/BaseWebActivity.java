@@ -56,8 +56,11 @@ public class BaseWebActivity extends BaseSwipeBackCompatActivity {
 
         if (null != mToolBar) {
             setSupportActionBar(mToolBar);
-            getSupportActionBar().setHomeButtonEnabled(true);
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            mActionBar = getSupportActionBar();
+            if (null != mActionBar) {
+                mActionBar.setHomeButtonEnabled(true);
+                mActionBar.setDisplayHomeAsUpEnabled(true);
+            }
         }
 
         if (!CommonUtils.isEmpty(mWebTitle)) {
@@ -91,6 +94,11 @@ public class BaseWebActivity extends BaseSwipeBackCompatActivity {
 
     @Override
     protected boolean isApplyStatusBarTranslucency() {
+        return true;
+    }
+
+    @Override
+    protected boolean isChangeStatusBarColor() {
         return true;
     }
 

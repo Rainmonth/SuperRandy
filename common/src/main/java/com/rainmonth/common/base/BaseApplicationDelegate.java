@@ -87,7 +87,7 @@ public class BaseApplicationDelegate implements IBaseApplicationDelegate {
                 .addInterceptor(new RequestInterceptor(GlobalHttpHandler.EMPTY))
                 //为了防止用户没有通过GlobeConfigModule配置baseurl,而导致报错,所以提前配置个默认baseurl
                 .baseUrl("http://rainmonth.cn")
-                .statusBarColor(R.color.colorPrimary)   //提供一个默认的状态栏颜色
+                .statusBarColor(R.color.theme_color)   //提供一个默认的状态栏颜色
                 .statusBarAlpha(0);
 
         for (ConfigModule module : modules) {
