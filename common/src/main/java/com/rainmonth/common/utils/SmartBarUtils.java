@@ -11,6 +11,7 @@ import android.os.Build;
 import android.support.annotation.ColorRes;
 import android.support.annotation.RequiresApi;
 import android.support.v4.view.ViewCompat;
+import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
@@ -305,6 +306,12 @@ public class SmartBarUtils {
             setStatusBarColorForLollipop(activity, colorResId);
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             setStatusBarColorForKitKat(activity, colorResId);
+        }
+    }
+
+    public static void setToolbarBgColor(Toolbar toolbar, @ColorRes int colorResId) {
+        if (null != toolbar) {
+            toolbar.setBackgroundColor(toolbar.getContext().getResources().getColor(colorResId));
         }
     }
 
