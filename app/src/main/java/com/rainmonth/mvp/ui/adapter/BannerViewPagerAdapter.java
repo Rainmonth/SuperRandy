@@ -2,7 +2,7 @@ package com.rainmonth.mvp.ui.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.rainmonth.common.base.BaseLazyFragment;
 
@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Created by RandyZhang on 16/6/30.
  */
-public class BannerViewPagerAdapter extends FragmentPagerAdapter {
+public class BannerViewPagerAdapter extends FragmentStatePagerAdapter {
 
     private List<BaseLazyFragment> mListFragments = null;
 

@@ -1,11 +1,9 @@
 package com.rainmonth.mvp.ui.fragment;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -14,22 +12,22 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.rainmonth.R;
+import com.rainmonth.common.adapter.ListViewDataAdapter;
+import com.rainmonth.common.adapter.ViewHolderBase;
+import com.rainmonth.common.adapter.ViewHolderCreator;
+import com.rainmonth.common.base.BaseLazyFragment;
 import com.rainmonth.common.di.component.AppComponent;
+import com.rainmonth.common.eventbus.EventCenter;
+import com.rainmonth.common.utils.ToastUtils;
 import com.rainmonth.di.component.DaggerRenComponent;
 import com.rainmonth.di.module.RenModule;
 import com.rainmonth.mvp.contract.RenContract;
 import com.rainmonth.mvp.model.bean.ArticleBean;
 import com.rainmonth.mvp.model.bean.ArticleGroupBean;
 import com.rainmonth.mvp.model.bean.BannerBean;
-import com.rainmonth.common.adapter.ListViewDataAdapter;
-import com.rainmonth.common.adapter.ViewHolderBase;
-import com.rainmonth.common.adapter.ViewHolderCreator;
-import com.rainmonth.common.base.BaseLazyFragment;
-import com.rainmonth.common.eventbus.EventCenter;
 import com.rainmonth.mvp.presenter.RenPresenter;
 import com.rainmonth.mvp.ui.adapter.BannerViewPagerAdapter;
 import com.rainmonth.mvp.ui.widgets.InnerListView;
-import com.rainmonth.common.utils.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -112,15 +110,15 @@ public class RenFragment extends BaseLazyFragment<RenPresenter> implements RenCo
                 bannerFragmentList.add(fragment);
             }
         }
-        View headView = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_ren_list_head, null);
+        View headView = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_ren_list_head, lvContent, false);
         ViewPager viewPager = (ViewPager) headView.findViewById(R.id.vp_ren_fragment);
-        viewPager.setAdapter(new BannerViewPagerAdapter(getSupportFragmentManager(), bannerFragmentList));
+        viewPager.setAdapter(new BannerViewPagerAdapter(getChildFragmentManager(), bannerFragmentList));
         lvContent.addHeaderView(headView);
     }
 
     @Override
     public void initContentList(List<ArticleGroupBean> articleGroupBeanList) {
-        mRenContentListAdapter = new ListViewDataAdapter<ArticleGroupBean>(new ViewHolderCreator<ArticleGroupBean>() {
+        ListViewDataAdapter<ArticleGroupBean> mRenContentListAdapter = new ListViewDataAdapter<ArticleGroupBean>(new ViewHolderCreator<ArticleGroupBean>() {
             @Override
             public ViewHolderBase<ArticleGroupBean> createViewHolder(int position) {
                 return new ViewHolderBase<ArticleGroupBean>() {

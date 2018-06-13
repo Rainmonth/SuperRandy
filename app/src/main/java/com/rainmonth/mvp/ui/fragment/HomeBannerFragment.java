@@ -1,25 +1,23 @@
 package com.rainmonth.mvp.ui.fragment;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.rainmonth.R;
-import com.rainmonth.common.di.component.AppComponent;
-import com.rainmonth.mvp.model.bean.BannerBean;
 import com.rainmonth.common.base.BaseLazyFragment;
+import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.common.eventbus.EventCenter;
 import com.rainmonth.common.utils.ToastUtils;
+import com.rainmonth.mvp.model.bean.BannerBean;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
+ * Banner Fragment
  * Created by RandyZhang on 2017/2/7.
  */
 
@@ -30,6 +28,11 @@ public class HomeBannerFragment extends BaseLazyFragment {
     TextView tvTitle;
     @BindView(R.id.fl_banner_container)
     FrameLayout flBannerContainer;
+
+    @Override
+    protected int getContentViewLayoutID() {
+        return R.layout.fragment_home_banner;
+    }
 
     @Override
     protected void onFirstUserVisible() {
@@ -61,6 +64,7 @@ public class HomeBannerFragment extends BaseLazyFragment {
         Bundle bundle = getArguments();
         if (null != bundle) {
             final BannerBean bannerBean = (BannerBean) bundle.getSerializable(RenFragment.BANNER_BEAN);
+            if (null == bannerBean) return;
             Glide.with(getActivity()).load(bannerBean.getThumb()).into(ivBannerImage);
             tvTitle.setText(bannerBean.getTitle());
             flBannerContainer.setOnClickListener(new View.OnClickListener() {
@@ -79,11 +83,6 @@ public class HomeBannerFragment extends BaseLazyFragment {
     }
 
     @Override
-    protected int getContentViewLayoutID() {
-        return R.layout.fragment_home_banner;
-    }
-
-    @Override
     protected void onEventComing(EventCenter eventCenter) {
 
     }
@@ -91,13 +90,6 @@ public class HomeBannerFragment extends BaseLazyFragment {
     @Override
     protected boolean isBindEventBusHere() {
         return false;
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = super.onCreateView(inflater, container, savedInstanceState);
-        ButterKnife.bind(this, rootView);
-        return rootView;
     }
 
     @Override

@@ -46,13 +46,6 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     Toolbar toolbar;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        SmartBarUtils.setStatusBarColor(this, R.color.theme_color);
-
-    }
-
-    @Override
     protected int getContentViewLayoutID() {
         return R.layout.activity_main;
     }
@@ -118,6 +111,40 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         ntbHorizontal.setIsBadged(true);
         ntbHorizontal.setModels(models);
         ntbHorizontal.setViewPager(vpHorizontalNtb, 0);
+        vpHorizontalNtb.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                switch (position) {
+                    case 1:
+                        SmartBarUtils.setStatusBarColor(mActivity, android.R.color.holo_red_dark);
+                        SmartBarUtils.setToolbarBgColor(toolbar, android.R.color.holo_red_dark);
+                        break;
+                    case 2:
+                        SmartBarUtils.setStatusBarColor(mActivity, android.R.color.holo_orange_dark);
+                        SmartBarUtils.setToolbarBgColor(toolbar, android.R.color.holo_orange_dark);
+                        break;
+                    case 3:
+                        SmartBarUtils.setStatusBarColor(mActivity, android.R.color.holo_purple);
+                        SmartBarUtils.setToolbarBgColor(toolbar, android.R.color.holo_purple);
+                        break;
+                    default:
+                        SmartBarUtils.setStatusBarColor(mActivity, R.color.theme_color);
+                        SmartBarUtils.setToolbarBgColor(toolbar, R.color.theme_color);
+                        break;
+
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
 
         ntbHorizontal.post(new Runnable() {
             @Override
@@ -142,11 +169,6 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
                 }
             }
         }, 500);
-    }
-
-    @Override
-    protected void getBundleExtras(Bundle extras) {
-
     }
 
     private List<NavigationTabBar.Model> getNavigationListModels() {
