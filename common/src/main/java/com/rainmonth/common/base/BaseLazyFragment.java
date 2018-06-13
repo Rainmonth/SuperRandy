@@ -31,33 +31,10 @@ public abstract class BaseLazyFragment<T extends BasePresenter> extends BaseSupp
     protected T mPresenter;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = super.onCreateView(inflater, container, savedInstanceState);
-        ButterKnife.bind(this, rootView);
-
-//        renPresenter = new RenPresenter(this);
-        return rootView;
-    }
-
-    @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setupFragmentComponent(mAppComponent);
         initViewsAndEvents(view);
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-//        ButterKnife.unbind(this);
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if (isBindEventBusHere()) {
-            EventBus.getDefault().unregister(this);
-        }
     }
 
     @Override
@@ -115,7 +92,8 @@ public abstract class BaseLazyFragment<T extends BasePresenter> extends BaseSupp
     }
 
     /**
-     * when fragment is visible for the first time, here we can do some initialized work or refresh data only once
+     * when fragment is visible for the first time, here we can do some initialized
+     * work or refresh data only once
      */
     protected abstract void onFirstUserVisible();
 
@@ -142,19 +120,6 @@ public abstract class BaseLazyFragment<T extends BasePresenter> extends BaseSupp
      * init all views and add events
      */
     protected abstract void initViewsAndEvents(View view);
-
-    public void onEventMainThread(EventCenter eventCenter) {
-        if (null != eventCenter) {
-            onEventComing(eventCenter);
-        }
-    }
-
-    /**
-     * when event coming
-     *
-     * @param eventCenter eventCenter
-     */
-    protected abstract void onEventComing(EventCenter eventCenter);
 
     @Override
     protected boolean isBindEventBusHere() {

@@ -9,16 +9,17 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.rainmonth.common.base.mvp.IBaseView;
 import com.rainmonth.common.di.component.AppComponent;
+import com.rainmonth.common.eventbus.EventCenter;
 import com.rainmonth.common.utils.CommonUtils;
 import com.rainmonth.common.utils.ComponentUtils;
 import com.rainmonth.common.widgets.loading.VaryViewHelperController;
+import com.socks.library.KLog;
 
 import java.lang.reflect.Field;
 
@@ -34,13 +35,6 @@ public abstract class BaseSupportFragment extends Fragment implements IBaseView 
      * Log tag
      */
     protected static String TAG = null;
-
-    /**
-     * Screen information
-     */
-    protected int mScreenWidth = 0;
-    protected int mScreenHeight = 0;
-    protected float mScreenDensity = 0.0f;
 
     protected AppComponent mAppComponent;
 
@@ -69,9 +63,11 @@ public abstract class BaseSupportFragment extends Fragment implements IBaseView 
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
+    public View onCreateView(LayoutInflater inflater,
+                             @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         if (getContentViewLayoutID() != 0) {
+            KLog.e("Randy", TAG + "->onCreateView");
             return inflater.inflate(getContentViewLayoutID(), null);
         } else {
             return super.onCreateView(inflater, container, savedInstanceState);
@@ -82,19 +78,50 @@ public abstract class BaseSupportFragment extends Fragment implements IBaseView 
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
-
+        // 初始化AppComponent实例
+        mAppComponent = ComponentUtils.getAppComponent();
         if (null != getLoadingTargetView()) {
             mVaryViewHelperController = new VaryViewHelperController(getLoadingTargetView());
         }
+    }
 
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        getActivity().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+    }
 
-        mScreenDensity = displayMetrics.density;
-        mScreenHeight = displayMetrics.heightPixels;
-        mScreenWidth = displayMetrics.widthPixels;
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
 
-        mAppComponent = ComponentUtils.getAppComponent();
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        KLog.e("Randy", TAG + "->onDestroyView");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (isBindEventBusHere()) {
+            EventBus.getDefault().unregister(this);
+        }
     }
 
     @Override
@@ -131,6 +158,19 @@ public abstract class BaseSupportFragment extends Fragment implements IBaseView 
      * @return bind event bus if return true, otherwise not bound
      */
     protected abstract boolean isBindEventBusHere();
+
+    /**
+     * when event coming
+     *
+     * @param eventCenter eventCenter
+     */
+    protected abstract void onEventComing(EventCenter eventCenter);
+
+    public void onEventMainThread(EventCenter eventCenter) {
+        if (null != eventCenter) {
+            onEventComing(eventCenter);
+        }
+    }
 
     /**
      * get the support fragment manager

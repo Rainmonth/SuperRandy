@@ -1,5 +1,6 @@
 package com.rainmonth.common.base;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -42,6 +43,7 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
      * context
      */
     protected Context mContext = null;
+    protected Activity mActivity;
     // 状态栏颜色
     protected int mStatusBarColor;
 
@@ -115,6 +117,7 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
         }
 
         mContext = this;
+        mActivity = this;
         mAppComponent = ComponentUtils.getAppComponent();
         mStatusBarColor = mAppComponent.statusBarAttr().get(StatusBarConstants.COLOR);
         if (isChangeStatusBarColor()) {

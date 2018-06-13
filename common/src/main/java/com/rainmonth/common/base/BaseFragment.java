@@ -7,18 +7,9 @@ import android.view.View;
 import com.rainmonth.common.di.component.AppComponent;
 
 /**
- *
  * Created by RandyZhang on 2018/5/31.
  */
 public abstract class BaseFragment extends BaseSupportFragment {
-
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        initViewsAndEvents(view);
-    }
-
-    protected abstract void setupFragmentComponent(AppComponent appComponent);
 
     /**
      * bind layout resource file
@@ -27,11 +18,19 @@ public abstract class BaseFragment extends BaseSupportFragment {
      */
     protected abstract int getContentViewLayoutID();
 
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        setupFragmentComponent(mAppComponent);
+        initViewsAndEvents(view);
+    }
+
+    protected abstract void setupFragmentComponent(AppComponent appComponent);
+
+    protected abstract void initViewsAndEvents(View view);
+
     /**
      * get loading target view
      */
     protected abstract View getLoadingTargetView();
-
-    protected abstract void initViewsAndEvents(View view);
-
 }
