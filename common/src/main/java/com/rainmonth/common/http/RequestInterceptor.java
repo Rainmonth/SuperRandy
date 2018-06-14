@@ -65,7 +65,9 @@ public class RequestInterceptor implements Interceptor {
                 charset = contentType.charset(charset);
             }
             bodyString = clone.readString(charset);
-            KLog.json("Randy", bodyString);
+            if (contentType != null && "json".equals(contentType.subtype())) {
+                KLog.json("Randy", bodyString);
+            }
         }
         if (mHandler != null) {
             return mHandler.onHttpResultResponse(bodyString, chain, originalResponse);
