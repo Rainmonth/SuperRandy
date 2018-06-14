@@ -90,7 +90,7 @@ public class GlideImageConfig extends ImageConfig {
     }
 
 
-    public Builder imagerView(ImageView imageView) {
+    public Builder imageView(ImageView imageView) {
       this.imageView = imageView;
       return this;
     }
