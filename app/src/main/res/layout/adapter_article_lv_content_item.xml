@@ -11,19 +11,20 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/iv_article_avatar"
+            android:id="@+id/iv_article_thumb"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_alignParentLeft="true"
             android:contentDescription="@string/app_name"
-            android:scaleType="fitXY" />
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_launcher" />
 
         <TextView
             android:id="@+id/tv_article_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/margin_small"
-            android:layout_toRightOf="@+id/iv_article_avatar"
+            android:layout_toRightOf="@+id/iv_article_thumb"
             android:ellipsize="end"
             android:maxLines="2"
             android:text="行走的力量系列文章之生命不息行走不止"
@@ -31,14 +32,15 @@
             android:textSize="@dimen/text_normal" />
 
         <TextView
-            android:id="@+id/tv_article_summarize"
+            android:id="@+id/tv_article_brief"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_article_title"
             android:layout_marginLeft="@dimen/margin_small"
             android:layout_marginTop="@dimen/margin_small"
-            android:layout_toRightOf="@+id/iv_article_avatar"
+            android:layout_toRightOf="@+id/iv_article_thumb"
             android:ellipsize="end"
+            android:maxLength="50"
             android:maxLines="3"
             android:text="体验行走，感受on the way 不一样的精彩。一个热爱生活的人，肯定是一个有趣的人。迈开青春的步伐，感受行走的力量吧！"
             android:textColor="@color/article_summarise"
@@ -51,25 +53,31 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_small"
         android:orientation="horizontal"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <TextView
             android:id="@+id/tv_btn_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="浏览" />
+            android:padding="@dimen/m4"
+            android:text="浏览"
+            android:textColor="@color/theme_color" />
 
         <TextView
             android:id="@+id/tv_btn_collect"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="收藏" />
+            android:padding="@dimen/m4"
+            android:text="收藏"
+            android:textColor="@color/theme_color" />
 
         <TextView
             android:id="@+id/tv_btn_like"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="喜欢" />
+            android:padding="@dimen/m4"
+            android:text="喜欢"
+            android:textColor="@color/theme_color" />
 
     </LinearLayout>
 

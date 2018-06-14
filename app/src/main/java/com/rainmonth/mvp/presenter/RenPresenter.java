@@ -3,10 +3,12 @@ package com.rainmonth.mvp.presenter;
 import com.rainmonth.common.base.mvp.BasePresenter;
 import com.rainmonth.common.di.scope.FragmentScope;
 import com.rainmonth.common.http.CommonSubscriber;
+import com.rainmonth.common.http.PageResult;
+import com.rainmonth.common.http.Result;
 import com.rainmonth.common.utils.RxUtils;
 import com.rainmonth.mvp.contract.RenContract;
+import com.rainmonth.mvp.model.bean.ArticleBean;
 import com.rainmonth.mvp.model.bean.BannerBean;
-import com.rainmonth.common.http.Result;
 
 import java.util.List;
 
@@ -23,10 +25,8 @@ public class RenPresenter extends BasePresenter<RenContract.Model, RenContract.V
         super(model, view);
     }
 
-    public void init() {
-
-        mView.initContentList(mModel.getArticleList());
-        addSubscribe(mModel.getBannerList(0, 10, 6)
+    public void getBannerList(int page, int pageSize, int type) {
+        addSubscribe(mModel.getBannerList(page, pageSize, type)
                 .compose(RxUtils.<Result<List<BannerBean>>>getFlowableTransformer())// 进行线程切换
                 .subscribeWith(new CommonSubscriber<Result<List<BannerBean>>>(mView) {
                     @Override
@@ -34,6 +34,20 @@ public class RenPresenter extends BasePresenter<RenContract.Model, RenContract.V
                         mView.initHomeBanners(baseResponse.getData());
                     }
                 }));
-//        mView.initHomeBanners(mModel.getBannerList());
+    }
+
+    public void getArticleList(int page, int pageSize) {
+        addSubscribe(mModel.getArticleList(page, pageSize)
+                .compose(RxUtils.<PageResult<ArticleBean>>getFlowableTransformer())
+                .subscribeWith(new CommonSubscriber<PageResult<ArticleBean>>(mView) {
+                    @Override
+                    public void onNext(PageResult<ArticleBean> articleBeanPageResult) {
+                        if (articleBeanPageResult.isSuccess()) {
+                            mView.initContentList(articleBeanPageResult.getData());
+                        } else {
+                            mView.toast(articleBeanPageResult.getMessage());
+                        }
+                    }
+                }));
     }
 }

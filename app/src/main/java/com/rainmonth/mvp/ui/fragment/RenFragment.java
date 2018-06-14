@@ -2,49 +2,44 @@ package com.rainmonth.mvp.ui.fragment;
 
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.rainmonth.R;
-import com.rainmonth.common.adapter.ListViewDataAdapter;
-import com.rainmonth.common.adapter.ViewHolderBase;
-import com.rainmonth.common.adapter.ViewHolderCreator;
 import com.rainmonth.common.base.BaseLazyFragment;
 import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.common.eventbus.EventCenter;
-import com.rainmonth.common.utils.ToastUtils;
+import com.rainmonth.common.http.PageData;
 import com.rainmonth.di.component.DaggerRenComponent;
 import com.rainmonth.di.module.RenModule;
+import com.rainmonth.mvp.ArticleListAdapter;
 import com.rainmonth.mvp.contract.RenContract;
 import com.rainmonth.mvp.model.bean.ArticleBean;
-import com.rainmonth.mvp.model.bean.ArticleGroupBean;
 import com.rainmonth.mvp.model.bean.BannerBean;
 import com.rainmonth.mvp.presenter.RenPresenter;
 import com.rainmonth.mvp.ui.adapter.BannerViewPagerAdapter;
-import com.rainmonth.mvp.ui.widgets.InnerListView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
+ * 荏Fragment，主要展示热门活动，文章列表，后续会展示力量专题
  * Created by RandyZhang on 16/6/30.
  */
 public class RenFragment extends BaseLazyFragment<RenPresenter> implements RenContract.View {
 
     public static final String BANNER_BEAN = "banner_bean";
-    @BindView(R.id.lv_content)
-    ListView lvContent;
+    @BindView(R.id.rv_content)
+    RecyclerView rvContent;
 
-    private ListViewDataAdapter<ArticleGroupBean> mRenContentListAdapter = null;
+    private int page = 1;
+    private boolean isRefresh = false;
+    private ArticleListAdapter mAdapter = null;
 
     @Override
     public void onFirstUserVisible() {
@@ -88,9 +83,19 @@ public class RenFragment extends BaseLazyFragment<RenPresenter> implements RenCo
 
     @Override
     protected void initViewsAndEvents(View view) {
-//        initContentList(renPresenter.getContentListFake());
-//        initHomeBanners(renPresenter.getHomeBannerFake());
-        mPresenter.init();
+        mAdapter = new ArticleListAdapter(R.layout.adapter_article_lv_content_item, mContext);
+        LinearLayoutManager manager = new LinearLayoutManager(getActivity());
+        rvContent.setLayoutManager(manager);
+        rvContent.setAdapter(mAdapter);
+        mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                if (mAdapter.getData().get(position) != null)
+                    showToast(mAdapter.getData().get(position).getTitle());
+            }
+        });
+        mPresenter.getArticleList(page, 10);
+        mPresenter.getBannerList(1, 10, 6);
     }
 
     @Override
@@ -110,95 +115,30 @@ public class RenFragment extends BaseLazyFragment<RenPresenter> implements RenCo
                 bannerFragmentList.add(fragment);
             }
         }
-        View headView = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_ren_list_head, lvContent, false);
+        View headView = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_ren_list_head,
+                rvContent, false);
         ViewPager viewPager = (ViewPager) headView.findViewById(R.id.vp_ren_fragment);
-        viewPager.setAdapter(new BannerViewPagerAdapter(getChildFragmentManager(), bannerFragmentList));
-        lvContent.addHeaderView(headView);
+        viewPager.setAdapter(new BannerViewPagerAdapter(getChildFragmentManager(),
+                bannerFragmentList));
+        mAdapter.addHeaderView(headView);
     }
 
     @Override
-    public void initContentList(List<ArticleGroupBean> articleGroupBeanList) {
-        ListViewDataAdapter<ArticleGroupBean> mRenContentListAdapter = new ListViewDataAdapter<ArticleGroupBean>(new ViewHolderCreator<ArticleGroupBean>() {
-            @Override
-            public ViewHolderBase<ArticleGroupBean> createViewHolder(int position) {
-                return new ViewHolderBase<ArticleGroupBean>() {
-                    //                    TextView tvTagType;
-                    TextView tvTypeName;
-                    InnerListView lvArticle;
-
-                    @Override
-                    public View createView(LayoutInflater layoutInflater) {
-                        View convertView = layoutInflater.inflate(R.layout.adapter_ren_lv_content_item, null);
-                        tvTypeName = ButterKnife.findById(convertView, R.id.tv_type_name);
-                        lvArticle = ButterKnife.findById(convertView, R.id.lv_article);
-                        return convertView;
-                    }
-
-                    @Override
-                    public void showData(int position, ArticleGroupBean itemData) {
-                        tvTypeName.setText(itemData.getType_name());
-
-                        final ListViewDataAdapter articleListAdapter = new ListViewDataAdapter<ArticleBean>(new ViewHolderCreator<ArticleBean>() {
-                            @Override
-                            public ViewHolderBase<ArticleBean> createViewHolder(int position) {
-                                return new ViewHolderBase<ArticleBean>() {
-                                    ImageView ivArticleAvatar;
-                                    TextView tvArticleTitle;
-                                    TextView tvArticleSummarize;
-                                    LinearLayout llActionBtnContainer;
-                                    TextView tvLike, tvView, tvCollect;
-
-                                    @Override
-                                    public View createView(LayoutInflater layoutInflater) {
-                                        View convertView = layoutInflater.inflate(R.layout.adapter_article_lv_content_item, null);
-                                        ivArticleAvatar = ButterKnife.findById(convertView, R.id.iv_article_avatar);
-                                        tvArticleTitle = ButterKnife.findById(convertView, R.id.tv_article_title);
-                                        tvArticleSummarize = ButterKnife.findById(convertView, R.id.tv_article_summarize);
-                                        llActionBtnContainer = ButterKnife.findById(convertView, R.id.ll_action_btn_container);
-                                        tvLike = ButterKnife.findById(convertView, R.id.tv_btn_like);
-                                        tvView = ButterKnife.findById(convertView, R.id.tv_btn_view);
-                                        tvCollect = ButterKnife.findById(convertView, R.id.tv_btn_collect);
-
-                                        return convertView;
-                                    }
-
-                                    @Override
-                                    public void showData(int position, ArticleBean itemData) {
-                                        Glide.with(getActivity()).load(itemData.getThumb_url()).into(ivArticleAvatar);
-                                        tvArticleTitle.setText(itemData.getTitle());
-                                        tvArticleSummarize.setText(itemData.getSummarize());
-                                        tvLike.setText(String.format("%s喜欢", itemData.getLike_num()));
-                                        tvView.setText(String.format("%s浏览", itemData.getView_num()));
-                                        tvCollect.setText(String.format("%s收藏", itemData.getCollect_num()));
-                                    }
-                                };
-                            }
-                        });
-                        articleListAdapter.getDataList().addAll(itemData.getList());
-                        lvArticle.setAdapter(articleListAdapter);
-                        lvArticle.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-                            @Override
-                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                ArticleBean articleBean = (ArticleBean) articleListAdapter.getDataList().get(position);
-                                ToastUtils.showShortToast(getActivity(), "nav to article with title " + articleBean.getTitle());
-                            }
-                        });
-
-                    }
-                };
+    public void initContentList(PageData<ArticleBean> articleBeanPageData) {
+        final int size = articleBeanPageData.getList().size();
+        if (isRefresh) {
+            mAdapter.setNewData(articleBeanPageData.getList());
+        } else {
+            if (size > 0) {
+                mAdapter.addData(articleBeanPageData.getList());
             }
-        });
-        mRenContentListAdapter.getDataList().addAll(articleGroupBeanList);
-        lvContent.setAdapter(mRenContentListAdapter);
-        lvContent.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                // nav to detail activity
-
-            }
-        });
+        }
+        if (page < articleBeanPageData.getTotalPage()) {
+            mAdapter.loadMoreComplete();
+        } else if (page == articleBeanPageData.getTotalPage()) {
+            mAdapter.loadMoreEnd(true);
+        }
+        page++;
     }
 
     @Override
