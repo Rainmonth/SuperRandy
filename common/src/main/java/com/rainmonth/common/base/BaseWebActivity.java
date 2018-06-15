@@ -5,10 +5,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.rainmonth.common.R;
+import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.common.eventbus.EventCenter;
 import com.rainmonth.common.utils.CommonUtils;
 import com.rainmonth.common.utils.NetworkUtils;
 import com.rainmonth.common.widgets.BrowserLayout;
+import com.socks.library.KLog;
 
 import butterknife.ButterKnife;
 
@@ -33,41 +35,21 @@ public class BaseWebActivity extends BaseSwipeBackCompatActivity {
     }
 
     @Override
+    protected void setupActivityComponent(AppComponent appComponent) {
+
+    }
+
+    @Override
     protected int getContentViewLayoutID() {
         return R.layout.activity_common_web;
     }
 
     @Override
-    protected void onEventComing(EventCenter eventCenter) {
-
-    }
-
-    @Override
-    protected View getLoadingTargetView() {
-        return null;
-    }
-
-    @Override
     protected void initViewsAndEvents() {
-        setSystemBarTintDrawable(getResources().getDrawable(R.drawable.sr_primary));
-
-        mToolBar = ButterKnife.findById(this, R.id.common_toolbar);
+        mToolBar = ButterKnife.findById(this, R.id.toolbar);
         mBrowserLayout = ButterKnife.findById(this, R.id.common_web_browser_layout);
-
-        if (null != mToolBar) {
-            setSupportActionBar(mToolBar);
-            mActionBar = getSupportActionBar();
-            if (null != mActionBar) {
-                mActionBar.setHomeButtonEnabled(true);
-                mActionBar.setDisplayHomeAsUpEnabled(true);
-            }
-        }
-
-        if (!CommonUtils.isEmpty(mWebTitle)) {
-            setTitle(mWebTitle);
-        } else {
-            setTitle("网页");
-        }
+        KLog.i("Randy", "title:" + mWebTitle);
+        KLog.i("Randy", "url:" + mWebTitle);
 
         if (!CommonUtils.isEmpty(mWebUrl)) {
             mBrowserLayout.loadUrl(mWebUrl);
@@ -83,37 +65,19 @@ public class BaseWebActivity extends BaseSwipeBackCompatActivity {
     }
 
     @Override
-    protected void onNetworkConnected(NetworkUtils.NetType type) {
+    public void initToolbar(int colorResId) {
+        if (null != mToolBar) {
+            setSupportActionBar(mToolBar);
+            mToolBar.setBackgroundColor(getResources().getColor(colorResId));
+            mActionBar = getSupportActionBar();
+            if (null != mActionBar) {
+                if (!CommonUtils.isEmpty(mWebTitle)) {
+                    mToolBar.setTitle(mWebTitle);
+                }
+                mActionBar.setHomeButtonEnabled(true);
+                mActionBar.setDisplayHomeAsUpEnabled(true);
+            }
+        }
 
-    }
-
-    @Override
-    protected void onNetworkDisConnected() {
-
-    }
-
-    @Override
-    protected boolean isApplyStatusBarTranslucency() {
-        return true;
-    }
-
-    @Override
-    protected boolean isChangeStatusBarColor() {
-        return true;
-    }
-
-    @Override
-    protected boolean isBindEventBusHere() {
-        return false;
-    }
-
-    @Override
-    protected boolean toggleOverridePendingTransition() {
-        return true;
-    }
-
-    @Override
-    protected TransitionMode getOverridePendingTransitionMode() {
-        return TransitionMode.RIGHT;
     }
 }
