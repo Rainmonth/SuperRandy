@@ -10,8 +10,8 @@ import android.view.View;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.rainmonth.R;
 import com.rainmonth.common.base.BaseLazyFragment;
+import com.rainmonth.common.base.BaseWebActivity;
 import com.rainmonth.common.di.component.AppComponent;
-import com.rainmonth.common.eventbus.EventCenter;
 import com.rainmonth.common.http.PageData;
 import com.rainmonth.di.component.DaggerRenComponent;
 import com.rainmonth.di.module.RenModule;
@@ -43,19 +43,10 @@ public class RenFragment extends BaseLazyFragment<RenPresenter> implements RenCo
 
     @Override
     public void onFirstUserVisible() {
-
+        page = 1;
+        mPresenter.getArticleList(page, 10);
+        mPresenter.getBannerList(1, 10, 6);
     }
-
-    @Override
-    public int getContentViewLayoutID() {
-        return R.layout.fragment_ren;
-    }
-
-    @Override
-    protected void onEventComing(EventCenter eventCenter) {
-
-    }
-
 
     @Override
     public void onUserVisible() {
@@ -65,6 +56,11 @@ public class RenFragment extends BaseLazyFragment<RenPresenter> implements RenCo
     @Override
     public void onUserInvisible() {
 
+    }
+
+    @Override
+    public int getContentViewLayoutID() {
+        return R.layout.fragment_ren;
     }
 
     @Override
@@ -90,12 +86,14 @@ public class RenFragment extends BaseLazyFragment<RenPresenter> implements RenCo
         mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                if (mAdapter.getData().get(position) != null)
-                    showToast(mAdapter.getData().get(position).getTitle());
+                ArticleBean articleBean = mAdapter.getData().get(position);
+                if (articleBean != null) {
+                    showToast(articleBean.getTitle());
+                    navToDetail(articleBean);
+                }
+
             }
         });
-        mPresenter.getArticleList(page, 10);
-        mPresenter.getBannerList(1, 10, 6);
     }
 
     @Override
@@ -143,6 +141,10 @@ public class RenFragment extends BaseLazyFragment<RenPresenter> implements RenCo
 
     @Override
     public void navToDetail(ArticleBean articleBean) {
-        // todo 进入二级界面
+        //  进入二级界面
+        Bundle bundle = new Bundle();
+        bundle.putString(BaseWebActivity.BUNDLE_KEY_URL, articleBean.getUrl());
+        bundle.putString(BaseWebActivity.BUNDLE_KEY_TITLE, articleBean.getTitle());
+        readyGo(BaseWebActivity.class, bundle);
     }
 }

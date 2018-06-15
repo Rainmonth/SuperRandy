@@ -2,30 +2,27 @@ package com.rainmonth.common.base;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.rainmonth.common.base.mvp.BasePresenter;
 import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.common.eventbus.EventCenter;
+import com.socks.library.KLog;
 
 import javax.inject.Inject;
 
-import butterknife.ButterKnife;
-import de.greenrobot.event.EventBus;
-
+/**
+ * 懒加载Fragment实现（目前有问题）
+ *
+ * @param <T>
+ */
 public abstract class BaseLazyFragment<T extends BasePresenter> extends BaseSupportFragment {
-
-    /**
-     * Log tag
-     */
-    protected static String TAG = null;
-
     private boolean isFirstResume = true;
     private boolean isFirstVisible = true;
     private boolean isFirstInvisible = true;
     private boolean isPrepared;
+
+    private boolean isFirstVisibleCalled = false;
 
     @Inject
     protected T mPresenter;
@@ -33,6 +30,7 @@ public abstract class BaseLazyFragment<T extends BasePresenter> extends BaseSupp
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        KLog.i("Randy", TAG);
         setupFragmentComponent(mAppComponent);
         initViewsAndEvents(view);
     }
@@ -40,12 +38,14 @@ public abstract class BaseLazyFragment<T extends BasePresenter> extends BaseSupp
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        KLog.i("Randy", TAG);
         initPrepare();
     }
 
     @Override
     public void onResume() {
         super.onResume();
+        KLog.i("Randy", TAG);
         if (isFirstResume) {
             isFirstResume = false;
             return;
@@ -58,6 +58,7 @@ public abstract class BaseLazyFragment<T extends BasePresenter> extends BaseSupp
     @Override
     public void onPause() {
         super.onPause();
+        KLog.i("Randy", TAG);
         if (getUserVisibleHint()) {
             onUserInvisible();
         }
@@ -66,6 +67,7 @@ public abstract class BaseLazyFragment<T extends BasePresenter> extends BaseSupp
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
+        KLog.i("Randy", TAG + "->" + isVisibleToUser);
         if (isVisibleToUser) {
             if (isFirstVisible) {
                 isFirstVisible = false;
@@ -84,8 +86,9 @@ public abstract class BaseLazyFragment<T extends BasePresenter> extends BaseSupp
     }
 
     private synchronized void initPrepare() {
-        if (isPrepared) {
+        if (isPrepared && !isFirstVisibleCalled) {
             onFirstUserVisible();
+            isFirstVisibleCalled = true;
         } else {
             isPrepared = true;
         }
@@ -120,6 +123,11 @@ public abstract class BaseLazyFragment<T extends BasePresenter> extends BaseSupp
      * init all views and add events
      */
     protected abstract void initViewsAndEvents(View view);
+
+    @Override
+    protected void onEventComing(EventCenter eventCenter) {
+
+    }
 
     @Override
     protected boolean isBindEventBusHere() {

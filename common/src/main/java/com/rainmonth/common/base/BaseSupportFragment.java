@@ -34,7 +34,7 @@ public abstract class BaseSupportFragment extends Fragment implements IBaseView 
     /**
      * Log tag
      */
-    protected static String TAG = null;
+    protected String TAG = null;
 
     protected AppComponent mAppComponent;
 
@@ -46,17 +46,23 @@ public abstract class BaseSupportFragment extends Fragment implements IBaseView 
     private VaryViewHelperController mVaryViewHelperController = null;
     protected Handler mHandler = new Handler();
 
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        TAG = this.getClass().getSimpleName();
+    }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        KLog.i("Randy", TAG);
         mContext = context;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        TAG = this.getClass().getSimpleName();
+        KLog.i("Randy", TAG);
         if (isBindEventBusHere()) {
             EventBus.getDefault().register(mContext);
         }
@@ -66,8 +72,8 @@ public abstract class BaseSupportFragment extends Fragment implements IBaseView 
     public View onCreateView(LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+        KLog.i("Randy", TAG);
         if (getContentViewLayoutID() != 0) {
-            KLog.e("Randy", TAG + "->onCreateView");
             return inflater.inflate(getContentViewLayoutID(), null);
         } else {
             return super.onCreateView(inflater, container, savedInstanceState);
@@ -78,6 +84,7 @@ public abstract class BaseSupportFragment extends Fragment implements IBaseView 
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
+        KLog.i("Randy", TAG);
         // 初始化AppComponent实例
         mAppComponent = ComponentUtils.getAppComponent();
         if (null != getLoadingTargetView()) {
@@ -88,37 +95,43 @@ public abstract class BaseSupportFragment extends Fragment implements IBaseView 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        KLog.i("Randy", TAG);
     }
 
     @Override
     public void onStart() {
         super.onStart();
+        KLog.i("Randy", TAG);
     }
 
     @Override
     public void onResume() {
         super.onResume();
+        KLog.i("Randy", TAG);
     }
 
     @Override
     public void onPause() {
         super.onPause();
+        KLog.i("Randy", TAG);
     }
 
     @Override
     public void onStop() {
         super.onStop();
+        KLog.i("Randy", TAG);
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        KLog.e("Randy", TAG + "->onDestroyView");
+        KLog.i("Randy", TAG);
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
+        KLog.i("Randy", TAG);
         if (isBindEventBusHere()) {
             EventBus.getDefault().unregister(this);
         }
@@ -127,6 +140,7 @@ public abstract class BaseSupportFragment extends Fragment implements IBaseView 
     @Override
     public void onDetach() {
         super.onDetach();
+        KLog.i("Randy", TAG);
         // for bug ---> java.lang.IllegalStateException: Activity has been destroyed
         try {
             Field childFragmentManager =

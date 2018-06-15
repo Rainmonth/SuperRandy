@@ -39,7 +39,7 @@ public class ArticleListAdapter extends BaseQuickAdapter<ArticleBean, BaseViewHo
 
         imageLoader.loadImage(context, GlideImageConfig
                 .builder()
-                .url("http://rainmonth.cn/public/assets/banner/277034.jpg")
+                .url("http://rainmonth.cn/public/assets/banner/byj.jpeg")
                 .imageView(ivThumb)
                 .build()
         );
