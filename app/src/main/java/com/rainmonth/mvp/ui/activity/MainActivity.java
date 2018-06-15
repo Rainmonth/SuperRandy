@@ -108,6 +108,8 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     public void initializeViews(List<NavigationTabBar.Model> models,
                                 List<BaseLazyFragment> fragments) {
         vpHorizontalNtb.setAdapter(new HomeViewPagerAdapter(getSupportFragmentManager(), fragments));
+        // 保证不被回收
+        vpHorizontalNtb.setOffscreenPageLimit(4);
         ntbHorizontal.setIsBadged(true);
         ntbHorizontal.setModels(models);
         ntbHorizontal.setViewPager(vpHorizontalNtb, 0);
