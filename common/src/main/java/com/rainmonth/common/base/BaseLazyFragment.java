@@ -133,4 +133,9 @@ public abstract class BaseLazyFragment<T extends BasePresenter> extends BaseSupp
     protected boolean isBindEventBusHere() {
         return false;
     }
+
+    @Override
+    protected View getLoadingTargetView() {
+        return null;
+    }
 }
