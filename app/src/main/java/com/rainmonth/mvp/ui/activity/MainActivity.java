@@ -1,13 +1,9 @@
 package com.rainmonth.mvp.ui.activity;
 
 import android.graphics.Color;
-import android.os.Build;
-import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import com.rainmonth.R;
@@ -24,7 +20,7 @@ import com.rainmonth.mvp.ui.fragment.RanFragment;
 import com.rainmonth.mvp.ui.fragment.RenFragment;
 import com.rainmonth.mvp.ui.fragment.XunFragment;
 import com.rainmonth.mvp.ui.fragment.YouFragment;
-import com.rainmonth.mvp.ui.fragment.ZhuiFragment;
+import com.rainmonth.mvp.ui.fragment.PursueFragment;
 import com.rainmonth.mvp.ui.widgets.NavigationTabBar;
 
 import java.util.ArrayList;
@@ -230,7 +226,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         final ArrayList<BaseLazyFragment> fragments = new ArrayList<BaseLazyFragment>();
         fragments.add(new RenFragment());
         fragments.add(new RanFragment());
-        fragments.add(new ZhuiFragment());
+        fragments.add(new PursueFragment());
         fragments.add(new XunFragment());
         fragments.add(new YouFragment());
         return fragments;

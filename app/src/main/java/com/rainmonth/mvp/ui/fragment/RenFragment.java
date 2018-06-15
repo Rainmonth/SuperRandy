@@ -15,7 +15,7 @@ import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.common.http.PageData;
 import com.rainmonth.di.component.DaggerRenComponent;
 import com.rainmonth.di.module.RenModule;
-import com.rainmonth.mvp.ArticleListAdapter;
+import com.rainmonth.mvp.ui.adapter.ArticleListAdapter;
 import com.rainmonth.mvp.contract.RenContract;
 import com.rainmonth.mvp.model.bean.ArticleBean;
 import com.rainmonth.mvp.model.bean.BannerBean;

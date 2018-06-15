@@ -1,4 +1,4 @@
-package com.rainmonth.mvp;
+package com.rainmonth.mvp.ui.adapter;
 
 import android.content.Context;
 import android.widget.ImageView;
