@@ -9,9 +9,9 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.rainmonth.R;
 import com.rainmonth.common.base.BaseLazyFragment;
+import com.rainmonth.common.base.BaseWebActivity;
 import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.common.eventbus.EventCenter;
-import com.rainmonth.common.utils.ToastUtils;
 import com.rainmonth.mvp.model.bean.BannerBean;
 
 import butterknife.BindView;
@@ -70,12 +70,10 @@ public class HomeBannerFragment extends BaseLazyFragment {
             flBannerContainer.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // nav to banner detail
-//                    Bundle bundle = new Bundle();
-//                    bundle.putString(WebExploreActivity.BUNDLE_KEY_TITLE, bannerBean.getTitle());
-//                    bundle.putString(WebExploreActivity.BUNDLE_KEY_URL, bannerBean.getUrl());
-//                    readyGo(BaseWebActivity.class, bundle);
-                    ToastUtils.showToast(getActivity(), "即将进入" + bannerBean.getUrl());
+                    Bundle bundle = new Bundle();
+                    bundle.putString(BaseWebActivity.BUNDLE_KEY_URL, bannerBean.getUrl());
+                    bundle.putString(BaseWebActivity.BUNDLE_KEY_TITLE, bannerBean.getTitle());
+                    readyGo(BaseWebActivity.class, bundle);
                 }
             });
         }
