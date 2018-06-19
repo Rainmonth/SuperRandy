@@ -5,15 +5,13 @@
     android:clipChildren="false"
     android:orientation="vertical">
 
-    <com.rainmonth.common.widgets.RandyViewPager.CustomViewPager
+    <com.rainmonth.common.widgets.CustomViewPager
         android:id="@+id/mzbanner_vp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-        android:clipChildren="false">
-
-    </com.rainmonth.common.widgets.RandyViewPager.CustomViewPager>
+        android:clipChildren="false" />
 
     <RelativeLayout
         android:layout_width="match_parent"
