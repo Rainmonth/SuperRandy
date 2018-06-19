@@ -1,11 +1,14 @@
 package com.rainmonth.mvp.ui.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.view.ViewPager;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.rainmonth.R;
@@ -13,16 +16,16 @@ import com.rainmonth.common.base.BaseLazyFragment;
 import com.rainmonth.common.base.BaseWebActivity;
 import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.common.http.PageData;
+import com.rainmonth.common.http.imageloader.glide.GlideImageConfig;
+import com.rainmonth.common.widgets.RandyViewPager;
 import com.rainmonth.di.component.DaggerRenComponent;
 import com.rainmonth.di.module.RenModule;
-import com.rainmonth.mvp.ui.adapter.ArticleListAdapter;
 import com.rainmonth.mvp.contract.RenContract;
 import com.rainmonth.mvp.model.bean.ArticleBean;
 import com.rainmonth.mvp.model.bean.BannerBean;
 import com.rainmonth.mvp.presenter.RenPresenter;
-import com.rainmonth.mvp.ui.adapter.BannerViewPagerAdapter;
+import com.rainmonth.mvp.ui.adapter.ArticleListAdapter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -34,8 +37,13 @@ import butterknife.BindView;
 public class RenFragment extends BaseLazyFragment<RenPresenter> implements RenContract.View {
 
     public static final String BANNER_BEAN = "banner_bean";
+    @BindView(R.id.srl_container)
+    SwipeRefreshLayout srlContainer;
     @BindView(R.id.rv_content)
     RecyclerView rvContent;
+
+    private View headView;
+    private RandyViewPager<BannerBean> viewPager;
 
     private int page = 1;
     private boolean isRefresh = false;
@@ -43,6 +51,8 @@ public class RenFragment extends BaseLazyFragment<RenPresenter> implements RenCo
 
     @Override
     public void onFirstUserVisible() {
+        srlContainer.setRefreshing(true);
+        isRefresh = true;
         page = 1;
         mPresenter.getArticleList(page, 10);
         mPresenter.getBannerList(1, 10, 6);
@@ -83,6 +93,10 @@ public class RenFragment extends BaseLazyFragment<RenPresenter> implements RenCo
         LinearLayoutManager manager = new LinearLayoutManager(getActivity());
         rvContent.setLayoutManager(manager);
         rvContent.setAdapter(mAdapter);
+        headView = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_ren_list_head,
+                rvContent, false);
+        viewPager = headView.findViewById(R.id.vp_ren_fragment);
+        mAdapter.addHeaderView(headView);
         mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
@@ -94,6 +108,16 @@ public class RenFragment extends BaseLazyFragment<RenPresenter> implements RenCo
 
             }
         });
+        srlContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                srlContainer.setRefreshing(true);
+                isRefresh = true;
+                page = 1;
+                mPresenter.getArticleList(page, 10);
+                mPresenter.getBannerList(1, 10, 6);
+            }
+        });
     }
 
     @Override
@@ -103,29 +127,48 @@ public class RenFragment extends BaseLazyFragment<RenPresenter> implements RenCo
 
     @Override
     public void initHomeBanners(List<BannerBean> bannerBeanList) {
-        List<BaseLazyFragment> bannerFragmentList = new ArrayList<>();
-        if (null != bannerBeanList && bannerBeanList.size() > 0) {
-            for (int i = 0; i < bannerBeanList.size(); i++) {
-                BaseLazyFragment fragment = new HomeBannerFragment();
-                Bundle bundle = new Bundle();
-                bundle.putSerializable(BANNER_BEAN, bannerBeanList.get(i));
-                fragment.setArguments(bundle);
-                bannerFragmentList.add(fragment);
-            }
+        if (bannerBeanList != null && bannerBeanList.size() > 0) {
+            viewPager.setPages(bannerBeanList, new RandyViewPager.ViewHolderCreator() {
+                @Override
+                public RandyViewPager.ViewHolder createViewHolder() {
+                    return new RandyViewPager.ViewHolder<BannerBean>() {
+                        private ImageView ivBanner;
+                        private TextView tvTitle;
+
+                        @Override
+                        public View createView(Context context) {
+                            View view = LayoutInflater.from(context)
+                                    .inflate(R.layout.ren_banner_item, null);
+                            ivBanner = view.findViewById(R.id.iv_thumb);
+                            tvTitle = view.findViewById(R.id.tv_title);
+                            return view;
+                        }
+
+                        @Override
+                        public void onBind(Context context, int position, BannerBean bannerBean) {
+                            tvTitle.setText(bannerBean.getTitle());
+                            mAppComponent.imageLoader().loadImage(context, GlideImageConfig
+                                    .builder()
+                                    .url(bannerBean.getThumb())
+                                    .imageView(ivBanner)
+                                    .build());
+                        }
+                    };
+                }
+            });
+            viewPager.start();
+        } else {
+            mAdapter.removeHeaderView(headView);
         }
-        View headView = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_ren_list_head,
-                rvContent, false);
-        ViewPager viewPager = (ViewPager) headView.findViewById(R.id.vp_ren_fragment);
-        viewPager.setAdapter(new BannerViewPagerAdapter(getChildFragmentManager(),
-                bannerFragmentList));
-        mAdapter.addHeaderView(headView);
     }
 
     @Override
     public void initContentList(PageData<ArticleBean> articleBeanPageData) {
+        srlContainer.setRefreshing(false);
         final int size = articleBeanPageData.getList().size();
         if (isRefresh) {
             mAdapter.setNewData(articleBeanPageData.getList());
+            isRefresh = false;
         } else {
             if (size > 0) {
                 mAdapter.addData(articleBeanPageData.getList());
