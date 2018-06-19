@@ -59,6 +59,8 @@ public class LoginActivity extends BaseActivity<UserPresenter> implements UserCo
     protected void initViewsAndEvents() {
         etUserName.setText("randy");
         etPsw.setText("randy123");
+        etUserName.setSelection(etUserName.getText().toString().length());
+        etPsw.setSelection(etPsw.getText().toString().length());
     }
 
     @Override

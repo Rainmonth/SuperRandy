@@ -21,7 +21,7 @@
         <item name="android:layout_marginBottom">@dimen/m8</item>
         <item name="android:paddingTop">@dimen/m8</item>
         <item name="android:paddingBottom">@dimen/m8</item>
-        <item name="android:background">@drawable/selector_green_btn</item>
+        <item name="android:background">@drawable/selector_theme_btn</item>
     </style>
 
 </resources>

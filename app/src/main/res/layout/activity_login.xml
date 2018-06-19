@@ -35,13 +35,13 @@
 
             <com.rainmonth.common.widgets.ClearEditText
                 android:id="@+id/et_user_name"
-                style="@style/half_trans_white_bg_edit_text"
+                style="@style/LeftContentEditText"
                 android:hint="@string/username_hint"
                 android:inputType="text" />
 
             <com.rainmonth.common.widgets.ClearEditText
                 android:id="@+id/et_psw"
-                style="@style/half_trans_white_bg_edit_text"
+                style="@style/LeftContentEditText"
                 android:hint="@string/psw_hint"
                 android:inputType="textPassword" />
 

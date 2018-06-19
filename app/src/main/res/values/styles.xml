@@ -13,7 +13,7 @@
         <item name="android:layout_marginBottom">@dimen/m8</item>
         <item name="android:paddingTop">@dimen/m8</item>
         <item name="android:paddingBottom">@dimen/m8</item>
-        <item name="android:background">@drawable/selector_green_btn</item>
+        <item name="android:background">@drawable/selector_theme_btn</item>
     </style>
 
     <style name="text_btn_base" parent="@style/TextAppearance.AppCompat.Inverse">
@@ -26,6 +26,20 @@
 
     <style name="white_bg_text_btn" parent="text_btn_base">
         <item name="android:background">@drawable/selector_white_bg</item>
+    </style>
+
+    <style name="LeftContentEditText" parent="half_trans_white_bg_edit_text">
+        <item name="android:gravity">left|center_vertical</item>
+        <item name="android:paddingLeft">@dimen/m8</item>
+    </style>
+
+    <style name="CenterContentEditText" parent="half_trans_white_bg_edit_text">
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+    <style name="RightContentEditText" parent="half_trans_white_bg_edit_text">
+        <item name="android:gravity">right|center_vertical</item>
+        <item name="android:paddingRight">@dimen/m8</item>
     </style>
 
     <style name="half_trans_white_bg_edit_text">
