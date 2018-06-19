@@ -122,10 +122,11 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
                         mActionBar.setTitle("荏");
                         SmartBarUtils.setStatusBarColor(mActivity, R.color.theme_color);
                         SmartBarUtils.setToolbarBgColor(toolbar, R.color.theme_color);
+                        break;
                     case 1:
+                        mActionBar.setTitle("苒");
                         SmartBarUtils.setStatusBarColor(mActivity, android.R.color.holo_red_dark);
                         SmartBarUtils.setToolbarBgColor(toolbar, android.R.color.holo_red_dark);
-                        mActionBar.setTitle("苒");
                         break;
                     case 2:
                         mActionBar.setTitle("追");
