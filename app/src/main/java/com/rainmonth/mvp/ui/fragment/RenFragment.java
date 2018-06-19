@@ -126,8 +126,18 @@ public class RenFragment extends BaseLazyFragment<RenPresenter> implements RenCo
     }
 
     @Override
-    public void initHomeBanners(List<BannerBean> bannerBeanList) {
+    public void initHomeBanners(final List<BannerBean> bannerBeanList) {
         if (bannerBeanList != null && bannerBeanList.size() > 0) {
+            viewPager.setOnPageClickListener(new RandyViewPager.PageClickListener() {
+                @Override
+                public void onPageClick(View view, int position) {
+                    BannerBean bannerBean = bannerBeanList.get(position);
+                    Bundle bundle = new Bundle();
+                    bundle.putString(BaseWebActivity.BUNDLE_KEY_URL, bannerBean.getUrl());
+                    bundle.putString(BaseWebActivity.BUNDLE_KEY_TITLE, bannerBean.getTitle());
+                    readyGo(BaseWebActivity.class, bundle);
+                }
+            });
             viewPager.setPages(bannerBeanList, new RandyViewPager.ViewHolderCreator() {
                 @Override
                 public RandyViewPager.ViewHolder createViewHolder() {
@@ -156,10 +166,14 @@ public class RenFragment extends BaseLazyFragment<RenPresenter> implements RenCo
                     };
                 }
             });
+
             viewPager.start();
-        } else {
+        } else
+
+        {
             mAdapter.removeHeaderView(headView);
         }
+
     }
 
     @Override

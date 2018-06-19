@@ -93,7 +93,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
             });
             mActionBar = getSupportActionBar();
             if (null != mActionBar) {
-                mActionBar.setTitle("主页");
+                mActionBar.setTitle("荏");
                 // 设置为true的时候，如果不设置navigationIcon，则显示向左箭头，
                 mActionBar.setDisplayHomeAsUpEnabled(false);
             }
@@ -118,19 +118,27 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
             @Override
             public void onPageSelected(int position) {
                 switch (position) {
+                    case 0:
+                        mActionBar.setTitle("荏");
+                        SmartBarUtils.setStatusBarColor(mActivity, R.color.theme_color);
+                        SmartBarUtils.setToolbarBgColor(toolbar, R.color.theme_color);
                     case 1:
                         SmartBarUtils.setStatusBarColor(mActivity, android.R.color.holo_red_dark);
                         SmartBarUtils.setToolbarBgColor(toolbar, android.R.color.holo_red_dark);
+                        mActionBar.setTitle("苒");
                         break;
                     case 2:
+                        mActionBar.setTitle("追");
                         SmartBarUtils.setStatusBarColor(mActivity, android.R.color.holo_orange_dark);
                         SmartBarUtils.setToolbarBgColor(toolbar, android.R.color.holo_orange_dark);
                         break;
                     case 3:
+                        mActionBar.setTitle("寻");
                         SmartBarUtils.setStatusBarColor(mActivity, android.R.color.holo_purple);
                         SmartBarUtils.setToolbarBgColor(toolbar, android.R.color.holo_purple);
                         break;
                     default:
+                        mActionBar.setTitle("你");
                         SmartBarUtils.setStatusBarColor(mActivity, R.color.theme_color);
                         SmartBarUtils.setToolbarBgColor(toolbar, R.color.theme_color);
                         break;
