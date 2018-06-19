@@ -11,7 +11,6 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
-import android.util.SparseArray;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -29,7 +28,6 @@ import com.rainmonth.common.widgets.transformer.ScaleYTransformer;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 
@@ -646,14 +644,14 @@ public class RandyViewPager<T> extends RelativeLayout {
         }
     }
 
-    private interface ViewHolderCreator<VH extends ViewHolder> {
+    public interface ViewHolderCreator<VH extends ViewHolder> {
         /**
          * 创建ViewHolder
          */
         VH createViewHolder();
     }
 
-    private interface ViewHolder<T> {
+    public interface ViewHolder<T> {
         /**
          * 创建View
          *
@@ -670,52 +668,5 @@ public class RandyViewPager<T> extends RelativeLayout {
          * @param data     绑定的数据
          */
         void onBind(Context context, int position, T data);
-    }
-
-    public class CustomViewPager extends ViewPager {
-        private ArrayList<Integer> childCenterXAbs = new ArrayList<>();
-        private SparseArray<Integer> childIndex = new SparseArray<>();
-
-        public CustomViewPager(Context context) {
-            super(context);
-            init();
-        }
-
-        public CustomViewPager(Context context, AttributeSet attrs) {
-            super(context, attrs);
-            init();
-        }
-
-        private void init() {
-            setClipToPadding(false);
-            setOverScrollMode(OVER_SCROLL_NEVER);
-        }
-
-        @Override
-        protected int getChildDrawingOrder(int childCount, int n) {
-            if (n == 0 || childIndex.size() != childCount) {
-                childCenterXAbs.clear();
-                childIndex.clear();
-                int viewCenterX = getViewCenterX(this);
-                for (int i = 0; i < childCount; ++i) {
-                    int indexAbs = Math.abs(viewCenterX - getViewCenterX(getChildAt(i)));
-                    //两个距离相同，后来的那个做自增，从而保持abs不同
-                    if (childIndex.get(indexAbs) != null) {
-                        ++indexAbs;
-                    }
-                    childCenterXAbs.add(indexAbs);
-                    childIndex.append(indexAbs, i);
-                }
-                Collections.sort(childCenterXAbs);//1,0,2  0,1,2
-            }
-            //那个item距离中心点远一些，就先draw它。（最近的就是中间放大的item,最后draw）
-            return childIndex.get(childCenterXAbs.get(childCount - 1 - n));
-        }
-
-        private int getViewCenterX(View view) {
-            int[] array = new int[2];
-            view.getLocationOnScreen(array);
-            return array[0] + view.getWidth() / 2;
-        }
     }
 }
