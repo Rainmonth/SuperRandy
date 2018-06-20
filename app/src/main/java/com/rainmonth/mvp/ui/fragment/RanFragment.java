@@ -1,57 +1,43 @@
 package com.rainmonth.mvp.ui.fragment;
 
-import android.view.LayoutInflater;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.rainmonth.R;
-import com.rainmonth.common.adapter.ListViewDataAdapter;
-import com.rainmonth.common.adapter.ViewHolderBase;
-import com.rainmonth.common.adapter.ViewHolderCreator;
 import com.rainmonth.common.base.BaseLazyFragment;
 import com.rainmonth.common.di.component.AppComponent;
-import com.rainmonth.common.eventbus.EventCenter;
 import com.rainmonth.di.component.DaggerRanComponent;
 import com.rainmonth.di.module.RanModule;
 import com.rainmonth.mvp.contract.RanContract;
 import com.rainmonth.mvp.model.bean.RanContentBean;
 import com.rainmonth.mvp.presenter.RanPresenter;
+import com.rainmonth.mvp.ui.adapter.RanListAdapter;
 
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
+ * 影集列表展示
+ * 点击具体影集，采用ViewPager展示
  * Created by RandyZhang on 16/6/30.
  */
 public class RanFragment extends BaseLazyFragment<RanPresenter> implements RanContract.View {
 
-    @BindView(R.id.lv_content)
-    ListView lvContent;
-    private ListViewDataAdapter<RanContentBean> mRanContentListAdapter = null;
+    @BindView(R.id.rv_ran_content)
+    RecyclerView rvContent;
+    private RanListAdapter mAdapter = null;
 
     @Override
     public void onFirstUserVisible() {
-
+        mPresenter.initialize();
     }
 
     @Override
     public int getContentViewLayoutID() {
         return R.layout.fragment_ran;
-    }
-
-    @Override
-    protected void onEventComing(EventCenter eventCenter) {
-
-    }
-
-    @Override
-    protected boolean isBindEventBusHere() {
-        return false;
     }
 
     @Override
@@ -74,67 +60,22 @@ public class RanFragment extends BaseLazyFragment<RanPresenter> implements RanCo
     }
 
     @Override
-    protected View getLoadingTargetView() {
-        return null;
-    }
-
-    @Override
     protected void initViewsAndEvents(View view) {
-        mPresenter.initialize();
+        LinearLayoutManager manager = new LinearLayoutManager(mContext);
+        mAdapter = new RanListAdapter(R.layout.adapter_ran_lv_content_item, mContext);
+        rvContent.setLayoutManager(manager);
+        rvContent.setAdapter(mAdapter);
     }
 
     @Override
-    public void initViews(List<RanContentBean> ranContentBeanList) {
-        mRanContentListAdapter = new ListViewDataAdapter<>(new ViewHolderCreator<RanContentBean>() {
+    public void initViews(final List<RanContentBean> ranContentBeanList) {
+        mAdapter.setNewData(ranContentBeanList);
+        mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
-            public ViewHolderBase<RanContentBean> createViewHolder(int position) {
-                return new ViewHolderBase<RanContentBean>() {
-                    ImageView ivAlbumFirstImage;
-                    TextView tvAlbumDescription;
-                    TextView tvAlbumAuthor;
-                    TextView tvAlbumPublishTime;
-                    TextView tvAlbumLikeNum;
-                    TextView tvAlbumTotalNum;
-                    TextView tvAlbumType;
-
-                    @Override
-                    public View createView(LayoutInflater layoutInflater) {
-                        View convertView = layoutInflater.inflate(R.layout.adapter_ran_lv_content_item, null);
-                        ivAlbumFirstImage = ButterKnife.findById(convertView, R.id.iv_album_first_image);
-                        tvAlbumDescription = ButterKnife.findById(convertView, R.id.tv_album_des);
-                        tvAlbumAuthor = ButterKnife.findById(convertView, R.id.tv_album_author);
-                        tvAlbumPublishTime = ButterKnife.findById(convertView, R.id.tv_album_publish_time);
-                        tvAlbumLikeNum = ButterKnife.findById(convertView, R.id.tv_album_like_num);
-                        tvAlbumTotalNum = ButterKnife.findById(convertView, R.id.tv_album_total_num);
-                        tvAlbumType = ButterKnife.findById(convertView, R.id.tv_album_type);
-                        return convertView;
-                    }
-
-                    @Override
-                    public void showData(int position, RanContentBean itemData) {
-                        if (null != itemData) {
-                            ivAlbumFirstImage.setImageResource(itemData.getAlbumFirstImageResId());
-                            tvAlbumDescription.setText(itemData.getAlbumDescription());
-                            tvAlbumAuthor.setText(itemData.getAlbumAuthor());
-                            tvAlbumPublishTime.setText(itemData.getAlbumPublishTime());
-                            tvAlbumLikeNum.setText(itemData.getAlbumLikeNum() + "人喜欢");
-                            tvAlbumTotalNum.setText("共" + itemData.getAlbumTotalNum() + "张图片");
-                            tvAlbumType.setText(itemData.getAlbumType());
-                        }
-                    }
-                };
-            }
-        });
-
-        mRanContentListAdapter.getDataList().addAll(ranContentBeanList);
-        lvContent.setAdapter(mRanContentListAdapter);
-        lvContent.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                RanContentBean ranContentBean = mRanContentListAdapter.getDataList().get(position);
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                RanContentBean ranContentBean = ranContentBeanList.get(position);
                 if (null != ranContentBean) {
-                    mPresenter.navToDetail(ranContentBean);
+                    navToDetail(ranContentBean);
                 }
             }
         });
@@ -142,11 +83,6 @@ public class RanFragment extends BaseLazyFragment<RanPresenter> implements RanCo
 
     @Override
     public void navToDetail(RanContentBean ranContentBean) {
-
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
+        showToast("即将进入" + ranContentBean.getAlbumDescription());
     }
 }
