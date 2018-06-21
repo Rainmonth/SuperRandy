@@ -1,16 +1,18 @@
 package com.rainmonth.mvp.model;
 
-import com.rainmonth.R;
+import com.rainmonth.api.AlbumService;
 import com.rainmonth.common.base.mvp.BaseModel;
 import com.rainmonth.common.di.scope.FragmentScope;
+import com.rainmonth.common.http.PageResult;
 import com.rainmonth.common.integration.IRepositoryManager;
 import com.rainmonth.mvp.contract.RanContract;
-import com.rainmonth.mvp.model.bean.RanContentBean;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.rainmonth.mvp.model.bean.MemAlbumBean;
 
 import javax.inject.Inject;
+
+import io.reactivex.Flowable;
+import io.reactivex.functions.Function;
+import retrofit2.Response;
 
 /**
  * RanFragment 数据获取
@@ -24,17 +26,17 @@ public class RanModel extends BaseModel implements RanContract.Model {
     }
 
     @Override
-    public List<RanContentBean> getRanContentList() {
-        List<RanContentBean> ranContentBeanList = new ArrayList<>();
-
-        ranContentBeanList.add(new RanContentBean(1, 1001, "RandyZhang", R.drawable.ren_bg_game, 7, "2016年09月12日", "一群逗比的欢乐日子", "大学", 123));
-        ranContentBeanList.add(new RanContentBean(1, 1001, "RandyZhang", R.drawable.ren_bg_game, 78, "2016年09月12日", "一群逗比的欢乐日子", "大学", 123));
-        ranContentBeanList.add(new RanContentBean(1, 1001, "RandyZhang", R.drawable.ren_bg_game, 107, "两天前", "那些年我们是这样疯的...", "大学", 1000));
-        ranContentBeanList.add(new RanContentBean(1, 1001, "RandyZhang", R.drawable.ren_bg_game, 79, "2016年09月11日", "流浪猫的毕业旅行", "大学", 123));
-        ranContentBeanList.add(new RanContentBean(1, 1001, "RandyZhang", R.drawable.ren_bg_game, 71, "2016年09月12日", "一群逗比的欢乐日子", "大学", 123));
-        ranContentBeanList.add(new RanContentBean(1, 1001, "RandyZhang", R.drawable.ren_bg_game, 35, "2016年09月12日", "一群逗比的欢乐日子", "大学", 123));
-
-        return ranContentBeanList;
+    public Flowable<PageResult<MemAlbumBean>> getRanContentList(String category,
+                                                                final int page,
+                                                                int pageSize) {
+        return mRepositoryManager.obtainRetrofitService(AlbumService.class)
+                .getMemoryAlbumList(category, page, pageSize)
+                .map(new Function<Response<PageResult<MemAlbumBean>>, PageResult<MemAlbumBean>>() {
+                    @Override
+                    public PageResult<MemAlbumBean> apply(Response<PageResult<MemAlbumBean>> pageResultResponse) throws Exception {
+                        return pageResultResponse.body();
+                    }
+                });
     }
 
 }

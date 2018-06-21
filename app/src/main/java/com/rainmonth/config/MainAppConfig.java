@@ -3,6 +3,7 @@ package com.rainmonth.config;
 import android.app.Application;
 import android.content.Context;
 
+import com.rainmonth.api.AlbumService;
 import com.rainmonth.api.ArticleService;
 import com.rainmonth.api.BannerService;
 import com.rainmonth.api.UserService;
@@ -28,6 +29,7 @@ public class MainAppConfig implements ConfigModule {
         repositoryManager.injectRetrofitService(BannerService.class);
         repositoryManager.injectRetrofitService(UserService.class);
         repositoryManager.injectRetrofitService(ArticleService.class);
+        repositoryManager.injectRetrofitService(AlbumService.class);
     }
 
     @Override

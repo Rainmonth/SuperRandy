@@ -1,8 +1,11 @@
 package com.rainmonth.mvp.presenter;
 
-import com.rainmonth.mvp.contract.RanContract;
-import com.rainmonth.mvp.model.bean.RanContentBean;
 import com.rainmonth.common.base.mvp.BasePresenter;
+import com.rainmonth.common.http.CommonSubscriber;
+import com.rainmonth.common.http.PageResult;
+import com.rainmonth.common.utils.RxUtils;
+import com.rainmonth.mvp.contract.RanContract;
+import com.rainmonth.mvp.model.bean.MemAlbumBean;
 
 import javax.inject.Inject;
 
@@ -16,11 +19,20 @@ public class RanPresenter extends BasePresenter<RanContract.Model, RanContract.V
         super(model, view);
     }
 
-    public void initialize() {
-        mView.initViews(mModel.getRanContentList());
-    }
+    public void getAlbumList(String category, int page, int pageSize) {
+        addSubscribe(mModel.getRanContentList(category,page,pageSize)
+        .compose(RxUtils.<PageResult<MemAlbumBean>>getFlowableTransformer())
+        .subscribeWith(new CommonSubscriber<PageResult<MemAlbumBean>>(mView) {
+            @Override
+            public void onNext(PageResult<MemAlbumBean> memAlbumBeanPageResult) {
+                if(memAlbumBeanPageResult.isSuccess()) {
+                    mView.initViews(memAlbumBeanPageResult.getData().getList());
+                }
+            }
+        }));
 
-    public void navToDetail(RanContentBean ranContentBean) {
-        mView.navToDetail(ranContentBean);
+    }
+    public void navToDetail(MemAlbumBean memAlbumBean) {
+        mView.navToDetail(memAlbumBean);
     }
 }

@@ -2,9 +2,12 @@ package com.rainmonth.mvp.contract;
 
 import com.rainmonth.common.base.mvp.IBaseModel;
 import com.rainmonth.common.base.mvp.IBaseView;
-import com.rainmonth.mvp.model.bean.RanContentBean;
+import com.rainmonth.common.http.PageResult;
+import com.rainmonth.mvp.model.bean.MemAlbumBean;
 
 import java.util.List;
+
+import io.reactivex.Flowable;
 
 /**
  * Created by RandyZhang on 2018/5/24.
@@ -12,12 +15,14 @@ import java.util.List;
 
 public interface RanContract {
     interface Model extends IBaseModel {
-        public List<RanContentBean> getRanContentList();
+        Flowable<PageResult<MemAlbumBean>> getRanContentList(String category,
+                                                             int page,
+                                                             int pageSize);
     }
 
     interface View extends IBaseView {
-        void initViews(List<RanContentBean> ranContentBeanList);
+        void initViews(List<MemAlbumBean> memAlbumBeanList);
 
-        void navToDetail(RanContentBean ranContentBean);
+        void navToDetail(MemAlbumBean memAlbumBean);
     }
 }

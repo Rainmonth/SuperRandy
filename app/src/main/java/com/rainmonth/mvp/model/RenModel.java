@@ -48,8 +48,8 @@ public class RenModel extends BaseModel implements RenContract.Model {
                 .getArticleList(page, pageSize)
                 .map(new Function<Response<PageResult<ArticleBean>>, PageResult<ArticleBean>>() {
                     @Override
-                    public PageResult<ArticleBean> apply(Response<PageResult<ArticleBean>> listResultResponse) throws Exception {
-                        return listResultResponse.body();
+                    public PageResult<ArticleBean> apply(Response<PageResult<ArticleBean>> pageResultResponse) throws Exception {
+                        return pageResultResponse.body();
                     }
                 });
     }

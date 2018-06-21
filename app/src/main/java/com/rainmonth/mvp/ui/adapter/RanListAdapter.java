@@ -10,14 +10,14 @@ import com.rainmonth.R;
 import com.rainmonth.common.http.imageloader.ImageLoader;
 import com.rainmonth.common.http.imageloader.glide.GlideImageConfig;
 import com.rainmonth.common.utils.ComponentUtils;
-import com.rainmonth.mvp.model.bean.RanContentBean;
+import com.rainmonth.mvp.model.bean.MemAlbumBean;
 
 /**
  * ran 列表适配器
  * Created by RandyZhang on 2018/6/20.
  */
 
-public class RanListAdapter extends BaseQuickAdapter<RanContentBean, BaseViewHolder> {
+public class RanListAdapter extends BaseQuickAdapter<MemAlbumBean, BaseViewHolder> {
     private Context context;
     private ImageLoader imageLoader;
 
@@ -28,7 +28,7 @@ public class RanListAdapter extends BaseQuickAdapter<RanContentBean, BaseViewHol
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, RanContentBean item) {
+    protected void convert(BaseViewHolder helper, MemAlbumBean item) {
         ImageView ivAlbumFirstImage = helper.getView(R.id.iv_album_first_image);
         TextView tvAlbumDescription = helper.getView(R.id.tv_album_des);
         TextView tvAlbumAuthor = helper.getView(R.id.tv_album_author);
@@ -40,14 +40,14 @@ public class RanListAdapter extends BaseQuickAdapter<RanContentBean, BaseViewHol
         if (null != item) {
             imageLoader.loadImage(context, GlideImageConfig.builder()
                     .imageView(ivAlbumFirstImage)
-                    .url("http://rainmonth.cn/public/assets/banner/byj.jpeg")
+                    .url(item.getCover_url())
                     .build());
-            tvAlbumDescription.setText(item.getAlbumDescription());
-            tvAlbumAuthor.setText(item.getAlbumAuthor());
-            tvAlbumPublishTime.setText(item.getAlbumPublishTime());
-            tvAlbumLikeNum.setText(item.getAlbumLikeNum() + "人喜欢");
-            tvAlbumTotalNum.setText("共" + item.getAlbumTotalNum() + "张图片");
-            tvAlbumType.setText(item.getAlbumType());
+            tvAlbumDescription.setText(item.getDescription());
+            tvAlbumAuthor.setText(item.getAuthor());
+            tvAlbumPublishTime.setText(item.getPublish_time() + "");
+            tvAlbumLikeNum.setText(item.getLike_num() + "人喜欢");
+            tvAlbumTotalNum.setText("共" + item.getPhoto_num() + "张图片");
+            tvAlbumType.setText(item.getCategory());
         }
     }
 }

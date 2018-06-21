@@ -14,6 +14,7 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 /**
+ * Banner Service
  * Created by RandyZhang on 16/9/19.
  */
 public interface BannerService {

@@ -11,7 +11,7 @@ import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.di.component.DaggerRanComponent;
 import com.rainmonth.di.module.RanModule;
 import com.rainmonth.mvp.contract.RanContract;
-import com.rainmonth.mvp.model.bean.RanContentBean;
+import com.rainmonth.mvp.model.bean.MemAlbumBean;
 import com.rainmonth.mvp.presenter.RanPresenter;
 import com.rainmonth.mvp.ui.adapter.RanListAdapter;
 
@@ -32,7 +32,7 @@ public class RanFragment extends BaseLazyFragment<RanPresenter> implements RanCo
 
     @Override
     public void onFirstUserVisible() {
-        mPresenter.initialize();
+        mPresenter.getAlbumList(null, 1, 10);
     }
 
     @Override
@@ -68,21 +68,21 @@ public class RanFragment extends BaseLazyFragment<RanPresenter> implements RanCo
     }
 
     @Override
-    public void initViews(final List<RanContentBean> ranContentBeanList) {
-        mAdapter.setNewData(ranContentBeanList);
+    public void initViews(final List<MemAlbumBean> memAlbumBeanList) {
+        mAdapter.setNewData(memAlbumBeanList);
         mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                RanContentBean ranContentBean = ranContentBeanList.get(position);
-                if (null != ranContentBean) {
-                    navToDetail(ranContentBean);
+                MemAlbumBean memAlbumBean = memAlbumBeanList.get(position);
+                if (null != memAlbumBean) {
+                    navToDetail(memAlbumBean);
                 }
             }
         });
     }
 
     @Override
-    public void navToDetail(RanContentBean ranContentBean) {
-        showToast("即将进入" + ranContentBean.getAlbumDescription());
+    public void navToDetail(MemAlbumBean memAlbumBean) {
+        showToast("即将进入" + memAlbumBean.getDescription());
     }
 }
