@@ -150,7 +150,7 @@ public class RandyViewPager<T> extends RelativeLayout {
     private void initViewPagerScroller() {
         Field mScroller;
         try {
-            mScroller = ViewPager.class.getField("mScroller");
+            mScroller = ViewPager.class.getDeclaredField("mScroller");
             mScroller.setAccessible(true);
             mViewPageScroller = new ViewPagerScroller(mViewPager.getContext());
             mScroller.set(mViewPager, mViewPageScroller);
