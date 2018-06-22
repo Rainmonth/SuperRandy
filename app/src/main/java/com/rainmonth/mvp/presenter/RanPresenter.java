@@ -26,7 +26,7 @@ public class RanPresenter extends BasePresenter<RanContract.Model, RanContract.V
             @Override
             public void onNext(PageResult<MemAlbumBean> memAlbumBeanPageResult) {
                 if(memAlbumBeanPageResult.isSuccess()) {
-                    mView.initViews(memAlbumBeanPageResult.getData().getList());
+                    mView.initViews(memAlbumBeanPageResult.getData());
                 }
             }
         }));

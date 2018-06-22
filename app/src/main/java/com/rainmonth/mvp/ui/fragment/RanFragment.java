@@ -1,5 +1,6 @@
 package com.rainmonth.mvp.ui.fragment;
 
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -8,14 +9,13 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.rainmonth.R;
 import com.rainmonth.common.base.BaseLazyFragment;
 import com.rainmonth.common.di.component.AppComponent;
+import com.rainmonth.common.http.PageData;
 import com.rainmonth.di.component.DaggerRanComponent;
 import com.rainmonth.di.module.RanModule;
 import com.rainmonth.mvp.contract.RanContract;
 import com.rainmonth.mvp.model.bean.MemAlbumBean;
 import com.rainmonth.mvp.presenter.RanPresenter;
 import com.rainmonth.mvp.ui.adapter.RanListAdapter;
-
-import java.util.List;
 
 import butterknife.BindView;
 
@@ -28,11 +28,18 @@ public class RanFragment extends BaseLazyFragment<RanPresenter> implements RanCo
 
     @BindView(R.id.rv_ran_content)
     RecyclerView rvContent;
+    @BindView(R.id.srl_container)
+    SwipeRefreshLayout srlContainer;
     private RanListAdapter mAdapter = null;
+
+    private int page = 1;
+    private boolean isRefresh = false;
 
     @Override
     public void onFirstUserVisible() {
-        mPresenter.getAlbumList(null, 1, 10);
+        srlContainer.setRefreshing(true);
+        isRefresh = true;
+        mPresenter.getAlbumList(null, page, 10);
     }
 
     @Override
@@ -65,20 +72,45 @@ public class RanFragment extends BaseLazyFragment<RanPresenter> implements RanCo
         mAdapter = new RanListAdapter(R.layout.adapter_ran_lv_content_item, mContext);
         rvContent.setLayoutManager(manager);
         rvContent.setAdapter(mAdapter);
+
+        srlContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                page = 1;
+                isRefresh = true;
+                srlContainer.setRefreshing(true);
+                mPresenter.getAlbumList(null, page, 10);
+            }
+        });
     }
 
     @Override
-    public void initViews(final List<MemAlbumBean> memAlbumBeanList) {
-        mAdapter.setNewData(memAlbumBeanList);
+    public void initViews(final PageData<MemAlbumBean> albumBeanPageData) {
+        srlContainer.setRefreshing(false);
+        int size = albumBeanPageData.getList().size();
+        if (isRefresh) {
+            mAdapter.setNewData(albumBeanPageData.getList());
+            isRefresh = false;
+        } else {
+            if (size > 0) {
+                mAdapter.addData(albumBeanPageData.getList());
+            }
+        }
+        if (page < albumBeanPageData.getTotalPage()) {
+            mAdapter.loadMoreComplete();
+        } else if (page == albumBeanPageData.getTotalPage()) {
+            mAdapter.loadMoreEnd();
+        }
         mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                MemAlbumBean memAlbumBean = memAlbumBeanList.get(position);
+                MemAlbumBean memAlbumBean = mAdapter.getData().get(position);
                 if (null != memAlbumBean) {
                     navToDetail(memAlbumBean);
                 }
             }
         });
+        page++;
     }
 
     @Override

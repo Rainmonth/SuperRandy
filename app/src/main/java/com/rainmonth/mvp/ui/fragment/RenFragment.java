@@ -177,9 +177,7 @@ public class RenFragment extends BaseLazyFragment<RenPresenter> implements RenCo
             });
 
             viewPager.start();
-        } else
-
-        {
+        } else {
             mAdapter.removeHeaderView(headView);
         }
 
