@@ -123,4 +123,21 @@ public class ArticleBean implements Serializable {
     public void setLast_update_time(String last_update_time) {
         this.last_update_time = last_update_time;
     }
+
+    @Override
+    public String toString() {
+        return "ArticleBean{" +
+                "id=" + id +
+                ", is_origin=" + is_origin +
+                ", author='" + author + '\'' +
+                ", url='" + url + '\'' +
+                ", title='" + title + '\'' +
+                ", category='" + category + '\'' +
+                ", breif='" + breif + '\'' +
+                ", source_content='" + source_content + '\'' +
+                ", content='" + content + '\'' +
+                ", create_time='" + create_time + '\'' +
+                ", last_update_time='" + last_update_time + '\'' +
+                '}';
+    }
 }

@@ -7,6 +7,7 @@ import com.rainmonth.common.http.PageResult;
 import com.rainmonth.common.http.Result;
 import com.rainmonth.mvp.model.bean.ArticleBean;
 import com.rainmonth.mvp.model.bean.BannerBean;
+import com.rainmonth.mvp.model.bean.TestBean;
 
 import java.util.List;
 
@@ -28,5 +29,7 @@ public interface RenContract {
         void initHomeBanners(List<BannerBean> bannerBeanList);
 
         void navToDetail(ArticleBean articleBean);
+
+        void test(TestBean testBean);
     }
 }

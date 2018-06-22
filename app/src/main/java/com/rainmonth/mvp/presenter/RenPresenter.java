@@ -9,10 +9,14 @@ import com.rainmonth.common.utils.RxUtils;
 import com.rainmonth.mvp.contract.RenContract;
 import com.rainmonth.mvp.model.bean.ArticleBean;
 import com.rainmonth.mvp.model.bean.BannerBean;
+import com.rainmonth.mvp.model.bean.TestBean;
 
 import java.util.List;
 
 import javax.inject.Inject;
+
+import io.reactivex.Flowable;
+import io.reactivex.functions.BiFunction;
 
 /**
  * Created by RandyZhang on 16/7/5.
@@ -49,5 +53,31 @@ public class RenPresenter extends BasePresenter<RenContract.Model, RenContract.V
                         }
                     }
                 }));
+    }
+
+    public void test() {
+        Flowable<Result<List<BannerBean>>> resultFlowable = mModel.getBannerList(1, 10, 6);
+        Flowable<PageResult<ArticleBean>> pageResultFlowable = mModel.getArticleList(1, 10);
+        Flowable<TestBean> flowable = Flowable.zip(resultFlowable, pageResultFlowable, new BiFunction<Result<List<BannerBean>>, PageResult<ArticleBean>, TestBean>() {
+            @Override
+            public TestBean apply(Result<List<BannerBean>> listResult, PageResult<ArticleBean> articleBeanPageResult) throws Exception {
+                TestBean testBean = new TestBean();
+                if (listResult.isSuccess()) {
+                    testBean.setBannerBeanList(listResult.getData());
+                }
+                if (articleBeanPageResult.isSuccess()) {
+                    testBean.setArticleBeanList(articleBeanPageResult.getData().getList());
+                }
+
+                return testBean;
+            }
+        });
+
+        addSubscribe(flowable.compose(RxUtils.<TestBean>getFlowableTransformer()).subscribeWith(new CommonSubscriber<TestBean>(mView) {
+            @Override
+            public void onNext(TestBean testBean) {
+                mView.test(testBean);
+            }
+        }));
     }
 }

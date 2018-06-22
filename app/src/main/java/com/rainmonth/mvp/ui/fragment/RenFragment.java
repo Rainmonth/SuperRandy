@@ -23,8 +23,10 @@ import com.rainmonth.di.module.RenModule;
 import com.rainmonth.mvp.contract.RenContract;
 import com.rainmonth.mvp.model.bean.ArticleBean;
 import com.rainmonth.mvp.model.bean.BannerBean;
+import com.rainmonth.mvp.model.bean.TestBean;
 import com.rainmonth.mvp.presenter.RenPresenter;
 import com.rainmonth.mvp.ui.adapter.ArticleListAdapter;
+import com.socks.library.KLog;
 
 import java.util.List;
 
@@ -56,6 +58,8 @@ public class RenFragment extends BaseLazyFragment<RenPresenter> implements RenCo
         page = 1;
         mPresenter.getArticleList(page, 10);
         mPresenter.getBannerList(1, 10, 6);
+
+        mPresenter.test();
     }
 
     @Override
@@ -118,6 +122,11 @@ public class RenFragment extends BaseLazyFragment<RenPresenter> implements RenCo
                 mPresenter.getBannerList(1, 10, 6);
             }
         });
+    }
+
+    @Override
+    public void test(TestBean testBean) {
+        KLog.i(testBean);
     }
 
     @Override

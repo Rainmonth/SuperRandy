@@ -62,4 +62,15 @@ public class BannerBean implements Serializable {
     public void setUrl(String url) {
         this.url = url;
     }
+
+    @Override
+    public String toString() {
+        return "BannerBean{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", type=" + type +
+                ", thumb='" + thumb + '\'' +
+                ", url='" + url + '\'' +
+                '}';
+    }
 }
