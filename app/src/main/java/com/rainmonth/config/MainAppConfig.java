@@ -7,6 +7,7 @@ import com.rainmonth.api.AlbumService;
 import com.rainmonth.api.ArticleService;
 import com.rainmonth.api.BannerService;
 import com.rainmonth.api.NavService;
+import com.rainmonth.api.PursueService;
 import com.rainmonth.api.UserService;
 import com.rainmonth.common.base.BaseApplicationDelegate;
 import com.rainmonth.common.di.module.GlobeConfigModule;
@@ -32,6 +33,7 @@ public class MainAppConfig implements ConfigModule {
         repositoryManager.injectRetrofitService(ArticleService.class);
         repositoryManager.injectRetrofitService(AlbumService.class);
         repositoryManager.injectRetrofitService(NavService.class);
+        repositoryManager.injectRetrofitService(PursueService.class);
     }
 
     @Override
