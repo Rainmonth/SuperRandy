@@ -5,17 +5,18 @@ import java.io.Serializable;
 /**
  * Created by RandyZhang on 16/7/5.
  */
-public class XunNavigationBean implements Serializable{
+public class XunNavigationBean implements Serializable {
+
+
+    /**
+     * type : 4
+     * title : 电影
+     * icon_url : http://localhost:3000/public/assets/extra/test3.jpg
+     */
 
     private int type;
-    private int navIconResId;
-    private String navName;
-
-    public XunNavigationBean(int type, int navIconResId, String navName) {
-        this.type = type;
-        this.navIconResId = navIconResId;
-        this.navName = navName;
-    }
+    private String title;
+    private String icon_url;
 
     public int getType() {
         return type;
@@ -25,19 +26,28 @@ public class XunNavigationBean implements Serializable{
         this.type = type;
     }
 
-    public int getNavIconResId() {
-        return navIconResId;
+    public String getTitle() {
+        return title;
     }
 
-    public void setNavIconResId(int navIconResId) {
-        this.navIconResId = navIconResId;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getNavName() {
-        return navName;
+    public String getIcon_url() {
+        return icon_url;
     }
 
-    public void setNavName(String navName) {
-        this.navName = navName;
+    public void setIcon_url(String icon_url) {
+        this.icon_url = icon_url;
+    }
+
+    @Override
+    public String toString() {
+        return "XunNavigationBean{" +
+                "type=" + type +
+                ", title='" + title + '\'' +
+                ", icon_url='" + icon_url + '\'' +
+                '}';
     }
 }

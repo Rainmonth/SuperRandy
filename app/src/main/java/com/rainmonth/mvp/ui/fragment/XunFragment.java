@@ -1,19 +1,14 @@
 package com.rainmonth.mvp.ui.fragment;
 
-import android.view.LayoutInflater;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.GridView;
-import android.widget.ImageView;
-import android.widget.TextView;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.rainmonth.R;
-import com.rainmonth.common.adapter.ListViewDataAdapter;
-import com.rainmonth.common.adapter.ViewHolderBase;
-import com.rainmonth.common.adapter.ViewHolderCreator;
 import com.rainmonth.common.base.BaseLazyFragment;
 import com.rainmonth.common.di.component.AppComponent;
-import com.rainmonth.common.eventbus.EventCenter;
 import com.rainmonth.di.component.DaggerXunComponent;
 import com.rainmonth.di.module.XunModule;
 import com.rainmonth.mvp.contract.XunContract;
@@ -22,6 +17,7 @@ import com.rainmonth.mvp.presenter.XunPresenter;
 import com.rainmonth.mvp.ui.activity.GridExploreActivity;
 import com.rainmonth.mvp.ui.activity.ListExploreActivity;
 import com.rainmonth.mvp.ui.activity.ViewPagerExploreActivity;
+import com.rainmonth.mvp.ui.adapter.XunListAdapter;
 import com.rainmonth.router.RouterConstant;
 import com.rainmonth.router.RouterUtils;
 import com.socks.library.KLog;
@@ -29,7 +25,6 @@ import com.socks.library.KLog;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * 寻 （采用动态配置）
@@ -44,32 +39,20 @@ import butterknife.ButterKnife;
  * Created by RandyZhang on 16/6/30.
  */
 public class XunFragment extends BaseLazyFragment<XunPresenter> implements XunContract.View {
-    @BindView(R.id.gv_content)
-    GridView gvContent;
+    @BindView(R.id.srl_container)
+    SwipeRefreshLayout srlContainer;
+    @BindView(R.id.rv_xun_content)
+    RecyclerView rvContent;
 
-    private ListViewDataAdapter<XunNavigationBean> mXunNavListAdapter = null;
+    private XunListAdapter mAdapter = null;
     public final static int TYPE_ARTICLE = 1,
             TYPE_IMAGE = 2, TYPE_MUSIC = 3,
             TYPE_FILM = 4, TYPE_APP = 5;
 
     @Override
     public void onFirstUserVisible() {
-
-    }
-
-    @Override
-    public int getContentViewLayoutID() {
-        return R.layout.fragment_xun;
-    }
-
-    @Override
-    protected void onEventComing(EventCenter eventCenter) {
-
-    }
-
-    @Override
-    protected boolean isBindEventBusHere() {
-        return false;
+        srlContainer.setRefreshing(true);
+        mPresenter.getNavigationList();
     }
 
     @Override
@@ -83,6 +66,11 @@ public class XunFragment extends BaseLazyFragment<XunPresenter> implements XunCo
     }
 
     @Override
+    public int getContentViewLayoutID() {
+        return R.layout.fragment_xun;
+    }
+
+    @Override
     protected void setupFragmentComponent(AppComponent appComponent) {
         DaggerXunComponent.builder()
                 .appComponent(appComponent)
@@ -92,59 +80,33 @@ public class XunFragment extends BaseLazyFragment<XunPresenter> implements XunCo
     }
 
     @Override
-    protected View getLoadingTargetView() {
-        return null;
-    }
-
-    @Override
     protected void initViewsAndEvents(View view) {
-        mPresenter.initialize();
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-    }
-
-    @Override
-    public void initViews(List<XunNavigationBean> xunNavigationBeanList) {
-        mXunNavListAdapter = new ListViewDataAdapter<>(new ViewHolderCreator<XunNavigationBean>() {
+        srlContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
-            public ViewHolderBase<XunNavigationBean> createViewHolder(int position) {
-                return new ViewHolderBase<XunNavigationBean>() {
-                    ImageView ivNavImg;
-                    TextView tvNavName;
-
-                    @Override
-                    public View createView(LayoutInflater layoutInflater) {
-                        View convertView = layoutInflater.inflate(R.layout.adapter_xun_gv_content_item, null);
-                        ivNavImg = ButterKnife.findById(convertView, R.id.iv_nav_img);
-                        tvNavName = ButterKnife.findById(convertView, R.id.tv_nav_name);
-                        return convertView;
-                    }
-
-                    @Override
-                    public void showData(int position, XunNavigationBean itemData) {
-                        ivNavImg.setImageResource(itemData.getNavIconResId());
-                        tvNavName.setText(itemData.getNavName());
-
-                    }
-                };
+            public void onRefresh() {
+                srlContainer.setRefreshing(true);
+                mPresenter.getNavigationList();
             }
         });
-        mXunNavListAdapter.getDataList().addAll(xunNavigationBeanList);
-        gvContent.setAdapter(mXunNavListAdapter);
-        gvContent.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
+        mAdapter = new XunListAdapter(R.layout.adapter_xun_gv_content_item, mContext);
+        GridLayoutManager manager = new GridLayoutManager(mContext, 2);
+        rvContent.setLayoutManager(manager);
+        rvContent.setAdapter(mAdapter);
+        mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                // nav to detail activity
-                XunNavigationBean xunNavigationBean = mXunNavListAdapter.getDataList().get(position);
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                XunNavigationBean xunNavigationBean = mAdapter.getData().get(position);
                 if (null != xunNavigationBean) {
                     mPresenter.navToDetail(xunNavigationBean);
                 }
             }
         });
+    }
+
+    @Override
+    public void initNavigationContent(List<XunNavigationBean> xunNavigationBeanList) {
+        srlContainer.setRefreshing(false);
+        mAdapter.setNewData(xunNavigationBeanList);
     }
 
     @Override

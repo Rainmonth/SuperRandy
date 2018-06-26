@@ -1,17 +1,20 @@
 package com.rainmonth.mvp.model;
 
-import com.rainmonth.R;
+import com.rainmonth.api.NavService;
 import com.rainmonth.common.base.mvp.BaseModel;
 import com.rainmonth.common.di.scope.FragmentScope;
+import com.rainmonth.common.http.Result;
 import com.rainmonth.common.integration.IRepositoryManager;
 import com.rainmonth.mvp.contract.XunContract;
 import com.rainmonth.mvp.model.bean.XunNavigationBean;
-import com.rainmonth.mvp.ui.fragment.XunFragment;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
+
+import io.reactivex.Flowable;
+import io.reactivex.functions.Function;
+import retrofit2.Response;
 
 /**
  * XunFragment 数据获取
@@ -24,24 +27,16 @@ public class XunModel extends BaseModel implements XunContract.Model {
         super(repositoryManager);
     }
 
+
     @Override
-    public List<XunNavigationBean> getNavigationBeanList() {
-        List<XunNavigationBean> xunNavigationBeanList = new ArrayList<XunNavigationBean>();
-        xunNavigationBeanList.add(new XunNavigationBean(XunFragment.TYPE_ARTICLE, R.drawable.bg_round_purple_rect, "文章"));
-        xunNavigationBeanList.add(new XunNavigationBean(XunFragment.TYPE_IMAGE, R.drawable.bg_round_purple_rect, "图片"));
-        xunNavigationBeanList.add(new XunNavigationBean(XunFragment.TYPE_MUSIC, R.drawable.bg_round_purple_rect, "音乐"));
-        xunNavigationBeanList.add(new XunNavigationBean(XunFragment.TYPE_FILM, R.drawable.bg_round_purple_rect, "电影"));
-        xunNavigationBeanList.add(new XunNavigationBean(XunFragment.TYPE_APP, R.drawable.bg_round_purple_rect, "应用"));
-//        xunNavigationBeanList.add(new XunNavigationBean(R.drawable.bg_round_purple_rect, "文章"));
-//        xunNavigationBeanList.add(new XunNavigationBean(R.drawable.bg_round_purple_rect, "图片"));
-//        xunNavigationBeanList.add(new XunNavigationBean(R.drawable.bg_round_purple_rect, "音乐"));
-//        xunNavigationBeanList.add(new XunNavigationBean(R.drawable.bg_round_purple_rect, "电影"));
-//        xunNavigationBeanList.add(new XunNavigationBean(R.drawable.bg_round_purple_rect, "应用"));
-//        xunNavigationBeanList.add(new XunNavigationBean(R.drawable.bg_round_purple_rect, "文章"));
-//        xunNavigationBeanList.add(new XunNavigationBean(R.drawable.bg_round_purple_rect, "图片"));
-//        xunNavigationBeanList.add(new XunNavigationBean(R.drawable.bg_round_purple_rect, "音乐"));
-//        xunNavigationBeanList.add(new XunNavigationBean(R.drawable.bg_round_purple_rect, "电影"));
-//        xunNavigationBeanList.add(new XunNavigationBean(R.drawable.bg_round_purple_rect, "应用"));
-        return xunNavigationBeanList;
+    public Flowable<Result<List<XunNavigationBean>>> getNavigationBeanList() {
+        return mRepositoryManager.obtainRetrofitService(NavService.class)
+                .getXunNavList()
+                .map(new Function<Response<Result<List<XunNavigationBean>>>, Result<List<XunNavigationBean>>>() {
+                    @Override
+                    public Result<List<XunNavigationBean>> apply(Response<Result<List<XunNavigationBean>>> resultResponse) throws Exception {
+                        return resultResponse.body();
+                    }
+                });
     }
 }
