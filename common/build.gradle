@@ -99,4 +99,10 @@ dependencies {
     compile 'com.github.zhaokaiqiang.klog:library:1.5.0'
     // multidex 解决4.4以下频繁出现的NoClassDefFoundError
     api rootProject.ext.dependencies["multidex"]
+
+    // leakcanary
+    debugImplementation rootProject.ext.dependencies['blockcanary-android']
+    releaseImplementation rootProject.ext.dependencies['blockcanary-no-op']
+    debugImplementation rootProject.ext.dependencies['leakcanary-android']
+    releaseImplementation rootProject.ext.dependencies['leakcanary-no-op']
 }

@@ -16,6 +16,7 @@ import com.rainmonth.common.http.RequestInterceptor;
 import com.rainmonth.common.integration.ConfigModule;
 import com.rainmonth.common.integration.ManifestParser;
 import com.rainmonth.common.utils.ComponentUtils;
+import com.squareup.leakcanary.LeakCanary;
 
 import java.util.List;
 
@@ -61,6 +62,14 @@ public class BaseApplicationDelegate implements IBaseApplicationDelegate {
             ARouter.printStackTrace();
         }
         ARouter.init(mApplication);
+
+        // leakcanary
+        if (BuildConfig.DEBUG) {
+            if (LeakCanary.isInAnalyzerProcess(mApplication)) {
+                return;
+            }
+            LeakCanary.install(mApplication);
+        }
 
         // 注册数据及网络请求相关组件
         for (ConfigModule module : mModules) {
