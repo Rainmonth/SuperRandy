@@ -28,6 +28,7 @@ public class ImageHomeActivity extends BaseActivity<ImageHomePresenter> implemen
                 .imageHomeModule(new ImageHomeModule(this))
                 .build()
                 .inject(this);
+
     }
 
     @Override
