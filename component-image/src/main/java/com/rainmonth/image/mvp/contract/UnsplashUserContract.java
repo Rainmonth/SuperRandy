@@ -14,7 +14,7 @@ import retrofit2.Response;
  */
 public interface UnsplashUserContract {
     interface Model extends IBaseModel {
-        Flowable<Response<BaseResponse>> getUserInfo(int w, int h, String username);
+        Flowable<Response<BaseResponse>> getUserInfo(String username, int w, int h);
     }
 
     interface View extends IBaseView {

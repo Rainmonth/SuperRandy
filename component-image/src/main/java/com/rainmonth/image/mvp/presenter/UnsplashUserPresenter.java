@@ -23,14 +23,14 @@ public class UnsplashUserPresenter extends BasePresenter<UnsplashUserContract.Mo
         super(model, view);
     }
 
-    public void getUserInfo(int w, int h, String username) {
-        addSubscribe(mModel.getUserInfo(w, h, username)
-        .compose(RxUtils.<Response<BaseResponse>>getFlowableTransformer())
-        .subscribeWith(new CommonSubscriber<Response<BaseResponse>>(mView) {
-            @Override
-            public void onNext(Response<BaseResponse> baseResponseResponse) {
-                mView.initUserInfo(baseResponseResponse);
-            }
-        }));
+    public void getUserInfo(String username, int w, int h) {
+        addSubscribe(mModel.getUserInfo(username, w, h)
+                .compose(RxUtils.<Response<BaseResponse>>getFlowableTransformer())
+                .subscribeWith(new CommonSubscriber<Response<BaseResponse>>(mView) {
+                    @Override
+                    public void onNext(Response<BaseResponse> baseResponseResponse) {
+                        mView.initUserInfo(baseResponseResponse);
+                    }
+                }));
     }
 }

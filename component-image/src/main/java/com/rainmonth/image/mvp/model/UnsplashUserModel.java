@@ -27,9 +27,9 @@ public class UnsplashUserModel extends BaseModel implements UnsplashUserContract
 
 
     @Override
-    public Flowable<Response<BaseResponse>> getUserInfo(int w, int h, String username) {
+    public Flowable<Response<BaseResponse>> getUserInfo(String username, int w, int h) {
         return mRepositoryManager.obtainRetrofitService(UnsplashUserService.class)
-                .getUserInfo(w, h, username);
+                .getUserInfo(username, w, h);
 //                .map(new Function<Response<BaseResponse>, Response<BaseResponse>>() {
 //                    @Override
 //                    public Response<BaseResponse> apply(Response<BaseResponse> baseResponseResponse) throws Exception {
