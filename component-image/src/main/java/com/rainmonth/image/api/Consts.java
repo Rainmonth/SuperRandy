@@ -11,5 +11,14 @@ public class Consts {
     public static final String GET_USER_PERSONAL_SITE = BASE_URL + "users/{username}/portfolio";
     // 获取用户的合集
     public static final String GET_USER_COLLECTIONS = BASE_URL + "users/{username}/collections";
+    // 获取用户的统计数据
+    public static final String GET_USER_STATISTICS = BASE_URL + "users/{username}/statistics";
+    // 获取用户的照片
+    public static final String GET_USER_PHOTOS = BASE_URL + "users/{username}/photos";
 
+    //------------------------------------------
+    // 获取当前用户信息
+    public static final String GET_CURRENT_USER_INFO = BASE_URL + "me";
+    // 跟新当前用户信息
+    public static final String UPDATE_CURRENT_USER_INFO = BASE_URL + "me";
 }
