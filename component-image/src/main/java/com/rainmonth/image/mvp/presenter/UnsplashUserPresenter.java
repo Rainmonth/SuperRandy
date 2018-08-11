@@ -6,9 +6,13 @@ import com.rainmonth.common.http.BaseResponse;
 import com.rainmonth.common.http.CommonSubscriber;
 import com.rainmonth.common.utils.RxUtils;
 import com.rainmonth.image.mvp.contract.UnsplashUserContract;
+import com.rainmonth.image.mvp.model.bean.UserBean;
+import com.socks.library.KLog;
 
 import javax.inject.Inject;
 
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 import retrofit2.Response;
 
 /**
@@ -25,11 +29,12 @@ public class UnsplashUserPresenter extends BasePresenter<UnsplashUserContract.Mo
 
     public void getUserInfo(String username, int w, int h) {
         addSubscribe(mModel.getUserInfo(username, w, h)
-                .compose(RxUtils.<Response<BaseResponse>>getFlowableTransformer())
-                .subscribeWith(new CommonSubscriber<Response<BaseResponse>>(mView) {
+                .compose(RxUtils.<UserBean>getObservableTransformer())
+                .subscribeWith(new CommonSubscriber<UserBean>(mView) {
+
                     @Override
-                    public void onNext(Response<BaseResponse> baseResponseResponse) {
-                        mView.initUserInfo(baseResponseResponse);
+                    public void onNext(UserBean userBean) {
+                        mView.initUserInfo(userBean);
                     }
                 }));
     }

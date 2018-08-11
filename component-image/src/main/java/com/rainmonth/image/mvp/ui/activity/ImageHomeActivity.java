@@ -12,6 +12,7 @@ import com.rainmonth.image.di.module.ImageHomeModule;
 import com.rainmonth.image.di.module.UnsplashUserModule;
 import com.rainmonth.image.mvp.contract.ImageHomeContract;
 import com.rainmonth.image.mvp.contract.UnsplashUserContract;
+import com.rainmonth.image.mvp.model.bean.UserBean;
 import com.rainmonth.image.mvp.presenter.ImageHomePresenter;
 import com.rainmonth.image.mvp.presenter.UnsplashUserPresenter;
 
@@ -58,7 +59,7 @@ public class ImageHomeActivity extends BaseActivity<ImageHomePresenter> implemen
     }
 
     @Override
-    public void initUserInfo(Response<BaseResponse> responseResponse) {
+    public void initUserInfo(UserBean userBean) {
 
     }
 }
