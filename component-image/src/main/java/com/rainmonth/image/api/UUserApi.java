@@ -14,13 +14,13 @@ import retrofit2.http.Query;
  * @author: RandyZhang
  * @date: 2018/8/8 上午7:01
  */
-public interface UnsplashUserService {
+public interface UUserApi {
 
     @Headers({
             "Accept-Version:v1",
             "Authorization:Client-ID ae1715b58d53e958f990d42c9a3e221120a292efd592d66d0ba3717ccc4c9abe"
     })
-    @GET("https://api.unsplash.com/users/{username}")
+    @GET(Consts.BASE_URL + "users/{username}")
     Flowable<Response<BaseResponse>> getUserInfo(@Path("username") String username,
                                                  @Query("w") int w,
                                                  @Query("h") int h);
