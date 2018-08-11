@@ -1,6 +1,7 @@
 package com.rainmonth.common.base;
 
 import android.app.Application;
+import android.os.Build;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.rainmonth.common.BuildConfig;
@@ -19,10 +20,6 @@ import com.rainmonth.common.utils.ComponentUtils;
 import com.squareup.leakcanary.LeakCanary;
 
 import java.util.List;
-
-import okhttp3.Interceptor;
-import okhttp3.Request;
-import okhttp3.Response;
 
 /**
  * Application 代理
@@ -63,8 +60,8 @@ public class BaseApplicationDelegate implements IBaseApplicationDelegate {
         }
         ARouter.init(mApplication);
 
-        // leakcanary
-        if (BuildConfig.DEBUG) {
+        // leakcanary(非Debug模式并且不是测试执行时开启leakcanary)
+        if (BuildConfig.DEBUG && !isRoboUnitTest()) {
             if (LeakCanary.isInAnalyzerProcess(mApplication)) {
                 return;
             }
@@ -75,6 +72,10 @@ public class BaseApplicationDelegate implements IBaseApplicationDelegate {
         for (ConfigModule module : mModules) {
             module.registerComponents(mApplication, mAppComponent.repositoryManager());
         }
+    }
+
+    public static boolean isRoboUnitTest() {
+        return "robolectric".equals(Build.FINGERPRINT);
     }
 
     public void onTerminate() {
