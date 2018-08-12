@@ -4,12 +4,14 @@ import com.rainmonth.common.base.mvp.BaseModel;
 import com.rainmonth.common.di.scope.ActivityScope;
 import com.rainmonth.common.http.BaseResponse;
 import com.rainmonth.common.integration.IRepositoryManager;
-import com.rainmonth.image.api.UnsplashUserService;
+import com.rainmonth.image.api.UUserApi;
 import com.rainmonth.image.mvp.contract.UnsplashUserContract;
+import com.rainmonth.image.mvp.model.bean.UserBean;
 
 import javax.inject.Inject;
 
 import io.reactivex.Flowable;
+import io.reactivex.Observable;
 import retrofit2.Response;
 
 /**
@@ -27,8 +29,8 @@ public class UnsplashUserModel extends BaseModel implements UnsplashUserContract
 
 
     @Override
-    public Flowable<Response<BaseResponse>> getUserInfo(String username, int w, int h) {
-        return mRepositoryManager.obtainRetrofitService(UnsplashUserService.class)
+    public Observable<UserBean> getUserInfo(String username, int w, int h) {
+        return mRepositoryManager.obtainRetrofitService(UUserApi.class)
                 .getUserInfo(username, w, h);
 //                .map(new Function<Response<BaseResponse>, Response<BaseResponse>>() {
 //                    @Override

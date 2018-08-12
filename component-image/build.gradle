@@ -9,6 +9,16 @@ dependencies {
     }
     annotationProcessor rootProject.ext.dependencies["router-compiler"]
     androidTestCompile 'junit:junit:4.12'
+    testCompile 'junit:junit:4.12'
+    testCompile "org.robolectric:robolectric:3.5.1"
+    testCompile 'org.robolectric:shadows-support-v4:3.4-rc2'
+    testCompile 'org.robolectric:shadows-multidex:3.3.2'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+}
+android {
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
 }

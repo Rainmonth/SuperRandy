@@ -5,11 +5,13 @@ import android.text.TextUtils;
 
 import com.rainmonth.common.base.mvp.IBaseView;
 
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.subscribers.ResourceSubscriber;
 import retrofit2.HttpException;
 
 
-public abstract class CommonSubscriber<T> extends ResourceSubscriber<T> {
+public abstract class CommonSubscriber<T> extends ResourceSubscriber<T> implements Observer<T> {
 
     private Context mContext;
     private IBaseView mView;
@@ -43,6 +45,11 @@ public abstract class CommonSubscriber<T> extends ResourceSubscriber<T> {
     @Override
     protected void onStart() {
         super.onStart();
+    }
+
+    @Override
+    public void onSubscribe(Disposable d) {
+
     }
 
     @Override

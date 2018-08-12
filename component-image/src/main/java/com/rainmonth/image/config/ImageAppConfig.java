@@ -7,7 +7,7 @@ import com.rainmonth.common.base.BaseApplicationDelegate;
 import com.rainmonth.common.di.module.GlobeConfigModule;
 import com.rainmonth.common.integration.ConfigModule;
 import com.rainmonth.common.integration.IRepositoryManager;
-import com.rainmonth.image.api.UnsplashUserService;
+import com.rainmonth.image.api.UUserApi;
 
 import java.util.List;
 
@@ -24,7 +24,7 @@ public class ImageAppConfig implements ConfigModule{
 
     @Override
     public void registerComponents(Context context, IRepositoryManager repositoryManager) {
-        repositoryManager.injectRetrofitService(UnsplashUserService.class);
+        repositoryManager.injectRetrofitService(UUserApi.class);
     }
 
     @Override
