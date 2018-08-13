@@ -21,4 +21,10 @@ public class Consts {
     public static final String GET_CURRENT_USER_INFO = BASE_URL + "me";
     // 跟新当前用户信息
     public static final String UPDATE_CURRENT_USER_INFO = BASE_URL + "me";
+    // 搜索用户
+    public static final String SEARCH_USER = BASE_URL + "search/users";
+    // 搜索图片
+    public static final String SEARCH_PHOTOS = BASE_URL + "search/photos";
+    // 搜索合集
+    public static final String SEARCH_COLLECTIONS = BASE_URL + "search/collections";
 }

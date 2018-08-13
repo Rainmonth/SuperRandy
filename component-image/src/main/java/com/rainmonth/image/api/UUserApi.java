@@ -1,12 +1,13 @@
 package com.rainmonth.image.api;
 
 import com.rainmonth.image.mvp.model.bean.CollectionBean;
+import com.rainmonth.image.mvp.model.bean.PhotoBean;
+import com.rainmonth.image.mvp.model.bean.SiteBean;
 import com.rainmonth.image.mvp.model.bean.UserBean;
 
 import java.util.List;
 
 import io.reactivex.Observable;
-import retrofit2.http.Body;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
@@ -21,6 +22,14 @@ import retrofit2.http.Query;
  */
 public interface UUserApi {
 
+    /**
+     * 获取某个用户信息
+     *
+     * @param username 用户名
+     * @param w        用户头像的宽度
+     * @param h        用户头像的高度
+     * @return 用户信息
+     */
     @Headers({
             "Accept-Version:v1",
             "Authorization:Client-ID ae1715b58d53e958f990d42c9a3e221120a292efd592d66d0ba3717ccc4c9abe"
@@ -31,23 +40,44 @@ public interface UUserApi {
                                      @Query("h") int h);
 
 
+    /**
+     * @param username 用户名
+     * @param page     页码
+     * @param perPage  页长
+     * @param orderBy  图片排序方式latest, oldest, popular; default: latest
+     * @return 图片列表
+     */
     @Headers({
             "Accept-Version:v1",
             "Authorization:Client-ID ae1715b58d53e958f990d42c9a3e221120a292efd592d66d0ba3717ccc4c9abe"
     })
     @GET(Consts.GET_USER_LIKE_PHOTOS)
-    Observable<UserBean> getUserLikePhotos(@Path("username") String username,
-                                           @Query("page") int page,
-                                           @Query("per_page") int perPage,
-                                           @Query("order_by") String orderBy);
+    Observable<List<PhotoBean>> getUserLikePhotos(@Path("username") String username,
+                                                  @Query("page") int page,
+                                                  @Query("per_page") int perPage,
+                                                  @Query("order_by") String orderBy);
 
+    /**
+     * 获取用户个人网站
+     *
+     * @param username 用户名
+     * @return 个人网站地址
+     */
     @Headers({
             "Accept-Version:v1",
             "Authorization:Client-ID ae1715b58d53e958f990d42c9a3e221120a292efd592d66d0ba3717ccc4c9abe"
     })
     @GET(Consts.GET_USER_PERSONAL_SITE)
-    Observable<String> getUserPersonalSite(@Path("username") String username);
+    Observable<SiteBean> getUserPersonalSite(@Path("username") String username);
 
+    /**
+     * 获取合集列表
+     *
+     * @param username 用户名
+     * @param page     页码
+     * @param perPage  页长
+     * @return 合集列表
+     */
     @Headers({
             "Accept-Version:v1",
             "Authorization:Client-ID ae1715b58d53e958f990d42c9a3e221120a292efd592d66d0ba3717ccc4c9abe"
@@ -63,13 +93,13 @@ public interface UUserApi {
             "Authorization:Client-ID ae1715b58d53e958f990d42c9a3e221120a292efd592d66d0ba3717ccc4c9abe"
     })
     @GET(Consts.GET_USER_PHOTOS)
-    Observable<List<CollectionBean>> getUserPhotos(@Path("username") String username,
-                                                   @Query("page") int page,
-                                                   @Query("per_page") int perPage,
-                                                   @Query("order_by") String oderBy,
-                                                   @Query("stats") boolean stats,
-                                                   @Query("resolution") String resolutions,
-                                                   @Query("quantity") int quantity);
+    Observable<List<PhotoBean>> getUserPhotos(@Path("username") String username,
+                                              @Query("page") int page,
+                                              @Query("per_page") int perPage,
+                                              @Query("order_by") String oderBy,
+                                              @Query("stats") boolean stats,
+                                              @Query("resolution") String resolutions,
+                                              @Query("quantity") int quantity);
 
     /**
      * 获取用户统计数据（默认30天）
