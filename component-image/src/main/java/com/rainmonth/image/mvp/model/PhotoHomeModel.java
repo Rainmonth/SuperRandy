@@ -4,7 +4,7 @@ import com.rainmonth.common.base.mvp.BaseModel;
 import com.rainmonth.common.di.scope.ActivityScope;
 import com.rainmonth.common.integration.IRepositoryManager;
 import com.rainmonth.image.api.UPhotoApi;
-import com.rainmonth.image.mvp.contract.ImageHomeContract;
+import com.rainmonth.image.mvp.contract.PhotoHomeContract;
 import com.rainmonth.image.mvp.model.bean.PhotoBean;
 
 import java.util.List;
@@ -15,9 +15,9 @@ import io.reactivex.Observable;
 
 
 @ActivityScope
-public class ImageHomeModel extends BaseModel implements ImageHomeContract.Model {
+public class PhotoHomeModel extends BaseModel implements PhotoHomeContract.Model {
     @Inject
-    public ImageHomeModel(IRepositoryManager repositoryManager) {
+    public PhotoHomeModel(IRepositoryManager repositoryManager) {
         super(repositoryManager);
     }
 

@@ -39,7 +39,7 @@ public class PhotosAdapter extends BaseQuickAdapter<PhotoBean, BaseViewHolder> {
     @Override
     protected void convert(BaseViewHolder helper, PhotoBean item) {
         ImageView ivPhotos = helper.getView(R.id.image_iv_photos);
-        TextView tvAuthor = helper.getView(R.id.image_tv_author);
+        TextView tvAuthor = helper.getView(R.id.image_tv_photo_author);
         if (item == null)
             return;
         imageLoader.loadImage(context, GlideImageConfig

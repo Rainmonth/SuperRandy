@@ -4,7 +4,7 @@ import com.rainmonth.common.base.mvp.BasePresenter;
 import com.rainmonth.common.di.scope.ActivityScope;
 import com.rainmonth.common.http.CommonSubscriber;
 import com.rainmonth.common.utils.RxUtils;
-import com.rainmonth.image.mvp.contract.ImageHomeContract;
+import com.rainmonth.image.mvp.contract.PhotoHomeContract;
 import com.rainmonth.image.mvp.model.bean.PhotoBean;
 
 import java.util.List;
@@ -13,10 +13,10 @@ import javax.inject.Inject;
 
 
 @ActivityScope
-public class ImageHomePresenter extends BasePresenter<ImageHomeContract.Model, ImageHomeContract.View> {
+public class PhotoHomePresenter extends BasePresenter<PhotoHomeContract.Model, PhotoHomeContract.View> {
 
     @Inject
-    public ImageHomePresenter(ImageHomeContract.Model model, ImageHomeContract.View rootView) {
+    public PhotoHomePresenter(PhotoHomeContract.Model model, PhotoHomeContract.View rootView) {
         super(model, rootView);
     }
 
