@@ -56,4 +56,11 @@ public class Consts {
     // 获取合集相关合集
     public static final String GET_RELATED_COLLECTIONS = BASE_URL + "collections/{id}/related";
 
+    //------------------图片相关------------------
+    // 获取图片
+    public static final String GET_PHOTOS = BASE_URL + "photos";
+    // 获取策划图片
+    public static final String GET_CURATED_PHOTOS = BASE_URL + "photos/curated";
+    // 获取某张图片的统计数据
+    public static final String GET_PHOTO_STATISTICS = BASE_URL + "photos/{id}/statistics";
 }

@@ -12,9 +12,12 @@ import com.rainmonth.image.di.module.ImageHomeModule;
 import com.rainmonth.image.di.module.UnsplashUserModule;
 import com.rainmonth.image.mvp.contract.ImageHomeContract;
 import com.rainmonth.image.mvp.contract.UnsplashUserContract;
+import com.rainmonth.image.mvp.model.bean.PhotoBean;
 import com.rainmonth.image.mvp.model.bean.UserBean;
 import com.rainmonth.image.mvp.presenter.ImageHomePresenter;
 import com.rainmonth.image.mvp.presenter.UnsplashUserPresenter;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -33,13 +36,13 @@ public class ImageHomeActivity extends BaseActivity<ImageHomePresenter> implemen
 
     @Override
     public void setupActivityComponent(@NonNull AppComponent appComponent) {
-        DaggerImageHomeComponent //如找不到该类,请编译一下项目
-                .builder()
-                .appComponent(appComponent)
-                .imageHomeModule(new ImageHomeModule(this))
-                .unsplashUserModule(new UnsplashUserModule(this))
-                .build()
-                .inject(this);
+//        DaggerImageHomeComponent //如找不到该类,请编译一下项目
+//                .builder()
+//                .appComponent(appComponent)
+//                .imageHomeModule(new ImageHomeModule(this))
+//                .unsplashUserModule(new UnsplashUserModule(this))
+//                .build()
+//                .inject(this);
 
     }
 
@@ -55,11 +58,16 @@ public class ImageHomeActivity extends BaseActivity<ImageHomePresenter> implemen
 
     @Override
     protected void initViewsAndEvents() {
-        unsplashUserPresenter.getUserInfo("charlesdeluvio", 1, 10);
+//        unsplashUserPresenter.getUserInfo("charlesdeluvio", 1, 10);
     }
 
     @Override
     public void initUserInfo(UserBean userBean) {
+
+    }
+
+    @Override
+    public void initPhotoList(List<PhotoBean> photoBeans) {
 
     }
 }

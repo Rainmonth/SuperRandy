@@ -1,4 +1,4 @@
 <resources>
-    <string name="app_name">compent-image</string>
+    <string name="image_app_name">图片模块</string>
     <string name="image_welcome_label">欢迎进入image模块</string>
 </resources>
