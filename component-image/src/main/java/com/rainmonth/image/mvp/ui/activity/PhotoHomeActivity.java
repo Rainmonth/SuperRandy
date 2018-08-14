@@ -22,9 +22,12 @@ import java.util.List;
 public class PhotoHomeActivity extends BaseActivity<PhotoHomePresenter> implements
         PhotoHomeContract.View {
 
-    SwipeRefreshLayout srfContainer;
-    RecyclerView rvPhotos;
+    SwipeRefreshLayout imageSrfContainer;
+    RecyclerView imageRvPhotos;
     PhotosAdapter photosAdapter;
+    private int page, perPage = 10;
+    private String orderBy = "latest";
+    private boolean isRefresh = false;
 
     @Override
     public void initToolbar(int colorResId) {
@@ -54,16 +57,32 @@ public class PhotoHomeActivity extends BaseActivity<PhotoHomePresenter> implemen
 
     @Override
     protected void initViewsAndEvents() {
-//        unsplashUserPresenter.getUserInfo("charlesdeluvio", 1, 10);
         try {
-            srfContainer = findViewById(R.id.image_srl_container);
-            rvPhotos = findViewById(R.id.image_rv_photos);
+            imageSrfContainer = findViewById(R.id.image_srl_container);
+            imageRvPhotos = findViewById(R.id.image_rv_photos);
+
+            imageSrfContainer.setOnRefreshListener(() -> {
+                imageSrfContainer.setRefreshing(true);
+                isRefresh = true;
+                page = 1;
+                mPresenter.getPhotos(page, perPage, orderBy);
+
+            });
 //
             photosAdapter = new PhotosAdapter(mContext, R.layout.image_rv_item_photos);
-            rvPhotos.setAdapter(photosAdapter);
+            photosAdapter.setEnableLoadMore(true);
+            photosAdapter.setOnLoadMoreListener(() -> {
+                isRefresh = false;
+                mPresenter.getPhotos(page, perPage, orderBy);
+            }, imageRvPhotos);
+
+            imageRvPhotos.setAdapter(photosAdapter);
             LinearLayoutManager manager = new LinearLayoutManager(mContext);
-            rvPhotos.setLayoutManager(manager);
-            mPresenter.getPhotos(1, 10, "latest");
+            imageRvPhotos.setLayoutManager(manager);
+
+            imageSrfContainer.setRefreshing(true);
+            isRefresh = true;
+            mPresenter.getPhotos(1, 10, orderBy);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -72,5 +91,21 @@ public class PhotoHomeActivity extends BaseActivity<PhotoHomePresenter> implemen
     @Override
     public void initPhotoList(List<PhotoBean> photoBeans) {
         photosAdapter.addData(photoBeans);
+        imageSrfContainer.setRefreshing(false);
+        final int size = photoBeans.size();
+        if (isRefresh) {
+            photosAdapter.setNewData(photoBeans);
+            isRefresh = false;
+        } else {
+            if (size > 0) {
+                photosAdapter.addData(photoBeans);
+            }
+        }
+        if (perPage == photoBeans.size()) {
+            photosAdapter.loadMoreComplete();
+        } else if (page > photoBeans.size()) {
+            photosAdapter.loadMoreEnd(true);
+        }
+        page++;
     }
 }

@@ -27,6 +27,8 @@ public class CollectionHomeActivity extends BaseActivity<CollectionHomePresenter
     RecyclerView imageRvCollections;
     SwipeRefreshLayout imageSrlContainer;
     CollectionsAdapter collectionsAdapter;
+    private boolean isRefresh = false;
+    private int page, perPage = 10;
 
     @Override
     protected void setupActivityComponent(AppComponent appComponent) {
@@ -50,14 +52,24 @@ public class CollectionHomeActivity extends BaseActivity<CollectionHomePresenter
     @Override
     protected void initViewsAndEvents() {
         try {
-            Log.d("Randy", "initViewsAndEvents");
-            Log.e("Randy", "initViewsAndEvents");
             collectionsAdapter = new CollectionsAdapter(mContext, R.layout.image_rv_item_collections);
             imageSrlContainer = findViewById(R.id.image_srl_container);
+            imageSrlContainer.setOnRefreshListener(() -> {
+                isRefresh = true;
+                page = 1;
+                mPresenter.getCollections(page, perPage);
+            });
             imageRvCollections = findViewById(R.id.image_rv_collections);
             GridLayoutManager manager = new GridLayoutManager(mContext, 2);
             imageRvCollections.setLayoutManager(manager);
             imageRvCollections.setAdapter(collectionsAdapter);
+            collectionsAdapter.setEnableLoadMore(true);
+            collectionsAdapter.setOnLoadMoreListener(() -> {
+                isRefresh = false;
+                mPresenter.getCollections(page, perPage);
+            }, imageRvCollections);
+            isRefresh = true;
+            imageSrlContainer.setRefreshing(true);
             mPresenter.getCollections(1, 10);
         } catch (Exception e) {
             e.printStackTrace();
@@ -68,5 +80,21 @@ public class CollectionHomeActivity extends BaseActivity<CollectionHomePresenter
     @Override
     public void initCollectionList(List<CollectionBean> collectionBeans) {
         collectionsAdapter.addData(collectionBeans);
+        imageSrlContainer.setRefreshing(false);
+        final int size = collectionBeans.size();
+        if (isRefresh) {
+            collectionsAdapter.setNewData(collectionBeans);
+            isRefresh = false;
+        } else {
+            if (size > 0) {
+                collectionsAdapter.addData(collectionBeans);
+            }
+        }
+        if (perPage == collectionBeans.size()) {
+            collectionsAdapter.loadMoreComplete();
+        } else if (page > collectionBeans.size()) {
+            collectionsAdapter.loadMoreEnd(true);
+        }
+        page++;
     }
 }
