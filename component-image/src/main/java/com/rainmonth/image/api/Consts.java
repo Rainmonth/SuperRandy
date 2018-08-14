@@ -33,6 +33,8 @@ public class Consts {
     public static final String SEARCH_COLLECTIONS = BASE_URL + "search/collections";
 
     //------------------合集相关------------------
+    // 获取合集
+    public static final String GET_COLLECTIONS = BASE_URL + "collections";
     // 获取精选合集
     public static final String GET_FEATURED_COLLECTIONS = BASE_URL + "collections/featured";
     // 获取策划合集

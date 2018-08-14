@@ -20,6 +20,22 @@ import retrofit2.http.Query;
 public interface UCollectionApi {
 
 
+
+    /**
+     * 获取合集
+     *
+     * @param page    页码
+     * @param perPage 页长
+     * @return 合集列表
+     */
+    @Headers({
+            "Accept-Version:v1",
+            "Authorization:Client-ID ae1715b58d53e958f990d42c9a3e221120a292efd592d66d0ba3717ccc4c9abe"
+    })
+    @GET(Consts.GET_COLLECTIONS)
+    Observable<List<CollectionBean>> getCollections(@Query("page") int page,
+                                                    @Query("per_page") int perPage);
+
     /**
      * 获取精选合集
      *
@@ -43,6 +59,10 @@ public interface UCollectionApi {
      * @param perPage 页长
      * @return 策划合集列表
      */
+    @Headers({
+            "Accept-Version:v1",
+            "Authorization:Client-ID ae1715b58d53e958f990d42c9a3e221120a292efd592d66d0ba3717ccc4c9abe"
+    })
     @GET(Consts.GET_CURATED_COLLECTIONS)
     Observable<List<CollectionBean>> getCuratedCollections(@Query("page") int page,
                                                            @Query("per_page") int perPage);
@@ -55,6 +75,10 @@ public interface UCollectionApi {
      * @param perPage
      * @return
      */
+    @Headers({
+            "Accept-Version:v1",
+            "Authorization:Client-ID ae1715b58d53e958f990d42c9a3e221120a292efd592d66d0ba3717ccc4c9abe"
+    })
     @GET(Consts.GET_CURATED_COLLECTION_PHOTOS)
     Observable<List<PhotoBean>> getCuratedCollectionPhotos(@Path("id") long id,
                                                            @Query("page") int page,
@@ -86,6 +110,10 @@ public interface UCollectionApi {
     // 采用这个的时候，单元测试获取不到结果
 //    Flowable<CollectionBean> getCollectionDetailInfo(@Path("id") int id);
 
+    @Headers({
+            "Accept-Version:v1",
+            "Authorization:Client-ID ae1715b58d53e958f990d42c9a3e221120a292efd592d66d0ba3717ccc4c9abe"
+    })
     @FormUrlEncoded
     @POST(Consts.ADD_COLLECTION)
     Observable<Object> addCollection(@Field("title") String title,
@@ -104,13 +132,25 @@ public interface UCollectionApi {
     @POST(Consts.ADD_PHOTO_TO_COLLECTION)
     Observable<Object> addPhotoToCollection(@Path("collection_id") long collectionId);
 
+    @Headers({
+            "Accept-Version:v1",
+            "Authorization:Client-ID ae1715b58d53e958f990d42c9a3e221120a292efd592d66d0ba3717ccc4c9abe"
+    })
     @DELETE(Consts.DELETE_COLLECTION)
     Observable<Object> deleteCollection(@Path("id") long id);
 
+    @Headers({
+            "Accept-Version:v1",
+            "Authorization:Client-ID ae1715b58d53e958f990d42c9a3e221120a292efd592d66d0ba3717ccc4c9abe"
+    })
     @FormUrlEncoded
     @DELETE(Consts.DELETE_PHOTO_FROM_COLLECTION)
     Observable<Observable> deletePhotoFromCollection(@Path("collection_id") long collectionId);
 
+    @Headers({
+            "Accept-Version:v1",
+            "Authorization:Client-ID ae1715b58d53e958f990d42c9a3e221120a292efd592d66d0ba3717ccc4c9abe"
+    })
     @FormUrlEncoded
     @POST(Consts.UPDATE_COLLECTION)
     Observable<Object> updateCollection(@Path("id") long id,
@@ -118,6 +158,10 @@ public interface UCollectionApi {
                                         @Field("description") String description,
                                         @Field("private") boolean isPrivate);
 
+    @Headers({
+            "Accept-Version:v1",
+            "Authorization:Client-ID ae1715b58d53e958f990d42c9a3e221120a292efd592d66d0ba3717ccc4c9abe"
+    })
     @FormUrlEncoded
     @POST(Consts.UPDATE_COLLECTION)
     Observable<Object> updateCollection(@Path("id") long id, @FieldMap Map<String, Object> fieldMap);
