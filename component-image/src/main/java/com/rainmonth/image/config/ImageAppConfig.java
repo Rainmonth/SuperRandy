@@ -7,6 +7,7 @@ import com.rainmonth.common.base.BaseApplicationDelegate;
 import com.rainmonth.common.di.module.GlobeConfigModule;
 import com.rainmonth.common.integration.ConfigModule;
 import com.rainmonth.common.integration.IRepositoryManager;
+import com.rainmonth.image.api.UCollectionApi;
 import com.rainmonth.image.api.UPhotoApi;
 import com.rainmonth.image.api.UUserApi;
 
@@ -27,6 +28,7 @@ public class ImageAppConfig implements ConfigModule{
     public void registerComponents(Context context, IRepositoryManager repositoryManager) {
         repositoryManager.injectRetrofitService(UUserApi.class);
         repositoryManager.injectRetrofitService(UPhotoApi.class);
+        repositoryManager.injectRetrofitService(UCollectionApi.class);
     }
 
     @Override
