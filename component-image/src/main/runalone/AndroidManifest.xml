@@ -24,7 +24,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".mvp.ui.activity.ImageHomeActivity" />
+        <activity android:name=".mvp.ui.activity.PhotoHomeActivity" />
+        <activity android:name=".mvp.ui.activity.CollectionHomeActivity" />
+
     </application>
 
 </manifest>
