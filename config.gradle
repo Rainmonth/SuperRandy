@@ -15,11 +15,11 @@ ext {
     ]
     // 要合并到主库的组件，未填写的组件可以独立运行
     merge = [
-            "app",
+//            "app",
 //            "image",
-            "movie",
-            "music",
-            "read"
+//            "movie",
+//            "music",
+//            "read"
     ]
 
     // 第三方依赖库版本控制
