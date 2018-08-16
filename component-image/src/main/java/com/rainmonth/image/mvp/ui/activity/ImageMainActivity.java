@@ -15,7 +15,7 @@ public class ImageMainActivity extends BaseActivity {
     Button imageBtnPhoto;
     Button imageBtnCollection;
     Button imageBtnSearch;
-
+    Button imageBtnShowDialog;
     @Override
     protected void setupActivityComponent(AppComponent appComponent) {
 
@@ -31,6 +31,7 @@ public class ImageMainActivity extends BaseActivity {
         imageBtnPhoto = findViewById(R.id.image_btn_photo);
         imageBtnCollection = findViewById(R.id.image_btn_collection);
         imageBtnSearch = findViewById(R.id.image_btn_search);
+        imageBtnShowDialog = findViewById(R.id.image_btn_show_dialog);
         imageBtnPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -49,6 +50,13 @@ public class ImageMainActivity extends BaseActivity {
                 readyGo(SearchActivity.class);
             }
         });
+        imageBtnShowDialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
     }
 
     @Override
