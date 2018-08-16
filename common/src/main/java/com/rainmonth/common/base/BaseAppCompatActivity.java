@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.nfc.Tag;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -27,6 +28,7 @@ import com.rainmonth.common.utils.SmartBarUtils;
 import com.rainmonth.common.utils.constant.StatusBarConstants;
 import com.rainmonth.common.widgets.loading.VaryViewHelperController;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
+import com.socks.library.KLog;
 
 import butterknife.ButterKnife;
 import de.greenrobot.event.EventBus;
@@ -100,6 +102,7 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
         if (isBindEventBusHere()) {
             EventBus.getDefault().register(this);
         }
+        TAG = this.getClass().getSimpleName();
 //        SmartBarUtils.hide(getWindow().getDecorView());
         setTranslucentStatus(isApplyStatusBarTranslucency());
         if (getContentViewLayoutID() != 0) {
@@ -111,6 +114,8 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
             if (parentView != null && Build.VERSION.SDK_INT >= 14) {
                 parentView.setFitsSystemWindows(true);
             }
+        } else if (getContentViewLayoutID() == -1) {
+            KLog.d(TAG, "this activity is without layout resource!");
         } else {
             throw new IllegalArgumentException("You must return a right contentView " +
                     "layout resource Id");
@@ -123,7 +128,6 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
         if (isChangeStatusBarColor()) {
             SmartBarUtils.setStatusBarColor(this, mStatusBarColor);
         }
-        TAG = this.getClass().getSimpleName();
         mAppComponent.appManager().addActivity(this);
 
         mNetChangeObserver = new NetChangeObserver() {
@@ -156,7 +160,9 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
 
     @Override
     public void setContentView(int layoutResID) {
-        super.setContentView(layoutResID);
+        if (-1 != layoutResID) {
+            super.setContentView(layoutResID);
+        }
         ButterKnife.bind(this);
         if (null != getLoadingTargetView()) {
             mVaryViewHelperController = new VaryViewHelperController(getLoadingTargetView());

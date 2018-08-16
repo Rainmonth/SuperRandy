@@ -11,7 +11,7 @@ public class ImageLaunchActivity extends BaseActivity {
 
     @Override
     protected int getContentViewLayoutID() {
-        return R.layout.image_activity_image_launch;
+        return -1;
     }
 
     @Override
@@ -20,7 +20,7 @@ public class ImageLaunchActivity extends BaseActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                readyGo(ImageMainActivity.class);
+                readyGoThenKill(ImageMainActivity.class);
             }
         }, 5000);
     }

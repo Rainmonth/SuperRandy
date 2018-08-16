@@ -16,7 +16,9 @@
             android:name="com.rainmonth.image.config.ImageAppConfig"
             android:value="ConfigModule" />
 
-        <activity android:name=".ImageLaunchActivity">
+        <activity
+            android:name=".ImageLaunchActivity"
+            android:theme="@style/ImageSplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
