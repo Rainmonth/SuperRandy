@@ -3,6 +3,9 @@
     package="com.rainmonth.image">
 
     <application>
+        <meta-data
+            android:name="com.rainmonth.image.config.ImageAppConfig"
+            android:value="ConfigModule" />
         <activity android:name=".mvp.ui.activity.ImageMainActivity" />
         <activity android:name=".mvp.ui.activity.PhotoHomeActivity" />
         <activity android:name=".mvp.ui.activity.CollectionHomeActivity" />

@@ -11,6 +11,7 @@ import com.rainmonth.common.base.BaseLazyFragment;
 import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.di.component.DaggerXunComponent;
 import com.rainmonth.di.module.XunModule;
+import com.rainmonth.image.mvp.ui.activity.ImageMainActivity;
 import com.rainmonth.mvp.contract.XunContract;
 import com.rainmonth.mvp.model.bean.XunNavigationBean;
 import com.rainmonth.mvp.presenter.XunPresenter;
@@ -119,7 +120,7 @@ public class XunFragment extends BaseLazyFragment<XunPresenter> implements XunCo
                 break;
             case TYPE_IMAGE:
                 // 图片首页
-                readyGo(GridExploreActivity.class);
+                readyGo(ImageMainActivity.class);
                 break;
 
             case TYPE_MUSIC:

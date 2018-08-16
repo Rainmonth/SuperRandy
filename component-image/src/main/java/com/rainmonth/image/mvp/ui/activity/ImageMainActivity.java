@@ -3,22 +3,17 @@ package com.rainmonth.image.mvp.ui.activity;
 import android.view.View;
 import android.widget.Button;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.rainmonth.common.base.BaseActivity;
 import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.image.R;
-import com.rainmonth.image.mvp.ui.activity.CollectionHomeActivity;
-import com.rainmonth.image.mvp.ui.activity.PhotoHomeActivity;
-import com.rainmonth.image.mvp.ui.activity.SearchActivity;
+import com.rainmonth.router.RouterConstant;
 
-import butterknife.BindView;
-
+@Route(path = RouterConstant.PATH_IMAGE_HOME)
 public class ImageMainActivity extends BaseActivity {
 
-    @BindView(R.id.image_btn_photo)
     Button imageBtnPhoto;
-    @BindView(R.id.image_btn_collection)
     Button imageBtnCollection;
-    @BindView(R.id.image_btn_search)
     Button imageBtnSearch;
 
     @Override
@@ -33,6 +28,9 @@ public class ImageMainActivity extends BaseActivity {
 
     @Override
     protected void initViewsAndEvents() {
+        imageBtnPhoto = findViewById(R.id.image_btn_photo);
+        imageBtnCollection = findViewById(R.id.image_btn_collection);
+        imageBtnSearch = findViewById(R.id.image_btn_search);
         imageBtnPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
