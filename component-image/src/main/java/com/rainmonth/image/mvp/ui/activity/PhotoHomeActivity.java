@@ -6,6 +6,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.rainmonth.common.base.BaseActivity;
 import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.image.R;
@@ -61,19 +62,24 @@ public class PhotoHomeActivity extends BaseActivity<PhotoHomePresenter> implemen
             imageSrfContainer = findViewById(R.id.image_srl_container);
             imageRvPhotos = findViewById(R.id.image_rv_photos);
 
-            imageSrfContainer.setOnRefreshListener(() -> {
-                imageSrfContainer.setRefreshing(true);
-                isRefresh = true;
-                page = 1;
-                mPresenter.getPhotos(page, perPage, orderBy);
-
+            imageSrfContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                @Override
+                public void onRefresh() {
+                    imageSrfContainer.setRefreshing(true);
+                    isRefresh = true;
+                    page = 1;
+                    mPresenter.getPhotos(page, perPage, orderBy);
+                }
             });
 //
             photosAdapter = new PhotosAdapter(mContext, R.layout.image_rv_item_photos);
             photosAdapter.setEnableLoadMore(true);
-            photosAdapter.setOnLoadMoreListener(() -> {
-                isRefresh = false;
-                mPresenter.getPhotos(page, perPage, orderBy);
+            photosAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
+                @Override
+                public void onLoadMoreRequested() {
+                    isRefresh = false;
+                    mPresenter.getPhotos(page, perPage, orderBy);
+                }
             }, imageRvPhotos);
 
             imageRvPhotos.setAdapter(photosAdapter);

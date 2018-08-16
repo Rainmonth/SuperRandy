@@ -22,7 +22,7 @@ public class PhotoHomePresenter extends BasePresenter<PhotoHomeContract.Model, P
 
     public void getPhotos(int page, int perPage, String orderBy) {
         addSubscribe(mModel.getPhotos(page, perPage, orderBy)
-                .compose(RxUtils.getObservableTransformer())
+                .compose(RxUtils.<List<PhotoBean>>getObservableTransformer())
                 .subscribeWith(new CommonSubscriber<List<PhotoBean>>(mView) {
                     @Override
                     public void onNext(List<PhotoBean> photoBeans) {

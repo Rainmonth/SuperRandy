@@ -1,9 +1,11 @@
-package com.rainmonth.image;
+package com.rainmonth.image.mvp.ui.activity;
 
+import android.view.View;
 import android.widget.Button;
 
 import com.rainmonth.common.base.BaseActivity;
 import com.rainmonth.common.di.component.AppComponent;
+import com.rainmonth.image.R;
 import com.rainmonth.image.mvp.ui.activity.CollectionHomeActivity;
 import com.rainmonth.image.mvp.ui.activity.PhotoHomeActivity;
 import com.rainmonth.image.mvp.ui.activity.SearchActivity;
@@ -31,9 +33,24 @@ public class ImageMainActivity extends BaseActivity {
 
     @Override
     protected void initViewsAndEvents() {
-        imageBtnPhoto.setOnClickListener(v -> readyGo(PhotoHomeActivity.class));
-        imageBtnCollection.setOnClickListener(v -> readyGo(CollectionHomeActivity.class));
-        imageBtnSearch.setOnClickListener(v -> readyGo(SearchActivity.class));
+        imageBtnPhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                readyGo(PhotoHomeActivity.class);
+            }
+        });
+        imageBtnCollection.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                readyGo(CollectionHomeActivity.class);
+            }
+        });
+        imageBtnSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                readyGo(SearchActivity.class);
+            }
+        });
     }
 
     @Override

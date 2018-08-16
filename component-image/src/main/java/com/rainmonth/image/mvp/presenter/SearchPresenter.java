@@ -40,7 +40,7 @@ public class SearchPresenter extends BasePresenter<SearchContract.Model, SearchC
                        String orientation) {
         if (searchType == SEARCH_TYPE_USER) {
             addSubscribe(mModel.searchUsers(keys, page, perPage)
-                    .compose(RxUtils.getObservableTransformer())
+                    .compose(RxUtils.<SearchResult<UserBean>>getObservableTransformer())
                     .subscribeWith(new CommonSubscriber<SearchResult<UserBean>>(mView) {
                         @Override
                         public void onNext(SearchResult<UserBean> userBeanSearchResult) {
@@ -49,7 +49,7 @@ public class SearchPresenter extends BasePresenter<SearchContract.Model, SearchC
                     }));
         } else if (searchType == SEARCH_TYPE_COLLECTIONS) {
             addSubscribe(mModel.searchCollections(keys, page, perPage)
-                    .compose(RxUtils.getObservableTransformer())
+                    .compose(RxUtils.<SearchResult<CollectionBean>>getObservableTransformer())
                     .subscribeWith(new CommonSubscriber<SearchResult<CollectionBean>>(mView) {
                         @Override
                         public void onNext(SearchResult<CollectionBean> collectionBeanSearchResult) {
@@ -60,7 +60,7 @@ public class SearchPresenter extends BasePresenter<SearchContract.Model, SearchC
             if (CommonUtils.isNullOrEmpty(orientation))
                 orientation = "landscape";
             addSubscribe(mModel.searchPhotos(keys, page, perPage, collectionIds, orientation)
-                    .compose(RxUtils.getObservableTransformer())
+                    .compose(RxUtils.<SearchResult<PhotoBean>>getObservableTransformer())
                     .subscribeWith(new CommonSubscriber<SearchResult<PhotoBean>>(mView) {
                         @Override
                         public void onNext(SearchResult<PhotoBean> photoBeanSearchResult) {

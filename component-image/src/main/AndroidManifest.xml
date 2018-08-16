@@ -3,8 +3,10 @@
     package="com.rainmonth.image">
 
     <application>
+        <activity android:name=".mvp.ui.activity.ImageMainActivity" />
         <activity android:name=".mvp.ui.activity.PhotoHomeActivity" />
         <activity android:name=".mvp.ui.activity.CollectionHomeActivity" />
+        <activity android:name=".mvp.ui.activity.SearchActivity" />
 
     </application>
 

@@ -2,7 +2,8 @@ apply from: "../base_component.gradle"
 apply from: "../base_component_compiler.gradle"
 
 dependencies {
-    compile(rootProject.ext.dependencies["router"]){
+    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
+    compile(rootProject.ext.dependencies["router"]) {
         exclude module: 'support-v4'
         exclude module: 'appcompat-v7'
         exclude module: 'support-annotations'
@@ -15,10 +16,4 @@ dependencies {
     testCompile 'org.robolectric:shadows-multidex:3.3.2'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-}
-android {
-    compileOptions {
-        targetCompatibility 1.8
-        sourceCompatibility 1.8
-    }
 }

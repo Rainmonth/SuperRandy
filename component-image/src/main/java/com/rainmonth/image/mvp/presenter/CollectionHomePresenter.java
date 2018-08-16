@@ -24,7 +24,7 @@ public class CollectionHomePresenter extends BasePresenter<CollectionHomeContrac
 
     public void getCollections(int page, int perPage) {
         addSubscribe(mModel.getCollections(page, perPage)
-                .compose(RxUtils.getObservableTransformer())
+                .compose(RxUtils.<List<CollectionBean>>getObservableTransformer())
                 .subscribeWith(new CommonSubscriber<List<CollectionBean>>(mView) {
                     @Override
                     public void onNext(List<CollectionBean> collectionBeans) {

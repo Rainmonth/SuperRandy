@@ -5,6 +5,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.rainmonth.common.base.BaseActivity;
 import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.image.R;
@@ -54,19 +55,26 @@ public class CollectionHomeActivity extends BaseActivity<CollectionHomePresenter
         try {
             collectionsAdapter = new CollectionsAdapter(mContext, R.layout.image_rv_item_collections);
             imageSrlContainer = findViewById(R.id.image_srl_container);
-            imageSrlContainer.setOnRefreshListener(() -> {
-                isRefresh = true;
-                page = 1;
-                mPresenter.getCollections(page, perPage);
+            imageSrlContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                @Override
+                public void onRefresh() {
+                    isRefresh = true;
+                    page = 1;
+                    mPresenter.getCollections(page, perPage);
+                }
             });
+
             imageRvCollections = findViewById(R.id.image_rv_collections);
             GridLayoutManager manager = new GridLayoutManager(mContext, 2);
             imageRvCollections.setLayoutManager(manager);
             imageRvCollections.setAdapter(collectionsAdapter);
             collectionsAdapter.setEnableLoadMore(true);
-            collectionsAdapter.setOnLoadMoreListener(() -> {
-                isRefresh = false;
-                mPresenter.getCollections(page, perPage);
+            collectionsAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
+                @Override
+                public void onLoadMoreRequested() {
+                    isRefresh = false;
+                    mPresenter.getCollections(page, perPage);
+                }
             }, imageRvCollections);
             isRefresh = true;
             imageSrlContainer.setRefreshing(true);

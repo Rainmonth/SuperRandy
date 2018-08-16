@@ -1,6 +1,7 @@
 package com.rainmonth.image.mvp.ui.activity;
 
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -48,13 +49,16 @@ public class SearchActivity extends BaseActivity<SearchPresenter> implements Sea
     protected void initViewsAndEvents() {
         etSearchKeys = findViewById(R.id.image_et_search_keys);
         btnSearch = findViewById(R.id.image_btn_search);
-        btnSearch.setOnClickListener(v -> {
-            if (CommonUtils.isNullOrEmpty(etSearchKeys.getText().toString())) {
-                showToast("搜索关键词为空！");
-                return;
+        btnSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (CommonUtils.isNullOrEmpty(etSearchKeys.getText().toString())) {
+                    showToast("搜索关键词为空！");
+                    return;
+                }
+                mPresenter.search(1, etSearchKeys.getText().toString(), 1,
+                        10, "", "");
             }
-            mPresenter.search(1, etSearchKeys.getText().toString(), 1, 10,
-                    "", "");
         });
 
     }
