@@ -11,11 +11,9 @@ import com.rainmonth.common.base.BaseLazyFragment;
 import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.di.component.DaggerXunComponent;
 import com.rainmonth.di.module.XunModule;
-import com.rainmonth.image.mvp.ui.activity.ImageMainActivity;
 import com.rainmonth.mvp.contract.XunContract;
 import com.rainmonth.mvp.model.bean.XunNavigationBean;
 import com.rainmonth.mvp.presenter.XunPresenter;
-import com.rainmonth.mvp.ui.activity.GridExploreActivity;
 import com.rainmonth.mvp.ui.activity.ListExploreActivity;
 import com.rainmonth.mvp.ui.activity.ViewPagerExploreActivity;
 import com.rainmonth.mvp.ui.adapter.XunListAdapter;
@@ -120,7 +118,7 @@ public class XunFragment extends BaseLazyFragment<XunPresenter> implements XunCo
                 break;
             case TYPE_IMAGE:
                 // 图片首页
-                readyGo(ImageMainActivity.class);
+                RouterUtils.getInstance().build(RouterConstant.PATH_IMAGE_HOME).navigation();
                 break;
 
             case TYPE_MUSIC:
@@ -134,7 +132,6 @@ public class XunFragment extends BaseLazyFragment<XunPresenter> implements XunCo
                 break;
             case TYPE_APP:
                 // app首页
-//                readyGo(CardExploreActivity.class);
                 RouterUtils.getInstance().build(RouterConstant.PATH_APP_HOME).navigation();
                 break;
             default:
