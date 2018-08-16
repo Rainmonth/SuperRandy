@@ -2,7 +2,6 @@ apply from: "../base_component.gradle"
 apply from: "../base_component_compiler.gradle"
 
 dependencies {
-    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
     compile(rootProject.ext.dependencies["router"]) {
         exclude module: 'support-v4'
         exclude module: 'appcompat-v7'
