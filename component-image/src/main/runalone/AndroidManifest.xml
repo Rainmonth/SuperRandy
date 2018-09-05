@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.rainmonth.image">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name=".ImageApplication"
@@ -11,6 +13,7 @@
         android:label="@string/image_app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        tools:replace="android:theme"
         android:theme="@style/AppTheme">
         <meta-data
             android:name="com.rainmonth.image.config.ImageAppConfig"
@@ -25,12 +28,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".mvp.ui.activity.ImageMainActivity" />
         <activity android:name=".mvp.ui.activity.PhotoHomeActivity" />
         <activity android:name=".mvp.ui.activity.CollectionHomeActivity" />
         <activity android:name=".mvp.ui.activity.SearchActivity" />
-
+        <activity android:name=".mvp.ui.activity.PicToAsciiActivity" />
     </application>
 
 </manifest>
