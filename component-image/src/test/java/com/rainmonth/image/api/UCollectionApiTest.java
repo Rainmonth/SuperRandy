@@ -150,7 +150,8 @@ public class UCollectionApiTest extends BaseApiTest {
     public void getRelatedCollections() {
         ApiTestHelper.createApiClass(UCollectionApi.class)
                 .getRelatedCollections(1922729)
-                .compose(RxUtils.getObservableTransformer())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new ApiTestObserver<List<CollectionBean>>() {
 
                     @Override
@@ -160,5 +161,6 @@ public class UCollectionApiTest extends BaseApiTest {
                         assertEquals(10, collectionBeans.size());
                     }
                 });
+
     }
 }
