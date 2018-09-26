@@ -10,7 +10,7 @@
         <activity android:name=".mvp.ui.activity.PhotoHomeActivity" />
         <activity android:name=".mvp.ui.activity.CollectionHomeActivity" />
         <activity android:name=".mvp.ui.activity.SearchActivity" />
-
+        <activity android:name=".mvp.ui.activity.UserCenterActivity" />
     </application>
 
 </manifest>

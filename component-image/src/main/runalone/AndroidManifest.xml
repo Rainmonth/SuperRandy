@@ -14,7 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         tools:replace="android:theme"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
         <meta-data
             android:name="com.rainmonth.image.config.ImageAppConfig"
             android:value="ConfigModule" />
@@ -33,6 +34,7 @@
         <activity android:name=".mvp.ui.activity.CollectionHomeActivity" />
         <activity android:name=".mvp.ui.activity.SearchActivity" />
         <activity android:name=".mvp.ui.activity.PicToAsciiActivity" />
+        <activity android:name=".mvp.ui.activity.UserCenterActivity" />
     </application>
 
 </manifest>
