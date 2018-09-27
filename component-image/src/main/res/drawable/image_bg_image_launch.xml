@@ -8,13 +8,13 @@
     <item android:top="180dp">
         <bitmap
             android:gravity="top|center_horizontal"
-            android:src="@mipmap/image_ic_launcher" />
+            android:src="@mipmap/ic_launcher" />
     </item>
 
     <item android:bottom="50dp">
         <bitmap
             android:gravity="bottom|center_horizontal"
-            android:src="@mipmap/image_ic_launcher" />
+            android:src="@mipmap/ic_launcher" />
     </item>
 
 </layer-list>
