@@ -13,7 +13,7 @@ import com.rainmonth.router.RouterUtils;
  * 音乐主页面
  */
 @Route(path = RouterConstant.PATH_MUSIC_HOME)
-public class MusicHomeActivity extends BaseActivity implements View.OnClickListener {
+public class MusicMainActivity extends BaseActivity implements View.OnClickListener {
 
     TextView tvPlayMusic;
     TextView tvGoApp;

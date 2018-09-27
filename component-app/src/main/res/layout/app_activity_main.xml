@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     tools:context="com.rainmonth.app.AppMainActivity">
 
-    <TextView
+    <Button
+        android:id="@+id/app_btn_start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/app_welcome_label"

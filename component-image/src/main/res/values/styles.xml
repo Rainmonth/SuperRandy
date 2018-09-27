@@ -1,3 +1,8 @@
 <resources>
 
+    <style name="ImageSplashTheme" parent="SplashTheme">
+
+        <item name="android:windowBackground">@drawable/image_bg_image_launch</item>
+
+    </style>
 </resources>

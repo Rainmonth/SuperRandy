@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     package="com.rainmonth.image">
 
-    <application
-        android:label="@string/app_name"
-        tools:replace="android:label">
-
+    <application>
+        <meta-data
+            android:name="com.rainmonth.image.config.ImageAppConfig"
+            android:value="ConfigModule" />
+        <activity android:name=".mvp.ui.activity.ImageMainActivity" />
+        <activity android:name=".mvp.ui.activity.PhotoHomeActivity" />
+        <activity android:name=".mvp.ui.activity.CollectionHomeActivity" />
+        <activity android:name=".mvp.ui.activity.SearchActivity" />
+        <activity android:name=".mvp.ui.activity.UserCenterActivity" />
     </application>
 
 </manifest>

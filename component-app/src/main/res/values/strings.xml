@@ -1,4 +1,4 @@
 <resources>
-    <string name="app_name">compent-app</string>
-    <string name="app_welcome_label">欢迎进入App模块</string>
+    <string name="app_app_name">App模块</string>
+    <string name="app_welcome_label">点击进入App模块</string>
 </resources>

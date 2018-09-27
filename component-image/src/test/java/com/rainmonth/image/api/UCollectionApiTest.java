@@ -1,6 +1,7 @@
 package com.rainmonth.image.api;
 
 import com.rainmonth.common.BuildConfig;
+import com.rainmonth.common.utils.RxUtils;
 import com.rainmonth.image.base.ApiTestHelper;
 import com.rainmonth.image.base.ApiTestObserver;
 import com.rainmonth.image.base.BaseApiTest;
@@ -40,7 +41,7 @@ public class UCollectionApiTest extends BaseApiTest {
     @Test
     public void getFeaturedCollection() {
         ApiTestHelper.createApiClass(UCollectionApi.class)
-                .getFeaturedCollection(1, 10)
+                .getFeaturedCollections(1, 10)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new ApiTestObserver<List<CollectionBean>>() {
@@ -52,6 +53,39 @@ public class UCollectionApiTest extends BaseApiTest {
                     }
                 });
 
+    }
+
+    @Test
+    public void getCuratedCollection() {
+        ApiTestHelper.createApiClass(UCollectionApi.class)
+                .getCuratedCollections(1, 10)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new ApiTestObserver<List<CollectionBean>>() {
+                    @Override
+                    public void onNext(List<CollectionBean> collectionBeans) {
+                        KLog.e("Randy", "next");
+                        KLog.e("Randy", "size=" + collectionBeans.size());
+                        assertEquals(11, collectionBeans.size());
+                    }
+                });
+
+    }
+
+    @Test
+    public void getCuratedCollectionPhotos() {
+        ApiTestHelper.createApiClass(UCollectionApi.class)
+                .getCuratedCollectionPhotos(1922729, 1, 10)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new ApiTestObserver<List<PhotoBean>>() {
+                    @Override
+                    public void onNext(List<PhotoBean> photoBeans) {
+                        KLog.e("Randy", "next");
+                        KLog.e("Randy", "size=" + photoBeans.size());
+                        assertEquals(10, photoBeans.size());
+                    }
+                });
     }
 
     @Test
@@ -86,5 +120,47 @@ public class UCollectionApiTest extends BaseApiTest {
                         assertEquals(1922728, collectionBean.getId());
                     }
                 });
+    }
+
+    @Test
+    public void addCollection() {
+    }
+
+    @Test
+    public void addCollection1() {
+    }
+
+    @Test
+    public void addPhotoToCollection() {
+    }
+
+    @Test
+    public void deleteCollection() {
+    }
+
+    @Test
+    public void deletePhotoFromCollection() {
+    }
+
+    @Test
+    public void updateCollection() {
+    }
+
+    @Test
+    public void getRelatedCollections() {
+        ApiTestHelper.createApiClass(UCollectionApi.class)
+                .getRelatedCollections(1922729)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new ApiTestObserver<List<CollectionBean>>() {
+
+                    @Override
+                    public void onNext(List<CollectionBean> collectionBeans) {
+                        KLog.e("Randy", "next");
+                        KLog.e("Randy", "size=" + collectionBeans.size());
+                        assertEquals(10, collectionBeans.size());
+                    }
+                });
+
     }
 }

@@ -1,4 +1,4 @@
 <resources>
-    <string name="app_name">compent-movie</string>
+    <string name="movie_app_name">电影模块</string>
     <string name="movie_welcome_label">欢迎进入电影模块</string>
 </resources>

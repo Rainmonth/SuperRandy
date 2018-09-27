@@ -1,26 +1,28 @@
 package com.rainmonth.image;
 
-import android.view.View;
+import android.os.Handler;
+import android.os.Bundle;
 
 import com.rainmonth.common.base.BaseActivity;
 import com.rainmonth.common.di.component.AppComponent;
-import com.rainmonth.image.mvp.ui.activity.ImageHomeActivity;
+import com.rainmonth.image.mvp.ui.activity.ImageMainActivity;
 
-public class ImageMainActivity extends BaseActivity {
+public class ImageLaunchActivity extends BaseActivity {
 
     @Override
     protected int getContentViewLayoutID() {
-        return R.layout.image_activity_main;
+        return -1;
     }
 
     @Override
     protected void initViewsAndEvents() {
-        findViewById(R.id.tv_welcom).setOnClickListener(new View.OnClickListener() {
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
             @Override
-            public void onClick(View v) {
-                readyGo(ImageHomeActivity.class);
+            public void run() {
+                readyGoThenKill(ImageMainActivity.class);
             }
-        });
+        }, 5000);
     }
 
     @Override
