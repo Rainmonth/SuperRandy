@@ -185,8 +185,8 @@ rootProject.ext.merge.each { c ->
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile files('libs/GetuiSDK2.9.5.0.jar')
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation files('libs/GetuiSDK2.9.5.0.jar')
     api project(':common')
     api project(':magicindicator')
     //di
@@ -194,11 +194,11 @@ dependencies {
     annotationProcessor rootProject.ext.dependencies["butterknife-compiler"]
     annotationProcessor rootProject.ext.dependencies["router-compiler"]
     //可选，用于生成application类
-    compile("com.tencent.tinker:tinker-android-lib:${TINKER_VERSION}") { changing = true }
+    implementation("com.tencent.tinker:tinker-android-lib:${TINKER_VERSION}") { changing = true }
     //tinker的核心库
-    provided("com.tencent.tinker:tinker-android-anno:${TINKER_VERSION}") { changing = true }
+    compileOnly("com.tencent.tinker:tinker-android-anno:${TINKER_VERSION}") { changing = true }
     annotationProcessor("com.tencent.tinker:tinker-android-anno:${TINKER_VERSION}")
-    compile('com.android.support:multidex:1.0.1')
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation('com.android.support:multidex:1.0.1')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 }
 

@@ -37,13 +37,13 @@ dependencies {
     //res
     api project(":common-res")
     api project(":router")
-    compile(rootProject.ext.dependencies["router"]){
+    api(rootProject.ext.dependencies["router"]) {
         exclude module: 'support-v4'
         exclude module: 'appcompat-v7'
         exclude module: 'support-annotations'
     }
     annotationProcessor rootProject.ext.dependencies["router-compiler"]
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     // base
     api rootProject.ext.dependencies["appcompat-v7"]
@@ -58,19 +58,12 @@ dependencies {
         exclude module: 'support-annotations'
     }
 
-    // test
-    testApi rootProject.ext.dependencies['junit']
-    androidTestCompile 'junit:junit:4.12'
-    testCompile 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-
     // butter knife
     api rootProject.ext.dependencies["butterknife"]
-    compile 'de.greenrobot:eventbus:2.4.0'
-    compile 'com.readystatesoftware.systembartint:systembartint:1.0.3'
-    compile 'com.nineoldandroids:library:2.4.0'
-    compile 'com.github.chrisbanes.photoview:library:1.2.4'
+    api rootProject.ext.dependencies["eventbus"]
+    api rootProject.ext.dependencies["systembartint"]
+    api rootProject.ext.dependencies["nineoldandroids"]
+    api rootProject.ext.dependencies["photoview"]
 
     //di
     api rootProject.ext.dependencies["dagger2"]
@@ -97,13 +90,13 @@ dependencies {
 //    api rootProject.ext.dependencies["glide-compiler"]
 
     // KLog
-    compile 'com.github.zhaokaiqiang.klog:library:1.5.0'
+    api rootProject.ext.dependencies["klog"]
     // multidex 解决4.4以下频繁出现的NoClassDefFoundError
     api rootProject.ext.dependencies["multidex"]
 
     // leakcanary
-    debugImplementation rootProject.ext.dependencies['blockcanary-android']
-    releaseImplementation rootProject.ext.dependencies['blockcanary-no-op']
-    debugImplementation rootProject.ext.dependencies['leakcanary-android']
-    releaseImplementation rootProject.ext.dependencies['leakcanary-no-op']
+    debugApi rootProject.ext.dependencies['blockcanary-android']
+    releaseApi rootProject.ext.dependencies['blockcanary-no-op']
+    debugApi rootProject.ext.dependencies['leakcanary-android']
+    releaseApi rootProject.ext.dependencies['leakcanary-no-op']
 }
