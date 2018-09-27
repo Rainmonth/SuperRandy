@@ -11,7 +11,7 @@
         android:layout_gravity="center"
         android:layout_marginRight="150dp"
         android:layout_marginTop="30dp"
-        app:srcCompat="@drawable/coin_wing_left" />
+        app:srcCompat="@drawable/image_coin_wing_left" />
 
     <ImageView
         android:id="@+id/iv_coin_wing_right"
@@ -20,7 +20,7 @@
         android:layout_gravity="center"
         android:layout_marginLeft="150dp"
         android:layout_marginTop="30dp"
-        app:srcCompat="@drawable/coin_wing_right" />
+        app:srcCompat="@drawable/image_coin_wing_right" />
 
     <ImageView
         android:id="@+id/iv_coin_crown"
@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginBottom="140dp"
-        app:srcCompat="@drawable/coin_crown" />
+        app:srcCompat="@drawable/image_coin_crown" />
 
     <ImageView
         android:id="@+id/iv_coin"
@@ -36,7 +36,7 @@
         android:layout_height="280dp"
         android:layout_gravity="center"
         android:layout_marginTop="50dp"
-        app:srcCompat="@drawable/coin_coin" />
+        app:srcCompat="@drawable/image_coin_coin" />
 
     <TextView
         android:id="@+id/tv_coin_num"
