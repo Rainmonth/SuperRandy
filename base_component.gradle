@@ -61,6 +61,14 @@ android {
     // 配置组件项目依赖
     dependencies {
 //        api project(":common")
-        implementation project(":common")
+        api project(":common")
+        // test
+        testApi rootProject.ext.dependencies['junit']
+        androidTestApi rootProject.ext.dependencies['junit']
+        testApi rootProject.ext.dependencies['robolectric']
+        testApi rootProject.ext.dependencies['shadows-support']
+        testApi rootProject.ext.dependencies['shadows-multidex']
+        androidTestApi rootProject.ext.dependencies['runner']
+        androidTestApi rootProject.ext.dependencies['espresso']
     }
 }
