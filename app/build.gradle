@@ -185,8 +185,8 @@ rootProject.ext.merge.each { c ->
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile files('libs/GetuiSDK2.9.5.0.jar')
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation files('libs/GetuiSDK2.9.5.0.jar')
     api project(':common')
     api project(':magicindicator')
     //di

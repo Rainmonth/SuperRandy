@@ -2,7 +2,7 @@ apply from: "../base_component.gradle"
 apply from: "../base_component_compiler.gradle"
 
 dependencies {
-    compile(rootProject.ext.dependencies["router"]) {
+    implementation(rootProject.ext.dependencies["router"]) {
         exclude module: 'support-v4'
         exclude module: 'appcompat-v7'
         exclude module: 'support-annotations'
