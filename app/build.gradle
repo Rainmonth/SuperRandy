@@ -198,7 +198,6 @@ dependencies {
     //tinker的核心库
     compileOnly("com.tencent.tinker:tinker-android-anno:${TINKER_VERSION}") { changing = true }
     annotationProcessor("com.tencent.tinker:tinker-android-anno:${TINKER_VERSION}")
-    implementation('com.android.support:multidex:1.0.1')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 }
 
