@@ -22,6 +22,9 @@ import java.util.List;
  * @desprition: 合集页面
  * @author: RandyZhang
  * @date: 2018/8/14 下午10:27
+ *
+ * 功能简介
+ * - 展示所有合集
  */
 public class CollectionHomeActivity extends BaseActivity<CollectionHomePresenter>
         implements CollectionHomeContract.View {

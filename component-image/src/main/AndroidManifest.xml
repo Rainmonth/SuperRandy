@@ -11,6 +11,10 @@
         <activity android:name=".mvp.ui.activity.CollectionHomeActivity" />
         <activity android:name=".mvp.ui.activity.SearchActivity" />
         <activity android:name=".mvp.ui.activity.UserCenterActivity" />
+        <activity android:name=".mvp.ui.activity.PhotoDetailActivity" />
+        <activity android:name=".mvp.ui.activity.SearchResultActivity" />
+        <activity android:name=".mvp.ui.activity.DownloadCenterActivity" />
+        <activity android:name=".mvp.ui.activity.UserImageCollectionActivity" />
     </application>
 
 </manifest>

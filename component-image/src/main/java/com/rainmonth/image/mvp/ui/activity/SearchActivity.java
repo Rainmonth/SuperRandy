@@ -9,7 +9,6 @@ import com.rainmonth.common.base.BaseActivity;
 import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.common.utils.CommonUtils;
 import com.rainmonth.image.R;
-import com.rainmonth.image.di.component.DaggerPhotoHomeComponent;
 import com.rainmonth.image.di.component.DaggerSearchComponent;
 import com.rainmonth.image.di.module.SearchModule;
 import com.rainmonth.image.mvp.contract.SearchContract;
@@ -19,6 +18,9 @@ import com.rainmonth.image.mvp.presenter.SearchPresenter;
 import com.socks.library.KLog;
 
 /**
+ * 搜索中间页
+ * 1.显示历史搜索记录
+ * 2.显示推荐搜索（这个需要自己写接口，Unsplash没有提供接口）
  * Created by RandyZhang on 2018/8/14.
  */
 public class SearchActivity extends BaseActivity<SearchPresenter> implements SearchContract.View {
@@ -56,8 +58,9 @@ public class SearchActivity extends BaseActivity<SearchPresenter> implements Sea
                     showToast("搜索关键词为空！");
                     return;
                 }
-                mPresenter.search(1, etSearchKeys.getText().toString(), 1,
-                        10, "", "");
+//                mPresenter.search(1, etSearchKeys.getText().toString(), 1,
+//                        10, "", "");
+                readyGo(SearchResultActivity.class);
             }
         });
 

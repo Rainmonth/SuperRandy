@@ -19,7 +19,11 @@ import com.rainmonth.image.mvp.ui.adapter.PhotosAdapter;
 
 import java.util.List;
 
-
+/**
+ * 照片页
+ * 功能简介
+ * - 显示所有图片
+ */
 public class PhotoHomeActivity extends BaseActivity<PhotoHomePresenter> implements
         PhotoHomeContract.View {
 

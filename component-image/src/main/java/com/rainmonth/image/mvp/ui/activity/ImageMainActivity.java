@@ -9,6 +9,11 @@ import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.image.R;
 import com.rainmonth.router.RouterConstant;
 
+/**
+ * 主展示页面
+ * 功能简介
+ * -
+ */
 @Route(path = RouterConstant.PATH_IMAGE_HOME)
 public class ImageMainActivity extends BaseActivity {
 
