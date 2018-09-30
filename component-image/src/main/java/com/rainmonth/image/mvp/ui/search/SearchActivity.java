@@ -1,4 +1,4 @@
-package com.rainmonth.image.mvp.ui.activity;
+package com.rainmonth.image.mvp.ui.search;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;

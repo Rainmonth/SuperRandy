@@ -1,4 +1,4 @@
-package com.rainmonth.image.mvp.ui.activity;
+package com.rainmonth.image.mvp.ui.photo;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;

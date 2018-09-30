@@ -1,4 +1,4 @@
-package com.rainmonth.image.mvp.ui.activity;
+package com.rainmonth.image.mvp.ui.common;
 
 import android.view.View;
 import android.widget.Button;
@@ -7,6 +7,10 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.rainmonth.common.base.BaseActivity;
 import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.image.R;
+import com.rainmonth.image.mvp.ui.collection.CollectionHomeActivity;
+import com.rainmonth.image.mvp.ui.photo.PhotoHomeActivity;
+import com.rainmonth.image.mvp.ui.search.SearchActivity;
+import com.rainmonth.image.mvp.ui.usercenter.UserCenterActivity;
 import com.rainmonth.router.RouterConstant;
 
 /**

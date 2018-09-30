@@ -1,4 +1,4 @@
-package com.rainmonth.image.mvp.ui.activity;
+package com.rainmonth.image.mvp.ui.usercenter;
 
 import com.rainmonth.common.base.BaseActivity;
 import com.rainmonth.common.di.component.AppComponent;

@@ -1,4 +1,4 @@
-package com.rainmonth.image.mvp.ui.activity;
+package com.rainmonth.image.mvp.ui.collection;
 
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;

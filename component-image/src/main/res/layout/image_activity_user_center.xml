@@ -12,7 +12,7 @@
             android:id="@+id/mineLabel"
             style="@style/image_setting_label"
             android:layout_marginTop="@dimen/m16"
-            android:text="我的"
+            android:text="@string/image_user_center_label_mine"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -20,7 +20,7 @@
         <Button
             android:id="@+id/downloadBtn"
             style="@style/image_setting_btn"
-            android:text="我的下载"
+            android:text="@string/image_user_center_label_my_download"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/mineLabel" />
@@ -28,7 +28,7 @@
         <Button
             android:id="@+id/collectBtn"
             style="@style/image_setting_btn"
-            android:text="我的收藏"
+            android:text="@string/image_user_center_label_my_collect"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/downloadBtn" />
@@ -36,7 +36,7 @@
         <Button
             android:id="@+id/focusBtn"
             style="@style/image_setting_btn"
-            android:text="我的关注"
+            android:text="@string/image_user_center_label_my_focus"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/collectBtn" />
@@ -44,50 +44,50 @@
         <Button
             android:id="@+id/infoBtn"
             style="@style/image_setting_btn"
-            android:text="我的信息"
+            android:text="@string/image_user_center_label_my_info"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/focusBtn" />
 
         <Button
-            android:id="@+id/image_button5"
+            android:id="@+id/statisticsBtn"
             style="@style/image_setting_btn"
-            android:text="我的统计"
+            android:text="@string/image_user_center_label_my_statistics"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/infoBtn" />
 
         <Button
-            android:id="@+id/button6"
+            android:id="@+id/siteBtn"
             style="@style/image_setting_btn"
-            android:text="我的网站"
+            android:text="@string/image_user_center_label_my_site"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/image_button5" />
+            app:layout_constraintTop_toBottomOf="@+id/statisticsBtn" />
 
         <TextView
             android:id="@+id/appLabel"
             style="@style/image_setting_label"
             android:layout_marginTop="@dimen/m16"
-            android:text="应用设置"
+            android:text="@string/image_user_center_label_app_setting"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button6" />
+            app:layout_constraintTop_toBottomOf="@+id/siteBtn" />
 
         <Button
-            android:id="@+id/image_button7"
+            android:id="@+id/clearCacheBtn"
             style="@style/image_setting_btn"
-            android:text="清除缓存"
+            android:text="@string/image_user_center_label_clear_cache"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/appLabel" />
 
         <Button
-            android:id="@+id/image_button8"
+            android:id="@+id/showSettingBtn"
             style="@style/image_setting_btn"
-            android:text="设置图片展示方式"
+            android:text="@string/image_user_center_label_setting_img_show_style"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/image_button7" />
+            app:layout_constraintTop_toBottomOf="@+id/clearCacheBtn" />
     </android.support.constraint.ConstraintLayout>
 </ScrollView>

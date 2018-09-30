@@ -1,4 +1,4 @@
-package com.rainmonth.image.mvp.ui.activity;
+package com.rainmonth.image.mvp.ui.common;
 
 import android.content.Context;
 import android.graphics.Bitmap;
