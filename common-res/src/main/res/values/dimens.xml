@@ -21,6 +21,9 @@
     <dimen name="indicator_internal_padding">4.0dip</dimen>
     <dimen name="indicator_right_padding">10.0dip</dimen>
 
+    <dimen name="f14">14sp</dimen>
+    <dimen name="f16">16sp</dimen>
+    <dimen name="f18">18sp</dimen>
     <dimen name="f22">22sp</dimen>
     <dimen name="f36">36sp</dimen>
     <dimen name="cpb_default_stroke_width">4dp</dimen>
