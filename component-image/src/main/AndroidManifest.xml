@@ -19,6 +19,12 @@
         <activity android:name=".mvp.ui.usercenter.UserInfoActivity" />
         <activity android:name=".mvp.ui.usercenter.UserFocusActivity" />
         <activity android:name=".mvp.ui.usercenter.SettingImageShowStyleActivity" />
+        <activity android:name=".mvp.ui.usercenter.UserStatisticsActivity" />
+
+        <activity
+            android:name="com.rainmonth.common.base.BaseWebActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>
