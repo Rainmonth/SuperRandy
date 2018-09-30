@@ -5,11 +5,14 @@ import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.SparseArray;
+import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.rainmonth.common.base.BaseActivity;
 import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.image.R;
+import com.rainmonth.image.api.Consts;
 import com.rainmonth.image.di.component.DaggerPhotoHomeComponent;
 import com.rainmonth.image.di.module.PhotoHomeModule;
 import com.rainmonth.image.mvp.contract.PhotoHomeContract;
@@ -83,6 +86,25 @@ public class PhotoHomeActivity extends BaseActivity<PhotoHomePresenter> implemen
                 }
             }, imageRvPhotos);
 
+            photosAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                    // 一次传递一页数据，并传递当前索引及页面，方便数据请求
+                    int currentPage = position / perPage + 1;
+                    int currentIndex = position % perPage;
+                    Bundle bundle = new Bundle();
+                    List<PhotoBean> currentPagePhotos = photosAdapter.getData()
+                            .subList(currentPage * perPage, (currentPage + 1) * perPage);
+                    SparseArray<PhotoBean> beanSparseArray =
+                            convertListToSparseArray(currentPagePhotos);
+                    bundle.putSparseParcelableArray(Consts.PHOTO_LIST, beanSparseArray);
+                    bundle.putInt(Consts.CURRENT_PAGE, page);
+                    bundle.putInt(Consts.CURRENT_INDEX, currentIndex);
+                    bundle.putInt(Consts.PAGE_SIZE, perPage);
+                    readyGo(PhotoDetailActivity.class, bundle);
+                }
+            });
+
             imageRvPhotos.setAdapter(photosAdapter);
             LinearLayoutManager manager = new LinearLayoutManager(mContext);
             imageRvPhotos.setLayoutManager(manager);
@@ -90,6 +112,15 @@ public class PhotoHomeActivity extends BaseActivity<PhotoHomePresenter> implemen
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private SparseArray<PhotoBean> convertListToSparseArray(List<PhotoBean> photoBeans) {
+        SparseArray<PhotoBean> beanSparseArray = new SparseArray<>();
+        for (int i = 0; i < photoBeans.size(); i++) {
+            beanSparseArray.append(i, photoBeans.get(i));
+        }
+
+        return beanSparseArray;
     }
 
     private void doRefresh() {

@@ -65,4 +65,11 @@ public class Consts {
     public static final String GET_CURATED_PHOTOS = BASE_URL + "photos/curated";
     // 获取某张图片的统计数据
     public static final String GET_PHOTO_STATISTICS = BASE_URL + "photos/{id}/statistics";
+
+
+    public static final String PHOTO_LIST = "photo_list";
+    public static final String CURRENT_PAGE = "current_page";
+    public static final String CURRENT_INDEX = "current_position";
+    public static final String PAGE_SIZE = "page_size";
+    public static final String PHOTO_BEAN = "photo_bean";
 }

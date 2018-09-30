@@ -1,5 +1,8 @@
 package com.rainmonth.image.mvp.model.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
@@ -8,7 +11,7 @@ import java.util.Date;
 /**
  * 用户Bean
  */
-public class UserBean implements Serializable {
+public class UserBean implements Serializable, Parcelable {
 
     private String id;
     private Date updated_at;
@@ -27,6 +30,34 @@ public class UserBean implements Serializable {
     private int total_collections;
     private int total_likes;
     private int total_photos;
+
+    protected UserBean(Parcel in) {
+        id = in.readString();
+        username = in.readString();
+        name = in.readString();
+        first_name = in.readString();
+        last_name = in.readString();
+        twitter_username = in.readString();
+        portfolio_url = in.readString();
+        bio = in.readString();
+        location = in.readString();
+        instagram_username = in.readString();
+        total_collections = in.readInt();
+        total_likes = in.readInt();
+        total_photos = in.readInt();
+    }
+
+    public static final Creator<UserBean> CREATOR = new Creator<UserBean>() {
+        @Override
+        public UserBean createFromParcel(Parcel in) {
+            return new UserBean(in);
+        }
+
+        @Override
+        public UserBean[] newArray(int size) {
+            return new UserBean[size];
+        }
+    };
 
     public void setId(String id) {
         this.id = id;
@@ -156,4 +187,25 @@ public class UserBean implements Serializable {
         return total_photos;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(id);
+        dest.writeString(username);
+        dest.writeString(name);
+        dest.writeString(first_name);
+        dest.writeString(last_name);
+        dest.writeString(twitter_username);
+        dest.writeString(portfolio_url);
+        dest.writeString(bio);
+        dest.writeString(location);
+        dest.writeString(instagram_username);
+        dest.writeInt(total_collections);
+        dest.writeInt(total_likes);
+        dest.writeInt(total_photos);
+    }
 }

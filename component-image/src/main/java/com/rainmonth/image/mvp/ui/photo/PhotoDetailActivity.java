@@ -1,8 +1,18 @@
 package com.rainmonth.image.mvp.ui.photo;
 
+import android.os.Bundle;
+import android.support.v4.view.ViewPager;
+import android.util.SparseArray;
+
 import com.rainmonth.common.base.BaseActivity;
 import com.rainmonth.common.di.component.AppComponent;
+import com.rainmonth.common.widgets.PullToRefreshViewPager;
 import com.rainmonth.image.R;
+import com.rainmonth.image.api.Consts;
+import com.rainmonth.image.mvp.model.bean.PhotoBean;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 照片详情Activity
@@ -18,14 +28,47 @@ import com.rainmonth.image.R;
  */
 public class PhotoDetailActivity extends BaseActivity {
 
+    private SparseArray<PhotoBean> photoBeans;
+    private int currentPage;
+    private int currentIndex;
+    private int pageSize;
+
+    private PullToRefreshViewPager refreshViewPager;
+    private ViewPager viewPager;
+    private PhotoPagerAdapter photoPagerAdapter;
+
     @Override
     protected int getContentViewLayoutID() {
         return R.layout.image_activity_photo_detail;
     }
 
     @Override
-    protected void initViewsAndEvents() {
+    protected void getBundleExtras(Bundle extras) {
+        photoBeans = extras.getSparseParcelableArray(Consts.PHOTO_LIST);
+        currentPage = extras.getInt(Consts.CURRENT_PAGE);
+        currentIndex = extras.getInt(Consts.CURRENT_INDEX);
+        pageSize = extras.getInt(Consts.PAGE_SIZE);
+    }
 
+    @Override
+    protected void initViewsAndEvents() {
+        refreshViewPager = findViewById(R.id.refreshViewPager);
+        refreshViewPager.setPullToRefreshOverScrollEnabled(true);
+
+        viewPager = refreshViewPager.getRefreshableView();
+        photoPagerAdapter = new PhotoPagerAdapter(getSupportFragmentManager(),
+                convertSparseArrayToList(photoBeans));
+        viewPager.setAdapter(photoPagerAdapter);
+    }
+
+    private List<PhotoBean> convertSparseArrayToList(SparseArray<PhotoBean> photoBeanSparseArray) {
+        List<PhotoBean> photoBeanList = new ArrayList<>();
+        if (null != photoBeanSparseArray && photoBeanSparseArray.size() > 0) {
+            for (int i = 0; i < photoBeanSparseArray.size(); i++) {
+                photoBeanList.add(photoBeanSparseArray.get(i));
+            }
+        }
+        return photoBeanList;
     }
 
     @Override

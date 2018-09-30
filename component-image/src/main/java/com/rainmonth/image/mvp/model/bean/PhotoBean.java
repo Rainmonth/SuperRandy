@@ -1,5 +1,8 @@
 package com.rainmonth.image.mvp.model.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
@@ -9,7 +12,7 @@ import java.util.List;
 /**
  * 封面图片Bean
  */
-public class PhotoBean implements Serializable {
+public class PhotoBean implements Serializable, Parcelable {
 
     private String id;
     private Date created_at;
@@ -28,6 +31,32 @@ public class PhotoBean implements Serializable {
     private List<String> current_user_collections;
     private String slug;
     private UserBean user;
+
+    protected PhotoBean(Parcel in) {
+        id = in.readString();
+        width = in.readInt();
+        height = in.readInt();
+        color = in.readString();
+        description = in.readString();
+        categories = in.createStringArrayList();
+        sponsored = in.readByte() != 0;
+        likes = in.readInt();
+        liked_by_user = in.readByte() != 0;
+        current_user_collections = in.createStringArrayList();
+        slug = in.readString();
+    }
+
+    public static final Creator<PhotoBean> CREATOR = new Creator<PhotoBean>() {
+        @Override
+        public PhotoBean createFromParcel(Parcel in) {
+            return new PhotoBean(in);
+        }
+
+        @Override
+        public PhotoBean[] newArray(int size) {
+            return new PhotoBean[size];
+        }
+    };
 
     public void setId(String id) {
         this.id = id;
@@ -156,5 +185,26 @@ public class PhotoBean implements Serializable {
     public UserBean getUser() {
         return user;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(id);
+        dest.writeInt(width);
+        dest.writeInt(height);
+        dest.writeString(color);
+        dest.writeString(description);
+        dest.writeStringList(categories);
+        dest.writeByte((byte) (sponsored ? 1 : 0));
+        dest.writeInt(likes);
+        dest.writeByte((byte) (liked_by_user ? 1 : 0));
+        dest.writeStringList(current_user_collections);
+        dest.writeString(slug);
+    }
+
 
 }
