@@ -61,9 +61,7 @@ public class CollectionHomeActivity extends BaseActivity<CollectionHomePresenter
             imageSrlContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
                 @Override
                 public void onRefresh() {
-                    isRefresh = true;
-                    page = 1;
-                    mPresenter.getCollections(page, perPage);
+                    doRefresh();
                 }
             });
 
@@ -79,18 +77,22 @@ public class CollectionHomeActivity extends BaseActivity<CollectionHomePresenter
                     mPresenter.getCollections(page, perPage);
                 }
             }, imageRvCollections);
-            isRefresh = true;
-            imageSrlContainer.setRefreshing(true);
-            mPresenter.getCollections(1, 10);
+            doRefresh();
         } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
 
+    private void doRefresh() {
+        isRefresh = true;
+        imageSrlContainer.setRefreshing(true);
+        page = 1;
+        mPresenter.getCollections(page, perPage);
+    }
+
     @Override
     public void initCollectionList(List<CollectionBean> collectionBeans) {
-        collectionsAdapter.addData(collectionBeans);
         imageSrlContainer.setRefreshing(false);
         final int size = collectionBeans.size();
         if (isRefresh) {

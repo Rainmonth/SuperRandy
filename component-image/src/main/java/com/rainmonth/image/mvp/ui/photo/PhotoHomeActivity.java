@@ -69,10 +69,7 @@ public class PhotoHomeActivity extends BaseActivity<PhotoHomePresenter> implemen
             imageSrfContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
                 @Override
                 public void onRefresh() {
-                    imageSrfContainer.setRefreshing(true);
-                    isRefresh = true;
-                    page = 1;
-                    mPresenter.getPhotos(page, perPage, orderBy);
+                    doRefresh();
                 }
             });
 //
@@ -89,18 +86,21 @@ public class PhotoHomeActivity extends BaseActivity<PhotoHomePresenter> implemen
             imageRvPhotos.setAdapter(photosAdapter);
             LinearLayoutManager manager = new LinearLayoutManager(mContext);
             imageRvPhotos.setLayoutManager(manager);
-
-            imageSrfContainer.setRefreshing(true);
-            isRefresh = true;
-            mPresenter.getPhotos(1, 10, orderBy);
+            doRefresh();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+    private void doRefresh() {
+        isRefresh = true;
+        imageSrfContainer.setRefreshing(true);
+        page = 1;
+        mPresenter.getPhotos(page, perPage, orderBy);
+    }
+
     @Override
     public void initPhotoList(List<PhotoBean> photoBeans) {
-        photosAdapter.addData(photoBeans);
         imageSrfContainer.setRefreshing(false);
         final int size = photoBeans.size();
         if (isRefresh) {
