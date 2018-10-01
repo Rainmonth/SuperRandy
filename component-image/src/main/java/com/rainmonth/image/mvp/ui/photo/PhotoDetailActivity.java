@@ -59,6 +59,7 @@ public class PhotoDetailActivity extends BaseActivity {
         photoPagerAdapter = new PhotoPagerAdapter(getSupportFragmentManager(),
                 convertSparseArrayToList(photoBeans));
         viewPager.setAdapter(photoPagerAdapter);
+        viewPager.setCurrentItem(currentIndex);
     }
 
     private List<PhotoBean> convertSparseArrayToList(SparseArray<PhotoBean> photoBeanSparseArray) {

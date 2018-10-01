@@ -94,7 +94,7 @@ public class PhotoHomeActivity extends BaseActivity<PhotoHomePresenter> implemen
                     int currentIndex = position % perPage;
                     Bundle bundle = new Bundle();
                     List<PhotoBean> currentPagePhotos = photosAdapter.getData()
-                            .subList(currentPage * perPage, (currentPage + 1) * perPage);
+                            .subList((currentPage - 1) * perPage, currentPage * perPage);
                     SparseArray<PhotoBean> beanSparseArray =
                             convertListToSparseArray(currentPagePhotos);
                     bundle.putSparseParcelableArray(Consts.PHOTO_LIST, beanSparseArray);
