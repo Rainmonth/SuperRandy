@@ -72,4 +72,5 @@ public class Consts {
     public static final String CURRENT_INDEX = "current_position";
     public static final String PAGE_SIZE = "page_size";
     public static final String PHOTO_BEAN = "photo_bean";
+    public static final String COLLECTION_ID = "collection_id";
 }

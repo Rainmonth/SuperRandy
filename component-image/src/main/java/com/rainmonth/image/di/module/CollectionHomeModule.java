@@ -3,9 +3,7 @@ package com.rainmonth.image.di.module;
 
 import com.rainmonth.common.di.scope.ActivityScope;
 import com.rainmonth.image.mvp.contract.CollectionHomeContract;
-import com.rainmonth.image.mvp.contract.PhotoHomeContract;
 import com.rainmonth.image.mvp.model.CollectionHomeModel;
-import com.rainmonth.image.mvp.model.PhotoHomeModel;
 
 import dagger.Module;
 import dagger.Provides;

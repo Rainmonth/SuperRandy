@@ -4,11 +4,8 @@ import com.rainmonth.common.base.mvp.BaseModel;
 import com.rainmonth.common.di.scope.ActivityScope;
 import com.rainmonth.common.integration.IRepositoryManager;
 import com.rainmonth.image.api.UCollectionApi;
-import com.rainmonth.image.api.UPhotoApi;
 import com.rainmonth.image.mvp.contract.CollectionHomeContract;
-import com.rainmonth.image.mvp.contract.PhotoHomeContract;
 import com.rainmonth.image.mvp.model.bean.CollectionBean;
-import com.rainmonth.image.mvp.model.bean.PhotoBean;
 
 import java.util.List;
 

@@ -97,7 +97,7 @@ public interface UCollectionApi {
             "Authorization:Client-ID ae1715b58d53e958f990d42c9a3e221120a292efd592d66d0ba3717ccc4c9abe"
     })
     @GET(Consts.GET_COLLECTION_PHOTOS)
-    Observable<List<PhotoBean>> getCollectionPhotos(@Path("id") int id,
+    Observable<List<PhotoBean>> getCollectionPhotos(@Path("id") long id,
                                                     @Query("page") int page,
                                                     @Query("per_page") int perPage);
 

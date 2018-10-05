@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="imageColorPrimary">#3F51B5</color>
+    <color name="imageColorPrimaryDark">#303F9F</color>
+    <color name="imageColorAccent">#FF4081</color>
+
+    <color name="imageColorHalfPrimary">#8F3F51B5</color>
+</resources>

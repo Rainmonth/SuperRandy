@@ -1,14 +1,17 @@
 package com.rainmonth.image.mvp.ui.collection;
 
+import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.rainmonth.common.base.BaseActivity;
 import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.image.R;
+import com.rainmonth.image.api.Consts;
 import com.rainmonth.image.di.component.DaggerCollectionHomeComponent;
 import com.rainmonth.image.di.module.CollectionHomeModule;
 import com.rainmonth.image.mvp.contract.CollectionHomeContract;
@@ -22,7 +25,7 @@ import java.util.List;
  * @desprition: 合集页面
  * @author: RandyZhang
  * @date: 2018/8/14 下午10:27
- *
+ * <p>
  * 功能简介
  * - 展示所有合集
  */
@@ -77,6 +80,15 @@ public class CollectionHomeActivity extends BaseActivity<CollectionHomePresenter
                     mPresenter.getCollections(page, perPage);
                 }
             }, imageRvCollections);
+            collectionsAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                    CollectionBean bean = collectionsAdapter.getData().get(position);
+                    Bundle bundle = new Bundle();
+                    bundle.putLong(Consts.COLLECTION_ID, bean.getId());
+                    readyGo(CollectionDetailActivity.class, bundle);
+                }
+            });
             doRefresh();
         } catch (Exception e) {
             e.printStackTrace();
