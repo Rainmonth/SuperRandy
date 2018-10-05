@@ -41,7 +41,7 @@ android {
                 // 指定Java源文件
                 java.srcDirs = ['src/main/java', 'src/main/runalone/java']
                 // 指定资源文件
-                res.srcDirs = ['src/main/res', 'src/main/runalone/java']
+                res.srcDirs = ['src/main/res', 'src/main/runalone/res']
             }
         }
     }
