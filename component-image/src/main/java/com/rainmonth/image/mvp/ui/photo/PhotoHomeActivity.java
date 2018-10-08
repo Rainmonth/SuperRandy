@@ -98,9 +98,11 @@ public class PhotoHomeActivity extends BaseActivity<PhotoHomePresenter> implemen
                     SparseArray<PhotoBean> beanSparseArray =
                             convertListToSparseArray(currentPagePhotos);
                     bundle.putSparseParcelableArray(Consts.PHOTO_LIST, beanSparseArray);
-                    bundle.putInt(Consts.CURRENT_PAGE, page);
+                    bundle.putInt(Consts.CURRENT_PAGE, currentPage);
                     bundle.putInt(Consts.CURRENT_INDEX, currentIndex);
                     bundle.putInt(Consts.PAGE_SIZE, perPage);
+                    bundle.putString(Consts.ORDER_BY, orderBy);
+                    bundle.putString(Consts.FROM, Consts.FROM_PHOTO);
                     readyGo(PhotoDetailActivity.class, bundle);
                 }
             });

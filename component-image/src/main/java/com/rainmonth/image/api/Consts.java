@@ -73,4 +73,8 @@ public class Consts {
     public static final String PAGE_SIZE = "page_size";
     public static final String PHOTO_BEAN = "photo_bean";
     public static final String COLLECTION_ID = "collection_id";
+    public static final String FROM_PHOTO = "from_photo";
+    public static final String FROM_COLLECTION = "from_collection";
+    public static final String ORDER_BY = "orderBy";
+    public static final String FROM = "from";
 }

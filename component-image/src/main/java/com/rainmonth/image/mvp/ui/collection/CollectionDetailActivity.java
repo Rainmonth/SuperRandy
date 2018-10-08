@@ -80,6 +80,8 @@ public class CollectionDetailActivity extends BaseActivity<CollectionDetailPrese
                 bundle.putInt(Consts.CURRENT_PAGE, page);
                 bundle.putInt(Consts.CURRENT_INDEX, currentIndex);
                 bundle.putInt(Consts.PAGE_SIZE, perPage);
+                bundle.putLong(Consts.COLLECTION_ID, collectionId);
+                bundle.putString(Consts.FROM, Consts.FROM_COLLECTION);
                 readyGo(PhotoDetailActivity.class, bundle);
             }
         });

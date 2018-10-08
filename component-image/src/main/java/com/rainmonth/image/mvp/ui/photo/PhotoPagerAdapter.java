@@ -53,6 +53,20 @@ public class PhotoPagerAdapter extends FragmentStatePagerAdapter {
         this.photoBeanList = photoBeanList;
     }
 
+    public void addPhotoList(List<PhotoBean> photoBeanList, boolean isAddAtHead) {
+        List<Fragment> localFragmentList = new ArrayList<>();
+        Iterator localIterator = photoBeanList.iterator();
+        while (localIterator.hasNext())
+            localFragmentList.add(PhotoFragment.getInstance((PhotoBean) localIterator.next()));
+        if (isAddAtHead) {
+            this.fragmentList.addAll(0, localFragmentList);
+            this.photoBeanList.addAll(0, photoBeanList);
+        } else {
+            this.fragmentList.addAll(localFragmentList);
+            this.photoBeanList.addAll(photoBeanList);
+        }
+    }
+
     public List<Fragment> getFragmentList() {
         return fragmentList;
     }
