@@ -147,7 +147,7 @@ public class PhotoDetailActivity extends BaseActivity<PhotoDetailPresenter>
             return;
         if (refreshView.getCurrentMode() == PullToRefreshBase.Mode.PULL_FROM_END) {//最右
             mIsRequesting = true;
-            new Handler().postDelayed(new Runnable() {
+            new Handler().post(new Runnable() {
                 @Override
                 public void run() {
                     if (!isLastPage) {
@@ -165,11 +165,11 @@ public class PhotoDetailActivity extends BaseActivity<PhotoDetailPresenter>
                     }
                     mIsRequesting = false;
                 }
-            }, 2000);
+            });
 
         } else if (refreshView.getCurrentMode() == PullToRefreshBase.Mode.PULL_FROM_START) {//最左
             mIsRequesting = true;
-            new Handler().postDelayed(new Runnable() {
+            new Handler().post(new Runnable() {
                 @Override
                 public void run() {
                     if (currentPage > 1) {
@@ -187,7 +187,7 @@ public class PhotoDetailActivity extends BaseActivity<PhotoDetailPresenter>
                     }
                     mIsRequesting = false;
                 }
-            }, 2000);
+            });
         }
     }
 
