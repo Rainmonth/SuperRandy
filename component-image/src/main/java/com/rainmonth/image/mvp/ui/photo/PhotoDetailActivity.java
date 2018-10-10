@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.util.SparseArray;
+import android.view.View;
+import android.widget.LinearLayout;
 
 import com.rainmonth.common.base.BaseActivity;
 import com.rainmonth.common.di.component.AppComponent;
@@ -33,7 +35,8 @@ import java.util.List;
  * 注意该页面的数据源可能是来自照片，也可能来自合集
  */
 public class PhotoDetailActivity extends BaseActivity<PhotoDetailPresenter>
-        implements PullToRefreshBase.OnRefreshListener<ViewPager>, PhotoDetailContract.View {
+        implements PullToRefreshBase.OnRefreshListener<ViewPager>, PhotoDetailContract.View,
+        View.OnClickListener {
 
     private SparseArray<PhotoBean> photoBeans;
     private int currentPage;
@@ -43,9 +46,11 @@ public class PhotoDetailActivity extends BaseActivity<PhotoDetailPresenter>
     private long collectionId;
     private String orderBy;
     private String from = Consts.FROM_PHOTO;
+    private LinearLayout llBtnContainer;
+    private View btnAddToCollection, btnCollect, btnDownload;
 
-    private PullToRefreshViewPager refreshViewPager;
-    private ViewPager viewPager;
+    private PullToRefreshViewPager ptrVpPhotos;
+    private ViewPager vpPhotos;
     private PhotoPagerAdapter photoPagerAdapter;
     private List<PhotoBean> photoBeanList = new ArrayList<>();
     private boolean mIsRequesting = false;
@@ -73,16 +78,42 @@ public class PhotoDetailActivity extends BaseActivity<PhotoDetailPresenter>
 
     @Override
     protected void initViewsAndEvents() {
-        refreshViewPager = findViewById(R.id.refreshViewPager);
-        refreshViewPager.setPullToRefreshOverScrollEnabled(true);
-        refreshViewPager.setOnRefreshListener(this);
-        refreshViewPager.setMode(PullToRefreshBase.Mode.BOTH);
+        ptrVpPhotos = findViewById(R.id.ptr_vp_photos);
 
-        viewPager = refreshViewPager.getRefreshableView();
+        llBtnContainer = findViewById(R.id.ll_btn_container);
+        btnAddToCollection = findViewById(R.id.btn_add_to_collection);
+        btnCollect = findViewById(R.id.btn_collect);
+        btnDownload = findViewById(R.id.btn_download);
+        btnAddToCollection.setOnClickListener(this);
+        btnCollect.setOnClickListener(this);
+        btnDownload.setOnClickListener(this);
+
+        ptrVpPhotos.setPullToRefreshOverScrollEnabled(true);
+        ptrVpPhotos.setOnRefreshListener(this);
+        ptrVpPhotos.setMode(PullToRefreshBase.Mode.BOTH);
+
+        vpPhotos = ptrVpPhotos.getRefreshableView();
         photoBeanList = convertSparseArrayToList(photoBeans);
         photoPagerAdapter = new PhotoPagerAdapter(getSupportFragmentManager(), photoBeanList);
-        viewPager.setAdapter(photoPagerAdapter);
-        viewPager.setCurrentItem(currentIndex);
+        vpPhotos.setAdapter(photoPagerAdapter);
+        vpPhotos.setCurrentItem(currentIndex);
+
+        vpPhotos.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 
     private List<PhotoBean> convertSparseArrayToList(SparseArray<PhotoBean> photoBeanSparseArray) {
@@ -130,7 +161,7 @@ public class PhotoDetailActivity extends BaseActivity<PhotoDetailPresenter>
                         mPresenter.getPrePagePhotos(requestPage, pageSize, collectionId, orderBy, from);
                     } else {
                         ToastUtils.showToast(mContext, "当前已是最后一页数据了");
-                        refreshViewPager.onRefreshComplete();
+                        ptrVpPhotos.onRefreshComplete();
                     }
                     mIsRequesting = false;
                 }
@@ -152,7 +183,7 @@ public class PhotoDetailActivity extends BaseActivity<PhotoDetailPresenter>
                         mPresenter.getPrePagePhotos(requestPage, pageSize, collectionId, orderBy, from);
                     } else {
                         ToastUtils.showToast(mContext, "当前已是第一页数据了");
-                        refreshViewPager.onRefreshComplete();
+                        ptrVpPhotos.onRefreshComplete();
                     }
                     mIsRequesting = false;
                 }
@@ -162,7 +193,7 @@ public class PhotoDetailActivity extends BaseActivity<PhotoDetailPresenter>
 
     @Override
     public void refreshViewWithPhotos(List<PhotoBean> photoBeans) {
-        refreshViewPager.onRefreshComplete();
+        ptrVpPhotos.onRefreshComplete();
         if (photoBeans != null && photoBeans.size() > 0) {
             if (photoBeans.size() < pageSize) {
                 isLastPage = true;
@@ -178,18 +209,37 @@ public class PhotoDetailActivity extends BaseActivity<PhotoDetailPresenter>
             photoPagerAdapter.setPhotoList(tempList);
 
             try {
-                int currentItem = viewPager.getCurrentItem();
+                int currentItem = vpPhotos.getCurrentItem();
                 KLog.d("Image", "currentItem:" + currentItem);
                 KLog.d("Image", "temp counts:" + photoBeans.size());
-                KLog.d("Image", "total counts:" + viewPager.getAdapter().getCount());
+                KLog.d("Image", "total counts:" + vpPhotos.getAdapter().getCount());
                 if (isAddAtHead) {
-                    viewPager.setCurrentItem(photoBeans.size() - 1, true);
+                    vpPhotos.setCurrentItem(photoBeans.size() - 1, true);
                 } else {
-                    viewPager.setCurrentItem(viewPager.getCurrentItem() + 1, true);
+                    vpPhotos.setCurrentItem(vpPhotos.getCurrentItem() + 1, true);
                 }
             } catch (Exception e) {
                 KLog.e("Image", "出错了");
             }
         }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn_add_to_collection:
+                ToastUtils.showShortToast(mContext, "添加到合集");
+                break;
+            case R.id.btn_collect:
+                ToastUtils.showShortToast(mContext, "收藏");
+                break;
+            case R.id.btn_download:
+                ToastUtils.showShortToast(mContext, "下载");
+                break;
+        }
+    }
+
+    private void toggleBtnContainer(boolean isShow) {
+        llBtnContainer.setVisibility(isShow ? View.VISIBLE : View.GONE);
     }
 }

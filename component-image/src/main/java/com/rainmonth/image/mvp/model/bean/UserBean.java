@@ -6,7 +6,6 @@ import android.os.Parcelable;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * 用户Bean
@@ -14,7 +13,7 @@ import java.util.Date;
 public class UserBean implements Serializable, Parcelable {
 
     private String id;
-    private Date updated_at;
+    private String updated_at;
     private String username;
     private String name;
     private String first_name;
@@ -33,6 +32,7 @@ public class UserBean implements Serializable, Parcelable {
 
     protected UserBean(Parcel in) {
         id = in.readString();
+        updated_at = in.readString();
         username = in.readString();
         name = in.readString();
         first_name = in.readString();
@@ -41,6 +41,8 @@ public class UserBean implements Serializable, Parcelable {
         portfolio_url = in.readString();
         bio = in.readString();
         location = in.readString();
+        links = in.readParcelable(getClass().getClassLoader());
+        profile_image = in.readParcelable(getClass().getClassLoader());
         instagram_username = in.readString();
         total_collections = in.readInt();
         total_likes = in.readInt();
@@ -67,11 +69,11 @@ public class UserBean implements Serializable, Parcelable {
         return id;
     }
 
-    public void setUpdated_at(Date updated_at) {
+    public void setUpdated_at(String updated_at) {
         this.updated_at = updated_at;
     }
 
-    public Date getUpdated_at() {
+    public String getUpdated_at() {
         return updated_at;
     }
 
@@ -195,6 +197,7 @@ public class UserBean implements Serializable, Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(id);
+        dest.writeString(updated_at);
         dest.writeString(username);
         dest.writeString(name);
         dest.writeString(first_name);
@@ -203,6 +206,8 @@ public class UserBean implements Serializable, Parcelable {
         dest.writeString(portfolio_url);
         dest.writeString(bio);
         dest.writeString(location);
+        dest.writeParcelable(links, flags);
+        dest.writeParcelable(profile_image, flags);
         dest.writeString(instagram_username);
         dest.writeInt(total_collections);
         dest.writeInt(total_likes);

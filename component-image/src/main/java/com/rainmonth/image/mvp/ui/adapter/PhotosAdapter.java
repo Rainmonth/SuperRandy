@@ -42,10 +42,12 @@ public class PhotosAdapter extends BaseQuickAdapter<PhotoBean, BaseViewHolder> {
         TextView tvAuthor = helper.getView(R.id.image_tv_photo_author);
         if (item == null)
             return;
-        imageLoader.loadImage(context, GlideImageConfig
-                .builder()
-                .url(item.getUrls().getSmall())
-                .imageView(ivPhotos).build());
-        tvAuthor.setText(item.getUser().getUsername());
+        if(item.getUrls() != null) {
+            imageLoader.loadImage(context, GlideImageConfig
+                    .builder()
+                    .url(item.getUrls().getSmall())
+                    .imageView(ivPhotos).build());
+        }
+        tvAuthor.setText(item.getUser().getName());
     }
 }
