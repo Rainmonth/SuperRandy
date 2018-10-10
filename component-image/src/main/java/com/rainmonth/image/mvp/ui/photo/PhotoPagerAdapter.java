@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.rainmonth.image.mvp.model.bean.PhotoBean;
+import com.socks.library.KLog;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -16,9 +17,11 @@ import java.util.List;
 public class PhotoPagerAdapter extends FragmentStatePagerAdapter {
     private List<PhotoBean> photoBeanList;
     private List<Fragment> fragmentList = new ArrayList<>();
+    private FragmentManager fragmentManager;
 
     public PhotoPagerAdapter(FragmentManager fm, List<PhotoBean> photoBeanList) {
         super(fm);
+        fragmentManager = fm;
         Iterator localIterator = photoBeanList.iterator();
         while (localIterator.hasNext()) {
             PhotoBean photoBean = (PhotoBean) localIterator.next();
@@ -53,17 +56,21 @@ public class PhotoPagerAdapter extends FragmentStatePagerAdapter {
         this.photoBeanList = photoBeanList;
     }
 
-    public void addPhotoList(List<PhotoBean> photoBeanList, boolean isAddAtHead) {
-        List<Fragment> localFragmentList = new ArrayList<>();
-        Iterator localIterator = photoBeanList.iterator();
-        while (localIterator.hasNext())
-            localFragmentList.add(PhotoFragment.getInstance((PhotoBean) localIterator.next()));
-        if (isAddAtHead) {
-            this.fragmentList.addAll(0, localFragmentList);
-            this.photoBeanList.addAll(0, photoBeanList);
-        } else {
-            this.fragmentList.addAll(localFragmentList);
-            this.photoBeanList.addAll(photoBeanList);
+    public void setPhotoList(List<PhotoBean> photoBeans) {
+        KLog.d("Image", "adapter add counts:" + photoBeans.size());
+        photoBeanList.clear();
+        fragmentList.clear();
+        KLog.d("Image", "adapter photoBeanList counts after clear:" + photoBeanList.size());
+        this.photoBeanList = photoBeans;
+        KLog.d("Image", "adapter photoBeanList counts:" + photoBeanList.size());
+        for (PhotoBean photoBean : photoBeanList)
+            this.fragmentList.add(PhotoFragment.getInstance(photoBean));
+        KLog.d("Image", "adapter fragment counts:" + fragmentList.size());
+        KLog.d("Image", "adapter photo counts:" + photoBeanList.size());
+        notifyDataSetChanged();
+        Iterator fragIterator = fragmentList.iterator();
+        while (fragIterator.hasNext()) {
+            KLog.d("Image", "Fragment mem address:" + fragIterator.next());
         }
     }
 

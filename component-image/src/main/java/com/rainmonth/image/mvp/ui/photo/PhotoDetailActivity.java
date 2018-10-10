@@ -37,6 +37,7 @@ public class PhotoDetailActivity extends BaseActivity<PhotoDetailPresenter>
 
     private SparseArray<PhotoBean> photoBeans;
     private int currentPage;
+    private int requestPage;
     private int currentIndex;
     private int pageSize;
     private long collectionId;
@@ -61,11 +62,13 @@ public class PhotoDetailActivity extends BaseActivity<PhotoDetailPresenter>
     protected void getBundleExtras(Bundle extras) {
         photoBeans = extras.getSparseParcelableArray(Consts.PHOTO_LIST);
         currentPage = extras.getInt(Consts.CURRENT_PAGE);
+        requestPage = currentPage;
         currentIndex = extras.getInt(Consts.CURRENT_INDEX);
         pageSize = extras.getInt(Consts.PAGE_SIZE);
         collectionId = extras.getLong(Consts.COLLECTION_ID, -1);
         orderBy = extras.getString(Consts.ORDER_BY);
         from = extras.getString(Consts.FROM, Consts.FROM_PHOTO);
+        KLog.d("Image", "currentPage:" + currentPage + " pageSize:" + pageSize + " from:" + from);
     }
 
     @Override
@@ -118,8 +121,13 @@ public class PhotoDetailActivity extends BaseActivity<PhotoDetailPresenter>
                 public void run() {
                     if (!isLastPage) {
                         isAddAtHead = false;
-                        currentPage++;
-                        mPresenter.getPrePagePhotos(currentPage, pageSize, collectionId, orderBy, from);
+                        // 从右加载数据的话，每次请求的页码肯定比进来的时候大
+                        if (requestPage <= currentPage) {
+                            requestPage = currentPage + 1;
+                        } else {
+                            requestPage = requestPage + 1;
+                        }
+                        mPresenter.getPrePagePhotos(requestPage, pageSize, collectionId, orderBy, from);
                     } else {
                         ToastUtils.showToast(mContext, "当前已是最后一页数据了");
                         refreshViewPager.onRefreshComplete();
@@ -135,8 +143,13 @@ public class PhotoDetailActivity extends BaseActivity<PhotoDetailPresenter>
                 public void run() {
                     if (currentPage > 1) {
                         isAddAtHead = true;
-                        currentPage--;
-                        mPresenter.getPrePagePhotos(currentPage, pageSize, collectionId, orderBy, from);
+                        // 从左加载数据的话，每次请求的页码肯定比进来的时候小;
+                        if (requestPage >= currentPage) {
+                            requestPage = currentPage - 1;
+                        } else {
+                            requestPage = requestPage - 1;
+                        }
+                        mPresenter.getPrePagePhotos(requestPage, pageSize, collectionId, orderBy, from);
                     } else {
                         ToastUtils.showToast(mContext, "当前已是第一页数据了");
                         refreshViewPager.onRefreshComplete();
@@ -154,19 +167,28 @@ public class PhotoDetailActivity extends BaseActivity<PhotoDetailPresenter>
             if (photoBeans.size() < pageSize) {
                 isLastPage = true;
             }
-            photoPagerAdapter.addPhotoList(photoBeans, isAddAtHead);
-            photoPagerAdapter.notifyDataSetChanged();
+            List<PhotoBean> tempList = new ArrayList<>(photoPagerAdapter.getPhotoBeanList());
             photoBeanList = photoPagerAdapter.getPhotoBeanList();
+            if (isAddAtHead) {
+                tempList.addAll(0, photoBeans);
+            } else {
+                tempList.addAll(photoBeans);
+            }
+            KLog.e("Image", "activity add counts:" + photoBeanList.size());
+            photoPagerAdapter.setPhotoList(tempList);
+
             try {
                 int currentItem = viewPager.getCurrentItem();
-                KLog.e("Randy", "currentItem:" + currentItem);
+                KLog.d("Image", "currentItem:" + currentItem);
+                KLog.d("Image", "temp counts:" + photoBeans.size());
+                KLog.d("Image", "total counts:" + viewPager.getAdapter().getCount());
                 if (isAddAtHead) {
-                    viewPager.setCurrentItem(currentItem + pageSize - 1, true);
+                    viewPager.setCurrentItem(photoBeans.size() - 1, true);
                 } else {
-                    viewPager.setCurrentItem(currentItem + 1, true);
+                    viewPager.setCurrentItem(viewPager.getCurrentItem() + 1, true);
                 }
             } catch (Exception e) {
-                KLog.e("Randy", "出错了");
+                KLog.e("Image", "出错了");
             }
         }
     }

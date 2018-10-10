@@ -24,7 +24,7 @@ public class PhotoDetailPresenter extends BasePresenter<PhotoDetailContract.Mode
                                  long collectionId,
                                  String orderBy,
                                  String from) {
-        KLog.d("Randy", "currentPage:" + page + " pageSize:" + perPage + " from:" + from);
+        KLog.d("Image", "request:" + page + " pageSize:" + perPage + " from:" + from);
         addSubscribe(mModel.getPagePhotos(page, perPage, collectionId, orderBy, from)
                 .compose(RxUtils.<List<PhotoBean>>getObservableTransformer())
                 .subscribeWith(new CommonSubscriber<List<PhotoBean>>(mView) {
