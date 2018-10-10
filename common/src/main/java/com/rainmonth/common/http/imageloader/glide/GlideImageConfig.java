@@ -23,6 +23,7 @@ public class GlideImageConfig extends ImageConfig {
   private Transformation<Bitmap> transformation;//glide用它来改变图形的形状
   private int fallback;
   private int[] size;
+  private boolean isCircleCrop;
 
   private GlideImageConfig(Builder builder) {
     this.url = builder.url;
@@ -33,6 +34,7 @@ public class GlideImageConfig extends ImageConfig {
     this.cacheStrategy = builder.cacheStrategy;
     this.transformation = builder.transformation;
     this.size = builder.size;
+    this.isCircleCrop = builder.isAsBitmap;
   }
 
   public static Builder builder() {
@@ -55,6 +57,10 @@ public class GlideImageConfig extends ImageConfig {
     return size;
   }
 
+  public boolean isCircleCrop() {
+    return isCircleCrop;
+  }
+
   public static final class Builder {
 
     private String url;
@@ -65,6 +71,7 @@ public class GlideImageConfig extends ImageConfig {
     private int cacheStrategy;
     private Transformation<Bitmap> transformation;//glide用它来改变图形的形状
     private int[] size;
+    private boolean isAsBitmap;
 
     private Builder() {
     }
@@ -107,6 +114,11 @@ public class GlideImageConfig extends ImageConfig {
 
     public Builder override(int width, int height) {
       this.size = new int[]{width, height};
+      return this;
+    }
+
+    public Builder isAsBitmap(boolean isAsBitmap) {
+      this.isAsBitmap = isAsBitmap;
       return this;
     }
 
