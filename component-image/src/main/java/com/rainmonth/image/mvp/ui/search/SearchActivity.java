@@ -1,5 +1,6 @@
 package com.rainmonth.image.mvp.ui.search;
 
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
@@ -9,6 +10,7 @@ import com.rainmonth.common.base.BaseActivity;
 import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.common.utils.CommonUtils;
 import com.rainmonth.image.R;
+import com.rainmonth.image.api.Consts;
 import com.rainmonth.image.di.component.DaggerSearchComponent;
 import com.rainmonth.image.di.module.SearchModule;
 import com.rainmonth.image.mvp.contract.SearchContract;
@@ -54,13 +56,16 @@ public class SearchActivity extends BaseActivity<SearchPresenter> implements Sea
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (CommonUtils.isNullOrEmpty(etSearchKeys.getText().toString())) {
+                String searchKey = etSearchKeys.getText().toString();
+                if (CommonUtils.isNullOrEmpty(searchKey)) {
                     showToast("搜索关键词为空！");
                     return;
                 }
 //                mPresenter.search(1, etSearchKeys.getText().toString(), 1,
 //                        10, "", "");
-                readyGo(SearchResultActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString(Consts.SEARch_KEY, searchKey);
+                readyGo(SearchResultActivity.class, bundle);
             }
         });
 
