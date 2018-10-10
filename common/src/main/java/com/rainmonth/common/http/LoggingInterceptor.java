@@ -52,7 +52,7 @@ public class LoggingInterceptor implements Interceptor {
             }
             bodyString = clone.readString(charset);
             if (contentType != null && "json".equals(contentType.subtype())) {
-                KLog.json("Randy", bodyString);
+                KLog.json("JsonResult", bodyString);
             }
         }
 
