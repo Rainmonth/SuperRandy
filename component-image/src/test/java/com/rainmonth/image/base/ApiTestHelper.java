@@ -1,5 +1,7 @@
 package com.rainmonth.image.base;
 
+import android.text.TextUtils;
+
 import com.rainmonth.common.http.LoggingInterceptor;
 import com.rainmonth.image.api.Consts;
 
@@ -15,6 +17,22 @@ public class ApiTestHelper {
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build();
+
+    private static Retrofit getRetrofit(String baseUrl) {
+        if (!TextUtils.isEmpty(baseUrl)) {
+            return new Retrofit.Builder().baseUrl(baseUrl)
+                    .client(getOkHttpClient())
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                    .build();
+        } else {
+            return retrofit;
+        }
+    }
+
+    public static <T> T createApiClass(Class<T> clazz, String baseUrl) {
+        return getRetrofit(baseUrl).create(clazz);
+    }
 
     public static <T> T createApiClass(Class<T> clazz) {
         return retrofit.create(clazz);

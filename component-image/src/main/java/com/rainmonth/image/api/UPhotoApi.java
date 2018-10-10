@@ -10,6 +10,8 @@ import retrofit2.http.Headers;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
+import static com.rainmonth.image.api.Consts.GET_DAILY_PHOTO;
+
 /**
  * @author: Randy Zhang
  * @description: Unsplash 图片Api
@@ -47,4 +49,14 @@ public interface UPhotoApi {
                                           @Query("resolution") String resolutions,
                                           @Query("quantity") String quantity);
 
+
+    // 获取每日图片
+//    @GET(Consts.GET_DAILY_PHOTO)
+//    @GET("https://unsplash.com/napi/feeds/home")
+    @Headers({
+            "user-agent:Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36"
+    })
+//    @GET(Consts.GET_DAILY_PHOTO)
+    @GET("https://unsplash.com/napi/users/adrian_infernus?")
+    Observable<PhotoBean> getDailyPhoto();
 }

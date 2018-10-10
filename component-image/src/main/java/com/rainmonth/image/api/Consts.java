@@ -4,6 +4,7 @@ public class Consts {
     // Base
     // Unsplash API 请求地址
     public static final String BASE_URL = "https://api.unsplash.com/";
+    public static final String NO_API_BASE_URL = "https://unsplash.com/";
     //------------------用户相关------------------
     // 获取用户信息
     public static final String GET_USER_INFO = BASE_URL + "users/{username}";
@@ -57,6 +58,9 @@ public class Consts {
     public static final String UPDATE_COLLECTION = BASE_URL + "collections/{id}";
     // 获取合集相关合集
     public static final String GET_RELATED_COLLECTIONS = BASE_URL + "collections/{id}/related";
+
+    // noapi
+    public static final String GET_DAILY_PHOTO = NO_API_BASE_URL + "napi/feeds/home";
 
     //------------------图片相关------------------
     // 获取图片
