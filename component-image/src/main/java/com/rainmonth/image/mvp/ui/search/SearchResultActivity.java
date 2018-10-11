@@ -11,7 +11,6 @@ import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.image.R;
 import com.rainmonth.image.api.Consts;
 import com.rainmonth.image.mvp.model.bean.SearchResult;
-import com.rainmonth.image.mvp.ui.photo.PhotoPagerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +25,9 @@ import java.util.List;
  * <p>
  * 图片搜索结果，支持浏览照片详情，支持左右滑动查看，由于搜索结果列表长度有限，浏览完成后给与提示；
  * 合集搜索结果，支持查看合集详情，支持左右滑动查看，当前合集查看完成后，继续查看下一个合集；
+ *
+ * 注意：
+ * ViewPager和TagLayout配合使用时，如果要显示标题，要重写ViewPager的adapter的getPageTitle方法
  */
 public class SearchResultActivity extends BaseActivity<SearchResultPresenter> implements SearchResultContract.View {
     private TabLayout resultTabLayout;
@@ -52,6 +54,7 @@ public class SearchResultActivity extends BaseActivity<SearchResultPresenter> im
     @Override
     protected void initViewsAndEvents() {
         List<Fragment> fragmentList = new ArrayList<>();
+        List<String> tagTitles = new ArrayList<>();
         photoResultFragment = PhotoSearchResultFragment.getInstance(searchKeys);
         collectionResultFragment = CollectionSearchResultFragment.getInstance(searchKeys);
         userResultFragment = UserSearchResultFragment.getInstance(searchKeys);
@@ -60,16 +63,21 @@ public class SearchResultActivity extends BaseActivity<SearchResultPresenter> im
         fragmentList.add(collectionResultFragment);
         fragmentList.add(userResultFragment);
 
+        tagTitles.add("照片");
+        tagTitles.add("合集");
+        tagTitles.add("用户");
+
         adapter = new SearchResultPagerAdapter(getSupportFragmentManager(), fragmentList);
+        adapter.setTitleList(tagTitles);
         resultTabLayout = findViewById(R.id.resultTabLayout);
-        resultTabLayout.addTab(resultTabLayout.newTab().setText("照片"));
-        resultTabLayout.addTab(resultTabLayout.newTab().setText("合集"));
-        resultTabLayout.addTab(resultTabLayout.newTab().setText("用户"));
+        if (fragmentList.size() == tagTitles.size()) {
+            for (int i = 0; i < fragmentList.size(); i++) {
+                resultTabLayout.addTab(resultTabLayout.newTab().setText(tagTitles.get(i)));
+            }
+        }
         resultViewPager = findViewById(R.id.resultViewPager);
         resultViewPager.setAdapter(adapter);
         resultTabLayout.setupWithViewPager(resultViewPager);
-
-
     }
 
     @Override

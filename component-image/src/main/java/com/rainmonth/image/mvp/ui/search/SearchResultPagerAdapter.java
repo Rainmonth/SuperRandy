@@ -16,7 +16,8 @@ import java.util.List;
  * 图片浏览适配器
  */
 public class SearchResultPagerAdapter extends FragmentStatePagerAdapter {
-    private List<Fragment> fragmentList = new ArrayList<>();
+    private List<Fragment> fragmentList;
+    private List<String> titleList = new ArrayList<>();
     private FragmentManager fragmentManager;
 
     public SearchResultPagerAdapter(FragmentManager fm, List<Fragment> list) {
@@ -43,11 +44,28 @@ public class SearchResultPagerAdapter extends FragmentStatePagerAdapter {
         }
     }
 
+    @Override
+    public CharSequence getPageTitle(int position) {
+        if (titleList.size() > 0 && position < titleList.size()) {
+            return titleList.get(position);
+        } else {
+            return super.getPageTitle(position);
+        }
+    }
+
     public List<Fragment> getFragmentList() {
         return fragmentList;
     }
 
     public void setFragmentList(List<Fragment> fragmentList) {
         this.fragmentList = fragmentList;
+    }
+
+    public List<String> getTitleList() {
+        return titleList;
+    }
+
+    public void setTitleList(List<String> titleList) {
+        this.titleList = titleList;
     }
 }
