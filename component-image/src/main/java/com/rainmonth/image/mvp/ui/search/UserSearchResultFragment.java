@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.TextView;
 
 import com.rainmonth.common.base.BaseLazyFragment;
 import com.rainmonth.common.di.component.AppComponent;
@@ -52,13 +53,19 @@ public class UserSearchResultFragment extends BaseLazyFragment {
 
     @Override
     protected void initViewsAndEvents(View view) {
+        UserAdapter adapter = new UserAdapter(mContext, R.layout.image_rv_item_users);
         rvUserSearchResult = view.findViewById(R.id.rv_user_search_result);
         rvUserSearchResult.setLayoutManager(new LinearLayoutManager(mContext));
-        UserAdapter adapter = new UserAdapter(mContext, R.layout.image_rv_item_users);
+        rvUserSearchResult.setAdapter(adapter);
         if (userSearchResult != null && userSearchResult.getResults() != null) {
             adapter.setNewData(userSearchResult.getResults());
+            if (userSearchResult.getResults().size() == 0) {
+                TextView textView = new TextView(mContext);
+                textView.setText("无用户数据");
+                adapter.setEmptyView(textView);
+            }
         }
-        rvUserSearchResult.setAdapter(adapter);
+
     }
 
     @Override

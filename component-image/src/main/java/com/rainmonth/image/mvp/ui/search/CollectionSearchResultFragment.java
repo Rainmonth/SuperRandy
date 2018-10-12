@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.TextView;
 
 import com.rainmonth.common.base.BaseLazyFragment;
 import com.rainmonth.common.di.component.AppComponent;
@@ -52,13 +53,18 @@ public class CollectionSearchResultFragment extends BaseLazyFragment {
 
     @Override
     protected void initViewsAndEvents(View view) {
+        CollectionsAdapter adapter = new CollectionsAdapter(mContext, R.layout.image_rv_item_collections);
         rvCollectionSearchResult = view.findViewById(R.id.rv_collection_search_result);
         rvCollectionSearchResult.setLayoutManager(new LinearLayoutManager(mContext));
-        CollectionsAdapter adapter = new CollectionsAdapter(mContext, R.layout.image_rv_item_collections);
+        rvCollectionSearchResult.setAdapter(adapter);
         if (collectionSearchResult != null && collectionSearchResult.getResults() != null) {
             adapter.setNewData(collectionSearchResult.getResults());
+            if (collectionSearchResult.getResults().size() == 0) {
+                TextView textView = new TextView(mContext);
+                textView.setText("无合集数据");
+                adapter.setEmptyView(textView );
+            }
         }
-        rvCollectionSearchResult.setAdapter(adapter);
     }
 
     @Override

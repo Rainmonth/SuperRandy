@@ -7,6 +7,7 @@ import android.support.v4.view.ViewPager;
 
 import com.rainmonth.common.base.BaseActivity;
 import com.rainmonth.common.di.component.AppComponent;
+import com.rainmonth.common.widgets.ProgressHUD;
 import com.rainmonth.image.R;
 import com.rainmonth.image.api.Consts;
 import com.rainmonth.image.mvp.model.bean.CollectionBean;
@@ -61,6 +62,18 @@ public class SearchResultActivity extends BaseActivity<SearchResultPresenter> im
 
         resultTabLayout.setupWithViewPager(resultViewPager);
         mPresenter.search("", searchKeys, 1, 10, "", "");
+        showProgress();
+    }
+
+    ProgressHUD progressHUD;
+    @Override
+    public void showProgress() {
+        progressHUD = ProgressHUD.show(mContext, "正在加载", R.mipmap.image_ic_launcher_round, true, null);
+    }
+
+    @Override
+    public void hideProgress() {
+        ProgressHUD.safeDismiss(progressHUD);
     }
 
     @Override
@@ -80,7 +93,7 @@ public class SearchResultActivity extends BaseActivity<SearchResultPresenter> im
 
     @Override
     public void initSearchResult(SearchBean<PhotoBean, CollectionBean, UserBean> searchBean) {
-
+        hideProgress();
         photoResultFragment = PhotoSearchResultFragment.getInstance(searchKeys);
         collectionResultFragment = CollectionSearchResultFragment.getInstance(searchKeys);
         userResultFragment = UserSearchResultFragment.getInstance(searchKeys);
@@ -106,7 +119,7 @@ public class SearchResultActivity extends BaseActivity<SearchResultPresenter> im
             tagTitles.add("合集");
         }
         if (searchBean.getUsers() != null && searchBean.getUsers().getTotal() > 0) {
-            tagTitles.add("用户-" + searchBean.getCollections().getTotal());
+            tagTitles.add("用户-" + searchBean.getUsers().getTotal());
         } else {
             tagTitles.add("用户");
         }
@@ -121,6 +134,7 @@ public class SearchResultActivity extends BaseActivity<SearchResultPresenter> im
         }
 
         resultViewPager.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
     }
 
     @Override
