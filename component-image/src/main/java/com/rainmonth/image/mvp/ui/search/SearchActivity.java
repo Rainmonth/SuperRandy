@@ -64,7 +64,7 @@ public class SearchActivity extends BaseActivity<SearchPresenter> implements Sea
 //                mPresenter.search(1, etSearchKeys.getText().toString(), 1,
 //                        10, "", "");
                 Bundle bundle = new Bundle();
-                bundle.putString(Consts.SEARch_KEY, searchKey);
+                bundle.putString(Consts.SEARCH_KEY, searchKey);
                 readyGo(SearchResultActivity.class, bundle);
             }
         });

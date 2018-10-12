@@ -6,7 +6,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 
 import com.rainmonth.common.base.BaseActivity;
-import com.rainmonth.common.base.BaseLazyFragment;
 import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.image.R;
 import com.rainmonth.image.api.Consts;
@@ -51,7 +50,7 @@ public class SearchResultActivity extends BaseActivity<SearchResultPresenter> im
     @Override
     protected void getBundleExtras(Bundle extras) {
         if (null != extras) {
-            searchKeys = extras.getString(Consts.SEARch_KEY);
+            searchKeys = extras.getString(Consts.SEARCH_KEY);
         }
     }
 
@@ -61,6 +60,7 @@ public class SearchResultActivity extends BaseActivity<SearchResultPresenter> im
         resultViewPager = findViewById(R.id.resultViewPager);
 
         resultTabLayout.setupWithViewPager(resultViewPager);
+        mPresenter.search("", searchKeys, 1, 10, "", "");
     }
 
     @Override

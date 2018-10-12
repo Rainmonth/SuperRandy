@@ -7,6 +7,7 @@ import com.rainmonth.common.utils.RxUtils;
 import com.rainmonth.image.api.Consts;
 import com.rainmonth.image.mvp.model.bean.CollectionBean;
 import com.rainmonth.image.mvp.model.bean.PhotoBean;
+import com.rainmonth.image.mvp.model.bean.SearchBean;
 import com.rainmonth.image.mvp.model.bean.SearchResult;
 import com.rainmonth.image.mvp.model.bean.UserBean;
 
@@ -41,13 +42,22 @@ public class SearchResultPresenter extends BasePresenter<SearchResultContract.Mo
                             mView.initViewWithSearchResult(userSearchResult);
                         }
                     }));
-        } else {
+        } else if (Consts.SEARCH_PHOTOS.equals(searchType)) {
             addSubscribe(mModel.searchPhotos(searchKey, page, perPage, collections, orientation)
                     .compose(RxUtils.<SearchResult<PhotoBean>>getObservableTransformer())
                     .subscribeWith(new CommonSubscriber<SearchResult<PhotoBean>>(mView) {
                         @Override
                         public void onNext(SearchResult<PhotoBean> photoSearchResult) {
                             mView.initViewWithSearchResult(photoSearchResult);
+                        }
+                    }));
+        } else {
+            addSubscribe(mModel.search(searchKey, page, perPage)
+                    .compose(RxUtils.<SearchBean<PhotoBean, CollectionBean, UserBean>>getObservableTransformer())
+                    .subscribeWith(new CommonSubscriber<SearchBean<PhotoBean, CollectionBean, UserBean>>(mView) {
+                        @Override
+                        public void onNext(SearchBean<PhotoBean, CollectionBean, UserBean> result) {
+                            mView.initSearchResult(result);
                         }
                     }));
         }

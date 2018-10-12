@@ -83,5 +83,5 @@ public class Consts {
     public static final String FROM_COLLECTION = "from_collection";
     public static final String ORDER_BY = "orderBy";
     public static final String FROM = "from";
-    public static final String SEARch_KEY = "search_key";
+    public static final String SEARCH_KEY = "search_key";
 }
