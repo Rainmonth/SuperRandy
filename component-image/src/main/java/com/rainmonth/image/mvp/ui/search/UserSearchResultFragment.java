@@ -7,8 +7,12 @@ import com.rainmonth.common.base.BaseLazyFragment;
 import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.image.R;
 import com.rainmonth.image.api.Consts;
+import com.rainmonth.image.mvp.model.bean.SearchResult;
+import com.rainmonth.image.mvp.model.bean.UserBean;
 
 public class UserSearchResultFragment extends BaseLazyFragment {
+
+    private SearchResult<UserBean> userSearchResult;
 
     public static UserSearchResultFragment getInstance(String searchKey) {
         UserSearchResultFragment userSearchResultFragment = new UserSearchResultFragment();
@@ -17,6 +21,11 @@ public class UserSearchResultFragment extends BaseLazyFragment {
         userSearchResultFragment.setArguments(localBundle);
         return userSearchResultFragment;
     }
+
+    public void setUserSearchResult(SearchResult<UserBean> userSearchResult) {
+        this.userSearchResult = userSearchResult;
+    }
+
     @Override
     protected void onFirstUserVisible() {
 

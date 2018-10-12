@@ -7,15 +7,23 @@ import com.rainmonth.common.base.BaseLazyFragment;
 import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.image.R;
 import com.rainmonth.image.api.Consts;
+import com.rainmonth.image.mvp.model.bean.CollectionBean;
+import com.rainmonth.image.mvp.model.bean.PhotoBean;
+import com.rainmonth.image.mvp.model.bean.SearchResult;
 
 public class CollectionSearchResultFragment extends BaseLazyFragment {
 
+    private SearchResult<CollectionBean> collectionSearchResult;
     public static CollectionSearchResultFragment getInstance(String searchKey) {
         CollectionSearchResultFragment collectionSearchResultFragment = new CollectionSearchResultFragment();
         Bundle localBundle = new Bundle();
         localBundle.putString(Consts.SEARch_KEY, searchKey);
         collectionSearchResultFragment.setArguments(localBundle);
         return collectionSearchResultFragment;
+    }
+
+    public void setCollectionSearchResult(SearchResult<CollectionBean> collectionSearchResult) {
+        this.collectionSearchResult = collectionSearchResult;
     }
 
     @Override

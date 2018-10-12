@@ -6,6 +6,7 @@ import com.rainmonth.common.integration.IRepositoryManager;
 import com.rainmonth.image.api.USearchApi;
 import com.rainmonth.image.mvp.model.bean.CollectionBean;
 import com.rainmonth.image.mvp.model.bean.PhotoBean;
+import com.rainmonth.image.mvp.model.bean.SearchBean;
 import com.rainmonth.image.mvp.model.bean.SearchResult;
 import com.rainmonth.image.mvp.model.bean.UserBean;
 
@@ -19,6 +20,12 @@ public class SearchResultModel extends BaseModel implements SearchResultContract
     @Inject
     public SearchResultModel(IRepositoryManager repositoryManager) {
         super(repositoryManager);
+    }
+
+    @Override
+    public Observable<SearchBean<PhotoBean, CollectionBean, UserBean>> search(String keys, int page, int perPage) {
+        return mRepositoryManager.obtainRetrofitService(USearchApi.class)
+                .search(keys, page, perPage);
     }
 
     @Override

@@ -26,6 +26,8 @@ public class Consts {
     public static final String UPDATE_CURRENT_USER_INFO = BASE_URL + "me";
 
     //------------------搜索相关------------------
+    // 搜索（图片、用户、合集）
+    public static final String SEARCH = BASE_URL + "search";
     // 搜索用户
     public static final String SEARCH_USER = BASE_URL + "search/users";
     // 搜索图片
