@@ -146,7 +146,7 @@ public class PhotoHomeActivity extends BaseActivity<PhotoHomePresenter> implemen
         }
         if (perPage == photoBeans.size()) {
             photosAdapter.loadMoreComplete();
-        } else if (page > photoBeans.size()) {
+        } else if (perPage > photoBeans.size()) {
             photosAdapter.loadMoreEnd(true);
         }
         page++;
