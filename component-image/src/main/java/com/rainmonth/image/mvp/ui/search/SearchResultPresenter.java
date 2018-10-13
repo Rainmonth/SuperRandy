@@ -3,6 +3,7 @@ package com.rainmonth.image.mvp.ui.search;
 import com.rainmonth.common.base.mvp.BasePresenter;
 import com.rainmonth.common.di.scope.ActivityScope;
 import com.rainmonth.common.http.CommonSubscriber;
+import com.rainmonth.common.utils.ComponentUtils;
 import com.rainmonth.common.utils.RxUtils;
 import com.rainmonth.image.api.Consts;
 import com.rainmonth.image.mvp.model.bean.CollectionBean;
@@ -19,6 +20,11 @@ public class SearchResultPresenter extends BasePresenter<SearchResultContract.Mo
     @Inject
     public SearchResultPresenter(SearchResultContract.Model model, SearchResultContract.View rootView) {
         super(model, rootView);
+    }
+
+    public SearchResultPresenter(SearchResultContract.View view) {
+        super(null, view);
+        mModel = new SearchResultModel(ComponentUtils.getAppComponent().repositoryManager());
     }
 
     public void search(String searchType, String searchKey, int page, int perPage,
@@ -49,6 +55,12 @@ public class SearchResultPresenter extends BasePresenter<SearchResultContract.Mo
                         @Override
                         public void onNext(SearchResult<PhotoBean> photoSearchResult) {
                             mView.initViewWithSearchResult(photoSearchResult);
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
+                            super.onError(e);
+                            mView.showError("加载错误" + e.getMessage());
                         }
                     }));
         } else {

@@ -1,23 +1,32 @@
 package com.rainmonth.image.mvp.ui.search;
 
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.rainmonth.common.base.BaseLazyFragment;
 import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.image.R;
 import com.rainmonth.image.api.Consts;
+import com.rainmonth.image.mvp.model.bean.CollectionBean;
+import com.rainmonth.image.mvp.model.bean.PhotoBean;
+import com.rainmonth.image.mvp.model.bean.SearchBean;
 import com.rainmonth.image.mvp.model.bean.SearchResult;
 import com.rainmonth.image.mvp.model.bean.UserBean;
-import com.rainmonth.image.mvp.ui.adapter.CollectionsAdapter;
 import com.rainmonth.image.mvp.ui.adapter.UserAdapter;
 
-public class UserSearchResultFragment extends BaseLazyFragment {
+public class UserSearchResultFragment extends BaseLazyFragment implements SearchResultContract.View {
+    private SwipeRefreshLayout srlContainer;
     private RecyclerView rvUserSearchResult;
     private SearchResult<UserBean> userSearchResult;
+    private UserAdapter adapter;
+    private int page = 2, perPage = 10;
+    private String searchKeys;
+    private boolean isRefresh = false;
 
     public static UserSearchResultFragment getInstance(String searchKey) {
         UserSearchResultFragment userSearchResultFragment = new UserSearchResultFragment();
@@ -53,10 +62,25 @@ public class UserSearchResultFragment extends BaseLazyFragment {
 
     @Override
     protected void initViewsAndEvents(View view) {
-        UserAdapter adapter = new UserAdapter(mContext, R.layout.image_rv_item_users);
+        if (getArguments() != null) {
+            searchKeys = getArguments().getString(Consts.SEARCH_KEY);
+        }
+        final SearchResultPresenter presenter = new SearchResultPresenter(this);
+
+        srlContainer = view.findViewById(R.id.srl_container);
+        adapter = new UserAdapter(mContext, R.layout.image_rv_item_users);
         rvUserSearchResult = view.findViewById(R.id.rv_user_search_result);
         rvUserSearchResult.setLayoutManager(new LinearLayoutManager(mContext));
         rvUserSearchResult.setAdapter(adapter);
+        adapter.setEnableLoadMore(true);
+        adapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
+            @Override
+            public void onLoadMoreRequested() {
+                isRefresh = false;
+                showProgress();
+                presenter.search(Consts.SEARCH_USER, searchKeys, page, perPage, "", "");
+            }
+        }, rvUserSearchResult);
         if (userSearchResult != null && userSearchResult.getResults() != null) {
             adapter.setNewData(userSearchResult.getResults());
             if (userSearchResult.getResults().size() == 0) {
@@ -71,5 +95,28 @@ public class UserSearchResultFragment extends BaseLazyFragment {
     @Override
     protected int getContentViewLayoutID() {
         return R.layout.image_fragment_user_search_result;
+    }
+
+    @Override
+    public void initSearchResult(SearchBean<PhotoBean, CollectionBean, UserBean> searchBean) {
+
+    }
+
+    @Override
+    public <T> void initViewWithSearchResult(SearchResult<T> searchResult) {
+        SearchResult<UserBean> temp = (SearchResult<UserBean>) searchResult;
+        hideProgress();
+        if (page == temp.getTotal_pages()) {
+            adapter.loadMoreEnd(true);
+        } else {
+            adapter.addData(temp.getResults());
+            adapter.loadMoreComplete();
+        }
+        page++;
+    }
+
+    @Override
+    public void showError(String message) {
+        hideProgress();
     }
 }

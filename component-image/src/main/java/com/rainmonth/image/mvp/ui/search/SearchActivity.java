@@ -52,6 +52,8 @@ public class SearchActivity extends BaseActivity<SearchPresenter> implements Sea
     @Override
     protected void initViewsAndEvents() {
         etSearchKeys = findViewById(R.id.image_et_search_keys);
+        etSearchKeys.setText("computer");
+        etSearchKeys.setSelection(etSearchKeys.getText().length());
         btnSearch = findViewById(R.id.image_btn_search);
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override

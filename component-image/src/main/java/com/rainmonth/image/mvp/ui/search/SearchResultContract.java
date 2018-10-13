@@ -8,8 +8,6 @@ import com.rainmonth.image.mvp.model.bean.SearchBean;
 import com.rainmonth.image.mvp.model.bean.SearchResult;
 import com.rainmonth.image.mvp.model.bean.UserBean;
 
-import java.util.List;
-
 import io.reactivex.Observable;
 
 public interface SearchResultContract {
@@ -17,6 +15,8 @@ public interface SearchResultContract {
         void initSearchResult(SearchBean<PhotoBean, CollectionBean, UserBean> searchBean);
 
         <T> void initViewWithSearchResult(SearchResult<T> searchResult);
+
+        void showError(String message);
     }
 
     interface Model extends IBaseModel {

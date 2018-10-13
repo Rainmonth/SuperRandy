@@ -7,7 +7,6 @@ import android.support.v4.view.ViewPager;
 
 import com.rainmonth.common.base.BaseActivity;
 import com.rainmonth.common.di.component.AppComponent;
-import com.rainmonth.common.widgets.ProgressHUD;
 import com.rainmonth.image.R;
 import com.rainmonth.image.api.Consts;
 import com.rainmonth.image.mvp.model.bean.CollectionBean;
@@ -63,17 +62,6 @@ public class SearchResultActivity extends BaseActivity<SearchResultPresenter> im
         resultTabLayout.setupWithViewPager(resultViewPager);
         mPresenter.search("", searchKeys, 1, 10, "", "");
         showProgress();
-    }
-
-    ProgressHUD progressHUD;
-    @Override
-    public void showProgress() {
-        progressHUD = ProgressHUD.show(mContext, "正在加载", R.mipmap.image_ic_launcher_round, true, null);
-    }
-
-    @Override
-    public void hideProgress() {
-        ProgressHUD.safeDismiss(progressHUD);
     }
 
     @Override
@@ -140,5 +128,10 @@ public class SearchResultActivity extends BaseActivity<SearchResultPresenter> im
     @Override
     public <T> void initViewWithSearchResult(SearchResult<T> searchResult) {
 
+    }
+
+    @Override
+    public void showError(String message) {
+        hideProgress();
     }
 }

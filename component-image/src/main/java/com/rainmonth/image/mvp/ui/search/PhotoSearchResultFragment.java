@@ -1,6 +1,7 @@
 package com.rainmonth.image.mvp.ui.search;
 
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -21,6 +22,7 @@ import com.rainmonth.image.mvp.ui.adapter.PhotosAdapter;
 
 public class PhotoSearchResultFragment extends BaseLazyFragment implements SearchResultContract.View {
 
+    private SwipeRefreshLayout srlContainer;
     private RecyclerView rvPhotoSearchResult;
     private PhotosAdapter photosAdapter;
     private String searchKeys;
@@ -59,16 +61,19 @@ public class PhotoSearchResultFragment extends BaseLazyFragment implements Searc
 
     }
 
-    private int page = 1, perPage = 10;
+    private int page = 2, perPage = 10;
     private boolean isResresh = false;
 
     @Override
     protected void initViewsAndEvents(View view) {
-        searchKeys = getArguments().getString(Consts.SEARCH_KEY);
+        if (getArguments() != null) {
+            searchKeys = getArguments().getString(Consts.SEARCH_KEY);
+        }
         SearchResultModel model = new SearchResultModel(ComponentUtils.getAppComponent().repositoryManager());
 
         final SearchResultPresenter presenter = new SearchResultPresenter(model, this);
         photosAdapter = new PhotosAdapter(mContext, R.layout.image_rv_item_photos);
+        srlContainer = view.findViewById(R.id.srl_container);
         rvPhotoSearchResult = view.findViewById(R.id.rv_photo_search_result);
         rvPhotoSearchResult.setLayoutManager(new LinearLayoutManager(mContext));
         rvPhotoSearchResult.setAdapter(photosAdapter);
@@ -77,13 +82,13 @@ public class PhotoSearchResultFragment extends BaseLazyFragment implements Searc
             @Override
             public void onLoadMoreRequested() {
                 isResresh = false;
-                page++;
+                showProgress();
                 presenter.search(Consts.SEARCH_PHOTOS, searchKeys, page, perPage, "", orientation);
             }
         }, rvPhotoSearchResult);
 
         if (photoSearchResult != null && photoSearchResult.getResults() != null) {
-            photosAdapter.setNewData(photoSearchResult.getResults());
+            photosAdapter.addData(photoSearchResult.getResults());
             if (photoSearchResult.getResults().size() == 0) {
                 TextView textView = new TextView(mContext);
                 textView.setText("无照片数据");
@@ -106,11 +111,18 @@ public class PhotoSearchResultFragment extends BaseLazyFragment implements Searc
     @Override
     public <T> void initViewWithSearchResult(SearchResult<T> searchResult) {
         SearchResult<PhotoBean> temp = (SearchResult<PhotoBean>) searchResult;
+        hideProgress();
         if (page == temp.getTotal_pages()) {
             photosAdapter.loadMoreEnd(true);
         } else {
             photosAdapter.addData(temp.getResults());
             photosAdapter.loadMoreComplete();
         }
+        page++;
+    }
+
+    @Override
+    public void showError(String message) {
+        hideProgress();
     }
 }

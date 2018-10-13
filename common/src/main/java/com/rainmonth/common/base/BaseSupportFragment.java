@@ -13,11 +13,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.rainmonth.common.R;
 import com.rainmonth.common.base.mvp.IBaseView;
 import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.common.eventbus.EventCenter;
 import com.rainmonth.common.utils.CommonUtils;
 import com.rainmonth.common.utils.ComponentUtils;
+import com.rainmonth.common.widgets.ProgressHUD;
 import com.rainmonth.common.widgets.loading.VaryViewHelperController;
 import com.socks.library.KLog;
 
@@ -329,13 +331,14 @@ public abstract class BaseSupportFragment extends Fragment implements IBaseView 
 
     }
 
+    ProgressHUD progressHUD;
     @Override
     public void showProgress() {
-
+        progressHUD = ProgressHUD.show(mContext, "正在加载", R.mipmap.ic_launcher_round, true, null);
     }
 
     @Override
     public void hideProgress() {
-
+        ProgressHUD.safeDismiss(progressHUD);
     }
 }
