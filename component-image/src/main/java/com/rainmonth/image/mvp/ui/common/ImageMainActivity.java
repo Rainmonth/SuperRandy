@@ -1,12 +1,15 @@
 package com.rainmonth.image.mvp.ui.common;
 
+import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.rainmonth.common.base.BaseActivity;
+import com.rainmonth.common.base.BaseWebActivity;
 import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.image.R;
+import com.rainmonth.image.api.Consts;
 import com.rainmonth.image.mvp.ui.collection.CollectionHomeActivity;
 import com.rainmonth.image.mvp.ui.photo.PhotoHomeActivity;
 import com.rainmonth.image.mvp.ui.search.SearchActivity;
@@ -26,6 +29,7 @@ public class ImageMainActivity extends BaseActivity {
     Button imageBtnSearch;
     Button imageBtnUserCenter;
     Button imageBtnAscii;
+    Button btnAuth;
     @Override
     protected void setupActivityComponent(AppComponent appComponent) {
 
@@ -43,6 +47,7 @@ public class ImageMainActivity extends BaseActivity {
         imageBtnSearch = findViewById(R.id.image_btn_search);
         imageBtnUserCenter = findViewById(R.id.image_btn_user_center);
         imageBtnAscii = findViewById(R.id.image_btn_ascii);
+        btnAuth = findViewById(R.id.btn_auth);
         imageBtnPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,6 +76,16 @@ public class ImageMainActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 readyGo(PicToAsciiActivity.class);
+            }
+        });
+
+        btnAuth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putString(BaseWebActivity.BUNDLE_KEY_URL, Consts.GRANT_URL);
+                bundle.putString(BaseWebActivity.BUNDLE_KEY_TITLE, "授权");
+                readyGo(BaseWebActivity.class, bundle);
             }
         });
 
