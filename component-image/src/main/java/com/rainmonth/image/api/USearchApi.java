@@ -19,8 +19,8 @@ import retrofit2.http.Query;
 public interface USearchApi {
 
     @Headers({
-            "Accept-Version:v1",
-            "Authorization:Client-ID ae1715b58d53e958f990d42c9a3e221120a292efd592d66d0ba3717ccc4c9abe"
+            Consts.HEADER_VERSION,
+            Consts.HEADER_BEARER_AUTHORIZATION
     })
     @GET(Consts.SEARCH)
     Observable<SearchBean<PhotoBean, CollectionBean, UserBean>>
@@ -37,8 +37,8 @@ public interface USearchApi {
      * @return
      */
     @Headers({
-            "Accept-Version:v1",
-            "Authorization:Client-ID ae1715b58d53e958f990d42c9a3e221120a292efd592d66d0ba3717ccc4c9abe"
+            Consts.HEADER_VERSION,
+            Consts.HEADER_BEARER_AUTHORIZATION
     })
     @GET(Consts.SEARCH_USER)
     Observable<SearchResult<UserBean>> searchUser(@Query("query") String keys,
@@ -54,8 +54,8 @@ public interface USearchApi {
      * @return
      */
     @Headers({
-            "Accept-Version:v1",
-            "Authorization:Client-ID ae1715b58d53e958f990d42c9a3e221120a292efd592d66d0ba3717ccc4c9abe"
+            Consts.HEADER_VERSION,
+            Consts.HEADER_BEARER_AUTHORIZATION
     })
     @GET(Consts.SEARCH_PHOTOS)
     Observable<SearchResult<PhotoBean>> searchPhotos(@Query("query") String keys,
@@ -73,8 +73,8 @@ public interface USearchApi {
      * @return
      */
     @Headers({
-            "Accept-Version:v1",
-            "Authorization:Client-ID ae1715b58d53e958f990d42c9a3e221120a292efd592d66d0ba3717ccc4c9abe"
+            Consts.HEADER_VERSION,
+            Consts.HEADER_CLIENT_ID_AUTHORIZATION
     })
     @GET(Consts.SEARCH_COLLECTIONS)
     Observable<SearchResult<CollectionBean>> searchCollections(@Query("query") String keys,

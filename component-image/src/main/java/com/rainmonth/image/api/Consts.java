@@ -1,6 +1,24 @@
 package com.rainmonth.image.api;
 
 public class Consts {
+    // Unsplash keys
+    public static final String ACCESS_KEY = "ae1715b58d53e958f990d42c9a3e221120a292efd592d66d0ba3717ccc4c9abe";
+    public static final String SECRET_KEY = "614461e7e06f0aceb99cc465b63edb5f4da5736fc8c0eedbd64dd5e81af0afac";
+    public static final String REDIRECT_URL = "urn:ietf:wg:oauth:2.0:oob";
+    // access_token
+    public static final String ACCESS_TOKEN = "a1e9039e38bd65f601404afe442a999c7a62310d0b0d76ad5571d41ed73da4fd";
+//    public static final String ACCESS_TOKEN = "ae1715b58d53e958f990d42c9a3e221120a292efd592d66d0ba3717ccc4c9abe";
+
+    // 后面的是access_token
+    public static final String BEARER_AUTHORIZATION = "Bearer " + ACCESS_TOKEN;
+    // 后面的是access_token
+    public static final String CLIENT_ID_AUTHORIZATION = "Client-ID " + ACCESS_TOKEN;
+    public static final String HEADER_VERSION = "Accept-Version:v1";
+    public static final String HEADER_BEARER_AUTHORIZATION = "Authorization:" + BEARER_AUTHORIZATION;
+    public static final String HEADER_CLIENT_ID_AUTHORIZATION = "Authorization:" + CLIENT_ID_AUTHORIZATION;
+
+    public static final String GRANT_URL = "https://unsplash.com/oauth/authorize?client_id=ae1715b58d53e958f990d42c9a3e221120a292efd592d66d0ba3717ccc4c9abe&redirect_uri=urn:ietf:wg:oauth:2.0:oob&response_type=code&scope=public+read_user+write_user+read_photos+write_photos+write_likes+write_followers+read_collections+write_collections";
+
     // Base
     // Unsplash API 请求地址
     public static final String BASE_URL = "https://api.unsplash.com/";

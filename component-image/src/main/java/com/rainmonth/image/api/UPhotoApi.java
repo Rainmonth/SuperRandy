@@ -20,13 +20,14 @@ import static com.rainmonth.image.api.Consts.GET_DAILY_PHOTO;
 public interface UPhotoApi {
 
     @Headers({
-            "Accept-Version:v1",
-            "Authorization:Client-ID ae1715b58d53e958f990d42c9a3e221120a292efd592d66d0ba3717ccc4c9abe"
+            Consts.HEADER_VERSION,
+            Consts.HEADER_BEARER_AUTHORIZATION
     })
     @GET(Consts.GET_PHOTOS)
     Observable<List<PhotoBean>> getPhotos(@Query("page") int page,
-                                                 @Query("per_page") int per_page,
-                                                 @Query("order_by") String orderBy);
+                                          @Query("per_page") int per_page,
+                                          @Query("order_by") String orderBy);
+
     /**
      * 获取策划图片
      *
@@ -36,8 +37,8 @@ public interface UPhotoApi {
      * @return
      */
     @Headers({
-            "Accept-Version:v1",
-            "Authorization:Client-ID ae1715b58d53e958f990d42c9a3e221120a292efd592d66d0ba3717ccc4c9abe"
+            Consts.HEADER_VERSION,
+            Consts.HEADER_BEARER_AUTHORIZATION
     })
     @GET(Consts.GET_CURATED_PHOTOS)
     Observable<List<PhotoBean>> getCuratedPhotos(@Query("page") int page,
@@ -56,7 +57,6 @@ public interface UPhotoApi {
     @Headers({
             "user-agent:Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36"
     })
-//    @GET(Consts.GET_DAILY_PHOTO)
-    @GET("https://unsplash.com/napi/users/adrian_infernus?")
+    @GET(Consts.GET_DAILY_PHOTO)
     Observable<PhotoBean> getDailyPhoto();
 }

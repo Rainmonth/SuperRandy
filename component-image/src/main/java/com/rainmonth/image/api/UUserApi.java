@@ -31,8 +31,8 @@ public interface UUserApi {
      * @return 用户信息
      */
     @Headers({
-            "Accept-Version:v1",
-            "Authorization:Client-ID ae1715b58d53e958f990d42c9a3e221120a292efd592d66d0ba3717ccc4c9abe"
+            Consts.HEADER_VERSION,
+            Consts.HEADER_BEARER_AUTHORIZATION
     })
     @GET(Consts.GET_USER_INFO)
     Observable<UserBean> getUserInfo(@Path("username") String username,
@@ -48,8 +48,8 @@ public interface UUserApi {
      * @return 图片列表
      */
     @Headers({
-            "Accept-Version:v1",
-            "Authorization:Client-ID ae1715b58d53e958f990d42c9a3e221120a292efd592d66d0ba3717ccc4c9abe"
+            Consts.HEADER_VERSION,
+            Consts.HEADER_BEARER_AUTHORIZATION
     })
     @GET(Consts.GET_USER_LIKE_PHOTOS)
     Observable<List<PhotoBean>> getUserLikePhotos(@Path("username") String username,
@@ -64,8 +64,8 @@ public interface UUserApi {
      * @return 个人网站地址
      */
     @Headers({
-            "Accept-Version:v1",
-            "Authorization:Client-ID ae1715b58d53e958f990d42c9a3e221120a292efd592d66d0ba3717ccc4c9abe"
+            Consts.HEADER_VERSION,
+            Consts.HEADER_BEARER_AUTHORIZATION
     })
     @GET(Consts.GET_USER_PERSONAL_SITE)
     Observable<SiteBean> getUserPersonalSite(@Path("username") String username);
@@ -79,8 +79,8 @@ public interface UUserApi {
      * @return 合集列表
      */
     @Headers({
-            "Accept-Version:v1",
-            "Authorization:Client-ID ae1715b58d53e958f990d42c9a3e221120a292efd592d66d0ba3717ccc4c9abe"
+            Consts.HEADER_VERSION,
+            Consts.HEADER_BEARER_AUTHORIZATION
     })
     @GET(Consts.GET_USER_COLLECTIONS)
     Observable<List<CollectionBean>> getUserCollections(@Path("username") String username,
@@ -89,8 +89,8 @@ public interface UUserApi {
 
 
     @Headers({
-            "Accept-Version:v1",
-            "Authorization:Client-ID ae1715b58d53e958f990d42c9a3e221120a292efd592d66d0ba3717ccc4c9abe"
+            Consts.HEADER_VERSION,
+            Consts.HEADER_BEARER_AUTHORIZATION
     })
     @GET(Consts.GET_USER_PHOTOS)
     Observable<List<PhotoBean>> getUserPhotos(@Path("username") String username,
@@ -110,8 +110,8 @@ public interface UUserApi {
      * @return
      */
     @Headers({
-            "Accept-Version:v1",
-            "Authorization:Client-ID ae1715b58d53e958f990d42c9a3e221120a292efd592d66d0ba3717ccc4c9abe"
+            Consts.HEADER_VERSION,
+            Consts.HEADER_BEARER_AUTHORIZATION
     })
     @GET(Consts.GET_USER_STATISTICS)
     Observable<String> getUserStatistics(@Path("username") String username,
@@ -125,8 +125,8 @@ public interface UUserApi {
      * @return 当前用户信息（与合集中的useInfo不一样）
      */
     @Headers({
-            "Accept-Version:v1",
-            "Authorization:Client-ID ae1715b58d53e958f990d42c9a3e221120a292efd592d66d0ba3717ccc4c9abe"
+            Consts.HEADER_VERSION,
+            Consts.HEADER_CLIENT_ID_AUTHORIZATION
     })
     @GET(Consts.GET_CURRENT_USER_INFO)
     Observable<UserBean> getCurrentUserInfo();
@@ -135,8 +135,8 @@ public interface UUserApi {
      * 修改当前用户信息
      */
     @Headers({
-            "Accept-Version:v1",
-            "Authorization:Client-ID ae1715b58d53e958f990d42c9a3e221120a292efd592d66d0ba3717ccc4c9abe"
+            Consts.HEADER_VERSION,
+            Consts.HEADER_CLIENT_ID_AUTHORIZATION
     })
     @FormUrlEncoded
     @PUT(Consts.UPDATE_CURRENT_USER_INFO)
