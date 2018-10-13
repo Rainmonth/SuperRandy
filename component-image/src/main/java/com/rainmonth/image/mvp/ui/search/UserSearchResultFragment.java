@@ -106,7 +106,7 @@ public class UserSearchResultFragment extends BaseLazyFragment implements Search
     public <T> void initViewWithSearchResult(SearchResult<T> searchResult) {
         SearchResult<UserBean> temp = (SearchResult<UserBean>) searchResult;
         hideProgress();
-        if (page == temp.getTotal_pages()) {
+        if (page > temp.getTotal_pages()) {
             adapter.loadMoreEnd(true);
         } else {
             adapter.addData(temp.getResults());

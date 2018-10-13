@@ -67,7 +67,7 @@ public class CollectionSearchResultFragment extends BaseLazyFragment implements 
         }
         final SearchResultPresenter presenter = new SearchResultPresenter(this);
         adapter = new CollectionsAdapter(mContext, R.layout.image_rv_item_collections);
-        rvCollectionSearchResult = view.findViewById(R.id.srl_container);
+        srlContainer = view.findViewById(R.id.srl_container);
         rvCollectionSearchResult = view.findViewById(R.id.rv_collection_search_result);
         rvCollectionSearchResult.setLayoutManager(new LinearLayoutManager(mContext));
         rvCollectionSearchResult.setAdapter(adapter);
@@ -104,7 +104,7 @@ public class CollectionSearchResultFragment extends BaseLazyFragment implements 
     public <T> void initViewWithSearchResult(SearchResult<T> searchResult) {
         SearchResult<CollectionBean> temp = (SearchResult<CollectionBean>) searchResult;
         hideProgress();
-        if (page == temp.getTotal_pages()) {
+        if (page > temp.getTotal_pages()) {
             adapter.loadMoreEnd(true);
         } else {
             adapter.addData(temp.getResults());

@@ -10,7 +10,6 @@ import android.widget.TextView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.rainmonth.common.base.BaseLazyFragment;
 import com.rainmonth.common.di.component.AppComponent;
-import com.rainmonth.common.utils.ComponentUtils;
 import com.rainmonth.image.R;
 import com.rainmonth.image.api.Consts;
 import com.rainmonth.image.mvp.model.bean.CollectionBean;
@@ -69,9 +68,7 @@ public class PhotoSearchResultFragment extends BaseLazyFragment implements Searc
         if (getArguments() != null) {
             searchKeys = getArguments().getString(Consts.SEARCH_KEY);
         }
-        SearchResultModel model = new SearchResultModel(ComponentUtils.getAppComponent().repositoryManager());
-
-        final SearchResultPresenter presenter = new SearchResultPresenter(model, this);
+        final SearchResultPresenter presenter = new SearchResultPresenter(this);
         photosAdapter = new PhotosAdapter(mContext, R.layout.image_rv_item_photos);
         srlContainer = view.findViewById(R.id.srl_container);
         rvPhotoSearchResult = view.findViewById(R.id.rv_photo_search_result);
@@ -83,7 +80,7 @@ public class PhotoSearchResultFragment extends BaseLazyFragment implements Searc
             public void onLoadMoreRequested() {
                 isResresh = false;
                 showProgress();
-                presenter.search(Consts.SEARCH_PHOTOS, searchKeys, page, perPage, "", orientation);
+                presenter.search(Consts.SEARCH_PHOTOS, searchKeys, page, perPage, "", null);
             }
         }, rvPhotoSearchResult);
 
@@ -112,7 +109,7 @@ public class PhotoSearchResultFragment extends BaseLazyFragment implements Searc
     public <T> void initViewWithSearchResult(SearchResult<T> searchResult) {
         SearchResult<PhotoBean> temp = (SearchResult<PhotoBean>) searchResult;
         hideProgress();
-        if (page == temp.getTotal_pages()) {
+        if (page > temp.getTotal_pages()) {
             photosAdapter.loadMoreEnd(true);
         } else {
             photosAdapter.addData(temp.getResults());
