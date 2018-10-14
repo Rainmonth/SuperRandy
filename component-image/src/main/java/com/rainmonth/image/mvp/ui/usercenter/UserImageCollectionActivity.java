@@ -1,8 +1,14 @@
 package com.rainmonth.image.mvp.ui.usercenter;
 
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
+
 import com.rainmonth.common.base.BaseActivity;
+import com.rainmonth.common.base.BaseLazyFragment;
 import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.image.R;
+
+import java.util.List;
 
 /**
  * 用户照片和合集展示页
@@ -11,6 +17,13 @@ import com.rainmonth.image.R;
  * - 图片和合集支持通用浏览操作
  */
 public class UserImageCollectionActivity extends BaseActivity {
+    private TabLayout tlUserContents;
+    private ViewPager vpUserContents;
+    private UserLikePhotosFragment userLikePhotosFragment;
+    private UserPhotosFragment userPhotosFragment;
+    private UserCollectionsFragment userCollectionsFragment;
+    private List<BaseLazyFragment> fragmentList;
+    private List<String> tagTitles;
 
     @Override
     protected int getContentViewLayoutID() {
@@ -19,6 +32,9 @@ public class UserImageCollectionActivity extends BaseActivity {
 
     @Override
     protected void initViewsAndEvents() {
+        tlUserContents = findViewById(R.id.tl_user_contents);
+        vpUserContents = findViewById(R.id.vp_user_contents);
+
 
     }
 
