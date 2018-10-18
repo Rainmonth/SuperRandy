@@ -15,12 +15,12 @@ import java.util.List;
 /***
  * 图片浏览适配器
  */
-public class SearchResultPagerAdapter extends FragmentStatePagerAdapter {
+public class CommonPagerAdapter extends FragmentStatePagerAdapter {
     private List<Fragment> fragmentList;
     private List<String> titleList = new ArrayList<>();
     private FragmentManager fragmentManager;
 
-    public SearchResultPagerAdapter(FragmentManager fm, List<Fragment> list) {
+    public CommonPagerAdapter(FragmentManager fm, List<Fragment> list) {
         super(fm);
         fragmentManager = fm;
         this.fragmentList = list;

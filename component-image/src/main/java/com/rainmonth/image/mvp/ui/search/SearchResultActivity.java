@@ -41,7 +41,7 @@ public class SearchResultActivity extends BaseActivity<SearchResultPresenter> im
     private UserSearchResultFragment userResultFragment;
 
     private String searchKeys;
-    private SearchResultPagerAdapter adapter;
+    private CommonPagerAdapter adapter;
 
     @Override
     protected int getContentViewLayoutID() {
@@ -125,7 +125,7 @@ public class SearchResultActivity extends BaseActivity<SearchResultPresenter> im
             tagTitles.add("用户");
         }
 
-        adapter = new SearchResultPagerAdapter(getSupportFragmentManager(), fragmentList);
+        adapter = new CommonPagerAdapter(getSupportFragmentManager(), fragmentList);
         adapter.setTitleList(tagTitles);
 
         if (fragmentList.size() == tagTitles.size()) {

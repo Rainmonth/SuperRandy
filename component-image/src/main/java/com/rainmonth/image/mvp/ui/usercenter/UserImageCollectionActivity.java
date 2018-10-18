@@ -7,7 +7,7 @@ import android.support.v4.view.ViewPager;
 import com.rainmonth.common.base.BaseActivity;
 import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.image.R;
-import com.rainmonth.image.mvp.ui.search.SearchResultPagerAdapter;
+import com.rainmonth.image.mvp.ui.search.CommonPagerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +26,7 @@ public class UserImageCollectionActivity extends BaseActivity {
     private UserCollectionsFragment userCollectionsFragment;
     private List<Fragment> fragmentList;
     private List<String> tagTitles;
-    private SearchResultPagerAdapter adapter;
+    private CommonPagerAdapter adapter;
 
     @Override
     protected int getContentViewLayoutID() {
@@ -60,7 +60,7 @@ public class UserImageCollectionActivity extends BaseActivity {
             }
         }
 
-        adapter = new SearchResultPagerAdapter(getSupportFragmentManager(), fragmentList);
+        adapter = new CommonPagerAdapter(getSupportFragmentManager(), fragmentList);
         adapter.setTitleList(tagTitles);
         tlUserContents.setupWithViewPager(vpUserContents);
         vpUserContents.setAdapter(adapter);
