@@ -6,7 +6,6 @@ import android.os.Parcelable;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -28,7 +27,7 @@ public class PhotoBean implements Serializable, Parcelable {
     private boolean sponsored;
     private int likes;
     private boolean liked_by_user;
-    private List<String> current_user_collections;
+    private List<CollectionBean> current_user_collections;
     private String slug;
     private UserBean user;
 
@@ -46,7 +45,7 @@ public class PhotoBean implements Serializable, Parcelable {
         sponsored = in.readByte() != 0;
         likes = in.readInt();
         liked_by_user = in.readByte() != 0;
-        current_user_collections = in.createStringArrayList();
+        in.readTypedList(current_user_collections, CollectionBean.CREATOR);
         slug = in.readString();
         user = in.readParcelable(getClass().getClassLoader());
     }
@@ -167,11 +166,11 @@ public class PhotoBean implements Serializable, Parcelable {
         return liked_by_user;
     }
 
-    public void setCurrent_user_collections(List<String> current_user_collections) {
+    public void setCurrent_user_collections(List<CollectionBean> current_user_collections) {
         this.current_user_collections = current_user_collections;
     }
 
-    public List<String> getCurrent_user_collections() {
+    public List<CollectionBean> getCurrent_user_collections() {
         return current_user_collections;
     }
 
@@ -211,7 +210,7 @@ public class PhotoBean implements Serializable, Parcelable {
         dest.writeByte((byte) (sponsored ? 1 : 0));
         dest.writeInt(likes);
         dest.writeByte((byte) (liked_by_user ? 1 : 0));
-        dest.writeStringList(current_user_collections);
+        dest.writeTypedList(current_user_collections);
         dest.writeString(slug);
         dest.writeParcelable(user, flags);
     }

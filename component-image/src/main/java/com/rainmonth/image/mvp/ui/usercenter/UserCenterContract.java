@@ -13,7 +13,9 @@ import io.reactivex.Observable;
 
 public interface UserCenterContract {
     interface View extends IBaseView {
+        void initPhotoList(List<PhotoBean> photoBeans);
 
+        void initCollectionList(List<CollectionBean> collectionBeans);
     }
 
     interface Model extends IBaseModel {

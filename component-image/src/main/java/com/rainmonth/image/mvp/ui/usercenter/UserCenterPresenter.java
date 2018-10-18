@@ -30,7 +30,7 @@ public class UserCenterPresenter extends BasePresenter<UserCenterContract.Model,
                 .subscribeWith(new CommonSubscriber<List<PhotoBean>>(mView) {
                     @Override
                     public void onNext(List<PhotoBean> photoBeans) {
-
+                        mView.initPhotoList(photoBeans);
                     }
                 }));
     }
