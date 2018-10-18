@@ -41,18 +41,18 @@ public class UserCenterPresenter extends BasePresenter<UserCenterContract.Model,
                 .subscribeWith(new CommonSubscriber<List<PhotoBean>>(mView) {
                     @Override
                     public void onNext(List<PhotoBean> photoBeans) {
-
+                        mView.initPhotoList(photoBeans);
                     }
                 }));
     }
 
-    public void getUserCollections(String username, int page, int perPage, String orderBy) {
+    public void getUserCollections(String username, int page, int perPage) {
         addSubscribe(mModel.getUserCollections(username, page, perPage)
                 .compose(RxUtils.<List<CollectionBean>>getObservableTransformer())
                 .subscribeWith(new CommonSubscriber<List<CollectionBean>>(mView) {
                     @Override
-                    public void onNext(List<CollectionBean> photoBeans) {
-
+                    public void onNext(List<CollectionBean> collectionBeans) {
+                        mView.initCollectionList(collectionBeans);
                     }
                 }));
     }

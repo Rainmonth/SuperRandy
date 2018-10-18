@@ -66,7 +66,7 @@ public class UserLikePhotosFragment extends BaseLazyFragment implements UserCent
     @Override
     protected void initViewsAndEvents(View view) {
         username = getArguments().getString(Consts.USER_NAME);
-        userCenterPresenter = new UserCenterPresenter(new UserCenterModel(ComponentUtils.getAppComponent().repositoryManager()), this);
+        userCenterPresenter = new UserCenterPresenter(this);
         srlContainer = view.findViewById(R.id.srl_container);
         rvUserLikePhotos = view.findViewById(R.id.rv_user_like_photos);
 
