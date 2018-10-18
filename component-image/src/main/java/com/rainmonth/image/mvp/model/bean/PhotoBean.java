@@ -6,6 +6,7 @@ import android.os.Parcelable;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -45,6 +46,8 @@ public class PhotoBean implements Serializable, Parcelable {
         sponsored = in.readByte() != 0;
         likes = in.readInt();
         liked_by_user = in.readByte() != 0;
+        if(current_user_collections == null)
+            current_user_collections = new ArrayList<>();
         in.readTypedList(current_user_collections, CollectionBean.CREATOR);
         slug = in.readString();
         user = in.readParcelable(getClass().getClassLoader());
