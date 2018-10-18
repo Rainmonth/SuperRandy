@@ -72,8 +72,14 @@ public class CollectionDetailActivity extends BaseActivity<CollectionDetailPrese
                 int currentPage = position / perPage + 1;
                 int currentIndex = position % perPage;
                 Bundle bundle = new Bundle();
-                List<PhotoBean> currentPagePhotos = photosAdapter.getData()
-                        .subList((currentPage - 1) * perPage, currentPage * perPage);
+                List<PhotoBean> currentPagePhotos;
+                if (photosAdapter.getData().size() >= perPage) {
+                    currentPagePhotos = photosAdapter.getData()
+                            .subList((currentPage - 1) * perPage, currentPage * perPage);
+                } else {
+                    currentPagePhotos = photosAdapter.getData();
+                }
+
                 SparseArray<PhotoBean> beanSparseArray =
                         convertListToSparseArray(currentPagePhotos);
                 bundle.putSparseParcelableArray(Consts.PHOTO_LIST, beanSparseArray);

@@ -69,7 +69,7 @@ public class UserPhotosFragment extends BaseLazyFragment implements UserCenterCo
         username = getArguments().getString(Consts.USER_NAME);
         userCenterPresenter = new UserCenterPresenter(this);
         srlContainer = view.findViewById(R.id.srl_container);
-        rvUserPhotos = view.findViewById(R.id.rv_user_like_photos);
+        rvUserPhotos = view.findViewById(R.id.rv_user_photos);
 
         srlContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
