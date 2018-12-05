@@ -29,6 +29,7 @@ public class ImageMainActivity extends BaseActivity {
     Button imageBtnSearch;
     Button imageBtnUserCenter;
     Button imageBtnAscii;
+    Button imageBtnDraw;
     Button btnAuth;
     @Override
     protected void setupActivityComponent(AppComponent appComponent) {
@@ -47,6 +48,7 @@ public class ImageMainActivity extends BaseActivity {
         imageBtnSearch = findViewById(R.id.image_btn_search);
         imageBtnUserCenter = findViewById(R.id.image_btn_user_center);
         imageBtnAscii = findViewById(R.id.image_btn_ascii);
+        imageBtnDraw = findViewById(R.id.image_btn_draw);
         btnAuth = findViewById(R.id.btn_auth);
         imageBtnPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,6 +78,13 @@ public class ImageMainActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 readyGo(PicToAsciiActivity.class);
+            }
+        });
+
+        imageBtnDraw.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                readyGo(RoundRectsActivity.class);
             }
         });
 

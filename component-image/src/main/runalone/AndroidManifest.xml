@@ -49,6 +49,7 @@
             android:name="com.rainmonth.common.base.BaseWebActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".mvp.ui.common.RoundRectsActivity" />
     </application>
 
 </manifest>
