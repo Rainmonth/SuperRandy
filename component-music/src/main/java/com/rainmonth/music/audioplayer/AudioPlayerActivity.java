@@ -1,4 +1,4 @@
-package com.rainmonth.music.player;
+package com.rainmonth.music.audioplayer;
 
 import android.os.Bundle;
 
@@ -13,7 +13,7 @@ import com.rainmonth.router.RouterConstant;
  * 音乐播放界面
  */
 @Route(path = RouterConstant.PATH_MUSIC_PLAYER)
-public class MusicPlayerActivity extends BaseActivity {
+public class AudioPlayerActivity extends BaseActivity {
 
     @Override
     protected void getBundleExtras(Bundle extras) {
@@ -22,7 +22,7 @@ public class MusicPlayerActivity extends BaseActivity {
 
     @Override
     protected int getContentViewLayoutID() {
-        return R.layout.music_activity_player;
+        return R.layout.music_activity_audio_player;
     }
 
     @Override
