@@ -6,6 +6,7 @@ import android.widget.TextView;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.rainmonth.common.base.BaseActivity;
 import com.rainmonth.common.di.component.AppComponent;
+import com.rainmonth.music.player.MusicPlayerActivity;
 import com.rainmonth.router.RouterConstant;
 import com.rainmonth.router.RouterUtils;
 

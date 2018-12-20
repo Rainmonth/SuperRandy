@@ -9,6 +9,6 @@
     android:paddingLeft="@dimen/m16"
     android:paddingRight="@dimen/m16"
     android:paddingTop="@dimen/m16"
-    tools:context=".MusicPlayerActivity">
+    tools:context=".player.MusicPlayerActivity">
 
 </RelativeLayout>

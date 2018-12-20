@@ -1,4 +1,4 @@
-package com.rainmonth.music;
+package com.rainmonth.music.player;
 
 import android.os.Bundle;
 
@@ -6,6 +6,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.rainmonth.common.base.BaseActivity;
 import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.common.eventbus.EventCenter;
+import com.rainmonth.music.R;
 import com.rainmonth.router.RouterConstant;
 
 /**
