@@ -5,7 +5,9 @@ import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.music.R;
 
 /**
- * 视频播放器
+ * @date: 2018-12-20
+ * @author: randy
+ * @description: 视频播放器
  */
 public class VideoPlayerActivity extends BaseActivity {
     @Override

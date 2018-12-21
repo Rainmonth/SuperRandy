@@ -10,7 +10,9 @@ import com.rainmonth.music.R;
 import com.rainmonth.router.RouterConstant;
 
 /**
- * 音乐播放界面
+ * @date: 2018-12-20
+ * @author: randy
+ * @description: 音乐播放界面
  */
 @Route(path = RouterConstant.PATH_MUSIC_PLAYER)
 public class AudioPlayerActivity extends BaseActivity {
