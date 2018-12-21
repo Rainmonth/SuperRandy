@@ -6,8 +6,6 @@
 
         <activity android:name=".MusicMainActivity" />
 
-        <activity android:name=".MusicPlayerActivity" />
-
     </application>
 
 </manifest>
