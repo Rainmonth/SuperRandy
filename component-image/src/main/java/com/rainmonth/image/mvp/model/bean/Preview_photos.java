@@ -10,11 +10,11 @@ import java.io.Serializable;
  */
 public class Preview_photos implements Serializable, Parcelable {
 
-    private long id;
+    private String id;
     private Urls urls;
 
     protected Preview_photos(Parcel in) {
-        id = in.readLong();
+        id = in.readString();
         urls = in.readParcelable(Urls.class.getClassLoader());
     }
 
@@ -30,11 +30,11 @@ public class Preview_photos implements Serializable, Parcelable {
         }
     };
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
@@ -53,7 +53,7 @@ public class Preview_photos implements Serializable, Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeLong(id);
+        dest.writeString(id);
         dest.writeParcelable(urls, flags);
     }
 }
