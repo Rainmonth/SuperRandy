@@ -6,7 +6,9 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 
 /**
- * 音频播放Service
+ * @date: 2018-12-20
+ * @author: randy
+ * @description: 音频播放Service
  */
 public class AudioPlayService extends Service {
     @Nullable
