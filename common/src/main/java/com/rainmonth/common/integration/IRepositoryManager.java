@@ -16,9 +16,9 @@ public interface IRepositoryManager {
     /**
      * 根据传入的Retrofit Service Name获取对应的Retrofit Service
      *
-     * @param serviceClass
-     * @param <T>
-     * @return
+     * @param serviceClass 需要获取的Service名字
+     * @param <T> 泛型参数
+     * @return 对应的Service类
      */
     <T> T obtainRetrofitService(Class<T> serviceClass);
 

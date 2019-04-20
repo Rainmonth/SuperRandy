@@ -6,30 +6,30 @@ ext {
     android = [
             organization     : "${organization}",
             applicationId    : "${organization}",
-            buildToolsVersion: "26.0.2",
-            compileSdkVersion: 26,
-            minSdkVersion    : 14,
-            targetSdkVersion : 26,
+            buildToolsVersion: "28.0.3",
+            compileSdkVersion: 28,
+            minSdkVersion    : 19,
+            targetSdkVersion : 28,
             versionCode      : 1,
             versionName      : "1.0.0"
     ]
     // 要合并到主库的组件，未填写的组件可以独立运行
     merge = [
-//            "app",
-//            "image",
-//            "movie",
-//            "music",
-//            "read"
+            "app",
+            "image",
+            "movie",
+            "music",
+            "read"
     ]
 
     // 第三方依赖库版本控制
     def dependVersion = [
-            support    : "26.1.0",
+            support    : "28.0.0",
             retrofit   : "2.3.0",
             okhttp     : "3.9.0",
             glide      : "4.2.0",
             dagger2    : "2.14.1",
-            butterknife: "8.8.1",
+            butterknife: "9.0.0-rc2",
             blockcanary: "1.5.0",
             leakcanary : "1.5.4"
     ]

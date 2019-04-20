@@ -46,8 +46,8 @@ public class BaseWebActivity extends BaseSwipeBackCompatActivity {
 
     @Override
     protected void initViewsAndEvents() {
-        mToolBar = ButterKnife.findById(this, R.id.toolbar);
-        mBrowserLayout = ButterKnife.findById(this, R.id.common_web_browser_layout);
+        mToolBar = (Toolbar) findViewById(R.id.toolbar);
+        mBrowserLayout = (BrowserLayout) findViewById(R.id.common_web_browser_layout);
         KLog.i("Randy", "title:" + mWebTitle);
         KLog.i("Randy", "url:" + mWebTitle);
 

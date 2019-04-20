@@ -16,6 +16,8 @@ import com.rainmonth.di.module.LoginModule;
 import com.rainmonth.mvp.contract.UserContract;
 import com.rainmonth.mvp.presenter.UserPresenter;
 
+import java.util.logging.Logger;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 
@@ -100,6 +102,7 @@ public class LoginActivity extends BaseActivity<UserPresenter> implements UserCo
     public void naveToAfterLogin(Result response) {
         if (response.getCode() == 1) {
             readyGo(MainActivity.class);
+
             ToastUtils.showLongToast(mContext, response.getMessage());
             finish();
         } else {

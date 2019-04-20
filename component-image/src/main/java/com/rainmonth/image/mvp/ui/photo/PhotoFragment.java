@@ -90,16 +90,15 @@ public class PhotoFragment extends BaseLazyFragment implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.iv_author_image:
-            case R.id.tv_author_name:
-                if (photoBean != null && photoBean.getUser() != null) {
-                    Bundle bundle = new Bundle();
-                    bundle.putString(BaseWebActivity.BUNDLE_KEY_URL, photoBean.getUser().getLinks().getHtml());
-                    bundle.putString(BaseWebActivity.BUNDLE_KEY_TITLE, photoBean.getUser().getName());
-                    readyGo(BaseWebActivity.class, bundle);
-                }
-                break;
+        int i = v.getId();
+        if (i == R.id.iv_author_image || i == R.id.tv_author_name) {
+            if (photoBean != null && photoBean.getUser() != null) {
+                Bundle bundle = new Bundle();
+                bundle.putString(BaseWebActivity.BUNDLE_KEY_URL, photoBean.getUser().getLinks().getHtml());
+                bundle.putString(BaseWebActivity.BUNDLE_KEY_TITLE, photoBean.getUser().getName());
+                readyGo(BaseWebActivity.class, bundle);
+            }
+
         }
     }
 }

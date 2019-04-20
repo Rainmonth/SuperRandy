@@ -226,16 +226,16 @@ public class PhotoDetailActivity extends BaseActivity<PhotoDetailPresenter>
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btn_add_to_collection:
-                ToastUtils.showShortToast(mContext, "添加到合集");
-                break;
-            case R.id.btn_collect:
-                ToastUtils.showShortToast(mContext, "收藏");
-                break;
-            case R.id.btn_download:
-                ToastUtils.showShortToast(mContext, "下载");
-                break;
+        int i = v.getId();
+        if (i == R.id.btn_add_to_collection) {
+            ToastUtils.showShortToast(mContext, "添加到合集");
+
+        } else if (i == R.id.btn_collect) {
+            ToastUtils.showShortToast(mContext, "收藏");
+
+        } else if (i == R.id.btn_download) {
+            ToastUtils.showShortToast(mContext, "下载");
+
         }
     }
 
