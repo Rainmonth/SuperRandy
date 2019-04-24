@@ -41,7 +41,7 @@ ext {
             "cardview-v7"               : "com.android.support:cardview-v7:${dependVersion.support}",
             "recyclerview-v7"           : "com.android.support:recyclerview-v7:${dependVersion.support}",
             "constraintlayout"          : "com.android.support.constraint:constraint-layout:1.1.3",
-            "support-annotations"       : "com.android.support:support-annotations:27.1.1",
+            "support-annotations"       : "com.android.support:support-annotations:${dependVersion.support}",
             //ui
             "dialog"                    : "com.github.hss01248:DialogUtil:1.17",
             "toast"                     : "com.github.GrenderG:Toasty:1.2.8",
@@ -124,7 +124,7 @@ ext {
             "systembartint"             : 'com.readystatesoftware.systembartint:systembartint:1.0.3',
 
             // 动画兼容库
-            "nineoldandroids"            : 'com.nineoldandroids:library:2.4.0',
+            "nineoldandroids"           : 'com.nineoldandroids:library:2.4.0',
             "photoview"                 : 'com.github.chrisbanes.photoview:library:1.2.4'
 
     ]
