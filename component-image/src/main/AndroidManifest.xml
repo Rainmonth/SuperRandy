@@ -6,7 +6,6 @@
         <meta-data
             android:name="com.rainmonth.image.config.ImageAppConfig"
             android:value="ConfigModule" />
-        <activity android:name=".mvp.ui.common.ImageMainActivity" />
         <activity android:name=".mvp.ui.photo.PhotoHomeActivity" />
         <activity android:name=".mvp.ui.photo.PhotoDetailActivity" />
         <activity android:name=".mvp.ui.collection.CollectionHomeActivity" />
@@ -20,6 +19,9 @@
         <activity android:name=".mvp.ui.usercenter.UserFocusActivity" />
         <activity android:name=".mvp.ui.usercenter.SettingImageShowStyleActivity" />
         <activity android:name=".mvp.ui.usercenter.UserStatisticsActivity" />
+
+        <activity android:name=".mvp.ui.common.ImageMainActivity" />
+        <activity android:name=".mvp.ui.common.PicToAsciiActivity" />
 
         <activity
             android:name="com.rainmonth.common.base.BaseWebActivity"

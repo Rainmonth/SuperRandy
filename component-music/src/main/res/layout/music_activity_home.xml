@@ -4,23 +4,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#423752"
-    android:paddingBottom="@dimen/m16"
     android:paddingLeft="@dimen/m16"
-    android:paddingRight="@dimen/m16"
     android:paddingTop="@dimen/m16"
+    android:paddingRight="@dimen/m16"
+    android:paddingBottom="@dimen/m16"
     tools:context=".MusicMainActivity">
 
     <TextView
         android:id="@+id/tv_play_music"
-        android:layout_centerInParent="true"
         style="@style/music_green_trans_btn"
+        android:layout_centerInParent="true"
         android:text="播放音乐" />
 
     <TextView
-        android:id="@+id/tv_go_app"
-        android:layout_marginTop="@dimen/m16"
-        android:layout_below="@+id/tv_play_music"
+        android:id="@+id/tv_play_video"
         style="@style/music_green_trans_btn"
+        android:layout_below="@+id/tv_play_music"
+        android:text="播放视频" />
+
+    <TextView
+        android:id="@+id/tv_go_app"
+        style="@style/music_green_trans_btn"
+        android:layout_below="@+id/tv_play_video"
+        android:layout_marginTop="@dimen/m16"
         android:text="去App模块" />
 
 </RelativeLayout>

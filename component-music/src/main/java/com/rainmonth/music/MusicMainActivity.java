@@ -7,6 +7,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.rainmonth.common.base.BaseActivity;
 import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.music.audioplayer.AudioPlayerActivity;
+import com.rainmonth.music.videoplayer.VideoPlayMainActivity;
 import com.rainmonth.router.RouterConstant;
 import com.rainmonth.router.RouterUtils;
 
@@ -17,6 +18,7 @@ import com.rainmonth.router.RouterUtils;
 public class MusicMainActivity extends BaseActivity implements View.OnClickListener {
 
     TextView tvPlayMusic;
+    TextView tvPlayVideo;
     TextView tvGoApp;
 
     @Override
@@ -32,8 +34,10 @@ public class MusicMainActivity extends BaseActivity implements View.OnClickListe
     @Override
     protected void initViewsAndEvents() {
         tvPlayMusic = findViewById(R.id.tv_play_music);
+        tvPlayVideo = findViewById(R.id.tv_play_video);
         tvGoApp = findViewById(R.id.tv_go_app);
         tvPlayMusic.setOnClickListener(this);
+        tvPlayVideo.setOnClickListener(this);
         tvGoApp.setOnClickListener(this);
     }
 
@@ -50,6 +54,8 @@ public class MusicMainActivity extends BaseActivity implements View.OnClickListe
         int id = view.getId();
         if (id == R.id.tv_play_music) {
             readyGo(AudioPlayerActivity.class);
+        } else if (id == R.id.tv_play_video) {
+            readyGo(VideoPlayMainActivity.class);
         } else if (id == R.id.tv_go_app) {
             // do nothing
             RouterUtils.getInstance().build(RouterConstant.PATH_APP_HOME).navigation();

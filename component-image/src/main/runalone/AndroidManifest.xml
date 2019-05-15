@@ -29,21 +29,23 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".mvp.ui.common.ImageMainActivity" />
+
         <activity android:name=".mvp.ui.photo.PhotoHomeActivity" />
+        <activity android:name=".mvp.ui.photo.PhotoDetailActivity" />
         <activity android:name=".mvp.ui.collection.CollectionHomeActivity" />
         <activity android:name=".mvp.ui.collection.CollectionDetailActivity" />
         <activity android:name=".mvp.ui.search.SearchActivity" />
-        <activity android:name=".mvp.ui.common.PicToAsciiActivity" />
-        <activity android:name=".mvp.ui.usercenter.UserCenterActivity" />
-        <activity android:name=".mvp.ui.photo.PhotoDetailActivity" />
         <activity android:name=".mvp.ui.search.SearchResultActivity" />
+        <activity android:name=".mvp.ui.usercenter.UserCenterActivity" />
         <activity android:name=".mvp.ui.usercenter.DownloadCenterActivity" />
         <activity android:name=".mvp.ui.usercenter.UserImageCollectionActivity" />
         <activity android:name=".mvp.ui.usercenter.UserInfoActivity" />
         <activity android:name=".mvp.ui.usercenter.UserFocusActivity" />
         <activity android:name=".mvp.ui.usercenter.SettingImageShowStyleActivity" />
         <activity android:name=".mvp.ui.usercenter.UserStatisticsActivity" />
+
+        <activity android:name=".mvp.ui.common.ImageMainActivity" />
+        <activity android:name=".mvp.ui.common.PicToAsciiActivity" />
 
         <activity
             android:name="com.rainmonth.common.base.BaseWebActivity"

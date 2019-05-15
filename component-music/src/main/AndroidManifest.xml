@@ -6,6 +6,11 @@
 
         <activity android:name=".MusicMainActivity" />
 
+        <activity android:name=".audioplayer.AudioPlayerActivity" />
+        <activity android:name=".videoplayer.VideoPlayerActivity" />
+        <activity android:name=".videoplayer.VideoPlayMainActivity" />
+        <service android:name=".audioplayer.AudioPlayService" />
+
     </application>
 
 </manifest>
