@@ -5,6 +5,8 @@ import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.image.R;
 
 /**
+ * 图片或视频预览页面
+ *
  * @author 张豪成
  * @date 2019-05-24 18:07
  */
