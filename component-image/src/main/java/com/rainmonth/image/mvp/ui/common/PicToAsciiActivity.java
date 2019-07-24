@@ -18,6 +18,7 @@ import com.rainmonth.common.base.BaseActivity;
 import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.common.utils.FileUtils;
 import com.rainmonth.image.R;
+import com.socks.library.KLog;
 
 /**
  * 实现效果:将视频逐帧取出，转化成Ascii图像连续播放
@@ -38,9 +39,13 @@ public class PicToAsciiActivity extends BaseActivity {
         ImageView ivAscii = findViewById(R.id.iv_ascii);
         String path = FileUtils.getStorageFilePath("DCIM/BeautyCam/test.jpg", this).getPath();
 //        Bitmap bitmap = BitmapFactory.decodeFile(path);
-        Bitmap bitmap = createAsciiPic(path, this);
+        try {
+            Bitmap bitmap = createAsciiPic(path, this);
 
-        ivAscii.setImageBitmap(bitmap);
+            ivAscii.setImageBitmap(bitmap);
+        } catch (Exception e) {
+            KLog.e(e);
+        }
 
     }
 
