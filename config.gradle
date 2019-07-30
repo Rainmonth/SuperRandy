@@ -29,7 +29,7 @@ ext {
             okhttp     : "3.9.0",
             glide      : "4.2.0",
             dagger2    : "2.14.1",
-            butterknife: "9.0.0-rc2",
+            butterknife: '10.1.0',
             blockcanary: "1.5.0",
             leakcanary : "1.5.4"
     ]
