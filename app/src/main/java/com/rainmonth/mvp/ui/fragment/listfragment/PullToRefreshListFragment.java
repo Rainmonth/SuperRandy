@@ -18,12 +18,14 @@ package com.rainmonth.mvp.ui.fragment.listfragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 
+import androidx.fragment.app.ListFragment;
+
 import com.rainmonth.common.widgets.library.PullToRefreshListView;
 
 
 /**
  * A sample implementation of how to use {@link PullToRefreshListView} with
- * {@link android.support.v4.app.ListFragment}. This implementation simply replaces the ListView that
+ * {@link ListFragment}. This implementation simply replaces the ListView that
  * {@code ListFragment} creates with a new PullToRefreshListView. This means
  * that ListFragment still works 100% (e.g. <code>setListShown(...)</code> ).
  * <p/>

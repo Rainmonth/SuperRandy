@@ -3,7 +3,7 @@ package com.rainmonth.common.base;
 import android.app.ActivityManager;
 import android.app.Application;
 import android.content.Context;
-import android.support.multidex.MultiDex;
+import androidx.multidex.MultiDex;
 
 import com.rainmonth.common.utils.ComponentUtils;
 

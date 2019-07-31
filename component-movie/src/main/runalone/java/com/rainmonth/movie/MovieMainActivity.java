@@ -1,6 +1,6 @@
 package com.rainmonth.movie;
 
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 public class MovieMainActivity extends AppCompatActivity {

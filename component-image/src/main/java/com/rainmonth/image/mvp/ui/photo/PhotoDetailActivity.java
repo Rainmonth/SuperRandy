@@ -2,7 +2,7 @@ package com.rainmonth.image.mvp.ui.photo;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.view.ViewPager;
+import androidx.viewpager.widget.ViewPager;
 import android.util.SparseArray;
 import android.view.View;
 import android.widget.LinearLayout;

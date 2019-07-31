@@ -1,8 +1,8 @@
 package com.rainmonth.mvp.ui.activity;
 
 import android.graphics.Color;
-import android.support.v4.view.ViewPager;
-import android.support.v7.widget.Toolbar;
+import androidx.viewpager.widget.ViewPager;
+import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import android.widget.FrameLayout;
 

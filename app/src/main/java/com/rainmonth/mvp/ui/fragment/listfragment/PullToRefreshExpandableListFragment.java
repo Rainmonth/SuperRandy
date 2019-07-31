@@ -18,12 +18,14 @@ package com.rainmonth.mvp.ui.fragment.listfragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 
+import androidx.fragment.app.ListFragment;
+
 import com.rainmonth.common.widgets.library.PullToRefreshExpandableListView;
 
 
 /**
  * A sample implementation of how to use {@link PullToRefreshExpandableListView}
- * with {@link android.support.v4.app.ListFragment}. This implementation simply replaces the ListView
+ * with {@link ListFragment}. This implementation simply replaces the ListView
  * that {@code ListFragment} creates with a new
  * {@code PullToRefreshExpandableListView}. This means that ListFragment still
  * works 100% (e.g. <code>setListShown(...)</code> ).

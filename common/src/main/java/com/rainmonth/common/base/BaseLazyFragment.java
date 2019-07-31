@@ -1,7 +1,7 @@
 package com.rainmonth.common.base;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.view.View;
 
 import com.rainmonth.common.base.mvp.BasePresenter;

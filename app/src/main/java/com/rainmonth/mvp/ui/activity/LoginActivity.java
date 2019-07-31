@@ -1,6 +1,6 @@
 package com.rainmonth.mvp.ui.activity;
 
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -15,8 +15,6 @@ import com.rainmonth.di.component.DaggerLoginComponent;
 import com.rainmonth.di.module.LoginModule;
 import com.rainmonth.mvp.contract.UserContract;
 import com.rainmonth.mvp.presenter.UserPresenter;
-
-import java.util.logging.Logger;
 
 import butterknife.BindView;
 import butterknife.OnClick;

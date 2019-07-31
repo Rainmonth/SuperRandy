@@ -10,7 +10,7 @@
     tools:context=".mvp.ui.activity.WelcomeActivity">
 
 
-    <android.support.v4.view.ViewPager
+    <androidx.viewpager.widget.ViewPager
         android:id="@+id/vp_welcome"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

@@ -1,6 +1,6 @@
 package com.rainmonth.image.selector.config;
 
-import android.support.annotation.StyleRes;
+import androidx.annotation.StyleRes;
 
 /**
  * 图片选择配置

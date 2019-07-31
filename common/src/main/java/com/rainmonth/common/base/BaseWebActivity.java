@@ -1,18 +1,13 @@
 package com.rainmonth.common.base;
 
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
+import androidx.appcompat.widget.Toolbar;
 
 import com.rainmonth.common.R;
 import com.rainmonth.common.di.component.AppComponent;
-import com.rainmonth.common.eventbus.EventCenter;
 import com.rainmonth.common.utils.CommonUtils;
-import com.rainmonth.common.utils.NetworkUtils;
 import com.rainmonth.common.widgets.BrowserLayout;
 import com.socks.library.KLog;
-
-import butterknife.ButterKnife;
 
 public class BaseWebActivity extends BaseSwipeBackCompatActivity {
 

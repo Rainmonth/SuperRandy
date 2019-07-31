@@ -1,6 +1,6 @@
 package com.rainmonth.app.mvp.ui;
 
-import android.support.v4.app.FragmentTransaction;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.rainmonth.app.R;

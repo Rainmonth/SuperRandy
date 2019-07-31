@@ -28,6 +28,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".mvp.ui.common.RoundRectsActivity" />
+        <activity android:name=".mvp.ui.common.ComponentTestActivity" />
     </application>
 
 </manifest>

@@ -1,7 +1,7 @@
 package com.rainmonth.image.mvp.ui.adapter;
 
 import android.content.Context;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -11,7 +11,6 @@ import com.rainmonth.common.http.imageloader.ImageLoader;
 import com.rainmonth.common.http.imageloader.glide.GlideImageConfig;
 import com.rainmonth.common.utils.ComponentUtils;
 import com.rainmonth.image.R;
-import com.rainmonth.image.mvp.model.bean.PhotoBean;
 import com.rainmonth.image.mvp.model.bean.UserBean;
 
 import java.util.List;

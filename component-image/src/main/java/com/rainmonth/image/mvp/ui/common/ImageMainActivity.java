@@ -84,7 +84,7 @@ public class ImageMainActivity extends BaseActivity {
         imageBtnDraw.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                readyGo(RoundRectsActivity.class);
+                readyGo(ComponentTestActivity.class);
             }
         });
 

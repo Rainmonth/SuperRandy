@@ -170,6 +170,8 @@ android {
         exclude 'META-INF/notice.txt'
         exclude 'META-INF/license'
         exclude 'META-INF/license.txt'
+        // 升级到Androidx后会提示duplicate entry: META-INF/services/javax.annotation.processing.Processor，这里将其排除
+        exclude 'META-INF/services/javax.annotation.processing.Processor'
     }
     dexOptions {
         javaMaxHeapSize "2048m"

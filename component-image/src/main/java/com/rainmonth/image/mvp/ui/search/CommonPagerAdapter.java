@@ -1,15 +1,10 @@
 package com.rainmonth.image.mvp.ui.search;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
-
-import com.rainmonth.image.mvp.model.bean.PhotoBean;
-import com.rainmonth.image.mvp.ui.photo.PhotoFragment;
-import com.socks.library.KLog;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /***
