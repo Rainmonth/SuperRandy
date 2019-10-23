@@ -176,6 +176,11 @@ android {
     dexOptions {
         javaMaxHeapSize "2048m"
     }
+    // 解决com.android.builder.dexing.DexArchiveBuilderException
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
 }
 
 // 解决duplicate class的问题
