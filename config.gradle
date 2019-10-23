@@ -125,7 +125,8 @@ ext {
 
             // 动画兼容库
             "nineoldandroids"           : 'com.nineoldandroids:library:2.4.0',
-            "photoview"                 : 'com.github.chrisbanes.photoview:library:1.2.4'
+            "photoview"                 : 'com.github.chrisbanes.photoview:library:1.2.4',
+            "exoplayer"                 : 'com.google.android.exoplayer:exoplayer:2.10.6'
 
     ]
 

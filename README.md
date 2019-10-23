@@ -7,7 +7,7 @@
 - 熟悉移动开发常用的技能
 
 一个自己业余时间开发的App，内容包括:
-
+- 项目迁移至androidX(done 2019/07/31)
 - 基本的五个模块的设计 (todo)
 - MaterialDesign以及常用工具类的整理; (under working)
 - MVP模式的运用 (done)
@@ -121,4 +121,11 @@
         }
     ```
 
+    注意：
     
+    Android Studio V3.4.2支持一键迁移至androidX，具体方法如下：
+    
+    项目更目录，右键，refactor，migrate to androidX即可，迁移过程中遇到的问题：
+    
+    - 低版本的glide提示`duplicate entry META-INF/services/javax.annotation.processing.Processor`，在packageOptions中添加exclude后仍无效，升级glide版本至4.8就没问题了
+    - 一些库的引用必须手动更改
