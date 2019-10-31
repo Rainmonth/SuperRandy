@@ -81,6 +81,7 @@ public class VideoPlayerActivity extends BaseActivity implements PlayerControlVi
         playerView.setControllerVisibilityListener(this);
 
         playerView.setPlayer(player);
+        playerView.setPlaybackPreparer(this);
         // 4. 准备MediaSource
         MediaSource mediaSource = getMediaSource();
         player.prepare(mediaSource);
@@ -112,8 +113,6 @@ public class VideoPlayerActivity extends BaseActivity implements PlayerControlVi
             player.addListener(new PlayerEventListener());
             player.setPlayWhenReady(startAutoPlay);
             player.addAnalyticsListener(new EventLogger(trackSelector));
-            playerView.setPlayer(player);
-            playerView.setPlaybackPreparer(this);
         }
     }
 
@@ -129,7 +128,8 @@ public class VideoPlayerActivity extends BaseActivity implements PlayerControlVi
 
     private MediaSource getMediaSource() {
         List<String> mediaList = Arrays.asList(getResources().getStringArray(R.array.music_media_source_list));
-        Uri uri = Uri.parse("https://storage.googleapis.com/exoplayer-test-media-1/gen-3/screens/dash-vod-single-segment/audio-141.mp4");
+//        Uri uri = Uri.parse("https://storage.googleapis.com/exoplayer-test-media-1/gen-3/screens/dash-vod-single-segment/audio-141.mp4");
+        Uri uri = Uri.parse("https://storage.googleapis.com/exoplayer-test-media-1/gen-3/screens/dash-vod-single-segment/video-137.mp4");
         DataSource.Factory dataSource = new DefaultDataSourceFactory(mContext, Util.getUserAgent(mContext, mContext.getPackageName()));
         MediaSource mediaSource = new ProgressiveMediaSource.Factory(dataSource).createMediaSource(uri);
 //        if (mediaList != null && mediaList.size() > 0) {
@@ -145,6 +145,14 @@ public class VideoPlayerActivity extends BaseActivity implements PlayerControlVi
     @Override
     public void onVisibilityChange(int visibility) {
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (player != null) {
+            player.release();
+        }
     }
 
     /**

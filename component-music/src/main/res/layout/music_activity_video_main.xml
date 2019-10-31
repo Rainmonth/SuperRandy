@@ -6,10 +6,11 @@
 
     <TextView
         android:id="@+id/tv_play_video"
+        style="@style/music_green_trans_btn"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_margin="16dp"
-        android:text="Play"
+        android:text="开始播放"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
