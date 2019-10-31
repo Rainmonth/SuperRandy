@@ -1,5 +1,8 @@
 package com.rainmonth.music.videoplayer;
 
+import android.view.View;
+import android.widget.TextView;
+
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -16,6 +19,7 @@ import com.rainmonth.music.R;
  * @date 2019-05-15 12:37
  */
 public class VideoPlayMainActivity extends BaseActivity {
+    TextView tvPlayVideo;
     RecyclerView rvAudioVideoExample;
     BaseQuickAdapter<ExampleBean, BaseViewHolder> exampleAdapter;
 
@@ -36,6 +40,13 @@ public class VideoPlayMainActivity extends BaseActivity {
 
     @Override
     protected void initViewsAndEvents() {
+        tvPlayVideo = findViewById(R.id.tv_play_video);
+        tvPlayVideo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                readyGo(VideoPlayerActivity.class);
+            }
+        });
         rvAudioVideoExample = findViewById(R.id.rv_audio_video_example);
         exampleAdapter = new BaseQuickAdapter<ExampleBean, BaseViewHolder>(R.layout.music_example_list_item_view) {
             @Override

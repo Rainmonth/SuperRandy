@@ -1,9 +1,15 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="music_app_name" translatable="false">音乐模块</string>
     <string name="music_welcome_label" translatable="false">欢迎进入音乐模块</string>
     <string-array name="music_media_source_list">
-        <string></string>
-        <string></string>
+        <item>111</item>
+        <item>222</item>
 
+    </string-array>
+
+    <!--SmoothStreaming格式的视频-->
+    <string-array name="ss_media_source_list" tools:ignore="ResourceName">
+        <item>11</item>
+        <item>22</item>
     </string-array>
 </resources>
