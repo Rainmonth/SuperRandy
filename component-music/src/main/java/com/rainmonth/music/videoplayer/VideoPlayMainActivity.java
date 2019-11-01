@@ -119,7 +119,7 @@ public class VideoPlayMainActivity extends BaseActivity {
         exampleBeans.add(new ExampleBean("可配置的视频播放", "支持切换清晰度、切换视窗大小、手势调节明暗、声音等", ExampleBean.STATE_TODO, ConfigVideoPlayActivity.class));
         exampleBeans.add(new ExampleBean("详情页视频播放", "类似于爱奇艺播放页", ExampleBean.STATE_TODO, DetailVideoPlayActivity.class));
         exampleBeans.add(new ExampleBean("列表焦点播放", "多个视频组成的列表，列表停止滑动是播放焦点上的那一个", ExampleBean.STATE_TODO, ListFocusVideoPlayActivity.class));
-        exampleBeans.add(new ExampleBean("抖音式播放", "类似于抖音的那种播放效果", ExampleBean.STATE_TODO, DouYinVideoPlayActivity.class));
+        exampleBeans.add(new ExampleBean("抖音式播放", "类似于抖音的那种播放效果", ExampleBean.STATE_TODO, DyVideoPlayActivity.class));
         exampleBeans.add(new ExampleBean("支持回退时悬浮窗播放", "很多游戏直播软件在退出播放页后仍可以小窗播放", ExampleBean.STATE_TODO, FloatVideoPlayerActivity.class));
         exampleBeans.add(new ExampleBean("全局悬浮窗播放", "全局浮窗播放", ExampleBean.STATE_TODO, GlobalVideoPlayerActivity.class));
         return exampleBeans;

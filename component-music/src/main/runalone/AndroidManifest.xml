@@ -23,11 +23,14 @@
         <activity android:name=".audioplayer.AudioPlayerActivity" />
         <activity android:name=".videoplayer.VideoPlayerActivity" />
         <activity android:name=".videoplayer.VideoPlayMainActivity" />
-
-        <service android:name=".audioplayer.AudioPlayService" />
         <activity android:name=".videoplayer.ConfigVideoPlayActivity" />
         <activity android:name=".videoplayer.DetailVideoPlayActivity" />
-        <activity android:name=".videoplayer.DouYinVideoPlayActivity" />
+        <activity android:name=".videoplayer.DyVideoPlayActivity" />
+        <activity android:name=".videoplayer.FloatVideoPlayerActivity" />
+        <activity android:name=".videoplayer.GlobalVideoPlayerActivity" />
+        <activity android:name=".videoplayer.ListFocusVideoPlayActivity" />
+
+        <service android:name=".audioplayer.AudioPlayService" />
     </application>
 
 </manifest>
