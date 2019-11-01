@@ -19,7 +19,7 @@ ext.appName = "SuperRandy"
 // 默认备份apk目录
 ext.bakApkDir = "/Users/RandyZhang/Documents/WorkFiles/SuperRandy/backApk"
 
-def javaVersion = JavaVersion.VERSION_1_7
+def javaVersion = JavaVersion.VERSION_1_8
 def dateTime = new Date().format("HH_mm_ss")
 
 def loadProperties() {
@@ -186,11 +186,6 @@ android {
 // 解决duplicate class的问题
 configurations {
     all*.exclude group: 'com.android.support', module: 'support-v4'
-}
-
-
-repositories {
-    mavenCentral()
 }
 
 rootProject.ext.merge.each { c ->
