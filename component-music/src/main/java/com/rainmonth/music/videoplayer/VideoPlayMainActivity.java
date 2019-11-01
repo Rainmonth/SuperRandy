@@ -27,7 +27,6 @@ import java.util.List;
  * @date 2019-05-15 12:37
  */
 public class VideoPlayMainActivity extends BaseActivity {
-    TextView tvPlayVideo;
     RecyclerView rvAudioVideoExample;
     BaseQuickAdapter<ExampleBean, BaseViewHolder> exampleAdapter;
 
@@ -48,13 +47,6 @@ public class VideoPlayMainActivity extends BaseActivity {
 
     @Override
     protected void initViewsAndEvents() {
-        tvPlayVideo = findViewById(R.id.tv_play_video);
-        tvPlayVideo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                readyGo(VideoPlayerActivity.class);
-            }
-        });
         rvAudioVideoExample = findViewById(R.id.rv_audio_video_example);
         LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
         DividerItemDecoration itemDecoration = new DividerItemDecoration(mContext, LinearLayout.HORIZONTAL);
