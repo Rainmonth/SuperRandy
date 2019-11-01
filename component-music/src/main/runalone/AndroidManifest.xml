@@ -25,6 +25,9 @@
         <activity android:name=".videoplayer.VideoPlayMainActivity" />
 
         <service android:name=".audioplayer.AudioPlayService" />
+        <activity android:name=".videoplayer.ConfigVideoPlayActivity" />
+        <activity android:name=".videoplayer.DetailVideoPlayActivity" />
+        <activity android:name=".videoplayer.DouYinVideoPlayActivity" />
     </application>
 
 </manifest>
