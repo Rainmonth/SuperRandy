@@ -2,6 +2,7 @@ package com.rainmonth.music.videoplayer;
 
 import com.rainmonth.common.base.BaseActivity;
 import com.rainmonth.common.di.component.AppComponent;
+import com.rainmonth.music.R;
 
 /**
  * 抖音式播放
@@ -22,7 +23,7 @@ public class DyVideoPlayActivity extends BaseActivity {
 
     @Override
     protected int getContentViewLayoutID() {
-        return 0;
+        return R.layout.music_activity_dou_yin_video_play;
     }
 
     @Override
