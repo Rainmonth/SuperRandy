@@ -7,7 +7,6 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.rainmonth.common.base.BaseActivity;
 import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.music.audioplayer.AudioPlayerActivity;
-import com.rainmonth.music.videoplayer.VideoPlayMainActivity;
 import com.rainmonth.router.RouterConstant;
 import com.rainmonth.router.RouterUtils;
 
@@ -55,7 +54,7 @@ public class MusicMainActivity extends BaseActivity implements View.OnClickListe
         if (id == R.id.tv_play_music) {
             readyGo(AudioPlayerActivity.class);
         } else if (id == R.id.tv_play_video) {
-            readyGo(VideoPlayMainActivity.class);
+            RouterUtils.getInstance().build(RouterConstant.PATH_VIDEO_HOME).navigation();
         } else if (id == R.id.tv_go_app) {
             // do nothing
             RouterUtils.getInstance().build(RouterConstant.PATH_APP_HOME).navigation();

@@ -9,12 +9,13 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.rainmonth.common.base.BaseActivity;
 import com.rainmonth.common.bean.ExampleBean;
 import com.rainmonth.common.di.component.AppComponent;
-import com.rainmonth.video.R;
+import com.rainmonth.router.RouterConstant;
 import com.socks.library.KLog;
 
 import java.util.ArrayList;
@@ -26,6 +27,7 @@ import java.util.List;
  * @author 张豪成
  * @date 2019-05-15 12:37
  */
+@Route(path = RouterConstant.PATH_VIDEO_HOME)
 public class VideoMainActivity extends BaseActivity {
     RecyclerView rvAudioVideoExample;
     BaseQuickAdapter<ExampleBean, BaseViewHolder> exampleAdapter;
