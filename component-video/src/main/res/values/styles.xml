@@ -8,4 +8,8 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="VideoSplashTheme"  parent="VideoAppTheme">
+        <item name="android:windowBackground">@drawable/video_bg_video_splash</item>
+    </style>
+
 </resources>

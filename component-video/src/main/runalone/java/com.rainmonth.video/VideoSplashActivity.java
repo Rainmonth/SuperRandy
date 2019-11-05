@@ -1,5 +1,7 @@
 package com.rainmonth.video;
 
+import android.os.Handler;
+
 import com.rainmonth.common.base.BaseActivity;
 import com.rainmonth.common.di.component.AppComponent;
 
@@ -18,7 +20,10 @@ public class VideoSplashActivity extends BaseActivity {
 
     @Override
     protected void initViewsAndEvents() {
-
+        Handler handler = new Handler();
+        handler.postDelayed(() -> {
+            readyGoThenKill(VideoMainActivity.class);
+        }, 5000);
     }
 
     @Override

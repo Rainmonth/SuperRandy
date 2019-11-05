@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item>
+        <color android:color="@color/white" />
+    </item>
+
+    <item android:top="180dp">
+        <bitmap
+            android:gravity="top|center_horizontal"
+            android:src="@drawable/video_splash_ic_top" />
+    </item>
+
+    <item android:bottom="50dp">
+        <!--这里的src必须采用图片，不能采用xml定义的drawable-->
+        <bitmap
+            android:gravity="bottom|center_horizontal"
+            android:src="@drawable/video_splash_ic_top" />
+    </item>
+
+</layer-list>
