@@ -42,6 +42,7 @@ dependencies {
     //res
     api project(":common-res")
     api project(":router")
+    api project(":component-base")
     api(rootProject.ext.dependencies["router"]) {
         exclude module: 'support-v4'
         exclude module: 'appcompat-v7'
