@@ -6,6 +6,7 @@ import android.widget.TextView;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.rainmonth.common.base.BaseActivity;
 import com.rainmonth.common.di.component.AppComponent;
+import com.rainmonth.componentbase.ServiceFactory;
 import com.rainmonth.music.audioplayer.AudioPlayerActivity;
 import com.rainmonth.router.RouterConstant;
 import com.rainmonth.router.RouterUtils;
@@ -52,6 +53,7 @@ public class MusicMainActivity extends BaseActivity implements View.OnClickListe
     public void onClick(View view) {
         int id = view.getId();
         if (id == R.id.tv_play_music) {
+            ServiceFactory.getInstance().getVideoService().playVideo("https://www.baidu.com/test.mp4");
             readyGo(AudioPlayerActivity.class);
         } else if (id == R.id.tv_play_video) {
             RouterUtils.getInstance().build(RouterConstant.PATH_VIDEO_HOME).navigation();

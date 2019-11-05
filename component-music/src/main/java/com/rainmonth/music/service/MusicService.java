@@ -15,6 +15,6 @@ public class MusicService implements IMusicService {
 
     @Override
     public void playMusic(String musicUrl) {
-        KLog.d("MusicService", "playMusic");
+        KLog.d("MusicService", "playMusic with url->" + musicUrl);
     }
 }

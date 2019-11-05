@@ -15,6 +15,7 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.rainmonth.common.base.BaseActivity;
 import com.rainmonth.common.bean.ExampleBean;
 import com.rainmonth.common.di.component.AppComponent;
+import com.rainmonth.componentbase.ServiceFactory;
 import com.rainmonth.router.RouterConstant;
 import com.socks.library.KLog;
 
@@ -93,6 +94,9 @@ public class VideoMainActivity extends BaseActivity {
         exampleAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                if (position == 1) {
+                    ServiceFactory.getInstance().getMusicService().playMusic("https://www.baidu.com/test.mp3");
+                }
                 List<ExampleBean> exampleBeans = exampleAdapter.getData();
                 ExampleBean exampleBean = exampleBeans.get(position);
                 if (exampleBean == null) {
