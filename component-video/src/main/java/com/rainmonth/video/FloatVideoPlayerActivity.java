@@ -1,8 +1,7 @@
-package com.rainmonth.music.videoplayer;
+package com.rainmonth.video;
 
 import com.rainmonth.common.base.BaseActivity;
 import com.rainmonth.common.di.component.AppComponent;
-import com.rainmonth.music.R;
 
 /**
  * @author 张豪成
@@ -21,7 +20,7 @@ public class FloatVideoPlayerActivity extends BaseActivity {
 
     @Override
     protected int getContentViewLayoutID() {
-        return R.layout.music_activity_float_video_play;
+        return R.layout.video_activity_float_video_play;
     }
 
     @Override

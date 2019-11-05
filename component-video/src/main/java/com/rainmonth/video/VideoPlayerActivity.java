@@ -1,4 +1,4 @@
-package com.rainmonth.music.videoplayer;
+package com.rainmonth.video;
 
 import android.net.Uri;
 
@@ -16,7 +16,6 @@ import com.google.android.exoplayer2.Timeline;
 import com.google.android.exoplayer2.source.MediaSource;
 import com.google.android.exoplayer2.source.ProgressiveMediaSource;
 import com.google.android.exoplayer2.source.TrackGroupArray;
-import com.google.android.exoplayer2.trackselection.AdaptiveTrackSelection;
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
 import com.google.android.exoplayer2.trackselection.RandomTrackSelection;
 import com.google.android.exoplayer2.trackselection.TrackSelection;
@@ -24,13 +23,11 @@ import com.google.android.exoplayer2.trackselection.TrackSelectionArray;
 import com.google.android.exoplayer2.ui.PlayerControlView;
 import com.google.android.exoplayer2.ui.PlayerView;
 import com.google.android.exoplayer2.upstream.DataSource;
-import com.google.android.exoplayer2.upstream.DefaultDataSource;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.EventLogger;
 import com.google.android.exoplayer2.util.Util;
 import com.rainmonth.common.base.BaseActivity;
 import com.rainmonth.common.di.component.AppComponent;
-import com.rainmonth.music.R;
 import com.socks.library.KLog;
 
 import java.util.Arrays;
@@ -69,7 +66,7 @@ public class VideoPlayerActivity extends BaseActivity implements PlayerControlVi
 
     @Override
     protected int getContentViewLayoutID() {
-        return R.layout.music_activity_video_player;
+        return R.layout.video_activity_video_player;
     }
 
     @Override
@@ -127,7 +124,7 @@ public class VideoPlayerActivity extends BaseActivity implements PlayerControlVi
     }
 
     private MediaSource getMediaSource() {
-        List<String> mediaList = Arrays.asList(getResources().getStringArray(R.array.music_media_source_list));
+        List<String> mediaList = Arrays.asList(getResources().getStringArray(R.array.video_media_source_list));
 //        Uri uri = Uri.parse("https://storage.googleapis.com/exoplayer-test-media-1/gen-3/screens/dash-vod-single-segment/audio-141.mp4");
         Uri uri = Uri.parse("https://storage.googleapis.com/exoplayer-test-media-1/gen-3/screens/dash-vod-single-segment/video-137.mp4");
         DataSource.Factory dataSource = new DefaultDataSourceFactory(mContext, Util.getUserAgent(mContext, mContext.getPackageName()));

@@ -1,0 +1,6 @@
+apply from: "../base_component.gradle"
+apply from: "../base_component_compiler.gradle"
+
+dependencies {
+    api rootProject.ext.dependencies["exoplayer"]
+}

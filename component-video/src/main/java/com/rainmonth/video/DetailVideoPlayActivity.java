@@ -1,8 +1,7 @@
-package com.rainmonth.music.videoplayer;
+package com.rainmonth.video;
 
 import com.rainmonth.common.base.BaseActivity;
 import com.rainmonth.common.di.component.AppComponent;
-import com.rainmonth.music.R;
 
 /**
  * 详情页视频播放
@@ -26,7 +25,7 @@ public class DetailVideoPlayActivity extends BaseActivity {
 
     @Override
     protected int getContentViewLayoutID() {
-        return R.layout.music_activity_detail_video_play;
+        return R.layout.video_activity_detail_video_play;
     }
 
     @Override

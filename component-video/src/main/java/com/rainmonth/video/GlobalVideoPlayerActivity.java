@@ -1,8 +1,7 @@
-package com.rainmonth.music.videoplayer;
+package com.rainmonth.video;
 
 import com.rainmonth.common.base.BaseActivity;
 import com.rainmonth.common.di.component.AppComponent;
-import com.rainmonth.music.R;
 
 /**
  * 全局悬浮窗播放
@@ -23,7 +22,7 @@ public class GlobalVideoPlayerActivity extends BaseActivity {
 
     @Override
     protected int getContentViewLayoutID() {
-        return R.layout.music_activity_global_video_play;
+        return R.layout.video_activity_global_video_play;
     }
 
     @Override

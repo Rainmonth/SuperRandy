@@ -1,8 +1,7 @@
-package com.rainmonth.music.videoplayer;
+package com.rainmonth.video;
 
 import com.rainmonth.common.base.BaseActivity;
 import com.rainmonth.common.di.component.AppComponent;
-import com.rainmonth.music.R;
 
 /**
  * 可配置的视频播放，可配置项：（先实现功能）
@@ -27,7 +26,7 @@ public class ConfigVideoPlayActivity extends BaseActivity {
 
     @Override
     protected int getContentViewLayoutID() {
-        return R.layout.music_activity_config_video_play;
+        return R.layout.video_activity_config_video_play;
     }
 
     @Override
