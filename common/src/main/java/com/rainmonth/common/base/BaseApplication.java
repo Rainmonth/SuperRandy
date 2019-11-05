@@ -11,7 +11,7 @@ import com.rainmonth.common.utils.ComponentUtils;
  * 通用Application实现（无论是壳App还是独立的module，都可以继承该类
  * Created by RandyZhang on 2018/5/21.
  */
-public class BaseApplication extends Application {
+public abstract class BaseApplication extends Application {
 
     private BaseApplicationDelegate mBaseApplicationDelegate;
 
@@ -26,6 +26,7 @@ public class BaseApplication extends Application {
             this.mBaseApplicationDelegate.onDefaultProgressCreate();
             this.onDefaultProgressCreate();
         }
+        initModuleService();
 
     }
 
@@ -59,5 +60,10 @@ public class BaseApplication extends Application {
         }
         return "";
     }
+
+    /**
+     * 初始化module对外提供的服务
+     */
+    public abstract void initModuleService();
 
 }

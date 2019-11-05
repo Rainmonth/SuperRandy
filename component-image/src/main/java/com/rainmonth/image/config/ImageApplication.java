@@ -1,4 +1,4 @@
-package com.rainmonth.image;
+package com.rainmonth.image.config;
 
 import com.rainmonth.common.base.BaseApplication;
 
@@ -11,5 +11,10 @@ public class ImageApplication extends BaseApplication {
     @Override
     public void onCreate() {
         super.onCreate();
+    }
+
+    @Override
+    public void initModuleService() {
+
     }
 }

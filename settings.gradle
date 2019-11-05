@@ -1,8 +1,10 @@
-include ':app', ':component-video'
+include ':app'
 include ':router'
-include ':common-res', ':common'
-include ':magicindicator'
-include ':component-movie',
+include ':common-res',
+        ':common',
+        ':component-base',
+        ':magicindicator',
+        ':component-movie',
         ':component-music',
         ':component-video',
         ':component-app',

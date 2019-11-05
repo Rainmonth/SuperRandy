@@ -1,4 +1,4 @@
-package com.rainmonth.movie;
+package com.rainmonth.movie.config;
 
 import android.app.Application;
 

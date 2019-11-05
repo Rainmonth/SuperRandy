@@ -14,7 +14,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
-        android:name=".MovieApplication"
+        android:name=".config.MovieApplication"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/movie_app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
