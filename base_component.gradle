@@ -8,12 +8,18 @@ if (isRunAlone) {
 } else {
     apply plugin: "com.android.library"
 }
+def javaVersion = JavaVersion.VERSION_1_8
 apply plugin: 'com.jakewharton.butterknife'
 apply plugin: 'com.alibaba.arouter'
 
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
     buildToolsVersion rootProject.ext.android.buildToolsVersion
+
+    compileOptions {
+        sourceCompatibility javaVersion
+        targetCompatibility javaVersion
+    }
 
     defaultConfig {
         minSdkVersion rootProject.ext.android.minSdkVersion
