@@ -13,6 +13,8 @@ import com.rainmonth.common.di.component.AppComponent;
  */
 public class VideoSplashActivity extends BaseActivity {
 
+    private Handler mHandler;
+
     @Override
     protected int getContentViewLayoutID() {
         return -1;
@@ -20,8 +22,8 @@ public class VideoSplashActivity extends BaseActivity {
 
     @Override
     protected void initViewsAndEvents() {
-        Handler handler = new Handler();
-        handler.postDelayed(() -> {
+        mHandler = new Handler();
+        mHandler.postDelayed(() -> {
             readyGoThenKill(VideoMainActivity.class);
         }, 5000);
     }
@@ -34,5 +36,19 @@ public class VideoSplashActivity extends BaseActivity {
     @Override
     public void initToolbar(int colorResId) {
 
+    }
+
+    @Override
+    public void onBackPressed() {
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mHandler != null) {
+            mHandler.removeCallbacksAndMessages(null);
+            mHandler = null;
+        }
     }
 }
