@@ -28,7 +28,9 @@ public abstract class BaseActivity<P extends BasePresenter> extends BaseAppCompa
         initToolbar(mStatusBarColor);
     }
 
-    protected abstract void setupActivityComponent(AppComponent appComponent);
+    protected void setupActivityComponent(AppComponent appComponent) {
+
+    }
 
     public abstract void initToolbar(int colorResId);
 
