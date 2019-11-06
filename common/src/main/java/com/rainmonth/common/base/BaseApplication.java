@@ -3,6 +3,7 @@ package com.rainmonth.common.base;
 import android.app.ActivityManager;
 import android.app.Application;
 import android.content.Context;
+
 import androidx.multidex.MultiDex;
 
 import com.rainmonth.common.utils.ComponentUtils;
@@ -26,8 +27,6 @@ public abstract class BaseApplication extends Application {
             this.mBaseApplicationDelegate.onDefaultProgressCreate();
             this.onDefaultProgressCreate();
         }
-        initModuleService();
-
     }
 
     @Override
@@ -62,6 +61,7 @@ public abstract class BaseApplication extends Application {
     }
 
     /**
+     * 这是个模板方法，库module只负责实现，真正的调用发生在主module中
      * 初始化module对外提供的服务
      */
     public abstract void initModuleService();
