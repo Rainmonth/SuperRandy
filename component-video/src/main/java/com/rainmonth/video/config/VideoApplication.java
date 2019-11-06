@@ -9,6 +9,7 @@ public class VideoApplication extends BaseApplication {
     @Override
     public void onCreate() {
         super.onCreate();
+        initModuleService();
     }
 
     @Override

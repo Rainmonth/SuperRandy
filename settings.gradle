@@ -10,3 +10,5 @@ include ':common-res',
         ':component-app',
         ':component-read',
         ':component-image'
+
+System.out.println("settingsDir:" + getSettingsDir().toString())
