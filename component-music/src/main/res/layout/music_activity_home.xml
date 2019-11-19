@@ -3,30 +3,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#423752"
-    android:paddingLeft="@dimen/m16"
-    android:paddingTop="@dimen/m16"
-    android:paddingRight="@dimen/m16"
-    android:paddingBottom="@dimen/m16"
     tools:context=".MusicMainActivity">
 
-    <TextView
-        android:id="@+id/tv_play_music"
-        style="@style/music_green_trans_btn"
-        android:layout_centerInParent="true"
-        android:text="播放音乐" />
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/vp_music_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/music_main_tab_height" />
 
-    <TextView
-        android:id="@+id/tv_play_video"
-        style="@style/music_green_trans_btn"
-        android:layout_below="@+id/tv_play_music"
-        android:text="播放视频" />
+    <RelativeLayout
+        android:id="@+id/rl_music_controller_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tl_music_main" />
 
-    <TextView
-        android:id="@+id/tv_go_app"
-        style="@style/music_green_trans_btn"
-        android:layout_below="@+id/tv_play_video"
-        android:layout_marginTop="@dimen/m16"
-        android:text="去App模块" />
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tl_music_main"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/music_main_tab_height"
+        android:layout_alignParentBottom="true" />
 
 </RelativeLayout>

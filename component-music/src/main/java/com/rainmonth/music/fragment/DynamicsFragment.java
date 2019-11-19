@@ -10,10 +10,10 @@ import com.rainmonth.music.R;
 /**
  * 推荐Fragment
  */
-public class RecommendFragment extends BaseLazyFragment {
+public class DynamicsFragment extends BaseLazyFragment {
 
-    public static RecommendFragment newInstance(Bundle args) {
-        RecommendFragment fragment = new RecommendFragment();
+    public static DynamicsFragment newInstance(Bundle args) {
+        DynamicsFragment fragment = new DynamicsFragment();
         fragment.setArguments(args);
         return fragment;
     }

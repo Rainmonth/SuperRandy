@@ -10,17 +10,17 @@ import com.rainmonth.music.R;
 /**
  * 推荐Fragment
  */
-public class DynamicsFragment extends BaseLazyFragment {
+public class MineFragment extends BaseLazyFragment {
 
-    public static DynamicsFragment newInstance(Bundle args) {
-        DynamicsFragment fragment = new DynamicsFragment();
+    public static MineFragment newInstance(Bundle args) {
+        MineFragment fragment = new MineFragment();
         fragment.setArguments(args);
         return fragment;
     }
 
     @Override
     protected int getContentViewLayoutID() {
-        return R.layout.music_fragment_recommend;
+        return R.layout.music_fragment_mine;
     }
 
     @Override

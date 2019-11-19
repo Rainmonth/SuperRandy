@@ -8,19 +8,19 @@ import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.music.R;
 
 /**
- *
+ * 推荐Fragment
  */
-public class MusicHallFragment extends BaseLazyFragment {
+public class RecommendFragment extends BaseLazyFragment {
 
-    public static MusicHallFragment newInstance(Bundle args) {
-        MusicHallFragment fragment = new MusicHallFragment();
+    public static RecommendFragment newInstance(Bundle args) {
+        RecommendFragment fragment = new RecommendFragment();
         fragment.setArguments(args);
         return fragment;
     }
 
     @Override
     protected int getContentViewLayoutID() {
-        return R.layout.fragment_music_hall;
+        return R.layout.music_fragment_recommend;
     }
 
     @Override
