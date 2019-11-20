@@ -7,8 +7,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.rainmonth.common.base.BaseActivity;
 import com.rainmonth.common.di.component.AppComponent;
-import com.rainmonth.music.R;
-import com.rainmonth.music.bean.VideoListBean;
+import com.rainmonth.video.bean.VideoListBean;
 
 /**
  * 视频列表焦点播放
@@ -42,7 +41,7 @@ public class ListFocusVideoPlayActivity extends BaseActivity {
     protected void initViewsAndEvents() {
         rvVideoList = findViewById(R.id.rv_video_list);
         rvVideoList.setLayoutManager(new LinearLayoutManager(mContext));
-        videoListAdapter = new BaseQuickAdapter<VideoListBean, BaseViewHolder>(R.layout.music_foucus_video_play_list_item_view) {
+        videoListAdapter = new BaseQuickAdapter<VideoListBean, BaseViewHolder>(R.layout.video_activity_list_focus_list_item) {
 
             @Override
             protected void convert(BaseViewHolder helper, VideoListBean item) {
