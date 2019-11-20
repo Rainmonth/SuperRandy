@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragment.MusicHallFragment">
 
-    <TextView
+    <com.rainmonth.music.widget.MusicMainTopBar
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="@string/music_main_tab_music_hall" />
+        android:layout_height="60dp"
+        app:music_icon="@drawable/music_icon_main_top_bar_discovery"
+        app:music_title="@string/music_main_tab_music_hall" />
 
 </FrameLayout>

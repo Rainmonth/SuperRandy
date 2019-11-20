@@ -7,13 +7,15 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <!--加上就去掉了Window你的背景，但容易引发问题-->
-<!--        <item name="android:windowBackground">@null</item>-->
+        <!--        <item name="android:windowBackground">@null</item>-->
     </style>
 
     <style name="MusicFullActivity" parent="MusicAppTheme">
         <!--        <item name="windowActionBar">false</item>-->
         <!--        <item name="windowNoTitle">true</item>-->
-        <item name="android:windowFullscreen">true</item>
+        <!--        <item name="android:windowFullscreen">true</item>-->
+        <item name="android:screenOrientation">portrait</item>
+        <item name="android:configChanges">orientation|screenSize|fontScale</item>
     </style>
 
     <style name="music_green_trans_btn" parent="Base.TextAppearance.AppCompat.Button">

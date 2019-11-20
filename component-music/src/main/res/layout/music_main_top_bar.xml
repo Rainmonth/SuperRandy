@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:parentTag="android.widget.RelativeLayout">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:paddingStart="@dimen/m16"
+        android:paddingTop="@dimen/m8"
+        android:paddingEnd="@dimen/m16"
+        android:paddingBottom="@dimen/m8"
+        android:text="标题"
+        android:textSize="@dimen/f16"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toStartOf="@+id/icon"
+        android:layout_toEndOf="@+id/title"
+        android:background="@drawable/music_main_top_bar_search_bg"
+        android:gravity="center"
+        android:padding="@dimen/m8"
+        android:text="搜索"
+        android:textSize="@dimen/f16" />
+
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="@dimen/m16"
+        android:layout_marginEnd="@dimen/m16" />
+
+</merge>

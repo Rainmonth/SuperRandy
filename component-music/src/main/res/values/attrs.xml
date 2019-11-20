@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="MusicMainTopBar">
+        <attr name="music_title" format="string|reference" />
+        <attr name="music_icon" format="reference" />
+    </declare-styleable>
+</resources>
