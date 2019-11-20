@@ -64,4 +64,7 @@
     <color name="gplus_color_4">#b23424</color>
 
     <color name="six_3">#333333</color>
+
+    <color name="common_tab_select_color">#0EC552</color>
+    <color name="common_tab_normal_color">#333333</color>
 </resources>

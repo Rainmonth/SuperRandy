@@ -27,4 +27,6 @@
     <dimen name="f22">22sp</dimen>
     <dimen name="f36">36sp</dimen>
     <dimen name="cpb_default_stroke_width">4dp</dimen>
+
+    <dimen name="common_bottom_tab_layout_height">48dp</dimen>
 </resources>

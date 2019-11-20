@@ -20,7 +20,7 @@ public class DynamicsFragment extends BaseLazyFragment {
 
     @Override
     protected int getContentViewLayoutID() {
-        return R.layout.music_fragment_recommend;
+        return R.layout.music_fragment_dynamics;
     }
 
     @Override

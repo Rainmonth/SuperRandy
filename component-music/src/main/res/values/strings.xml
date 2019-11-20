@@ -1,11 +1,10 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <string name="music_app_name" translatable="false">音乐模块</string>
     <string name="music_welcome_label" translatable="false">欢迎进入音乐模块</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="music_main_tab_recommend">推荐</string>
-    <string name="music_main_tab_music_hall">音乐馆</string>
-    <string name="music_main_tab_mine">我的</string>
+    <string name="music_main_tab_music_hall" translatable="false">音乐馆</string>
+    <string name="music_main_tab_recommend" translatable="false">推荐</string>
+    <string name="music_main_tab_music_dynamics" translatable="false">动态</string>
+    <string name="music_main_tab_mine" translatable="false">我的</string>
 
 </resources>

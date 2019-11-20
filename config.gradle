@@ -18,8 +18,8 @@ ext {
 //            "app",
 //            "image",
 //            "movie",
-            "music",
-            "video",
+//            "music",
+//            "video",
 //            "read"
     ]
 

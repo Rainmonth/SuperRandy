@@ -15,10 +15,16 @@ import com.rainmonth.common.utils.ComponentUtils;
 public abstract class BaseApplication extends Application {
 
     private BaseApplicationDelegate mBaseApplicationDelegate;
+    private static BaseApplication mInstance;
+
+    public static BaseApplication getInstance() {
+        return mInstance;
+    }
 
     @Override
     public void onCreate() {
         super.onCreate();
+        mInstance = this;
         this.mBaseApplicationDelegate = new BaseApplicationDelegate(this);
         this.mBaseApplicationDelegate.onCreate();
 

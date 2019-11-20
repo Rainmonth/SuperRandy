@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <!--无ActionBar的Activity-->
     <style name="BaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
 
@@ -73,4 +73,20 @@
         <item name="android:windowSoftInputMode">adjustPan</item>
     </style>
 
+    <style name="CommonTabLayoutStyle" parent="Base.Widget.Design.TabLayout">
+        <item name="android:background">@android:color/white</item>
+        <!--指示线的颜色-->
+        <item name="tabIndicatorColor">@android:color/transparent</item>
+        <item name="tabTextAppearance">@style/MusicMainTabTextAppearance</item>
+        <item name="tabTextColor">@color/common_tab_normal_color</item>
+        <item name="tabSelectedTextColor">@color/common_tab_select_color</item>
+        <item name="tabMode">fixed</item>
+        <!--点击时的那个颜色-->
+        <item name="tabBackground">@android:color/transparent</item>
+        <item name="tabGravity">fill</item>
+    </style>
+
+    <style name="MusicMainTabTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize" tools:ignore="SpUsage">10dp</item>
+    </style>
 </resources>

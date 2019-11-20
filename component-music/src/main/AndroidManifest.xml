@@ -4,7 +4,7 @@
 
     <application>
 
-        <activity android:name=".MusicMainActivity" />
+        <activity android:name=".MusicMainActivity" android:theme="@style/MusicFullActivity"/>
 
         <activity android:name=".audioplayer.AudioPlayerActivity" />
 
