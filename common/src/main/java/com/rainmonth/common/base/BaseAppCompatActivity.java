@@ -6,9 +6,13 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+
 import com.google.android.material.snackbar.Snackbar;
+
+import androidx.annotation.IntDef;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,6 +37,12 @@ import butterknife.ButterKnife;
 import de.greenrobot.event.EventBus;
 
 public abstract class BaseAppCompatActivity extends AppCompatActivity {
+    private static final int TRANSITION_MODE_LEFT = 0;
+    private static final int TRANSITION_MODE_RIGHT = 1;
+    private static final int TRANSITION_MODE_TOP = 2;
+    private static final int TRANSITION_MODE_BOTTOM = 3;
+    private static final int TRANSITION_MODE_SCALE = 4;
+    private static final int TRANSITION_MODE_FADE = 5;
 
     /**
      * Log tag
@@ -63,32 +73,36 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
     /**
      * overridePendingTransition mode
      */
-    public enum TransitionMode {
-        LEFT, RIGHT, TOP, BOTTOM, SCALE, FADE
+    @IntDef({TRANSITION_MODE_LEFT, TRANSITION_MODE_RIGHT,
+            TRANSITION_MODE_TOP, TRANSITION_MODE_BOTTOM,
+            TRANSITION_MODE_SCALE, TRANSITION_MODE_FADE})
+    @interface TransitionMode {
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         if (toggleOverridePendingTransition()) {
-            switch (getOverridePendingTransitionMode()) {
-                case LEFT:
-                    overridePendingTransition(R.anim.left_in, R.anim.left_out);
-                    break;
-                case RIGHT:
-                    overridePendingTransition(R.anim.right_in, R.anim.right_out);
-                    break;
-                case TOP:
-                    overridePendingTransition(R.anim.top_in, R.anim.top_out);
-                    break;
-                case BOTTOM:
-                    overridePendingTransition(R.anim.bottom_in, R.anim.bottom_out);
-                    break;
-                case SCALE:
-                    overridePendingTransition(R.anim.scale_in, R.anim.scale_out);
-                    break;
-                case FADE:
-                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-                    break;
+            if (getOverridePendingTransitionMode() >= 0) {
+                switch (getOverridePendingTransitionMode()) {
+                    case TRANSITION_MODE_LEFT:
+                        overridePendingTransition(R.anim.left_in, R.anim.left_out);
+                        break;
+                    case TRANSITION_MODE_RIGHT:
+                        overridePendingTransition(R.anim.right_in, R.anim.right_out);
+                        break;
+                    case TRANSITION_MODE_TOP:
+                        overridePendingTransition(R.anim.top_in, R.anim.top_out);
+                        break;
+                    case TRANSITION_MODE_BOTTOM:
+                        overridePendingTransition(R.anim.bottom_in, R.anim.bottom_out);
+                        break;
+                    case TRANSITION_MODE_SCALE:
+                        overridePendingTransition(R.anim.scale_in, R.anim.scale_out);
+                        break;
+                    case TRANSITION_MODE_FADE:
+                        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                        break;
+                }
             }
         }
         super.onCreate(savedInstanceState);
@@ -173,25 +187,27 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
         super.finish();
         mAppComponent.appManager().removeActivity(this);
         if (toggleOverridePendingTransition()) {
-            switch (getOverridePendingTransitionMode()) {
-                case LEFT:
-                    overridePendingTransition(R.anim.left_in, R.anim.left_out);
-                    break;
-                case RIGHT:
-                    overridePendingTransition(R.anim.right_in, R.anim.right_out);
-                    break;
-                case TOP:
-                    overridePendingTransition(R.anim.top_in, R.anim.top_out);
-                    break;
-                case BOTTOM:
-                    overridePendingTransition(R.anim.bottom_in, R.anim.bottom_out);
-                    break;
-                case SCALE:
-                    overridePendingTransition(R.anim.scale_in, R.anim.scale_out);
-                    break;
-                case FADE:
-                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-                    break;
+            if (getOverridePendingTransitionMode() >= 0) {
+                switch (getOverridePendingTransitionMode()) {
+                    case TRANSITION_MODE_LEFT:
+                        overridePendingTransition(R.anim.left_in, R.anim.left_out);
+                        break;
+                    case TRANSITION_MODE_RIGHT:
+                        overridePendingTransition(R.anim.right_in, R.anim.right_out);
+                        break;
+                    case TRANSITION_MODE_TOP:
+                        overridePendingTransition(R.anim.top_in, R.anim.top_out);
+                        break;
+                    case TRANSITION_MODE_BOTTOM:
+                        overridePendingTransition(R.anim.bottom_in, R.anim.bottom_out);
+                        break;
+                    case TRANSITION_MODE_SCALE:
+                        overridePendingTransition(R.anim.scale_in, R.anim.scale_out);
+                        break;
+                    case TRANSITION_MODE_FADE:
+                        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                        break;
+                }
             }
         }
     }
@@ -274,7 +290,7 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
      *
      * @return the TransitionMode used
      */
-    protected abstract TransitionMode getOverridePendingTransitionMode();
+    protected abstract int getOverridePendingTransitionMode();
 
     /**
      * startActivity

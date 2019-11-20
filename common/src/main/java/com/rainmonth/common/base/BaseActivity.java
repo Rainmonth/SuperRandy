@@ -89,8 +89,8 @@ public abstract class BaseActivity<P extends BasePresenter> extends BaseAppCompa
     }
 
     @Override
-    protected TransitionMode getOverridePendingTransitionMode() {
-        return null;
+    protected int getOverridePendingTransitionMode() {
+        return -1;
     }
 
     @Override
