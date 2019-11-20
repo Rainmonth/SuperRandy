@@ -1,64 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_music_player"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black_50_alpha"
     android:paddingLeft="@dimen/m16"
     android:paddingTop="@dimen/m16"
     android:paddingRight="@dimen/m16"
     android:paddingBottom="@dimen/m16"
-    tools:context=".audioplayer.AudioPlayerActivity">
+    tools:context=".audioplayer.AudioPlayerActivity"
+    tools:ignore="ContentDescription">
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/vp_cover"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
-
-    <LinearLayout
-        android:id="@+id/ll_action_container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/ll_progress_container"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/btn_collect"
-            android:layout_width="32dp"
-            android:layout_height="32dp" />
-
-        <Button
-            android:id="@+id/btn_download"
-            android:layout_width="32dp"
-            android:layout_height="32dp" />
-
-        <Button
-            android:id="@+id/btn_comment"
-            android:layout_width="32dp"
-            android:layout_height="32dp" />
-
-        <Button
-            android:id="@+id/btn_more_actions"
-            android:layout_width="32dp"
-            android:layout_height="32dp" />
-
-    </LinearLayout>
+        android:layout_height="match_parent"
+        android:layout_above="@+id/ll_progress_container" />
 
     <LinearLayout
         android:id="@+id/ll_progress_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/rl_control_container"
-        android:gravity="center_vertical">
+        android:gravity="center_vertical"
+        android:padding="@dimen/m16"
+        app:layout_constraintBottom_toTopOf="@+id/rl_control_container"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
         <TextView
             android:id="@+id/tv_play_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
+            android:layout_marginEnd="@dimen/m8"
             android:text="00:00" />
 
         <ProgressBar
@@ -71,8 +47,7 @@
             android:id="@+id/tv_total_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
+            android:layout_marginStart="@dimen/m8"
             android:text="04:34" />
 
     </LinearLayout>
@@ -81,46 +56,89 @@
         android:id="@+id/rl_control_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true">
+        android:layout_marginBottom="@dimen/m16"
+        app:layout_constraintBottom_toTopOf="@+id/btn_download"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
-        <Button
+        <ImageView
             android:id="@+id/btn_play_mode"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true" />
+            android:layout_centerVertical="true"
+            android:src="@drawable/music_play_drawable_play_mode_repeat" />
 
-        <Button
+        <ImageView
             android:id="@+id/btn_play_prev"
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:layout_centerVertical="true"
             android:layout_toStartOf="@+id/btn_play"
-            android:layout_toLeftOf="@+id/btn_play" />
+            android:src="@drawable/player_notification_pre" />
 
-        <Button
+        <ImageView
             android:id="@+id/btn_play"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_centerInParent="true" />
+            android:layout_centerInParent="true"
+            android:src="@drawable/music_play_drawable_play_btn" />
 
-        <Button
+        <ImageView
             android:id="@+id/btn_play_next"
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:layout_centerVertical="true"
             android:layout_toEndOf="@+id/btn_play"
-            android:layout_toRightOf="@+id/btn_play" />
+            android:src="@drawable/player_notification_next" />
 
-        <Button
+        <ImageView
             android:id="@+id/btn_play_list"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true" />
+            android:layout_centerVertical="true"
+            android:padding="8dp"
+            android:src="@drawable/music_play_drawable_play_list" />
 
     </RelativeLayout>
 
-</RelativeLayout>
+
+    <ImageView
+        android:id="@+id/btn_collect"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/player_btn_favorite_normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_download"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintVertical_chainStyle="spread_inside" />
+
+    <ImageView
+        android:id="@+id/btn_download"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/music_play_drawable_action_download"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_comment"
+        app:layout_constraintStart_toEndOf="@+id/btn_collect" />
+
+    <ImageView
+        android:id="@+id/btn_comment"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/music_play_drawable_action_share"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btn_more_actions"
+        app:layout_constraintStart_toEndOf="@+id/btn_download" />
+
+    <ImageView
+        android:id="@+id/btn_more_actions"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/player_btn_comment_normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btn_comment" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

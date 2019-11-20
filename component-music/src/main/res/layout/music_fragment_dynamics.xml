@@ -9,7 +9,7 @@
     <com.rainmonth.music.widget.MusicMainTopBar
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        app:music_icon="@drawable/music_icon_main_top_bar_follow"
+        app:music_icon="@drawable/music_main_top_bar_icon_follow"
         app:music_title="@string/music_main_tab_music_dynamics" />
 
 </FrameLayout>

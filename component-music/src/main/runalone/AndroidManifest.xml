@@ -31,8 +31,10 @@
         </activity>
         <activity
             android:name=".MusicMainActivity"
-            android:theme="@style/MusicFullActivity" />
-        <activity android:name=".audioplayer.AudioPlayerActivity" />
+            android:theme="@style/MusicFullscreen" />
+        <activity
+            android:name=".audioplayer.AudioPlayerActivity"
+            android:theme="@style/MusicFullscreen" />
 
         <service android:name=".audioplayer.AudioPlayService" />
     </application>
