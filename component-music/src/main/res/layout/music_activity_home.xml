@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:clipChildren="false"
     tools:context=".MusicMainActivity">
 
     <androidx.viewpager.widget.ViewPager
@@ -11,14 +13,17 @@
         android:layout_height="match_parent"
         android:layout_marginBottom="@dimen/music_main_tab_height" />
 
-    <RelativeLayout
-        android:id="@+id/rl_music_controller_container"
+    <com.rainmonth.music.widget.MusicMiniBar
+        android:id="@+id/mmb_minibar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/tl_music_main" />
+        android:layout_height="@dimen/music_minibar_height"
+        android:layout_above="@+id/tl_music_main"
+        android:background="@drawable/music_minibar_bg"
+        android:clipChildren="true" />
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tl_music_main"
+        app:tabIndicatorGravity="top"
         style="@style/CommonTabLayoutStyle"
         android:layout_width="match_parent"
         android:layout_height="@dimen/music_main_tab_height"

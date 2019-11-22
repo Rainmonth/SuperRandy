@@ -65,6 +65,8 @@
 
     <color name="six_3">#333333</color>
 
+    <color name="divider_color">#eeeeee</color>
+
     <color name="common_tab_select_color">#0EC552</color>
     <color name="common_tab_normal_color">#333333</color>
 </resources>

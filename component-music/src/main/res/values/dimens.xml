@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="music_main_tab_height">48dp</dimen>
+
+    <dimen name="music_minibar_action_btn_size">32dp</dimen>
+    <dimen name="music_minibar_height">56dp</dimen>
+    <dimen name="music_minibar_cover_btn_size">48dp</dimen>
+    <dimen name="music_minibar_bottom_margin">8dp</dimen>
 </resources>

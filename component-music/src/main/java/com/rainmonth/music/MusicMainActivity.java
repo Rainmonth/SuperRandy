@@ -15,6 +15,7 @@ import com.rainmonth.music.fragment.DynamicsFragment;
 import com.rainmonth.music.fragment.MineFragment;
 import com.rainmonth.music.fragment.MusicHallFragment;
 import com.rainmonth.music.fragment.RecommendFragment;
+import com.rainmonth.music.widget.MusicMiniBar;
 import com.rainmonth.router.RouterConstant;
 import com.socks.library.KLog;
 
@@ -28,7 +29,7 @@ import java.util.List;
 public class MusicMainActivity extends BaseActivity implements View.OnClickListener {
 
     ViewPager vpMain;
-    RelativeLayout rlMusicController;
+    MusicMiniBar musicMiniBar;
     TabLayout tlMain;
 
     List<Fragment> fragments = new ArrayList<>();
@@ -55,7 +56,7 @@ public class MusicMainActivity extends BaseActivity implements View.OnClickListe
     @Override
     protected void initViewsAndEvents() {
         vpMain = findViewById(R.id.vp_music_main);
-        rlMusicController = findViewById(R.id.rl_music_controller_container);
+        musicMiniBar = findViewById(R.id.mmb_minibar);
         tlMain = findViewById(R.id.tl_music_main);
 
         initViewPager();
