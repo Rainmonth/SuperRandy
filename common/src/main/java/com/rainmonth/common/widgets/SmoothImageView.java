@@ -153,7 +153,7 @@ public class SmoothImageView extends PhotoView {
         if (getDrawable() == null) {
             return;
         }
-        
+
         //防止转换失败
         if (getDrawable() instanceof ColorDrawable) return;
 
@@ -175,7 +175,7 @@ public class SmoothImageView extends PhotoView {
         float ySScale = mOriginalHeight / ((float) mBitmap.getHeight());
         float startScale = xSScale > ySScale ? xSScale : ySScale;
         mTransfrom.startScale = startScale;
-		/* 计算结束时候的缩放值，结束值因为要达到FIT_CENTER效果，所以要保证图片的宽和高至少1个能匹配原始的宽和高，另1个小于 */
+        /* 计算结束时候的缩放值，结束值因为要达到FIT_CENTER效果，所以要保证图片的宽和高至少1个能匹配原始的宽和高，另1个小于 */
         float xEScale = getWidth() / ((float) mBitmap.getWidth());
         float yEScale = getHeight() / ((float) mBitmap.getHeight());
         float endScale = xEScale < yEScale ? xEScale : yEScale;
@@ -187,13 +187,13 @@ public class SmoothImageView extends PhotoView {
          * ，到最终的FIT_CENTER的范围之间的，区域我用LocationSizeF更好计算
          * ，他就包括左上顶点坐标，和宽高，最后转为Canvas裁减的Rect.
          */
-		/* 开始区域 */
+        /* 开始区域 */
         mTransfrom.startRect = new LocationSizeF();
         mTransfrom.startRect.left = mOriginalLocationX;
         mTransfrom.startRect.top = mOriginalLocationY;
         mTransfrom.startRect.width = mOriginalWidth;
         mTransfrom.startRect.height = mOriginalHeight;
-		/* 结束区域 */
+        /* 结束区域 */
         mTransfrom.endRect = new LocationSizeF();
         float bitmapEndWidth = mBitmap.getWidth() * mTransfrom.endScale;// 图片最终的宽度
         float bitmapEndHeight = mBitmap.getHeight() * mTransfrom.endScale;// 图片最终的宽度
@@ -232,7 +232,7 @@ public class SmoothImageView extends PhotoView {
         if (mBitmap == null || mBitmap.isRecycled()) {
             mBitmap = ((BitmapDrawable) getDrawable()).getBitmap();
         }
-		/* 下面实现了CENTER_CROP的功能 */
+        /* 下面实现了CENTER_CROP的功能 */
         float xScale = mOriginalWidth / ((float) mBitmap.getWidth());
         float yScale = mOriginalHeight / ((float) mBitmap.getHeight());
         float scale = xScale > yScale ? xScale : yScale;
@@ -251,7 +251,7 @@ public class SmoothImageView extends PhotoView {
         if (mBitmap == null || mBitmap.isRecycled()) {
             mBitmap = ((BitmapDrawable) getDrawable()).getBitmap();
         }
-		/* 下面实现了CENTER_CROP的功能 */
+        /* 下面实现了CENTER_CROP的功能 */
         mSmoothMatrix.setScale(mTransfrom.scale, mTransfrom.scale);
         mSmoothMatrix.postTranslate(-(mTransfrom.scale * mBitmap.getWidth() / 2 - mTransfrom.rect.width / 2),
                 -(mTransfrom.scale * mBitmap.getHeight() / 2 - mTransfrom.rect.height / 2));
@@ -364,10 +364,10 @@ public class SmoothImageView extends PhotoView {
 
             @Override
             public void onAnimationEnd(Animator animation) {
-				/*
-				 * 如果是进入的话，当然是希望最后停留在center_crop的区域。但是如果是out的话，就不应该是center_crop的位置了
-				 * ， 而应该是最后变化的位置，因为当out的时候结束时，不回复视图是Normal，要不然会有一个突然闪动回去的bug
-				 */
+                /*
+                 * 如果是进入的话，当然是希望最后停留在center_crop的区域。但是如果是out的话，就不应该是center_crop的位置了
+                 * ， 而应该是最后变化的位置，因为当out的时候结束时，不回复视图是Normal，要不然会有一个突然闪动回去的bug
+                 */
                 // TODO 这个可以根据实际需求来修改
                 if (state == STATE_TRANSFORM_IN) {
                     mState = STATE_NORMAL;

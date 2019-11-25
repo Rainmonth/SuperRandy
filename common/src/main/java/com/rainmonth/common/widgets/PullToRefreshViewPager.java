@@ -16,8 +16,10 @@
 package com.rainmonth.common.widgets;
 
 import android.content.Context;
+
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
+
 import android.util.AttributeSet;
 
 import com.rainmonth.common.R;
@@ -25,47 +27,47 @@ import com.rainmonth.common.widgets.library.PullToRefreshBase;
 
 public class PullToRefreshViewPager extends PullToRefreshBase<ViewPager> {
 
-	public PullToRefreshViewPager(Context context) {
-		super(context);
-	}
+    public PullToRefreshViewPager(Context context) {
+        super(context);
+    }
 
-	public PullToRefreshViewPager(Context context, AttributeSet attrs) {
-		super(context, attrs);
-	}
+    public PullToRefreshViewPager(Context context, AttributeSet attrs) {
+        super(context, attrs);
+    }
 
-	@Override
-	public final Orientation getPullToRefreshScrollDirection() {
-		return Orientation.HORIZONTAL;
-	}
+    @Override
+    public final Orientation getPullToRefreshScrollDirection() {
+        return Orientation.HORIZONTAL;
+    }
 
-	@Override
-	protected ViewPager createRefreshableView(Context context, AttributeSet attrs) {
-		ViewPager viewPager = new ViewPager(context, attrs);
-		viewPager.setId(R.id.viewpager);
-		return viewPager;
-	}
+    @Override
+    protected ViewPager createRefreshableView(Context context, AttributeSet attrs) {
+        ViewPager viewPager = new ViewPager(context, attrs);
+        viewPager.setId(R.id.viewpager);
+        return viewPager;
+    }
 
-	@Override
-	protected boolean isReadyForPullStart() {
-		ViewPager refreshableView = getRefreshableView();
+    @Override
+    protected boolean isReadyForPullStart() {
+        ViewPager refreshableView = getRefreshableView();
 
-		PagerAdapter adapter = refreshableView.getAdapter();
-		if (null != adapter) {
-			return refreshableView.getCurrentItem() == 0;
-		}
+        PagerAdapter adapter = refreshableView.getAdapter();
+        if (null != adapter) {
+            return refreshableView.getCurrentItem() == 0;
+        }
 
-		return false;
-	}
+        return false;
+    }
 
-	@Override
-	protected boolean isReadyForPullEnd() {
-		ViewPager refreshableView = getRefreshableView();
+    @Override
+    protected boolean isReadyForPullEnd() {
+        ViewPager refreshableView = getRefreshableView();
 
-		PagerAdapter adapter = refreshableView.getAdapter();
-		if (null != adapter) {
-			return refreshableView.getCurrentItem() == adapter.getCount() - 1;
-		}
+        PagerAdapter adapter = refreshableView.getAdapter();
+        if (null != adapter) {
+            return refreshableView.getCurrentItem() == adapter.getCount() - 1;
+        }
 
-		return false;
-	}
+        return false;
+    }
 }

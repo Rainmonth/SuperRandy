@@ -12,9 +12,11 @@ import android.view.animation.Animation;
 import android.view.animation.CycleInterpolator;
 import android.view.animation.TranslateAnimation;
 
+import androidx.appcompat.widget.AppCompatEditText;
+
 import com.rainmonth.common.R;
 
-public class ClearEditText extends androidx.appcompat.widget.AppCompatEditText implements
+public class ClearEditText extends AppCompatEditText implements
         OnFocusChangeListener, TextWatcher {
     /**
      * 删除按钮的引用

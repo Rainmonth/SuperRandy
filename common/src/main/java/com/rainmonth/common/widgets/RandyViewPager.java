@@ -5,10 +5,12 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.os.Build;
 import android.os.Handler;
+
 import androidx.annotation.DrawableRes;
 import androidx.annotation.RequiresApi;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
+
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;

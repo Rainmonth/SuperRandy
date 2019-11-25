@@ -1,7 +1,9 @@
 package com.rainmonth.common.widgets;
 
 import android.content.Context;
+
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 

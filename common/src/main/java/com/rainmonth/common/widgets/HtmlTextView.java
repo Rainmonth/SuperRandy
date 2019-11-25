@@ -8,9 +8,10 @@ import android.text.StaticLayout;
 import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
-import android.widget.TextView;
 
-public class HtmlTextView extends TextView {
+import androidx.appcompat.widget.AppCompatTextView;
+
+public class HtmlTextView extends AppCompatTextView {
     boolean dontConsumeNonUrlClicks = true;
     boolean linkHit;
     private String mEllipsis = "...";

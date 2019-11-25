@@ -3,8 +3,10 @@ package com.rainmonth.common.widgets;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.Handler;
+
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
+
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Gravity;
