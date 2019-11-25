@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
     <com.rainmonth.common.widgets.RandyViewPager
-        android:id="@+id/vp_ren_fragment"
+        android:id="@+id/vp_banner"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         app:canLoop="true"
@@ -15,5 +15,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:open_mz_mode="false" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
