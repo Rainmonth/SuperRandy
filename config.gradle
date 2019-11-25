@@ -46,7 +46,7 @@ ext {
             //ui
             "dialog"                    : "com.github.hss01248:DialogUtil:1.17",
             "toast"                     : "com.github.GrenderG:Toasty:1.2.8",
-            "base-rcv-helper"           : "com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.34",
+            "base-rcv-helper"           : "com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.50",
             "html-textview"             : "org.sufficientlysecure:html-textview:3.3",
             "bottom-bar"                : "com.roughike:bottom-bar:2.3.1",
             "mz-banner"                 : "com.github.pinguo-zhouwei:MZBannerView:v2.0.0",
