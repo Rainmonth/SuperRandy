@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_music_player"
+    android:id="@+id/cl_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black_50_alpha"
@@ -16,8 +16,11 @@
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/vp_cover"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/ll_progress_container" />
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/ll_progress_container"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:id="@+id/ll_progress_container"
@@ -82,6 +85,8 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_centerInParent="true"
+            android:layout_marginStart="@dimen/m16"
+            android:layout_marginEnd="@dimen/m16"
             android:src="@drawable/music_play_drawable_play_btn" />
 
         <ImageView
