@@ -11,6 +11,7 @@ import com.chad.library.adapter.base.entity.MultiItemEntity;
 import com.chad.library.adapter.base.provider.BaseItemProvider;
 import com.rainmonth.common.adapter.BaseMultiTypeAdapter;
 import com.rainmonth.common.base.BaseLazyFragment;
+import com.rainmonth.common.component.RandyBaseItemProvider;
 import com.rainmonth.common.di.component.AppComponent;
 
 import java.util.ArrayList;
@@ -28,8 +29,8 @@ public abstract class BaseMultiTypeListFragment<T extends MultiItemEntity> exten
 
     protected List<T> datas = new ArrayList<>();
 
-    protected BaseMultiTypeAdapter<T, BaseViewHolder> adapter;
-    protected List<BaseItemProvider<T, BaseViewHolder>> providerList = new ArrayList<>();
+    protected BaseMultiTypeAdapter<T> adapter;
+    protected List<RandyBaseItemProvider> providerList = new ArrayList<>();
 
     @Override
     protected void onFirstUserVisible() {
@@ -58,7 +59,7 @@ public abstract class BaseMultiTypeListFragment<T extends MultiItemEntity> exten
 
         initData();
 
-        adapter = new BaseMultiTypeAdapter<T, BaseViewHolder>(datas, getProviderList()) {
+        adapter = new BaseMultiTypeAdapter<T>(datas, getProviderList()) {
             @Override
             protected int getViewType(T t) {
                 return getItemType(t);
@@ -78,7 +79,7 @@ public abstract class BaseMultiTypeListFragment<T extends MultiItemEntity> exten
 
     }
 
-    protected abstract List<BaseItemProvider<T, BaseViewHolder>> getProviderList();
+    protected abstract List<RandyBaseItemProvider> getProviderList();
 
     protected int getItemType(T t) {
         return t.getItemType();

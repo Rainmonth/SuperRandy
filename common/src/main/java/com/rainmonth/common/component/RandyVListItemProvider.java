@@ -3,6 +3,7 @@ package com.rainmonth.common.component;
 import androidx.annotation.NonNull;
 
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.rainmonth.common.bean.BaseBean;
 import com.rainmonth.common.bean.RandyLogicBean;
 import com.rainmonth.common.bean.RandyMultiBean;
 
@@ -12,7 +13,7 @@ import com.rainmonth.common.bean.RandyMultiBean;
  * @author 张豪成
  * @date 2019-11-25 13:50
  */
-public class RandyVListItemProvider<T extends RandyMultiBean, K extends BaseViewHolder> extends RandyBaseItemProvider<T, K> {
+public class RandyVListItemProvider<Item extends BaseBean> extends RandyBaseItemProvider<RandyMultiBean<Item>> {
 
     public RandyVListItemProvider(RandyLogicBean mLogicBean) {
         super(mLogicBean);
@@ -29,7 +30,7 @@ public class RandyVListItemProvider<T extends RandyMultiBean, K extends BaseView
     }
 
     @Override
-    public void randyConvert(@NonNull BaseViewHolder helper, RandyMultiBean data, int position) {
+    public void randyConvert(@NonNull BaseViewHolder helper, RandyMultiBean<Item> data, int position) {
 
     }
 }

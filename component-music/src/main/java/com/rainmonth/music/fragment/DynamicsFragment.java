@@ -2,16 +2,17 @@ package com.rainmonth.music.fragment;
 
 import android.os.Bundle;
 
-import com.chad.library.adapter.base.BaseViewHolder;
-import com.chad.library.adapter.base.provider.BaseItemProvider;
 import com.rainmonth.common.bean.BannerBean;
 import com.rainmonth.common.bean.CateBean;
 import com.rainmonth.common.bean.RandyLogicBean;
 import com.rainmonth.common.bean.RandyMultiBean;
 import com.rainmonth.common.component.Const;
 import com.rainmonth.common.component.RandyBannerItemProvider;
+import com.rainmonth.common.component.RandyBaseItemProvider;
 import com.rainmonth.music.BaseMultiTypeListFragment;
 import com.rainmonth.music.bean.SongListBean;
+import com.rainmonth.music.component.MusicCateItemProvider;
+import com.rainmonth.music.component.MusicSongListItemProvider;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,9 +35,11 @@ public class DynamicsFragment extends BaseMultiTypeListFragment<RandyMultiBean> 
 
 
     @Override
-    protected List<BaseItemProvider<RandyMultiBean, BaseViewHolder>> getProviderList() {
+    protected List<RandyBaseItemProvider> getProviderList() {
         RandyLogicBean randyLogicBean = new RandyLogicBean();
-        providerList.add(new RandyBannerItemProvider<>(randyLogicBean));
+        providerList.add(new RandyBannerItemProvider(randyLogicBean));
+        providerList.add(new MusicCateItemProvider(randyLogicBean));
+        providerList.add(new MusicSongListItemProvider(randyLogicBean));
         return providerList;
     }
 
@@ -44,11 +47,11 @@ public class DynamicsFragment extends BaseMultiTypeListFragment<RandyMultiBean> 
     protected void initData() {
         RandyMultiBean<BannerBean> bannerMultiBean = new RandyMultiBean<>(Const.Type.RANDY_BANNER, getBannerList());
         RandyMultiBean<CateBean> cateMultiBean = new RandyMultiBean<>(Const.Type.RANDY_CATE, getCateList());
-        RandyMultiBean<SongListBean> songListMultiBean = new RandyMultiBean<>(Const.Type.RANDY_H_LIST, getSongList());
+        RandyMultiBean<SongListBean> songListMultiBean = new RandyMultiBean<>(Const.Type.RANDY_SONG_LIST, getSongList());
 
         datas.add(bannerMultiBean);
-//        datas.add(cateMultiBean);
-//        datas.add(songListMultiBean);
+        datas.add(cateMultiBean);
+        datas.add(songListMultiBean);
     }
 
     private List<BannerBean> getBannerList() {
@@ -72,13 +75,11 @@ public class DynamicsFragment extends BaseMultiTypeListFragment<RandyMultiBean> 
 
     private List<SongListBean> getSongList() {
         List<SongListBean> songList = new ArrayList<>();
-        songList.add(new SongListBean(1, "song 1", "https://y.qq.com/n/yqq/playsquare/6813388020.html#stat=y_new.index.playlist.pic"));
-        songList.add(new SongListBean(2, "song 2", "https://y.qq.com/n/yqq/playsquare/7010048343.html#stat=y_new.index.playlist.pic"));
-        songList.add(new SongListBean(3, "song 3", "https://y.qq.com/n/yqq/playsquare/2389010807.html#stat=y_new.index.playlist.pic"));
-        songList.add(new SongListBean(4, "song 4", "https://y.qq.com/n/yqq/playsquare/2292375244.html#stat=y_new.index.playlist.pic"));
-        songList.add(new SongListBean(5, "song 5", "https://y.qq.com/n/yqq/playsquare/1766861815.html#stat=y_new.index.playlist.pic"));
-        songList.add(new SongListBean(6, "song 6", "https://y.qq.com/n/yqq/playsquare/7038772310.html#stat=y_new.index.playlist.pic"));
-        songList.add(new SongListBean(7, "song 7", "https://y.qq.com/n/yqq/playsquare/7092536294.html#stat=y_new.index.playlist.pic"));
+        songList.add(new SongListBean(1, "song 1", "https://qpic.y.qq.com/music_cover/E5tljftwyuTJhcWy5SmsVeqsSghjdzrxstqAwa1ibFLmeYWH1CTFiawg/300?n=1"));
+        songList.add(new SongListBean(2, "song 2", "https://qpic.y.qq.com/music_cover/s7d2SyNMvV9FtG35UU2tEPpD3gT1pwQJlboPBPj679kicyX3wyOC1lQ/300?n=1"));
+        songList.add(new SongListBean(3, "song 3", "https://qpic.y.qq.com/music_cover/0yiaX8d9LSmnROyId1RsUUwklzSKKp7RSjfgpbIxRxBGia7Rbs5EjcLA/300?n=1"));
+        songList.add(new SongListBean(4, "song 4", "https://qpic.y.qq.com/music_cover/INjfo1hfBB6rKe9QpZsljZNUHn8ibs23DqRVV6J0SADyLKmWRdibjwFQ/300?n=1"));
+        songList.add(new SongListBean(5, "song 5", "https://qpic.y.qq.com/music_cover/jZF7DFPDuB0TKtRdGE1raXzicHRP4gDTibIhlvrSLIR6YmJX9OJ313oQ/600?n=1"));
         return songList;
     }
 

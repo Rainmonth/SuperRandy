@@ -12,6 +12,23 @@
         <attr name="roundRightBottomRadius" format="float" />
         <attr name="roundHighQuality" format="boolean" />
     </declare-styleable>
+
+    <declare-styleable name="RandyLinearListView">
+        <attr name="firstItemSpace" format="dimension" />
+        <attr name="lastItemSpace" format="dimension" />
+        <attr name="extraItemSpace" format="dimension" />
+        <attr name="fixedItemSpace" format="dimension" />
+        <attr name="retainStart" format="dimension" />
+        <attr name="showItemCount" format="integer" />
+        <attr name="itemSpace" format="dimension" />
+        <attr name="rightItemOffset" format="dimension" />
+        <attr name="itemWidth" format="dimension" />
+        <attr name="itemLayoutId" format="reference" />
+        <attr name="listRate" format="float" />
+        <attr name="listItemRate" format="float" />
+        <attr name="fixedMode" format="boolean" />
+        <attr name="android:orientation" />
+    </declare-styleable>
     <declare-styleable name="PullToRefresh">
 
         <attr name="ptrRefreshableViewBackground" format="reference|color" />

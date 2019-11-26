@@ -21,7 +21,7 @@ import com.rainmonth.common.widgets.RandyViewPager;
  * @author 张豪成
  * @date 2019-11-25 13:46
  */
-public class RandyBannerItemProvider<T extends RandyMultiBean, K extends BaseViewHolder> extends RandyBaseItemProvider<T, K> {
+public class RandyBannerItemProvider extends RandyBaseItemProvider<RandyMultiBean<BannerBean>> {
     private RandyViewPager<BannerBean> randyViewPager;
 
     public RandyBannerItemProvider(RandyLogicBean mLogicBean) {
@@ -39,35 +39,30 @@ public class RandyBannerItemProvider<T extends RandyMultiBean, K extends BaseVie
     }
 
     @Override
-    public void randyConvert(@NonNull BaseViewHolder helper, RandyMultiBean data, int position) {
+    public void randyConvert(@NonNull BaseViewHolder helper, RandyMultiBean<BannerBean> data, int position) {
         randyViewPager = helper.getView(R.id.vp_banner);
 
-        randyViewPager.setPages(data.items, new RandyViewPager.ViewHolderCreator() {
+        randyViewPager.setPages(data.items, () -> new RandyViewPager.ViewHolder<BannerBean>() {
+            private ImageView ivBanner;
+            private TextView tvTitle;
+
             @Override
-            public RandyViewPager.ViewHolder createViewHolder() {
-                return new RandyViewPager.ViewHolder<BannerBean>() {
-                    private ImageView ivBanner;
-                    private TextView tvTitle;
+            public View createView(Context context) {
+                View view = LayoutInflater.from(context)
+                        .inflate(R.layout.music_banner_item, null);
+                ivBanner = view.findViewById(R.id.iv_thumb);
+                tvTitle = view.findViewById(R.id.tv_title);
+                return view;
+            }
 
-                    @Override
-                    public View createView(Context context) {
-                        View view = LayoutInflater.from(context)
-                                .inflate(R.layout.music_banner_item, null);
-                        ivBanner = view.findViewById(R.id.iv_thumb);
-                        tvTitle = view.findViewById(R.id.tv_title);
-                        return view;
-                    }
-
-                    @Override
-                    public void onBind(Context context, int position, BannerBean bannerBean) {
-                        tvTitle.setText(bannerBean.title);
-                        ComponentUtils.getAppComponent().imageLoader().loadImage(context, GlideImageConfig
-                                .builder()
-                                .url(bannerBean.imageUrl)
-                                .imageView(ivBanner)
-                                .build());
-                    }
-                };
+            @Override
+            public void onBind(Context context, int position1, BannerBean bannerBean) {
+                tvTitle.setText(bannerBean.title);
+                ComponentUtils.getAppComponent().imageLoader().loadImage(context, GlideImageConfig
+                        .builder()
+                        .url(bannerBean.imageUrl)
+                        .imageView(ivBanner)
+                        .build());
             }
         });
     }
