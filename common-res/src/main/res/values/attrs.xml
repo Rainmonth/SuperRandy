@@ -3,6 +3,15 @@
     <declare-styleable name="RandyRateLayout">
         <attr name="rate" format="flags" />
     </declare-styleable>
+    <declare-styleable name="RandyRoundLayout">
+        <attr name="roundRadius" format="float" />
+        <attr name="roundRadiusPercentage" format="float" />
+        <attr name="roundLeftTopRadius" format="float" />
+        <attr name="roundRightTopRadius" format="float" />
+        <attr name="roundLeftBottomRadius" format="float" />
+        <attr name="roundRightBottomRadius" format="float" />
+        <attr name="roundHighQuality" format="boolean" />
+    </declare-styleable>
     <declare-styleable name="PullToRefresh">
 
         <attr name="ptrRefreshableViewBackground" format="reference|color" />
