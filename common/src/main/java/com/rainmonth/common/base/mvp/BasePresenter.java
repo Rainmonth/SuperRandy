@@ -34,7 +34,7 @@ public class BasePresenter<M extends IBaseModel, V extends IBaseView> implements
 
     @Override
     public void onDestroy() {
-        unSubscrie();
+        unSubscribe();
         if (mModel != null) {
             mModel.onDestroy();
             this.mModel = null;
@@ -49,7 +49,7 @@ public class BasePresenter<M extends IBaseModel, V extends IBaseView> implements
         mCompositeDisposable.add(subscription);
     }
 
-    protected void unSubscrie() {
+    protected void unSubscribe() {
         if (mCompositeDisposable != null) {
             mCompositeDisposable.dispose();
         }
