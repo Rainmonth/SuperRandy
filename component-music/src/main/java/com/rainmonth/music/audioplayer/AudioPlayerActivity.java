@@ -21,6 +21,7 @@ import com.rainmonth.music.R;
 import com.rainmonth.music.fragment.player.SongAnimFragment;
 import com.rainmonth.music.fragment.player.SongLyricFragment;
 import com.rainmonth.music.fragment.player.SongRelatedFragment;
+import com.rainmonth.music.widget.MusicTopBar;
 import com.rainmonth.router.RouterConstant;
 
 import java.util.ArrayList;
@@ -35,6 +36,7 @@ import java.util.List;
 public class AudioPlayerActivity extends BaseActivity implements View.OnClickListener {
     public static final String TAG = "AudioPlayerActivity";
 
+    MusicTopBar topBar;
     ViewPager vpCover;
     private BaseViewPagerAdapter<Fragment> mAdapter;
     private List<Fragment> fragments;
@@ -80,6 +82,7 @@ public class AudioPlayerActivity extends BaseActivity implements View.OnClickLis
 
     @Override
     protected void initViewsAndEvents() {
+        topBar = findViewById(R.id.top_bar);
         vpCover = findViewById(R.id.vp_cover);
         tvPlayTime = findViewById(R.id.tv_play_time);
         tvTotalTime = findViewById(R.id.tv_total_time);
@@ -106,8 +109,22 @@ public class AudioPlayerActivity extends BaseActivity implements View.OnClickLis
         btnShare.setOnClickListener(this);
         btnComment.setOnClickListener(this);
 
+        topBar.setOnClickListener(this::onTopBarClick);
         initViewPager();
 
+    }
+
+    private void onTopBarClick(View v) {
+        switch (v.getId()) {
+            case R.id.iv_left:
+                finish();
+                break;
+            case R.id.iv_right:
+                ToastUtils.showToast(this, "点击topBar菜单");
+                break;
+            default:
+                break;
+        }
     }
 
     private void initViewPager() {
@@ -117,6 +134,7 @@ public class AudioPlayerActivity extends BaseActivity implements View.OnClickLis
         fragments.add(SongLyricFragment.newInstance(null));
         mAdapter = new BaseViewPagerAdapter<>(getSupportFragmentManager(), fragments);
         vpCover.setAdapter(mAdapter);
+        vpCover.setCurrentItem(1, false);
     }
 
     @Override

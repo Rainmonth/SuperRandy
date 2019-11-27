@@ -20,7 +20,6 @@ import com.rainmonth.music.R;
  * @date 2019-11-20 15:50
  */
 public class MusicMainTopBar extends RelativeLayout {
-    private Context mContext;
     private String title;
     private int iconRes;
 
@@ -37,10 +36,9 @@ public class MusicMainTopBar extends RelativeLayout {
 
     public MusicMainTopBar(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        this.mContext = context;
 
-        handleTypedArray(mContext, attrs);
-        init();
+        handleTypedArray(context, attrs);
+        init(context);
     }
 
     private void handleTypedArray(Context context, AttributeSet attrs) {
@@ -53,8 +51,8 @@ public class MusicMainTopBar extends RelativeLayout {
         typedArray.recycle();
     }
 
-    private void init() {
-        View.inflate(mContext, R.layout.music_main_top_bar, this);
+    private void init(Context context) {
+        View.inflate(context, R.layout.music_main_top_bar, this);
 
         tvTitle = findViewById(R.id.title);
         ivIcon = findViewById(R.id.icon);

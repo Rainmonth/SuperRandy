@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <declare-styleable name="MusicTopBar">
+        <attr name="music_top_left_icon" format="reference" />
+        <attr name="music_top_title" format="string|reference" />
+        <attr name="music_top_title_color" format="reference|color" />
+        <attr name="music_top_right_icon" format="reference" />
+    </declare-styleable>
     <declare-styleable name="MusicMainTopBar">
         <attr name="music_title" format="string|reference" />
         <attr name="music_icon" format="reference" />

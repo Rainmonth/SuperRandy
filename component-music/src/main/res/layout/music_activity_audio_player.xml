@@ -7,11 +7,21 @@
     android:layout_height="match_parent"
     android:background="@drawable/player_background_real"
     android:paddingLeft="@dimen/m16"
-    android:paddingTop="@dimen/m16"
     android:paddingRight="@dimen/m16"
     android:paddingBottom="@dimen/m16"
     tools:context=".audioplayer.AudioPlayerActivity"
     tools:ignore="ContentDescription">
+
+    <com.rainmonth.music.widget.MusicTopBar
+        android:id="@+id/top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:music_top_title="歌曲名字"
+        app:layout_constraintTop_toTopOf="parent"
+        app:music_top_left_icon="@drawable/topbar_icon_fold"
+        app:music_top_right_icon="@drawable/topbar_icon_morel" />
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/vp_cover"
@@ -20,7 +30,7 @@
         app:layout_constraintBottom_toTopOf="@+id/ll_progress_container"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/top_bar" />
 
     <LinearLayout
         android:id="@+id/ll_progress_container"
