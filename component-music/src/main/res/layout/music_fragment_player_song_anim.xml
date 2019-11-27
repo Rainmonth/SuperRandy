@@ -5,12 +5,46 @@
     android:layout_height="match_parent">
 
     <TextView
+        android:id="@+id/tv_singer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/m16"
+        android:layout_marginBottom="@dimen/m16"
+        android:paddingTop="@dimen/m8"
+        android:paddingBottom="@dimen/m8"
+        android:text="歌手名字"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/ll_label_container"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="@dimen/m16"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_singer" />
+
+    <ImageView
+        android:id="@+id/iv_song_cover"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="@dimen/m16"
+        android:src="@drawable/music_minibar_default_img"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ll_label_container" />
+
+    <TextView
+        android:id="@+id/tv_lyric"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="歌曲播放动画界面"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/iv_song_cover" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

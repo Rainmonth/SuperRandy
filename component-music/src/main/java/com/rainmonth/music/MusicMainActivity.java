@@ -17,6 +17,7 @@ import com.rainmonth.music.fragment.MusicHallFragment;
 import com.rainmonth.music.fragment.RecommendFragment;
 import com.rainmonth.music.widget.MusicMiniBar;
 import com.rainmonth.router.RouterConstant;
+import com.rainmonth.router.RouterUtils;
 import com.socks.library.KLog;
 
 import java.util.ArrayList;
@@ -60,7 +61,22 @@ public class MusicMainActivity extends BaseActivity implements View.OnClickListe
         tlMain = findViewById(R.id.tl_music_main);
 
         initViewPager();
+        musicMiniBar.setMiniBarClickListener(this::onMiniBarClick);
         initTabs();
+    }
+
+    public void onMiniBarClick(View view) {
+        switch (view.getId()) {
+            case R.id.iv_play_list:
+                showToast("点击播放列表");
+                break;
+            case R.id.iv_play_state:
+                showToast("点击播放状态");
+                break;
+            default:
+                RouterUtils.getInstance().build(RouterConstant.PATH_MUSIC_PLAYER).navigation();
+                break;
+        }
     }
 
     private void initViewPager() {

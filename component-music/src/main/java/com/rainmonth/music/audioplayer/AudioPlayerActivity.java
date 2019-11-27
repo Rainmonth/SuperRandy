@@ -54,6 +54,16 @@ public class AudioPlayerActivity extends BaseActivity implements View.OnClickLis
     ConstraintLayout clContainer;
 
     @Override
+    protected boolean toggleOverridePendingTransition() {
+        return true;
+    }
+
+    @Override
+    protected int getOverridePendingTransitionMode() {
+        return TRANSITION_MODE_BOTTOM;
+    }
+
+    @Override
     protected void getBundleExtras(Bundle extras) {
 
     }
@@ -85,6 +95,16 @@ public class AudioPlayerActivity extends BaseActivity implements View.OnClickLis
         btnShare = findViewById(R.id.btn_share);
         btnComment = findViewById(R.id.btn_comment);
         clContainer = findViewById(R.id.cl_container);
+
+        btnPlayMode.setOnClickListener(this);
+        btnPlayPrev.setOnClickListener(this);
+        btnPlay.setOnClickListener(this);
+        btnPlayNext.setOnClickListener(this);
+        btnPlayList.setOnClickListener(this);
+        btnCollect.setOnClickListener(this);
+        btnDownload.setOnClickListener(this);
+        btnShare.setOnClickListener(this);
+        btnComment.setOnClickListener(this);
 
         initViewPager();
 

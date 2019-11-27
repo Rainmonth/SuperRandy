@@ -37,12 +37,12 @@ import butterknife.ButterKnife;
 import de.greenrobot.event.EventBus;
 
 public abstract class BaseAppCompatActivity extends AppCompatActivity {
-    private static final int TRANSITION_MODE_LEFT = 0;
-    private static final int TRANSITION_MODE_RIGHT = 1;
-    private static final int TRANSITION_MODE_TOP = 2;
-    private static final int TRANSITION_MODE_BOTTOM = 3;
-    private static final int TRANSITION_MODE_SCALE = 4;
-    private static final int TRANSITION_MODE_FADE = 5;
+    public static final int TRANSITION_MODE_LEFT = 0;
+    public static final int TRANSITION_MODE_RIGHT = 1;
+    public static final int TRANSITION_MODE_TOP = 2;
+    public static final int TRANSITION_MODE_BOTTOM = 3;
+    public static final int TRANSITION_MODE_SCALE = 4;
+    public static final int TRANSITION_MODE_FADE = 5;
 
     /**
      * Log tag

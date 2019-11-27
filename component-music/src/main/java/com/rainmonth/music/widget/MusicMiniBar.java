@@ -14,7 +14,7 @@ import com.socks.library.KLog;
  * @author 张豪成
  * @date 2019-11-22 17:06
  */
-public class MusicMiniBar extends RelativeLayout {
+public class MusicMiniBar extends RelativeLayout implements View.OnClickListener {
 
     public static final String TAG = "MusicMiniBar";
     public static final int STATE_INIT = 0;
@@ -30,6 +30,8 @@ public class MusicMiniBar extends RelativeLayout {
 
     ImageView btnState;
     ImageView btnList;
+
+    private View.OnClickListener mOnClickListener;
 
     public MusicMiniBar(Context context) {
         this(context, null);
@@ -51,6 +53,10 @@ public class MusicMiniBar extends RelativeLayout {
         title = findViewById(R.id.tv_title);
         btnState = findViewById(R.id.iv_play_state);
         btnList = findViewById(R.id.iv_play_list);
+
+        setOnClickListener(this);
+        btnState.setOnClickListener(this);
+        btnList.setOnClickListener(this);
     }
 
     private void tryToExpectState(int expectState) {
@@ -72,6 +78,17 @@ public class MusicMiniBar extends RelativeLayout {
                 KLog.d(TAG, "暂停状态");
                 break;
 
+        }
+    }
+
+    public void setMiniBarClickListener(OnClickListener onClickListener) {
+        this.mOnClickListener = onClickListener;
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (mOnClickListener != null) {
+            mOnClickListener.onClick(v);
         }
     }
 }

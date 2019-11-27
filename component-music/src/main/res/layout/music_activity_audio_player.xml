@@ -5,7 +5,7 @@
     android:id="@+id/cl_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black_50_alpha"
+    android:background="@drawable/player_background_real"
     android:paddingLeft="@dimen/m16"
     android:paddingTop="@dimen/m16"
     android:paddingRight="@dimen/m16"
