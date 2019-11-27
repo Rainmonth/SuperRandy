@@ -1,7 +1,6 @@
 package com.rainmonth.music;
 
 import android.view.View;
-import android.widget.RelativeLayout;
 
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
@@ -11,10 +10,10 @@ import com.google.android.material.tabs.TabLayout;
 import com.rainmonth.common.adapter.BaseTabViewPagerAdapter;
 import com.rainmonth.common.base.BaseActivity;
 import com.rainmonth.common.di.component.AppComponent;
-import com.rainmonth.music.fragment.DynamicsFragment;
-import com.rainmonth.music.fragment.MineFragment;
-import com.rainmonth.music.fragment.MusicHallFragment;
-import com.rainmonth.music.fragment.RecommendFragment;
+import com.rainmonth.music.fragment.main.DynamicsFragment;
+import com.rainmonth.music.fragment.main.MineFragment;
+import com.rainmonth.music.fragment.main.MusicHallFragment;
+import com.rainmonth.music.fragment.main.RecommendFragment;
 import com.rainmonth.music.widget.MusicMiniBar;
 import com.rainmonth.router.RouterConstant;
 import com.rainmonth.router.RouterUtils;

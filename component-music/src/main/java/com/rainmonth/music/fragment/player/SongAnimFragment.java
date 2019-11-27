@@ -46,6 +46,6 @@ public class SongAnimFragment extends BaseLazyFragment {
 
     @Override
     protected int getContentViewLayoutID() {
-        return R.layout.music_fragment_player_song_anim;
+        return R.layout.music_player_fragment_song_anim;
     }
 }

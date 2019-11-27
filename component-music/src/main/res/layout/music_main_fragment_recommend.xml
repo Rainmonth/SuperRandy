@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.DynamicsFragment">
+    tools:context=".fragment.main.RecommendFragment">
 
     <com.rainmonth.music.widget.MusicMainTopBar
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        app:music_icon="@drawable/music_main_top_bar_icon_follow"
-        app:music_title="@string/music_main_tab_music_dynamics" />
+        app:music_icon="@drawable/music_main_top_bar_icon_discovery"
+        app:music_title="@string/music_main_tab_recommend" />
 
 </FrameLayout>

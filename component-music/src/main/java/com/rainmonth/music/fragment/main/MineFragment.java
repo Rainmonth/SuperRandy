@@ -1,4 +1,4 @@
-package com.rainmonth.music.fragment;
+package com.rainmonth.music.fragment.main;
 
 import android.os.Bundle;
 import android.view.View;
@@ -8,19 +8,19 @@ import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.music.R;
 
 /**
- * 音乐馆Fragment
+ * 推荐Fragment
  */
-public class MusicHallFragment extends BaseLazyFragment {
+public class MineFragment extends BaseLazyFragment {
 
-    public static MusicHallFragment newInstance(Bundle args) {
-        MusicHallFragment fragment = new MusicHallFragment();
+    public static MineFragment newInstance(Bundle args) {
+        MineFragment fragment = new MineFragment();
         fragment.setArguments(args);
         return fragment;
     }
 
     @Override
     protected int getContentViewLayoutID() {
-        return R.layout.music_fragment_music_hall;
+        return R.layout.music_main_fragment_mine;
     }
 
     @Override

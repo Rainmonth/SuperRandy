@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.MineFragment">
+    tools:context=".fragment.main.MineFragment">
 
     <com.rainmonth.music.widget.MusicMainTopBar
         android:layout_width="match_parent"

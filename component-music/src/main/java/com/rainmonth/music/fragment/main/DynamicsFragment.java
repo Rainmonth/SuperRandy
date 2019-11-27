@@ -1,4 +1,4 @@
-package com.rainmonth.music.fragment;
+package com.rainmonth.music.fragment.main;
 
 import android.os.Bundle;
 
