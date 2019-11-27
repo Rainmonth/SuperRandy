@@ -16,6 +16,9 @@ import com.rainmonth.common.bean.RandyMultiBean;
 import com.rainmonth.common.http.imageloader.glide.GlideImageConfig;
 import com.rainmonth.common.utils.ComponentUtils;
 import com.rainmonth.common.widgets.RandyViewPager;
+import com.rainmonth.router.RouterConstant;
+import com.rainmonth.router.RouterUtils;
+import com.socks.library.KLog;
 
 /**
  * @author 张豪成
@@ -42,6 +45,16 @@ public class RandyBannerItemProvider extends RandyBaseItemProvider<RandyMultiBea
     public void randyConvert(@NonNull BaseViewHolder helper, RandyMultiBean<BannerBean> data, int position) {
         randyViewPager = helper.getView(R.id.vp_banner);
 
+        // todo page的点击事件需要卸载setPages前面
+        randyViewPager.setOnPageClickListener(new RandyViewPager.PageClickListener() {
+            @Override
+            public void onPageClick(View view, int position) {
+                KLog.d("onPageClicked " + position);
+                if (position % 2 == 0) {
+                    RouterUtils.getInstance().build(RouterConstant.PATH_MUSIC_PLAYER).navigation();
+                }
+            }
+        });
         randyViewPager.setPages(data.items, () -> new RandyViewPager.ViewHolder<BannerBean>() {
             private ImageView ivBanner;
             private TextView tvTitle;

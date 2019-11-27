@@ -8,14 +8,23 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.rainmonth.common.adapter.BaseViewPagerAdapter;
 import com.rainmonth.common.base.BaseActivity;
 import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.common.eventbus.EventCenter;
+import com.rainmonth.common.utils.ToastUtils;
 import com.rainmonth.music.R;
+import com.rainmonth.music.fragment.player.SongAnimFragment;
+import com.rainmonth.music.fragment.player.SongLyricFragment;
+import com.rainmonth.music.fragment.player.SongRelatedFragment;
 import com.rainmonth.router.RouterConstant;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @date: 2018-12-20
@@ -27,6 +36,8 @@ public class AudioPlayerActivity extends BaseActivity implements View.OnClickLis
     public static final String TAG = "AudioPlayerActivity";
 
     ViewPager vpCover;
+    private BaseViewPagerAdapter<Fragment> mAdapter;
+    private List<Fragment> fragments;
     TextView tvPlayTime;
     TextView tvTotalTime;
     LinearLayout llProgressContainer;
@@ -38,8 +49,8 @@ public class AudioPlayerActivity extends BaseActivity implements View.OnClickLis
     RelativeLayout rlControlContainer;
     ImageView btnCollect;
     ImageView btnDownload;
+    ImageView btnShare;
     ImageView btnComment;
-    ImageView btnMoreActions;
     ConstraintLayout clContainer;
 
     @Override
@@ -71,9 +82,21 @@ public class AudioPlayerActivity extends BaseActivity implements View.OnClickLis
         rlControlContainer = findViewById(R.id.rl_control_container);
         btnCollect = findViewById(R.id.btn_collect);
         btnDownload = findViewById(R.id.btn_download);
+        btnShare = findViewById(R.id.btn_share);
         btnComment = findViewById(R.id.btn_comment);
-        btnMoreActions = findViewById(R.id.btn_more_actions);
         clContainer = findViewById(R.id.cl_container);
+
+        initViewPager();
+
+    }
+
+    private void initViewPager() {
+        fragments = new ArrayList<>();
+        fragments.add(SongRelatedFragment.newInstance(null));
+        fragments.add(SongAnimFragment.newInstance(null));
+        fragments.add(SongLyricFragment.newInstance(null));
+        mAdapter = new BaseViewPagerAdapter<>(getSupportFragmentManager(), fragments);
+        vpCover.setAdapter(mAdapter);
     }
 
     @Override
@@ -92,22 +115,31 @@ public class AudioPlayerActivity extends BaseActivity implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_play_mode:
+                ToastUtils.showToast(this, "点击播放模式");
                 break;
             case R.id.btn_play_prev:
+                ToastUtils.showToast(this, "点击前一个");
                 break;
             case R.id.btn_play:
+                ToastUtils.showToast(this, "点击播放");
                 break;
             case R.id.btn_play_next:
+                ToastUtils.showToast(this, "点击后一个");
                 break;
             case R.id.btn_play_list:
+                ToastUtils.showToast(this, "点击播放列表");
                 break;
             case R.id.btn_collect:
+                ToastUtils.showToast(this, "点击收藏");
                 break;
             case R.id.btn_download:
+                ToastUtils.showToast(this, "点击下载");
+                break;
+            case R.id.btn_share:
+                ToastUtils.showToast(this, "点击分享");
                 break;
             case R.id.btn_comment:
-                break;
-            case R.id.btn_more_actions:
+                ToastUtils.showToast(this, "点击评论");
                 break;
 
             default:
