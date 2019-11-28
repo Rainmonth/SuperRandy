@@ -6,6 +6,7 @@ import android.text.TextUtils;
 
 import androidx.annotation.Nullable;
 
+import com.google.android.exoplayer2.C;
 import com.google.android.exoplayer2.ExoPlaybackException;
 import com.google.android.exoplayer2.ExoPlayer;
 import com.google.android.exoplayer2.ExoPlayerFactory;
@@ -117,6 +118,33 @@ public class RandyAudioPlayer implements Player, IRandyAudioPlayer, Player.Event
         }
     }
 
+    /**
+     * 根据uri返回合适的MediaSource
+     *
+     * @param uri 资源uri
+     */
+    private MediaSource buildMediaSource(Uri uri) {
+        int type = Util.inferContentType(uri);
+        switch (type) {
+            case C.TYPE_DASH:
+
+                break;
+            case C.TYPE_HLS:
+
+                break;
+            case C.TYPE_SS:
+
+                break;
+            case C.TYPE_OTHER:
+            default:
+
+                break;
+
+        }
+        // todo
+        return null;
+    }
+
     @Override
     public void prepare(Uri resUri, MediaSource mediaSource) {
         if (null == resUri || null == mediaSource) {
@@ -190,27 +218,27 @@ public class RandyAudioPlayer implements Player, IRandyAudioPlayer, Player.Event
 
     @Override
     public void onIsPlayingChanged(boolean isPlaying) {
-
+        KLog.d(TAG, "isPlaying:" + isPlaying);
     }
 
     @Override
     public void onRepeatModeChanged(int repeatMode) {
-
+        KLog.d(TAG, "repeatMode:" + repeatMode);
     }
 
     @Override
     public void onShuffleModeEnabledChanged(boolean shuffleModeEnabled) {
-
+        KLog.d(TAG, "shuffleModeEnabled:" + shuffleModeEnabled);
     }
 
     @Override
     public void onPlayerError(ExoPlaybackException error) {
-
+        KLog.d(TAG, error.getMessage());
     }
 
     @Override
     public void onPositionDiscontinuity(int reason) {
-
+        KLog.d(TAG, "reason:" + reason);
     }
 
     @Override

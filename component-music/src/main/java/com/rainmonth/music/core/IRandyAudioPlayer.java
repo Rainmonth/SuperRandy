@@ -7,7 +7,7 @@ import androidx.annotation.IntDef;
 import com.google.android.exoplayer2.source.MediaSource;
 
 /**
- * RandyAudioPlayer功能
+ * 该接口之定义播放器正常操作以及常用的判断（不定义业务逻辑）
  *
  * @author RandyZhang
  * @date 2019-11-19 23:26

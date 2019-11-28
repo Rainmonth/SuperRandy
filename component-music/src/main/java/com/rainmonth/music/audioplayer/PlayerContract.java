@@ -1,12 +1,24 @@
 package com.rainmonth.music.audioplayer;
 
+import com.rainmonth.common.base.mvp.IBaseModel;
+import com.rainmonth.common.base.mvp.IBaseView;
+import com.rainmonth.music.bean.SongDetailBean;
+import com.rainmonth.music.bean.SongRelatedBean;
+
+import io.reactivex.Observable;
+
+
 /**
  * @date: 2019-01-07
  * @author: randy
  * @description: AudioPlayerContract
  */
 public interface PlayerContract {
-    interface View {
+    interface View extends IBaseView {
+
+        void updateWithSongDetailInfo(SongDetailBean songDetailInfo);
+
+        void updateWithSongRelatedInfo(SongRelatedBean songRelatedInfo);
 
         void updatePlayBtn(int playState);
 
@@ -20,20 +32,10 @@ public interface PlayerContract {
 
     }
 
-    interface Presenter {
-        void startPlay();
+    interface Model extends IBaseModel {
+        Observable<SongDetailBean> getSongDetailInfo();
 
-        void playPre();
-
-        void playNext();
-
-        void pausePlay();
-
-        void seekTo();
-
-        void startUpdatePlayTimeTask();
-
-        void stopUpdatePlayTimeTask();
+        Observable<SongRelatedBean> getSongRelatedInfo();
     }
 
 }

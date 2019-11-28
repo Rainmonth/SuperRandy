@@ -1,0 +1,52 @@
+{
+  "audio": {
+    "playList": [
+      {
+        "title": "",
+        "singer": "",
+        "coverUrl": "",
+        "uri": ""
+      }
+    ],
+    "songList": [
+      {
+        "title": "",
+        "author": "",
+        "items": [
+          {
+            "title": "",
+            "singer": "",
+            "coverUrl": "",
+            "uri": ""
+          },
+          {
+            "title": "",
+            "singer": "",
+            "coverUrl": "",
+            "uri": ""
+          }
+        ]
+      },
+      {
+        "title": "",
+        "author": "",
+        "items": [
+          {
+            "title": "",
+            "singer": "",
+            "coverUrl": "",
+            "uri": ""
+          },
+          {
+            "title": "",
+            "singer": "",
+            "coverUrl": "",
+            "uri": ""
+          }
+        ]
+      }
+    ]
+  },
+  "video": {
+  }
+}
