@@ -8,7 +8,7 @@ import com.rainmonth.music.core.base.BasePlayer;
  * @author 张豪成
  * @date 2019-12-05 20:20
  */
-public class RandySystemPlayer extends BasePlayer {
+public class RandySysPlayer extends BasePlayer {
     private MediaPlayer mInternalPlayer;
 
     @Override
@@ -27,7 +27,7 @@ public class RandySystemPlayer extends BasePlayer {
     }
 
     @Override
-    public void relesae() {
+    public void release() {
 
     }
 }

@@ -24,7 +24,7 @@ public class RandyIjkPlayer extends BasePlayer {
     }
 
     @Override
-    public void relesae() {
+    public void release() {
 
     }
 }

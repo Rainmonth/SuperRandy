@@ -14,5 +14,5 @@ public interface IPlayer {
 
     void stop();
 
-    void relesae();
+    void release();
 }

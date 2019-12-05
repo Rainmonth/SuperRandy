@@ -29,7 +29,7 @@ public class RandyExoPlayer extends BasePlayer {
     }
 
     @Override
-    public void relesae() {
+    public void release() {
 
     }
 }
