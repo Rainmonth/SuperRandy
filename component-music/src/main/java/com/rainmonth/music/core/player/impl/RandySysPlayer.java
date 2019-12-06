@@ -1,6 +1,7 @@
 package com.rainmonth.music.core.player.impl;
 
 import android.media.MediaPlayer;
+import android.net.Uri;
 
 import com.rainmonth.music.core.player.BasePlayer;
 
@@ -10,6 +11,11 @@ import com.rainmonth.music.core.player.BasePlayer;
  */
 public class RandySysPlayer extends BasePlayer {
     private MediaPlayer mInternalPlayer;
+
+    @Override
+    public void prepare(Uri uri) {
+
+    }
 
     @Override
     public void start() {
@@ -28,6 +34,26 @@ public class RandySysPlayer extends BasePlayer {
 
     @Override
     public void release() {
+
+    }
+
+    @Override
+    public long getCurrentPosition() {
+        return 0;
+    }
+
+    @Override
+    public long getDuration() {
+        return 0;
+    }
+
+    @Override
+    public void seekTo() {
+
+    }
+
+    @Override
+    public void getSourceInfo() {
 
     }
 }

@@ -7,4 +7,17 @@ import com.rainmonth.music.core.player.IPlayer;
  * @date 2019-12-05 20:03
  */
 public interface IVideoPlayer extends IPlayer {
+    /**
+     * 获取视频的宽
+     *
+     * @return
+     */
+    int getVideoWidth();
+
+    /**
+     * 获取视频的高
+     *
+     * @return
+     */
+    int getVideoHeight();
 }

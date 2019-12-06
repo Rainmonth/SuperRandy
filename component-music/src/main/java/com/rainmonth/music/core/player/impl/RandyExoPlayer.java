@@ -1,5 +1,7 @@
 package com.rainmonth.music.core.player.impl;
 
+import android.net.Uri;
+
 import com.google.android.exoplayer2.ExoPlayer;
 import com.rainmonth.music.core.player.BasePlayer;
 
@@ -12,6 +14,11 @@ import com.rainmonth.music.core.player.BasePlayer;
 public class RandyExoPlayer extends BasePlayer {
 
     ExoPlayer mInternalPlayer;
+
+    @Override
+    public void prepare(Uri uri) {
+
+    }
 
     @Override
     public void start() {
@@ -30,6 +37,26 @@ public class RandyExoPlayer extends BasePlayer {
 
     @Override
     public void release() {
+
+    }
+
+    @Override
+    public long getCurrentPosition() {
+        return 0;
+    }
+
+    @Override
+    public long getDuration() {
+        return 0;
+    }
+
+    @Override
+    public void seekTo() {
+
+    }
+
+    @Override
+    public void getSourceInfo() {
 
     }
 }
