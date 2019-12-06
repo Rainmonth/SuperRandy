@@ -1,7 +1,7 @@
-package com.rainmonth.music.core.factory;
+package com.rainmonth.music.core.factory.impl;
 
-import com.rainmonth.music.core.base.BasePlayerMgrFactory;
-import com.rainmonth.music.core.func.IPlayerManager;
+import com.rainmonth.music.core.factory.BasePlayerMgrFactory;
+import com.rainmonth.music.core.manager.IPlayerManager;
 
 /**
  * 播放器工厂类，用来获取播放器实例

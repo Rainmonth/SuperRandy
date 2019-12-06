@@ -1,4 +1,6 @@
-package com.rainmonth.music.core.func;
+package com.rainmonth.music.core.factory;
+
+import com.rainmonth.music.core.manager.IPlayerManager;
 
 /**
  * @author 张豪成

@@ -1,6 +1,6 @@
-package com.rainmonth.music.core.func;
+package com.rainmonth.music.core.player;
 
-import com.rainmonth.music.core.func.IPlayer;
+import com.rainmonth.music.core.player.IPlayer;
 
 /**
  * @author 张豪成

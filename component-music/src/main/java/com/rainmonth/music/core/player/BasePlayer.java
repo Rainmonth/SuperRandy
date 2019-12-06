@@ -1,6 +1,4 @@
-package com.rainmonth.music.core.base;
-
-import com.rainmonth.music.core.func.IPlayer;
+package com.rainmonth.music.core.player;
 
 /**
  * 播放器通用操作实现

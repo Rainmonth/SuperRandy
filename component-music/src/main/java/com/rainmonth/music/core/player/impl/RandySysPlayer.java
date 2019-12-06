@@ -1,8 +1,8 @@
-package com.rainmonth.music.core.player;
+package com.rainmonth.music.core.player.impl;
 
 import android.media.MediaPlayer;
 
-import com.rainmonth.music.core.base.BasePlayer;
+import com.rainmonth.music.core.player.BasePlayer;
 
 /**
  * @author 张豪成

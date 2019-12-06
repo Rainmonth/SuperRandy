@@ -1,6 +1,6 @@
-package com.rainmonth.music.core.player;
+package com.rainmonth.music.core.player.impl;
 
-import com.rainmonth.music.core.base.BasePlayer;
+import com.rainmonth.music.core.player.BasePlayer;
 
 /**
  *

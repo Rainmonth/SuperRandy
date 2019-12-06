@@ -1,7 +1,7 @@
-package com.rainmonth.music.core.player;
+package com.rainmonth.music.core.player.impl;
 
 import com.google.android.exoplayer2.ExoPlayer;
-import com.rainmonth.music.core.base.BasePlayer;
+import com.rainmonth.music.core.player.BasePlayer;
 
 /**
  * BasePlayer的Exo实现，内部持有ExoPlayer播放器实例

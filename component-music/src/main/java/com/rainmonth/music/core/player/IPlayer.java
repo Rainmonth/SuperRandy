@@ -1,4 +1,4 @@
-package com.rainmonth.music.core.func;
+package com.rainmonth.music.core.player;
 
 /**
  * 播放器差异化体现

@@ -1,7 +1,7 @@
-package com.rainmonth.music.core.manager;
+package com.rainmonth.music.core.manager.impl;
 
-import com.rainmonth.music.core.base.BasePlayerManager;
-import com.rainmonth.music.core.func.IPlayer;
+import com.rainmonth.music.core.manager.BasePlayerManager;
+import com.rainmonth.music.core.player.IPlayer;
 
 /**
  * 内部持有RandySysPlayer的管理器
