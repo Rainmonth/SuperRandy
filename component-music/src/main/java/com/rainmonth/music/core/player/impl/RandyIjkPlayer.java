@@ -1,8 +1,13 @@
 package com.rainmonth.music.core.player.impl;
 
+import android.content.Context;
 import android.net.Uri;
+import android.view.Surface;
+import android.view.SurfaceHolder;
 
 import com.rainmonth.music.core.player.BasePlayer;
+
+import java.util.Map;
 
 /**
  *
@@ -11,7 +16,37 @@ import com.rainmonth.music.core.player.BasePlayer;
  */
 public class RandyIjkPlayer extends BasePlayer {
     @Override
-    public void prepare(Uri uri) {
+    public void setDisplay(SurfaceHolder surfaceHolder) {
+
+    }
+
+    @Override
+    public void setSurface(Surface surface) {
+
+    }
+
+    @Override
+    public void setDataSource(String path) {
+
+    }
+
+    @Override
+    public void setDataSource(Context context, Uri uri) {
+
+    }
+
+    @Override
+    public void setDataSource(Context context, Uri uri, Map<String, String> headers) {
+
+    }
+
+    @Override
+    public void prepare() {
+
+    }
+
+    @Override
+    public void prepareAsync() {
 
     }
 
@@ -31,7 +66,32 @@ public class RandyIjkPlayer extends BasePlayer {
     }
 
     @Override
+    public int getVideoWidth() {
+        return 0;
+    }
+
+    @Override
+    public int getVideoHeight() {
+        return 0;
+    }
+
+    @Override
+    public boolean isPlaying() {
+        return false;
+    }
+
+    @Override
+    public void seekTo(long milliseconds) {
+
+    }
+
+    @Override
     public void release() {
+
+    }
+
+    @Override
+    public void reset() {
 
     }
 
@@ -43,11 +103,6 @@ public class RandyIjkPlayer extends BasePlayer {
     @Override
     public long getDuration() {
         return 0;
-    }
-
-    @Override
-    public void seekTo() {
-
     }
 
     @Override
