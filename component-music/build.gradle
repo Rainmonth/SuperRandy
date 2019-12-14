@@ -3,5 +3,6 @@ apply from: "../base_component_compiler.gradle"
 
 dependencies {
     api rootProject.ext.dependencies["exoplayer"]
+    api rootProject.ext.dependencies["exoplayer-extension-rtmp"]
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 }
