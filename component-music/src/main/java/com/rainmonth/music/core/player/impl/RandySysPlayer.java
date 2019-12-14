@@ -278,12 +278,12 @@ public class RandySysPlayer extends BasePlayer {
         }
 
         @Override
-        public void onVideoSizeChanged(IPlayer player) {
+        public void onVideoSizeChanged(IPlayer player, int width, int height) {
             RandySysPlayer self = mWeakPlayer.get();
             if (self == null) {
                 return;
             }
-            notifyOnVideoSizeChanged();
+            notifyOnVideoSizeChanged(width, height);
         }
 
         @Override

@@ -91,9 +91,9 @@ public abstract class BasePlayer implements IPlayer {
         }
     }
 
-    protected void notifyOnVideoSizeChanged() {
+    protected void notifyOnVideoSizeChanged(int width, int height) {
         if (mOnVideoSizeChangedListener != null) {
-            mOnVideoSizeChangedListener.onVideoSizeChanged(this);
+            mOnVideoSizeChangedListener.onVideoSizeChanged(this, width, height);
         }
     }
 

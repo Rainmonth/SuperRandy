@@ -16,6 +16,11 @@ import java.util.Map;
  */
 public interface IPlayer {
 
+    int MEDIA_ERROR_UNKNOWN = 1;
+    int MEDIA_INFO_POSITION_DISCONTINUITY = 2702;
+    int MEDIA_INFO_BUFFERING_START = 701;
+    int MEDIA_INFO_BUFFERING_END = 702;
+
     /**
      * 是否开启日志记录
      *
@@ -168,7 +173,7 @@ public interface IPlayer {
      * 尺寸改变监听
      */
     interface OnVideoSizeChangedListener {
-        void onVideoSizeChanged(IPlayer player);
+        void onVideoSizeChanged(IPlayer player, int width, int height);
     }
 
 //    interface OnTimedTextListener {
