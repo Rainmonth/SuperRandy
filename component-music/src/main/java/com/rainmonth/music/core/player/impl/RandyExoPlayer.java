@@ -604,6 +604,8 @@ public class RandyExoPlayer extends BasePlayer implements Player.EventListener, 
 
     @Override
     public void onVideoSizeChanged(EventTime eventTime, int width, int height, int unappliedRotationDegrees, float pixelWidthHeightRatio) {
+        mWidth = (int) (width * pixelWidthHeightRatio);
+        mHeight = height;
         notifyOnVideoSizeChanged((int) (pixelWidthHeightRatio * width), height);
     }
 
