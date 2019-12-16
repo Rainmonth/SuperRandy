@@ -607,6 +607,9 @@ public class RandyExoPlayer extends BasePlayer implements Player.EventListener, 
         mWidth = (int) (width * pixelWidthHeightRatio);
         mHeight = height;
         notifyOnVideoSizeChanged((int) (pixelWidthHeightRatio * width), height);
+        if (unappliedRotationDegrees > 0) {// 这个值在API>=21时都是0
+            notifyOnInfo(IPlayer.MEDIA_INFO_VIDEO_ROTATION_CHANGE, unappliedRotationDegrees);
+        }
     }
 
     @Override

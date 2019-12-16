@@ -20,6 +20,7 @@ public interface IPlayer {
     int MEDIA_INFO_POSITION_DISCONTINUITY = 2702;
     int MEDIA_INFO_BUFFERING_START = 701;
     int MEDIA_INFO_BUFFERING_END = 702;
+    int MEDIA_INFO_VIDEO_ROTATION_CHANGE = 10001;
 
     /**
      * 是否开启日志记录
