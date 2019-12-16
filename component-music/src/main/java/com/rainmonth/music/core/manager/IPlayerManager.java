@@ -1,5 +1,9 @@
 package com.rainmonth.music.core.manager;
 
+import android.content.Context;
+import android.os.Message;
+
+import com.rainmonth.music.core.cache.ICacheManager;
 import com.rainmonth.music.core.player.IPlayer;
 
 /**
@@ -12,5 +16,5 @@ public interface IPlayerManager {
 
     IPlayer getPlayer();
 
-    void initPlayer();
+    void initPlayer(Context context, Message msg, ICacheManager cacheManager);
 }

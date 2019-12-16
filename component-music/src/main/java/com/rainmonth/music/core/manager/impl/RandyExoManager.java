@@ -1,5 +1,9 @@
 package com.rainmonth.music.core.manager.impl;
 
+import android.content.Context;
+import android.os.Message;
+
+import com.rainmonth.music.core.cache.ICacheManager;
 import com.rainmonth.music.core.manager.BasePlayerManager;
 import com.rainmonth.music.core.player.IPlayer;
 
@@ -14,7 +18,7 @@ public class RandyExoManager extends BasePlayerManager {
     }
 
     @Override
-    public void initPlayer() {
+    public void initPlayer(Context context, Message msg, ICacheManager cacheManager) {
 
     }
 }
