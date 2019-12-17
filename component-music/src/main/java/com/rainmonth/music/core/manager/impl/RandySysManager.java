@@ -16,15 +16,101 @@ import com.rainmonth.music.core.player.impl.RandyExoPlayer;
  */
 public class RandySysManager extends BasePlayerManager {
     Context mContext;
-    RandyExoPlayer mPlayer;
+    RandyExoPlayer mSysPlayer;
 
     @Override
     public IPlayer getPlayer() {
-        return mPlayer;
+        return mSysPlayer;
     }
 
     @Override
     public void initPlayer(Context context, Message msg, ICacheManager cacheManager) {
 
+        notifyInitPlayerSuccess();
+    }
+
+    @Override
+    public void showDisplay(Message msg) {
+
+    }
+
+    @Override
+    public void setNeedMute(boolean isMute) {
+
+    }
+
+    @Override
+    public void releaseSurface() {
+
+    }
+
+    @Override
+    public void release() {
+
+    }
+
+    @Override
+    public long getBufferedPercentage() {
+        return 0;
+    }
+
+    @Override
+    public long getNetSpeed() {
+        return 0;
+    }
+
+    @Override
+    public void setSpeedPlaying(float speed, boolean soundTouch) {
+
+    }
+
+    @Override
+    public boolean isSurfaceSupportLockCanvas() {
+        return false;
+    }
+
+    @Override
+    public void start() {
+
+    }
+
+    @Override
+    public void pause() {
+
+    }
+
+    @Override
+    public void stop() {
+
+    }
+
+    @Override
+    public int getVideoWidth() {
+        return 0;
+    }
+
+    @Override
+    public int getVideoHeight() {
+        return 0;
+    }
+
+    @Override
+    public boolean isPlaying() {
+        return false;
+    }
+
+    @Override
+    public void seekTo(long time) {
+
+    }
+
+    @Override
+    public long getCurrentPosition() {
+        return 0;
+    }
+
+    @Override
+    public long getDuration() {
+        return 0;
     }
 }
