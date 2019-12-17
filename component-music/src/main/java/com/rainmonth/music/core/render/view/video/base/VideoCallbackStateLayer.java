@@ -7,9 +7,12 @@ import android.view.Surface;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.rainmonth.music.core.bridge.IVideoViewMgrBridge;
+
 /**
  * 视频回调及状态管理层
- * 实现了{@link com.rainmonth.music.core.helper.MeasureHelper.MeasureFormVideoParamsListener}、
+ * 实现了
+ * {@link com.rainmonth.music.core.helper.MeasureHelper.MeasureFormVideoParamsListener}、
  * {@link VideoDrawLayerContainer#showPauseCover()}、
  * {@link VideoDrawLayerContainer#releasePauseCover()}等方法
  *
