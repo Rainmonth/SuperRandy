@@ -1,6 +1,4 @@
-package com.rainmonth.music.core.view.audio;
-
-import com.rainmonth.music.core.view.IBaseMgrViewBridge;
+package com.rainmonth.music.core.bridge;
 
 /**
  * 音频播放器管理器与View桥接接口

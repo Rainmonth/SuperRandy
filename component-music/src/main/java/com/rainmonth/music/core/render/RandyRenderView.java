@@ -1,5 +1,6 @@
 package com.rainmonth.music.core.render;
 
+import android.content.Context;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,7 +9,11 @@ import android.widget.RelativeLayout;
 
 import com.rainmonth.music.BuildConfig;
 import com.rainmonth.music.core.helper.ConstHelper;
+import com.rainmonth.music.core.helper.MeasureHelper;
 import com.rainmonth.music.core.render.view.IRenderView;
+import com.rainmonth.music.core.render.view.RandySurfaceView;
+import com.rainmonth.music.core.render.view.RandyTextureView;
+import com.rainmonth.music.core.render.view.listener.SurfaceListener;
 import com.socks.library.KLog;
 
 /**
@@ -18,13 +23,77 @@ import com.socks.library.KLog;
 public class RandyRenderView {
     public static final String TAG = RandyRenderView.class.getSimpleName();
 
-    private IRenderView mRenderViewContainer;
+    private IRenderView mRenderView;
 
-    public void requestLayout() {
-        if (mRenderViewContainer != null) {
-
+    /**
+     * 初始化mRenderView，并将其添加到期父容器中
+     *
+     * @param context             ctx
+     * @param renderViewParent    父容器
+     * @param rotate              旋转角度
+     * @param surfaceListener     Surface变化监听{@link SurfaceListener}
+     * @param videoParamsListener VideoParams变化监听{@link com.rainmonth.music.core.helper.MeasureHelper.MeasureFormVideoParamsListener}
+     */
+    public void initRenderView(Context context, ViewGroup renderViewParent, int rotate,
+                               SurfaceListener surfaceListener,
+                               MeasureHelper.MeasureFormVideoParamsListener videoParamsListener) {
+        if (ConstHelper.getRenderType() == ConstHelper.RENDER_TYPE_SURFACE) {
+            mRenderView = RandySurfaceView.addRenderView(context, renderViewParent, rotate, surfaceListener, videoParamsListener);
+        } else if (ConstHelper.getRenderType() == ConstHelper.RENDER_TYPE_GL_SURFACE) {
+            // todo
+            mRenderView = null;
+        } else {
+            mRenderView = RandyTextureView.addRenderView(context, renderViewParent, rotate, surfaceListener, videoParamsListener);
         }
     }
+
+    public void requestLayout() {
+        if (mRenderView != null) {
+            mRenderView.getRealRenderView().requestLayout();
+        }
+    }
+
+    public float getRotation() {
+        if (mRenderView != null) {
+            return mRenderView.getRealRenderView().getRotation();
+        }
+        return 0f;
+    }
+
+    public void setRotation(float rotation) {
+        if (mRenderView != null) {
+            mRenderView.getRealRenderView().setRotation(rotation);
+        }
+    }
+
+    public void invalidate() {
+        if (mRenderView != null) {
+            mRenderView.getRealRenderView().invalidate();
+        }
+    }
+
+    public int getWidth() {
+        return mRenderView != null ? mRenderView.getRealRenderView().getWidth() : 0;
+    }
+
+    public int getHeight() {
+        return mRenderView != null ? mRenderView.getRealRenderView().getHeight() : 0;
+    }
+
+    public View getRealRenderView() {
+        return mRenderView != null ? mRenderView.getRealRenderView() : null;
+    }
+
+    public ViewGroup.LayoutParams getLayoutParams() {
+        return mRenderView.getRealRenderView().getLayoutParams();
+    }
+
+    public void setLayoutParams(ViewGroup.LayoutParams layoutParams) {
+        if (mRenderView != null) {
+            mRenderView.getRealRenderView().setLayoutParams(layoutParams);
+        }
+    }
+
 
     /**
      * 将RenderView添加到父容器中

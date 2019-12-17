@@ -24,7 +24,7 @@ public class RandyTextureView extends TextureView implements IRenderView,
         TextureView.SurfaceTextureListener,
         MeasureHelper.MeasureFormVideoParamsListener {
 
-    private final String TAG = RandyTextureView.class.getSimpleName();
+    private static final String TAG = RandyTextureView.class.getSimpleName();
     private SurfaceListener mSurfaceListener;
     private MeasureHelper mMeasureHelper;
     private MeasureHelper.MeasureFormVideoParamsListener mVideoParamsListener;
@@ -45,7 +45,7 @@ public class RandyTextureView extends TextureView implements IRenderView,
         mMeasureHelper = new MeasureHelper(this, this);
     }
 
-    public RandyTextureView addRenderView(Context context, ViewGroup renderViewContainer, int rotate,
+    public static RandyTextureView addRenderView(Context context, ViewGroup renderViewContainer, int rotate,
                                           final SurfaceListener surfaceListener,
                                           final MeasureHelper.MeasureFormVideoParamsListener paramsListener) {
         if (renderViewContainer == null) {

@@ -21,7 +21,7 @@ import com.socks.library.KLog;
 public class RandySurfaceView extends SurfaceView implements SurfaceHolder.Callback2, IRenderView,
         MeasureHelper.MeasureFormVideoParamsListener {
 
-    private final String TAG = RandySurfaceView.class.getSimpleName();
+    private static final String TAG = RandySurfaceView.class.getSimpleName();
     private SurfaceListener mSurfaceListener;
     private MeasureHelper mMeasureHelper;
     private MeasureHelper.MeasureFormVideoParamsListener mVideoParamsListener;
@@ -40,9 +40,9 @@ public class RandySurfaceView extends SurfaceView implements SurfaceHolder.Callb
         mMeasureHelper = new MeasureHelper(this, this);
     }
 
-    public RandySurfaceView addRenderView(Context context, ViewGroup renderViewContainer, int rotate,
-                                          final SurfaceListener surfaceListener,
-                                          final MeasureHelper.MeasureFormVideoParamsListener paramsListener) {
+    public static RandySurfaceView addRenderView(Context context, ViewGroup renderViewContainer, int rotate,
+                                                 final SurfaceListener surfaceListener,
+                                                 final MeasureHelper.MeasureFormVideoParamsListener paramsListener) {
         if (renderViewContainer == null) {
             KLog.e(TAG, "renderViewContainer is null");
             return null;

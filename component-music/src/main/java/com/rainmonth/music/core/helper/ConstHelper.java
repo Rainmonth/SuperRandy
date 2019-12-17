@@ -36,17 +36,17 @@ public class ConstHelper {
     /**
      * GLSurfaceView 主要用于OpenGL渲染的
      */
-    public final static int GLSURFACE = 2;
+    public final static int RENDER_TYPE_GL_SURFACE = 2;
 
     /**
      * SurfaceView，与动画全屏的效果不是很兼容
      */
-    public final static int SURFACE = 1;
+    public final static int RENDER_TYPE_SURFACE = 1;
 
     /**
      * TextureView,默认
      */
-    public final static int TEXTURE = 0;
+    public final static int RENDER_TYPE_TEXTURE = 0;
 
 
     //显示比例类型
@@ -56,7 +56,7 @@ public class ConstHelper {
     private static boolean MEDIA_CODEC_FLAG = false;
 
     //渲染类型
-    private static int sRenderType = TEXTURE;
+    private static int sRenderType = RENDER_TYPE_TEXTURE;
 
     //是否使用硬解码优化
     private static boolean sTextureMediaPlay = false;

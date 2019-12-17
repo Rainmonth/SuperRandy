@@ -1,4 +1,4 @@
-package com.rainmonth.music.core.view.audio;
+package com.rainmonth.music.core.render.view.audio.base;
 
 import android.content.Context;
 import android.widget.RelativeLayout;
