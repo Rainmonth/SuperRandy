@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.rainmonth.music.core.helper.MeasureHelper;
-import com.rainmonth.music.core.render.RandyRenderView;
+import com.rainmonth.music.core.render.RenderViewHolder;
 import com.rainmonth.music.core.render.view.listener.SurfaceListener;
 
 /**
@@ -24,7 +24,7 @@ public abstract class Layer0PlayerDrawLayout extends FrameLayout implements Surf
         MeasureHelper.MeasureFormVideoParamsListener {
 
     protected Surface mSurface;             //
-    protected RandyRenderView mRenderView;
+    protected RenderViewHolder mRenderView;
     protected ViewGroup mRenderViewParent;
     protected Bitmap mFullPauseBitmap;
     protected int mRotate;
@@ -76,7 +76,7 @@ public abstract class Layer0PlayerDrawLayout extends FrameLayout implements Surf
     }
     //</editor-fold>
 
-    protected RandyRenderView getRenderProxy() {
+    protected RenderViewHolder getRenderProxy() {
         return mRenderView;
     }
 
@@ -84,6 +84,14 @@ public abstract class Layer0PlayerDrawLayout extends FrameLayout implements Surf
         if (mRenderView != null) {
             mFullPauseBitmap = mRenderView.initCover();
         }
+    }
+
+    /**
+     * 添加RenderView
+     */
+    protected void addRenderView() {
+        mRenderView = new RenderViewHolder();
+        mRenderView.initRenderView(getContext(), mRenderViewParent, mRotate, this, this);
     }
 
     //<editor-fold>待实现的方法

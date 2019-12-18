@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 
 import com.rainmonth.music.core.helper.ConstHelper;
 import com.rainmonth.music.core.helper.MeasureHelper;
-import com.rainmonth.music.core.render.RandyRenderView;
+import com.rainmonth.music.core.render.RenderViewHolder;
 import com.rainmonth.music.core.render.view.listener.SurfaceListener;
 import com.socks.library.KLog;
 
@@ -59,7 +59,7 @@ public class RandyTextureView extends TextureView implements IRenderView,
         randyTextureView.setRandySurfaceListener(surfaceListener);
         randyTextureView.setVideoParamsListener(paramsListener);
         randyTextureView.setRotation(rotate);
-        RandyRenderView.addToParent(renderViewContainer, randyTextureView);
+        RenderViewHolder.addToParent(renderViewContainer, randyTextureView);
         return randyTextureView;
     }
 

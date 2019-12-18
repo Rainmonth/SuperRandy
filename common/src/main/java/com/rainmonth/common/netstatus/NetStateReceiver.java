@@ -105,9 +105,7 @@ public class NetStateReceiver extends BroadcastReceiver {
 
     public static void removeRegisterObserver(NetChangeObserver observer) {
         if (mNetChangeObservers != null) {
-            if (mNetChangeObservers.contains(observer)) {
-                mNetChangeObservers.remove(observer);
-            }
+            mNetChangeObservers.remove(observer);
         }
     }
 }

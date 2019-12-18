@@ -18,11 +18,13 @@ import com.rainmonth.music.core.render.view.listener.SurfaceListener;
 import com.socks.library.KLog;
 
 /**
+ * RenderView持有者
+ *
  * @author 张豪成
  * @date 2019-12-17 11:30
  */
-public class RandyRenderView {
-    public static final String TAG = RandyRenderView.class.getSimpleName();
+public class RenderViewHolder {
+    public static final String TAG = RenderViewHolder.class.getSimpleName();
 
     private IRenderView mRenderView;
 
@@ -111,6 +113,18 @@ public class RandyRenderView {
         if (mRenderView != null)
             return mRenderView.initCoverHigh();
         return null;
+    }
+
+    public void onResume() {
+        if (mRenderView != null) {
+            mRenderView.onRenderResume();
+        }
+    }
+
+    public void onPause() {
+        if (mRenderView != null) {
+            mRenderView.onRenderPause();
+        }
     }
 
     /**

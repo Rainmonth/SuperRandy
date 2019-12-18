@@ -346,6 +346,51 @@ public abstract class Layer1PlayerCallbackStateLayout extends Layer0PlayerDrawLa
             return;
         }
         mHadPrepared = true;
+        if (mVideoViewCallBack != null && isCurrentPlayerListener()) {
+            KLog.d(TAG, "onPrepared");
+            mVideoViewCallBack.onPrepared(mOriginUrl, mTitle, this);
+        }
+        if (!mStartAfterPrepared) {
+            updateStateAndUi(STATE_PAUSE);
+            onVideoPause();
+            return;
+        }
+        startAfterPrepared();
+    }
+
+    public void startAfterPrepared() {
+        if (!mHadPrepared) {
+            prepareVideo();
+        }
+
+        try {
+            if (getVideoViewMgrBridge() != null) {
+                getVideoViewMgrBridge().start();
+            }
+            updateStateAndUi(STATE_PLAYING);
+            if (getVideoViewMgrBridge() != null && mStartPlayPosition > 0) {
+                getVideoViewMgrBridge().seekTo(mStartPlayPosition);
+                mStartPlayPosition = 0;// 播放位置重置
+            }
+        } catch (Exception e) {
+            KLog.e(TAG, e);
+        }
+        addRenderView();
+
+        // todo 创建网络监听
+
+        // todo 开启网络监听
+
+        mIsHadPlay = true;
+
+        if (mRenderView != null) {
+            // GLSurfaceView的特殊处理
+            mRenderView.onResume();
+        }
+        if (mPauseBeforePrepared) {
+            onVideoPause();
+            mPauseBeforePrepared = false;
+        }
     }
 
     @Override

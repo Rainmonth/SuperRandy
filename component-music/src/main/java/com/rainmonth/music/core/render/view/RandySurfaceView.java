@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.rainmonth.music.core.helper.MeasureHelper;
-import com.rainmonth.music.core.render.RandyRenderView;
+import com.rainmonth.music.core.render.RenderViewHolder;
 import com.rainmonth.music.core.render.view.listener.SurfaceListener;
 import com.socks.library.KLog;
 
@@ -54,7 +54,7 @@ public class RandySurfaceView extends SurfaceView implements SurfaceHolder.Callb
         surfaceView.setRandySurfaceListener(surfaceListener);
         surfaceView.setVideoParamsListener(paramsListener);
         surfaceView.setRotation(rotate);
-        RandyRenderView.addToParent(renderViewContainer, surfaceView);
+        RenderViewHolder.addToParent(renderViewContainer, surfaceView);
         return surfaceView;
     }
 
