@@ -8,8 +8,8 @@ import android.content.Context;
  * @author 张豪成
  * @date 2019-12-17 19:56
  */
-public abstract class VideoControlLayer extends VideoCallbackStateLayer {
-    public VideoControlLayer(Context context) {
+public abstract class Layer2PlayerControlLayout extends Layer1PlayerCallbackStateLayout {
+    public Layer2PlayerControlLayout(Context context) {
         super(context);
     }
 }

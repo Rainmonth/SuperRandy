@@ -20,7 +20,7 @@ import com.rainmonth.music.core.render.view.listener.SurfaceListener;
  * @author 张豪成
  * @date 2019-12-17 11:52
  */
-public abstract class VideoDrawLayerContainer extends FrameLayout implements SurfaceListener,
+public abstract class Layer0PlayerDrawLayout extends FrameLayout implements SurfaceListener,
         MeasureHelper.MeasureFormVideoParamsListener {
 
     protected Surface mSurface;             //
@@ -41,15 +41,15 @@ public abstract class VideoDrawLayerContainer extends FrameLayout implements Sur
 //    protected int mMode = GSYVideoGLView.MODE_LAYOUT_SIZE;
 
 
-    public VideoDrawLayerContainer(Context context) {
+    public Layer0PlayerDrawLayout(Context context) {
         super(context);
     }
 
-    public VideoDrawLayerContainer(@NonNull Context context, @Nullable AttributeSet attrs) {
+    public Layer0PlayerDrawLayout(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public VideoDrawLayerContainer(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public Layer0PlayerDrawLayout(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
@@ -78,6 +78,12 @@ public abstract class VideoDrawLayerContainer extends FrameLayout implements Sur
 
     protected RandyRenderView getRenderProxy() {
         return mRenderView;
+    }
+
+    protected void initCover() {
+        if (mRenderView != null) {
+            mFullPauseBitmap = mRenderView.initCover();
+        }
     }
 
     //<editor-fold>待实现的方法

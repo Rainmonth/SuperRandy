@@ -1,6 +1,7 @@
 package com.rainmonth.music.core.render;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -94,6 +95,23 @@ public class RandyRenderView {
         }
     }
 
+    /**
+     * 暂停时初始化位图
+     */
+    public Bitmap initCover() {
+        if (mRenderView != null)
+            return mRenderView.initCover();
+        return null;
+    }
+
+    /**
+     * 暂停时初始化位图
+     */
+    public Bitmap initCoverHigh() {
+        if (mRenderView != null)
+            return mRenderView.initCoverHigh();
+        return null;
+    }
 
     /**
      * 将RenderView添加到父容器中
