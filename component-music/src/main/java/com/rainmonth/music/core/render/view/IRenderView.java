@@ -5,7 +5,13 @@ import android.graphics.Matrix;
 import android.view.View;
 
 import com.rainmonth.music.core.helper.MeasureHelper;
+import com.rainmonth.music.core.render.glrender.GLSurfaceViewBaseRenderer;
+import com.rainmonth.music.core.render.glrender.IShader;
+import com.rainmonth.music.core.render.view.listener.ShotSaveCallback;
 import com.rainmonth.music.core.render.view.listener.SurfaceListener;
+import com.rainmonth.music.core.render.view.listener.VideoShotListener;
+
+import java.io.File;
 
 /**
  * 渲染要用到的通用接口定义
@@ -49,17 +55,15 @@ public interface IRenderView {
      */
     void setVideoParamsListener(MeasureHelper.MeasureFormVideoParamsListener listener);
 
-//    /**
-//     * 截图
-//     */
-//    todo
-//    void taskShotPic(GSYVideoShotListener gsyVideoShotListener, boolean shotHigh);
+    /**
+     * 截图
+     */
+    void taskShotPic(VideoShotListener videoShotListener, boolean shotHigh);
 
-//    /**
-//     * 保存当前帧
-//     */
-//    todo
-//    void saveFrame(final File file, final boolean high, final GSYVideoShotSaveListener gsyVideoShotSaveListener);
+    /**
+     * 保存当前帧
+     */
+    void saveFrame(final File file, final boolean high, final ShotSaveCallback callback);
 
     /**
      * 获取当前画面的bitmap，没有返回空
@@ -81,10 +85,10 @@ public interface IRenderView {
 
     void setRenderTransform(Matrix transform);
 
-//    void setGLRenderer(GSYVideoGLViewBaseRender renderer);
+    void setGLRenderer(GLSurfaceViewBaseRenderer renderer);
 
     void setGLMVPMatrix(float[] MVPMatrix);
 
-//    void setGLEffectFilter(GSYVideoGLView.ShaderInterface effectFilter);
+    void setGLEffectFilter(IShader shader);
 
 }

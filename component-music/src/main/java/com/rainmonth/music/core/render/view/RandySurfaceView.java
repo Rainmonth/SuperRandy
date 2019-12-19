@@ -11,8 +11,14 @@ import android.view.ViewGroup;
 
 import com.rainmonth.music.core.helper.MeasureHelper;
 import com.rainmonth.music.core.render.RenderViewHolder;
+import com.rainmonth.music.core.render.glrender.GLSurfaceViewBaseRenderer;
+import com.rainmonth.music.core.render.glrender.IShader;
+import com.rainmonth.music.core.render.view.listener.ShotSaveCallback;
 import com.rainmonth.music.core.render.view.listener.SurfaceListener;
+import com.rainmonth.music.core.render.view.listener.VideoShotListener;
 import com.socks.library.KLog;
+
+import java.io.File;
 
 /**
  * @author 张豪成
@@ -166,9 +172,30 @@ public class RandySurfaceView extends SurfaceView implements SurfaceHolder.Callb
     }
 
     @Override
+    public void setGLRenderer(GLSurfaceViewBaseRenderer renderer) {
+
+    }
+
+    @Override
     public void setGLMVPMatrix(float[] MVPMatrix) {
         KLog.d(TAG, TAG + " not support setGLMVPMatrix now!");
     }
+
+    @Override
+    public void setGLEffectFilter(IShader shader) {
+
+    }
+
+    @Override
+    public void taskShotPic(VideoShotListener videoShotListener, boolean shotHigh) {
+
+    }
+
+    @Override
+    public void saveFrame(File file, boolean high, ShotSaveCallback callback) {
+
+    }
+
     //</editor-fold>
 
 
