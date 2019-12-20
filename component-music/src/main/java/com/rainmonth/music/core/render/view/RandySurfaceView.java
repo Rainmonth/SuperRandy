@@ -57,7 +57,7 @@ public class RandySurfaceView extends SurfaceView implements SurfaceHolder.Callb
             renderViewContainer.removeAllViews();
         }
         RandySurfaceView surfaceView = new RandySurfaceView(context);
-        surfaceView.setRandySurfaceListener(surfaceListener);
+        surfaceView.setSurfaceListener(surfaceListener);
         surfaceView.setVideoParamsListener(paramsListener);
         surfaceView.setRotation(rotate);
         RenderViewHolder.addToParent(renderViewContainer, surfaceView);
@@ -104,12 +104,12 @@ public class RandySurfaceView extends SurfaceView implements SurfaceHolder.Callb
 
     //<editor-fold> IRenderView实现
     @Override
-    public SurfaceListener getRandySurfaceListener() {
+    public SurfaceListener getSurfaceListener() {
         return mSurfaceListener;
     }
 
     @Override
-    public void setRandySurfaceListener(SurfaceListener listener) {
+    public void setSurfaceListener(SurfaceListener listener) {
         getHolder().addCallback(this);
         mSurfaceListener = listener;
     }

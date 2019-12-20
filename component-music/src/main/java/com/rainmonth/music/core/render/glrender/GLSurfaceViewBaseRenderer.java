@@ -194,19 +194,23 @@ public abstract class GLSurfaceViewBaseRenderer implements GLSurfaceView.Rendere
     }
 
     public void setShaderEffect(IShader shaderEffect) {
-
+        // to be override
     }
 
-    public Shader getShaderEffect() {
+    public IShader getShaderEffect() {
         return null;
     }
 
     public void setVideoShotListener(VideoShotListener listener, boolean showHigh) {
-
+        // to be override
     }
 
     public void setGLSurfaceListener(GLSurfaceListener glSurfaceListener) {
         this.mGLSurfaceListener = glSurfaceListener;
+    }
+
+    public void setGLRenderErrorListener(GLRenderErrorListener errorListener) {
+        this.mGLRenderErrorListener = errorListener;
     }
 
     public void setMvpMatrix(float[] matrix) {

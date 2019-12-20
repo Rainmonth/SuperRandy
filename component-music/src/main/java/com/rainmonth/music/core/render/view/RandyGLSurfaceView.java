@@ -7,10 +7,12 @@ import android.opengl.GLSurfaceView;
 import android.util.AttributeSet;
 import android.view.Surface;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.rainmonth.common.utils.FileUtils;
 import com.rainmonth.music.core.helper.MeasureHelper;
 import com.rainmonth.music.core.render.effect.NoEffectShader;
+import com.rainmonth.music.core.render.glrender.GLRenderErrorListener;
 import com.rainmonth.music.core.render.glrender.GLSurfaceViewBaseRenderer;
 import com.rainmonth.music.core.render.glrender.IShader;
 import com.rainmonth.music.core.render.glrender.SimpleGLSurfaceViewRenderer;
@@ -34,18 +36,18 @@ public class RandyGLSurfaceView extends GLSurfaceView implements IRenderView, GL
     public static final int MEASURE_MODE_LAYOUT_SIZE = 0;   // 基于布局参数测量
     public static final int MEASURE_MODE_RENDER_SIZE = 1;   // 计入渲染参数测量
 
+    //<editor-fold>成员变量
+    private Context mContext;                               // 上下文
     private int mMeasureMode = MEASURE_MODE_LAYOUT_SIZE;    // 测量模式
     private GLSurfaceViewBaseRenderer mRenderer;            // 渲染器
     private IShader mShaderEffect = new NoEffectShader();   // GL渲染shader
-
-    private Context mContext;                               // 上下文
-    private SurfaceListener mSurfaceListener;               // 通用监听器
-    private GLSurfaceListener mGLSurfaceListener;           // GLSurfaceView 特有的监听器
-
-    private MeasureHelper mMeasureHelper;                   // 测量格局类
-    private MeasureHelper.MeasureFormVideoParamsListener mVideoParamsListener;
-
     private float[] mMvpMatrix;
+
+    private MeasureHelper mMeasureHelper;                   // 测量工具类
+    private MeasureHelper.MeasureFormVideoParamsListener mVideoParamsListener;
+    private SurfaceListener mSurfaceListener;               // Surface通用监听器
+    private GLSurfaceListener mGLSurfaceListener;           // GLSurfaceView 特有的监听器
+    //</editor-fold>
 
     public RandyGLSurfaceView(Context context) {
         super(context);
@@ -63,6 +65,42 @@ public class RandyGLSurfaceView extends GLSurfaceView implements IRenderView, GL
         mRenderer = new SimpleGLSurfaceViewRenderer();
         mMeasureHelper = new MeasureHelper(this, this);
         mRenderer.setSurfaceView(this);
+    }
+
+    public RandyGLSurfaceView addRenderView(Context context, ViewGroup renderViewParent, int rotate,
+                                            final SurfaceListener surfaceListener,
+                                            final MeasureHelper.MeasureFormVideoParamsListener videoParamsListener,
+                                            final IShader shaderEffect, final float[] mvpMatrix,
+                                            final GLSurfaceViewBaseRenderer customRender, final int renderMode) {
+        if (renderViewParent == null) {
+            KLog.e(TAG, "renderViewContainer is null");
+            throw new NullPointerException("renderViewContainer is null");
+        }
+        if (renderViewParent.getChildCount() > 0) {
+            renderViewParent.removeAllViews();
+        }
+        RandyGLSurfaceView glSurfaceView = new RandyGLSurfaceView(context);
+        if (customRender != null) {
+            glSurfaceView.setCustomRenderer(customRender);
+        }
+        glSurfaceView.setShaderEffect(shaderEffect);
+        glSurfaceView.setVideoParamsListener(videoParamsListener);
+        glSurfaceView.setRenderMode(renderMode);
+        glSurfaceView.setSurfaceListener(surfaceListener);
+        glSurfaceView.setRotation(rotate);
+        glSurfaceView.initRender();
+
+        glSurfaceView.setGlRenderErrorListener((render, Error, code, byChangedRenderError) -> {
+            // 如果因为改变render导致的错误，重新添加一遍
+            if (byChangedRenderError) {
+                addRenderView(context, renderViewParent, rotate, surfaceListener, videoParamsListener,
+                        render.getShaderEffect(), render.getMvpMatrix(), render, renderMode);
+            }
+        });
+        if (mvpMatrix != null && mvpMatrix.length == 16) {
+            glSurfaceView.setMvpMatrix(mvpMatrix);
+        }
+        return glSurfaceView;
     }
 
     @Override
@@ -106,9 +144,21 @@ public class RandyGLSurfaceView extends GLSurfaceView implements IRenderView, GL
         setRenderer(mRenderer);
     }
 
+    public void setGlRenderErrorListener(GLRenderErrorListener errorListener) {
+        if (mRenderer != null) {
+            mRenderer.setGLRenderErrorListener(errorListener);
+        }
+    }
+
     public void setGlSurfaceListener(GLSurfaceListener glSurfaceListener) {
         mGLSurfaceListener = glSurfaceListener;
         mRenderer.setGLSurfaceListener(mGLSurfaceListener);
+    }
+
+    public void setVideoShotListener(VideoShotListener listener, boolean showHigh) {
+        if (mRenderer != null) {
+            this.mRenderer.setVideoShotListener(listener, showHigh);
+        }
     }
 
     public void setCustomRenderer(GLSurfaceViewBaseRenderer renderer) {
@@ -169,20 +219,15 @@ public class RandyGLSurfaceView extends GLSurfaceView implements IRenderView, GL
         }
     }
 
-    public void setVideoShotListener(VideoShotListener listener, boolean showHigh) {
-        if (mRenderer != null) {
-            this.mRenderer.setVideoShotListener(listener, showHigh);
-        }
-    }
 
     //<editor-fold>IRenderView实现
     @Override
-    public SurfaceListener getRandySurfaceListener() {
+    public SurfaceListener getSurfaceListener() {
         return mSurfaceListener;
     }
 
     @Override
-    public void setRandySurfaceListener(SurfaceListener listener) {
+    public void setSurfaceListener(SurfaceListener listener) {
         setGlSurfaceListener(this);
         mSurfaceListener = listener;
     }
@@ -296,7 +341,8 @@ public class RandyGLSurfaceView extends GLSurfaceView implements IRenderView, GL
     }
 
     //</editor-fold>
-    //<editor-fold> MeasureFormVideoParamsListener实现
+
+    //<editor-fold>MeasureFormVideoParamsListener实现
 
     @Override
     public int getCurrentVideoWidth() {

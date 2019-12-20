@@ -184,4 +184,23 @@ public class NetworkUtils {
         return NetType.NONE;
     }
 
+
+    /**
+     * 获取网络速度文本串
+     *
+     * @param speed 网络速度
+     * @return 文本串
+     */
+    public static String getNetSpeedText(long speed) {
+        String text = "";
+        if (speed >= 0 && speed < 1024) {
+            text = speed + " KB/s";
+        } else if (speed >= 1024 && speed < (1024 * 1024)) {
+            text = Long.toString(speed / 1024) + " KB/s";
+        } else if (speed >= (1024 * 1024) && speed < (1024 * 1024 * 1024)) {
+            text = Long.toString(speed / (1024 * 1024)) + " MB/s";
+        }
+        return text;
+    }
+
 }

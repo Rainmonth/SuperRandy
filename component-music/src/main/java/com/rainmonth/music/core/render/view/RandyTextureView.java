@@ -52,8 +52,8 @@ public class RandyTextureView extends TextureView implements IRenderView,
     }
 
     public static RandyTextureView addRenderView(Context context, ViewGroup renderViewContainer, int rotate,
-                                          final SurfaceListener surfaceListener,
-                                          final MeasureHelper.MeasureFormVideoParamsListener paramsListener) {
+                                                 final SurfaceListener surfaceListener,
+                                                 final MeasureHelper.MeasureFormVideoParamsListener paramsListener) {
         if (renderViewContainer == null) {
             KLog.e(TAG, "renderViewContainer is null");
             return null;
@@ -62,7 +62,7 @@ public class RandyTextureView extends TextureView implements IRenderView,
             renderViewContainer.removeAllViews();
         }
         RandyTextureView randyTextureView = new RandyTextureView(context);
-        randyTextureView.setRandySurfaceListener(surfaceListener);
+        randyTextureView.setSurfaceListener(surfaceListener);
         randyTextureView.setVideoParamsListener(paramsListener);
         randyTextureView.setRotation(rotate);
         RenderViewHolder.addToParent(renderViewContainer, randyTextureView);
@@ -75,14 +75,14 @@ public class RandyTextureView extends TextureView implements IRenderView,
         setMeasuredDimension(mMeasureHelper.getMeasuredWidth(), mMeasureHelper.getMeasuredHeight());
     }
 
-    //<editor-fold> IRenderView实现
+    //<editor-fold>IRenderView实现
     @Override
-    public SurfaceListener getRandySurfaceListener() {
+    public SurfaceListener getSurfaceListener() {
         return mSurfaceListener;
     }
 
     @Override
-    public void setRandySurfaceListener(SurfaceListener listener) {
+    public void setSurfaceListener(SurfaceListener listener) {
         this.mSurfaceListener = listener;
     }
 
@@ -171,7 +171,7 @@ public class RandyTextureView extends TextureView implements IRenderView,
     }
     //</editor-fold>
 
-    //<editor-fold>
+    //<editor-fold>TextureView.SurfaceTextureListener实现
 
     @Override
     public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {
@@ -223,7 +223,7 @@ public class RandyTextureView extends TextureView implements IRenderView,
 
     //</editor-fold>
 
-    //<editor-fold>
+    //<editor-fold>MeasureHelper.MeasureFormVideoParamsListener实现
 
     @Override
     public int getCurrentVideoWidth() {

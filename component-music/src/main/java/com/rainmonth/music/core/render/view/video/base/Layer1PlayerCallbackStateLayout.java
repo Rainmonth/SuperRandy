@@ -7,6 +7,7 @@ import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.AttributeSet;
@@ -20,6 +21,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.TintContextWrapper;
 
 import com.rainmonth.common.utils.AppUtils;
+import com.rainmonth.common.utils.NetworkUtils;
 import com.rainmonth.music.R;
 import com.rainmonth.music.core.bridge.IVideoViewMgrBridge;
 import com.rainmonth.music.core.listener.RandyPlayerListener;
@@ -47,11 +49,17 @@ public abstract class Layer1PlayerCallbackStateLayout extends Layer0PlayerDrawLa
     public static final String NET_STATE_NORMAL = "NORMAL";
 
     public static final int STATE_NORMAL = 0;
+    // 准备状态
     public static final int STATE_PREPARING = 1;
+    // 播放状态
     public static final int STATE_PLAYING = 2;
+    // 开始缓存播放
     public static final int STATE_PLAYING_BUFFERING_START = 3;
+    // 暂停状态
     public static final int STATE_PAUSE = 4;
+    // 自动完成状态
     public static final int STATE_AUTO_COMPLETE = 5;
+    // 错误状态
     public static final int STATE_ERROR = 6;
     // 调用setup方法的间隔2000毫秒
     public static final int SET_UP_VIEW_DELAY_TIME = 2000;
@@ -87,7 +95,7 @@ public abstract class Layer1PlayerCallbackStateLayout extends Layer0PlayerDrawLa
     // 是否不变调
     protected boolean mSoundTouch = false;
     // 是否需要显示暂停锁定效果
-    protected boolean mShowPauseCover = false;
+    protected boolean mShowPauseCover = true;
     // 是否准备完成前调用了暂停
     protected boolean mPauseBeforePrepared = false;
     // Prepared之后是否自动开始播放
@@ -241,7 +249,7 @@ public abstract class Layer1PlayerCallbackStateLayout extends Layer0PlayerDrawLa
     /**
      * 开始播放逻辑处理
      */
-    protected void startPlayLogic() {
+    protected void startButtonLogic() {
         if (mVideoViewCallBack != null && mCurrentState == STATE_NORMAL) {
             KLog.d(TAG, "startButtonLogic()->onClickStartIcon");
             mVideoViewCallBack.onClickStartIcon(mOriginUrl, mTitle, this);
@@ -377,10 +385,10 @@ public abstract class Layer1PlayerCallbackStateLayout extends Layer0PlayerDrawLa
         }
         addRenderView();
 
-        // todo 创建网络监听
-
-        // todo 开启网络监听
-
+        // 创建网络监听
+        createNetworkListener();
+        // 开启网络监听
+        registerNetworkListener();
         mIsHadPlay = true;
 
         if (mRenderView != null) {
@@ -393,24 +401,96 @@ public abstract class Layer1PlayerCallbackStateLayout extends Layer0PlayerDrawLa
         }
     }
 
+    /**
+     * todo 创建网路监听
+     */
+    public void createNetworkListener() {
+
+    }
+
+    /**
+     * todo 注册网络监听
+     */
+    public void registerNetworkListener() {
+
+    }
+
+    /**
+     * todo 取消注册网路监听
+     */
+    public void unRegisterNetworkListener() {
+
+    }
+
+    /**
+     * todo 释放网络监听
+     */
+    public void releaseNetworkListener() {
+
+    }
+
     @Override
     public void onAutoCompletion() {
+        updateStateAndUi(STATE_AUTO_COMPLETE);
+        mSetupViewTimeMillis = 0;
+        mCurrentPosition = 0;
 
+        if (mRenderViewParent != null && mRenderViewParent.getChildCount() > 0) {
+            mRenderViewParent.removeAllViews();
+        }
+        if (!mIsCurrentFullscreen) {
+            getVideoViewMgrBridge().setLastListener(null);
+        }
+        // 释放音频焦点，让之前有获取音频焦点请求的获取焦点
+        mAudioManager.abandonAudioFocus(mAudioFocusChangeListener);
+        // 取消屏幕常亮
+        AppUtils.cancelKeepScreenOn(mContext);
+        // 取消注册网络监听
+        unRegisterNetworkListener();
+        // 释放网络监听
+        releaseNetworkListener();
+        // 发送通知
+        if (mVideoViewCallBack != null && isCurrentPlayerListener()) {
+            KLog.d(TAG, "onAutoCompletion");
+            mVideoViewCallBack.onAutoComplete(mOriginUrl, mTitle, this);
+        }
     }
 
     @Override
     public void onCompletion() {
+        updateStateAndUi(STATE_NORMAL);
+        mSetupViewTimeMillis = 0;
+        mCurrentPosition = 0;
 
+        if (mRenderViewParent != null && mRenderViewParent.getChildCount() > 0) {
+            mRenderViewParent.removeAllViews();
+        }
+        if (!mIsCurrentFullscreen) {
+            getVideoViewMgrBridge().setListener(null);
+            getVideoViewMgrBridge().setLastListener(null);
+        }
+        getVideoViewMgrBridge().setCurrentVideoWidth(0);
+        getVideoViewMgrBridge().setCurrentVideoHeight(0);
+
+        // 释放音频焦点，让之前有获取音频焦点请求的获取焦点
+        mAudioManager.abandonAudioFocus(mAudioFocusChangeListener);
+        // 取消屏幕常亮
+        AppUtils.cancelKeepScreenOn(mContext);
+        // 取消注册网络监听
+        unRegisterNetworkListener();
+        // 释放网络监听
+        releaseNetworkListener();
     }
 
-    @Override
-    public void onBufferingUpdate(int percentage) {
-
-    }
+//    @Override
+//    public void onBufferingUpdate(int percentage) {
+//
+//    }
 
     @Override
     public void onSeekComplete() {
-
+        // do nothing
+        KLog.d(TAG, "onSeekComplete");
     }
 
     @Override
@@ -467,11 +547,6 @@ public abstract class Layer1PlayerCallbackStateLayout extends Layer0PlayerDrawLa
         return position;
     }
 
-
-    public void setStartPlayPosition(long startPlayPosition) {
-        this.mStartPlayPosition = startPlayPosition;
-    }
-
     /**
      * 播放错误的时候，删除缓存文件
      */
@@ -499,18 +574,45 @@ public abstract class Layer1PlayerCallbackStateLayout extends Layer0PlayerDrawLa
 
     @Override
     public void onInfo(int what, int extra) {
-
+        if (what == MediaPlayer.MEDIA_INFO_BUFFERING_START) {
+            // 缓存前保存之前的状态
+            mStateBeforeBuffering = mCurrentState;
+            if (mIsHadPlay && mCurrentState != STATE_PREPARING && mCurrentState > 0) {
+                updateStateAndUi(STATE_PLAYING_BUFFERING_START);
+            }
+        } else if (what == MediaPlayer.MEDIA_INFO_BUFFERING_END) {
+            if (mStateBeforeBuffering != -1) {
+                // 如果缓冲之前保存的状态就是缓冲，则在缓冲完成后更新为播放状态
+                if (mStateBeforeBuffering == STATE_PLAYING_BUFFERING_START) {
+                    mStateBeforeBuffering = STATE_PLAYING;
+                }
+                if (mIsHadPlay && mCurrentState != STATE_PREPARING && mCurrentState > 0) {
+                    // 缓冲完毕后恢复到之前的状态
+                    updateStateAndUi(mStateBeforeBuffering);
+                }
+            }
+        } else if (what == getVideoViewMgrBridge().getRotateInfoFlag()) {
+            mRotate = extra;
+            KLog.d(TAG, "Video rotate info " + extra);
+            if (mRenderView != null) {
+                mRenderView.setRotation(mRotate);
+            }
+        }
     }
 
     @Override
     public void onVideoSizeChanged() {
-
+        int mVideoWidth = getVideoViewMgrBridge().getCurrentVideoWidth();
+        int mVideoHeight = getVideoViewMgrBridge().getCurrentVideoHeight();
+        if (mRenderView != null && mVideoWidth != 0 && mVideoHeight != 0) {
+            mRenderView.requestLayout();
+        }
     }
 
-    @Override
-    public void onBackFullscreen() {
-
-    }
+//    @Override
+//    public void onBackFullscreen() {
+//
+//    }
 
     public void onVideoReset() {
         updateStateAndUi(STATE_NORMAL);
@@ -653,6 +755,13 @@ public abstract class Layer1PlayerCallbackStateLayout extends Layer0PlayerDrawLa
     //<editor-fold>子类要实现的方法
 
     /**
+     * 获取View和Mgr的桥接管理器
+     *
+     * @return 实现了IVideoViewMgrBridge的PlayerManager
+     */
+    protected abstract IVideoViewMgrBridge getVideoViewMgrBridge();
+
+    /**
      * 获取布局id
      *
      * @return 布局文件id
@@ -660,7 +769,17 @@ public abstract class Layer1PlayerCallbackStateLayout extends Layer0PlayerDrawLa
     protected abstract @LayoutRes
     int getLayoutId();
 
-    protected abstract IVideoViewMgrBridge getVideoViewMgrBridge();
+    /**
+     * 开始播放的逻辑处理
+     */
+    protected abstract void startPlayLogic();
+
+    /**
+     * 从全屏推出
+     *
+     * @param context ctx
+     */
+    protected abstract boolean backFromFull(Context context);
 
     /**
      * 更新状态和UI
@@ -670,5 +789,138 @@ public abstract class Layer1PlayerCallbackStateLayout extends Layer0PlayerDrawLa
     protected abstract void updateStateAndUi(int state);
 
     protected abstract void releaseAllVideos();
+    //</editor-fold>
+
+    //<editor-fold>对外暴露的getter和setter方法
+    public int getCurrentState() {
+        return mCurrentState;
+    }
+
+    public boolean isPlayingState() {
+        return mCurrentState >= 0 && mCurrentState != STATE_NORMAL
+                && mCurrentState != STATE_PAUSE
+                && mCurrentState != STATE_AUTO_COMPLETE
+                && mCurrentState != STATE_ERROR;
+    }
+
+    public String getPlayTag() {
+        return mPlayTag;
+    }
+
+    public void setPlayTag(String playTag) {
+        this.mPlayTag = playTag;
+    }
+
+    public int getPlayPosition() {
+        return mPlayPosition;
+    }
+
+    public void setPlayPosition(int playPosition) {
+        this.mPlayPosition = playPosition;
+    }
+
+    public long getNetSpeed() {
+        return getVideoViewMgrBridge().getNetSpeed();
+    }
+
+    public String getNetSpeedText() {
+        long speed = getNetSpeed();
+        return NetworkUtils.getNetSpeedText(speed);
+    }
+
+    public long getStartPlayPosition() {
+        return mStartPlayPosition;
+    }
+
+    public void setStartPlayPosition(long startPlayPosition) {
+        this.mStartPlayPosition = startPlayPosition;
+    }
+
+    public int getBufferPoint() {
+        return mBufferPoint;
+    }
+
+    public boolean isCurrentFullscreen() {
+        return mIsCurrentFullscreen;
+    }
+
+    public void setIsCurrentFullscreen(boolean isCurrentFullscreen) {
+        this.mIsCurrentFullscreen = isCurrentFullscreen;
+    }
+
+    public boolean isLoop() {
+        return mIsLoop;
+    }
+
+    public void setIsLoop(boolean isLoop) {
+        this.mIsLoop = isLoop;
+    }
+
+    public void setVideoViewCallback(VideoViewCallback callback) {
+        this.mVideoViewCallBack = callback;
+    }
+
+    public float getSpeed() {
+        return mSpeed;
+    }
+
+    public void setSpeed(float speed) {
+        setSpeed(speed, false);
+    }
+
+    /**
+     * 设置播放速度
+     *
+     * @param speed        播放速度
+     * @param isSoundTouch 是否对6.0下开启变速不变调
+     */
+    public void setSpeed(float speed, boolean isSoundTouch) {
+        this.mSpeed = speed;
+        this.mSoundTouch = isSoundTouch;
+        if (getVideoViewMgrBridge() != null) {
+            getVideoViewMgrBridge().setSpeed(speed, isSoundTouch);
+        }
+    }
+
+    public boolean isShowPauseCover() {
+        return mShowPauseCover;
+    }
+
+    public void setShowPauseCover(boolean mShowPauseCover) {
+        this.mShowPauseCover = mShowPauseCover;
+    }
+
+    public boolean isStartAfterPrepared() {
+        return mStartAfterPrepared;
+    }
+
+    public void setStartAfterPrepared(boolean startAfterPrepared) {
+        this.mStartAfterPrepared = startAfterPrepared;
+    }
+
+    public boolean isReleaseWhenLossAudio() {
+        return mReleaseWhenLossAudio;
+    }
+
+    public void setReleaseWhenLossAudio(boolean releaseWhenLossAudio) {
+        this.mReleaseWhenLossAudio = releaseWhenLossAudio;
+    }
+
+    public String getOverrideExtension() {
+        return mOverrideExtension;
+    }
+
+    public void setOverrideExtension(String overrideExtension) {
+        this.mOverrideExtension = overrideExtension;
+    }
+
+    public Map<String, String> getmMapHeadData() {
+        return mMapHeadData;
+    }
+
+    public void setmMapHeadData(Map<String, String> mMapHeadData) {
+        this.mMapHeadData = mMapHeadData;
+    }
+
     //</editor-fold>
 }

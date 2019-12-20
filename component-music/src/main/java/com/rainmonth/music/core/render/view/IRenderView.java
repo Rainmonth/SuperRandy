@@ -20,14 +20,14 @@ import java.io.File;
  * @date 2019-12-17 11:30
  */
 public interface IRenderView {
-    SurfaceListener getRandySurfaceListener();
+    SurfaceListener getSurfaceListener();
 
     /**
      * Surface变化监听
      *
      * @param listener RandySurfaceListener实例
      */
-    void setRandySurfaceListener(SurfaceListener listener);
+    void setSurfaceListener(SurfaceListener listener);
 
     /**
      * 获取当前View的宽度
