@@ -162,7 +162,7 @@ public abstract class Layer1PlayerCallbackStateLayout extends Layer0PlayerDrawLa
 
         initInflate(mContext);
 
-        mRenderViewParent = findViewById(R.id.render_view_container);
+        mRenderViewParent = findViewById(R.id.player_render_view_container);
         if (isInEditMode()) {
             return;
         }
@@ -364,6 +364,24 @@ public abstract class Layer1PlayerCallbackStateLayout extends Layer0PlayerDrawLa
             return;
         }
         startAfterPrepared();
+    }
+
+    public long getDuration() {
+        long duration = 0;
+        try {
+            duration = getVideoViewMgrBridge().getDuration();
+        } catch (Exception e) {
+            duration = 0;
+            KLog.e(TAG, e);
+        }
+        return duration;
+    }
+
+    public void release() {
+        mSetupViewTimeMillis = 0;
+        if (isCurrentPlayerListener() && System.currentTimeMillis() - mSetupViewTimeMillis > 0) {
+            releaseAllVideos();
+        }
     }
 
     public void startAfterPrepared() {
