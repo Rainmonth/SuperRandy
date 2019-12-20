@@ -13,7 +13,7 @@ public interface SurfaceListener {
 
     void onSurfaceChanged(Surface surface, int width, int height);
 
-    void onSurfaceDestroyed(Surface surface);
+    boolean onSurfaceDestroyed(Surface surface);
 
     void onSurfaceUpdated(Surface surface);
 }

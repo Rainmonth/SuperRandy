@@ -12,6 +12,10 @@ import androidx.annotation.Nullable;
 
 import com.rainmonth.music.core.helper.MeasureHelper;
 import com.rainmonth.music.core.render.RenderViewHolder;
+import com.rainmonth.music.core.render.effect.NoEffectShader;
+import com.rainmonth.music.core.render.glrender.GLSurfaceViewBaseRenderer;
+import com.rainmonth.music.core.render.glrender.IShader;
+import com.rainmonth.music.core.render.view.RandyGLSurfaceView;
 import com.rainmonth.music.core.render.view.listener.SurfaceListener;
 
 /**
@@ -31,14 +35,14 @@ public abstract class Layer0PlayerDrawLayout extends FrameLayout implements Surf
 
     // for GLSurfaceView
 
-//    //GL的滤镜
-//    protected GSYVideoGLView.ShaderInterface mEffectFilter = new NoEffect();
-//    //GL的自定义渲染
-//    protected GSYVideoGLViewBaseRender mRenderer;
-//    //GL的角度
-//    protected float[] mMatrixGL = null;
-//    //GL的布局模式
-//    protected int mMode = GSYVideoGLView.MODE_LAYOUT_SIZE;
+    //GL的滤镜
+    protected IShader mEffectFilter = new NoEffectShader();
+    //GL的自定义渲染
+    protected GLSurfaceViewBaseRenderer mRenderer;
+    //GL的角度
+    protected float[] mMatrixGL = null;
+    //GL的布局模式
+    protected int mMode = RandyGLSurfaceView.MEASURE_MODE_LAYOUT_SIZE;
 
 
     public Layer0PlayerDrawLayout(Context context) {
@@ -66,8 +70,10 @@ public abstract class Layer0PlayerDrawLayout extends FrameLayout implements Surf
     }
 
     @Override
-    public void onSurfaceDestroyed(Surface surface) {
-
+    public boolean onSurfaceDestroyed(Surface surface) {
+        setDisplay(null);
+        releaseSurface(surface);
+        return true;
     }
 
     @Override
@@ -86,6 +92,11 @@ public abstract class Layer0PlayerDrawLayout extends FrameLayout implements Surf
         }
     }
 
+
+    protected void setSmallVideoTextureView() {
+
+    }
+
     /**
      * 添加RenderView
      */
@@ -98,8 +109,6 @@ public abstract class Layer0PlayerDrawLayout extends FrameLayout implements Surf
     protected abstract void showPauseCover();
 
     protected abstract void releasePauseCover();
-
-    protected abstract void setSmallVideoTextureView();
 
     protected abstract void setDisplay(Surface surface);
 

@@ -308,6 +308,10 @@ public abstract class Layer2PlayerControlLayout extends Layer1PlayerCallbackStat
         resolveUiState(mCurrentState);
     }
 
+    @Override
+    protected void setSmallVideoTextureView() {
+        super.setSmallVideoTextureView();
+    }
 
     /**
      * UI处理
