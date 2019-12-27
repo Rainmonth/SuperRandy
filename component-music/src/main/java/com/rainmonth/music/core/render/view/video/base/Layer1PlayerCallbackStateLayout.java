@@ -371,7 +371,6 @@ public abstract class Layer1PlayerCallbackStateLayout extends Layer0PlayerDrawLa
         try {
             duration = getVideoViewMgrBridge().getDuration();
         } catch (Exception e) {
-            duration = 0;
             KLog.e(TAG, e);
         }
         return duration;

@@ -207,7 +207,7 @@ public class RenFragment extends BaseLazyFragment<RenPresenter> implements RenCo
     public void navToDetail(ArticleBean articleBean) {
         //  进入二级界面
         Bundle bundle = new Bundle();
-        bundle.putString(BaseWebActivity.BUNDLE_KEY_URL, articleBean.getUrl());
+        bundle.putString(BaseWebActivity.BUNDLE_KEY_URL, "http://10.0.10.61:38890/vip-introduce/#/launcher");
         bundle.putString(BaseWebActivity.BUNDLE_KEY_TITLE, articleBean.getTitle());
         readyGo(BaseWebActivity.class, bundle);
     }

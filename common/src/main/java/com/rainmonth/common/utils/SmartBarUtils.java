@@ -8,10 +8,12 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+
 import androidx.annotation.ColorRes;
 import androidx.annotation.RequiresApi;
 import androidx.core.view.ViewCompat;
 import androidx.appcompat.widget.Toolbar;
+
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
@@ -507,5 +509,44 @@ public class SmartBarUtils {
         } else {
             return null;
         }
+    }
+
+    /**
+     * 隐藏虚导航栏
+     *
+     * @param context ctx上下文
+     */
+    public static void hideNavKey(Context context) {
+        if (Build.VERSION.SDK_INT >= 29) {
+            //       设置屏幕始终在前面，不然点击鼠标，重新出现虚拟按键
+            ((Activity) context).getWindow().getDecorView().setSystemUiVisibility(
+                    View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION // hide nav
+                            // bar
+                            | View.SYSTEM_UI_FLAG_IMMERSIVE);
+
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            //       设置屏幕始终在前面，不然点击鼠标，重新出现虚拟按键
+            ((Activity) context).getWindow().getDecorView().setSystemUiVisibility(
+                    View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION // hide nav
+                            // bar
+                            | View.SYSTEM_UI_FLAG_IMMERSIVE);
+        } else {
+            ((Activity) context).getWindow().getDecorView().setSystemUiVisibility(
+                    View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION // hide nav
+            );
+        }
+    }
+
+    /**
+     * 显示虚拟导航栏
+     *
+     * @param context            ctx上下文
+     * @param systemUiVisibility 对应flag
+     */
+    public static void showNavKey(Context context, int systemUiVisibility) {
+        ((Activity) context).getWindow().getDecorView().setSystemUiVisibility(systemUiVisibility);
     }
 }

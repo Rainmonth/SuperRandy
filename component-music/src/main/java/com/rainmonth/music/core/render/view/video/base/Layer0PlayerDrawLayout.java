@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.util.AttributeSet;
 import android.view.Surface;
+import android.view.TextureView;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
@@ -61,7 +62,7 @@ public abstract class Layer0PlayerDrawLayout extends FrameLayout implements Surf
 
     @Override
     public void onSurfaceCreated(Surface surface) {
-
+        pauseLogic(surface, (mRenderView != null && mRenderView.getRealRenderView() instanceof TextureView));
     }
 
     @Override
@@ -78,9 +79,17 @@ public abstract class Layer0PlayerDrawLayout extends FrameLayout implements Surf
 
     @Override
     public void onSurfaceUpdated(Surface surface) {
-
+        releasePauseCover();
     }
     //</editor-fold>
+
+    protected void pauseLogic(Surface surface, boolean pauseLogic) {
+        mSurface = surface;
+        if (pauseLogic) {
+            showPauseCover();
+        }
+        setDisplay(surface);
+    }
 
     protected RenderViewHolder getRenderProxy() {
         return mRenderView;
@@ -93,8 +102,10 @@ public abstract class Layer0PlayerDrawLayout extends FrameLayout implements Surf
     }
 
 
-    protected void setSmallVideoTextureView() {
-
+    protected void setSmallVideoTextureView(OnTouchListener listener) {
+        mRenderViewParent.setOnTouchListener(listener);
+        mRenderViewParent.setOnClickListener(null);
+        setSmallVideoTextureView();
     }
 
     /**
@@ -109,6 +120,8 @@ public abstract class Layer0PlayerDrawLayout extends FrameLayout implements Surf
     protected abstract void showPauseCover();
 
     protected abstract void releasePauseCover();
+
+    protected abstract void setSmallVideoTextureView();
 
     protected abstract void setDisplay(Surface surface);
 

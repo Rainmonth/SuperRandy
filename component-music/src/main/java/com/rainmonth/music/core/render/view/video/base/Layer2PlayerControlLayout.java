@@ -3,6 +3,7 @@ package com.rainmonth.music.core.render.view.video.base;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -16,6 +17,7 @@ import androidx.annotation.Nullable;
 
 import com.rainmonth.common.utils.DateUtils;
 import com.rainmonth.common.utils.DensityUtils;
+import com.rainmonth.common.utils.SmartBarUtils;
 import com.rainmonth.music.R;
 import com.rainmonth.music.core.render.view.listener.LockClickListener;
 import com.rainmonth.music.core.render.view.listener.VideoProgressListener;
@@ -308,9 +310,35 @@ public abstract class Layer2PlayerControlLayout extends Layer1PlayerCallbackStat
         resolveUiState(mCurrentState);
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
-    protected void setSmallVideoTextureView() {
-        super.setSmallVideoTextureView();
+    protected void setSmallVideoTextureView(OnTouchListener listener) {
+        super.setSmallVideoTextureView(listener);
+        if (mThumbImageContainer != null) {
+            mThumbImageContainer.setOnTouchListener(listener);
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        int id = v.getId();
+        if (mHideKey && mIsCurrentFullscreen) {
+            SmartBarUtils.hideNavKey(mContext);
+        }
+        if (id == R.id.player_start) {
+            clickStartIcon();
+        } else if (id == R.id.player_render_view_container) {
+
+        }
+    }
+
+    protected void clickStartIcon() {
+
+    }
+
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        return false;
     }
 
     /**
