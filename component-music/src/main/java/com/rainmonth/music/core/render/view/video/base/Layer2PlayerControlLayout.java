@@ -2,7 +2,9 @@ package com.rainmonth.music.core.render.view.video.base;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -202,7 +204,7 @@ public abstract class Layer2PlayerControlLayout extends Layer1PlayerCallbackStat
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
         KLog.d(TAG, "onDetachedFromWindow");
-        // todo 资源回收，主要是定时资源的回收
+        // 资源回收，主要是定时资源的回收
         // 回收更新进度条的time
         cancelProgressTimer();
         // 播放设置相关控件隐藏逻辑实现
@@ -327,17 +329,163 @@ public abstract class Layer2PlayerControlLayout extends Layer1PlayerCallbackStat
         }
         if (id == R.id.player_start) {
             clickStartIcon();
+        } else if (id == R.id.player_render_view_container && mCurrentState == STATE_ERROR) {
+            if (mVideoViewCallBack != null) {
+                KLog.d(TAG, "onClickStartError()");
+                mVideoViewCallBack.onClickStartError(mOriginUrl, mTitle, this);
+            }
+            prepareVideo();
         } else if (id == R.id.player_render_view_container) {
-
+            if (mVideoViewCallBack != null && isCurrentPlayerListener()) {
+                if (mIsCurrentFullscreen) {
+                    KLog.d(TAG, "onClickBlankFullscreen()");
+                    mVideoViewCallBack.onClickBlankFullscreen(mOriginUrl, mTitle, Layer2PlayerControlLayout.this);
+                } else {
+                    KLog.d(TAG, "onClickStartError()");
+                    mVideoViewCallBack.onClickStartError(mOriginUrl, mTitle, Layer2PlayerControlLayout.this);
+                }
+            }
+            startWidgetDismissTimer();
+        } else if (id == R.id.player_thumb_container) {
+            if (!mThumbPlay) {
+                return;
+            }
+            if (TextUtils.isEmpty(mUrl)) {
+                KLog.d(TAG, "播放地址无效");
+                return;
+            }
+            if (mCurrentState == STATE_NORMAL) {
+                if (isShowNetConfirm()) {
+                    showWifiDialog();
+                    return;
+                }
+                startPlayLogic();
+            } else if (mCurrentState == STATE_AUTO_COMPLETE) {
+                onClickUiToggle();
+            }
         }
     }
 
-    protected void clickStartIcon() {
+    protected GestureDetector gestureDetector = new GestureDetector(mContext.getApplicationContext(), new GestureDetector.SimpleOnGestureListener() {
+        @Override
+        public boolean onDoubleTap(MotionEvent e) {
+            touchDoubleUp();
+            return super.onDoubleTap(e);
+        }
 
+        @Override
+        public boolean onSingleTapConfirmed(MotionEvent e) {
+            if (!mChangePosition && !mChangeVolume && !mBrightness) {
+                onClickUiToggle();
+            }
+            return super.onSingleTapConfirmed(e);
+        }
+    });
+
+    /**
+     * 双击暂停/播放实现
+     */
+    protected void touchDoubleUp() {
+        if (!mIsHadPlay) {
+            return;
+        }
+        clickStartIcon();
+    }
+
+    /**
+     * 是否需要弹出非WiFi环境播放确认框
+     *
+     * @return true 当前处于非网络环境且播放的是没有缓存的网络视频
+     */
+    protected boolean isShowNetConfirm() {
+        boolean isLocalResource = mOriginUrl.startsWith("file") || mOriginUrl.startsWith("android.resource");
+        boolean isCacheFile = getVideoViewMgrBridge().isTotalCached(mContext.getApplicationContext(), mCachePath, mOriginUrl);
+        return mNeedShowWifiTip && !isCacheFile && !isLocalResource;
+    }
+
+    /**
+     * 播放按钮点击处理
+     */
+    protected void clickStartIcon() {
+        if (TextUtils.isEmpty(mUrl)) {
+            KLog.e(TAG, "播放地址无效");
+            return;
+        }
+        if (mCurrentState == STATE_NORMAL || mCurrentState == STATE_ERROR) {
+            if (isShowNetConfirm()) {
+                showWifiDialog();
+                return;
+            }
+            startButtonLogic();
+        } else if (mCurrentState == STATE_PLAYING) {
+            try {
+                onVideoPause();
+            } catch (Exception e) {
+                KLog.e(TAG, e);
+            }
+            updateStateAndUi(STATE_PAUSE);
+            if (mVideoViewCallBack != null && isCurrentPlayerListener()) {
+                if (mIsCurrentFullscreen) {
+                    KLog.d(TAG, "onClickStopFullscreen");
+                    mVideoViewCallBack.onClickStopFullscreen(mOriginUrl, mTitle, this);
+                } else {
+                    KLog.d(TAG, "onClickStop");
+                    mVideoViewCallBack.onClickStop(mOriginUrl, mTitle, this);
+                }
+            }
+        } else if (mCurrentState == STATE_PAUSE) {
+            if (mVideoViewCallBack != null && isCurrentPlayerListener()) {
+                if (mIsCurrentFullscreen) {
+                    KLog.d(TAG, "onClickStopFullscreen");
+                    mVideoViewCallBack.onClickResumeFullscreen(mOriginUrl, mTitle, this);
+                } else {
+                    KLog.d(TAG, "onClickResume");
+                    mVideoViewCallBack.onClickResume(mOriginUrl, mTitle, this);
+                }
+            }
+            if (!mIsHadPlay && !mStartAfterPrepared) {
+                startAfterPrepared();
+            }
+            try {
+                getVideoViewMgrBridge().start();
+            } catch (Exception e) {
+                KLog.e(TAG, e);
+            }
+            updateStateAndUi(STATE_PLAYING);
+        } else if (mCurrentState == STATE_AUTO_COMPLETE) {
+            startButtonLogic();
+        }
     }
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
+        int id = v.getId();
+        float x = event.getX();
+        float y = event.getY();
+        if (mIsCurrentFullscreen && mIsCurrentScreenLock && mNeedLockFull) {
+            onClickUiToggle();
+            startWidgetDismissTimer();
+            return true;// 消费事件
+        }
+        if (id == R.id.player_fullscreen) { // 触摸的是全屏按钮，交由子View处理）
+            return false;
+        }
+        if (id == R.id.player_render_view_container) {
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    // todo
+                    break;
+                case MotionEvent.ACTION_MOVE:
+                    // todo
+                    break;
+                case MotionEvent.ACTION_UP:
+                    // todo
+                    break;
+            }
+            gestureDetector.onTouchEvent(event);
+        } else if (id == R.id.player_progress) {
+            // todo
+        }
         return false;
     }
 
@@ -512,6 +660,9 @@ public abstract class Layer2PlayerControlLayout extends Layer1PlayerCallbackStat
         }
     };
 
+    /**
+     * 隐藏控件
+     */
     protected void startWidgetDismissTimer() {
         cancelWidgetDismissTimer();
         mPostDismiss = true;
@@ -559,6 +710,16 @@ public abstract class Layer2PlayerControlLayout extends Layer1PlayerCallbackStat
 
 
     //<editor-fold>子类要实现的方法
+
+    /**
+     * 展示非WiFi环境播放弹出
+     */
+    protected abstract void showWifiDialog();
+
+    /**
+     * 点击时播放界面相关控件的显示与隐藏切换
+     */
+    protected abstract void onClickUiToggle();
 
     /**
      * 隐藏所有小控件，只保留播放视图
