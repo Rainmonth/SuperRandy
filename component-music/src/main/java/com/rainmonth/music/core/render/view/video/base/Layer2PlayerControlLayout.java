@@ -1,13 +1,17 @@
 package com.rainmonth.music.core.render.view.video.base;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
+import android.media.AudioManager;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewParent;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -36,7 +40,7 @@ public abstract class Layer2PlayerControlLayout extends Layer1PlayerCallbackStat
     public static final String TAG = Layer2PlayerControlLayout.class.getSimpleName();
     //<editor-fold>成员变量
     //手指放下的位置
-    protected int mDownPosition;
+    protected long mDownPosition;
     //手势调节音量的大小
     protected int mGestureDownVolume;
     //手势偏差值
@@ -473,21 +477,205 @@ public abstract class Layer2PlayerControlLayout extends Layer1PlayerCallbackStat
         if (id == R.id.player_render_view_container) {
             switch (event.getAction()) {
                 case MotionEvent.ACTION_DOWN:
-                    // todo
+                    KLog.d(TAG, "View with hashCode " + this.hashCode() + " renderView action down");
+                    touchSurfaceDown(x, y);
                     break;
                 case MotionEvent.ACTION_MOVE:
-                    // todo
+                    float deltaX = x - mDownX;
+                    float deltaY = y - mDownY;
+                    float absDeltaX = Math.abs(deltaX);
+                    float absDeltaY = Math.abs(deltaY);
+
+                    if ((mIsCurrentFullscreen && mIsTouchWigetFull)
+                            || (mIsTouchWiget && !mIsCurrentFullscreen)) {
+                        if (!mChangePosition && !mChangeVolume && !mBrightness) {
+                            touchSurfaceMoveFullLogic(absDeltaX, absDeltaY);
+                        }
+                    }
+                    touchSurfaceMove(deltaX, deltaY, y);
                     break;
                 case MotionEvent.ACTION_UP:
-                    // todo
+                    KLog.d(TAG, "View with hashCode " + this.hashCode() + " renderView action up");
+                    startWidgetDismissTimer();
+                    touchSurfaceUp();
+
+                    startProgressTimer();
+                    //不要和隐藏虚拟按键后，滑出虚拟按键冲突
+                    if (mHideKey && mShowVKey) {
+                        return true;
+                    }
                     break;
             }
             gestureDetector.onTouchEvent(event);
         } else if (id == R.id.player_progress) {
-            // todo
+            // 移动进度条处理
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    KLog.d(TAG, "View with hashCode " + this.hashCode() + " progress action down");
+                    cancelWidgetDismissTimer();
+                    break;
+                case MotionEvent.ACTION_MOVE:
+                    cancelProgressTimer();
+                    // 此时需要防止父容器拦截时间
+                    ViewParent vpMove = getParent();
+                    while (vpMove != null) {
+                        vpMove.requestDisallowInterceptTouchEvent(true);
+                        vpMove = vpMove.getParent();
+                    }
+                    break;
+                case MotionEvent.ACTION_UP:
+                    KLog.d(TAG, "View with hashCode " + this.hashCode() + " progress action up");
+                    startWidgetDismissTimer();
+                    startProgressTimer();
+                    // 此时需要防止父容器拦截时间
+                    ViewParent vpUp = getParent();
+                    while (vpUp != null) {
+                        vpUp.requestDisallowInterceptTouchEvent(false);
+                        vpUp = vpUp.getParent();
+                    }
+                    mBrightnessData = -1f;
+                    break;
+            }
         }
         return false;
     }
+
+    protected void touchSurfaceDown(float x, float y) {
+        mTouchingProgressBar = true;
+        mDownX = x;
+        mDownY = y;
+        mMoveY = 0;
+        mChangeVolume = false;
+        mChangePosition = false;
+        mShowVKey = false;
+        mBrightness = false;
+        mFirstTouch = true;
+    }
+
+    protected void touchSurfaceMoveFullLogic(float absDeltaX, float absDeltaY) {
+        int curWidth = 0;
+        if (getActivityCtx(getContext()) != null) {
+            curWidth = DensityUtils.isCurrentScreenLandscape((Activity) getActivityCtx(getContext())) ? mScreenHeight : mScreenWidth;
+        }
+        if (absDeltaX > mThreshold || absDeltaY > mThreshold) {
+            cancelProgressTimer();
+            if (absDeltaX >= mThreshold) {
+                //防止全屏虚拟按键
+                int screenWidth = DensityUtils.getScreenWidth(getContext());
+                if (Math.abs(screenWidth - mDownX) > mSeekEndOffset) {
+                    mChangePosition = true;
+                    mDownPosition = getCurrentPositionWhenPlaying();
+                } else {
+                    mShowVKey = true;
+                }
+            } else {
+                int screenHeight = DensityUtils.getScreenHeight(getContext());
+                boolean noEnd = Math.abs(screenHeight - mDownY) > mSeekEndOffset;
+                if (mFirstTouch) {
+                    mBrightness = (mDownX < curWidth * 0.5f) && noEnd;
+                    mFirstTouch = false;
+                }
+                if (!mBrightness) {
+                    mChangeVolume = noEnd;
+                    mGestureDownVolume = mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
+                }
+                mShowVKey = !noEnd;
+            }
+        }
+    }
+
+    protected void touchSurfaceMove(float deltaX, float deltaY, float y) {
+        int curWidth = 0;
+        int curHeight = 0;
+        if (getActivityCtx(getContext()) != null) {
+            curWidth = DensityUtils.isCurrentScreenLandscape((Activity) getActivityCtx(getContext())) ? mScreenHeight : mScreenWidth;
+            curHeight = DensityUtils.isCurrentScreenLandscape((Activity) getActivityCtx(getContext())) ? mScreenWidth : mScreenHeight;
+        }
+        if (mChangePosition) {
+            long totalTimeDuration = getDuration();
+            mSeekTimePosition = (int) (mDownPosition + (deltaX * totalTimeDuration / curWidth) / mSeekRatio);
+            if (mSeekTimePosition > totalTimeDuration)
+                mSeekTimePosition = (int) totalTimeDuration;
+            String seekTime = DateUtils.stringForTime(mSeekTimePosition);
+            String totalTime = DateUtils.stringForTime(totalTimeDuration);
+            showProgressDialog(deltaX, seekTime, mSeekTimePosition, totalTime, totalTimeDuration);
+        } else if (mChangeVolume) {
+            deltaY = -deltaY;
+            int max = mAudioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+            int deltaV = (int) (max * deltaY * 3 / curHeight);
+            mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, mGestureDownVolume + deltaV, 0);
+            int volumePercent = (int) (mGestureDownVolume * 100 / max + deltaY * 3 * 100 / curHeight);
+
+            showVolumeDialog(-deltaY, volumePercent);
+        } else if (mBrightness) {
+            if (Math.abs(deltaY) > mThreshold) {
+                float percent = (-deltaY / curHeight);
+                onBrightnessSlide(percent);
+                mDownY = y;
+            }
+        }
+    }
+
+    /**
+     * 滑动改变亮度
+     *
+     * @param percent
+     */
+    protected void onBrightnessSlide(float percent) {
+        mBrightnessData = ((Activity) (mContext)).getWindow().getAttributes().screenBrightness;
+        if (mBrightnessData <= 0.00f) {
+            mBrightnessData = 0.50f;
+        } else if (mBrightnessData < 0.01f) {
+            mBrightnessData = 0.01f;
+        }
+        WindowManager.LayoutParams lpa = ((Activity) (mContext)).getWindow().getAttributes();
+        lpa.screenBrightness = mBrightnessData + percent;
+        if (lpa.screenBrightness > 1.0f) {
+            lpa.screenBrightness = 1.0f;
+        } else if (lpa.screenBrightness < 0.01f) {
+            lpa.screenBrightness = 0.01f;
+        }
+        showBrightnessDialog(lpa.screenBrightness);
+        ((Activity) (mContext)).getWindow().setAttributes(lpa);
+    }
+
+    protected void touchSurfaceUp() {
+
+    }
+
+    //<editor-fold>SeekBar.OnSeekBarChangeListener实现
+    @Override
+    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+
+    }
+
+    @Override
+    public void onStartTrackingTouch(SeekBar seekBar) {
+        mHadSeekTouch = true;
+    }
+
+    @Override
+    public void onStopTrackingTouch(SeekBar seekBar) {
+        if (mVideoViewCallBack != null && isCurrentPlayerListener()) {
+            if (isCurrentFullscreen()) {
+                KLog.d(TAG, "onClickSeekbarFullscreen");
+                mVideoViewCallBack.onClickSeekbarFullscreen(mOriginUrl, mTitle, this);
+            } else {
+                KLog.d(TAG, "onClickSeekbar");
+                mVideoViewCallBack.onClickSeekbar(mOriginUrl, mTitle, this);
+            }
+        }
+        if (getVideoViewMgrBridge() != null && mIsHadPlay) {
+            try {
+                int time = (int) (seekBar.getProgress() * getDuration() / 100);
+                getVideoViewMgrBridge().seekTo(time);
+            } catch (Exception e) {
+                KLog.e(TAG, e);
+            }
+        }
+        mHadSeekTouch = false;
+    }
+    //</editor-fold>
 
     /**
      * UI处理
@@ -619,7 +807,14 @@ public abstract class Layer2PlayerControlLayout extends Layer1PlayerCallbackStat
      * 循环播放的时候进度和时间的显示
      */
     protected void loopSetProgressAndTime() {
-
+        if (mProgressBar == null || mCurrentTimeView == null || mTotalTimeView == null) {
+            return;
+        }
+        mProgressBar.setProgress(0);
+        mProgressBar.setSecondaryProgress(0);
+        mCurrentTimeView.setText(DateUtils.stringForTime(0));
+        if (mBottomProgressBar != null)
+            mBottomProgressBar.setProgress(0);
     }
 
     //<editor-fold>定时任务相关
@@ -715,6 +910,21 @@ public abstract class Layer2PlayerControlLayout extends Layer1PlayerCallbackStat
      * 展示非WiFi环境播放弹出
      */
     protected abstract void showWifiDialog();
+
+    /**
+     * 显示进度弹窗
+     */
+    protected abstract void showProgressDialog(float deltaX, String seekTime, int seekPosition, String totalTime, long totalTimeDuration);
+
+    /**
+     * 显示音量弹框
+     */
+    protected abstract void showVolumeDialog(float deltaY, int percentage);
+
+    /**
+     * 显示亮度弹框
+     */
+    protected abstract void showBrightnessDialog(float brightnessPercentage);
 
     /**
      * 点击时播放界面相关控件的显示与隐藏切换

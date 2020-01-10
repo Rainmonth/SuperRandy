@@ -10,6 +10,7 @@ import android.os.Build;
 import android.telephony.TelephonyManager;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Surface;
 
 import java.lang.reflect.Method;
 
@@ -386,5 +387,17 @@ public class DensityUtils {
         styledAttributes.recycle();
 
         return toolbarHeight;
+    }
+
+    /**
+     * 当前是否横屏
+     *
+     * @param context ctx
+     * @return true if is landscape
+     */
+    public static boolean isCurrentScreenLandscape(Activity context) {
+        return context.getWindowManager().getDefaultDisplay().getRotation() == Surface.ROTATION_90 ||
+                context.getWindowManager().getDefaultDisplay().getRotation() == Surface.ROTATION_270;
+
     }
 }
