@@ -640,7 +640,45 @@ public abstract class Layer2PlayerControlLayout extends Layer1PlayerCallbackStat
     }
 
     protected void touchSurfaceUp() {
-
+        if (mChangePosition) {
+            long duration = getDuration();
+            int progress = (int) (mSeekTimePosition * 100 / (duration == 0 ? 1 : duration));
+            if (mBottomProgressBar != null) {
+                mBottomProgressBar.setProgress(progress);
+            }
+        }
+        mTouchingProgressBar = false;
+        dismissProgressDialog();
+        dismissVolumeDialog();
+        dismissBrightnessDialog();
+        if (mChangePosition && getVideoViewMgrBridge() != null && (mCurrentState == STATE_PLAYING || mCurrentState == STATE_PAUSE)) {
+            try {
+                // 移动特定位置
+                getVideoViewMgrBridge().seekTo(mSeekTimePosition);
+            } catch (Exception e) {
+                KLog.e(TAG, e);
+            }
+            // 同步进度
+            long duration = getDuration();
+            int progress = (int) (mSeekTimePosition * 100 / (duration == 0 ? 1 : duration));
+            if (mProgressBar != null) {
+                mProgressBar.setProgress(progress);
+            }
+            if (mVideoViewCallBack != null && isCurrentPlayerListener()) {
+                KLog.d(TAG, "onTouchScreenSeekPosition");
+                mVideoViewCallBack.onTouchScreenSeekPosition(mOriginUrl, mTitle, this);
+            }
+        } else if (mBrightness) {
+            if (mVideoViewCallBack != null) {
+                KLog.d(TAG, "onTouchScreenSeekLight");
+                mVideoViewCallBack.onTouchScreenSeekLight(mOriginUrl, mTitle, this);
+            }
+        } else if (mChangeVolume) {
+            if (mVideoViewCallBack != null) {
+                KLog.d(TAG, "onTouchScreenSeekVolume");
+                mVideoViewCallBack.onTouchScreenSeekVolume(mOriginUrl, mTitle, this);
+            }
+        }
     }
 
     //<editor-fold>SeekBar.OnSeekBarChangeListener实现
@@ -851,7 +889,20 @@ public abstract class Layer2PlayerControlLayout extends Layer1PlayerCallbackStat
     Runnable widgetDismissTask = new Runnable() {
         @Override
         public void run() {
-
+            if (mCurrentState != STATE_NORMAL
+                    && mCurrentState != STATE_ERROR
+                    && mCurrentState != STATE_AUTO_COMPLETE) {
+                if (getActivityCtx(getContext()) != null) {
+                    hideAllWidgets();
+                    setViewShowState(mLockScreenBtn, GONE);
+                    if (mHideKey && mIsCurrentFullscreen && mShowVKey) {
+                        SmartBarUtils.hideNavKey(mContext);
+                    }
+                }
+                if (mPostDismiss) {
+                    postDelayed(this, mDismissControlTime);
+                }
+            }
         }
     };
 
@@ -870,6 +921,15 @@ public abstract class Layer2PlayerControlLayout extends Layer1PlayerCallbackStat
     }
 
     //</editor-fold>
+
+    /**
+     * 设置View的显示状态
+     */
+    protected void setViewShowState(View view, int visibility) {
+        if (view != null) {
+            view.setVisibility(visibility);
+        }
+    }
 
     /**
      * 将非全屏状态下的封面内容加入到封面容器中
@@ -917,14 +977,29 @@ public abstract class Layer2PlayerControlLayout extends Layer1PlayerCallbackStat
     protected abstract void showProgressDialog(float deltaX, String seekTime, int seekPosition, String totalTime, long totalTimeDuration);
 
     /**
+     * 隐藏进度弹框
+     */
+    protected abstract void dismissProgressDialog();
+
+    /**
      * 显示音量弹框
      */
     protected abstract void showVolumeDialog(float deltaY, int percentage);
 
     /**
+     * 隐藏音量弹窗
+     */
+    protected abstract void dismissVolumeDialog();
+
+    /**
      * 显示亮度弹框
      */
     protected abstract void showBrightnessDialog(float brightnessPercentage);
+
+    /**
+     * 隐藏亮度弹窗
+     */
+    protected abstract void dismissBrightnessDialog();
 
     /**
      * 点击时播放界面相关控件的显示与隐藏切换
