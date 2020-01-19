@@ -10,6 +10,7 @@ import android.os.Build;
 import android.telephony.TelephonyManager;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.Surface;
 
 import java.lang.reflect.Method;
@@ -72,6 +73,10 @@ public class DensityUtils {
         return context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
     }
 
+    /**
+     * 直接获取DeviceId在Android 10上已经不允许了
+     */
+    @Deprecated
     public static String getDeviceId(Context context) {
         TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
         return telephonyManager.getDeviceId();
@@ -281,6 +286,21 @@ public class DensityUtils {
             }
         }
         return statusHeight;
+    }
+
+    /**
+     * 获取actionBar的高度
+     *
+     * @param context Activity实例
+     * @return 存在则返回ActionBar的高度，反之返回0
+     */
+    public static int getActionBarHeight(Activity context) {
+        TypedValue tv = new TypedValue();
+        if (context.getTheme().resolveAttribute(android.R.attr.actionBarSize, tv, true)) {
+            return TypedValue.complexToDimensionPixelSize(tv.data, context.getResources().getDisplayMetrics());
+        }
+
+        return 0;
     }
 
     /**

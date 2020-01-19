@@ -366,4 +366,6 @@
     <item name="player_bottom_container" type="id" />
     <!--加载视图-->
     <item name="player_loading_view" type="id" />
+    <!--小窗口关闭按钮id-->
+    <item name="player_small_close" type="id" />
 </resources>

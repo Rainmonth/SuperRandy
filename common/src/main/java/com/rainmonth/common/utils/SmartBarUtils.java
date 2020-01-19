@@ -1,5 +1,6 @@
 package com.rainmonth.common.utils;
 
+import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
@@ -8,12 +9,6 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-
-import androidx.annotation.ColorRes;
-import androidx.annotation.RequiresApi;
-import androidx.core.view.ViewCompat;
-import androidx.appcompat.widget.Toolbar;
-
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
@@ -21,6 +16,14 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
+
+import androidx.annotation.ColorRes;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.ContextThemeWrapper;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.ViewCompat;
+import androidx.fragment.app.FragmentActivity;
 
 import com.rainmonth.common.R;
 
@@ -548,5 +551,75 @@ public class SmartBarUtils {
      */
     public static void showNavKey(Context context, int systemUiVisibility) {
         ((Activity) context).getWindow().getDecorView().setSystemUiVisibility(systemUiVisibility);
+    }
+
+    @SuppressLint("RestrictedApi")
+    public static void hideSupportActionBar(Context context, boolean actionBar, boolean statusBar) {
+        if (actionBar) {
+            AppCompatActivity appCompatActivity = getAppCompActivity(context);
+            if (appCompatActivity != null) {
+                androidx.appcompat.app.ActionBar ab = appCompatActivity.getSupportActionBar();
+                if (ab != null) {
+                    ab.setShowHideAnimationEnabled(false);
+                    ab.hide();
+                }
+            }
+        }
+        if (statusBar) {
+            if (context instanceof FragmentActivity) {
+                FragmentActivity fragmentActivity = (FragmentActivity) context;
+                fragmentActivity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                        WindowManager.LayoutParams.FLAG_FULLSCREEN);
+            } else if (context instanceof Activity) {
+                Activity activity = (Activity) context;
+                activity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                        WindowManager.LayoutParams.FLAG_FULLSCREEN);
+            } else {
+                getAppCompActivity(context).getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                        WindowManager.LayoutParams.FLAG_FULLSCREEN);
+            }
+        }
+    }
+
+    @SuppressLint("RestrictedApi")
+    public static void showSupportActionBar(Context context, boolean actionBar, boolean statusBar) {
+        if (actionBar) {
+            AppCompatActivity appCompatActivity = getAppCompActivity(context);
+            if (appCompatActivity != null) {
+                androidx.appcompat.app.ActionBar ab = appCompatActivity.getSupportActionBar();
+                if (ab != null) {
+                    ab.setShowHideAnimationEnabled(false);
+                    ab.show();
+                }
+            }
+        }
+
+        if (statusBar) {
+            if (context instanceof FragmentActivity) {
+                FragmentActivity fragmentActivity = (FragmentActivity) context;
+                fragmentActivity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+            } else if (context instanceof Activity) {
+                Activity activity = (Activity) context;
+                activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+            } else {
+                getAppCompActivity(context).getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+            }
+        }
+    }
+
+    /**
+     * Get AppCompatActivity from context
+     *
+     * @param context
+     * @return AppCompatActivity if it's not null
+     */
+    public static AppCompatActivity getAppCompActivity(Context context) {
+        if (context == null) return null;
+        if (context instanceof AppCompatActivity) {
+            return (AppCompatActivity) context;
+        } else if (context instanceof ContextThemeWrapper) {
+            return getAppCompActivity(((ContextThemeWrapper) context).getBaseContext());
+        }
+        return null;
     }
 }

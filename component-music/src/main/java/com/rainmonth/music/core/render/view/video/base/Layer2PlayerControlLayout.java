@@ -29,6 +29,9 @@ import com.rainmonth.music.core.render.view.listener.LockClickListener;
 import com.rainmonth.music.core.render.view.listener.VideoProgressListener;
 import com.socks.library.KLog;
 
+import java.io.File;
+import java.util.Map;
+
 /**
  * 播放UI的显示、控制及手势处理
  *
@@ -80,9 +83,9 @@ public abstract class Layer2PlayerControlLayout extends Layer1PlayerCallbackStat
     //是否需要显示流量提示
     protected boolean mNeedShowWifiTip = true;
     //是否支持非全屏滑动触摸有效
-    protected boolean mIsTouchWiget = true;
+    protected boolean mIsTouchWidget = true;
     //是否支持全屏滑动触摸有效
-    protected boolean mIsTouchWigetFull = true;
+    protected boolean mIsTouchWidgetFull = true;
     //是否点击封面播放
     protected boolean mThumbPlay;
     //锁定屏幕点击
@@ -486,8 +489,8 @@ public abstract class Layer2PlayerControlLayout extends Layer1PlayerCallbackStat
                     float absDeltaX = Math.abs(deltaX);
                     float absDeltaY = Math.abs(deltaY);
 
-                    if ((mIsCurrentFullscreen && mIsTouchWigetFull)
-                            || (mIsTouchWiget && !mIsCurrentFullscreen)) {
+                    if ((mIsCurrentFullscreen && mIsTouchWidgetFull)
+                            || (mIsTouchWidget && !mIsCurrentFullscreen)) {
                         if (!mChangePosition && !mChangeVolume && !mBrightness) {
                             touchSurfaceMoveFullLogic(absDeltaX, absDeltaY);
                         }
@@ -1027,4 +1030,71 @@ public abstract class Layer2PlayerControlLayout extends Layer1PlayerCallbackStat
 
     //</editor-fold>
 
+    public boolean setUpLazy(String url, boolean isCachePlay, File cachePath, Map<String, String> mapHeadData, String title) {
+        mOriginUrl = url;
+        mIsCachePlay = isCachePlay;
+        mCachePath = cachePath;
+        mSetUpLazy = true;
+        mTitle = title;
+        mMapHeadData = mapHeadData;
+        if (isCurrentPlayerListener() && System.currentTimeMillis() - mSetupViewTimeMillis < SET_UP_VIEW_DELAY_TIME) {
+            return false;
+        }
+        mUrl = "waiting";
+        mCurrentState = STATE_NORMAL;
+        return true;
+    }
+
+    public void setIsTouchWidgetFull(boolean isTouchWidgetFull) {
+        this.mIsTouchWidgetFull = isTouchWidgetFull;
+    }
+
+
+    public View getStartBtn() {
+        return mStartBtn;
+    }
+
+    public ImageView getFullscreeBtn() {
+        return mFullscreenBtn;
+    }
+
+    public ImageView getBackBtn() {
+        return mBackBtn;
+    }
+
+    public ImageView getLockScreenBtn() {
+        return mLockScreenBtn;
+    }
+
+    public int getEnlargeImageRes() {
+        if (mEnlargeImageRes == -1) {
+            return R.drawable.video_enlarge;
+        }
+        return mEnlargeImageRes;
+    }
+
+    /**
+     * 设置右下角 显示切换到全屏 的按键资源
+     * 必须在setUp之前设置
+     * 不设置使用默认
+     */
+    public void setEnlargeImageRes(int mEnlargeImageRes) {
+        this.mEnlargeImageRes = mEnlargeImageRes;
+    }
+
+    public int getShrinkImageRes() {
+        if (mShrinkImageRes == -1) {
+            return R.drawable.video_shrink;
+        }
+        return mShrinkImageRes;
+    }
+
+    /**
+     * 设置右下角 显示退出全屏 的按键资源
+     * 必须在setUp之前设置
+     * 不设置使用默认
+     */
+    public void setShrinkImageRes(int mShrinkImageRes) {
+        this.mShrinkImageRes = mShrinkImageRes;
+    }
 }

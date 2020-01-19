@@ -128,8 +128,6 @@ public abstract class Layer1PlayerCallbackStateLayout extends Layer0PlayerDrawLa
 //    protected NetInfoModule mNetInfoModule;
     // 音频焦点管理
     protected AudioManager mAudioManager;
-    // Surface父容器
-    protected ViewGroup mRenderViewParent;
     //</editor-fold>
 
     public Layer1PlayerCallbackStateLayout(Context context) {
@@ -171,7 +169,7 @@ public abstract class Layer1PlayerCallbackStateLayout extends Layer0PlayerDrawLa
         mAudioManager = (AudioManager) mContext.getApplicationContext().getSystemService(Context.AUDIO_SERVICE);
     }
 
-    protected Context getActivityCtx(Context context) {
+    protected Activity getActivityCtx(Context context) {
         if (context == null) {
             return null;
         } else if (context instanceof Activity) {
