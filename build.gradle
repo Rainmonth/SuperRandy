@@ -19,7 +19,7 @@ buildscript {
         //butterknife，apply plugin: 'com.jakewharton.butterknife'，必须添加
         classpath 'com.jakewharton:butterknife-gradle-plugin:9.0.0-rc2'
         //kotlin
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+//        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         //arouter，要应用apply plugin: 'com.alibaba.arouter'，必须添加
         classpath "com.alibaba:arouter-register:1.0.2"
     }
