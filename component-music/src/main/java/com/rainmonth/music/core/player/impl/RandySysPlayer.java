@@ -16,6 +16,7 @@ import java.lang.ref.WeakReference;
 import java.util.Map;
 
 /**
+ * BasePlayer的系统自带播放器实现
  * 系统播放器的特点：
  * - 差异性明显，这个从不同版本MediaPlayer的源代码就可以看出
  * - 基于状态管理的，一旦状态没处理好就会发生{@link IllegalStateException}

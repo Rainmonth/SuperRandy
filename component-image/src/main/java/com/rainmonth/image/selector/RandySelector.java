@@ -66,9 +66,23 @@ public class RandySelector {
     }
 
     /**
+     * 选择照片
+     */
+    public void selectPhotos() {
+
+    }
+
+    /**
      * 开始录制
      */
     public void startRecordVideo() {
+
+    }
+
+    /**
+     * 选择视频
+     */
+    public void selectVideos() {
 
     }
 }

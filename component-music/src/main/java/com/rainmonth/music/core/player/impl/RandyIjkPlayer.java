@@ -10,6 +10,7 @@ import com.rainmonth.music.core.player.BasePlayer;
 import java.util.Map;
 
 /**
+ * BasePlayer的IjkPlayer实现
  *
  * @author 张豪成
  * @date 2019-12-05 20:44

@@ -91,7 +91,62 @@ public class StandardPlayer extends Layer4ViewMgrInteractLayout {
     }
 
     @Override
+    protected void showWifiDialog() {
+
+    }
+
+    @Override
+    protected void showProgressDialog(float deltaX, String seekTime, int seekPosition, String totalTime, long totalTimeDuration) {
+
+    }
+
+    @Override
+    protected void dismissProgressDialog() {
+
+    }
+
+    @Override
+    protected void showVolumeDialog(float deltaY, int percentage) {
+
+    }
+
+    @Override
+    protected void dismissVolumeDialog() {
+
+    }
+
+    @Override
+    protected void showBrightnessDialog(float brightnessPercentage) {
+
+    }
+
+    @Override
+    protected void dismissBrightnessDialog() {
+
+    }
+
+    @Override
+    protected void onClickUiToggle() {
+
+    }
+
+    @Override
     public void onBackFullscreen() {
 
+    }
+
+    @Override
+    protected void releaseVideos() {
+
+    }
+
+    @Override
+    protected int getSmallId() {
+        return 0;
+    }
+
+    @Override
+    protected int getFullId() {
+        return 0;
     }
 }
