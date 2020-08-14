@@ -7,4 +7,35 @@ package com.rainmonth.image.selector.bean;
  * @date 2019-05-30 10:00
  */
 public class MediaFileBean {
+
+    /**
+     * 文件id
+     */
+    public long id;
+    /**
+     * 文件路径
+     */
+    public String path;
+    /**
+     * 真实路径，AndroidQ上无法获取
+     */
+    public String realPath;
+    /**
+     *
+     */
+    public String originalPath;
+    /**
+     * 压缩后的文件保存路径
+     */
+    public String compressedPath;
+    /**
+     * 裁剪保存的路径
+     */
+    public String cutPath;
+    public String androidQPath;
+    /**
+     * 音视频的长度
+     */
+    public long duration;
+
 }

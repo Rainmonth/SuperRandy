@@ -32,7 +32,7 @@ public class ThreadHelper {
     /**
      * 打印当前线程的信息
      */
-    public static void pringCurrentThreadInfo() {
+    public static void printCurrentThreadInfo() {
         Log.d(TAG, Thread.currentThread().toString());
     }
 }
