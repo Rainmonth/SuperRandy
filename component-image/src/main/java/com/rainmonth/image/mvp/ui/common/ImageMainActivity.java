@@ -14,6 +14,7 @@ import com.rainmonth.image.mvp.ui.collection.CollectionHomeActivity;
 import com.rainmonth.image.mvp.ui.photo.PhotoHomeActivity;
 import com.rainmonth.image.mvp.ui.search.SearchActivity;
 import com.rainmonth.image.mvp.ui.usercenter.UserCenterActivity;
+import com.rainmonth.image.selector.FileSelectActivity;
 import com.rainmonth.router.RouterConstant;
 
 /**
@@ -31,6 +32,7 @@ public class ImageMainActivity extends BaseActivity {
     Button imageBtnAscii;
     Button imageBtnDraw;
     Button btnAuth;
+    Button btnLoadMedia;
     @Override
     protected void setupActivityComponent(AppComponent appComponent) {
 
@@ -50,6 +52,7 @@ public class ImageMainActivity extends BaseActivity {
         imageBtnAscii = findViewById(R.id.image_btn_ascii);
         imageBtnDraw = findViewById(R.id.image_btn_draw);
         btnAuth = findViewById(R.id.btn_auth);
+        btnLoadMedia = findViewById(R.id.btn_load_media);
         imageBtnPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,6 +101,12 @@ public class ImageMainActivity extends BaseActivity {
             }
         });
 
+        btnLoadMedia.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                readyGo(FileSelectActivity.class);
+            }
+        });
     }
 
     @Override

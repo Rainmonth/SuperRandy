@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.rainmonth.image">
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application>
         <meta-data
             android:name="com.rainmonth.image.config.ImageAppConfig"
@@ -29,6 +31,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".mvp.ui.common.RoundRectsActivity" />
         <activity android:name=".mvp.ui.common.ComponentTestActivity" />
+        <activity android:name=".selector.FileSelectActivity" />
     </application>
 
 </manifest>

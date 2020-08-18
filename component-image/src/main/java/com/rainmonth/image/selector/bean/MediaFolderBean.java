@@ -122,6 +122,9 @@ public class MediaFolderBean implements Parcelable {
         isHasMore = hasMore;
     }
 
+    public MediaFolderBean() {
+    }
+
     protected MediaFolderBean(Parcel in) {
         bucketId = in.readLong();
         name = in.readString();

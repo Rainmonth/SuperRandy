@@ -1,8 +1,13 @@
 package com.rainmonth.image.selector;
 
+import android.view.View;
+import android.widget.TextView;
+
 import com.rainmonth.common.base.BaseActivity;
 import com.rainmonth.common.di.component.AppComponent;
+import com.rainmonth.common.utils.PermissionUtils;
 import com.rainmonth.image.R;
+import com.rainmonth.image.selector.task.impl.MediaLoader;
 
 /**
  * 文件选择页面
@@ -31,7 +36,14 @@ public class FileSelectActivity extends BaseActivity {
 
     @Override
     protected void initViewsAndEvents() {
-
+        TextView tvLoadMedia = findViewById(R.id.tv_load_media);
+        tvLoadMedia.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MediaLoader mediaLoader = new MediaLoader();
+                mediaLoader.load(mContext, null);
+            }
+        });
     }
 
 }

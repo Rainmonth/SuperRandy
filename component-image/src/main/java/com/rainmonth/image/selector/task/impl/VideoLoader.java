@@ -4,6 +4,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 
 import com.rainmonth.image.selector.task.IMediaLoader;
+import com.rainmonth.image.selector.task.callback.IMediaTaskCallback;
 
 /**
  * @author RandyZhang
@@ -11,12 +12,12 @@ import com.rainmonth.image.selector.task.IMediaLoader;
  */
 public class VideoLoader implements IMediaLoader {
     @Override
-    public void load(ContentResolver cr) {
+    public void load(ContentResolver cr, IMediaTaskCallback callback) {
 
     }
 
     @Override
-    public void load(Context context) {
+    public void load(Context context, IMediaTaskCallback callback) {
 
     }
 
