@@ -1,5 +1,7 @@
 package com.rainmonth.mvp.model.bean;
 
+import android.text.TextUtils;
+
 import java.io.Serializable;
 
 /**
@@ -48,6 +50,9 @@ public class BannerBean implements Serializable {
     }
 
     public String getThumb() {
+        if (!TextUtils.isEmpty(thumb)) {
+            return thumb.replace("rainmonth.cn", "47.98.215.111");
+        }
         return thumb;
     }
 
