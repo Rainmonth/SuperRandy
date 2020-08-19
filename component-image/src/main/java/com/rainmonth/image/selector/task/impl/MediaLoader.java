@@ -7,7 +7,7 @@ import android.net.Uri;
 import android.provider.MediaStore;
 import android.util.Log;
 
-import com.rainmonth.image.selector.bean.MediaFolderBean;
+import com.rainmonth.image.selector.bean.MediaFileBean;
 import com.rainmonth.image.selector.task.IMediaLoader;
 import com.rainmonth.image.selector.task.callback.IMediaTaskCallback;
 
@@ -33,11 +33,30 @@ public class MediaLoader implements IMediaLoader {
     private Uri fileUri = MediaStore.Files.getContentUri("external");
 
     /**
+     * 图片文件要获取的属性
+     */
+    private String[] IMAGE_PROJECTION = {
+            MediaStore.MediaColumns._ID,
+//            MediaStore.MediaColumns._COUNT,
+            MediaStore.Images.ImageColumns.BUCKET_ID,
+            MediaStore.Images.ImageColumns.BUCKET_DISPLAY_NAME,
+            MediaStore.MediaColumns.DISPLAY_NAME,
+            MediaStore.MediaColumns.SIZE,
+            MediaStore.MediaColumns.DATA,
+            MediaStore.MediaColumns.DATE_ADDED,
+            MediaStore.MediaColumns.DATE_MODIFIED,
+            MediaStore.MediaColumns.MIME_TYPE,
+//            "COUNT(*) AS " + COLUMN_COUNT
+    };
+
+    /**
      * 视频文件要获取的属性
      */
     private String[] VIDEO_PROJECTION = {
             MediaStore.MediaColumns._ID,
-            MediaStore.MediaColumns._COUNT,
+//            MediaStore.MediaColumns._COUNT,
+            MediaStore.Video.VideoColumns.BUCKET_ID,
+            MediaStore.Video.VideoColumns.BUCKET_DISPLAY_NAME,
             MediaStore.MediaColumns.DISPLAY_NAME,
             MediaStore.MediaColumns.SIZE,
             MediaStore.MediaColumns.DATA,
@@ -47,27 +66,14 @@ public class MediaLoader implements IMediaLoader {
     };
 
     /**
-     * 图片文件要获取的属性
-     */
-    private String[] IMAGE_PROJECTION = {
-            MediaStore.MediaColumns._ID,
-//            MediaStore.MediaColumns._COUNT,
-            MediaStore.Images.ImageColumns.BUCKET_ID,
-            MediaStore.MediaColumns.DISPLAY_NAME,
-            MediaStore.MediaColumns.SIZE,
-            MediaStore.MediaColumns.DATA,
-            MediaStore.MediaColumns.DATE_ADDED,
-            MediaStore.MediaColumns.DATE_MODIFIED,
-            MediaStore.MediaColumns.MIME_TYPE,
-            "COUNT(*) AS " + COLUMN_COUNT
-    };
-
-    /**
      * 音频文件要获取的属性
      */
     private String[] AUDIO_PROJECTION = {
             MediaStore.MediaColumns._ID,
-            MediaStore.MediaColumns._COUNT,
+//            MediaStore.MediaColumns._COUNT,
+            MediaStore.Audio.Media.ALBUM,
+            MediaStore.Audio.Media.ALBUM_ID,
+            MediaStore.Audio.Media.DURATION,
             MediaStore.MediaColumns.DISPLAY_NAME,
             MediaStore.MediaColumns.SIZE,
             MediaStore.MediaColumns.DATA,
@@ -158,64 +164,32 @@ public class MediaLoader implements IMediaLoader {
             Log.d(TAG, "#load, selection:" + selection);
             cursor = cr.query(imageUri, IMAGE_PROJECTION, null, null, null);
 
-            // todo 处理数据，先拿到文件夹，在拿文件
+            // todo 处理数据，先拿到文件夹，再拿文件
             if (cursor != null) {
                 int count = cursor.getCount();
-                int totalCount = 0;
-                List<MediaFolderBean> mediaFolders = new ArrayList<>();
+                List<MediaFileBean> mediaFileBeans = new ArrayList<>();
                 if (count > 0) {
                     cursor.moveToFirst();
                     do {
-                        MediaFolderBean mediaFolder = new MediaFolderBean();
-//                        private String[] IMAGE_PROJECTION = {
-//                                MediaStore.MediaColumns._ID,
-////            MediaStore.MediaColumns._COUNT,
-//                                MediaStore.Images.ImageColumns.BUCKET_ID,
-//                                MediaStore.MediaColumns.DISPLAY_NAME,
-//                                MediaStore.MediaColumns.SIZE,
-//                                MediaStore.MediaColumns.DATA,
-//                                MediaStore.MediaColumns.DATE_ADDED,
-//                                MediaStore.MediaColumns.DATE_MODIFIED,
-//                                MediaStore.MediaColumns.MIME_TYPE,
-//                                "COUNT(*) AS " + COLUMN_COUNT
-//                        };
+                        MediaFileBean mediaFileBean = new MediaFileBean();
                         long id = cursor.getLong(cursor.getColumnIndex(IMAGE_PROJECTION[0]));
                         long bucketId = cursor.getLong(cursor.getColumnIndex(IMAGE_PROJECTION[1]));
                         String bucketDisplayName = cursor.getString(cursor.getColumnIndex(IMAGE_PROJECTION[2]));
-                        long size = cursor.getLong(cursor.getColumnIndex(IMAGE_PROJECTION[3]));
-                        String url = cursor.getString(cursor.getColumnIndex(IMAGE_PROJECTION[4]));
-                        mediaFolder.setFirstImagePath(url);
-                        int columnCount = cursor.getInt(cursor.getColumnIndex(COLUMN_COUNT));
-                        mediaFolder.setBucketId(bucketId);
+                        String displayName = cursor.getString(cursor.getColumnIndex(IMAGE_PROJECTION[3]));
+                        long size = cursor.getLong(cursor.getColumnIndex(IMAGE_PROJECTION[4]));
+                        String url = cursor.getString(cursor.getColumnIndex(IMAGE_PROJECTION[5]));
 
-                        mediaFolder.setName(bucketDisplayName);
-                        mediaFolder.setFolderMediaNum(columnCount);
-                        mediaFolders.add(mediaFolder);
-                        totalCount += columnCount;
+                        mediaFileBean.id = id;
+                        mediaFileBean.bucketId = bucketId;
+                        mediaFileBean.bucketDisplayName = bucketDisplayName;
+                        mediaFileBean.fileName = displayName;
+                        mediaFileBean.size = size;
+                        mediaFileBean.path = url;
+                        mediaFileBeans.add(mediaFileBean);
+
+                        Log.d(TAG, mediaFileBean.toString());
                     } while (cursor.moveToNext());
                 }
-
-//                sortFolder(mediaFolders);
-
-                // 相机胶卷
-                MediaFolderBean allMediaFolder = new MediaFolderBean();
-                allMediaFolder.setFolderMediaNum(totalCount);
-                allMediaFolder.setSelected(true);
-                allMediaFolder.setBucketId(-1);
-                if (cursor.moveToFirst()) {
-//                    String firstUrl = SdkVersionUtils.checkedAndroid_Q() ? getFirstUri(data) : getFirstUrl(data);
-                    String firstUrl = getFirstUrl(cursor);
-                    allMediaFolder.setFirstImagePath(firstUrl);
-                }
-//                String bucketDisplayName = config.chooseMode == PictureMimeType.ofAudio() ?
-//                        mContext.getString(R.string.picture_all_audio)
-//                        : mContext.getString(R.string.picture_camera_roll);
-//                allMediaFolder.setName(bucketDisplayName);
-//                allMediaFolder.setOfAllType(config.chooseMode);
-                allMediaFolder.setCameraFolder(true);
-                mediaFolders.add(0, allMediaFolder);
-
-//                return mediaFolders;
             }
 
         } catch (Exception e) {
@@ -226,6 +200,107 @@ public class MediaLoader implements IMediaLoader {
             }
         }
     }
+
+    public void loadVideos(ContentResolver cr, IMediaTaskCallback callback) {
+        if (cr == null) {
+            return;
+        }
+
+        Cursor cursor = null;
+        try {
+            cursor = cr.query(videoUri, VIDEO_PROJECTION, null, null, null);
+            if (cursor != null) {
+                int count = cursor.getCount();
+                List<MediaFileBean> mediaFileBeans = new ArrayList<>();
+                if (count > 0) {
+                    cursor.moveToFirst();
+                    do {
+                        MediaFileBean mediaFileBean = new MediaFileBean();
+                        long id = cursor.getLong(cursor.getColumnIndex(VIDEO_PROJECTION[0]));
+                        long bucketId = cursor.getLong(cursor.getColumnIndex(VIDEO_PROJECTION[1]));
+                        String bucketDisplayName = cursor.getString(cursor.getColumnIndex(VIDEO_PROJECTION[2]));
+                        String displayName = cursor.getString(cursor.getColumnIndex(VIDEO_PROJECTION[3]));
+                        long size = cursor.getLong(cursor.getColumnIndex(VIDEO_PROJECTION[4]));
+                        String url = cursor.getString(cursor.getColumnIndex(VIDEO_PROJECTION[5]));
+
+                        mediaFileBean.id = id;
+                        mediaFileBean.bucketId = bucketId;
+                        mediaFileBean.bucketDisplayName = bucketDisplayName;
+                        mediaFileBean.fileName = displayName;
+                        mediaFileBean.size = size;
+                        mediaFileBean.path = url;
+                        mediaFileBeans.add(mediaFileBean);
+
+                        Log.d(TAG, mediaFileBean.toString());
+                    } while (cursor.moveToNext());
+                }
+            }
+        } catch (Exception e) {
+            Log.d(TAG, e.getMessage());
+        } finally {
+            if (cursor != null && !cursor.isClosed()) {
+                cursor.close();
+            }
+        }
+    }
+
+
+    public void loadAudios(ContentResolver cr, IMediaTaskCallback callback) {
+        if (cr == null) {
+            return;
+        }
+
+        Cursor cursor = null;
+        try {
+            cursor = cr.query(audioUri, AUDIO_PROJECTION, null, null, null);
+            if (cursor != null) {
+                int count = cursor.getCount();
+                List<MediaFileBean> mediaFileBeans = new ArrayList<>();
+                if (count > 0) {
+                    cursor.moveToFirst();
+                    do {
+                        MediaFileBean mediaFileBean = new MediaFileBean();
+//                        MediaStore.MediaColumns._ID,
+////            MediaStore.MediaColumns._COUNT,
+//                                MediaStore.Audio.Media.ALBUM,
+//                                MediaStore.Audio.Media.ALBUM_ID,
+//                                MediaStore.Audio.Media.DURATION,
+//                                MediaStore.MediaColumns.DISPLAY_NAME,
+//                                MediaStore.MediaColumns.SIZE,
+//                                MediaStore.MediaColumns.DATA,
+//                                MediaStore.MediaColumns.DATE_ADDED,
+//                                MediaStore.MediaColumns.DATE_MODIFIED,
+//                                MediaStore.MediaColumns.MIME_TYPE
+                        long id = cursor.getLong(cursor.getColumnIndex(AUDIO_PROJECTION[0]));
+                        String album = cursor.getString(cursor.getColumnIndex(AUDIO_PROJECTION[1]));
+                        long albumId = cursor.getLong(cursor.getColumnIndex(AUDIO_PROJECTION[2]));
+                        long duration = cursor.getLong(cursor.getColumnIndex(AUDIO_PROJECTION[3]));
+                        String displayName = cursor.getString(cursor.getColumnIndex(AUDIO_PROJECTION[4]));
+                        long size = cursor.getLong(cursor.getColumnIndex(AUDIO_PROJECTION[5]));
+                        String url = cursor.getString(cursor.getColumnIndex(AUDIO_PROJECTION[6]));
+
+                        mediaFileBean.id = id;
+                        mediaFileBean.album = album;
+                        mediaFileBean.albumId = albumId;
+                        mediaFileBean.duration = duration;
+                        mediaFileBean.fileName = displayName;
+                        mediaFileBean.size = size;
+                        mediaFileBean.path = url;
+                        mediaFileBeans.add(mediaFileBean);
+
+                        Log.d(TAG, mediaFileBean.toString());
+                    } while (cursor.moveToNext());
+                }
+            }
+        } catch (Exception e) {
+            Log.d(TAG, e.getMessage());
+        } finally {
+            if (cursor != null && !cursor.isClosed()) {
+                cursor.close();
+            }
+        }
+    }
+
 
     private String getFirstUrl(Cursor cursor) {
         return cursor.getString(cursor.getColumnIndex(MediaStore.Files.FileColumns.DATA));
@@ -276,5 +351,65 @@ public class MediaLoader implements IMediaLoader {
                 String.valueOf(MediaStore.Files.FileColumns.MEDIA_TYPE_AUDIO),
                 String.valueOf(MediaStore.Files.FileColumns.MEDIA_TYPE_VIDEO),
         };
+    }
+
+    public static final int TABLE_FILE = 0;
+    public static final int TABLE_IMAGE = 1;
+    public static final int TABLE_ALBUMS = 2;
+    public static final int TABLE_ARTIST = 3;
+    public static final int TABLE_AUDIO = 4;
+    public static final int TABLE_VIDEO = 5;
+
+    public void printTableInfo(Context context, int tableType) {
+        printTableInfo(context.getContentResolver(), tableType);
+    }
+
+    public void printTableInfo(ContentResolver cr, int tableType) {
+        Uri uri;
+        switch (tableType) {
+            case TABLE_IMAGE:
+            case TABLE_ALBUMS:
+            case TABLE_ARTIST:
+                // uri = MediaStore.Images.Media.getContentUri()
+                uri = imageUri;
+                break;
+            case TABLE_AUDIO:
+                uri = audioUri;
+                break;
+            case TABLE_VIDEO:
+                uri = videoUri;
+                break;
+            case TABLE_FILE:
+            default:
+                uri = fileUri;
+                break;
+        }
+        printTableInfo(cr, uri);
+    }
+
+    /**
+     * 打印MediaStore表信息的方法
+     *
+     * @param cr  ContentResolver obj
+     * @param uri 表对应的uri
+     */
+    private void printTableInfo(ContentResolver cr, Uri uri) {
+        Cursor cursor = null;
+        try {
+            cursor = cr.query(uri, null, null, null, null);
+            if (cursor != null) {
+                cursor.moveToFirst();
+                String[] columns = cursor.getColumnNames();
+                for (String string : columns) {
+                    Log.d(TAG, cursor.getColumnIndex(string) + " = " + string);
+                }
+            }
+        } catch (Exception e) {
+            Log.d(TAG, e.getMessage());
+        } finally {
+            if (cursor != null && !cursor.isClosed()) {
+                cursor.close();
+            }
+        }
     }
 }

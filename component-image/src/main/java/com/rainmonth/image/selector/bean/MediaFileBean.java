@@ -40,6 +40,8 @@ public class MediaFileBean implements Parcelable {
      * 音视频的长度
      */
     public long duration;
+    public String album;
+    public long albumId;
 
     //<editor-fold>
     public boolean isChecked;
@@ -64,7 +66,8 @@ public class MediaFileBean implements Parcelable {
     public int loadLongImageStatus;
     public boolean isLongImage;
 
-    private long bucketId = -1;
+    public long bucketId = -1;
+    public String bucketDisplayName;
 
     private boolean isMaxSelectedEnabledMask;
 
@@ -78,8 +81,19 @@ public class MediaFileBean implements Parcelable {
         this.chooseModel = chooseModel;
     }
 
+    @Override
+    public String toString() {
+        return "MediaFileBean{" +
+                "id=" + id +
+                ", path='" + path + '\'' +
+                ", fileName='" + fileName + '\'' +
+                ", bucketId=" + bucketId +
+                ", bucketDisplayName='" + bucketDisplayName + '\'' +
+                '}';
+    }
+
     public MediaFileBean(long id, String path, String fileName, String parentFolderName, long duration, int chooseModel,
-                      String mimeType, int width, int height, long size) {
+                         String mimeType, int width, int height, long size) {
         this.id = id;
         this.path = path;
         this.fileName = fileName;
@@ -93,7 +107,7 @@ public class MediaFileBean implements Parcelable {
     }
 
     public MediaFileBean(long id, String path, String absolutePath, String fileName, String parentFolderName, long duration, int chooseModel,
-                      String mimeType, int width, int height, long size, long bucketId) {
+                         String mimeType, int width, int height, long size, long bucketId) {
         this.id = id;
         this.path = path;
         this.realPath = absolutePath;
@@ -109,7 +123,7 @@ public class MediaFileBean implements Parcelable {
     }
 
     public MediaFileBean(String path, long duration,
-                      boolean isChecked, int position, int num, int chooseModel) {
+                         boolean isChecked, int position, int num, int chooseModel) {
         this.path = path;
         this.duration = duration;
         this.isChecked = isChecked;

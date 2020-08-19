@@ -41,7 +41,11 @@ public class FileSelectActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 MediaLoader mediaLoader = new MediaLoader();
-                mediaLoader.load(mContext, null);
+//                mediaLoader.load(mContext, null);
+//                mediaLoader.loadVideos(mContext.getContentResolver(), null);
+                mediaLoader.loadAudios(mContext.getContentResolver(), null);
+
+                mediaLoader.printTableInfo(mContext, MediaLoader.TABLE_VIDEO);
             }
         });
     }
