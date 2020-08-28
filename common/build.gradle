@@ -105,4 +105,5 @@ dependencies {
     releaseApi rootProject.ext.dependencies['blockcanary-no-op']
     debugApi rootProject.ext.dependencies['leakcanary-android']
     releaseApi rootProject.ext.dependencies['leakcanary-no-op']
+    testImplementation 'junit:junit:4.12'
 }

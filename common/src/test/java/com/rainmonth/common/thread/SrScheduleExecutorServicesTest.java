@@ -1,10 +1,6 @@
-package com.rainmonth;
+package com.rainmonth.common.thread;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -17,20 +13,7 @@ import java.util.concurrent.TimeUnit;
 
 import static java.lang.System.currentTimeMillis;
 
-/**
- * Example local unit test, which will execute on the development machine (host).
- *
- * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
- */
-@RunWith(JUnit4.class)
-public class ScheduleExecutorServiceTest {
-
-//    @Before
-//    public void beginTest() {
-//        System.out.println("------begin test------");
-//        System.out.println("...");
-//    }
-
+public class SrScheduleExecutorServicesTest {
     @Test
     public void scheduleExecutorServiceFixedRateTest() {
         Executors.newScheduledThreadPool(1).scheduleAtFixedRate(new Runnable() {
@@ -112,10 +95,4 @@ public class ScheduleExecutorServiceTest {
         }
     }
 
-
-//    @After
-//    public void endTest() {
-//        System.out.println("...");
-//        System.out.println("------end test------");
-//    }
 }

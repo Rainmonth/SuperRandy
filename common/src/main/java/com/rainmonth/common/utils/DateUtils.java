@@ -20,29 +20,27 @@ public class DateUtils {
     /**
      * 获取现在时间
      *
-     * @return 返回时间类型 yyyy-MM-dd HH:mm:ss
+     * @return 返回时间类型 EEE MMM dd HH:mm:ss z yyyy
      */
     public static Date getNowDate() {
         Date currentTime = new Date();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String dateString = formatter.format(currentTime);
-        ParsePosition pos = new ParsePosition(8);
-        Date currentTime_2 = formatter.parse(dateString, pos);
-        return currentTime_2;
+        ParsePosition pos = new ParsePosition(0);
+        return formatter.parse(dateString, pos);
     }
 
     /**
      * 获取现在时间
      *
-     * @return 返回短时间格式 yyyy-MM-dd
+     * @return object of Date EEE MMM dd 00:00:00 z yyyy
      */
     public static Date getNowDateShort() {
         Date currentTime = new Date();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         String dateString = formatter.format(currentTime);
-        ParsePosition pos = new ParsePosition(8);
-        Date currentTime_2 = formatter.parse(dateString, pos);
-        return currentTime_2;
+        ParsePosition pos = new ParsePosition(0);
+        return formatter.parse(dateString, pos);
     }
 
     /**
@@ -53,8 +51,7 @@ public class DateUtils {
     public static String getStringDate() {
         Date currentTime = new Date();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String dateString = formatter.format(currentTime);
-        return dateString;
+        return formatter.format(currentTime);
     }
 
     /**
@@ -231,9 +228,10 @@ public class DateUtils {
     }
 
     /**
+     * todo 检查方法
      * 二个小时时间间的差值,必须保证二个时间都是"HH:MM"的格式，返回字符型的分钟
      */
-    public static String getTwoHour(String st1, String st2) {
+    public static String getDiffOfTwoHour(String st1, String st2) {
         String[] kk = null;
         String[] jj = null;
         kk = st1.split(":");
