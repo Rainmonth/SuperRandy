@@ -23,7 +23,10 @@ public class SrThread extends Thread {
     @Override
     public void run() {
         try {
+            long start = System.currentTimeMillis();
             super.run();
+            long end = System.currentTimeMillis();
+            Log.v(TAG, "SrThread: " + getName() + " executed " + (end - start) + "ms");
         } catch (Exception e) {
             Log.e(TAG, "error happened, error thread is " + getName());
         }
