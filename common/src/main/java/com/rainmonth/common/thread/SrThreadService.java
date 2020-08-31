@@ -18,7 +18,7 @@ public class SrThreadService implements IThread {
     private int mCpuNumbers = ThreadHelper.getCpuNumbers();
     private SrThreadPoolExecutor mNetworkPool = new SrThreadPoolExecutor(Math.max(mCpuNumbers, 2) / 2, Math.max(mCpuNumbers, 10), "SrNetwork");
     private SrThreadPoolExecutor mDaemonPool = new SrThreadPoolExecutor(Math.max(mCpuNumbers, 2) / 2, Math.max(mCpuNumbers, 10), "SrDaemon");
-
+    private SrScheduleThreadPoolExecutor mSchedulePool = new SrScheduleThreadPoolExecutor("SrSchedule");
 
     @Override
     public void executeNetTask(Runnable task, String name) {
