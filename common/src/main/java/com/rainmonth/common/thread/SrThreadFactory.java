@@ -24,7 +24,7 @@ public class SrThreadFactory implements ThreadFactory {
     public Thread newThread(Runnable r) {
         int count = threadNum.getAndIncrement();
         String threadName = mThreadFactoryName + "-" + count;
-        Log.v(TAG, "newThread: " + threadName);
+        Log.v(IThread.TAG, "SrThreadFactory: newThread: " + threadName);
         SrThread srThread = new SrThread(r, threadName);
 
         if (srThread.isDaemon()) {

@@ -9,6 +9,7 @@ import java.util.concurrent.Future;
  * @description: TreadService对外暴露的接口
  */
 public interface IThread {
+    String TAG = "IThread";
 
     /**
      * 执行网络任务

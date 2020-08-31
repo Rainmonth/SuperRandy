@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
 
 import static java.lang.System.currentTimeMillis;
 
-public class SrScheduleExecutorServicesTest {
+public class SrScheduleThreadPoolExecutorTest {
     @Test
     public void scheduleExecutorServiceFixedRateTest() {
         Executors.newScheduledThreadPool(1).scheduleAtFixedRate(new Runnable() {

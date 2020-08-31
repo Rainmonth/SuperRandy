@@ -26,9 +26,9 @@ public class SrThread extends Thread {
             long start = System.currentTimeMillis();
             super.run();
             long end = System.currentTimeMillis();
-            Log.v(TAG, "SrThread: " + getName() + " executed " + (end - start) + "ms");
+            Log.v(IThread.TAG, "SrThread: " + getName() + " executed " + (end - start) + "ms");
         } catch (Exception e) {
-            Log.e(TAG, "error happened, error thread is " + getName());
+            Log.e(IThread.TAG, "SrThread: error happened, error thread is " + getName());
         }
     }
 }

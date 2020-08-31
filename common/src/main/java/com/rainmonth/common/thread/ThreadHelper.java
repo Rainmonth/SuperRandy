@@ -35,4 +35,20 @@ public class ThreadHelper {
     public static void printCurrentThreadInfo() {
         Log.d(TAG, Thread.currentThread().toString());
     }
+
+
+    private static boolean isGetCpuNumbers;
+    private static int cpuNumbers;
+
+    public static int getCpuNumbers() {
+        if (isGetCpuNumbers) {
+            return cpuNumbers;
+        }
+        try {
+            cpuNumbers = Runtime.getRuntime().availableProcessors();
+        } catch (Throwable ignore) {
+            cpuNumbers = 1;
+        }
+        return cpuNumbers;
+    }
 }
