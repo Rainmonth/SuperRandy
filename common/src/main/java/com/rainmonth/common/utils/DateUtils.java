@@ -374,6 +374,17 @@ public class DateUtils {
     /**
      * 判断二个时间是否在同一个周
      *
+     * @param dStr1 日期字符串
+     * @param dStr2 日期字符串
+     * @return true if is same week
+     */
+    public static boolean isSameWeekDates(String dStr1, String dStr2) {
+        return isSameWeekDates(strToDate(dStr1), strToDate(dStr2));
+    }
+
+    /**
+     * 判断二个时间是否在同一个周
+     *
      * @param date1
      * @param date2
      * @return

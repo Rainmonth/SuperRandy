@@ -107,10 +107,12 @@ public class DateUtilsTest {
 
     @Test
     public void getNextDay() {
+        System.out.println(DateUtils.getNextDay("2020-09-11", "2"));
     }
 
     @Test
     public void isLeapYear() {
+        System.out.println(DateUtils.isLeapYear("2096-11-1"));
     }
 
     @Test
@@ -123,6 +125,7 @@ public class DateUtilsTest {
 
     @Test
     public void isSameWeekDates() {
+        System.out.println(DateUtils.isSameWeekDates("2020-08-31", "2019-08-31"));
     }
 
     @Test
@@ -131,6 +134,7 @@ public class DateUtilsTest {
 
     @Test
     public void getWeek() {
+        System.out.println(DateUtils.getWeek("2020-08-31"));
     }
 
     @Test
@@ -139,10 +143,12 @@ public class DateUtilsTest {
 
     @Test
     public void getWeekStr() {
+        System.out.println(DateUtils.getWeekStr("2020-08-31"));
     }
 
     @Test
     public void getDays() {
+        System.out.println(DateUtils.getDays("2020-09-1", "2020-1-1"));
     }
 
     @Test
