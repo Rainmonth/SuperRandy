@@ -35,7 +35,6 @@ public class SrThreadPoolExecutor {
     private Handler.Callback mCallback = new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
-            // todo
             switch (msg.what) {
                 case MSG_EXECUTE_TASK:
                     int count = mMaxSize - mThreadPool.getActiveCount();

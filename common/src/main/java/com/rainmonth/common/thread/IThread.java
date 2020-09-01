@@ -2,6 +2,7 @@ package com.rainmonth.common.thread;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @date: 2018-12-21
@@ -13,6 +14,7 @@ public interface IThread {
 
     /**
      * 执行网络任务
+     *
      * @param task 具体任务
      * @param name 任务名
      */
@@ -20,6 +22,7 @@ public interface IThread {
 
     /**
      * 执行网络任务
+     *
      * @param task
      * @param name
      * @param <T>
@@ -31,4 +34,11 @@ public interface IThread {
 
     <T> Future<T> executeDaemonTask(Callable<T> task, String name);
 
+    void executeScheduleTask(Runnable task, String name);
+
+    void executeScheduleTask(Runnable task, String name, long delay, TimeUnit timeUnit);
+
+    <T> Future<T> executeScheduleTask(Callable<T> task, String name);
+
+    <T> Future<T> executeScheduleTask(Callable<T> task, String name, long delay, TimeUnit timeUnit);
 }
