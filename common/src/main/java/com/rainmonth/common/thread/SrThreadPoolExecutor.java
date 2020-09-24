@@ -102,6 +102,7 @@ public class SrThreadPoolExecutor {
         mBufferQueue = getBufferQueue();
 
         mHandlerThread = new HandlerThread(name + "_HandlerThread");
+        mHandlerThread.start();
         mHandler = new Handler(mHandlerThread.getLooper(), mCallback);
     }
 
