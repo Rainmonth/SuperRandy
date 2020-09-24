@@ -25,7 +25,7 @@ public class GlideImageConfig extends ImageConfig {
   private int[] size;
   private boolean isCircleCrop;
 
-  private GlideImageConfig(Builder builder) {
+  protected GlideImageConfig(Builder builder) {
     this.url = builder.url;
     this.imageView = builder.imageView;
     this.placeholder = builder.placeholder;

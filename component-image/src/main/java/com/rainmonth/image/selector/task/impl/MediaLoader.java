@@ -291,6 +291,9 @@ public class MediaLoader implements IMediaLoader {
                         Log.d(TAG, mediaFileBean.toString());
                     } while (cursor.moveToNext());
                 }
+                if (callback != null) {
+                    callback.onMediaLoaded(mediaFileBeans);
+                }
             }
         } catch (Exception e) {
             Log.d(TAG, e.getMessage());
