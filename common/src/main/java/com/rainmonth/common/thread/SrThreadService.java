@@ -12,6 +12,24 @@ import java.util.concurrent.TimeUnit;
  * @description: 线程服务定义
  */
 public class SrThreadService implements IThread {
+
+    private static SrThreadService sInstance;
+
+    public static SrThreadService get() {
+        if (sInstance == null) {
+            synchronized (SrThreadService.class) {
+                if (sInstance == null) {
+                    sInstance = new SrThreadService();
+                }
+            }
+        }
+        return sInstance;
+    }
+
+
+    private SrThreadService() {
+    }
+
     /**
      * Cpu核心数
      */

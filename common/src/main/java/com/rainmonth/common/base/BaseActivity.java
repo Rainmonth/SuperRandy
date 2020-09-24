@@ -1,6 +1,9 @@
 package com.rainmonth.common.base;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.view.View;
 
 import com.rainmonth.common.base.mvp.BasePresenter;
@@ -8,6 +11,7 @@ import com.rainmonth.common.base.mvp.IBaseView;
 import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.common.eventbus.EventCenter;
 import com.rainmonth.common.utils.NetworkUtils;
+import com.rainmonth.common.utils.SafeHandler;
 
 import javax.inject.Inject;
 
@@ -15,10 +19,28 @@ import javax.inject.Inject;
  * Activity 基类
  */
 public abstract class BaseActivity<P extends BasePresenter> extends BaseAppCompatActivity
-        implements IBaseView {
+        implements IBaseView, Handler.Callback {
 
     @Inject
     protected P mPresenter;
+
+    private SafeHandler mHandler = null;
+
+    public SafeHandler getSafeHandler() {
+        if (mHandler == null) {
+            synchronized (BaseActivity.class) {
+                if (mHandler == null) {
+                    mHandler = new SafeHandler(Looper.getMainLooper(), this);
+                }
+            }
+        }
+        return mHandler;
+    }
+
+    @Override
+    public boolean handleMessage(Message msg) {
+        return false;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
