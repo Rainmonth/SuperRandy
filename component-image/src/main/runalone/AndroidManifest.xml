@@ -61,6 +61,7 @@
         <activity android:name=".mvp.ui.common.RoundRectsActivity" />
         <activity android:name=".mvp.ui.common.ComponentTestActivity" />
         <activity android:name=".selector.FileSelectActivity" />
+        <activity android:name=".mvp.ui.test.WorkDemoActivity" />
     </application>
 
 </manifest>
