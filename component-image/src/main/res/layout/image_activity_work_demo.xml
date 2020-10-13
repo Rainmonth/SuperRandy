@@ -27,6 +27,11 @@
             android:layout_height="wrap_content" />
 
 
+        <com.rainmonth.image.mvp.ui.widget.BookShelfView
+            android:id="@+id/book_shelf_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
         <com.rainmonth.image.mvp.ui.widget.HouseBookItemView
             android:id="@+id/book_item_view"
             android:layout_width="92dp"
