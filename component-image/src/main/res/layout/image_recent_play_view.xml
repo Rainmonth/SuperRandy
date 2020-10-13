@@ -4,15 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@drawable/image_component_container_bg"
     android:paddingStart="20dp"
     android:paddingTop="8dp"
     android:paddingEnd="20dp"
-    android:paddingBottom="8dp">
+    android:paddingBottom="8dp"
+    tools:ignore="HardcodedText,SpUsage,ContentDescription">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         android:background="@drawable/recent_play_bg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,6 +27,7 @@
             android:layout_marginTop="20dp"
             android:drawableEnd="@drawable/image_icon_recent_play_arrow"
             android:drawablePadding="8dp"
+            android:gravity="center_vertical"
             android:text="最近播放"
             android:textColor="#3F3F3F"
             android:textSize="20dp"
@@ -39,6 +41,7 @@
             android:layout_height="30dp"
             android:layout_marginTop="17dp"
             android:layout_marginEnd="20dp"
+            android:background="@drawable/image_bg_continue_play"
             android:gravity="center"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
@@ -54,7 +57,7 @@
                 android:id="@+id/tv_continue_play"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/image_bg_continue_play"
+
                 android:gravity="center"
                 android:text="继续播放"
                 android:textColor="#FFCF0C"
@@ -71,7 +74,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_continue_play" />
+            app:layout_constraintTop_toBottomOf="@+id/ll_continue_play_container" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
