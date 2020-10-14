@@ -34,6 +34,8 @@ public class HouseBookItemView extends FrameLayout {
     View bottomRightFlag;       // 可能是限免、推荐、VIP、精品之一
     TextView tvTitle;
 
+    private int[] demoImageId = {R.drawable.book_sample_cover_1, R.drawable.book_sample_cover_2, R.drawable.book_sample_cover_3,};
+
     /**
      * 是否统一圆角（即四个角圆角大小一致）
      */
@@ -97,6 +99,7 @@ public class HouseBookItemView extends FrameLayout {
         View.inflate(context, R.layout.image_book_shelf_item_view, this);
 
         tvTitle = findViewById(R.id.tv_title);
+        cover = findViewById(R.id.iv_cover);
     }
 
     @Override
@@ -108,9 +111,17 @@ public class HouseBookItemView extends FrameLayout {
         if (data instanceof SubscribeBean) {
             SubscribeBean subscribeBean = (SubscribeBean) data;
             if (subscribeBean.isRedirectInfo) {
-                setBackgroundColor(Color.BLACK);
+                showCover(R.drawable.book_shelf_more);
+                tvTitle.setVisibility(GONE);
+            } else {
+                showCover(demoImageId[subscribeBean.index % 3]);
+                tvTitle.setVisibility(VISIBLE);
             }
             tvTitle.setText(String.valueOf(subscribeBean.index + 1));
         }
+    }
+
+    public void showCover(int resId) {
+        cover.setImageResource(resId);
     }
 }

@@ -35,8 +35,7 @@
             android:layout_height="match_parent"
             android:layout_marginStart="5dp"
             android:layout_marginEnd="5dp"
-            android:layout_weight="1"
-            android:background="@android:color/holo_green_light" />
+            android:layout_weight="1" />
 
         <!--封面宽高比25:32-->
         <com.rainmonth.image.mvp.ui.widget.HouseBookItemView
@@ -45,8 +44,7 @@
             android:layout_height="match_parent"
             android:layout_marginStart="5dp"
             android:layout_marginEnd="5dp"
-            android:layout_weight="1"
-            android:background="@android:color/holo_red_light" />
+            android:layout_weight="1" />
 
         <!--封面宽高比25:32-->
         <com.rainmonth.image.mvp.ui.widget.HouseBookItemView
@@ -55,8 +53,7 @@
             android:layout_height="match_parent"
             android:layout_marginStart="5dp"
             android:layout_marginEnd="5dp"
-            android:layout_weight="1"
-            android:background="@android:color/holo_blue_light" />
+            android:layout_weight="1" />
 
     </LinearLayout>
 </merge>
