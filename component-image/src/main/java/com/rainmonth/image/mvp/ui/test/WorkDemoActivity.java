@@ -10,6 +10,7 @@ import com.rainmonth.image.mvp.ui.widget.BookShelfView;
 import com.rainmonth.image.mvp.ui.widget.HouseBookItemView;
 import com.rainmonth.image.mvp.ui.widget.HouseStoryItemView;
 import com.rainmonth.image.mvp.ui.widget.RecentPlayView;
+import com.rainmonth.image.mvp.ui.widget.StoryShelfView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +29,8 @@ public class WorkDemoActivity extends BaseActivity {
     RecentPlayView recentPlayView;
     @BindView(R.id.book_shelf_view)
     BookShelfView bookShelfView;
+    @BindView(R.id.story_shelf_view)
+    StoryShelfView storyShelfView;
 //    @BindView(R.id.book_item_view)
 //    HouseBookItemView bookItemView;
 //    @BindView(R.id.story_item_view)
@@ -52,5 +55,8 @@ public class WorkDemoActivity extends BaseActivity {
         }
         subscribeList.add(new SubscribeBean(size, true));
         bookShelfView.update(subscribeList);
+
+        storyShelfView.update(subscribeList);
+
     }
 }
