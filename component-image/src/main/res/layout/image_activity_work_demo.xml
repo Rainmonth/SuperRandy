@@ -32,21 +32,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <com.rainmonth.image.mvp.ui.widget.HouseBookItemView
-            android:id="@+id/book_item_view"
-            android:layout_width="92dp"
-            android:layout_height="119dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20dp"
-            android:background="@android:color/holo_green_light" />
+<!--        <com.rainmonth.image.mvp.ui.widget.HouseBookItemView-->
+<!--            android:id="@+id/book_item_view"-->
+<!--            android:layout_width="92dp"-->
+<!--            android:layout_height="119dp"-->
+<!--            android:layout_gravity="center_horizontal"-->
+<!--            android:layout_marginTop="20dp"-->
+<!--            android:background="@android:color/holo_green_light" />-->
 
 
-        <com.rainmonth.image.mvp.ui.widget.HouseStoryItemView
-            android:id="@+id/story_item_view"
-            android:layout_width="98dp"
-            android:layout_height="114dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20dp" />
+<!--        <com.rainmonth.image.mvp.ui.widget.HouseStoryItemView-->
+<!--            android:id="@+id/story_item_view"-->
+<!--            android:layout_width="98dp"-->
+<!--            android:layout_height="114dp"-->
+<!--            android:layout_gravity="center_horizontal"-->
+<!--            android:layout_marginTop="20dp" />-->
 
 
     </LinearLayout>

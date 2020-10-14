@@ -3,15 +3,30 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
+    <!--宽高比310:22-->
+    <ImageView
+        android:id="@+id/iv_book_shelf_bg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ll_item_container"
+        android:layout_gravity="bottom"
+        android:layout_marginStart="13dp"
+        android:layout_marginTop="-5dp"
+        android:layout_marginEnd="13dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/house_book_shelf_bg" />
+
     <LinearLayout
         android:id="@+id/ll_item_container"
         android:layout_width="match_parent"
         android:layout_height="119dp"
         android:layout_alignStart="@+id/iv_book_shelf_bg"
         android:layout_alignEnd="@+id/iv_book_shelf_bg"
+        android:layout_marginStart="7dp"
+        android:layout_marginEnd="7dp"
         android:orientation="horizontal">
 
-        <!--宽高比25:32-->
+        <!--封面宽高比25:32-->
         <com.rainmonth.image.mvp.ui.widget.HouseBookItemView
             android:id="@+id/book_item_view_1"
             android:layout_width="0dp"
@@ -21,7 +36,7 @@
             android:layout_weight="1"
             android:background="@android:color/holo_green_light" />
 
-        <!--宽高比25:32-->
+        <!--封面宽高比25:32-->
         <com.rainmonth.image.mvp.ui.widget.HouseBookItemView
             android:id="@+id/book_item_view_2"
             android:layout_width="0dp"
@@ -31,7 +46,7 @@
             android:layout_weight="1"
             android:background="@android:color/holo_red_light" />
 
-        <!--宽高比25:32-->
+        <!--封面宽高比25:32-->
         <com.rainmonth.image.mvp.ui.widget.HouseBookItemView
             android:id="@+id/book_item_view_3"
             android:layout_width="0dp"
@@ -42,17 +57,4 @@
             android:background="@android:color/holo_blue_light" />
 
     </LinearLayout>
-
-    <!--宽高比310:22-->
-    <ImageView
-        android:id="@+id/iv_book_shelf_bg"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/ll_item_container"
-        android:layout_gravity="bottom"
-        android:layout_marginStart="12dp"
-        android:layout_marginEnd="12dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/house_book_shelf_bg" />
-
 </RelativeLayout>

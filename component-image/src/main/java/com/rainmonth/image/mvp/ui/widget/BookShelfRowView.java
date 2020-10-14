@@ -2,6 +2,8 @@ package com.rainmonth.image.mvp.ui.widget;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -45,5 +47,7 @@ public class BookShelfRowView extends RelativeLayout {
 
     private void init(Context context) {
         View.inflate(context, R.layout.image_book_shelf_row_view, this);
+//        LayoutInflater.from(context).inflate(R.layout.image_book_shelf_row_view, this);
+        Log.d("Randy", "row init");
     }
 }

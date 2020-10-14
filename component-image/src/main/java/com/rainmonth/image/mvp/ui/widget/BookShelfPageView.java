@@ -2,6 +2,7 @@ package com.rainmonth.image.mvp.ui.widget;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 
@@ -39,5 +40,6 @@ public class BookShelfPageView extends FrameLayout {
 
     private void init(Context context) {
         View.inflate(context, R.layout.image_book_shelf_page_view, this);
+        Log.d("Randy", "shelf init");
     }
 }

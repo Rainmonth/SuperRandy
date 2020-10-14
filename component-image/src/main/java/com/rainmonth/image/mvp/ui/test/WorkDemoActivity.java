@@ -22,10 +22,10 @@ public class WorkDemoActivity extends BaseActivity {
     RecentPlayView recentPlayView;
     @BindView(R.id.book_shelf_view)
     BookShelfView bookShelfView;
-    @BindView(R.id.book_item_view)
-    HouseBookItemView bookItemView;
-    @BindView(R.id.story_item_view)
-    HouseStoryItemView storyItemView;
+//    @BindView(R.id.book_item_view)
+//    HouseBookItemView bookItemView;
+//    @BindView(R.id.story_item_view)
+//    HouseStoryItemView storyItemView;
 
     @Override
     public void initToolbar(int colorResId) {
