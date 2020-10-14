@@ -106,9 +106,10 @@ public class BookShelfView extends ConstraintLayout {
 
         generatePages(mPageNum);
         generateIndicators(mPageNum);
-
-        mCurrentIndex = 0;
-        llIndicatorContainer.getChildAt(0).setSelected(true);
+        if (mPageNum > 1) {
+            mCurrentIndex = 0;
+            llIndicatorContainer.getChildAt(0).setSelected(true);
+        }
 
         vpSubscribeList.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override

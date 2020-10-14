@@ -21,7 +21,7 @@ public class ImageLaunchActivity extends BaseActivity {
             public void run() {
                 readyGoThenKill(ImageMainActivity.class);
             }
-        }, 5000);
+        }, 2000);
     }
 
     @Override

@@ -48,15 +48,19 @@ public class WorkDemoActivity extends BaseActivity {
 
     @Override
     protected void initViewsAndEvents() {
+
+        bookShelfView.update(getBookSubscribeList(12));
+
+        storyShelfView.update(getBookSubscribeList(14));
+
+    }
+
+    private List<SubscribeBean> getBookSubscribeList(int size) {
         List<SubscribeBean> subscribeList = new ArrayList<>();
-        int size = 18;
         for (int i = 0; i < size; i++) {
             subscribeList.add(new SubscribeBean(i, false));
         }
         subscribeList.add(new SubscribeBean(size, true));
-        bookShelfView.update(subscribeList);
-
-        storyShelfView.update(subscribeList);
-
+        return subscribeList;
     }
 }

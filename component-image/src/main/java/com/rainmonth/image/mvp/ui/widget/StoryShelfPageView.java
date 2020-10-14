@@ -60,7 +60,11 @@ public class StoryShelfPageView extends RelativeLayout {
         storyItemView1 = findViewById(R.id.book_item_view_1);
         storyItemView2 = findViewById(R.id.book_item_view_2);
         storyItemView3 = findViewById(R.id.book_item_view_3);
-        
+
+        storyItemView1.setOnClickListener(listener);
+        storyItemView2.setOnClickListener(listener);
+        storyItemView3.setOnClickListener(listener);
+
         Log.d("Randy", "storyShelfPage init");
     }
 
@@ -103,9 +107,7 @@ public class StoryShelfPageView extends RelativeLayout {
     }
 
     public void setOnPageItemClickListener(OnPageItemClickListener listener) {
-//        this.mOnPageItemClickListener = listener;
-//        shelfRowOne.setOnPageItemClickListener(mOnPageItemClickListener);
-//        shelfRowTwo.setOnPageItemClickListener(mOnPageItemClickListener);
+        this.mPageListener = listener;
     }
 
     public interface OnPageItemClickListener {
