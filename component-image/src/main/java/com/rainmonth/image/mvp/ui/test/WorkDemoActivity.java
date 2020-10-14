@@ -3,11 +3,17 @@ package com.rainmonth.image.mvp.ui.test;
 import android.os.Bundle;
 
 import com.rainmonth.common.base.BaseActivity;
+import com.rainmonth.common.bean.BaseBean;
 import com.rainmonth.image.R;
+import com.rainmonth.image.mvp.model.bean.SubscribeBean;
 import com.rainmonth.image.mvp.ui.widget.BookShelfView;
 import com.rainmonth.image.mvp.ui.widget.HouseBookItemView;
 import com.rainmonth.image.mvp.ui.widget.HouseStoryItemView;
 import com.rainmonth.image.mvp.ui.widget.RecentPlayView;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -39,6 +45,12 @@ public class WorkDemoActivity extends BaseActivity {
 
     @Override
     protected void initViewsAndEvents() {
-
+        List<SubscribeBean> subscribeList = new ArrayList<>();
+        int size = 31;
+        for (int i = 0; i < size; i++) {
+            subscribeList.add(new SubscribeBean(false));
+        }
+        subscribeList.add(new SubscribeBean(true));
+        bookShelfView.update(subscribeList);
     }
 }

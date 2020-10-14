@@ -46,40 +46,16 @@
         <!--            app:layout_constraintStart_toStartOf="parent"-->
         <!--            app:layout_constraintTop_toBottomOf="@+id/tv_label" />-->
 
-        <com.rainmonth.image.mvp.ui.widget.BookShelfPageView
-            android:id="@+id/book_shelf_page_view"
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/vp_subscribe_list"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/ll_indicator_container"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_label" />
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_label">
-
-            <com.rainmonth.image.mvp.ui.widget.BookShelfRowView
-                android:id="@+id/shelf_row_one"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <com.rainmonth.image.mvp.ui.widget.BookShelfRowView
-                android:id="@+id/shelf_row_two"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp" />
-
-        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/ll_indicator_container"
@@ -90,29 +66,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/book_shelf_page_view">
-
-            <View
-                android:layout_width="8dp"
-                android:layout_height="8dp"
-                android:layout_marginStart="3dp"
-                android:layout_marginEnd="3dp"
-                android:background="@drawable/image_book_shelf_indicator_selected" />
-
-            <View
-                android:layout_width="8dp"
-                android:layout_height="8dp"
-                android:layout_marginStart="3dp"
-                android:layout_marginEnd="3dp"
-                android:background="@drawable/image_book_shelf_indicator_unselected" />
-
-            <View
-                android:layout_width="8dp"
-                android:layout_height="8dp"
-                android:layout_marginStart="3dp"
-                android:layout_marginEnd="3dp"
-                android:background="@drawable/image_book_shelf_indicator_unselected" />
-        </LinearLayout>
+            app:layout_constraintTop_toBottomOf="@id/vp_subscribe_list" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

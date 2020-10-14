@@ -11,7 +11,9 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.rainmonth.common.bean.BaseBean;
 import com.rainmonth.common.utils.DensityUtils;
+import com.rainmonth.image.mvp.model.bean.SubscribeBean;
 
 /**
  * 1、支持不规则边框
@@ -95,5 +97,14 @@ public class HouseBookItemView extends FrameLayout {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+    }
+
+    public void update(BaseBean data) {
+        if (data instanceof SubscribeBean) {
+            SubscribeBean subscribeBean = (SubscribeBean) data;
+            if (subscribeBean.isRedirectInfo) {
+                setBackgroundColor(Color.BLACK);
+            }
+        }
     }
 }
