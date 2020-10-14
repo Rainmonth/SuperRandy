@@ -96,9 +96,9 @@ public class BookShelfView extends ConstraintLayout {
 
         mPageNum = getPageNum(size);
         if (mPageNum == 1 && size < 3) {
-            vpSubscribeList.getLayoutParams().height = DensityUtils.dip2px(mContext, 150);
+            vpSubscribeList.getLayoutParams().height = DensityUtils.dip2px(mContext, 136);
         } else {
-            vpSubscribeList.getLayoutParams().height = DensityUtils.dip2px(mContext, 280);
+            vpSubscribeList.getLayoutParams().height = DensityUtils.dip2px(mContext, 288);
         }
         List<View> pageViewList = new ArrayList<>();
         llIndicatorContainer.removeAllViews();

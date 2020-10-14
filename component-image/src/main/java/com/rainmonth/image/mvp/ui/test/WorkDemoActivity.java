@@ -46,7 +46,7 @@ public class WorkDemoActivity extends BaseActivity {
     @Override
     protected void initViewsAndEvents() {
         List<SubscribeBean> subscribeList = new ArrayList<>();
-        int size = 0;
+        int size = 18;
         for (int i = 0; i < size; i++) {
             subscribeList.add(new SubscribeBean(i, false));
         }
