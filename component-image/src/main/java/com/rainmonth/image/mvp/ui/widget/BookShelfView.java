@@ -103,29 +103,12 @@ public class BookShelfView extends ConstraintLayout {
         } else {
             vpSubscribeList.getLayoutParams().height = DensityUtils.dip2px(mContext, 288);
         }
-        List<View> pageViewList = new ArrayList<>();
-        llIndicatorContainer.removeAllViews();
-        for (int i = 0; i < mPageNum; i++) {
-            BookShelfPageView bookShelfPageView = new BookShelfPageView(mContext);
-            bookShelfPageView.update(i, mPagedSubscribeList.get(i));
-            pageViewList.add(bookShelfPageView);
 
-            bookShelfPageView.setOnPageItemClickListener(this::onPageItemClick);
-
-            View view = new View(mContext);
-            view.setBackgroundResource(R.drawable.image_house_book_indicator_selector);
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(DensityUtils.dip2px(mContext, 8), DensityUtils.dip2px(mContext, 8));
-            params.leftMargin = DensityUtils.dip2px(mContext, 3);
-            params.rightMargin = DensityUtils.dip2px(mContext, 3);
-            llIndicatorContainer.addView(view, params);
-        }
+        generatePages(mPageNum);
+        generateIndicators(mPageNum);
 
         mCurrentIndex = 0;
         llIndicatorContainer.getChildAt(0).setSelected(true);
-
-
-        mAdapter = new ViewPagerAdapter(pageViewList);
-        vpSubscribeList.setAdapter(mAdapter);
 
         vpSubscribeList.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -147,13 +130,38 @@ public class BookShelfView extends ConstraintLayout {
 
             }
         });
+    }
 
-        if (mPageNum == 1) { // 只有一页
-            hideIndicator();
-        } else { // 找过一页
-            showIndicator();
+    private void generatePages(int pageNum) {
+        List<View> pageViewList = new ArrayList<>();
+        for (int i = 0; i < pageNum; i++) {
+            BookShelfPageView bookShelfPageView = new BookShelfPageView(mContext);
+            bookShelfPageView.update(i, mPagedSubscribeList.get(i));
+            pageViewList.add(bookShelfPageView);
+
+            bookShelfPageView.setOnPageItemClickListener(this::onPageItemClick);
         }
 
+        mAdapter = new ViewPagerAdapter(pageViewList);
+        vpSubscribeList.setAdapter(mAdapter);
+    }
+
+    private void generateIndicators(int pageNum) {
+        llIndicatorContainer.removeAllViews();
+        if (pageNum == 1) {
+            hideIndicator();
+            return;
+        } else {
+            showIndicator();
+        }
+        for (int i = 0; i < pageNum; i++) {
+            View view = new View(mContext);
+            view.setBackgroundResource(R.drawable.image_house_book_indicator_selector);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(DensityUtils.dip2px(mContext, 8), DensityUtils.dip2px(mContext, 8));
+            params.leftMargin = DensityUtils.dip2px(mContext, 3);
+            params.rightMargin = DensityUtils.dip2px(mContext, 3);
+            llIndicatorContainer.addView(view, params);
+        }
     }
 
     private int getPageNum(int size) {
@@ -221,7 +229,7 @@ public class BookShelfView extends ConstraintLayout {
     }
 
 
-    public class ViewPagerAdapter extends PagerAdapter {
+    private static class ViewPagerAdapter extends PagerAdapter {
         private List<View> mViewList;
 
         public ViewPagerAdapter(List<View> mViewList) {
