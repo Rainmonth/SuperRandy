@@ -7,9 +7,11 @@ import com.rainmonth.common.bean.BaseBean;
  * @date 2020/10/14 2:23 PM
  */
 public class SubscribeBean extends BaseBean {
+    public int index;
     public boolean isRedirectInfo = false;
 
-    public SubscribeBean(boolean isRedirectInfo) {
+    public SubscribeBean(int index, boolean isRedirectInfo) {
+        this.index = index;
         this.isRedirectInfo = isRedirectInfo;
     }
 }

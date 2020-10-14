@@ -3,7 +3,6 @@ package com.rainmonth.image.mvp.ui.widget;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -12,13 +11,10 @@ import android.widget.RelativeLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.rainmonth.common.bean.BaseBean;
 import com.rainmonth.image.R;
 import com.rainmonth.image.mvp.model.bean.SubscribeBean;
 
 import java.util.List;
-
-import butterknife.BindView;
 
 /**
  * @author RandyZhang
@@ -55,6 +51,9 @@ public class BookShelfRowView extends RelativeLayout {
 
     public void update(List<SubscribeBean> subscribeList) {
         if (subscribeList == null || subscribeList.size() == 0) {
+            bookItemView1.setVisibility(INVISIBLE);
+            bookItemView2.setVisibility(INVISIBLE);
+            bookItemView3.setVisibility(INVISIBLE);
             return;
         }
 

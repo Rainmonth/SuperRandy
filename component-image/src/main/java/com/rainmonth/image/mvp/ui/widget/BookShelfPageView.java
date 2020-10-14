@@ -4,12 +4,11 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
-import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.rainmonth.common.bean.BaseBean;
 import com.rainmonth.image.R;
 import com.rainmonth.image.mvp.model.bean.SubscribeBean;
 
@@ -21,7 +20,7 @@ import java.util.List;
  * @author RandyZhang
  * @date 2020/10/13 8:10 PM
  */
-public class BookShelfPageView extends FrameLayout {
+public class BookShelfPageView extends LinearLayout {
     BookShelfRowView shelfRowOne;
     BookShelfRowView shelfRowTwo;
 
@@ -39,6 +38,7 @@ public class BookShelfPageView extends FrameLayout {
     }
 
     private void init(Context context) {
+        setOrientation(LinearLayout.VERTICAL);
         View.inflate(context, R.layout.image_book_shelf_page_view, this);
         shelfRowOne = findViewById(R.id.shelf_row_one);
         shelfRowTwo = findViewById(R.id.shelf_row_two);
@@ -62,10 +62,17 @@ public class BookShelfPageView extends FrameLayout {
                 shelfRowTwo.setVisibility(GONE);
             }
         } else {
-            shelfRowOne.update(subscribeList.subList(0, 3));
-            shelfRowOne.update(subscribeList.subList(3, size));
             shelfRowOne.setVisibility(VISIBLE);
             shelfRowTwo.setVisibility(VISIBLE);
+            if (size >=3) {
+                shelfRowOne.update(subscribeList.subList(0, 3));
+                shelfRowTwo.update(subscribeList.subList(3, size));
+            } else {
+                shelfRowOne.update(subscribeList.subList(0, size));
+                shelfRowTwo.update(null);
+            }
+
+
         }
     }
 }

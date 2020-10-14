@@ -35,38 +35,33 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <!--        <com.rainmonth.common.widgets.CustomViewPager-->
-        <!--            android:id="@+id/rv_list"-->
-        <!--            android:layout_width="0dp"-->
-        <!--            android:layout_height="200dp"-->
-        <!--            android:layout_marginTop="20dp"-->
-        <!--            android:layout_marginBottom="20dp"-->
-        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--            app:layout_constraintEnd_toEndOf="parent"-->
-        <!--            app:layout_constraintStart_toStartOf="parent"-->
-        <!--            app:layout_constraintTop_toBottomOf="@+id/tv_label" />-->
-
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/vp_subscribe_list"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="200dp"
             android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
             app:layout_constraintBottom_toTopOf="@+id/ll_indicator_container"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_label" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_label"
+            app:layout_goneMarginBottom="20dp"
+            tools:background="@android:color/holo_green_light" />
 
         <LinearLayout
             android:id="@+id/ll_indicator_container"
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:gravity="center"
             android:orientation="horizontal"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/vp_subscribe_list" />
+            app:layout_constraintTop_toBottomOf="@id/vp_subscribe_list"
+            tools:background="@android:color/holo_red_light"
+            tools:visibility="visible" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

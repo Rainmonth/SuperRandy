@@ -7,12 +7,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.rainmonth.common.bean.BaseBean;
 import com.rainmonth.common.utils.DensityUtils;
+import com.rainmonth.image.R;
 import com.rainmonth.image.mvp.model.bean.SubscribeBean;
 
 /**
@@ -30,6 +32,7 @@ public class HouseBookItemView extends FrameLayout {
     View newFlag;
     View countFlag;
     View bottomRightFlag;       // 可能是限免、推荐、VIP、精品之一
+    TextView tvTitle;
 
     /**
      * 是否统一圆角（即四个角圆角大小一致）
@@ -91,7 +94,9 @@ public class HouseBookItemView extends FrameLayout {
     private void init(Context context) {
         mContext = context;
         Log.d("Randy", "itemView init");
+        View.inflate(context, R.layout.image_book_shelf_item_view, this);
 
+        tvTitle = findViewById(R.id.tv_title);
     }
 
     @Override
@@ -105,6 +110,7 @@ public class HouseBookItemView extends FrameLayout {
             if (subscribeBean.isRedirectInfo) {
                 setBackgroundColor(Color.BLACK);
             }
+            tvTitle.setText(String.valueOf(subscribeBean.index + 1));
         }
     }
 }

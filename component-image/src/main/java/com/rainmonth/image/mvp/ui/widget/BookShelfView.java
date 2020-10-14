@@ -1,10 +1,8 @@
 package com.rainmonth.image.mvp.ui.widget;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +14,6 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import com.rainmonth.common.bean.BaseBean;
 import com.rainmonth.common.utils.DensityUtils;
 import com.rainmonth.image.R;
 import com.rainmonth.image.mvp.model.bean.SubscribeBean;
@@ -87,14 +84,7 @@ public class BookShelfView extends ConstraintLayout {
         if (size == 0) {
             return;
         }
-        // 超过 30 个 需要支持 左滑查看更多
-        if (size == 30) {
-            if (subscribeList.get(size - 1).isRedirectInfo) {
-                mNeedSupportSlideViewMore = false;
-            } else {
-                mNeedSupportSlideViewMore = true;
-            }
-        }
+        // 超过 31 个 需要支持 左滑查看更多
         mNeedSupportSlideViewMore = size > 31;
         mNeedInterceptTouchEvent = size > 5;
 
@@ -108,7 +98,7 @@ public class BookShelfView extends ConstraintLayout {
         if (mPageNum == 1 && size < 3) {
             vpSubscribeList.getLayoutParams().height = DensityUtils.dip2px(mContext, 150);
         } else {
-            vpSubscribeList.getLayoutParams().height = DensityUtils.dip2px(mContext, 300);
+            vpSubscribeList.getLayoutParams().height = DensityUtils.dip2px(mContext, 280);
         }
         List<View> pageViewList = new ArrayList<>();
         llIndicatorContainer.removeAllViews();
