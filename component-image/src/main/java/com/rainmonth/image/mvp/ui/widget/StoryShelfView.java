@@ -197,9 +197,9 @@ public class StoryShelfView extends ConstraintLayout {
     public void onPageItemClick(int pageNum, SubscribeBean subscribeBean) {
         if (subscribeBean != null) {
             if (subscribeBean.isRedirectInfo) {
-                ToastUtils.showShortToast(mContext, "第" + pageNum + "页，跳转item " + subscribeBean.index % 6 + " clicked!");
+                ToastUtils.showShortToast(mContext, "第" + pageNum + "页，跳转item " + subscribeBean.index % 3 + " clicked!");
             } else {
-                ToastUtils.showShortToast(mContext, "第" + pageNum + "页，item " + subscribeBean.index % 6 + " clicked!");
+                ToastUtils.showShortToast(mContext, "第" + pageNum + "页，item " + subscribeBean.index % 3 + " clicked!");
             }
         }
     }
