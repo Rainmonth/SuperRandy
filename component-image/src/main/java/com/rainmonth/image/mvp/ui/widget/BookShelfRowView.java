@@ -27,6 +27,18 @@ public class BookShelfRowView extends RelativeLayout {
     LinearLayout llItemContainer;
     ImageView ivBookShelfBg;
 
+    private int mBelongPage;
+    BookShelfPageView.OnPageItemClickListener mPageListener;
+
+    private View.OnClickListener listener = new OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if (mPageListener != null) {
+                mPageListener.onPageItemClick(mBelongPage, (SubscribeBean) v.getTag());
+            }
+        }
+    };
+
     public BookShelfRowView(@NonNull Context context) {
         this(context, null);
     }
@@ -49,33 +61,45 @@ public class BookShelfRowView extends RelativeLayout {
         Log.d("Randy", "row init");
     }
 
-    public void update(List<SubscribeBean> subscribeList) {
+    public void update(int pageIndex, List<SubscribeBean> subscribeList) {
+        mBelongPage = pageIndex;
         if (subscribeList == null || subscribeList.size() == 0) {
-            bookItemView1.setVisibility(INVISIBLE);
-            bookItemView2.setVisibility(INVISIBLE);
-            bookItemView3.setVisibility(INVISIBLE);
+            hideBookItem(bookItemView1);
+            hideBookItem(bookItemView2);
+            hideBookItem(bookItemView3);
             return;
         }
 
         int size = subscribeList.size();
         if (size == 1) {
-            bookItemView1.setVisibility(VISIBLE);
-            bookItemView1.update(subscribeList.get(0));
-            bookItemView2.setVisibility(INVISIBLE);
-            bookItemView3.setVisibility(INVISIBLE);
+            showBookItem(bookItemView1, subscribeList.get(0));
+            hideBookItem(bookItemView2);
+            hideBookItem(bookItemView3);
         } else if (size == 2) {
-            bookItemView1.setVisibility(VISIBLE);
-            bookItemView1.update(subscribeList.get(0));
-            bookItemView2.setVisibility(VISIBLE);
-            bookItemView2.update(subscribeList.get(1));
-            bookItemView3.setVisibility(INVISIBLE);
+            showBookItem(bookItemView1, subscribeList.get(0));
+            showBookItem(bookItemView2, subscribeList.get(1));
+            hideBookItem(bookItemView3);
         } else {
-            bookItemView1.setVisibility(VISIBLE);
-            bookItemView1.update(subscribeList.get(0));
-            bookItemView2.setVisibility(VISIBLE);
-            bookItemView2.update(subscribeList.get(1));
-            bookItemView3.setVisibility(VISIBLE);
-            bookItemView3.update(subscribeList.get(2));
+            showBookItem(bookItemView1, subscribeList.get(0));
+            showBookItem(bookItemView2, subscribeList.get(1));
+            showBookItem(bookItemView3, subscribeList.get(2));
         }
+    }
+
+    private void showBookItem(HouseBookItemView view, SubscribeBean subscribeBean) {
+        view.setVisibility(VISIBLE);
+        view.update(subscribeBean);
+        view.setTag(subscribeBean);
+        view.setOnClickListener(listener);
+    }
+
+    private void hideBookItem(HouseBookItemView view) {
+        view.setVisibility(INVISIBLE);
+        view.setOnClickListener(null);
+        view.setTag(null);
+    }
+
+    public void setOnPageItemClickListener(BookShelfPageView.OnPageItemClickListener listener) {
+        this.mPageListener = listener;
     }
 }

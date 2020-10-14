@@ -15,6 +15,7 @@ import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.rainmonth.common.utils.DensityUtils;
+import com.rainmonth.common.utils.ToastUtils;
 import com.rainmonth.image.R;
 import com.rainmonth.image.mvp.model.bean.SubscribeBean;
 
@@ -65,6 +66,8 @@ public class BookShelfView extends ConstraintLayout {
         vpSubscribeList = findViewById(R.id.vp_subscribe_list);
         llIndicatorContainer = findViewById(R.id.ll_indicator_container);
 
+        tvLabel.setOnClickListener(v -> onLabelClick());
+
         Log.d("Randy", "shelfView init");
 
     }
@@ -106,6 +109,8 @@ public class BookShelfView extends ConstraintLayout {
             BookShelfPageView bookShelfPageView = new BookShelfPageView(mContext);
             bookShelfPageView.update(i, mPagedSubscribeList.get(i));
             pageViewList.add(bookShelfPageView);
+
+            bookShelfPageView.setOnPageItemClickListener(this::onPageItemClick);
 
             View view = new View(mContext);
             view.setBackgroundResource(R.drawable.image_house_book_indicator_selector);
@@ -191,6 +196,20 @@ public class BookShelfView extends ConstraintLayout {
         llIndicatorContainer.setVisibility(GONE);
     }
 
+    private void onLabelClick() {
+        ToastUtils.showShortToast(mContext, "查看更多内容");
+    }
+
+    public void onPageItemClick(int pageNum, SubscribeBean subscribeBean) {
+        if (subscribeBean != null) {
+            if (subscribeBean.isRedirectInfo) {
+                ToastUtils.showShortToast(mContext, "第" + pageNum + "页，跳转item " + subscribeBean.index % 6 + " clicked!");
+            } else {
+                ToastUtils.showShortToast(mContext, "第" + pageNum + "页，item " + subscribeBean.index % 6 + " clicked!");
+            }
+        }
+    }
+
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         return super.onTouchEvent(event);
@@ -229,8 +248,9 @@ public class BookShelfView extends ConstraintLayout {
         }
 
         @Override
-        public boolean isViewFromObject(View view, Object object) {
+        public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
             return view == object;
         }
     }
+
 }

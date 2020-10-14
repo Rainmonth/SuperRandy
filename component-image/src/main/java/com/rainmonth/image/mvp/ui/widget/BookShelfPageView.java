@@ -24,6 +24,8 @@ public class BookShelfPageView extends LinearLayout {
     BookShelfRowView shelfRowOne;
     BookShelfRowView shelfRowTwo;
 
+    OnPageItemClickListener mOnPageItemClickListener;
+
     public BookShelfPageView(@NonNull Context context) {
         this(context, null);
     }
@@ -45,34 +47,42 @@ public class BookShelfPageView extends LinearLayout {
         Log.d("Randy", "shelfPage init");
     }
 
-    public void update(int pageIndex, List<SubscribeBean> subscribeList) {
+    public void update(int pageNum, List<SubscribeBean> subscribeList) {
         if (subscribeList == null || subscribeList.size() == 0) {
             setVisibility(GONE);
             return;
         }
         int size = subscribeList.size();
-        if (pageIndex == 0) {
+        if (pageNum == 0) {
             shelfRowOne.setVisibility(VISIBLE);
             if (size >= 3) {
-                shelfRowOne.update(subscribeList.subList(0, 3));
-                shelfRowTwo.update(subscribeList.subList(3, size));
+                shelfRowOne.update(pageNum, subscribeList.subList(0, 3));
+                shelfRowTwo.update(pageNum, subscribeList.subList(3, size));
                 shelfRowTwo.setVisibility(VISIBLE);
             } else {
-                shelfRowOne.update(subscribeList.subList(0, size));
+                shelfRowOne.update(pageNum, subscribeList.subList(0, size));
                 shelfRowTwo.setVisibility(GONE);
             }
         } else {
             shelfRowOne.setVisibility(VISIBLE);
             shelfRowTwo.setVisibility(VISIBLE);
-            if (size >=3) {
-                shelfRowOne.update(subscribeList.subList(0, 3));
-                shelfRowTwo.update(subscribeList.subList(3, size));
+            if (size >= 3) {
+                shelfRowOne.update(pageNum, subscribeList.subList(0, 3));
+                shelfRowTwo.update(pageNum, subscribeList.subList(3, size));
             } else {
-                shelfRowOne.update(subscribeList.subList(0, size));
-                shelfRowTwo.update(null);
+                shelfRowOne.update(pageNum, subscribeList.subList(0, size));
+                shelfRowTwo.update(pageNum, null);
             }
-
-
         }
+    }
+
+    public void setOnPageItemClickListener(OnPageItemClickListener listener) {
+        this.mOnPageItemClickListener = listener;
+        shelfRowOne.setOnPageItemClickListener(mOnPageItemClickListener);
+        shelfRowTwo.setOnPageItemClickListener(mOnPageItemClickListener);
+    }
+
+    public interface OnPageItemClickListener {
+        void onPageItemClick(int pageNum, SubscribeBean subscribeBean);
     }
 }
