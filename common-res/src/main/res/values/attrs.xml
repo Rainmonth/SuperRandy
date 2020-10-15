@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <declare-styleable name="RandyPercentageLayout">
+        <attr name="rpl_rage" format="float" />
+        <attr name="rpl_percentage" format="float" />
+    </declare-styleable>
     <declare-styleable name="BorderRoundItemView">
         <attr name="borderRoundItemViewWidthPercentage" format="float" />
         <attr name="borderRoundItemViewRate" format="float" />

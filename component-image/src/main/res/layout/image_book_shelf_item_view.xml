@@ -2,24 +2,37 @@
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="16dp"
+    android:background="@android:color/holo_green_light"
+    app:rpl_percentage="0.2453"
+    app:rpl_rage="1.28"
     tools:ignore="ContentDescription"
-    tools:parentTag="android.widget.FrameLayout">
+    tools:parentTag="com.rainmonth.common.widgets.test.RandyPercentageLayout">
 
-    <ImageView
-        android:id="@+id/iv_cover"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:scaleType="centerCrop"
-        tools:src="@drawable/sample_cover_1" />
+    <com.rainmonth.common.widgets.test.BorderRoundItemView
+        android:id="@+id/border_round_item_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:borderRoundItemViewBorderEnabled="true"
+        app:borderRoundItemViewWidthPercentage="-1" />
 
-    <TextView
-        android:id="@+id/tv_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:background="@color/bg_half_transparent_black"
-        android:textColor="@color/white" />
+    <!--采用ViewStub实现-->
+    <FrameLayout
+        android:id="@+id/fl_redirect_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/image_book_item_view_redirect_bg"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <ImageView
+            android:id="@+id/iv_redirect_icon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center"
+            android:src="@drawable/image_ic_book_item_view_add" />
+    </FrameLayout>
 
 </merge>

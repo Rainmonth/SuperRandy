@@ -60,21 +60,43 @@
 
         </com.rainmonth.common.widgets.RandyRoundLayout>
 
-        <com.rainmonth.common.widgets.RandyRateLayout
-            android:layout_width="100dp"
+        <com.rainmonth.common.widgets.test.RandyPercentageLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:background="@android:color/holo_green_light"
-            app:rate="1.2">
+            app:rpl_percentage="0.2453"
+            app:rpl_rage="1.28">
 
-        </com.rainmonth.common.widgets.RandyRateLayout>
+            <com.rainmonth.common.widgets.test.BorderRoundItemView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:borderRoundItemViewWidthPercentage="-1" />
+
+            <!--采用ViewStub实现-->
+            <FrameLayout
+                android:id="@+id/fl_redirect_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/image_book_item_view_redirect_bg">
+
+                <ImageView
+                    android:id="@+id/iv_redirect_icon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/image_ic_book_item_view_add" />
+            </FrameLayout>
+
+        </com.rainmonth.common.widgets.test.RandyPercentageLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="gone">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -83,11 +105,12 @@
                 android:layout_marginEnd="12dp"
                 android:orientation="horizontal">
 
-                <com.rainmonth.common.widgets.test.BorderRoundItemView
+                <com.rainmonth.common.widgets.test.RandyPercentageLayout
                     android:id="@+id/item_1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
+                    android:background="@android:color/holo_green_light"
                     app:borderRoundItemViewRate="1.28"
                     app:borderRoundItemViewWidthPercentage="0.2453"
                     app:layout_constraintEnd_toStartOf="@+id/item_2"
@@ -95,12 +118,13 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <com.rainmonth.common.widgets.test.BorderRoundItemView
+                <com.rainmonth.common.widgets.test.RandyPercentageLayout
                     android:id="@+id/item_2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:layout_weight="1"
+                    android:background="@android:color/holo_green_light"
                     app:borderRoundItemViewRate="1.28"
                     app:borderRoundItemViewWidthPercentage="0.2453"
                     app:layout_constraintEnd_toStartOf="@id/item_3"
@@ -108,12 +132,13 @@
                     app:layout_constraintTop_toTopOf="parent"
                     tools:visibility="visible" />
 
-                <com.rainmonth.common.widgets.test.BorderRoundItemView
+                <com.rainmonth.common.widgets.test.RandyPercentageLayout
                     android:id="@+id/item_3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:layout_weight="1"
+                    android:background="@android:color/holo_green_light"
                     app:borderRoundItemViewRate="1.28"
                     app:borderRoundItemViewWidthPercentage="0.2453"
                     app:layout_constraintEnd_toEndOf="parent"

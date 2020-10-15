@@ -4,11 +4,13 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
+import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.rainmonth.common.widgets.test.BorderRoundItemView;
+import com.rainmonth.common.widgets.test.RandyPercentageLayout;
 import com.rainmonth.image.R;
 import com.rainmonth.image.mvp.model.bean.SubscribeBean;
 
@@ -20,11 +22,14 @@ import com.rainmonth.image.mvp.model.bean.SubscribeBean;
  * @author RandyZhang
  * @date 2020/10/13 3:39 PM
  */
-public class HouseBookItemView extends BorderRoundItemView {
+public class HouseBookItemView extends RandyPercentageLayout {
 
     private int[] demoImageId = {R.drawable.sample_cover_1, R.drawable.sample_cover_2, R.drawable.sample_cover_3,};
 
     private Context mContext;
+
+    BorderRoundItemView borderRoundItemView;
+    FrameLayout flRedirectContainer;
 
     public HouseBookItemView(@NonNull Context context) {
         this(context, null);
@@ -42,19 +47,37 @@ public class HouseBookItemView extends BorderRoundItemView {
     private void init(Context context) {
         mContext = context;
         Log.d("Randy", "HouseBookItemView init");
-//        View.inflate(context, R.layout.image_book_shelf_item_view, this);
+        View.inflate(context, R.layout.image_book_shelf_item_view, this);
+
+        borderRoundItemView = findViewById(R.id.border_round_item_view);
+        flRedirectContainer = findViewById(R.id.fl_redirect_container);
 
     }
 
     public void update(SubscribeBean subscribeBean) {
         if (subscribeBean != null) {
             if (subscribeBean.isRedirectInfo) {
-                handleCover(R.drawable.book_shelf_more);
-                handleCount(false, "");
+                handleRedirectInfo(subscribeBean);
             } else {
-                handleCover(demoImageId[subscribeBean.index % 3]);
-                handleCount(true, String.valueOf(subscribeBean.index + 1));
+                handleSubscribeInfo(subscribeBean);
             }
+        }
+    }
+
+    private void handleSubscribeInfo(SubscribeBean subscribeBean) {
+        if (subscribeBean != null && !subscribeBean.isRedirectInfo) {
+            borderRoundItemView.setVisibility(VISIBLE);
+            borderRoundItemView.handleCover(demoImageId[subscribeBean.index % 3]);
+            borderRoundItemView.handleCount(true, String.valueOf(subscribeBean.index + 1));
+
+            flRedirectContainer.setVisibility(GONE);
+        }
+    }
+
+    private void handleRedirectInfo(SubscribeBean subscribeBean) {
+        if (subscribeBean != null && subscribeBean.isRedirectInfo) {
+            borderRoundItemView.setVisibility(GONE);
+            flRedirectContainer.setVisibility(VISIBLE);
         }
     }
 }

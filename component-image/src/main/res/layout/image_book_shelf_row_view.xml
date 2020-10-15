@@ -31,35 +31,31 @@
             android:id="@+id/book_item_view_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:borderRoundItemViewRate="1.28"
-            app:borderRoundItemViewWidthPercentage="0.2453"
             app:layout_constraintEnd_toStartOf="@+id/book_item_view_2"
             app:layout_constraintHorizontal_chainStyle="spread"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:rpl_percentage="0.2453"
+            app:rpl_rage="1.28" />
 
         <com.rainmonth.image.mvp.ui.widget.HouseBookItemView
             android:id="@+id/book_item_view_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:borderRoundItemViewRate="1.28"
-            app:borderRoundItemViewLeftBorderEnabled="true"
-            app:borderRoundItemViewWidthPercentage="0.2453"
             app:layout_constraintEnd_toStartOf="@id/book_item_view_3"
             app:layout_constraintStart_toEndOf="@id/book_item_view_1"
             app:layout_constraintTop_toTopOf="parent"
-            tools:visibility="visible" />
+            app:rpl_percentage="0.2453"
+            app:rpl_rage="1.28" />
 
         <com.rainmonth.image.mvp.ui.widget.HouseBookItemView
             android:id="@+id/book_item_view_3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:borderRoundItemViewRate="1.28"
-            app:borderRoundItemViewWidthPercentage="0.2453"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/book_item_view_2"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:rpl_percentage="0.2453"
+            app:rpl_rage="1.28" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </merge>
