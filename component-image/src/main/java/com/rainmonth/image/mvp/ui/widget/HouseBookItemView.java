@@ -42,7 +42,7 @@ public class HouseBookItemView extends BorderRoundItemView<SubscribeBean> {
     private void init(Context context) {
         mContext = context;
         Log.d("Randy", "itemView init");
-        View.inflate(context, R.layout.image_book_shelf_item_view, this);
+//        View.inflate(context, R.layout.image_book_shelf_item_view, this);
 
     }
 
