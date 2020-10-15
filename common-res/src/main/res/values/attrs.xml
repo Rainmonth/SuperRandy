@@ -6,10 +6,10 @@
     <declare-styleable name="RandyRoundLayout">
         <attr name="roundRadius" format="dimension" />
         <attr name="roundRadiusPercentage" format="float" />
-        <attr name="roundLeftTopRadius" format="float" />
-        <attr name="roundRightTopRadius" format="float" />
-        <attr name="roundLeftBottomRadius" format="float" />
-        <attr name="roundRightBottomRadius" format="float" />
+        <attr name="roundLeftTopRadius" format="dimension" />
+        <attr name="roundRightTopRadius" format="dimension" />
+        <attr name="roundLeftBottomRadius" format="dimension" />
+        <attr name="roundRightBottomRadius" format="dimension" />
         <attr name="roundHighQuality" format="boolean" />
     </declare-styleable>
 
