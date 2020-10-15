@@ -5,20 +5,20 @@
         <attr name="rpl_percentage" format="float" />
     </declare-styleable>
     <declare-styleable name="BorderRoundItemView">
-        <attr name="borderRoundItemViewWidthPercentage" format="float" />
-        <attr name="borderRoundItemViewRate" format="float" />
-        <attr name="borderRoundItemViewTopLeftRadius" format="dimension" />
-        <attr name="borderRoundItemViewTopRightRadius" format="dimension" />
-        <attr name="borderRoundItemViewBottomLeftRadius" format="dimension" />
-        <attr name="borderRoundItemViewBottomRightRadius" format="dimension" />
-        <attr name="borderRoundItemViewBorderWidth" format="dimension" />
-        <attr name="borderRoundItemViewBorderColor" format="reference|color" />
+        <attr name="brivWidthPercentage" format="float" />
+        <attr name="brivRate" format="float" />
+        <attr name="brivTopLeftRadius" format="dimension" />
+        <attr name="brivTopRightRadius" format="dimension" />
+        <attr name="brivBottomLeftRadius" format="dimension" />
+        <attr name="brivBottomRightRadius" format="dimension" />
+        <attr name="brivBorderWidth" format="dimension" />
+        <attr name="brivBorderColor" format="reference|color" />
         <!--边框的方向-->
-        <attr name="borderRoundItemViewBorderEnabled" format="boolean" />
-        <attr name="borderRoundItemViewLeftBorderEnabled" format="boolean" />
-        <attr name="borderRoundItemViewTopBorderEnabled" format="boolean" />
-        <attr name="borderRoundItemViewRightBorderEnabled" format="boolean" />
-        <attr name="borderRoundItemViewBottomBorderEnabled" format="boolean" />
+        <attr name="brivBorderEnabled" format="boolean" />
+        <attr name="brivLeftBorderEnabled" format="boolean" />
+        <attr name="brivTopBorderEnabled" format="boolean" />
+        <attr name="brivRightBorderEnabled" format="boolean" />
+        <attr name="brivBottomBorderEnabled" format="boolean" />
     </declare-styleable>
 
     <declare-styleable name="RandyRateLayout">

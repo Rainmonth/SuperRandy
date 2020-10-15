@@ -35,7 +35,7 @@ public class BorderRoundItemView extends FrameLayout {
     /**
      * 宽高比
      */
-    private float mRate = 32 / 25f;
+    private float mRate = -1;
 
     private float mTopLeftRadius = DensityUtils.dip2px(getContext(), 10);
     private float mBottomLeftRadius = DensityUtils.dip2px(getContext(), 10);
@@ -103,21 +103,21 @@ public class BorderRoundItemView extends FrameLayout {
     private void initAttr(Context context, AttributeSet attrs) {
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.BorderRoundItemView);
         try {
-            mWidthPercentage = ta.getFloat(R.styleable.BorderRoundItemView_borderRoundItemViewWidthPercentage, -1);
-            mRate = ta.getFloat(R.styleable.BorderRoundItemView_borderRoundItemViewRate, mRate);
+            mWidthPercentage = ta.getFloat(R.styleable.BorderRoundItemView_brivWidthPercentage, -1);
+            mRate = ta.getFloat(R.styleable.BorderRoundItemView_brivRate, mRate);
 
-            mTopLeftRadius = ta.getDimension(R.styleable.BorderRoundItemView_borderRoundItemViewTopLeftRadius, DensityUtils.dip2px(context, 10));
-            mBottomLeftRadius = ta.getDimension(R.styleable.BorderRoundItemView_borderRoundItemViewBottomLeftRadius, DensityUtils.dip2px(context, 10));
-            mTopRightRadius = ta.getDimension(R.styleable.BorderRoundItemView_borderRoundItemViewTopRightRadius, DensityUtils.dip2px(context, 18));
-            mBottomRightRadius = ta.getDimension(R.styleable.BorderRoundItemView_borderRoundItemViewBottomRightRadius, DensityUtils.dip2px(context, 18));
+            mTopLeftRadius = ta.getDimension(R.styleable.BorderRoundItemView_brivTopLeftRadius, DensityUtils.dip2px(context, 10));
+            mBottomLeftRadius = ta.getDimension(R.styleable.BorderRoundItemView_brivBottomLeftRadius, DensityUtils.dip2px(context, 10));
+            mTopRightRadius = ta.getDimension(R.styleable.BorderRoundItemView_brivTopRightRadius, DensityUtils.dip2px(context, 18));
+            mBottomRightRadius = ta.getDimension(R.styleable.BorderRoundItemView_brivBottomRightRadius, DensityUtils.dip2px(context, 18));
 
-            mBorderWidth = ta.getDimension(R.styleable.BorderRoundItemView_borderRoundItemViewBorderWidth, DensityUtils.dip2px(context, 3));
-            mBorderColor = ta.getColor(R.styleable.BorderRoundItemView_borderRoundItemViewBorderColor, Color.WHITE);
-            mBorderEnabled = ta.getBoolean(R.styleable.BorderRoundItemView_borderRoundItemViewBorderEnabled, true);
-            mBorderLeftEnabled = ta.getBoolean(R.styleable.BorderRoundItemView_borderRoundItemViewLeftBorderEnabled, false);
-            mBorderTopEnabled = ta.getBoolean(R.styleable.BorderRoundItemView_borderRoundItemViewTopBorderEnabled, true);
-            mBorderRightEnabled = ta.getBoolean(R.styleable.BorderRoundItemView_borderRoundItemViewRightBorderEnabled, true);
-            mBorderBottomEnabled = ta.getBoolean(R.styleable.BorderRoundItemView_borderRoundItemViewBottomBorderEnabled, true);
+            mBorderWidth = ta.getDimension(R.styleable.BorderRoundItemView_brivBorderWidth, DensityUtils.dip2px(context, 3));
+            mBorderColor = ta.getColor(R.styleable.BorderRoundItemView_brivBorderColor, Color.WHITE);
+            mBorderEnabled = ta.getBoolean(R.styleable.BorderRoundItemView_brivBorderEnabled, true);
+            mBorderLeftEnabled = ta.getBoolean(R.styleable.BorderRoundItemView_brivLeftBorderEnabled, false);
+            mBorderTopEnabled = ta.getBoolean(R.styleable.BorderRoundItemView_brivTopBorderEnabled, true);
+            mBorderRightEnabled = ta.getBoolean(R.styleable.BorderRoundItemView_brivRightBorderEnabled, true);
+            mBorderBottomEnabled = ta.getBoolean(R.styleable.BorderRoundItemView_brivBottomBorderEnabled, true);
 
             mRadii = new float[8];
             mRadii[0] = mTopLeftRadius;
@@ -178,7 +178,7 @@ public class BorderRoundItemView extends FrameLayout {
         int sw = getResources().getDisplayMetrics().widthPixels;
         KLog.d(TAG, "onMeasure: " + "screenWidth=" + getResources().getDisplayMetrics().widthPixels + ",screeHeight=" + getResources().getDisplayMetrics().heightPixels);
         KLog.d(TAG, "onMeasure: " + "w=" + getWidth() + ",h=" + getHeight() + ",mw=" + getMeasuredWidth() + ",mh=" + getMeasuredHeight());
-        if (mWidthPercentage == -1) {
+        if (mWidthPercentage == -1 && mRate == -1) {
             super.onMeasure(widthMeasureSpec, heightMeasureSpec);
             return;
         }
@@ -188,7 +188,7 @@ public class BorderRoundItemView extends FrameLayout {
         }
         final int width = MeasureSpec.getSize(widthMeasureSpec);
         KLog.e(TAG, "onMeasure: " + "w=" + getWidth() + ",h=" + getHeight() + ",mw=" + getMeasuredWidth() + ",mh=" + getMeasuredHeight() + ",width=" + width);
-        int newWidth = Math.round(sw * mWidthPercentage);
+        int newWidth = mWidthPercentage != -1 ? width : (Math.round(sw * mWidthPercentage));
 
         if (mRate == -1) {
             super.onMeasure(MeasureSpec.makeMeasureSpec(newWidth, MeasureSpec.EXACTLY), heightMeasureSpec);

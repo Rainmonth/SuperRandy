@@ -64,28 +64,38 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:background="@android:color/holo_green_light"
             app:rpl_percentage="0.2453"
-            app:rpl_rage="1.28">
+            app:rpl_rage="1.12">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="centerCrop"
+                android:src="@drawable/image_ic_story_item_view_desk" />
 
             <com.rainmonth.common.widgets.test.BorderRoundItemView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:borderRoundItemViewWidthPercentage="-1" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                app:brivBorderEnabled="true"
+                app:brivRate="1"
+                app:brivTopBorderEnabled="false"
+                app:brivWidthPercentage="1" />
 
             <!--采用ViewStub实现-->
             <FrameLayout
                 android:id="@+id/fl_redirect_container"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/image_book_item_view_redirect_bg">
+                android:background="@drawable/image_story_item_view_redirect_bg"
+                android:visibility="gone">
 
                 <ImageView
                     android:id="@+id/iv_redirect_icon"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/image_ic_book_item_view_add" />
+                    android:src="@drawable/image_ic_story_item_view_add" />
             </FrameLayout>
 
         </com.rainmonth.common.widgets.test.RandyPercentageLayout>
@@ -111,8 +121,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:background="@android:color/holo_green_light"
-                    app:borderRoundItemViewRate="1.28"
-                    app:borderRoundItemViewWidthPercentage="0.2453"
+                    app:brivRate="1.28"
+                    app:brivWidthPercentage="0.2453"
                     app:layout_constraintEnd_toStartOf="@+id/item_2"
                     app:layout_constraintHorizontal_chainStyle="spread"
                     app:layout_constraintStart_toStartOf="parent"
@@ -125,8 +135,8 @@
                     android:layout_marginTop="16dp"
                     android:layout_weight="1"
                     android:background="@android:color/holo_green_light"
-                    app:borderRoundItemViewRate="1.28"
-                    app:borderRoundItemViewWidthPercentage="0.2453"
+                    app:brivRate="1.28"
+                    app:brivWidthPercentage="0.2453"
                     app:layout_constraintEnd_toStartOf="@id/item_3"
                     app:layout_constraintStart_toEndOf="@id/item_1"
                     app:layout_constraintTop_toTopOf="parent"
@@ -139,8 +149,8 @@
                     android:layout_marginTop="16dp"
                     android:layout_weight="1"
                     android:background="@android:color/holo_green_light"
-                    app:borderRoundItemViewRate="1.28"
-                    app:borderRoundItemViewWidthPercentage="0.2453"
+                    app:brivRate="1.28"
+                    app:brivWidthPercentage="0.2453"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/item_2"
                     app:layout_constraintTop_toTopOf="parent" />

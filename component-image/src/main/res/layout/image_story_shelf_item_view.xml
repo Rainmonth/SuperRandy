@@ -5,35 +5,45 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginTop="16dp"
-    android:background="@android:color/holo_green_light"
     app:rpl_percentage="0.2453"
-    app:rpl_rage="1.28"
+    app:rpl_rage="1.12"
     tools:ignore="ContentDescription"
     tools:parentTag="com.rainmonth.common.widgets.test.RandyPercentageLayout">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        android:src="@drawable/image_ic_story_item_view_desk" />
+
     <com.rainmonth.common.widgets.test.BorderRoundItemView
         android:id="@+id/border_round_item_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:brivBorderEnabled="true"
-        app:brivRate="-1"
-        app:brivWidthPercentage="-1" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        app:brivBottomLeftRadius="18dp"
+        app:brivBottomRightRadius="18dp"
+        app:brivLeftBorderEnabled="true"
+        app:brivRate="1"
+        app:brivTopBorderEnabled="false"
+        app:brivTopLeftRadius="18dp"
+        app:brivTopRightRadius="18dp"
+        app:brivWidthPercentage="1" />
 
     <!--采用ViewStub实现-->
     <FrameLayout
         android:id="@+id/fl_redirect_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/image_book_item_view_redirect_bg"
-        android:visibility="gone"
-        tools:visibility="visible">
+        android:background="@drawable/image_story_item_view_redirect_bg"
+        android:visibility="gone">
 
         <ImageView
             android:id="@+id/iv_redirect_icon"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_gravity="center"
-            android:src="@drawable/image_ic_book_item_view_add" />
+            android:src="@drawable/image_ic_story_item_view_add" />
     </FrameLayout>
 
 </merge>
