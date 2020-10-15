@@ -20,7 +20,7 @@ import com.rainmonth.image.mvp.model.bean.SubscribeBean;
  * @author RandyZhang
  * @date 2020/10/13 3:39 PM
  */
-public class HouseBookItemView extends BorderRoundItemView<SubscribeBean> {
+public class HouseBookItemView extends BorderRoundItemView {
 
     private int[] demoImageId = {R.drawable.sample_cover_1, R.drawable.sample_cover_2, R.drawable.sample_cover_3,};
 
@@ -46,7 +46,6 @@ public class HouseBookItemView extends BorderRoundItemView<SubscribeBean> {
 
     }
 
-    @Override
     public void update(SubscribeBean subscribeBean) {
         if (subscribeBean != null) {
             if (subscribeBean.isRedirectInfo) {

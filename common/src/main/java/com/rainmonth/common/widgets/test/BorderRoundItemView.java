@@ -26,7 +26,7 @@ import com.socks.library.KLog;
  * @author RandyZhang
  * @date 2020/10/15 11:29 AM
  */
-public class BorderRoundItemView<T> extends FrameLayout {
+public class BorderRoundItemView extends FrameLayout {
     private static final String TAG = BorderRoundItemView.class.getSimpleName();
     /**
      * 宽度占屏幕百分比， -1表示不根据百分比计算
@@ -277,10 +277,6 @@ public class BorderRoundItemView<T> extends FrameLayout {
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
         KLog.d(TAG, "onDetachedFromWindow: " + "w=" + getWidth() + ",h=" + getHeight() + ",mw=" + getMeasuredWidth() + ",mh=" + getMeasuredHeight());
-    }
-
-    public void update(T data) {
-
     }
 
     public void handleCover(int resId) {
