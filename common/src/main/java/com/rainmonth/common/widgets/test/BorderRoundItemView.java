@@ -19,7 +19,6 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 
 import com.rainmonth.common.R;
-import com.rainmonth.common.bean.BaseBean;
 import com.rainmonth.common.utils.DensityUtils;
 import com.socks.library.KLog;
 
@@ -49,6 +48,7 @@ public class BorderRoundItemView<T> extends FrameLayout {
     private float mBorderWidth = DensityUtils.dip2px(getContext(), 3);
 
     /**
+     * todo 暂不支持
      * 边框颜色
      */
     private int mBorderColor = Color.RED;
@@ -218,13 +218,21 @@ public class BorderRoundItemView<T> extends FrameLayout {
         mViewPath.reset();
         // 初始化View原始path
         mViewPath.addRect(0, 0, w, h, Path.Direction.CW);
-
         mOutlinePath.addRoundRect(new RectF(0, 0, w, h), mRadii, Path.Direction.CW);
-        mInnerPath.addRoundRect(new RectF(0, mBorderWidth, w - mBorderWidth, h - mBorderWidth), mRadii, Path.Direction.CW);
-
+        // 获取圆角
         mViewPath.op(mOutlinePath, Path.Op.DIFFERENCE);
-        mOutlinePath.op(mInnerPath, Path.Op.DIFFERENCE);
 
+        // 获取border
+        if (mBorderEnabled) {
+            float left, top, right, bottom;
+
+            left = mBorderLeftEnabled ? mBorderWidth : 0;
+            top = mBorderTopEnabled ? mBorderWidth : 0;
+            right = mBorderRightEnabled ? w - mBorderWidth : w;
+            bottom = mBorderBottomEnabled ? h - mBorderWidth : h;
+            mInnerPath.addRoundRect(new RectF(left, top, right, bottom), mRadii, Path.Direction.CW);
+            mOutlinePath.op(mInnerPath, Path.Op.DIFFERENCE);
+        }
     }
 
     @Override
@@ -252,13 +260,16 @@ public class BorderRoundItemView<T> extends FrameLayout {
         int count = canvas.saveLayer(new RectF(0, 0, canvas.getWidth(), canvas.getHeight()), null, Canvas
                 .ALL_SAVE_FLAG);
         super.dispatchDraw(canvas);
+        // 绘制圆角
         mRadiusPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_OUT));
         canvas.drawPath(mViewPath, mRadiusPaint);
         mRadiusPaint.setXfermode(null);
         canvas.restoreToCount(count);
 
         // 绘制边框
-        canvas.drawPath(mOutlinePath, mBorderPaint);
+        if (mBorderEnabled) {
+            canvas.drawPath(mOutlinePath, mBorderPaint);
+        }
     }
 
 

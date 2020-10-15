@@ -44,6 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             app:borderRoundItemViewRate="1.28"
+            app:borderRoundItemViewLeftBorderEnabled="true"
             app:borderRoundItemViewWidthPercentage="0.2453"
             app:layout_constraintEnd_toStartOf="@id/book_item_view_3"
             app:layout_constraintStart_toEndOf="@id/book_item_view_1"
