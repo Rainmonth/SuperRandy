@@ -48,14 +48,13 @@ public class HouseBookItemView extends BorderRoundItemView<SubscribeBean> {
 
     @Override
     public void update(SubscribeBean subscribeBean) {
-        super.update(subscribeBean);
         if (subscribeBean != null) {
             if (subscribeBean.isRedirectInfo) {
-                showCover(R.drawable.book_shelf_more);
-                handleCount("", false);
+                handleCover(R.drawable.book_shelf_more);
+                handleCount(false, "");
             } else {
-                showCover(demoImageId[subscribeBean.index % 3]);
-                handleCount(String.valueOf(subscribeBean.index + 1), true);
+                handleCover(demoImageId[subscribeBean.index % 3]);
+                handleCount(true, String.valueOf(subscribeBean.index + 1));
             }
         }
     }

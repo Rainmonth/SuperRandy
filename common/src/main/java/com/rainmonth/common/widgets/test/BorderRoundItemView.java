@@ -53,6 +53,12 @@ public class BorderRoundItemView<T> extends FrameLayout {
      */
     private int mBorderColor = Color.RED;
 
+    private boolean mBorderEnabled = true;
+    private boolean mBorderLeftEnabled = false;
+    private boolean mBorderTopEnabled = false;
+    private boolean mBorderRightEnabled = false;
+    private boolean mBorderBottomEnabled = false;
+
     /**
      * 整个View对应的Path
      */
@@ -70,7 +76,6 @@ public class BorderRoundItemView<T> extends FrameLayout {
 
     private Paint mRadiusPaint;
     private Paint mBorderPaint;
-
 
     private ImageView ivCover;
     private ImageView ivTopRightFlag;
@@ -108,6 +113,11 @@ public class BorderRoundItemView<T> extends FrameLayout {
 
             mBorderWidth = ta.getDimension(R.styleable.BorderRoundItemView_borderRoundItemViewBorderWidth, DensityUtils.dip2px(context, 3));
             mBorderColor = ta.getColor(R.styleable.BorderRoundItemView_borderRoundItemViewBorderColor, Color.WHITE);
+            mBorderEnabled = ta.getBoolean(R.styleable.BorderRoundItemView_borderRoundItemViewBorderEnabled, true);
+            mBorderLeftEnabled = ta.getBoolean(R.styleable.BorderRoundItemView_borderRoundItemViewLeftBorderEnabled, false);
+            mBorderTopEnabled = ta.getBoolean(R.styleable.BorderRoundItemView_borderRoundItemViewTopBorderEnabled, true);
+            mBorderRightEnabled = ta.getBoolean(R.styleable.BorderRoundItemView_borderRoundItemViewRightBorderEnabled, true);
+            mBorderBottomEnabled = ta.getBoolean(R.styleable.BorderRoundItemView_borderRoundItemViewBottomBorderEnabled, true);
 
             mRadii = new float[8];
             mRadii[0] = mTopLeftRadius;
@@ -128,7 +138,7 @@ public class BorderRoundItemView<T> extends FrameLayout {
 
     private void initView(Context context) {
 
-        View.inflate(context, R.layout.test_view, this);
+        View.inflate(context, R.layout.border_round_item_view, this);
         ivCover = findViewById(R.id.iv_cover);
         ivTopRightFlag = findViewById(R.id.iv_top_right_flag);
         ivBottomRightFlag = findViewById(R.id.iv_bottom_right_flag);
@@ -145,7 +155,7 @@ public class BorderRoundItemView<T> extends FrameLayout {
         mRadiusPaint.setStyle(Paint.Style.FILL);
 
         mBorderPaint = new Paint();
-        // 不要带透明的颜色都可
+
         mBorderPaint.setColor(mBorderColor);
         mBorderPaint.setAntiAlias(true);
         mBorderPaint.setStyle(Paint.Style.FILL);
@@ -262,14 +272,24 @@ public class BorderRoundItemView<T> extends FrameLayout {
 
     }
 
-    public void showCover(int resId) {
+    public void handleCover(int resId) {
         ivCover.setImageResource(resId);
     }
 
-    public void handleCount(String text, boolean isShow) {
+    public void handleCount(boolean isShow, String text) {
         tvCount.setVisibility(isShow ? VISIBLE : GONE);
         if (isShow && !TextUtils.isEmpty(text)) {
             tvCount.setText(text);
         }
+    }
+
+    public void handleTopRightFlag(boolean isShow, int resId) {
+        ivTopRightFlag.setVisibility(isShow ? VISIBLE : GONE);
+        ivTopRightFlag.setImageResource(isShow ? resId : 0);
+    }
+
+    public void handleBottomRightFlag(boolean isShow, int resId) {
+        ivBottomRightFlag.setVisibility(isShow ? VISIBLE : GONE);
+        ivBottomRightFlag.setImageResource(isShow ? resId : 0);
     }
 }
