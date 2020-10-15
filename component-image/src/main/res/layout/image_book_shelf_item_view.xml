@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:scaleType="centerCrop"
-        tools:src="@drawable/book_sample_cover_1" />
+        tools:src="@drawable/sample_cover_1" />
 
     <TextView
         android:id="@+id/tv_title"

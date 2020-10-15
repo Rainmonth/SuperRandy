@@ -18,6 +18,7 @@ import com.rainmonth.common.utils.DensityUtils;
 import com.rainmonth.common.utils.ToastUtils;
 import com.rainmonth.image.R;
 import com.rainmonth.image.mvp.model.bean.SubscribeBean;
+import com.socks.library.KLog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -97,11 +98,14 @@ public class BookShelfView extends ConstraintLayout {
 
         }
 
+        int rowHeight = (int) (DensityUtils.getScreenWidth(mContext) * 0.2453 * 1.28 + DensityUtils.dip2px(mContext, 17));
+        KLog.e("Randy", rowHeight);
+
         mPageNum = getPageNum(size);
         if (mPageNum == 1 && size < 3) {
-            vpSubscribeList.getLayoutParams().height = DensityUtils.dip2px(mContext, 136);
+            vpSubscribeList.getLayoutParams().height = rowHeight;
         } else {
-            vpSubscribeList.getLayoutParams().height = DensityUtils.dip2px(mContext, 288);
+            vpSubscribeList.getLayoutParams().height = rowHeight * 2 + DensityUtils.dip2px(mContext, 16);
         }
 
         generatePages(mPageNum);

@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <declare-styleable name="BorderRoundItemView">
+        <attr name="borderRoundItemViewWidthPercentage" format="float" />
+        <attr name="borderRoundItemViewRate" format="float" />
+        <attr name="borderRoundItemViewTopLeftRadius" format="dimension" />
+        <attr name="borderRoundItemViewTopRightRadius" format="dimension" />
+        <attr name="borderRoundItemViewBottomLeftRadius" format="dimension" />
+        <attr name="borderRoundItemViewBottomRightRadius" format="dimension" />
+        <attr name="borderRoundItemViewBorderWidth" format="dimension" />
+        <attr name="borderRoundItemViewBorderColor" format="reference|color" />
+    </declare-styleable>
+
     <declare-styleable name="RandyRateLayout">
         <attr name="rate" format="float" />
     </declare-styleable>

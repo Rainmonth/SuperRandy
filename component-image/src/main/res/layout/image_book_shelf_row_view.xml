@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -10,7 +11,7 @@
         android:id="@+id/iv_book_shelf_bg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/ll_item_container"
+        android:layout_below="@+id/cl_item_container"
         android:layout_gravity="bottom"
         android:layout_marginStart="13dp"
         android:layout_marginTop="-5dp"
@@ -18,42 +19,46 @@
         android:scaleType="fitXY"
         android:src="@drawable/house_book_shelf_bg" />
 
-    <LinearLayout
-        android:id="@+id/ll_item_container"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_item_container"
         android:layout_width="match_parent"
-        android:layout_height="119dp"
-        android:layout_alignStart="@+id/iv_book_shelf_bg"
-        android:layout_alignEnd="@+id/iv_book_shelf_bg"
-        android:layout_marginStart="7dp"
-        android:layout_marginEnd="7dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
         android:orientation="horizontal">
 
-        <!--封面宽高比25:32-->
         <com.rainmonth.image.mvp.ui.widget.HouseBookItemView
             android:id="@+id/book_item_view_1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="5dp"
-            android:layout_weight="1" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:borderRoundItemViewRate="1.28"
+            app:borderRoundItemViewWidthPercentage="0.2453"
+            app:layout_constraintEnd_toStartOf="@+id/book_item_view_2"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <!--封面宽高比25:32-->
         <com.rainmonth.image.mvp.ui.widget.HouseBookItemView
             android:id="@+id/book_item_view_2"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="5dp"
-            android:layout_weight="1" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:borderRoundItemViewRate="1.28"
+            app:borderRoundItemViewWidthPercentage="0.2453"
+            app:layout_constraintEnd_toStartOf="@id/book_item_view_3"
+            app:layout_constraintStart_toEndOf="@id/book_item_view_1"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible" />
 
-        <!--封面宽高比25:32-->
         <com.rainmonth.image.mvp.ui.widget.HouseBookItemView
             android:id="@+id/book_item_view_3"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="5dp"
-            android:layout_weight="1" />
-
-    </LinearLayout>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:borderRoundItemViewRate="1.28"
+            app:borderRoundItemViewWidthPercentage="0.2453"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/book_item_view_2"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </merge>

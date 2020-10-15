@@ -36,6 +36,8 @@ public class ImageMainActivity extends BaseActivity {
     Button btnLoadMedia;
 
     Button btnWorkDemo;
+
+    Button btnCommentDemo;
     @Override
     protected void setupActivityComponent(AppComponent appComponent) {
 
@@ -57,6 +59,8 @@ public class ImageMainActivity extends BaseActivity {
         btnAuth = findViewById(R.id.btn_auth);
         btnLoadMedia = findViewById(R.id.btn_load_media);
         btnWorkDemo = findViewById(R.id.btn_work_demo);
+        btnCommentDemo = findViewById(R.id.btn_comment_demo);
+
         imageBtnPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -113,6 +117,8 @@ public class ImageMainActivity extends BaseActivity {
         });
 
         btnWorkDemo.setOnClickListener(v-> readyGo(WorkDemoActivity.class));
+
+        btnCommentDemo.setOnClickListener(v->readyGo(ComponentTestActivity.class));
     }
 
     @Override

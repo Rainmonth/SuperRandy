@@ -1,53 +1,133 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:ignore="ContentDescription">
 
-    <ImageView
-        android:id="@+id/image_imageview"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:contentDescription="@string/app_name"
-        android:padding="5dp"
-        android:scaleType="fitXY"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/backgrounds/scenic[1]" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
 
-    <View
-        android:id="@+id/v0"
-        android:layout_width="0dp"
-        android:layout_height="200dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <com.rainmonth.common.widgets.RandyRoundLayout
+            android:id="@+id/book_item_view"
+            android:layout_width="98dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/image_book_item_bg"
+            app:rate="1.28"
+            app:roundLeftBottomRadius="10dp"
+            app:roundLeftTopRadius="10dp"
+            app:roundRightBottomRadius="18dp"
+            app:roundRightTopRadius="18dp">
 
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/sample_cover_1" />
 
-    <View
-        android:id="@+id/v1"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|end"
+                android:src="@drawable/house_ic_new" />
 
-    <View
-        android:id="@+id/v2"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/v1" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:src="@drawable/house_ic_vip_flag" />
+
+        </com.rainmonth.common.widgets.RandyRoundLayout>
+
+        <com.rainmonth.common.widgets.RandyRoundLayout
+            android:id="@+id/story_item_view"
+            android:layout_width="98dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:rate="1"
+            app:roundRadius="18dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/sample_cover_1" />
+
+        </com.rainmonth.common.widgets.RandyRoundLayout>
+
+        <com.rainmonth.common.widgets.RandyRateLayout
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@android:color/holo_green_light"
+            app:rate="1.2">
+
+        </com.rainmonth.common.widgets.RandyRateLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:orientation="vertical">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:orientation="horizontal">
+
+                <com.rainmonth.common.widgets.test.BorderRoundItemView
+                    android:id="@+id/item_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    app:borderRoundItemViewRate="1.28"
+                    app:borderRoundItemViewWidthPercentage="0.2453"
+                    app:layout_constraintEnd_toStartOf="@+id/item_2"
+                    app:layout_constraintHorizontal_chainStyle="spread"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.rainmonth.common.widgets.test.BorderRoundItemView
+                    android:id="@+id/item_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_weight="1"
+                    app:borderRoundItemViewRate="1.28"
+                    app:borderRoundItemViewWidthPercentage="0.2453"
+                    app:layout_constraintEnd_toStartOf="@id/item_3"
+                    app:layout_constraintStart_toEndOf="@id/item_1"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:visibility="visible" />
+
+                <com.rainmonth.common.widgets.test.BorderRoundItemView
+                    android:id="@+id/item_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_weight="1"
+                    app:borderRoundItemViewRate="1.28"
+                    app:borderRoundItemViewWidthPercentage="0.2453"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/item_2"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+
+        <!--        <com.rainmonth.common.widgets.test.TestViewGroup-->
+        <!--            android:layout_width="200dp"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginTop="16dp"-->
+        <!--            android:background="@android:color/holo_green_light">-->
+
+        <!--        </com.rainmonth.common.widgets.test.TestViewGroup>-->
+    </LinearLayout>
+</ScrollView>

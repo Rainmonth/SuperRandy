@@ -1,19 +1,14 @@
 package com.rainmonth.image.mvp.ui.widget;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.rainmonth.common.bean.BaseBean;
-import com.rainmonth.common.utils.DensityUtils;
+import com.rainmonth.common.widgets.test.BorderRoundItemView;
 import com.rainmonth.image.R;
 import com.rainmonth.image.mvp.model.bean.SubscribeBean;
 
@@ -25,58 +20,9 @@ import com.rainmonth.image.mvp.model.bean.SubscribeBean;
  * @author RandyZhang
  * @date 2020/10/13 3:39 PM
  */
-public class HouseBookItemView extends FrameLayout {
+public class HouseBookItemView extends BorderRoundItemView<SubscribeBean> {
 
-
-    ImageView cover;
-    View newFlag;
-    View countFlag;
-    View bottomRightFlag;       // 可能是限免、推荐、VIP、精品之一
-    TextView tvTitle;
-
-    private int[] demoImageId = {R.drawable.book_sample_cover_1, R.drawable.book_sample_cover_2, R.drawable.book_sample_cover_3,};
-
-    /**
-     * 是否统一圆角（即四个角圆角大小一致）
-     */
-    private boolean isUniformRadius = true;
-
-    /**
-     * 内部统一圆角，优先级高于 mInnerRadiiArray 中的圆角设置 *
-     */
-    private float mInnerUniformRadius;
-    /**
-     * 外部统一圆角，优先级高于 mOuterRadiiArray 中的圆角设置
-     */
-    private float mOuterUniformRadius;
-    /**
-     * 内部封面圆角数据
-     */
-    private float[] mInnerRadiiArray;
-    /**
-     * 外部边框圆角数组
-     */
-    private float[] mOuterRadiiArray;
-    /**
-     * 左 边框宽度
-     */
-    private float mLeftBorderWidth = DensityUtils.dip2px(getContext(), 3);
-    /**
-     * 上 边框宽度
-     */
-    private float mTopBorderWidth = DensityUtils.dip2px(getContext(), 3);
-    /**
-     * 右 边框宽度
-     */
-    private float mRightBorderWidth = DensityUtils.dip2px(getContext(), 3);
-    /**
-     * 下 边框宽度
-     */
-    private float mBottomBorderWidth = DensityUtils.dip2px(getContext(), 3);
-    /**
-     * 边框颜色
-     */
-    private int mOutBorderColor = Color.WHITE;
+    private int[] demoImageId = {R.drawable.sample_cover_1, R.drawable.sample_cover_2, R.drawable.sample_cover_3,};
 
     private Context mContext;
 
@@ -98,30 +44,19 @@ public class HouseBookItemView extends FrameLayout {
         Log.d("Randy", "itemView init");
         View.inflate(context, R.layout.image_book_shelf_item_view, this);
 
-        tvTitle = findViewById(R.id.tv_title);
-        cover = findViewById(R.id.iv_cover);
     }
 
     @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-    }
-
-    public void update(BaseBean data) {
-        if (data instanceof SubscribeBean) {
-            SubscribeBean subscribeBean = (SubscribeBean) data;
+    public void update(SubscribeBean subscribeBean) {
+        super.update(subscribeBean);
+        if (subscribeBean != null) {
             if (subscribeBean.isRedirectInfo) {
                 showCover(R.drawable.book_shelf_more);
-                tvTitle.setVisibility(GONE);
+                handleCount("", false);
             } else {
                 showCover(demoImageId[subscribeBean.index % 3]);
-                tvTitle.setVisibility(VISIBLE);
+                handleCount(String.valueOf(subscribeBean.index + 1), true);
             }
-            tvTitle.setText(String.valueOf(subscribeBean.index + 1));
         }
-    }
-
-    public void showCover(int resId) {
-        cover.setImageResource(resId);
     }
 }
