@@ -21,6 +21,8 @@ import com.rainmonth.common.R;
 import com.rainmonth.common.utils.DensityUtils;
 
 /**
+ * 本身背景不会有圆角
+ *
  * @author 张豪成
  * @date 2019-11-25 17:46
  */
