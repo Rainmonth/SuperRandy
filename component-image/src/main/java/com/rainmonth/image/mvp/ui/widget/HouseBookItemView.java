@@ -41,7 +41,7 @@ public class HouseBookItemView extends BorderRoundItemView {
 
     private void init(Context context) {
         mContext = context;
-        Log.d("Randy", "itemView init");
+        Log.d("Randy", "HouseBookItemView init");
 //        View.inflate(context, R.layout.image_book_shelf_item_view, this);
 
     }

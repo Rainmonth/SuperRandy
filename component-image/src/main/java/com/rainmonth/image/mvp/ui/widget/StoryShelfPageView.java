@@ -23,9 +23,9 @@ import java.util.List;
  * @date 2020/10/13 8:10 PM
  */
 public class StoryShelfPageView extends RelativeLayout {
-    HouseBookItemView storyItemView1;
-    HouseBookItemView storyItemView2;
-    HouseBookItemView storyItemView3;
+    HouseStoryItemView storyItemView1;
+    HouseStoryItemView storyItemView2;
+    HouseStoryItemView storyItemView3;
     LinearLayout llItemContainer;
     ImageView ivBookShelfBg;
 
@@ -93,14 +93,14 @@ public class StoryShelfPageView extends RelativeLayout {
         }
     }
 
-    private void showBookItem(HouseBookItemView view, SubscribeBean subscribeBean) {
+    private void showBookItem(HouseStoryItemView view, SubscribeBean subscribeBean) {
         view.setVisibility(VISIBLE);
         view.update(subscribeBean);
         view.setTag(subscribeBean);
         view.setOnClickListener(listener);
     }
 
-    private void hideBookItem(HouseBookItemView view) {
+    private void hideBookItem(HouseStoryItemView view) {
         view.setVisibility(INVISIBLE);
         view.setOnClickListener(null);
         view.setTag(null);

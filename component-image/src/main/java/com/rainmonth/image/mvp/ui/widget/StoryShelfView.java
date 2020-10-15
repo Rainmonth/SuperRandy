@@ -19,6 +19,7 @@ import com.rainmonth.common.utils.DensityUtils;
 import com.rainmonth.common.utils.ToastUtils;
 import com.rainmonth.image.R;
 import com.rainmonth.image.mvp.model.bean.SubscribeBean;
+import com.socks.library.KLog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -93,7 +94,9 @@ public class StoryShelfView extends ConstraintLayout {
         }
 
         mPageNum = getPageNum(size);
-        rvSubscribeList.getLayoutParams().height = DensityUtils.dip2px(mContext, 136);
+        int rowHeight = (int) (DensityUtils.getScreenWidth(mContext) * 0.2453 * 1 + DensityUtils.dip2px(mContext, 17));
+        KLog.e("Randy", rowHeight);
+        rvSubscribeList.getLayoutParams().height = rowHeight;
 
         generatePages(mPageNum);
         generateIndicators(mPageNum);
