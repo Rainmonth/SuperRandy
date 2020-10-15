@@ -9,6 +9,12 @@
         <attr name="borderRoundItemViewBottomRightRadius" format="dimension" />
         <attr name="borderRoundItemViewBorderWidth" format="dimension" />
         <attr name="borderRoundItemViewBorderColor" format="reference|color" />
+        <!--边框的方向-->
+        <attr name="borderRoundItemViewBorderEnabled" format="boolean" />
+        <attr name="borderRoundItemViewLeftBorderEnabled" format="boolean" />
+        <attr name="borderRoundItemViewTopBorderEnabled" format="boolean" />
+        <attr name="borderRoundItemViewRightBorderEnabled" format="boolean" />
+        <attr name="borderRoundItemViewBottomBorderEnabled" format="boolean" />
     </declare-styleable>
 
     <declare-styleable name="RandyRateLayout">
