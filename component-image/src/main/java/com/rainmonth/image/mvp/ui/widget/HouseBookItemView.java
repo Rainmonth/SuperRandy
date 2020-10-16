@@ -68,7 +68,7 @@ public class HouseBookItemView extends RandyPercentageLayout {
         if (subscribeBean != null && !subscribeBean.isRedirectInfo) {
             borderRoundItemView.setVisibility(VISIBLE);
             borderRoundItemView.handleCover(demoImageId[subscribeBean.index % 3]);
-            borderRoundItemView.handleCount(true, String.valueOf(subscribeBean.index + 1));
+            borderRoundItemView.handleCount(true, (subscribeBean.index + 1) + "本" );
 
             flRedirectContainer.setVisibility(GONE);
         }

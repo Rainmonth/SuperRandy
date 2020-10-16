@@ -58,7 +58,7 @@ public class WorkDemoActivity extends BaseActivity {
     private List<SubscribeBean> getBookSubscribeList(int size) {
         List<SubscribeBean> subscribeList = new ArrayList<>();
         for (int i = 0; i < size; i++) {
-            subscribeList.add(new SubscribeBean(i, false));
+            subscribeList.add(new SubscribeBean(95 + i, false));
         }
         subscribeList.add(new SubscribeBean(size, true));
         return subscribeList;

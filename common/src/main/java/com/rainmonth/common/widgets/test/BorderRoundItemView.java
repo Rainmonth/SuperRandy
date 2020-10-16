@@ -159,6 +159,14 @@ public class BorderRoundItemView extends FrameLayout {
         mBorderPaint.setColor(mBorderColor);
         mBorderPaint.setAntiAlias(true);
         mBorderPaint.setStyle(Paint.Style.FILL);
+
+        if (mBorderEnabled) {
+            int leftP = mBorderLeftEnabled ? (int) mBorderWidth : 0;
+            int topP = mBorderTopEnabled ? (int) mBorderWidth : 0;
+            int rightP = mBorderRightEnabled ? (int) mBorderWidth : 0;
+            int bottomP = mBorderBottomEnabled ? (int) mBorderWidth : 0;
+            setPadding(leftP, topP, rightP, bottomP);
+        }
     }
 
     @Override
@@ -216,6 +224,7 @@ public class BorderRoundItemView extends FrameLayout {
         KLog.d(TAG, "onSizeChanged: " + "w=" + getWidth() + ",h=" + getHeight() + ",mw=" + getMeasuredWidth() + ",mh=" + getMeasuredHeight());
         // 重置
         mViewPath.reset();
+        mOutlinePath.reset();
         // 初始化View原始path
         mViewPath.addRect(0, 0, w, h, Path.Direction.CW);
         mOutlinePath.addRoundRect(new RectF(0, 0, w, h), mRadii, Path.Direction.CW);
@@ -224,6 +233,7 @@ public class BorderRoundItemView extends FrameLayout {
 
         // 获取border
         if (mBorderEnabled) {
+            mInnerPath.reset();
             float left, top, right, bottom;
 
             left = mBorderLeftEnabled ? mBorderWidth : 0;

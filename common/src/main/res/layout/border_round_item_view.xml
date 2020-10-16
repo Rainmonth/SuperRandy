@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:ignore="ContentDescription"
+    tools:ignore="ContentDescription,SpUsage"
     tools:parentTag="android.widget.FrameLayout">
 
     <ImageView
@@ -16,20 +16,31 @@
 
     <ImageView
         android:id="@+id/iv_top_right_flag"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="top|end" />
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_gravity="top|end"
+        android:src="@drawable/house_ic_new" />
 
     <ImageView
         android:id="@+id/iv_bottom_right_flag"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end" />
+        android:layout_width="46dp"
+        android:layout_height="18dp"
+        android:layout_gravity="bottom|end"
+        android:src="@drawable/house_ic_vip_flag" />
 
     <TextView
         android:id="@+id/tv_count"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|start" />
+        android:layout_height="18dp"
+        android:layout_gravity="bottom|start"
+        android:background="@drawable/house_count_bg"
+        android:gravity="center_vertical"
+        android:paddingStart="6dp"
+        android:paddingTop="2dp"
+        android:paddingEnd="6dp"
+        android:paddingBottom="2dp"
+        android:textColor="@color/white"
+        android:textSize="12dp"
+        tools:text="120本" />
 
 </merge>
