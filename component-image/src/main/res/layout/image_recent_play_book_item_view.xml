@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.rainmonth.common.widgets.test.RandyPercentageLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/item_view_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:rpl_percentage="0.2133"
+    app:rpl_rage="1.28"
+    tools:ignore="ResourceName">
+
+    <com.rainmonth.image.mvp.ui.widget.HouseBookItemView
+        android:id="@+id/book_item_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</com.rainmonth.common.widgets.test.RandyPercentageLayout>

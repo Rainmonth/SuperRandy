@@ -64,6 +64,14 @@ public class HouseBookItemView extends RandyPercentageLayout {
         }
     }
 
+
+    public void update(RecentPlayBean recentPlayBean) {
+        borderRoundItemView.setVisibility(VISIBLE);
+        borderRoundItemView.handleCover(demoImageId[recentPlayBean.index % 3]);
+        borderRoundItemView.handleCount(true, (recentPlayBean.index + 1) + "本" );
+        flRedirectContainer.setVisibility(GONE);
+    }
+
     private void handleSubscribeInfo(SubscribeBean subscribeBean) {
         if (subscribeBean != null && !subscribeBean.isRedirectInfo) {
             borderRoundItemView.setVisibility(VISIBLE);

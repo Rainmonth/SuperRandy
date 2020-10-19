@@ -8,4 +8,15 @@ import com.rainmonth.common.bean.BaseBean;
  */
 public class RecentPlayBean extends BaseBean {
     public int resId;
+    public int type;// 1 book；2 story
+    public int index;
+
+    public boolean isBookType() {
+        return type == 1;
+    }
+
+    public boolean isStoryType() {
+        return type == 2;
+    }
+
 }
