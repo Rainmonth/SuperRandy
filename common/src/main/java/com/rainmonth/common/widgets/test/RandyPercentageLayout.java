@@ -31,11 +31,11 @@ public class RandyPercentageLayout extends FrameLayout {
     /**
      * 宽度占屏幕百分比， -1表示不根据百分比计算
      */
-    private float mWidthPercentage = -1;
+    protected float mWidthPercentage = -1;
     /**
      * 宽高比
      */
-    private float mRate = 32 / 25f;
+    protected float mRate = 32 / 25f;
 
 
     public RandyPercentageLayout(Context context) {

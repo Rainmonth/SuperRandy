@@ -13,6 +13,7 @@ import com.rainmonth.common.widgets.test.BorderRoundItemView;
 import com.rainmonth.common.widgets.test.RandyPercentageLayout;
 import com.rainmonth.image.R;
 import com.rainmonth.image.mvp.model.bean.SubscribeBean;
+import com.socks.library.KLog;
 
 /**
  * @author RandyZhang
@@ -45,6 +46,12 @@ public class HouseStoryItemView extends RandyPercentageLayout {
 
         borderRoundItemView = findViewById(R.id.border_round_item_view);
         flRedirectContainer = findViewById(R.id.fl_redirect_container);
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        KLog.d("Randy", "mWidthPercentage:" + mWidthPercentage + ", mRate" + mRate);
     }
 
     public void update(SubscribeBean subscribeBean) {
