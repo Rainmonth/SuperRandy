@@ -5,10 +5,9 @@ import android.widget.Toast;
 
 import com.rainmonth.common.base.BaseActivity;
 import com.rainmonth.common.di.component.AppComponent;
-import com.rainmonth.common.utils.ToastUtils;
+import com.rainmonth.common.widgets.library.internal.PullAcrView;
 import com.rainmonth.image.R;
 import com.rainmonth.image.mvp.ui.test.WorkDemoActivity;
-import com.rainmonth.image.mvp.ui.widget.PullAcrView;
 
 import butterknife.BindView;
 

@@ -10,7 +10,7 @@
     android:orientation="vertical"
     tools:ignore="ContentDescription">
 
-    <com.rainmonth.image.mvp.ui.widget.PullAcrView
+    <com.rainmonth.common.widgets.library.internal.PullAcrView
         android:id="@+id/pull_arc_view"
         android:layout_width="38dp"
         android:layout_height="200dp"

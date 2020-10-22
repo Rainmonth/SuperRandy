@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="50dp"
+    android:layout_height="match_parent"
+    android:layout_gravity="start|center_vertical"
+    android:gravity="center_vertical|end"
+    android:orientation="vertical"
+    tools:ignore="SpUsage,HardcodedText"
+    tools:parentTag="android.widget.LinearLayout">
+
+    <TextView
+        android:id="@+id/tv_tip_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity=""
+        android:drawableTop="@drawable/image_ic_tip_arrow"
+        android:ems="1"
+        android:gravity="center_vertical"
+        android:text="左滑查看更多"
+        android:textColor="@color/white"
+        android:textSize="12dp"
+        tools:background="@android:color/holo_orange_light"
+        tools:text="左滑查看更多" />
+
+</LinearLayout>

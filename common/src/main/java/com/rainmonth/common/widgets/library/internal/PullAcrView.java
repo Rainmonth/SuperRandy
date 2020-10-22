@@ -1,4 +1,4 @@
-package com.rainmonth.image.mvp.ui.widget;
+package com.rainmonth.common.widgets.library.internal;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -15,8 +15,8 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
+import com.rainmonth.common.R;
 import com.rainmonth.common.utils.DensityUtils;
-import com.rainmonth.image.R;
 import com.socks.library.KLog;
 
 /**
@@ -58,7 +58,7 @@ public class PullAcrView extends LinearLayout {
     /**
      * 最大滑动的距离
      */
-    private int mMaxScrollDistance = DensityUtils.dip2px(getContext(), 50);
+    private int mMaxScrollDistance = DensityUtils.dip2px(getContext(), 150);
 
 
     public PullAcrView(Context context) {
@@ -144,18 +144,18 @@ public class PullAcrView extends LinearLayout {
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
-        KLog.d("RandyTest", "onSizeChanged()");
+
         mWidth = w;
         mHeight = h;
-
+        KLog.d("RandyTest", "onSizeChanged(), w:" + w + ",h:" + h);
         mStartPoint.x = w;
-        mStartPoint.y = 0;
+        mStartPoint.y = h / 4f;
 
         mControlPoint.x = w;
         mControlPoint.y = h / 2f;
 
         mEndPoint.x = w;
-        mEndPoint.y = h;
+        mEndPoint.y = h * 3 / 4f;
 
         mLabelWidth = tvTipLabel.getMeasuredWidth();
 
@@ -199,9 +199,21 @@ public class PullAcrView extends LinearLayout {
     public void onPull(float pullDistance) {
         KLog.d("RandyTest", pullDistance);
 
+
+        if (pullDistance >= 0) {// 从右向左
+            pullDistance = Math.min(mWidth, pullDistance);
+            mControlPoint.x = mWidth - pullDistance;
+
+            tvTipLabel.setTranslationX(mWidth - (pullDistance / mMaxScrollDistance * mWidth));
+            invalidate();
+        }
     }
 
-    public void onPullRelease() {
+    public void onReset() {
+        reset();
+    }
+
+    public void onRelease() {
 
     }
 
