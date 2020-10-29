@@ -1,20 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="20dp"
-    android:layout_marginEnd="20dp"
-    android:background="@android:color/holo_green_light"
-    android:orientation="vertical"
-    tools:ignore="ContentDescription">
+    android:layout_height="match_parent">
 
-    <com.rainmonth.common.widgets.library.internal.PullAcrView
-        android:id="@+id/pull_arc_view"
-        android:layout_width="38dp"
-        android:layout_height="200dp"
-        android:layout_gravity="end|center_vertical"
-        android:background="@android:color/holo_orange_light"
-        android:gravity="center_vertical|end" />
-</LinearLayout>
+    <LinearLayout
+        android:id="@+id/ll_recent_play_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/image_recent_play_bg"
+            android:orientation="vertical"
+            tools:ignore="ContentDescription">
+
+            <com.rainmonth.common.widgets.library.internal.PullAcrView
+                android:id="@+id/pull_arc_view1"
+                android:layout_width="100dp"
+                android:layout_height="200dp"
+                android:layout_gravity="end|center_vertical"
+                android:gravity="center_vertical|end" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/image_book_shelf_bg"
+            android:orientation="vertical"
+            tools:ignore="ContentDescription">
+
+            <com.rainmonth.common.widgets.library.internal.PullAcrView
+                android:id="@+id/pull_arc_view2"
+                android:layout_width="100dp"
+                android:layout_height="200dp"
+                android:layout_gravity="end|center_vertical"
+                android:gravity="center_vertical|end" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/image_story_shelf_bg"
+            android:orientation="vertical"
+            tools:ignore="ContentDescription">
+
+            <com.rainmonth.common.widgets.library.internal.PullAcrView
+                android:id="@+id/pull_arc_view3"
+                android:layout_width="100dp"
+                android:layout_height="200dp"
+                android:layout_gravity="end|center_vertical"
+                android:gravity="center_vertical|end" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+</ScrollView>

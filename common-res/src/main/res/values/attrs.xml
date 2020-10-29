@@ -76,6 +76,7 @@
             <flag name="rotate" value="0x00000000" />
             <flag name="flip" value="0x00000001" />
             <flag name="rotate_and_anim" value="0x00000002" />
+            <flag name="pull_arc" value="0x00000003" />
         </attr>
         <attr name="ptrScrollingWhileRefreshingEnabled" format="reference|boolean" />
         <attr name="ptrListViewExtrasEnabled" format="reference|boolean" />

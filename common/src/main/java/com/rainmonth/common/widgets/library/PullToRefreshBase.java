@@ -1,18 +1,3 @@
-/*******************************************************************************
- * Copyright 2011, 2012 Chris Banes.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *******************************************************************************/
 package com.rainmonth.common.widgets.library;
 
 import android.content.Context;
@@ -35,6 +20,7 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import com.rainmonth.common.R;
+import com.rainmonth.common.widgets.library.internal.ArcLoadingLayout;
 import com.rainmonth.common.widgets.library.internal.FlipLoadingLayout;
 import com.rainmonth.common.widgets.library.internal.LoadingLayout;
 import com.rainmonth.common.widgets.library.internal.RotateLoadingLayout;
@@ -873,7 +859,7 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
      * necessary
      */
     protected final void refreshLoadingViewsSize() {
-        final int maximumPullScroll = (int) (getMaximumPullScroll() * 1.2f);
+        final int maximumPullScroll = (int) (getMaximumPullScroll() * 1.f);
 
         int pLeft = getPaddingLeft();
         int pTop = getPaddingTop();
@@ -1164,7 +1150,7 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
      * change
      */
     private void pullEvent() {
-        final int newScrollValue;
+        int newScrollValue;
         final int itemDimension;
         final float initialMotionValue, lastMotionValue;
 
@@ -1194,6 +1180,7 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
 
         setHeaderScroll(newScrollValue);
 
+        newScrollValue = Math.min(newScrollValue, itemDimension);
         if (newScrollValue != 0 && !isRefreshing()) {
             float scale = Math.abs(newScrollValue) / (float) itemDimension;
             switch (mCurrentMode) {
@@ -1206,9 +1193,9 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
                     break;
             }
 
-            if (mState != State.PULL_TO_REFRESH && itemDimension >= Math.abs(newScrollValue)) {
+            if (mState != State.PULL_TO_REFRESH && itemDimension > Math.abs(newScrollValue)) {
                 setState(State.PULL_TO_REFRESH);
-            } else if (mState == State.PULL_TO_REFRESH && itemDimension < Math.abs(newScrollValue)) {
+            } else if (mState == State.PULL_TO_REFRESH && itemDimension <= Math.abs(newScrollValue)) {
                 setState(State.RELEASE_TO_REFRESH);
             }
         }
@@ -1226,7 +1213,7 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
         }
     }
 
-    private int getMaximumPullScroll() {
+    protected int getMaximumPullScroll() {
         switch (getPullToRefreshScrollDirection()) {
             case HORIZONTAL:
                 return Math.round(getWidth() / FRICTION);
@@ -1263,7 +1250,7 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
                 break;
         }
 
-        if (oldScrollValue != newScrollValue) {
+        if (oldScrollValue != newScrollValue || newScrollValue == getMaximumPullScroll()) {
             if (null == mScrollAnimationInterpolator) {
                 // Default interpolator is a Decelerate Interpolator
                 mScrollAnimationInterpolator = new DecelerateInterpolator();
@@ -1299,7 +1286,9 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
          * This is the old default, and what is commonly used on iOS. Uses an
          * arrow image which flips depending on where the user has scrolled.
          */
-        FLIP;
+        FLIP,
+
+        PULL_ARC;
 
         static AnimationStyle getDefault() {
             return ROTATE;
@@ -1320,6 +1309,8 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
                     return ROTATE;
                 case 0x1:
                     return FLIP;
+                case 0x3:
+                    return PULL_ARC;
             }
         }
 
@@ -1330,6 +1321,8 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
                     return new RotateLoadingLayout(context, mode, scrollDirection, attrs);
                 case FLIP:
                     return new FlipLoadingLayout(context, mode, scrollDirection, attrs);
+                case PULL_ARC:
+                    return new ArcLoadingLayout(context, mode, scrollDirection, attrs);
             }
         }
     }
@@ -1558,7 +1551,8 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
          * When the UI is currently overscrolling, caused by a fling on the
          * Refreshable View.
          */
-        OVERSCROLLING(0x10),;
+        OVERSCROLLING(0x10),
+        ;
 
         /**
          * Maps an int to a specific state. This is needed when saving state.

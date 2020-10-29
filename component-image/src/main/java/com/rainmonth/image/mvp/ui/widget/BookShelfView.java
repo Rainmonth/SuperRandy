@@ -1,6 +1,9 @@
 package com.rainmonth.image.mvp.ui.widget;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Handler;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -16,8 +19,11 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.rainmonth.common.utils.DensityUtils;
 import com.rainmonth.common.utils.ToastUtils;
+import com.rainmonth.common.widgets.PullToRefreshViewPager;
+import com.rainmonth.common.widgets.library.PullToRefreshBase;
 import com.rainmonth.image.R;
 import com.rainmonth.image.mvp.model.bean.SubscribeBean;
+import com.rainmonth.image.mvp.ui.common.ImageMainActivity;
 import com.socks.library.KLog;
 
 import java.util.ArrayList;
@@ -31,6 +37,7 @@ public class BookShelfView extends ConstraintLayout {
     private static final String TAG = BookShelfView.class.getSimpleName();
 
     TextView tvLabel;
+    PullToRefreshViewPager ptrVp;
     ViewPager vpSubscribeList;
     LinearLayout llIndicatorContainer;
     private Context mContext;
@@ -45,6 +52,7 @@ public class BookShelfView extends ConstraintLayout {
 
     private boolean mNeedInterceptTouchEvent = false;
     private boolean mNeedSupportSlideViewMore = false;
+    private ArrayList<View> pageViewList = new ArrayList<>();
 
     public BookShelfView(Context context) {
         this(context, null);
@@ -64,12 +72,75 @@ public class BookShelfView extends ConstraintLayout {
         View.inflate(mContext, R.layout.image_book_shelf_view, this);
 
         tvLabel = findViewById(R.id.tv_label);
-        vpSubscribeList = findViewById(R.id.vp_subscribe_list);
+        ptrVp = findViewById(R.id.vp_subscribe_list);
+
+        vpSubscribeList = ptrVp.getRefreshableView();
+        mAdapter = new ViewPagerAdapter(pageViewList);
+        vpSubscribeList.setAdapter(mAdapter);
+
         llIndicatorContainer = findViewById(R.id.ll_indicator_container);
 
         tvLabel.setOnClickListener(v -> onLabelClick());
 
         Log.d("Randy", "shelfView init");
+
+        ptrVp.setPullToRefreshOverScrollEnabled(true);
+        ptrVp.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ViewPager>() {
+            @Override
+            public void onRefresh(PullToRefreshBase<ViewPager> refreshView) {
+                if (refreshView.getCurrentMode() == PullToRefreshBase.Mode.PULL_FROM_END) {//最右
+//                    mIsRequesting = true;
+                    Intent intent = new Intent(mContext, ImageMainActivity.class);
+                    mContext.startActivity(intent);
+                    ptrVp.onRefreshComplete();
+                    if (mContext instanceof Activity) {
+                        ((Activity) mContext).finish();
+                    }
+//                    new Handler().post(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            if (!isLastPage) {
+//                                isAddAtHead = false;
+//                                // 从右加载数据的话，每次请求的页码肯定比进来的时候大
+//                                if (requestPage <= currentPage) {
+//                                    requestPage = currentPage + 1;
+//                                } else {
+//                                    requestPage = requestPage + 1;
+//                                }
+//                                mPresenter.getPrePagePhotos(requestPage, pageSize, collectionId, orderBy, from);
+//                            } else {
+//                                ToastUtils.showToast(mContext, "当前已是最后一页数据了");
+//                                ptrVpPhotos.onRefreshComplete();
+//                            }
+//                            mIsRequesting = false;
+//                        }
+//                    });
+
+                }
+            }
+        });
+        ptrVp.setMode(PullToRefreshBase.Mode.BOTH);
+
+        vpSubscribeList.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                if (mCurrentIndex != position) {
+                    llIndicatorContainer.getChildAt(mCurrentIndex).setSelected(false);
+                    llIndicatorContainer.getChildAt(position).setSelected(true);
+                    mCurrentIndex = position;
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
 
     }
 
@@ -103,9 +174,9 @@ public class BookShelfView extends ConstraintLayout {
 
         mPageNum = getPageNum(size);
         if (mPageNum == 1 && size < 3) {
-            vpSubscribeList.getLayoutParams().height = rowHeight;
+            ptrVp.getLayoutParams().height = rowHeight;
         } else {
-            vpSubscribeList.getLayoutParams().height = rowHeight * 2 + DensityUtils.dip2px(mContext, 16);
+            ptrVp.getLayoutParams().height = rowHeight * 2 + DensityUtils.dip2px(mContext, 16);
         }
 
         generatePages(mPageNum);
@@ -114,31 +185,11 @@ public class BookShelfView extends ConstraintLayout {
             mCurrentIndex = 0;
             llIndicatorContainer.getChildAt(0).setSelected(true);
         }
-
-        vpSubscribeList.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                if (mCurrentIndex != position) {
-                    llIndicatorContainer.getChildAt(mCurrentIndex).setSelected(false);
-                    llIndicatorContainer.getChildAt(position).setSelected(true);
-                    mCurrentIndex = position;
-                }
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
     }
 
     private void generatePages(int pageNum) {
-        List<View> pageViewList = new ArrayList<>();
+        pageViewList.clear();
+        vpSubscribeList.removeAllViews();
         for (int i = 0; i < pageNum; i++) {
             BookShelfPageView bookShelfPageView = new BookShelfPageView(mContext);
             bookShelfPageView.update(i, mPagedSubscribeList.get(i));
@@ -146,9 +197,9 @@ public class BookShelfView extends ConstraintLayout {
 
             bookShelfPageView.setOnPageItemClickListener(this::onPageItemClick);
         }
-
-        mAdapter = new ViewPagerAdapter(pageViewList);
-        vpSubscribeList.setAdapter(mAdapter);
+        if (mAdapter != null) {
+            mAdapter.notifyDataSetChanged();
+        };
     }
 
     private void generateIndicators(int pageNum) {

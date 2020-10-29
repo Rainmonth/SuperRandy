@@ -53,17 +53,16 @@ public class PullAcrView extends LinearLayout {
      * #16C3FF
      * 填充色
      */
-    private int mFillColor = Color.GREEN;
+    private int mFillColor = Color.parseColor("#16C3FF");
 
     /**
      * 最大滑动的距离
      */
-    private int mMaxScrollDistance = DensityUtils.dip2px(getContext(), 150);
+    private int mMaxScrollDistance = DensityUtils.dip2px(getContext(), 38);
 
 
     public PullAcrView(Context context) {
         this(context, null);
-
     }
 
     public PullAcrView(Context context, @Nullable AttributeSet attrs) {
@@ -76,6 +75,7 @@ public class PullAcrView extends LinearLayout {
     }
 
     private void init(Context context) {
+        setWillNotDraw(false);
         mScreenWidth = context.getResources().getDisplayMetrics().widthPixels;
 
         View.inflate(context, R.layout.image_pull_arc_view, this);
@@ -108,7 +108,7 @@ public class PullAcrView extends LinearLayout {
                 float moveY = event.getY();
                 float deltaX = mDownX - moveX;
                 if (deltaX >= 0) {// 从右向左
-                    deltaX = Math.min(mMaxScrollDistance, mDownX - moveX);
+                    deltaX = Math.min(mMaxScrollDistance, deltaX);
                     mControlPoint.x = mWidth - deltaX;
 
                     tvTipLabel.setTranslationX(mWidth - (deltaX / mMaxScrollDistance * mWidth));
@@ -147,15 +147,18 @@ public class PullAcrView extends LinearLayout {
 
         mWidth = w;
         mHeight = h;
-        KLog.d("RandyTest", "onSizeChanged(), w:" + w + ",h:" + h);
+        if (mWidth > 0) {
+            mMaxScrollDistance = mWidth;
+        }
+        KLog.d("RandyTest", "onSizeChanged(), w:" + w + ",h:" + h + ",mMaxScroll:" + mMaxScrollDistance);
         mStartPoint.x = w;
-        mStartPoint.y = h / 4f;
+        mStartPoint.y = 0;
 
         mControlPoint.x = w;
         mControlPoint.y = h / 2f;
 
         mEndPoint.x = w;
-        mEndPoint.y = h * 3 / 4f;
+        mEndPoint.y = h;
 
         mLabelWidth = tvTipLabel.getMeasuredWidth();
 
@@ -165,21 +168,22 @@ public class PullAcrView extends LinearLayout {
     }
 
     @Override
+    protected void dispatchDraw(Canvas canvas) {
+        super.dispatchDraw(canvas);
+    }
+
+    @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         mArcPath.reset();
         // 移到起点
-        KLog.e("RandyTest", "startPoint:" + mStartPoint);
-        KLog.e("RandyTest", "controlPoint:" + mControlPoint);
-        KLog.e("RandyTest", "endPoint:" + mEndPoint);
+        KLog.d("RandyTest", "startPoint:" + mStartPoint + ", controlPoint:" + mControlPoint + ", endPoint:" + mEndPoint);
 
         mArcPath.moveTo(mStartPoint.x, mStartPoint.y);
         mArcPath.quadTo(mControlPoint.x, mControlPoint.y, mEndPoint.x, mEndPoint.y);
 
         mArcPath.close();
         canvas.drawPath(mArcPath, mArcPaint);
-
-        canvas.drawPoint(mControlPoint.x, mControlPoint.y, mArcPaint);
     }
 
     private void reset() {
@@ -196,7 +200,7 @@ public class PullAcrView extends LinearLayout {
         invalidate();
     }
 
-    public void onPull(float pullDistance) {
+    public void onPullToRefresh(float pullDistance) {
         KLog.d("RandyTest", pullDistance);
 
 
@@ -213,7 +217,7 @@ public class PullAcrView extends LinearLayout {
         reset();
     }
 
-    public void onRelease() {
+    public void onReleaseToRefresh() {
 
     }
 

@@ -16,8 +16,35 @@ import butterknife.BindView;
  * @date 2019-07-24 09:53
  */
 public class ComponentTestActivity extends BaseActivity {
-    @BindView(R.id.pull_arc_view)
-    PullAcrView pullArcView;
+    @BindView(R.id.pull_arc_view1)
+    PullAcrView recentPlayPullArcView;
+
+    @BindView(R.id.pull_arc_view2)
+    PullAcrView bookPullArcView;
+
+    @BindView(R.id.pull_arc_view3)
+    PullAcrView storyPullArcView;
+
+    private PullAcrView.OnPullListener mOnPullListener = new PullAcrView.OnPullListener() {
+        @Override
+        public void onPull(float pullDistance) {
+
+        }
+
+        @Override
+        public void onPullRelease() {
+            Toast.makeText(mContext, "即将跳转", Toast.LENGTH_SHORT).show();
+            getSafeHandler().postDelayed(() -> {
+                readyGo(WorkDemoActivity.class);
+            }, 1000);
+
+        }
+
+        @Override
+        public void onPullCancel() {
+            Toast.makeText(mContext, "拖动取消, 无需调整", Toast.LENGTH_SHORT).show();
+        }
+    };
 
     @Override
     protected void setupActivityComponent(AppComponent appComponent) {
@@ -36,27 +63,9 @@ public class ComponentTestActivity extends BaseActivity {
 
     @Override
     protected void initViewsAndEvents() {
-        pullArcView.setOnPullListener(new PullAcrView.OnPullListener() {
-            @Override
-            public void onPull(float pullDistance) {
-
-            }
-
-            @Override
-            public void onPullRelease() {
-                Toast.makeText(mContext, "即将跳转", Toast.LENGTH_SHORT).show();
-                getSafeHandler().postDelayed(() -> {
-                    readyGo(WorkDemoActivity.class);
-                }, 1000);
-
-            }
-
-            @Override
-            public void onPullCancel() {
-                Toast.makeText(mContext, "拖动取消, 无需调整", Toast.LENGTH_SHORT).show();
-                ;
-            }
-        });
+        recentPlayPullArcView.setOnPullListener(mOnPullListener);
+        bookPullArcView.setOnPullListener(mOnPullListener);
+        storyPullArcView.setOnPullListener(mOnPullListener);
     }
 
     @Override

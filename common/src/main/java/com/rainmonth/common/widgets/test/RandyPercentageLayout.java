@@ -76,8 +76,8 @@ public class RandyPercentageLayout extends FrameLayout {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int sw = getResources().getDisplayMetrics().widthPixels;
-        KLog.d(TAG, "onMeasure: " + "screenWidth=" + getResources().getDisplayMetrics().widthPixels + ",screeHeight=" + getResources().getDisplayMetrics().heightPixels);
-        KLog.d(TAG, "onMeasure: " + "w=" + getWidth() + ",h=" + getHeight() + ",mw=" + getMeasuredWidth() + ",mh=" + getMeasuredHeight());
+//        KLog.d(TAG, "onMeasure: " + "screenWidth=" + getResources().getDisplayMetrics().widthPixels + ",screeHeight=" + getResources().getDisplayMetrics().heightPixels);
+//        KLog.d(TAG, "onMeasure: " + "w=" + getWidth() + ",h=" + getHeight() + ",mw=" + getMeasuredWidth() + ",mh=" + getMeasuredHeight());
         if (mWidthPercentage == -1) {
             super.onMeasure(widthMeasureSpec, heightMeasureSpec);
             return;
@@ -87,23 +87,23 @@ public class RandyPercentageLayout extends FrameLayout {
             mWidthPercentage = Math.min(mWidthPercentage, 1);
         }
         final int width = MeasureSpec.getSize(widthMeasureSpec);
-        KLog.e(TAG, "onMeasure: " + "w=" + getWidth() + ",h=" + getHeight() + ",mw=" + getMeasuredWidth() + ",mh=" + getMeasuredHeight() + ",width=" + width);
+//        KLog.e(TAG, "onMeasure: " + "w=" + getWidth() + ",h=" + getHeight() + ",mw=" + getMeasuredWidth() + ",mh=" + getMeasuredHeight() + ",width=" + width);
         int newWidth = Math.round(sw * mWidthPercentage);
 
         if (mRate == -1) {
             super.onMeasure(MeasureSpec.makeMeasureSpec(newWidth, MeasureSpec.EXACTLY), heightMeasureSpec);
-            KLog.e(TAG, "onMeasure: " + "w=" + getWidth() + ",h=" + getHeight() + ",mw=" + getMeasuredWidth() + ",mh=" + getMeasuredHeight() + ",width=" + width);
+//            KLog.e(TAG, "onMeasure: " + "w=" + getWidth() + ",h=" + getHeight() + ",mw=" + getMeasuredWidth() + ",mh=" + getMeasuredHeight() + ",width=" + width);
             setMeasuredDimension(newWidth, MeasureSpec.getSize(heightMeasureSpec));
-            KLog.e(TAG, "onMeasure: " + "w=" + getWidth() + ",h=" + getHeight() + ",mw=" + getMeasuredWidth() + ",mh=" + getMeasuredHeight() + ",width=" + width);
+//            KLog.e(TAG, "onMeasure: " + "w=" + getWidth() + ",h=" + getHeight() + ",mw=" + getMeasuredWidth() + ",mh=" + getMeasuredHeight() + ",width=" + width);
             return;
         }
 
         if (mRate > 0) {
             int newHeight = Math.round(newWidth * mRate);
             super.onMeasure(MeasureSpec.makeMeasureSpec(newWidth, MeasureSpec.EXACTLY), MeasureSpec.makeMeasureSpec(newHeight, MeasureSpec.EXACTLY));
-            KLog.e(TAG, "onMeasure: " + "w=" + getWidth() + ",h=" + getHeight() + ",mw=" + getMeasuredWidth() + ",mh=" + getMeasuredHeight() + ",width=" + width);
+//            KLog.e(TAG, "onMeasure: " + "w=" + getWidth() + ",h=" + getHeight() + ",mw=" + getMeasuredWidth() + ",mh=" + getMeasuredHeight() + ",width=" + width);
             setMeasuredDimension(newWidth, newHeight);
-            KLog.e(TAG, "onMeasure: " + "w=" + getWidth() + ",h=" + getHeight() + ",mw=" + getMeasuredWidth() + ",mh=" + getMeasuredHeight() + ",width=" + width);
+//            KLog.e(TAG, "onMeasure: " + "w=" + getWidth() + ",h=" + getHeight() + ",mw=" + getMeasuredWidth() + ",mh=" + getMeasuredHeight() + ",width=" + width);
             return;
         }
 

@@ -137,7 +137,7 @@ public class BorderRoundItemView extends FrameLayout {
     }
 
     private void initView(Context context) {
-
+        setWillNotDraw(false);
         View.inflate(context, R.layout.border_round_item_view, this);
         ivCover = findViewById(R.id.iv_cover);
         ivTopRightFlag = findViewById(R.id.iv_top_right_flag);
@@ -172,20 +172,20 @@ public class BorderRoundItemView extends FrameLayout {
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
-        KLog.d(TAG, "onFinishInflate: " + "w=" + getWidth() + ",h=" + getHeight() + ",mw=" + getMeasuredWidth() + ",mh=" + getMeasuredHeight());
+//        KLog.d(TAG, "onFinishInflate: " + "w=" + getWidth() + ",h=" + getHeight() + ",mw=" + getMeasuredWidth() + ",mh=" + getMeasuredHeight());
     }
 
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
-        KLog.d(TAG, "onAttachedToWindow: " + "w=" + getWidth() + ",h=" + getHeight() + ",mw=" + getMeasuredWidth() + ",mh=" + getMeasuredHeight());
+//        KLog.d(TAG, "onAttachedToWindow: " + "w=" + getWidth() + ",h=" + getHeight() + ",mw=" + getMeasuredWidth() + ",mh=" + getMeasuredHeight());
     }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int sw = getResources().getDisplayMetrics().widthPixels;
-        KLog.d(TAG, "onMeasure: " + "screenWidth=" + getResources().getDisplayMetrics().widthPixels + ",screeHeight=" + getResources().getDisplayMetrics().heightPixels);
-        KLog.d(TAG, "onMeasure: " + "w=" + getWidth() + ",h=" + getHeight() + ",mw=" + getMeasuredWidth() + ",mh=" + getMeasuredHeight());
+//        KLog.d(TAG, "onMeasure: " + "screenWidth=" + getResources().getDisplayMetrics().widthPixels + ",screeHeight=" + getResources().getDisplayMetrics().heightPixels);
+//        KLog.d(TAG, "onMeasure: " + "w=" + getWidth() + ",h=" + getHeight() + ",mw=" + getMeasuredWidth() + ",mh=" + getMeasuredHeight());
         if (mWidthPercentage == -1 && mRate == -1) {
             super.onMeasure(widthMeasureSpec, heightMeasureSpec);
             return;
@@ -195,23 +195,23 @@ public class BorderRoundItemView extends FrameLayout {
             mWidthPercentage = Math.min(mWidthPercentage, 1);
         }
         final int width = MeasureSpec.getSize(widthMeasureSpec);
-        KLog.e(TAG, "onMeasure: " + "w=" + getWidth() + ",h=" + getHeight() + ",mw=" + getMeasuredWidth() + ",mh=" + getMeasuredHeight() + ",width=" + width);
+//        KLog.e(TAG, "onMeasure: " + "w=" + getWidth() + ",h=" + getHeight() + ",mw=" + getMeasuredWidth() + ",mh=" + getMeasuredHeight() + ",width=" + width);
         int newWidth = mWidthPercentage != -1 ? width : (Math.round(sw * mWidthPercentage));
 
         if (mRate == -1) {
             super.onMeasure(MeasureSpec.makeMeasureSpec(newWidth, MeasureSpec.EXACTLY), heightMeasureSpec);
-            KLog.e(TAG, "onMeasure: " + "w=" + getWidth() + ",h=" + getHeight() + ",mw=" + getMeasuredWidth() + ",mh=" + getMeasuredHeight() + ",width=" + width);
+//            KLog.e(TAG, "onMeasure: " + "w=" + getWidth() + ",h=" + getHeight() + ",mw=" + getMeasuredWidth() + ",mh=" + getMeasuredHeight() + ",width=" + width);
             setMeasuredDimension(newWidth, MeasureSpec.getSize(heightMeasureSpec));
-            KLog.e(TAG, "onMeasure: " + "w=" + getWidth() + ",h=" + getHeight() + ",mw=" + getMeasuredWidth() + ",mh=" + getMeasuredHeight() + ",width=" + width);
+//            KLog.e(TAG, "onMeasure: " + "w=" + getWidth() + ",h=" + getHeight() + ",mw=" + getMeasuredWidth() + ",mh=" + getMeasuredHeight() + ",width=" + width);
             return;
         }
 
         if (mRate > 0) {
             int newHeight = Math.round(newWidth * mRate);
             super.onMeasure(MeasureSpec.makeMeasureSpec(newWidth, MeasureSpec.EXACTLY), MeasureSpec.makeMeasureSpec(newHeight, MeasureSpec.EXACTLY));
-            KLog.e(TAG, "onMeasure: " + "w=" + getWidth() + ",h=" + getHeight() + ",mw=" + getMeasuredWidth() + ",mh=" + getMeasuredHeight() + ",width=" + width);
+//            KLog.e(TAG, "onMeasure: " + "w=" + getWidth() + ",h=" + getHeight() + ",mw=" + getMeasuredWidth() + ",mh=" + getMeasuredHeight() + ",width=" + width);
             setMeasuredDimension(newWidth, newHeight);
-            KLog.e(TAG, "onMeasure: " + "w=" + getWidth() + ",h=" + getHeight() + ",mw=" + getMeasuredWidth() + ",mh=" + getMeasuredHeight() + ",width=" + width);
+//            KLog.e(TAG, "onMeasure: " + "w=" + getWidth() + ",h=" + getHeight() + ",mw=" + getMeasuredWidth() + ",mh=" + getMeasuredHeight() + ",width=" + width);
             return;
         }
 

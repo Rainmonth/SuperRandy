@@ -68,20 +68,25 @@ public abstract class LoadingLayout extends FrameLayout implements ILoadingLayou
 		mMode = mode;
 		mScrollDirection = scrollDirection;
 
-		switch (scrollDirection) {
-			case HORIZONTAL:
-				LayoutInflater.from(context).inflate(R.layout.pull_to_refresh_header_horizontal, this);
-				break;
-			case VERTICAL:
-			default:
-				LayoutInflater.from(context).inflate(R.layout.pull_to_refresh_header_vertical, this);
-				break;
+		if (getLoadingLayoutId()== 0) {
+			switch (scrollDirection) {
+				case HORIZONTAL:
+					LayoutInflater.from(context).inflate(R.layout.pull_to_refresh_header_horizontal, this);
+					break;
+				case VERTICAL:
+				default:
+					LayoutInflater.from(context).inflate(R.layout.pull_to_refresh_header_vertical, this);
+					break;
+			}
+		} else {
+			LayoutInflater.from(context).inflate(getLoadingLayoutId(), this);
 		}
 
 		mInnerLayout = (FrameLayout) findViewById(R.id.fl_inner);
 		mHeaderText = (TextView) mInnerLayout.findViewById(R.id.pull_to_refresh_text);
-		mHeaderProgress = (ProgressBar) mInnerLayout.findViewById(R.id.pull_to_refresh_progress);
 		mSubHeaderText = (TextView) mInnerLayout.findViewById(R.id.pull_to_refresh_sub_text);
+
+		mHeaderProgress = (ProgressBar) mInnerLayout.findViewById(R.id.pull_to_refresh_progress);
 		mHeaderImage = (ImageView) mInnerLayout.findViewById(R.id.pull_to_refresh_image);
 
 		LayoutParams lp = (LayoutParams) mInnerLayout.getLayoutParams();
@@ -387,6 +392,10 @@ public abstract class LoadingLayout extends FrameLayout implements ILoadingLayou
 		if (null != mSubHeaderText) {
 			mSubHeaderText.setTextColor(color);
 		}
+	}
+
+	protected int getLoadingLayoutId() {
+		return 0;
 	}
 
 }
