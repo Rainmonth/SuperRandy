@@ -420,15 +420,15 @@ public class DateUtils {
         if (week.length() == 1)
             week = "0" + week;
         String year = Integer.toString(c.get(Calendar.YEAR));
-        return year + week;
+        return year + "年第" + week + "周";
     }
 
     /**
      * 获得一个日期所在的周的星期几的日期，如要找出2002年2月3日所在周的星期一是几号
      *
-     * @param sdate
-     * @param num
-     * @return
+     * @param sdate 日期字符串（格式yyyy-MM-dd)
+     * @param num   星期几
+     * @return yyyy-MM-dd这个日期星期num 对应当然日期
      */
     public static String getWeek(String sdate, String num) {
         // 再转换为时间

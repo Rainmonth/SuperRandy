@@ -130,6 +130,7 @@ public class DateUtilsTest {
 
     @Test
     public void getSeqWeek() {
+        System.out.printf("当前周是该年的第几周：" + DateUtils.getSeqWeek());
     }
 
     @Test

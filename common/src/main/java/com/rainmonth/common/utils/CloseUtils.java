@@ -38,7 +38,7 @@ public final class CloseUtils {
   }
 
   /**
-   * 安静关闭IO
+   * 安全关闭IO
    *
    * @param closeables closeables
    */

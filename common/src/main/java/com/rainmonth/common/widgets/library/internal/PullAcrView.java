@@ -49,6 +49,7 @@ public class PullAcrView extends LinearLayout {
      * 弧画笔
      */
     private Paint mArcPaint;
+    private Paint mLinePaint;
     /**
      * #16C3FF
      * 填充色
@@ -58,7 +59,7 @@ public class PullAcrView extends LinearLayout {
     /**
      * 最大滑动的距离
      */
-    private int mMaxScrollDistance = DensityUtils.dip2px(getContext(), 38);
+    private int mMaxScrollDistance = DensityUtils.dip2px(getContext(), 76);
 
 
     public PullAcrView(Context context) {
@@ -90,6 +91,11 @@ public class PullAcrView extends LinearLayout {
         mArcPaint.setColor(mFillColor);
         mArcPaint.setStyle(Paint.Style.FILL);
 
+        mLinePaint = new Paint();
+        mLinePaint.setAntiAlias(true);
+        mArcPaint.setColor(Color.MAGENTA);
+        mArcPaint.setStyle(Paint.Style.FILL);
+
     }
 
     private float mDownX, mDownY;
@@ -108,8 +114,8 @@ public class PullAcrView extends LinearLayout {
                 float moveY = event.getY();
                 float deltaX = mDownX - moveX;
                 if (deltaX >= 0) {// 从右向左
-                    deltaX = Math.min(mMaxScrollDistance, deltaX);
-                    mControlPoint.x = mWidth - deltaX;
+                    deltaX = Math.min(1.5f * mWidth, deltaX);
+                    mControlPoint.x = (mWidth - deltaX) * 2;
 
                     tvTipLabel.setTranslationX(mWidth - (deltaX / mMaxScrollDistance * mWidth));
                     if (mOnPullListener != null) {
@@ -181,6 +187,8 @@ public class PullAcrView extends LinearLayout {
 
         mArcPath.moveTo(mStartPoint.x, mStartPoint.y);
         mArcPath.quadTo(mControlPoint.x, mControlPoint.y, mEndPoint.x, mEndPoint.y);
+        canvas.drawLine(mStartPoint.x, mStartPoint.y, mControlPoint.x, mControlPoint.y, mLinePaint);
+        canvas.drawLine(mControlPoint.x, mControlPoint.y, mEndPoint.x, mEndPoint.y, mLinePaint);
 
         mArcPath.close();
         canvas.drawPath(mArcPath, mArcPaint);

@@ -22,7 +22,8 @@
 
             <com.rainmonth.common.widgets.library.internal.PullAcrView
                 android:id="@+id/pull_arc_view1"
-                android:layout_width="100dp"
+                android:background="@android:color/holo_green_light"
+                android:layout_width="38dp"
                 android:layout_height="200dp"
                 android:layout_gravity="end|center_vertical"
                 android:gravity="center_vertical|end" />
