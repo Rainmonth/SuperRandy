@@ -22,7 +22,6 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     testImplementation rootProject.ext.dependencies['junit']
-    testImplementation rootProject.ext.dependencies['junit']
     testImplementation rootProject.ext.dependencies['robolectric']
     testImplementation rootProject.ext.dependencies['shadows-support']
     testImplementation rootProject.ext.dependencies['shadows-multidex']

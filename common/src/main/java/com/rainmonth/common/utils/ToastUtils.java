@@ -9,8 +9,14 @@ import android.widget.Toast;
  */
 public class ToastUtils {
 
+    private static Context mAppCtx;
+
+    public static void init(Context context) {
+        mAppCtx = context.getApplicationContext();
+    }
+
     public static void showToast(Context context, String message) {
-        showLongToast(context, message);
+        showLongToast(mAppCtx, message);
     }
 
     public static void showLongToast(Context context, String message) {
