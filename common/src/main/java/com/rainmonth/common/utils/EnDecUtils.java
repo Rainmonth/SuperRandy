@@ -1,10 +1,13 @@
 package com.rainmonth.common.utils;
 
+import android.text.TextUtils;
 import android.util.Base64;
 
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 /**
  * 加密解密更具类
@@ -49,8 +52,29 @@ public class EnDecUtils {
 
     /**
      * Md5加密
+     * 原理：
      */
-    public static void enByMd5() {
+    public static String enByMd5(String source) {
+        if (TextUtils.isEmpty(source)) {
+            return "";
+        }
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            byte[]  bytes = md.digest(source.getBytes());
+            for (byte b : bytes) {
+
+            }
+            return "";
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
+
+    /**
+     * Md5解密
+     */
+    public static void decByMd5() {
 
     }
 
@@ -70,10 +94,6 @@ public class EnDecUtils {
 
     //<editor-fold> 解密
     public void decrypt() {
-
-    }
-
-    public static void decByMd5() {
 
     }
 
