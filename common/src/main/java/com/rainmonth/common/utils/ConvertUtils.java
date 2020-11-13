@@ -156,7 +156,7 @@ public class ConvertUtils {
      * @return 对应的字节数组
      */
     public static byte[] hexString2Bytes(String hexString) {
-        if (isSpace(hexString)) return new byte[0];
+        if (StringUtils.isSpace(hexString)) return new byte[0];
         int len = hexString.length();
         if (len % 2 != 0) {
             hexString = "0" + hexString;
@@ -184,22 +184,6 @@ public class ConvertUtils {
         } else {
             throw new IllegalArgumentException();
         }
-    }
-
-    /**
-     * 是否是null或者全为空格的字符串
-     *
-     * @param s the string
-     * @return true if is null or empty string
-     */
-    private static boolean isSpace(String s) {
-        if (s == null) return true;
-        for (int i = 0, len = s.length(); i < len; i++) {
-            if (!Character.isWhitespace(s.charAt(i))) {
-                return false;
-            }
-        }
-        return true;
     }
 
     public static String bytes2String(final byte[] bytes) {
@@ -232,7 +216,7 @@ public class ConvertUtils {
 
     private static String getSafeCharset(String charsetName) {
         String charset = charsetName;
-        if (isSpace(charset) || !Charset.isSupported(charset)) {
+        if (StringUtils.isSpace(charset) || !Charset.isSupported(charset)) {
             charset = "UTF-8";
         }
         return charset;
