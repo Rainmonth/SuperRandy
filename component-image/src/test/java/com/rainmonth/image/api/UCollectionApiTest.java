@@ -26,7 +26,7 @@ import io.reactivex.schedulers.Schedulers;
 import static junit.framework.Assert.assertEquals;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(constants = BuildConfig.class, sdk = 23)
+@Config(sdk = 23)
 public class UCollectionApiTest extends BaseApiTest {
 
     @Rule
