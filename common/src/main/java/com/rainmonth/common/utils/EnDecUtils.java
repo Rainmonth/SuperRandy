@@ -385,7 +385,7 @@ public class EnDecUtils {
      * @param algorithm 对应的加密算法
      * @return 加密后的字节数组
      */
-    private static byte[] hashTemplate(final byte[] bytes, final String algorithm) {
+    public static byte[] hashTemplate(final byte[] bytes, final String algorithm) {
         if (bytes == null || bytes.length <= 0) return null;
         try {
             MessageDigest md = MessageDigest.getInstance(algorithm);

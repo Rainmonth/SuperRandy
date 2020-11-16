@@ -101,10 +101,10 @@ public class LoginActivity extends BaseActivity<UserPresenter> implements UserCo
         if (response.getCode() == 1) {
             readyGo(MainActivity.class);
 
-            ToastUtils.showLongToast(mContext, response.getMessage());
+            ToastUtils.showLong(response.getMessage());
             finish();
         } else {
-            ToastUtils.showLongToast(mContext, response.getMessage());
+            ToastUtils.showLong(response.getMessage());
         }
     }
 }

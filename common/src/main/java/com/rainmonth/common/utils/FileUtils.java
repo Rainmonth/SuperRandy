@@ -2,8 +2,12 @@ package com.rainmonth.common.utils;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Environment;
+import android.os.StatFs;
+import android.text.TextUtils;
 
 import com.rainmonth.common.utils.constant.MemoryConstants;
 
@@ -13,6 +17,7 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileFilter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -31,16 +36,11 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * <pre>
- *     author: Blankj
- *     blog  : http://blankj.com
- *     time  : 2016/8/11
- *     desc  : 文件相关工具类
- * </pre>
+ * 文件工具类
  */
 public final class FileUtils {
 
-    private static final char hexDigits[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A',
+    private static final char[] hexDigits = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A',
             'B', 'C', 'D', 'E', 'F'};
 
     private FileUtils() {
@@ -861,7 +861,7 @@ public final class FileUtils {
         OutputStream os = null;
         try {
             os = new BufferedOutputStream(new FileOutputStream(file, append));
-            byte data[] = new byte[1024];
+            byte[] data = new byte[1024];
             int len;
             while ((len = is.read(data, 0, 1024)) != -1) {
                 os.write(data, 0, len);
@@ -1315,7 +1315,7 @@ public final class FileUtils {
             dis = new DigestInputStream(fis, md);
             byte[] buffer = new byte[1024 * 256];
             while (dis.read(buffer) > 0) {
-                ;
+
             }
             md = dis.getMessageDigest();
             return md.digest();
@@ -1598,4 +1598,103 @@ public final class FileUtils {
             }
         }
     }
+
+
+    public static boolean deleteAllInDir(String filePath) {
+        return deleteAllInDir(getFileByPath(filePath));
+    }
+
+    public static boolean deleteAllInDir(File dir) {
+        return deleteFilesInDirWithFilter(dir, new FileFilter() {
+            @Override
+            public boolean accept(File pathname) {
+                return pathname.isFile();
+            }
+        });
+    }
+
+    public static boolean deleteFilesInDirWithFilter(final File dir, final FileFilter filter) {
+        if (dir == null || filter == null) return false;
+        // dir doesn't exist then return true
+        if (!dir.exists()) return true;
+        // dir isn't a directory then return false
+        if (!dir.isDirectory()) return false;
+        File[] files = dir.listFiles();
+        if (files != null && files.length != 0) {
+            for (File file : files) {
+                if (filter.accept(file)) {
+                    if (file.isFile()) {
+                        if (!file.delete()) return false;
+                    } else if (file.isDirectory()) {
+                        if (!deleteDir(file)) return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Return the total size of file system.
+     *
+     * @param anyPathInFs Any path in file system.
+     * @return the total size of file system
+     */
+    public static long getFsTotalSize(String anyPathInFs) {
+        if (TextUtils.isEmpty(anyPathInFs)) return 0;
+        StatFs statFs = new StatFs(anyPathInFs);
+        long blockSize;
+        long totalSize;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN_MR2) {
+            blockSize = statFs.getBlockSizeLong();
+            totalSize = statFs.getBlockCountLong();
+        } else {
+            blockSize = statFs.getBlockSize();
+            totalSize = statFs.getBlockCount();
+        }
+        return blockSize * totalSize;
+    }
+
+    /**
+     * Return the available size of file system.
+     *
+     * @param anyPathInFs Any path in file system.
+     * @return the available size of file system
+     */
+    public static long getFsAvailableSize(final String anyPathInFs) {
+        if (TextUtils.isEmpty(anyPathInFs)) return 0;
+        StatFs statFs = new StatFs(anyPathInFs);
+        long blockSize;
+        long availableSize;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN_MR2) {
+            blockSize = statFs.getBlockSizeLong();
+            availableSize = statFs.getAvailableBlocksLong();
+        } else {
+            blockSize = statFs.getBlockSize();
+            availableSize = statFs.getAvailableBlocks();
+        }
+        return blockSize * availableSize;
+    }
+
+    /**
+     * Notify system to scan the file.
+     *
+     * @param filePath The path of file.
+     */
+    public static void notifySystemToScan(final String filePath) {
+        notifySystemToScan(getFileByPath(filePath));
+    }
+
+    /**
+     * Notify system to scan the file.
+     *
+     * @param file The file.
+     */
+    public static void notifySystemToScan(final File file) {
+        if (file == null || !file.exists()) return;
+        Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+        intent.setData(Uri.parse("file://" + file.getAbsolutePath()));
+        Utils.getApp().sendBroadcast(intent);
+    }
+
 }

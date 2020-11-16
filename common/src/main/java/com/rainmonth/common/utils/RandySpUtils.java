@@ -22,8 +22,8 @@ import java.util.Set;
  * @author RandyZhang
  * @date 2020/11/06 AM
  */
-public class SpUtils {
-    private static final String TAG = SpUtils.class.getSimpleName();
+public class RandySpUtils {
+    private static final String TAG = RandySpUtils.class.getSimpleName();
 
     @SuppressLint("StaticFieldLeak")
     private static Context mAppCtx;

@@ -1,13 +1,32 @@
 package com.rainmonth.common.utils;
 
+import android.annotation.SuppressLint;
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import androidx.annotation.NonNull;
+
+import com.rainmonth.common.utils.constant.MemoryConstants;
+import com.rainmonth.common.utils.constant.TimeConstants;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
+import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 转换工具类
@@ -18,8 +37,9 @@ import java.nio.charset.Charset;
 
 public class ConvertUtils {
 
-    public static final char[] HEX_DIGITS_UPPER = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };
-    public static final char[] HEX_DIGITS_LOWER = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f' };
+    private static final int    BUFFER_SIZE      = 8192;
+    public static final  char[] HEX_DIGITS_UPPER = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
+    public static final  char[] HEX_DIGITS_LOWER = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
 
     /**
      * 10 进制转换成 16 进制字符串
@@ -251,4 +271,350 @@ public class ConvertUtils {
         if (jsonArray == null) return null;
         return jsonArray.toString().getBytes();
     }
+
+    public static <T> T bytes2Parcelable(final byte[] bytes, final Parcelable.Creator<T> creator) {
+        if (bytes == null) return null;
+        Parcel parcel = Parcel.obtain();
+        parcel.unmarshall(bytes, 0, bytes.length);
+        parcel.setDataPosition(0);
+        T result = creator.createFromParcel(parcel);
+        parcel.recycle();
+        return result;
+    }
+
+    public static byte[] parcelable2Bytes(final Parcelable parcelable) {
+        if (parcelable == null) return null;
+        Parcel parcel = Parcel.obtain();
+        parcelable.writeToParcel(parcel, 0);
+        byte[] bytes = parcel.marshall();
+        parcel.recycle();
+        return bytes;
+    }
+
+    public static Object bytes2Object(final byte[] bytes) {
+        if (bytes == null) return null;
+        ObjectInputStream ois = null;
+
+        try {
+            ois = new ObjectInputStream(new ByteArrayInputStream(bytes));
+            return ois.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            try {
+                if (ois != null) {
+                    ois.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public static byte[] serializable2Bytes(Serializable serializable) {
+        if (serializable == null) return null;
+        ByteArrayOutputStream baos;
+        ObjectOutputStream oos = null;
+
+        try {
+            oos = new ObjectOutputStream(baos = new ByteArrayOutputStream());
+            oos.writeObject(serializable);
+            return baos.toByteArray();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            try {
+                if (oos != null) {
+                    oos.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * 内存单位成对应的字节数
+     *
+     * @param memorySize 内存大小
+     * @param unit       单位
+     * @return 对应字节数
+     */
+    public static long memorySize2Bytes(final long memorySize, @MemoryConstants.Unit final int unit) {
+        if (memorySize < 0) return -1;
+        return memorySize * unit;
+    }
+
+    /**
+     * 字节数转换成内存单位描述
+     *
+     * @param byteSize 字节大小
+     * @param unit     单位
+     * @return 对应的内存大小
+     */
+    public static double byte2MemorySize(final long byteSize, @MemoryConstants.Unit final int unit) {
+        if (byteSize < 0) return -1;
+        return (double) byteSize / unit;
+    }
+
+    /**
+     * Size of byte to fit size of memory.
+     * <p>to three decimal places</p>
+     *
+     * @param byteSize Size of byte.
+     * @return fit size of memory
+     */
+    @SuppressLint("DefaultLocale")
+    public static String byte2FitMemorySize(final long byteSize) {
+        return byte2FitMemorySize(byteSize, 3);
+    }
+
+    /**
+     * Size of byte to fit size of memory.
+     * <p>to three decimal places</p>
+     *
+     * @param byteSize  Size of byte.
+     * @param precision The precision
+     * @return fit size of memory
+     */
+    @SuppressLint("DefaultLocale")
+    public static String byte2FitMemorySize(final long byteSize, int precision) {
+        if (precision < 0) {
+            throw new IllegalArgumentException("precision shouldn't be less than zero!");
+        }
+        if (byteSize < 0) {
+            throw new IllegalArgumentException("byteSize shouldn't be less than zero!");
+        } else if (byteSize < MemoryConstants.KB) {
+            return String.format("%." + precision + "fB", (double) byteSize);
+        } else if (byteSize < MemoryConstants.MB) {
+            return String.format("%." + precision + "fKB", (double) byteSize / MemoryConstants.KB);
+        } else if (byteSize < MemoryConstants.GB) {
+            return String.format("%." + precision + "fMB", (double) byteSize / MemoryConstants.MB);
+        } else {
+            return String.format("%." + precision + "fGB", (double) byteSize / MemoryConstants.GB);
+        }
+    }
+
+    /**
+     * Time span in unit to milliseconds.
+     *
+     * @param timeSpan The time span.
+     * @param unit     The unit of time span.
+     *                 <ul>
+     *                 <li>{@link TimeConstants#MSEC}</li>
+     *                 <li>{@link TimeConstants#SEC }</li>
+     *                 <li>{@link TimeConstants#MIN }</li>
+     *                 <li>{@link TimeConstants#HOUR}</li>
+     *                 <li>{@link TimeConstants#DAY }</li>
+     *                 </ul>
+     * @return milliseconds
+     */
+    public static long timeSpan2Millis(final long timeSpan, @TimeConstants.Unit final int unit) {
+        return timeSpan * unit;
+    }
+
+    /**
+     * Milliseconds to time span in unit.
+     *
+     * @param millis The milliseconds.
+     * @param unit   The unit of time span.
+     *               <ul>
+     *               <li>{@link TimeConstants#MSEC}</li>
+     *               <li>{@link TimeConstants#SEC }</li>
+     *               <li>{@link TimeConstants#MIN }</li>
+     *               <li>{@link TimeConstants#HOUR}</li>
+     *               <li>{@link TimeConstants#DAY }</li>
+     *               </ul>
+     * @return time span in unit
+     */
+    public static long millis2TimeSpan(final long millis, @TimeConstants.Unit final int unit) {
+        return millis / unit;
+    }
+
+    /**
+     * Milliseconds to fit time span.
+     *
+     * @param millis    The milliseconds.
+     *                  <p>millis &lt;= 0, return null</p>
+     * @param precision The precision of time span.
+     *                  <ul>
+     *                  <li>precision = 0, return null</li>
+     *                  <li>precision = 1, return 天</li>
+     *                  <li>precision = 2, return 天, 小时</li>
+     *                  <li>precision = 3, return 天, 小时, 分钟</li>
+     *                  <li>precision = 4, return 天, 小时, 分钟, 秒</li>
+     *                  <li>precision &gt;= 5，return 天, 小时, 分钟, 秒, 毫秒</li>
+     *                  </ul>
+     * @return fit time span
+     */
+    public static String millis2FitTimeSpan(long millis, int precision) {
+        return UtilsBridge.millis2FitTimeSpan(millis, precision);
+    }
+
+    /**
+     * Input stream to output stream.
+     */
+    public static ByteArrayOutputStream input2OutputStream(final InputStream is) {
+        if (is == null) return null;
+        try {
+            ByteArrayOutputStream os = new ByteArrayOutputStream();
+            byte[] b = new byte[BUFFER_SIZE];
+            int len;
+            while ((len = is.read(b, 0, BUFFER_SIZE)) != -1) {
+                os.write(b, 0, len);
+            }
+            return os;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            try {
+                is.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * Output stream to input stream.
+     */
+    public static ByteArrayInputStream output2InputStream(final OutputStream out) {
+        if (out == null) return null;
+        return new ByteArrayInputStream(((ByteArrayOutputStream) out).toByteArray());
+    }
+
+    /**
+     * Input stream to bytes.
+     */
+    public static byte[] inputStream2Bytes(final InputStream is) {
+        if (is == null) return null;
+        return input2OutputStream(is).toByteArray();
+    }
+
+    /**
+     * Bytes to input stream.
+     */
+    public static InputStream bytes2InputStream(final byte[] bytes) {
+        if (bytes == null || bytes.length <= 0) return null;
+        return new ByteArrayInputStream(bytes);
+    }
+
+    /**
+     * Output stream to bytes.
+     */
+    public static byte[] outputStream2Bytes(final OutputStream out) {
+        if (out == null) return null;
+        return ((ByteArrayOutputStream) out).toByteArray();
+    }
+
+    /**
+     * Bytes to output stream.
+     */
+    public static OutputStream bytes2OutputStream(final byte[] bytes) {
+        if (bytes == null || bytes.length <= 0) return null;
+        ByteArrayOutputStream os = null;
+        try {
+            os = new ByteArrayOutputStream();
+            os.write(bytes);
+            return os;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            try {
+                if (os != null) {
+                    os.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * Input stream to string.
+     */
+    public static String inputStream2String(final InputStream is, final String charsetName) {
+        if (is == null) return "";
+        try {
+            ByteArrayOutputStream baos = input2OutputStream(is);
+            if (baos == null) return "";
+            return baos.toString(getSafeCharset(charsetName));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
+
+    /**
+     * String to input stream.
+     */
+    public static InputStream string2InputStream(final String string, final String charsetName) {
+        if (string == null) return null;
+        try {
+            return new ByteArrayInputStream(string.getBytes(getSafeCharset(charsetName)));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    /**
+     * Output stream to string.
+     */
+    public static String outputStream2String(final OutputStream out, final String charsetName) {
+        if (out == null) return "";
+        try {
+            return new String(outputStream2Bytes(out), getSafeCharset(charsetName));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
+
+    /**
+     * String to output stream.
+     */
+    public static OutputStream string2OutputStream(final String string, final String charsetName) {
+        if (string == null) return null;
+        try {
+            return bytes2OutputStream(string.getBytes(getSafeCharset(charsetName)));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static List<String> inputStream2Lines(final InputStream is) {
+        return inputStream2Lines(is, "");
+    }
+
+    public static List<String> inputStream2Lines(final InputStream is,
+                                                 final String charsetName) {
+        BufferedReader reader = null;
+        try {
+            List<String> list = new ArrayList<>();
+            reader = new BufferedReader(new InputStreamReader(is, getSafeCharset(charsetName)));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                list.add(line);
+            }
+            return list;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            try {
+                if (reader != null) {
+                    reader.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
 }

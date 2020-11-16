@@ -25,15 +25,15 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter>
     @BindView(R.id.iv_user_avatar)
     ImageView ivUserAvatar;
     @BindView(R.id.et_phone)
-    EditText etPhone;
+    EditText  etPhone;
     @BindView(R.id.et_user_name)
-    EditText etUserName;
+    EditText  etUserName;
     @BindView(R.id.et_email)
-    EditText etEmail;
+    EditText  etEmail;
     @BindView(R.id.et_psw)
-    EditText etPsw;
+    EditText  etPsw;
     @BindView(R.id.tv_create_account)
-    TextView tvCreateAccount;
+    TextView  tvCreateAccount;
 
     @Override
     protected int getContentViewLayoutID() {
@@ -80,7 +80,7 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter>
             readyGo(MainActivity.class);
             finish();
         } else {
-            ToastUtils.showLongToast(mContext, response.getMessage());
+            ToastUtils.showLong(response.getMessage());
         }
     }
 }

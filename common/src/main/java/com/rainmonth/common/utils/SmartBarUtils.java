@@ -59,18 +59,10 @@ public class SmartBarUtils {
                     "setTabsShowAtBottom", boolean.class);
             try {
                 method.invoke(actionbar, showAtBottom);
-            } catch (IllegalArgumentException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            } catch (InvocationTargetException e) {
+            } catch (IllegalArgumentException | IllegalAccessException | InvocationTargetException e) {
                 e.printStackTrace();
             }
-        } catch (SecurityException e) {
-            e.printStackTrace();
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
+        } catch (SecurityException | NoSuchMethodException | ClassNotFoundException e) {
             e.printStackTrace();
         }
     }

@@ -8,6 +8,9 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.OvershootInterpolator;
 
 
+/**
+ * 常用动画工具类
+ */
 public class AnimatorUtils {
     public static Animator animViewFadeIn(View paramView) {
         return animViewFadeIn(paramView, 200L, null);
