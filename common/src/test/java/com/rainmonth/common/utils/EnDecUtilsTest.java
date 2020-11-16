@@ -18,10 +18,12 @@ import static org.junit.Assert.*;
  * @date 2020/11/14 2:51 PM
  */
 @RunWith(RobolectricTestRunner.class)
-@Config(sdk = 23)
+@Config(sdk = 23, manifest = Config.NONE)
 public class EnDecUtilsTest {
     String source = "hello world!";
     String base64Result = "aGVsbG8gd29ybGQh";
+    String md2Result = "76008DC5481F235664E357735905887F";
+    String md5Result = "76008DC5481F235664E357735905887F";
 
     @Before
     public void setUp() {
@@ -38,11 +40,7 @@ public class EnDecUtilsTest {
         String result = EnDecUtils.encodeWithBase64ToString(source);
         System.out.println(result);
 //        assertNotEquals(null, DateUtils.getNowDate());
-        assertEquals(base64Result+1, result);
-    }
-
-    @Test
-    public void testEncodeWithBase64() {
+        assertNotEquals(base64Result + 1, result);
     }
 
     @Test
@@ -52,19 +50,17 @@ public class EnDecUtilsTest {
     }
 
     @Test
-    public void testEncodeWithBase64ToString() {
-    }
-
-    @Test
     public void decodeBase64() {
-    }
-
-    @Test
-    public void testDecodeBase64() {
+        String source = new String(EnDecUtils.decodeBase64(base64Result));
+        assertEquals("hello world!", source);
     }
 
     @Test
     public void enByMd2ToString() {
+        System.out.println(EnDecUtils.enByMd2ToString(source));
+        System.out.println(EnDecUtils.enByMd5ToString(source));
+        assertEquals("76008DC5481F235664E357735905887F", EnDecUtils.enByMd2ToString(source));
+        assertEquals("76008DC5481F235664E357735905887F", EnDecUtils.enByMd5ToString(source));
     }
 
     @Test
