@@ -29,12 +29,8 @@ import java.util.Set;
 
 
 /**
- * <pre>
- *     author: Blankj
- *     blog  : http://blankj.com
- *     time  : 2017/12/29
- *     desc  : utils about permission
- * </pre>
+ * 权限请求工具类
+ * {@link UtilsTransActivity}、{@link UtilsTransActivity4MainProcess}
  */
 public final class PermissionUtils {
 

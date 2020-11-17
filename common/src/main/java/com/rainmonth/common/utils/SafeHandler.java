@@ -4,6 +4,8 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 
+import com.rainmonth.common.utils.log.LogUtils;
+
 /**
  * @author RandyZhang
  * @date 2020/9/24 10:57 AM
@@ -43,7 +45,7 @@ public class SafeHandler extends Handler {
         try {
             super.dispatchMessage(msg);
         } catch (Exception e) {
-            LogUtil.e(e.getMessage());
+            LogUtils.e(e.getMessage());
         }
         clearMessages(msg);
     }

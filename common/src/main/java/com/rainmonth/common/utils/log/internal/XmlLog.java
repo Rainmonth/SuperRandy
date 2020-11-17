@@ -3,7 +3,6 @@ package com.rainmonth.common.utils.log.internal;
 import android.util.Log;
 
 import com.rainmonth.common.utils.log.LogUtils;
-import com.socks.library.Util;
 
 import java.io.StringReader;
 import java.io.StringWriter;
@@ -26,11 +25,11 @@ public class XmlLog {
             xml = XmlLog.formatXML(xml);
             xml = headString + "\n" + xml;
         } else {
-            xml = headString + KLog.NULL_TIPS;
+            xml = headString + LogUtils.NULL_TIPS;
         }
 
         Util.printLine(tag, true);
-        String[] lines = xml.split(KLog.LINE_SEPARATOR);
+        String[] lines = xml.split(LogUtils.LINE_SEPARATOR);
         for (String line : lines) {
             if (!Util.isEmpty(line)) {
                 Log.d(tag, "║ " + line);
