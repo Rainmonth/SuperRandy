@@ -30,7 +30,7 @@ import java.lang.reflect.Method;
 import static android.Manifest.permission.EXPAND_STATUS_BAR;
 
 /**
- *
+ * 状态栏工具类
  */
 public final class BarUtils {
 
