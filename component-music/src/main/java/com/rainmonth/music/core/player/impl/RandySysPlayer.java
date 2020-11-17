@@ -9,7 +9,7 @@ import android.view.SurfaceHolder;
 
 import com.rainmonth.music.core.player.BasePlayer;
 import com.rainmonth.music.core.player.IPlayer;
-import com.socks.library.KLog;
+import com.rainmonth.common.utils.log.LogUtils;
 
 import java.io.IOException;
 import java.lang.ref.WeakReference;
@@ -42,7 +42,7 @@ public class RandySysPlayer extends BasePlayer {
         try {
             mInternalPlayer.setDisplay(surfaceHolder);
         } catch (IllegalStateException e) {
-            KLog.e(Tag, e);
+            LogUtils.e(Tag, e);
         }
     }
 
@@ -51,7 +51,7 @@ public class RandySysPlayer extends BasePlayer {
         try {
             mInternalPlayer.setSurface(surface);
         } catch (IllegalStateException e) {
-            KLog.e(Tag, e);
+            LogUtils.e(Tag, e);
         }
     }
 
@@ -66,7 +66,7 @@ public class RandySysPlayer extends BasePlayer {
                 mInternalPlayer.setDataSource(path);
             }
         } catch (IOException e) {
-            KLog.e(Tag, e);
+            LogUtils.e(Tag, e);
         }
     }
 
@@ -75,7 +75,7 @@ public class RandySysPlayer extends BasePlayer {
         try {
             mInternalPlayer.setDataSource(context, uri);
         } catch (IOException e) {
-            KLog.e(Tag, e);
+            LogUtils.e(Tag, e);
         }
     }
 
@@ -84,7 +84,7 @@ public class RandySysPlayer extends BasePlayer {
         try {
             mInternalPlayer.setDataSource(context, uri, headers);
         } catch (IOException e) {
-            KLog.e(Tag, e);
+            LogUtils.e(Tag, e);
         }
     }
 
@@ -93,7 +93,7 @@ public class RandySysPlayer extends BasePlayer {
         try {
             mInternalPlayer.prepare();
         } catch (IllegalStateException | IOException e) {
-            KLog.e(Tag, e);
+            LogUtils.e(Tag, e);
         }
     }
 
@@ -102,7 +102,7 @@ public class RandySysPlayer extends BasePlayer {
         try {
             mInternalPlayer.prepareAsync();
         } catch (IllegalStateException e) {
-            KLog.e(Tag, e);
+            LogUtils.e(Tag, e);
         }
     }
 
@@ -111,7 +111,7 @@ public class RandySysPlayer extends BasePlayer {
         try {
             mInternalPlayer.start();
         } catch (IllegalStateException e) {
-            KLog.e(Tag, e);
+            LogUtils.e(Tag, e);
         }
     }
 
@@ -120,7 +120,7 @@ public class RandySysPlayer extends BasePlayer {
         try {
             mInternalPlayer.pause();
         } catch (IllegalStateException e) {
-            KLog.e(Tag, e);
+            LogUtils.e(Tag, e);
         }
     }
 
@@ -129,7 +129,7 @@ public class RandySysPlayer extends BasePlayer {
         try {
             mInternalPlayer.stop();
         } catch (IllegalStateException e) {
-            KLog.e(Tag, e);
+            LogUtils.e(Tag, e);
         }
     }
 
@@ -138,7 +138,7 @@ public class RandySysPlayer extends BasePlayer {
         try {
             return mInternalPlayer.getVideoWidth();
         } catch (IllegalStateException e) {
-            KLog.e(Tag, e);
+            LogUtils.e(Tag, e);
             return 0;
         }
     }
@@ -148,7 +148,7 @@ public class RandySysPlayer extends BasePlayer {
         try {
             return mInternalPlayer.getVideoHeight();
         } catch (IllegalStateException e) {
-            KLog.e(Tag, e);
+            LogUtils.e(Tag, e);
             return 0;
         }
     }
@@ -158,7 +158,7 @@ public class RandySysPlayer extends BasePlayer {
         try {
             return mInternalPlayer.isPlaying();
         } catch (IllegalStateException e) {
-            KLog.e(Tag, e);
+            LogUtils.e(Tag, e);
             return false;
         }
     }
@@ -168,7 +168,7 @@ public class RandySysPlayer extends BasePlayer {
         try {
             mInternalPlayer.seekTo((int) milliseconds);
         } catch (IllegalStateException e) {
-            KLog.e(Tag, e);
+            LogUtils.e(Tag, e);
         }
     }
 
@@ -194,7 +194,7 @@ public class RandySysPlayer extends BasePlayer {
         try {
             return mInternalPlayer.getCurrentPosition();
         } catch (IllegalStateException e) {
-            KLog.e(Tag, e);
+            LogUtils.e(Tag, e);
             return 0;
         }
     }
@@ -204,7 +204,7 @@ public class RandySysPlayer extends BasePlayer {
         try {
             return mInternalPlayer.getDuration();
         } catch (IllegalStateException e) {
-            KLog.e(Tag, e);
+            LogUtils.e(Tag, e);
             return 0;
         }
     }

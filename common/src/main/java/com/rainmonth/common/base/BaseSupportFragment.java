@@ -5,23 +5,24 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import androidx.annotation.Nullable;
-import com.google.android.material.snackbar.Snackbar;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+
+import com.google.android.material.snackbar.Snackbar;
 import com.rainmonth.common.R;
 import com.rainmonth.common.base.mvp.IBaseView;
 import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.common.eventbus.EventCenter;
 import com.rainmonth.common.utils.CommonUtils;
 import com.rainmonth.common.utils.ComponentUtils;
+import com.rainmonth.common.utils.log.LogUtils;
 import com.rainmonth.common.widgets.ProgressHUD;
 import com.rainmonth.common.widgets.loading.VaryViewHelperController;
-import com.socks.library.KLog;
 
 import java.lang.reflect.Field;
 
@@ -45,8 +46,8 @@ public abstract class BaseSupportFragment extends Fragment implements IBaseView 
      */
     protected Context mContext = null;
 
-    private VaryViewHelperController mVaryViewHelperController = null;
-    protected Handler mHandler = new Handler();
+    private   VaryViewHelperController mVaryViewHelperController = null;
+    protected Handler                  mHandler                  = new Handler();
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
@@ -57,14 +58,14 @@ public abstract class BaseSupportFragment extends Fragment implements IBaseView 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        KLog.i("Randy", TAG);
+        LogUtils.i("Randy", TAG);
         mContext = context;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        KLog.i("Randy", TAG);
+        LogUtils.i("Randy", TAG);
         if (isBindEventBusHere()) {
             EventBus.getDefault().register(mContext);
         }
@@ -74,7 +75,7 @@ public abstract class BaseSupportFragment extends Fragment implements IBaseView 
     public View onCreateView(LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        KLog.i("Randy", TAG);
+        LogUtils.i("Randy", TAG);
         if (getContentViewLayoutID() != 0) {
             return inflater.inflate(getContentViewLayoutID(), null);
         } else {
@@ -86,7 +87,7 @@ public abstract class BaseSupportFragment extends Fragment implements IBaseView 
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
-        KLog.i("Randy", TAG);
+        LogUtils.i("Randy", TAG);
         // 初始化AppComponent实例
         mAppComponent = ComponentUtils.getAppComponent();
         if (null != getLoadingTargetView()) {
@@ -97,43 +98,43 @@ public abstract class BaseSupportFragment extends Fragment implements IBaseView 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        KLog.i("Randy", TAG);
+        LogUtils.i("Randy", TAG);
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        KLog.i("Randy", TAG);
+        LogUtils.i("Randy", TAG);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        KLog.i("Randy", TAG);
+        LogUtils.i("Randy", TAG);
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        KLog.i("Randy", TAG);
+        LogUtils.i("Randy", TAG);
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        KLog.i("Randy", TAG);
+        LogUtils.i("Randy", TAG);
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        KLog.i("Randy", TAG);
+        LogUtils.i("Randy", TAG);
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        KLog.i("Randy", TAG);
+        LogUtils.i("Randy", TAG);
         if (isBindEventBusHere()) {
             EventBus.getDefault().unregister(this);
         }
@@ -142,7 +143,7 @@ public abstract class BaseSupportFragment extends Fragment implements IBaseView 
     @Override
     public void onDetach() {
         super.onDetach();
-        KLog.i("Randy", TAG);
+        LogUtils.i("Randy", TAG);
         // for bug ---> java.lang.IllegalStateException: Activity has been destroyed
         try {
             Field childFragmentManager =
@@ -332,6 +333,7 @@ public abstract class BaseSupportFragment extends Fragment implements IBaseView 
     }
 
     ProgressHUD progressHUD;
+
     @Override
     public void showProgress() {
         progressHUD = ProgressHUD.show(mContext, "正在加载", R.mipmap.ic_launcher_round, true, null);

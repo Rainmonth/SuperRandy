@@ -2,13 +2,14 @@ package com.rainmonth.mvp.ui.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.rainmonth.R;
@@ -17,6 +18,7 @@ import com.rainmonth.common.base.BaseWebActivity;
 import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.common.http.PageData;
 import com.rainmonth.common.http.imageloader.glide.GlideImageConfig;
+import com.rainmonth.common.utils.log.LogUtils;
 import com.rainmonth.common.widgets.RandyViewPager;
 import com.rainmonth.di.component.DaggerRenComponent;
 import com.rainmonth.di.module.RenModule;
@@ -26,7 +28,6 @@ import com.rainmonth.mvp.model.bean.BannerBean;
 import com.rainmonth.mvp.model.bean.TestBean;
 import com.rainmonth.mvp.presenter.RenPresenter;
 import com.rainmonth.mvp.ui.adapter.ArticleListAdapter;
-import com.socks.library.KLog;
 
 import java.util.List;
 
@@ -42,14 +43,14 @@ public class RenFragment extends BaseLazyFragment<RenPresenter> implements RenCo
     @BindView(R.id.srl_container)
     SwipeRefreshLayout srlContainer;
     @BindView(R.id.rv_content)
-    RecyclerView rvContent;
+    RecyclerView       rvContent;
 
-    private View headView;
+    private View                       headView;
     private RandyViewPager<BannerBean> viewPager;
 
-    private int page = 1;
-    private boolean isRefresh = false;
-    private ArticleListAdapter mAdapter = null;
+    private int                page      = 1;
+    private boolean            isRefresh = false;
+    private ArticleListAdapter mAdapter  = null;
 
     @Override
     public void onFirstUserVisible() {
@@ -126,7 +127,7 @@ public class RenFragment extends BaseLazyFragment<RenPresenter> implements RenCo
 
     @Override
     public void test(TestBean testBean) {
-        KLog.i(testBean);
+        LogUtils.i(testBean);
     }
 
     @Override

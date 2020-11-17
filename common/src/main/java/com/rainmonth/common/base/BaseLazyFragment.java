@@ -1,13 +1,14 @@
 package com.rainmonth.common.base;
 
 import android.os.Bundle;
-import androidx.annotation.Nullable;
 import android.view.View;
+
+import androidx.annotation.Nullable;
 
 import com.rainmonth.common.base.mvp.BasePresenter;
 import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.common.eventbus.EventCenter;
-import com.socks.library.KLog;
+import com.rainmonth.common.utils.log.LogUtils;
 
 import javax.inject.Inject;
 
@@ -17,8 +18,8 @@ import javax.inject.Inject;
  * @param <T>
  */
 public abstract class BaseLazyFragment<T extends BasePresenter> extends BaseSupportFragment {
-    private boolean isFirstResume = true;
-    private boolean isFirstVisible = true;
+    private boolean isFirstResume    = true;
+    private boolean isFirstVisible   = true;
     private boolean isFirstInvisible = true;
     private boolean isPrepared;
 
@@ -30,7 +31,7 @@ public abstract class BaseLazyFragment<T extends BasePresenter> extends BaseSupp
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        KLog.i("Randy", TAG);
+        LogUtils.i("Randy", TAG);
         setupFragmentComponent(mAppComponent);
         initViewsAndEvents(view);
     }
@@ -38,14 +39,14 @@ public abstract class BaseLazyFragment<T extends BasePresenter> extends BaseSupp
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        KLog.i("Randy", TAG);
+        LogUtils.i("Randy", TAG);
         initPrepare();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        KLog.i("Randy", TAG);
+        LogUtils.i("Randy", TAG);
         if (isFirstResume) {
             isFirstResume = false;
             return;
@@ -58,7 +59,7 @@ public abstract class BaseLazyFragment<T extends BasePresenter> extends BaseSupp
     @Override
     public void onPause() {
         super.onPause();
-        KLog.i("Randy", TAG);
+        LogUtils.i("Randy", TAG);
         if (getUserVisibleHint()) {
             onUserInvisible();
         }
@@ -67,7 +68,7 @@ public abstract class BaseLazyFragment<T extends BasePresenter> extends BaseSupp
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        KLog.i("Randy", TAG + "->" + isVisibleToUser);
+        LogUtils.i("Randy", TAG + "->" + isVisibleToUser);
         if (isVisibleToUser) {
             if (isFirstVisible) {
                 isFirstVisible = false;

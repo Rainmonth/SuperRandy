@@ -1,12 +1,12 @@
 package com.rainmonth.image.api;
 
 import com.rainmonth.common.BuildConfig;
+import com.rainmonth.common.utils.log.LogUtils;
 import com.rainmonth.image.base.ApiTestHelper;
 import com.rainmonth.image.base.ApiTestObserver;
 import com.rainmonth.image.base.BaseApiTest;
 import com.rainmonth.image.base.LogRule;
 import com.rainmonth.image.mvp.model.bean.PhotoBean;
-import com.socks.library.KLog;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -46,8 +46,8 @@ public class UPhotoApiTest extends BaseApiTest {
 
                     @Override
                     public void onNext(List<PhotoBean> photoBeanList) {
-                        KLog.e("Randy", "next");
-                        KLog.e("Randy", "size=" + photoBeanList.size());
+                        LogUtils.e("Randy", "next");
+                        LogUtils.e("Randy", "size=" + photoBeanList.size());
                         assertEquals(10, photoBeanList.size());
                     }
                 });
@@ -63,8 +63,8 @@ public class UPhotoApiTest extends BaseApiTest {
 
                     @Override
                     public void onNext(PhotoBean photoBean) {
-                        KLog.e("Randy", "next");
-                        KLog.e("Randy", "size=" + photoBean.getUrls().getFull());
+                        LogUtils.e("Randy", "next");
+                        LogUtils.e("Randy", "size=" + photoBean.getUrls().getFull());
 //                        assertEquals(10, collectionBeans.size());
                     }
                 });

@@ -15,9 +15,9 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.rainmonth.common.base.BaseActivity;
 import com.rainmonth.common.bean.ExampleBean;
 import com.rainmonth.common.di.component.AppComponent;
+import com.rainmonth.common.utils.log.LogUtils;
 import com.rainmonth.componentbase.ServiceFactory;
 import com.rainmonth.router.RouterConstant;
-import com.socks.library.KLog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +30,7 @@ import java.util.List;
  */
 @Route(path = RouterConstant.PATH_VIDEO_HOME)
 public class VideoMainActivity extends BaseActivity {
-    RecyclerView rvAudioVideoExample;
+    RecyclerView                                  rvAudioVideoExample;
     BaseQuickAdapter<ExampleBean, BaseViewHolder> exampleAdapter;
 
     @Override
@@ -105,7 +105,7 @@ public class VideoMainActivity extends BaseActivity {
                 try {
                     readyGo(exampleBean.clazz);
                 } catch (Exception e) {
-                    KLog.e(e);
+                    LogUtils.e(e);
                 }
             }
         });

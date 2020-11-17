@@ -8,7 +8,7 @@ import com.rainmonth.image.mvp.model.bean.CollectionBean;
 import com.rainmonth.image.mvp.model.bean.PhotoBean;
 import com.rainmonth.image.mvp.model.bean.SiteBean;
 import com.rainmonth.image.mvp.model.bean.UserBean;
-import com.socks.library.KLog;
+import com.rainmonth.common.utils.log.LogUtils;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -46,7 +46,7 @@ public class UUserApiTest extends BaseApiTest {
                 .subscribe(new ApiTestObserver<UserBean>() {
                     @Override
                     public void onNext(UserBean userBean) {
-                        KLog.d("Randy", userBean.getName());
+                        LogUtils.d("Randy", userBean.getName());
                         assertEquals("charlesdeluvio", userBean.getName() + 1);
                     }
                 });
@@ -61,7 +61,7 @@ public class UUserApiTest extends BaseApiTest {
                 .subscribe(new ApiTestObserver<List<PhotoBean>>() {
                     @Override
                     public void onNext(List<PhotoBean> photoBeans) {
-                        KLog.d("Randy", photoBeans.get(0).getUrls());
+                        LogUtils.d("Randy", photoBeans.get(0).getUrls());
                         assertEquals(11, photoBeans.size());
                     }
                 });
@@ -76,7 +76,7 @@ public class UUserApiTest extends BaseApiTest {
                 .subscribe(new ApiTestObserver<SiteBean>() {
                     @Override
                     public void onNext(SiteBean siteBean) {
-                        KLog.d("Randy", siteBean.getUrl());
+                        LogUtils.d("Randy", siteBean.getUrl());
                         assertEquals("www.rainmonth.cn", siteBean.getUrl());
                     }
                 });
@@ -91,7 +91,7 @@ public class UUserApiTest extends BaseApiTest {
                 .subscribe(new ApiTestObserver<List<CollectionBean>>() {
                     @Override
                     public void onNext(List<CollectionBean> collectionBeans) {
-                        KLog.d("Randy", collectionBeans.size());
+                        LogUtils.d("Randy", collectionBeans.size());
                         assertEquals(10, collectionBeans.size());
                     }
                 });
@@ -107,7 +107,7 @@ public class UUserApiTest extends BaseApiTest {
                 .subscribe(new ApiTestObserver<List<PhotoBean>>() {
                     @Override
                     public void onNext(List<PhotoBean> photoBeans) {
-                        KLog.d("Randy", photoBeans.size() + "" +
+                        LogUtils.d("Randy", photoBeans.size() + "" +
                                 photoBeans.get(0));
                         assertEquals(10, photoBeans.size());
                     }

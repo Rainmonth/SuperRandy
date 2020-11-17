@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
+import com.rainmonth.common.utils.log.LogUtils;
 import com.rainmonth.music.BuildConfig;
 import com.rainmonth.music.core.helper.ConstHelper;
 import com.rainmonth.music.core.helper.MeasureHelper;
@@ -15,7 +16,6 @@ import com.rainmonth.music.core.render.view.IRenderView;
 import com.rainmonth.music.core.render.view.RandySurfaceView;
 import com.rainmonth.music.core.render.view.RandyTextureView;
 import com.rainmonth.music.core.render.view.listener.SurfaceListener;
-import com.socks.library.KLog;
 
 /**
  * RenderView持有者
@@ -147,7 +147,7 @@ public class RenderViewHolder {
             if (BuildConfig.DEBUG) {
                 throw new IllegalArgumentException("parent should be FrameLayout or RelativeLayout");
             } else {
-                KLog.e(TAG, "parent should be FrameLayout or RelativeLayout");
+                LogUtils.e(TAG, "parent should be FrameLayout or RelativeLayout");
             }
         }
     }

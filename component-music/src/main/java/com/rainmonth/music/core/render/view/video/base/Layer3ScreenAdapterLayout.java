@@ -5,7 +5,6 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.Handler;
 import android.util.AttributeSet;
-import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -18,9 +17,9 @@ import androidx.transition.TransitionManager;
 
 import com.rainmonth.common.utils.DensityUtils;
 import com.rainmonth.common.utils.SmartBarUtils;
+import com.rainmonth.common.utils.log.LogUtils;
 import com.rainmonth.music.R;
 import com.rainmonth.music.core.utils.OrientationUtils;
-import com.socks.library.KLog;
 
 import java.lang.reflect.Constructor;
 
@@ -75,7 +74,7 @@ public abstract class Layer3ScreenAdapterLayout extends Layer2PlayerControlLayou
 
     //全屏返回监听，如果设置了，默认返回无效
     protected View.OnClickListener mBackFromFullScreenListener;
-    protected Handler mInnerHandler = new Handler();
+    protected Handler              mInnerHandler = new Handler();
 
     public Layer3ScreenAdapterLayout(Context context) {
         super(context);
@@ -153,7 +152,7 @@ public abstract class Layer3ScreenAdapterLayout extends Layer2PlayerControlLayou
         addRenderView();
         mSetupViewTimeMillis = System.currentTimeMillis();
         if (mVideoViewCallBack != null) {
-            KLog.d(TAG, "onQuitSmallWidget");
+            LogUtils.d(TAG, "onQuitSmallWidget");
             mVideoViewCallBack.onQuitSmallWidget(mOriginUrl, mTitle, this);
         }
     }
@@ -282,7 +281,7 @@ public abstract class Layer3ScreenAdapterLayout extends Layer2PlayerControlLayou
             Layer3ScreenAdapterLayout.this.getClass().getConstructor(Context.class, Boolean.class);
         } catch (Exception e) {
             hasNewConstructor = false;
-            KLog.e(TAG, e);
+            LogUtils.e(TAG, e);
         }
         try {
             Constructor<Layer3ScreenAdapterLayout> constructor;
@@ -365,7 +364,7 @@ public abstract class Layer3ScreenAdapterLayout extends Layer2PlayerControlLayou
 //            checkoutState();
             return player;
         } catch (Exception e) {
-            KLog.e(TAG, e);
+            LogUtils.e(TAG, e);
         }
         return null;
     }
@@ -432,7 +431,7 @@ public abstract class Layer3ScreenAdapterLayout extends Layer2PlayerControlLayou
         if (mIsCurrentFullscreen) {
             // 确保开启竖屏检测的时候正常全屏
             boolean isVertical = isVerticalFullByVideoSize();
-            KLog.d(TAG, "Layer3 onPrepared isVerticalFullByVideoSize " + isVertical);
+            LogUtils.d(TAG, "Layer3 onPrepared isVerticalFullByVideoSize " + isVertical);
             if (isVertical) {
                 if (mOrientationUtils != null) {
                     mOrientationUtils.backToProtVideo();
@@ -504,10 +503,10 @@ public abstract class Layer3ScreenAdapterLayout extends Layer2PlayerControlLayou
             int[] location = new int[2];
             getLocationOnScreen(location);
             if (location[1] == 0) {
-                KLog.d(TAG, "竖屏，系统未将布局下移，手动添加Padding将其下移");
+                LogUtils.d(TAG, "竖屏，系统未将布局下移，手动添加Padding将其下移");
                 setPadding(0, DensityUtils.getStatusBarHeight(context), 0, 0);
             } else {
-                KLog.d(TAG, "竖屏，系统将布局下移");
+                LogUtils.d(TAG, "竖屏，系统将布局下移");
             }
         }
     }
@@ -554,8 +553,8 @@ public abstract class Layer3ScreenAdapterLayout extends Layer2PlayerControlLayou
         boolean isVertical = false;
         int videoHeight = getCurrentVideoHeight();
         int videoWidth = getCurrentVideoWidth();
-        KLog.d(TAG, "Layer3 isVerticalVideo videoHeight:" + videoHeight + " videoWidth:" + videoWidth);
-        KLog.d(TAG, "Layer3 isVerticalVideo mRotate:" + mRotate);
+        LogUtils.d(TAG, "Layer3 isVerticalVideo videoHeight:" + videoHeight + " videoWidth:" + videoWidth);
+        LogUtils.d(TAG, "Layer3 isVerticalVideo mRotate:" + mRotate);
         if (videoHeight > 0 && videoWidth > 0) {
             if (mRotate == 90 || mRotate == 270) {
                 isVertical = videoWidth > videoHeight;

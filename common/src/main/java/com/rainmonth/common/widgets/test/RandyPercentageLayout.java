@@ -2,40 +2,27 @@ package com.rainmonth.common.widgets.test;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Path;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffXfermode;
-import android.graphics.RectF;
-import android.text.TextUtils;
 import android.util.AttributeSet;
-import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
 import com.rainmonth.common.R;
-import com.rainmonth.common.utils.DensityUtils;
-import com.socks.library.KLog;
 
 /**
  * @author RandyZhang
  * @date 2020/10/15 11:29 AM
  */
 public class RandyPercentageLayout extends FrameLayout {
-    private static final String TAG = RandyPercentageLayout.class.getSimpleName();
+    private static final String TAG              = RandyPercentageLayout.class.getSimpleName();
     /**
      * 宽度占屏幕百分比， -1表示不根据百分比计算
      */
-    protected float mWidthPercentage = -1;
+    protected            float  mWidthPercentage = -1;
     /**
      * 宽高比
      */
-    protected float mRate = 32 / 25f;
+    protected            float  mRate            = 32 / 25f;
 
 
     public RandyPercentageLayout(Context context) {
@@ -76,7 +63,7 @@ public class RandyPercentageLayout extends FrameLayout {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int sw = getResources().getDisplayMetrics().widthPixels;
-//        KLog.d(TAG, "onMeasure: " + "screenWidth=" + getResources().getDisplayMetrics().widthPixels + ",screeHeight=" + getResources().getDisplayMetrics().heightPixels);
+//        LogUtils.d(TAG, "onMeasure: " + "screenWidth=" + getResources().getDisplayMetrics().widthPixels + ",screeHeight=" + getResources().getDisplayMetrics().heightPixels);
 //        KLog.d(TAG, "onMeasure: " + "w=" + getWidth() + ",h=" + getHeight() + ",mw=" + getMeasuredWidth() + ",mh=" + getMeasuredHeight());
         if (mWidthPercentage == -1) {
             super.onMeasure(widthMeasureSpec, heightMeasureSpec);

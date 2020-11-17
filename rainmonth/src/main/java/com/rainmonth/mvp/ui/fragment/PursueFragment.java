@@ -1,14 +1,16 @@
 package com.rainmonth.mvp.ui.fragment;
 
+import android.view.View;
+
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import android.view.View;
 
 import com.google.gson.Gson;
 import com.rainmonth.R;
 import com.rainmonth.common.base.BaseLazyFragment;
 import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.common.http.PageData;
+import com.rainmonth.common.utils.log.LogUtils;
 import com.rainmonth.di.component.DaggerPursueComponent;
 import com.rainmonth.di.module.PursueModule;
 import com.rainmonth.mvp.contract.PursueContract;
@@ -16,7 +18,6 @@ import com.rainmonth.mvp.model.bean.PursueBean;
 import com.rainmonth.mvp.model.bean.PursueGroupBean;
 import com.rainmonth.mvp.presenter.PursuePresenter;
 import com.rainmonth.mvp.ui.adapter.PursueContentAdapter;
-import com.socks.library.KLog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -87,7 +88,7 @@ public class PursueFragment extends BaseLazyFragment<PursuePresenter>
         data.add(new PursueGroupBean(1, "热门推荐2", pursueBeans));
         data.add(new PursueGroupBean(1, "热门推荐3", pursueBeans));
         data.add(new PursueGroupBean(1, "热门推荐4", pursueBeans));
-        KLog.e("Randy", new Gson().toJson(data));
+        LogUtils.e("Randy", new Gson().toJson(data));
         return data;
     }
 

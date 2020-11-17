@@ -1,14 +1,12 @@
 package com.rainmonth.image.api;
 
-import com.rainmonth.common.BuildConfig;
-import com.rainmonth.common.utils.RxUtils;
+import com.rainmonth.common.utils.log.LogUtils;
 import com.rainmonth.image.base.ApiTestHelper;
 import com.rainmonth.image.base.ApiTestObserver;
 import com.rainmonth.image.base.BaseApiTest;
 import com.rainmonth.image.base.LogRule;
 import com.rainmonth.image.mvp.model.bean.CollectionBean;
 import com.rainmonth.image.mvp.model.bean.PhotoBean;
-import com.socks.library.KLog;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -47,8 +45,8 @@ public class UCollectionApiTest extends BaseApiTest {
                 .subscribe(new ApiTestObserver<List<CollectionBean>>() {
                     @Override
                     public void onNext(List<CollectionBean> collectionBeans) {
-                        KLog.e("Randy", "next");
-                        KLog.e("Randy", "size=" + collectionBeans.size());
+                        LogUtils.e("Randy", "next");
+                        LogUtils.e("Randy", "size=" + collectionBeans.size());
                         assertEquals(11, collectionBeans.size());
                     }
                 });
@@ -64,8 +62,8 @@ public class UCollectionApiTest extends BaseApiTest {
                 .subscribe(new ApiTestObserver<List<CollectionBean>>() {
                     @Override
                     public void onNext(List<CollectionBean> collectionBeans) {
-                        KLog.e("Randy", "next");
-                        KLog.e("Randy", "size=" + collectionBeans.size());
+                        LogUtils.e("Randy", "next");
+                        LogUtils.e("Randy", "size=" + collectionBeans.size());
                         assertEquals(11, collectionBeans.size());
                     }
                 });
@@ -81,8 +79,8 @@ public class UCollectionApiTest extends BaseApiTest {
                 .subscribe(new ApiTestObserver<List<PhotoBean>>() {
                     @Override
                     public void onNext(List<PhotoBean> photoBeans) {
-                        KLog.e("Randy", "next");
-                        KLog.e("Randy", "size=" + photoBeans.size());
+                        LogUtils.e("Randy", "next");
+                        LogUtils.e("Randy", "size=" + photoBeans.size());
                         assertEquals(10, photoBeans.size());
                     }
                 });
@@ -97,8 +95,8 @@ public class UCollectionApiTest extends BaseApiTest {
                 .subscribe(new ApiTestObserver<List<PhotoBean>>() {
                     @Override
                     public void onNext(List<PhotoBean> photoBeans) {
-                        KLog.e("Randy", "next");
-                        KLog.e("Randy", "size=" + photoBeans.size());
+                        LogUtils.e("Randy", "next");
+                        LogUtils.e("Randy", "size=" + photoBeans.size());
                         assertEquals(10, photoBeans.size());
                     }
                 });
@@ -114,8 +112,8 @@ public class UCollectionApiTest extends BaseApiTest {
 
                     @Override
                     public void onNext(CollectionBean collectionBean) {
-                        KLog.e("Randy", "next");
-                        KLog.e("Randy", ";id=" + collectionBean.getId() +
+                        LogUtils.e("Randy", "next");
+                        LogUtils.e("Randy", ";id=" + collectionBean.getId() +
                                 "desc=" + collectionBean.getDescription());
                         assertEquals(1922728, collectionBean.getId());
                     }
@@ -156,8 +154,8 @@ public class UCollectionApiTest extends BaseApiTest {
 
                     @Override
                     public void onNext(List<CollectionBean> collectionBeans) {
-                        KLog.e("Randy", "next");
-                        KLog.e("Randy", "size=" + collectionBeans.size());
+                        LogUtils.e("Randy", "next");
+                        LogUtils.e("Randy", "size=" + collectionBeans.size());
                         assertEquals(10, collectionBeans.size());
                     }
                 });

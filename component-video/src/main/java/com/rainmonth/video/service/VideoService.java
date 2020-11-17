@@ -1,7 +1,7 @@
 package com.rainmonth.video.service;
 
+import com.rainmonth.common.utils.log.LogUtils;
 import com.rainmonth.componentbase.service.video.IVideoService;
-import com.socks.library.KLog;
 
 /**
  * @author 张豪成
@@ -10,11 +10,11 @@ import com.socks.library.KLog;
 public class VideoService implements IVideoService {
     @Override
     public void goVideoMain() {
-        KLog.d("VideoService", "goVideoMain");
+        LogUtils.d("VideoService", "goVideoMain");
     }
 
     @Override
     public void playVideo(String videoUrl) {
-        KLog.d("VideoService", "playVideo with url->" + videoUrl);
+        LogUtils.d("VideoService", "playVideo with url->" + videoUrl);
     }
 }

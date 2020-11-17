@@ -10,6 +10,7 @@ import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.rainmonth.common.utils.log.LogUtils;
 import com.rainmonth.music.core.helper.ConstHelper;
 import com.rainmonth.music.core.helper.MeasureHelper;
 import com.rainmonth.music.core.render.RenderViewHolder;
@@ -18,7 +19,6 @@ import com.rainmonth.music.core.render.glrender.IShader;
 import com.rainmonth.music.core.render.view.listener.ShotSaveCallback;
 import com.rainmonth.music.core.render.view.listener.SurfaceListener;
 import com.rainmonth.music.core.render.view.listener.VideoShotListener;
-import com.socks.library.KLog;
 
 import java.io.File;
 
@@ -30,12 +30,12 @@ public class RandyTextureView extends TextureView implements IRenderView,
         TextureView.SurfaceTextureListener,
         MeasureHelper.MeasureFormVideoParamsListener {
 
-    private static final String TAG = RandyTextureView.class.getSimpleName();
-    private SurfaceListener mSurfaceListener;
-    private MeasureHelper mMeasureHelper;
-    private MeasureHelper.MeasureFormVideoParamsListener mVideoParamsListener;
-    private SurfaceTexture mSurfaceTexture;
-    private Surface mSurface;
+    private static final String                                       TAG = RandyTextureView.class.getSimpleName();
+    private              SurfaceListener                              mSurfaceListener;
+    private              MeasureHelper                                mMeasureHelper;
+    private              MeasureHelper.MeasureFormVideoParamsListener mVideoParamsListener;
+    private              SurfaceTexture                               mSurfaceTexture;
+    private              Surface                                      mSurface;
 
     public RandyTextureView(Context context) {
         super(context);
@@ -55,7 +55,7 @@ public class RandyTextureView extends TextureView implements IRenderView,
                                                  final SurfaceListener surfaceListener,
                                                  final MeasureHelper.MeasureFormVideoParamsListener paramsListener) {
         if (renderViewContainer == null) {
-            KLog.e(TAG, "renderViewContainer is null");
+            LogUtils.e(TAG, "renderViewContainer is null");
             return null;
         }
         if (renderViewContainer.getChildCount() > 0) {
@@ -122,27 +122,27 @@ public class RandyTextureView extends TextureView implements IRenderView,
 
     @Override
     public void onRenderResume() {
-        KLog.d(TAG, TAG + " not support onRenderResume now!");
+        LogUtils.d(TAG, TAG + " not support onRenderResume now!");
     }
 
     @Override
     public void onRenderPause() {
-        KLog.d(TAG, TAG + " not support onRenderPause now!");
+        LogUtils.d(TAG, TAG + " not support onRenderPause now!");
     }
 
     @Override
     public void releaseRenderAll() {
-        KLog.d(TAG, TAG + " not support releaseRenderAll now!");
+        LogUtils.d(TAG, TAG + " not support releaseRenderAll now!");
     }
 
     @Override
     public void setRenderMode(int mode) {
-        KLog.d(TAG, TAG + " not support setRenderMode now!");
+        LogUtils.d(TAG, TAG + " not support setRenderMode now!");
     }
 
     @Override
     public void setRenderTransform(Matrix transform) {
-        KLog.d(TAG, TAG + " not support setRenderTransform now!");
+        LogUtils.d(TAG, TAG + " not support setRenderTransform now!");
     }
 
     @Override
@@ -167,7 +167,7 @@ public class RandyTextureView extends TextureView implements IRenderView,
 
     @Override
     public void setGLMVPMatrix(float[] MVPMatrix) {
-        KLog.d(TAG, TAG + " not support setGLMVPMatrix now!");
+        LogUtils.d(TAG, TAG + " not support setGLMVPMatrix now!");
     }
     //</editor-fold>
 

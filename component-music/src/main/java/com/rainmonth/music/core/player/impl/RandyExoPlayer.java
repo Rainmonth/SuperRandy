@@ -27,12 +27,12 @@ import com.google.android.exoplayer2.source.MediaSourceEventListener;
 import com.google.android.exoplayer2.source.TrackGroupArray;
 import com.google.android.exoplayer2.trackselection.MappingTrackSelector;
 import com.google.android.exoplayer2.trackselection.TrackSelectionArray;
+import com.rainmonth.common.utils.log.LogUtils;
 import com.rainmonth.music.BuildConfig;
 import com.rainmonth.music.core.helper.EventLogger;
 import com.rainmonth.music.core.helper.ExoHelper;
 import com.rainmonth.music.core.player.BasePlayer;
 import com.rainmonth.music.core.player.IPlayer;
-import com.socks.library.KLog;
 
 import java.io.File;
 import java.io.IOException;
@@ -55,21 +55,21 @@ public class RandyExoPlayer extends BasePlayer implements Player.EventListener, 
     public static final String Tag = RandyExoPlayer.class.getSimpleName();
 
     private SimpleExoPlayer mInternalPlayer;                    // 内部持有的ExoPlayer对象
-    private Context mAppContext;                                // context（最好是application的context）
-    private ExoHelper mHelper;                                  // Exo辅助类
+    private Context         mAppContext;                                // context（最好是application的context）
+    private ExoHelper       mHelper;                                  // Exo辅助类
 
-    private String mDataSourcePath;                             //
-    private String mOverrideExtension;                          //
-    private boolean mCacheEnable;                               //
-    private File mCacheDir;                                        // 缓存目录
+    private String              mDataSourcePath;                             //
+    private String              mOverrideExtension;                          //
+    private boolean             mCacheEnable;                               //
+    private File                mCacheDir;                                        // 缓存目录
     private Map<String, String> mHeaders = new HashMap<>();     // headers
-    private Surface mSurface;
-    private int mWidth = 0, mHeight = 0;
-    private MappingTrackSelector mTrackSelector;
+    private Surface             mSurface;
+    private int                 mWidth   = 0, mHeight = 0;
+    private MappingTrackSelector    mTrackSelector;
     private DefaultRenderersFactory mRenderersFactory;
-    private EventLogger mEventLogger;
-    private LoadControl mLoadControl;
-    private PlaybackParameters mSpeedPlaybackParameters;
+    private EventLogger             mEventLogger;
+    private LoadControl             mLoadControl;
+    private PlaybackParameters      mSpeedPlaybackParameters;
 
     private MediaSource mMediaSource;
 
@@ -131,7 +131,7 @@ public class RandyExoPlayer extends BasePlayer implements Player.EventListener, 
             if (BuildConfig.DEBUG) {
                 throw new IllegalStateException("can't prepare a prepared player");
             } else {
-                KLog.e(Tag, "can't prepare a prepared player");
+                LogUtils.e(Tag, "can't prepare a prepared player");
                 return;
             }
         }
@@ -394,7 +394,7 @@ public class RandyExoPlayer extends BasePlayer implements Player.EventListener, 
 
     //<editor-fold> Player.AnalyticsListener
     private boolean lastReportedPlayWhenReady;
-    private int lastPlaybackState;
+    private int     lastPlaybackState;
     private boolean isBuffering, isPreparing;
 
     @Override

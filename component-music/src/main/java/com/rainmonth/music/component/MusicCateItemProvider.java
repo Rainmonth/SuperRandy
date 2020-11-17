@@ -12,7 +12,7 @@ import com.rainmonth.common.bean.RandyLogicBean;
 import com.rainmonth.common.component.Const;
 import com.rainmonth.common.component.RandyHListItemProvider;
 import com.rainmonth.music.R;
-import com.socks.library.KLog;
+import com.rainmonth.common.utils.log.LogUtils;
 
 /**
  * 功能分类Item提供者
@@ -22,7 +22,7 @@ import com.socks.library.KLog;
  */
 public class MusicCateItemProvider extends RandyHListItemProvider<CateBean> {
     private ImageView ivCateIcon;
-    private TextView tvCateTitle;
+    private TextView  tvCateTitle;
 
     public MusicCateItemProvider(RandyLogicBean mLogicBean) {
         super(mLogicBean);
@@ -52,7 +52,7 @@ public class MusicCateItemProvider extends RandyHListItemProvider<CateBean> {
 
     @Override
     public void onRealItemClick(BaseQuickAdapter adapter, View view, int position) {
-        KLog.d("position " + position + " clicked!");
+        LogUtils.d("position " + position + " clicked!");
     }
 
 }

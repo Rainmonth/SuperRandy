@@ -17,7 +17,7 @@ import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
 
-import com.socks.library.KLog;
+import com.rainmonth.common.utils.log.LogUtils;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -47,7 +47,7 @@ public class AppUtils {
             }
             ctx.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         } catch (Exception e) {
-            KLog.e(TAG, e);
+            LogUtils.e(TAG, e);
         }
     }
 
@@ -57,7 +57,7 @@ public class AppUtils {
                 cancelKeepScreenOn((Activity) ctx);
             }
         } catch (Exception e) {
-            KLog.e(TAG, e);
+            LogUtils.e(TAG, e);
         }
     }
 
@@ -73,7 +73,7 @@ public class AppUtils {
             }
             ctx.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         } catch (Exception e) {
-            KLog.e(TAG, e);
+            LogUtils.e(TAG, e);
         }
     }
 

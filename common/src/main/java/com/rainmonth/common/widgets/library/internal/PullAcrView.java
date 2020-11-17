@@ -17,7 +17,7 @@ import androidx.annotation.Nullable;
 
 import com.rainmonth.common.R;
 import com.rainmonth.common.utils.DensityUtils;
-import com.socks.library.KLog;
+import com.rainmonth.common.utils.log.LogUtils;
 
 /**
  * @author RandyZhang
@@ -31,7 +31,7 @@ public class PullAcrView extends LinearLayout {
 
     private int mWidth, mHeight;
     private PointF mStartPoint = new PointF(100, 200);
-    private PointF mEndPoint = new PointF(100, 500);
+    private PointF mEndPoint   = new PointF(100, 500);
 
     private PointF mControlPoint = new PointF(50, 350);
 
@@ -40,11 +40,11 @@ public class PullAcrView extends LinearLayout {
     /**
      * 屏幕宽度
      */
-    private int mScreenWidth;
+    private int   mScreenWidth;
     /**
      * 弧路径
      */
-    private Path mArcPath;
+    private Path  mArcPath;
     /**
      * 弧画笔
      */
@@ -54,7 +54,7 @@ public class PullAcrView extends LinearLayout {
      * #16C3FF
      * 填充色
      */
-    private int mFillColor = Color.parseColor("#16C3FF");
+    private int   mFillColor = Color.parseColor("#16C3FF");
 
     /**
      * 最大滑动的距离
@@ -156,7 +156,7 @@ public class PullAcrView extends LinearLayout {
         if (mWidth > 0) {
             mMaxScrollDistance = mWidth;
         }
-        KLog.d("RandyTest", "onSizeChanged(), w:" + w + ",h:" + h + ",mMaxScroll:" + mMaxScrollDistance);
+        LogUtils.d("RandyTest", "onSizeChanged(), w:" + w + ",h:" + h + ",mMaxScroll:" + mMaxScrollDistance);
         mStartPoint.x = w;
         mStartPoint.y = 0;
 
@@ -168,9 +168,9 @@ public class PullAcrView extends LinearLayout {
 
         mLabelWidth = tvTipLabel.getMeasuredWidth();
 
-        KLog.d("RandyTest", "translationX:" + tvTipLabel.getTranslationX());
+        LogUtils.d("RandyTest", "translationX:" + tvTipLabel.getTranslationX());
         tvTipLabel.setTranslationX(mLabelWidth);
-        KLog.d("RandyTest", "translationX:" + tvTipLabel.getTranslationX());
+        LogUtils.d("RandyTest", "translationX:" + tvTipLabel.getTranslationX());
     }
 
     @Override
@@ -183,7 +183,7 @@ public class PullAcrView extends LinearLayout {
         super.onDraw(canvas);
         mArcPath.reset();
         // 移到起点
-        KLog.d("RandyTest", "startPoint:" + mStartPoint + ", controlPoint:" + mControlPoint + ", endPoint:" + mEndPoint);
+        LogUtils.d("RandyTest", "startPoint:" + mStartPoint + ", controlPoint:" + mControlPoint + ", endPoint:" + mEndPoint);
 
         mArcPath.moveTo(mStartPoint.x, mStartPoint.y);
         mArcPath.quadTo(mControlPoint.x, mControlPoint.y, mEndPoint.x, mEndPoint.y);
@@ -209,7 +209,7 @@ public class PullAcrView extends LinearLayout {
     }
 
     public void onPullToRefresh(float pullDistance) {
-        KLog.d("RandyTest", pullDistance);
+        LogUtils.d("RandyTest", pullDistance);
 
 
         if (pullDistance >= 0) {// 从右向左

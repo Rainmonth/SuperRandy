@@ -5,10 +5,10 @@ import android.app.ActivityManager;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
-import com.google.android.material.snackbar.Snackbar;
 import android.view.View;
 
-import com.rainmonth.common.utils.LogUtil;
+import com.google.android.material.snackbar.Snackbar;
+import com.rainmonth.common.utils.log.LogUtils;
 
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -21,13 +21,13 @@ import javax.inject.Singleton;
 @Singleton
 public class AppManager {
 
-    public static final String IS_NOT_ADD_ACTIVITY_LIST = "is_add_activity_list";//是否加入到activity的list，管理
+    public static final String         IS_NOT_ADD_ACTIVITY_LIST = "is_add_activity_list";//是否加入到activity的list，管理
     //管理所有activity
-    public List<Activity> mActivityList;
-    private Application mApplication;
-//    private Flowable<AppManagerEvent> mAppManagerEventFlowable;
+    public              List<Activity> mActivityList;
+    private             Application    mApplication;
+    //    private Flowable<AppManagerEvent> mAppManagerEventFlowable;
     //当前在前台的activity
-    private Activity mCurrentActivity;
+    private             Activity       mCurrentActivity;
 
     @Inject
     public AppManager(Application application) {
@@ -90,7 +90,7 @@ public class AppManager {
      */
     public void showSnackbar(String message) {
         if (getCurrentActivity() == null) {
-            LogUtil.w("mCurrentActivity == null when showSnackbar(String,boolean)");
+            LogUtils.w("mCurrentActivity == null when showSnackbar(String,boolean)");
             return;
         }
         View view = getCurrentActivity().getWindow().getDecorView().findViewById(android.R.id.content);
@@ -103,7 +103,7 @@ public class AppManager {
      */
     public void startActivity(Intent intent) {
         if (getCurrentActivity() == null) {
-            LogUtil.w("mCurrentActivity == null when startActivity(Intent)");
+            LogUtils.w("mCurrentActivity == null when startActivity(Intent)");
             //如果没有前台的activity就使用new_task模式启动activity
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             mApplication.startActivity(intent);
@@ -176,7 +176,7 @@ public class AppManager {
      */
     public void removeActivity(Activity activity) {
         if (mActivityList == null) {
-            LogUtil.w("mActivityList == null when removeActivity(Activity)");
+            LogUtils.w("mActivityList == null when removeActivity(Activity)");
             return;
         }
         synchronized (AppManager.class) {
@@ -191,7 +191,7 @@ public class AppManager {
      */
     public Activity removeActivity(int location) {
         if (mActivityList == null) {
-            LogUtil.w("mActivityList == null when removeActivity(int)");
+            LogUtils.w("mActivityList == null when removeActivity(int)");
             return null;
         }
         synchronized (AppManager.class) {
@@ -207,7 +207,7 @@ public class AppManager {
      */
     public void killActivity(Class<?> activityClass) {
         if (mActivityList == null) {
-            LogUtil.w("mActivityList == null when killActivity");
+            LogUtils.w("mActivityList == null when killActivity");
             return;
         }
         for (Activity activity : mActivityList) {
@@ -223,7 +223,7 @@ public class AppManager {
      */
     public boolean activityInstanceIsLive(Activity activity) {
         if (mActivityList == null) {
-            LogUtil.w("mActivityList == null when activityInstanceIsLive");
+            LogUtils.w("mActivityList == null when activityInstanceIsLive");
             return false;
         }
         return mActivityList.contains(activity);
@@ -235,7 +235,7 @@ public class AppManager {
      */
     public boolean activityClassIsLive(Class<?> activityClass) {
         if (mActivityList == null) {
-            LogUtil.w("mActivityList == null when activityClassIsLive");
+            LogUtils.w("mActivityList == null when activityClassIsLive");
             return false;
         }
         for (Activity activity : mActivityList) {

@@ -9,6 +9,7 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.rainmonth.common.utils.log.LogUtils;
 import com.rainmonth.music.core.helper.MeasureHelper;
 import com.rainmonth.music.core.render.RenderViewHolder;
 import com.rainmonth.music.core.render.glrender.GLSurfaceViewBaseRenderer;
@@ -16,7 +17,6 @@ import com.rainmonth.music.core.render.glrender.IShader;
 import com.rainmonth.music.core.render.view.listener.ShotSaveCallback;
 import com.rainmonth.music.core.render.view.listener.SurfaceListener;
 import com.rainmonth.music.core.render.view.listener.VideoShotListener;
-import com.socks.library.KLog;
 
 import java.io.File;
 
@@ -27,10 +27,10 @@ import java.io.File;
 public class RandySurfaceView extends SurfaceView implements SurfaceHolder.Callback2, IRenderView,
         MeasureHelper.MeasureFormVideoParamsListener {
 
-    private static final String TAG = RandySurfaceView.class.getSimpleName();
-    private SurfaceListener mSurfaceListener;
-    private MeasureHelper mMeasureHelper;
-    private MeasureHelper.MeasureFormVideoParamsListener mVideoParamsListener;
+    private static final String                                       TAG = RandySurfaceView.class.getSimpleName();
+    private              SurfaceListener                              mSurfaceListener;
+    private              MeasureHelper                                mMeasureHelper;
+    private              MeasureHelper.MeasureFormVideoParamsListener mVideoParamsListener;
 
     public RandySurfaceView(Context context) {
         super(context);
@@ -50,7 +50,7 @@ public class RandySurfaceView extends SurfaceView implements SurfaceHolder.Callb
                                                  final SurfaceListener surfaceListener,
                                                  final MeasureHelper.MeasureFormVideoParamsListener paramsListener) {
         if (renderViewContainer == null) {
-            KLog.e(TAG, "renderViewContainer is null");
+            LogUtils.e(TAG, "renderViewContainer is null");
             return null;
         }
         if (renderViewContainer.getChildCount() > 0) {
@@ -136,39 +136,39 @@ public class RandySurfaceView extends SurfaceView implements SurfaceHolder.Callb
 
     @Override
     public Bitmap initCover() {
-        KLog.d(TAG, TAG + " not support initCover now!");
+        LogUtils.d(TAG, TAG + " not support initCover now!");
         return null;
     }
 
     @Override
     public Bitmap initCoverHigh() {
-        KLog.d(TAG, TAG + " not support initCoverHigh now!");
+        LogUtils.d(TAG, TAG + " not support initCoverHigh now!");
         return null;
     }
 
     @Override
     public void onRenderResume() {
-        KLog.d(TAG, TAG + " not support onRenderResume now!");
+        LogUtils.d(TAG, TAG + " not support onRenderResume now!");
     }
 
     @Override
     public void onRenderPause() {
-        KLog.d(TAG, TAG + " not support onRenderPause now!");
+        LogUtils.d(TAG, TAG + " not support onRenderPause now!");
     }
 
     @Override
     public void releaseRenderAll() {
-        KLog.d(TAG, TAG + " not support releaseRenderAll now!");
+        LogUtils.d(TAG, TAG + " not support releaseRenderAll now!");
     }
 
     @Override
     public void setRenderMode(int mode) {
-        KLog.d(TAG, TAG + " not support setRenderMode now!");
+        LogUtils.d(TAG, TAG + " not support setRenderMode now!");
     }
 
     @Override
     public void setRenderTransform(Matrix transform) {
-        KLog.d(TAG, TAG + " not support setRenderTransform now!");
+        LogUtils.d(TAG, TAG + " not support setRenderTransform now!");
     }
 
     @Override
@@ -178,7 +178,7 @@ public class RandySurfaceView extends SurfaceView implements SurfaceHolder.Callb
 
     @Override
     public void setGLMVPMatrix(float[] MVPMatrix) {
-        KLog.d(TAG, TAG + " not support setGLMVPMatrix now!");
+        LogUtils.d(TAG, TAG + " not support setGLMVPMatrix now!");
     }
 
     @Override

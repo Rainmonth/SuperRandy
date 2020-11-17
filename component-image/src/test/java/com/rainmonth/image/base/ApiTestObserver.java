@@ -1,6 +1,6 @@
 package com.rainmonth.image.base;
 
-import com.socks.library.KLog;
+import com.rainmonth.common.utils.log.LogUtils;
 
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
@@ -8,16 +8,16 @@ import io.reactivex.disposables.Disposable;
 public abstract class ApiTestObserver<T> implements Observer<T> {
     @Override
     public void onSubscribe(Disposable d) {
-        KLog.d("Randy", "onSubscribe");
+        LogUtils.d("Randy", "onSubscribe");
     }
 
     @Override
     public void onError(Throwable e) {
-        KLog.d("Randy", "error happen->" + e.getMessage());
+        LogUtils.d("Randy", "error happen->" + e.getMessage());
     }
 
     @Override
     public void onComplete() {
-        KLog.d("Randy", "onComplete");
+        LogUtils.d("Randy", "onComplete");
     }
 }

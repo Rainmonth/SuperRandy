@@ -19,7 +19,6 @@ import com.google.android.exoplayer2.source.smoothstreaming.DefaultSsChunkSource
 import com.google.android.exoplayer2.source.smoothstreaming.SsMediaSource;
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
 import com.google.android.exoplayer2.trackselection.MappingTrackSelector;
-import com.google.android.exoplayer2.trackselection.TrackSelector;
 import com.google.android.exoplayer2.upstream.DataSource;
 import com.google.android.exoplayer2.upstream.DataSpec;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
@@ -31,7 +30,7 @@ import com.google.android.exoplayer2.upstream.cache.CacheDataSourceFactory;
 import com.google.android.exoplayer2.upstream.cache.LeastRecentlyUsedCacheEvictor;
 import com.google.android.exoplayer2.upstream.cache.SimpleCache;
 import com.google.android.exoplayer2.util.Util;
-import com.socks.library.KLog;
+import com.rainmonth.common.utils.log.LogUtils;
 
 import java.io.File;
 import java.util.Map;
@@ -45,10 +44,10 @@ import java.util.Map;
 public class ExoHelper {
     private static final String Tag = ExoHelper.class.getSimpleName();
 
-    public static final int TYPE_RTMP = 4;
+    public static final  int  TYPE_RTMP              = 4;
     private static final long DEFAULT_MAX_CACHE_SIZE = 512 * 1024 * 1024;
 
-    private Context mContext;
+    private Context             mContext;
     private Map<String, String> mHeaders;
 
     private static ExoHelper mInstance;
@@ -74,7 +73,7 @@ public class ExoHelper {
 
     public MediaSource getMediaSource(String dataSourcePath, String overrideExtension, boolean cacheEnable, File cacheFile) {
         if (TextUtils.isEmpty(dataSourcePath)) {
-            KLog.e(Tag, "dataSourcePath is empty");
+            LogUtils.e(Tag, "dataSourcePath is empty");
             return null;
         }
 
@@ -95,7 +94,7 @@ public class ExoHelper {
             try {
                 rawResourceDataSource.open(dataSpec);
             } catch (RawResourceDataSource.RawResourceDataSourceException e) {
-                KLog.e(Tag, e);
+                LogUtils.e(Tag, e);
             }
             DataSource.Factory factory = new DataSource.Factory() {
                 @Override

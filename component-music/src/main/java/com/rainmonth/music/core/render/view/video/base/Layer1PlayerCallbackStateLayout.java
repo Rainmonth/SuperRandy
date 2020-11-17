@@ -13,7 +13,6 @@ import android.os.Looper;
 import android.util.AttributeSet;
 import android.view.Surface;
 import android.view.View;
-import android.view.ViewGroup;
 
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
@@ -22,11 +21,11 @@ import androidx.appcompat.widget.TintContextWrapper;
 
 import com.rainmonth.common.utils.AppUtils;
 import com.rainmonth.common.utils.NetworkUtils;
+import com.rainmonth.common.utils.log.LogUtils;
 import com.rainmonth.music.R;
 import com.rainmonth.music.core.bridge.IVideoViewMgrBridge;
 import com.rainmonth.music.core.listener.RandyPlayerListener;
 import com.rainmonth.music.core.listener.VideoViewCallback;
-import com.socks.library.KLog;
 
 import java.io.File;
 import java.util.HashMap;
@@ -187,7 +186,7 @@ public abstract class Layer1PlayerCallbackStateLayout extends Layer0PlayerDrawLa
         try {
             View.inflate(context, getLayoutId(), this);
         } catch (Exception e) {
-            KLog.e(TAG, e);
+            LogUtils.e(TAG, e);
         }
     }
 
@@ -249,10 +248,10 @@ public abstract class Layer1PlayerCallbackStateLayout extends Layer0PlayerDrawLa
      */
     protected void startButtonLogic() {
         if (mVideoViewCallBack != null && mCurrentState == STATE_NORMAL) {
-            KLog.d(TAG, "startButtonLogic()->onClickStartIcon");
+            LogUtils.d(TAG, "startButtonLogic()->onClickStartIcon");
             mVideoViewCallBack.onClickStartIcon(mOriginUrl, mTitle, this);
         } else if (mVideoViewCallBack != null) {
-            KLog.d(TAG, "startButtonLogic()->onClickStartError");
+            LogUtils.d(TAG, "startButtonLogic()->onClickStartError");
             mVideoViewCallBack.onClickStartError(mOriginUrl, mTitle, this);
         }
         prepareVideo();
@@ -307,7 +306,7 @@ public abstract class Layer1PlayerCallbackStateLayout extends Layer0PlayerDrawLa
      * 获得焦点处理
      */
     protected void onGainAudio() {
-        KLog.d(TAG, "onGainAudio");
+        LogUtils.d(TAG, "onGainAudio");
     }
 
     /**
@@ -333,7 +332,7 @@ public abstract class Layer1PlayerCallbackStateLayout extends Layer0PlayerDrawLa
         try {
             onVideoPause();
         } catch (Exception e) {
-            KLog.e(TAG, e);
+            LogUtils.e(TAG, e);
         }
     }
 
@@ -341,7 +340,7 @@ public abstract class Layer1PlayerCallbackStateLayout extends Layer0PlayerDrawLa
      * 失去焦点，但可以继续定音量播放
      */
     protected void onLossTransientCanDuck() {
-        KLog.d(TAG, "onLossTransientCanDuck");
+        LogUtils.d(TAG, "onLossTransientCanDuck");
     }
     //</editor-fold>
 
@@ -353,7 +352,7 @@ public abstract class Layer1PlayerCallbackStateLayout extends Layer0PlayerDrawLa
         }
         mHadPrepared = true;
         if (mVideoViewCallBack != null && isCurrentPlayerListener()) {
-            KLog.d(TAG, "onPrepared");
+            LogUtils.d(TAG, "onPrepared");
             mVideoViewCallBack.onPrepared(mOriginUrl, mTitle, this);
         }
         if (!mStartAfterPrepared) {
@@ -369,7 +368,7 @@ public abstract class Layer1PlayerCallbackStateLayout extends Layer0PlayerDrawLa
         try {
             duration = getVideoViewMgrBridge().getDuration();
         } catch (Exception e) {
-            KLog.e(TAG, e);
+            LogUtils.e(TAG, e);
         }
         return duration;
     }
@@ -396,7 +395,7 @@ public abstract class Layer1PlayerCallbackStateLayout extends Layer0PlayerDrawLa
                 mStartPlayPosition = 0;// 播放位置重置
             }
         } catch (Exception e) {
-            KLog.e(TAG, e);
+            LogUtils.e(TAG, e);
         }
         addRenderView();
 
@@ -466,7 +465,7 @@ public abstract class Layer1PlayerCallbackStateLayout extends Layer0PlayerDrawLa
         releaseNetworkListener();
         // 发送通知
         if (mVideoViewCallBack != null && isCurrentPlayerListener()) {
-            KLog.d(TAG, "onAutoCompletion");
+            LogUtils.d(TAG, "onAutoCompletion");
             mVideoViewCallBack.onAutoComplete(mOriginUrl, mTitle, this);
         }
     }
@@ -505,7 +504,7 @@ public abstract class Layer1PlayerCallbackStateLayout extends Layer0PlayerDrawLa
     @Override
     public void onSeekComplete() {
         // do nothing
-        KLog.d(TAG, "onSeekComplete");
+        LogUtils.d(TAG, "onSeekComplete");
     }
 
     @Override
@@ -532,7 +531,7 @@ public abstract class Layer1PlayerCallbackStateLayout extends Layer0PlayerDrawLa
      */
     protected void netWorkErrorLogic() {
         final long currentPosition = getCurrentPositionWhenPlaying();
-        KLog.e(TAG, "******* Net State Changed. renew player to connect *******" + currentPosition);
+        LogUtils.e(TAG, "******* Net State Changed. renew player to connect *******" + currentPosition);
         getVideoViewMgrBridge().release();
         postDelayed(() -> {
             setStartPlayPosition(currentPosition);
@@ -551,7 +550,7 @@ public abstract class Layer1PlayerCallbackStateLayout extends Layer0PlayerDrawLa
             try {
                 position = getVideoViewMgrBridge().getCurrentPosition();
             } catch (Exception e) {
-                KLog.e(TAG, e);
+                LogUtils.e(TAG, e);
                 return position;
             }
         }
@@ -567,9 +566,9 @@ public abstract class Layer1PlayerCallbackStateLayout extends Layer0PlayerDrawLa
      */
     protected void deleteCacheFileWhenError() {
         clearCurrentCache();
-        KLog.e(TAG, "Link Or mCache Error, Please Try Again " + mOriginUrl);
+        LogUtils.e(TAG, "Link Or mCache Error, Please Try Again " + mOriginUrl);
         if (mIsCachePlay) {
-            KLog.e(TAG, "mCache Link " + mUrl);
+            LogUtils.e(TAG, "mCache Link " + mUrl);
         }
         mUrl = mOriginUrl;
     }
@@ -608,7 +607,7 @@ public abstract class Layer1PlayerCallbackStateLayout extends Layer0PlayerDrawLa
             }
         } else if (what == getVideoViewMgrBridge().getRotateInfoFlag()) {
             mRotate = extra;
-            KLog.d(TAG, "Video rotate info " + extra);
+            LogUtils.d(TAG, "Video rotate info " + extra);
             if (mRenderView != null) {
                 mRenderView.setRotation(mRotate);
             }
@@ -645,7 +644,7 @@ public abstract class Layer1PlayerCallbackStateLayout extends Layer0PlayerDrawLa
                 getVideoViewMgrBridge().pause();
             }
         } catch (Exception e) {
-            KLog.e(TAG, e);
+            LogUtils.e(TAG, e);
         }
     }
 
@@ -673,7 +672,7 @@ public abstract class Layer1PlayerCallbackStateLayout extends Layer0PlayerDrawLa
                 }
             }
         } catch (Exception e) {
-            KLog.e(TAG, e);
+            LogUtils.e(TAG, e);
         }
     }
 

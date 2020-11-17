@@ -20,26 +20,26 @@ import androidx.annotation.Nullable;
 
 import com.rainmonth.common.R;
 import com.rainmonth.common.utils.DensityUtils;
-import com.socks.library.KLog;
+import com.rainmonth.common.utils.log.LogUtils;
 
 /**
  * @author RandyZhang
  * @date 2020/10/15 11:29 AM
  */
 public class BorderRoundItemView extends FrameLayout {
-    private static final String TAG = BorderRoundItemView.class.getSimpleName();
+    private static final String TAG              = BorderRoundItemView.class.getSimpleName();
     /**
      * 宽度占屏幕百分比， -1表示不根据百分比计算
      */
-    private float mWidthPercentage = -1;
+    private              float  mWidthPercentage = -1;
     /**
      * 宽高比
      */
-    private float mRate = -1;
+    private              float  mRate            = -1;
 
-    private float mTopLeftRadius = DensityUtils.dip2px(getContext(), 10);
-    private float mBottomLeftRadius = DensityUtils.dip2px(getContext(), 10);
-    private float mTopRightRadius = DensityUtils.dip2px(getContext(), 18);
+    private float mTopLeftRadius     = DensityUtils.dip2px(getContext(), 10);
+    private float mBottomLeftRadius  = DensityUtils.dip2px(getContext(), 10);
+    private float mTopRightRadius    = DensityUtils.dip2px(getContext(), 18);
     private float mBottomRightRadius = DensityUtils.dip2px(getContext(), 18);
 
     /**
@@ -53,10 +53,10 @@ public class BorderRoundItemView extends FrameLayout {
      */
     private int mBorderColor = Color.RED;
 
-    private boolean mBorderEnabled = true;
-    private boolean mBorderLeftEnabled = false;
-    private boolean mBorderTopEnabled = false;
-    private boolean mBorderRightEnabled = false;
+    private boolean mBorderEnabled       = true;
+    private boolean mBorderLeftEnabled   = false;
+    private boolean mBorderTopEnabled    = false;
+    private boolean mBorderRightEnabled  = false;
     private boolean mBorderBottomEnabled = false;
 
     /**
@@ -80,7 +80,7 @@ public class BorderRoundItemView extends FrameLayout {
     private ImageView ivCover;
     private ImageView ivTopRightFlag;
     private ImageView ivBottomRightFlag;
-    private TextView tvCount;
+    private TextView  tvCount;
 
     public BorderRoundItemView(Context context) {
         super(context);
@@ -144,7 +144,7 @@ public class BorderRoundItemView extends FrameLayout {
         ivBottomRightFlag = findViewById(R.id.iv_bottom_right_flag);
         tvCount = findViewById(R.id.tv_count);
 
-        KLog.d(TAG, "initView: " + "w=" + getWidth() + ",h=" + getHeight() + ",mw=" + getMeasuredWidth() + ",mh=" + getMeasuredHeight());
+        LogUtils.d(TAG, "initView: " + "w=" + getWidth() + ",h=" + getHeight() + ",mw=" + getMeasuredWidth() + ",mh=" + getMeasuredHeight());
         mViewPath = new Path();
         mOutlinePath = new Path();
         mInnerPath = new Path();
@@ -172,20 +172,20 @@ public class BorderRoundItemView extends FrameLayout {
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
-//        KLog.d(TAG, "onFinishInflate: " + "w=" + getWidth() + ",h=" + getHeight() + ",mw=" + getMeasuredWidth() + ",mh=" + getMeasuredHeight());
+//        LogUtils.d(TAG, "onFinishInflate: " + "w=" + getWidth() + ",h=" + getHeight() + ",mw=" + getMeasuredWidth() + ",mh=" + getMeasuredHeight());
     }
 
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
-//        KLog.d(TAG, "onAttachedToWindow: " + "w=" + getWidth() + ",h=" + getHeight() + ",mw=" + getMeasuredWidth() + ",mh=" + getMeasuredHeight());
+//        LogUtils.d(TAG, "onAttachedToWindow: " + "w=" + getWidth() + ",h=" + getHeight() + ",mw=" + getMeasuredWidth() + ",mh=" + getMeasuredHeight());
     }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int sw = getResources().getDisplayMetrics().widthPixels;
-//        KLog.d(TAG, "onMeasure: " + "screenWidth=" + getResources().getDisplayMetrics().widthPixels + ",screeHeight=" + getResources().getDisplayMetrics().heightPixels);
-//        KLog.d(TAG, "onMeasure: " + "w=" + getWidth() + ",h=" + getHeight() + ",mw=" + getMeasuredWidth() + ",mh=" + getMeasuredHeight());
+//        LogUtils.d(TAG, "onMeasure: " + "screenWidth=" + getResources().getDisplayMetrics().widthPixels + ",screeHeight=" + getResources().getDisplayMetrics().heightPixels);
+//        LogUtils.d(TAG, "onMeasure: " + "w=" + getWidth() + ",h=" + getHeight() + ",mw=" + getMeasuredWidth() + ",mh=" + getMeasuredHeight());
         if (mWidthPercentage == -1 && mRate == -1) {
             super.onMeasure(widthMeasureSpec, heightMeasureSpec);
             return;
@@ -195,23 +195,23 @@ public class BorderRoundItemView extends FrameLayout {
             mWidthPercentage = Math.min(mWidthPercentage, 1);
         }
         final int width = MeasureSpec.getSize(widthMeasureSpec);
-//        KLog.e(TAG, "onMeasure: " + "w=" + getWidth() + ",h=" + getHeight() + ",mw=" + getMeasuredWidth() + ",mh=" + getMeasuredHeight() + ",width=" + width);
+//        LogUtils.e(TAG, "onMeasure: " + "w=" + getWidth() + ",h=" + getHeight() + ",mw=" + getMeasuredWidth() + ",mh=" + getMeasuredHeight() + ",width=" + width);
         int newWidth = mWidthPercentage != -1 ? width : (Math.round(sw * mWidthPercentage));
 
         if (mRate == -1) {
             super.onMeasure(MeasureSpec.makeMeasureSpec(newWidth, MeasureSpec.EXACTLY), heightMeasureSpec);
-//            KLog.e(TAG, "onMeasure: " + "w=" + getWidth() + ",h=" + getHeight() + ",mw=" + getMeasuredWidth() + ",mh=" + getMeasuredHeight() + ",width=" + width);
+//            LogUtils.e(TAG, "onMeasure: " + "w=" + getWidth() + ",h=" + getHeight() + ",mw=" + getMeasuredWidth() + ",mh=" + getMeasuredHeight() + ",width=" + width);
             setMeasuredDimension(newWidth, MeasureSpec.getSize(heightMeasureSpec));
-//            KLog.e(TAG, "onMeasure: " + "w=" + getWidth() + ",h=" + getHeight() + ",mw=" + getMeasuredWidth() + ",mh=" + getMeasuredHeight() + ",width=" + width);
+//            LogUtils.e(TAG, "onMeasure: " + "w=" + getWidth() + ",h=" + getHeight() + ",mw=" + getMeasuredWidth() + ",mh=" + getMeasuredHeight() + ",width=" + width);
             return;
         }
 
         if (mRate > 0) {
             int newHeight = Math.round(newWidth * mRate);
             super.onMeasure(MeasureSpec.makeMeasureSpec(newWidth, MeasureSpec.EXACTLY), MeasureSpec.makeMeasureSpec(newHeight, MeasureSpec.EXACTLY));
-//            KLog.e(TAG, "onMeasure: " + "w=" + getWidth() + ",h=" + getHeight() + ",mw=" + getMeasuredWidth() + ",mh=" + getMeasuredHeight() + ",width=" + width);
+//            LogUtils.e(TAG, "onMeasure: " + "w=" + getWidth() + ",h=" + getHeight() + ",mw=" + getMeasuredWidth() + ",mh=" + getMeasuredHeight() + ",width=" + width);
             setMeasuredDimension(newWidth, newHeight);
-//            KLog.e(TAG, "onMeasure: " + "w=" + getWidth() + ",h=" + getHeight() + ",mw=" + getMeasuredWidth() + ",mh=" + getMeasuredHeight() + ",width=" + width);
+//            LogUtils.e(TAG, "onMeasure: " + "w=" + getWidth() + ",h=" + getHeight() + ",mw=" + getMeasuredWidth() + ",mh=" + getMeasuredHeight() + ",width=" + width);
             return;
         }
 
@@ -221,7 +221,7 @@ public class BorderRoundItemView extends FrameLayout {
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
-        KLog.d(TAG, "onSizeChanged: " + "w=" + getWidth() + ",h=" + getHeight() + ",mw=" + getMeasuredWidth() + ",mh=" + getMeasuredHeight());
+        LogUtils.d(TAG, "onSizeChanged: " + "w=" + getWidth() + ",h=" + getHeight() + ",mw=" + getMeasuredWidth() + ",mh=" + getMeasuredHeight());
         // 重置
         mViewPath.reset();
         mOutlinePath.reset();
@@ -248,25 +248,25 @@ public class BorderRoundItemView extends FrameLayout {
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
-        KLog.d(TAG, "onLayout: " + "w=" + getWidth() + ",h=" + getHeight() + ",mw=" + getMeasuredWidth() + ",mh=" + getMeasuredHeight());
+        LogUtils.d(TAG, "onLayout: " + "w=" + getWidth() + ",h=" + getHeight() + ",mw=" + getMeasuredWidth() + ",mh=" + getMeasuredHeight());
     }
 
     @Override
     public void draw(Canvas canvas) {
         super.draw(canvas);
-        KLog.d(TAG, "draw: " + "w=" + getWidth() + ",h=" + getHeight() + ",mw=" + getMeasuredWidth() + ",mh=" + getMeasuredHeight());
+        LogUtils.d(TAG, "draw: " + "w=" + getWidth() + ",h=" + getHeight() + ",mw=" + getMeasuredWidth() + ",mh=" + getMeasuredHeight());
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        KLog.d(TAG, "onDraw: " + "w=" + getWidth() + ",h=" + getHeight() + ",mw=" + getMeasuredWidth() + ",mh=" + getMeasuredHeight());
+        LogUtils.d(TAG, "onDraw: " + "w=" + getWidth() + ",h=" + getHeight() + ",mw=" + getMeasuredWidth() + ",mh=" + getMeasuredHeight());
     }
 
     @Override
     protected void dispatchDraw(Canvas canvas) {
 
-        KLog.d(TAG, "dispatchDraw: " + "w=" + getWidth() + ",h=" + getHeight() + ",mw=" + getMeasuredWidth() + ",mh=" + getMeasuredHeight());
+        LogUtils.d(TAG, "dispatchDraw: " + "w=" + getWidth() + ",h=" + getHeight() + ",mw=" + getMeasuredWidth() + ",mh=" + getMeasuredHeight());
         int count = canvas.saveLayer(new RectF(0, 0, canvas.getWidth(), canvas.getHeight()), null, Canvas
                 .ALL_SAVE_FLAG);
         super.dispatchDraw(canvas);
@@ -286,7 +286,7 @@ public class BorderRoundItemView extends FrameLayout {
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
-        KLog.d(TAG, "onDetachedFromWindow: " + "w=" + getWidth() + ",h=" + getHeight() + ",mw=" + getMeasuredWidth() + ",mh=" + getMeasuredHeight());
+        LogUtils.d(TAG, "onDetachedFromWindow: " + "w=" + getWidth() + ",h=" + getHeight() + ",mw=" + getMeasuredWidth() + ",mh=" + getMeasuredHeight());
     }
 
     public void handleCover(int resId) {

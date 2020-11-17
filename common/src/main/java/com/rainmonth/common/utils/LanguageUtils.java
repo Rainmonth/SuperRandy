@@ -14,12 +14,7 @@ import androidx.annotation.Nullable;
 import java.util.Locale;
 
 /**
- * <pre>
- *     author: Blankj
- *     blog  : http://blankj.com
- *     time  : 2019/06/20
- *     desc  : utils about language
- * </pre>
+ * 语言切换工具类
  */
 public class LanguageUtils {
 

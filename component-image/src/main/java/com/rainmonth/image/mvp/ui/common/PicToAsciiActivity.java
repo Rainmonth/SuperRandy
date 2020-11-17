@@ -18,7 +18,7 @@ import com.rainmonth.common.base.BaseActivity;
 import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.common.utils.FileUtils;
 import com.rainmonth.image.R;
-import com.socks.library.KLog;
+import com.rainmonth.common.utils.log.LogUtils;
 
 /**
  * 实现效果:将视频逐帧取出，转化成Ascii图像连续播放
@@ -44,7 +44,7 @@ public class PicToAsciiActivity extends BaseActivity {
 
             ivAscii.setImageBitmap(bitmap);
         } catch (Exception e) {
-            KLog.e(e);
+            LogUtils.e(e);
         }
 
     }

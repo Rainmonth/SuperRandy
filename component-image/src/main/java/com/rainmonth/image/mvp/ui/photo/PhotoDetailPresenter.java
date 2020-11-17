@@ -4,8 +4,8 @@ import com.rainmonth.common.base.mvp.BasePresenter;
 import com.rainmonth.common.di.scope.ActivityScope;
 import com.rainmonth.common.http.CommonSubscriber;
 import com.rainmonth.common.utils.RxUtils;
+import com.rainmonth.common.utils.log.LogUtils;
 import com.rainmonth.image.mvp.model.bean.PhotoBean;
-import com.socks.library.KLog;
 
 import java.util.List;
 
@@ -24,7 +24,7 @@ public class PhotoDetailPresenter extends BasePresenter<PhotoDetailContract.Mode
                                  long collectionId,
                                  String orderBy,
                                  String from) {
-        KLog.d("Image", "request:" + page + " pageSize:" + perPage + " from:" + from);
+        LogUtils.d("Image", "request:" + page + " pageSize:" + perPage + " from:" + from);
         addSubscribe(mModel.getPagePhotos(page, perPage, collectionId, orderBy, from)
                 .compose(RxUtils.<List<PhotoBean>>getObservableTransformer())
                 .subscribeWith(new CommonSubscriber<List<PhotoBean>>(mView) {

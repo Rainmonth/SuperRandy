@@ -17,9 +17,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.rainmonth.common.utils.DensityUtils;
 import com.rainmonth.common.utils.ToastUtils;
+import com.rainmonth.common.utils.log.LogUtils;
 import com.rainmonth.image.R;
 import com.rainmonth.image.mvp.model.bean.SubscribeBean;
-import com.socks.library.KLog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,20 +32,20 @@ import java.util.List;
  */
 public class StoryShelfView extends ConstraintLayout {
 
-    private TextView tvLabel;
+    private TextView     tvLabel;
     private RecyclerView rvSubscribeList;
     private LinearLayout llIndicatorContainer;
 
     private Context mContext;
 
-    private List<SubscribeBean> mSubscribeList = new ArrayList<>();
+    private List<SubscribeBean>       mSubscribeList      = new ArrayList<>();
     private List<List<SubscribeBean>> mPagedSubscribeList = new ArrayList<>();
 
     private StoryShelfListAdapter mAdapter;
-    private boolean mNeedInterceptTouchEvent = false;
-    private boolean mNeedSupportSlideViewMore = false;
-    private int mPageNum = 1;
-    private int mCurrentIndex = 0;
+    private boolean               mNeedInterceptTouchEvent  = false;
+    private boolean               mNeedSupportSlideViewMore = false;
+    private int                   mPageNum                  = 1;
+    private int                   mCurrentIndex             = 0;
 
 
     public StoryShelfView(Context context) {
@@ -95,7 +95,7 @@ public class StoryShelfView extends ConstraintLayout {
 
         mPageNum = getPageNum(size);
         int rowHeight = (int) (DensityUtils.getScreenWidth(mContext) * 0.2453 * 1 + DensityUtils.dip2px(mContext, 17));
-        KLog.e("Randy", rowHeight);
+        LogUtils.e("Randy", rowHeight);
         rvSubscribeList.getLayoutParams().height = rowHeight;
 
         generatePages(mPageNum);
@@ -209,7 +209,7 @@ public class StoryShelfView extends ConstraintLayout {
 
     private static class StoryShelfListAdapter extends RecyclerView.Adapter<ShelfPageViewHolder> {
 
-        private List<List<SubscribeBean>> mData = new ArrayList<>();
+        private List<List<SubscribeBean>>                  mData = new ArrayList<>();
         private StoryShelfPageView.OnPageItemClickListener mOnPageItemClickListener;
 
         private Context mContext;
@@ -258,11 +258,11 @@ public class StoryShelfView extends ConstraintLayout {
      * RecyclerView实现ViewPager所使用的的LayoutManager
      */
     private static class ViewPagerLayoutManager extends LinearLayoutManager {
-        private static final String TAG = "ViewPagerLayoutManager";
-        private PagerSnapHelper mPagerSnapHelper;
-        private OnViewPagerListener mOnViewPagerListener;
-        private RecyclerView mRecyclerView;
-        private int mDrift;//位移，用来判断移动方向
+        private static final String              TAG = "ViewPagerLayoutManager";
+        private              PagerSnapHelper     mPagerSnapHelper;
+        private              OnViewPagerListener mOnViewPagerListener;
+        private              RecyclerView        mRecyclerView;
+        private              int                 mDrift;//位移，用来判断移动方向
 
         public ViewPagerLayoutManager(Context context, int orientation) {
             super(context, orientation, false);

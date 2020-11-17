@@ -26,9 +26,9 @@ import com.google.android.exoplayer2.upstream.DataSource;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.upstream.RawResourceDataSource;
 import com.google.android.exoplayer2.util.Util;
+import com.rainmonth.common.utils.log.LogUtils;
 import com.rainmonth.music.config.MusicApplication;
 import com.rainmonth.music.core.player.IRandyAudioPlayer;
-import com.socks.library.KLog;
 
 /**
  * 音频播放器
@@ -43,12 +43,12 @@ public class RandyAudioPlayer implements Player, IRandyAudioPlayer, Player.Event
      * ExoPlayer实例（本质是ExoPlayerImpl）
      */
     private ExoPlayer mInternalPlayer;
-    private Uri mCurrentUri;
+    private Uri       mCurrentUri;
 
     // 当前状态
     private int mCurrentState = Player.STATE_IDLE;
     // 期望达到的状态
-    private int mExpectState = Player.STATE_IDLE;
+    private int mExpectState  = Player.STATE_IDLE;
 
     // 音频解码器
     private Renderer audioRenderer;
@@ -76,7 +76,7 @@ public class RandyAudioPlayer implements Player, IRandyAudioPlayer, Player.Event
                 Uri uri = RawResourceDataSource.buildRawResourceUri(rawResId);
                 prepare(uri);
             } catch (Exception e) {
-                KLog.e(TAG, "prepare rawResId " + rawResId + " error, please check");
+                LogUtils.e(TAG, "prepare rawResId " + rawResId + " error, please check");
             }
         }
     }
@@ -88,10 +88,10 @@ public class RandyAudioPlayer implements Player, IRandyAudioPlayer, Player.Event
                 Uri uri = Uri.parse(resUrl);
                 prepare(uri);
             } catch (Exception e) {
-                KLog.e(TAG, "prepare resUrl " + resUrl + " error, please check");
+                LogUtils.e(TAG, "prepare resUrl " + resUrl + " error, please check");
             }
         } else {
-            KLog.e(TAG, "prepare a empty resUrl");
+            LogUtils.e(TAG, "prepare a empty resUrl");
         }
     }
 
@@ -149,7 +149,7 @@ public class RandyAudioPlayer implements Player, IRandyAudioPlayer, Player.Event
     @Override
     public void prepare(Uri resUri, MediaSource mediaSource) {
         if (null == resUri || null == mediaSource) {
-            KLog.e(TAG, "the resUri or mediaSource is null, Please check!");
+            LogUtils.e(TAG, "the resUri or mediaSource is null, Please check!");
             return;
         }
 
@@ -174,15 +174,15 @@ public class RandyAudioPlayer implements Player, IRandyAudioPlayer, Player.Event
     private void tryToExpectState() {
         if (mCurrentState != mExpectState) {
             if (mExpectState == STATE_PLAYING) {
-                KLog.d(TAG, "change to play state, start play");
+                LogUtils.d(TAG, "change to play state, start play");
                 mCurrentState = STATE_PLAYING;
                 setPlayWhenReady(true);
             } else if (mExpectState == STATE_PAUSED) {
-                KLog.d(TAG, "change to paused state, pause play");
+                LogUtils.d(TAG, "change to paused state, pause play");
                 mCurrentState = STATE_PAUSED;
                 setPlayWhenReady(false);
             } else if (mExpectState == STATE_RELEASED) {
-                KLog.d(TAG, "change to released state, release player");
+                LogUtils.d(TAG, "change to released state, release player");
                 mCurrentState = STATE_RELEASED;
                 mInternalPlayer.release();
             }
@@ -199,17 +199,17 @@ public class RandyAudioPlayer implements Player, IRandyAudioPlayer, Player.Event
 
     @Override
     public void onTracksChanged(TrackGroupArray trackGroups, TrackSelectionArray trackSelections) {
-        KLog.d(TAG, "trackGroups size:" + trackGroups.length + ", trackSelections size:" + trackSelections.length);
+        LogUtils.d(TAG, "trackGroups size:" + trackGroups.length + ", trackSelections size:" + trackSelections.length);
     }
 
     @Override
     public void onLoadingChanged(boolean isLoading) {
-        KLog.d(TAG, "isLoading:" + isLoading);
+        LogUtils.d(TAG, "isLoading:" + isLoading);
     }
 
     @Override
     public void onPlayerStateChanged(boolean playWhenReady, int playbackState) {
-        KLog.d(TAG, "playWhenReady:" + playWhenReady + ",playbackState:" + playbackState);
+        LogUtils.d(TAG, "playWhenReady:" + playWhenReady + ",playbackState:" + playbackState);
     }
 
     @Override
@@ -219,27 +219,27 @@ public class RandyAudioPlayer implements Player, IRandyAudioPlayer, Player.Event
 
     @Override
     public void onIsPlayingChanged(boolean isPlaying) {
-        KLog.d(TAG, "isPlaying:" + isPlaying);
+        LogUtils.d(TAG, "isPlaying:" + isPlaying);
     }
 
     @Override
     public void onRepeatModeChanged(int repeatMode) {
-        KLog.d(TAG, "repeatMode:" + repeatMode);
+        LogUtils.d(TAG, "repeatMode:" + repeatMode);
     }
 
     @Override
     public void onShuffleModeEnabledChanged(boolean shuffleModeEnabled) {
-        KLog.d(TAG, "shuffleModeEnabled:" + shuffleModeEnabled);
+        LogUtils.d(TAG, "shuffleModeEnabled:" + shuffleModeEnabled);
     }
 
     @Override
     public void onPlayerError(ExoPlaybackException error) {
-        KLog.d(TAG, error.getMessage());
+        LogUtils.d(TAG, error.getMessage());
     }
 
     @Override
     public void onPositionDiscontinuity(int reason) {
-        KLog.d(TAG, "reason:" + reason);
+        LogUtils.d(TAG, "reason:" + reason);
     }
 
     @Override

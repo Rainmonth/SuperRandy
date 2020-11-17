@@ -2,20 +2,21 @@ package com.rainmonth.image.mvp.ui.photo;
 
 import android.os.Bundle;
 import android.os.Handler;
-import androidx.viewpager.widget.ViewPager;
 import android.util.SparseArray;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import androidx.viewpager.widget.ViewPager;
+
 import com.rainmonth.common.base.BaseActivity;
 import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.common.utils.ToastUtils;
+import com.rainmonth.common.utils.log.LogUtils;
 import com.rainmonth.common.widgets.PullToRefreshViewPager;
 import com.rainmonth.common.widgets.library.PullToRefreshBase;
 import com.rainmonth.image.R;
 import com.rainmonth.image.api.Consts;
 import com.rainmonth.image.mvp.model.bean.PhotoBean;
-import com.socks.library.KLog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,24 +40,24 @@ public class PhotoDetailActivity extends BaseActivity<PhotoDetailPresenter>
         View.OnClickListener {
 
     private SparseArray<PhotoBean> photoBeans;
-    private int currentPage;
-    private int requestPage;
-    private int currentIndex;
-    private int pageSize;
-    private long collectionId;
-    private String orderBy;
-    private String from = Consts.FROM_PHOTO;
-    private LinearLayout llBtnContainer;
-    private View btnAddToCollection, btnCollect, btnDownload;
+    private int                    currentPage;
+    private int                    requestPage;
+    private int                    currentIndex;
+    private int                    pageSize;
+    private long                   collectionId;
+    private String                 orderBy;
+    private String                 from = Consts.FROM_PHOTO;
+    private LinearLayout           llBtnContainer;
+    private View                   btnAddToCollection, btnCollect, btnDownload;
 
     private PullToRefreshViewPager ptrVpPhotos;
-    private ViewPager vpPhotos;
-    private PhotoPagerAdapter photoPagerAdapter;
-    private List<PhotoBean> photoBeanList = new ArrayList<>();
-    private boolean mIsRequesting = false;
+    private ViewPager              vpPhotos;
+    private PhotoPagerAdapter      photoPagerAdapter;
+    private List<PhotoBean>        photoBeanList = new ArrayList<>();
+    private boolean                mIsRequesting = false;
     // todo 这里的判断不准确，后期通过获取响应头中的信息来获取总共的页数
-    private boolean isLastPage = false;
-    private boolean isAddAtHead = true;
+    private boolean                isLastPage    = false;
+    private boolean                isAddAtHead   = true;
 
     @Override
     protected int getContentViewLayoutID() {
@@ -73,7 +74,7 @@ public class PhotoDetailActivity extends BaseActivity<PhotoDetailPresenter>
         collectionId = extras.getLong(Consts.COLLECTION_ID, -1);
         orderBy = extras.getString(Consts.ORDER_BY);
         from = extras.getString(Consts.FROM, Consts.FROM_PHOTO);
-        KLog.d("Image", "currentPage:" + currentPage + " pageSize:" + pageSize + " from:" + from);
+        LogUtils.d("Image", "currentPage:" + currentPage + " pageSize:" + pageSize + " from:" + from);
     }
 
     @Override
@@ -205,21 +206,21 @@ public class PhotoDetailActivity extends BaseActivity<PhotoDetailPresenter>
             } else {
                 tempList.addAll(photoBeans);
             }
-            KLog.e("Image", "activity add counts:" + photoBeanList.size());
+            LogUtils.e("Image", "activity add counts:" + photoBeanList.size());
             photoPagerAdapter.setPhotoList(tempList);
 
             try {
                 int currentItem = vpPhotos.getCurrentItem();
-                KLog.d("Image", "currentItem:" + currentItem);
-                KLog.d("Image", "temp counts:" + photoBeans.size());
-                KLog.d("Image", "total counts:" + vpPhotos.getAdapter().getCount());
+                LogUtils.d("Image", "currentItem:" + currentItem);
+                LogUtils.d("Image", "temp counts:" + photoBeans.size());
+                LogUtils.d("Image", "total counts:" + vpPhotos.getAdapter().getCount());
                 if (isAddAtHead) {
                     vpPhotos.setCurrentItem(photoBeans.size() - 1, true);
                 } else {
                     vpPhotos.setCurrentItem(vpPhotos.getCurrentItem() + 1, true);
                 }
             } catch (Exception e) {
-                KLog.e("Image", "出错了");
+                LogUtils.e("Image", "出错了");
             }
         }
     }

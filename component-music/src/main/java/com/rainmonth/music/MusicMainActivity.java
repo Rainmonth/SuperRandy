@@ -17,7 +17,7 @@ import com.rainmonth.music.fragment.main.RecommendFragment;
 import com.rainmonth.music.widget.MusicMiniBar;
 import com.rainmonth.router.RouterConstant;
 import com.rainmonth.router.RouterUtils;
-import com.socks.library.KLog;
+import com.rainmonth.common.utils.log.LogUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -149,7 +149,7 @@ public class MusicMainActivity extends BaseActivity implements View.OnClickListe
                 R.drawable.music_main_mine_tab_selector
         };
         if (fragments.size() != icons.length) {
-            KLog.e("数据出错，请检查");
+            LogUtils.e("数据出错，请检查");
             return;
         }
         for (int i = 0; i < fragments.size(); i++) {

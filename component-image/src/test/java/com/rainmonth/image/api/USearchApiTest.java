@@ -8,7 +8,7 @@ import com.rainmonth.image.mvp.model.bean.CollectionBean;
 import com.rainmonth.image.mvp.model.bean.PhotoBean;
 import com.rainmonth.image.mvp.model.bean.UserBean;
 import com.rainmonth.image.mvp.model.bean.SearchResult;
-import com.socks.library.KLog;
+import com.rainmonth.common.utils.log.LogUtils;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -44,7 +44,7 @@ public class USearchApiTest extends BaseApiTest {
                 .subscribe(new ApiTestObserver<SearchResult<UserBean>>() {
                     @Override
                     public void onNext(SearchResult<UserBean> userBeanSearchResult) {
-                        KLog.d("Randy", userBeanSearchResult.getTotal_pages());
+                        LogUtils.d("Randy", userBeanSearchResult.getTotal_pages());
                         assertEquals(10, userBeanSearchResult
                                 .getResults().size() + 1);
 
@@ -61,7 +61,7 @@ public class USearchApiTest extends BaseApiTest {
                 .subscribe(new ApiTestObserver<SearchResult<PhotoBean>>() {
                     @Override
                     public void onNext(SearchResult<PhotoBean> photoBeanSearchResult) {
-                        KLog.d("Randy", photoBeanSearchResult.getTotal_pages());
+                        LogUtils.d("Randy", photoBeanSearchResult.getTotal_pages());
                         assertEquals(10, photoBeanSearchResult
                                 .getResults().size() + 1);
 
@@ -78,7 +78,7 @@ public class USearchApiTest extends BaseApiTest {
                 .subscribe(new ApiTestObserver<SearchResult<CollectionBean>>() {
                     @Override
                     public void onNext(SearchResult<CollectionBean> collectionBeanSearchResult) {
-                        KLog.d("Randy", collectionBeanSearchResult.getTotal_pages());
+                        LogUtils.d("Randy", collectionBeanSearchResult.getTotal_pages());
                         assertEquals(10, collectionBeanSearchResult
                                 .getResults().size() + 1);
 

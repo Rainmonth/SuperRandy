@@ -14,27 +14,51 @@ import java.math.BigDecimal;
  */
 public class CacheUtils {
 
+    public static final String DATABASES    = "/databases";
+    public static final String SHARED_PREFS = "/shared_prefs";
+
+    /**
+     * 删除 /data/data/youPackageName/cache 下的换出
+     *
+     * @param context 上下文
+     */
     public static void cleanInternalCache(Context context) {
         deleteFilesByDirectory(context.getCacheDir());
     }
 
     /**
-     * * 清除本应用所有数据库(/data/data/com.xxx.xxx/databases) * *
+     * 清除外部cache下的内容(/mnt/sdcard/android/data/com.xxx.xxx/cache)
+     *
+     * @param context 上下文
+     */
+    public static void cleanExternalCache(Context context) {
+        if (Environment.getExternalStorageState().equals(
+                Environment.MEDIA_MOUNTED)) {
+            deleteFilesByDirectory(context.getExternalCacheDir());
+        }
+    }
+
+    public static File getAppFireDir(Context context) {
+        return context.getFilesDir();
+    }
+
+    /**
+     * 清除本应用所有数据库(/data/data/com.xxx.xxx/databases) * *
      *
      * @param context 上下文
      */
     public static void cleanDatabases(Context context) {
         deleteFilesByDirectory(new File("/data/data/"
-                + context.getPackageName() + "/databases"));
+                + context.getPackageName() + DATABASES));
     }
 
     /**
-     * * 清除本应用SharedPreference(/data/data/com.xxx.xxx/shared_prefs) *
+     * 清除本应用SharedPreference(/data/data/com.xxx.xxx/shared_prefs)
      *
      * @param context 上下文
      */
     public static void cleanSharedPreference(Context context) {
-        deleteFilesByDirectory(new File("/data/data/" + context.getPackageName() + "/shared_prefs"));
+        deleteFilesByDirectory(new File("/data/data/" + context.getPackageName() + SHARED_PREFS));
     }
 
     /**
@@ -57,18 +81,6 @@ public class CacheUtils {
     }
 
     /**
-     * * 清除外部cache下的内容(/mnt/sdcard/android/data/com.xxx.xxx/cache)
-     *
-     * @param context 上下文
-     */
-    public static void cleanExternalCache(Context context) {
-        if (Environment.getExternalStorageState().equals(
-                Environment.MEDIA_MOUNTED)) {
-            deleteFilesByDirectory(context.getExternalCacheDir());
-        }
-    }
-
-    /**
      * 清除自定义路径下的文件，使用需小心，请不要误删。而且只支持目录下的文件删除 * *
      *
      * @param filePath
@@ -80,7 +92,7 @@ public class CacheUtils {
     /**
      * 清除本应用所有的数据 * *
      *
-     * @param context 上下文
+     * @param context  上下文
      * @param filepath 文件路径
      */
     public static void cleanApplicationData(Context context, String... filepath) {

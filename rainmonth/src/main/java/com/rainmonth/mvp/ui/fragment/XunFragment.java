@@ -1,14 +1,16 @@
 package com.rainmonth.mvp.ui.fragment;
 
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import android.view.View;
+
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import android.view.View;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.rainmonth.R;
 import com.rainmonth.common.base.BaseLazyFragment;
 import com.rainmonth.common.di.component.AppComponent;
+import com.rainmonth.common.utils.log.LogUtils;
 import com.rainmonth.di.component.DaggerXunComponent;
 import com.rainmonth.di.module.XunModule;
 import com.rainmonth.mvp.contract.XunContract;
@@ -19,7 +21,6 @@ import com.rainmonth.mvp.ui.activity.ViewPagerExploreActivity;
 import com.rainmonth.mvp.ui.adapter.XunListAdapter;
 import com.rainmonth.router.RouterConstant;
 import com.rainmonth.router.RouterUtils;
-import com.socks.library.KLog;
 
 import java.util.List;
 
@@ -41,12 +42,12 @@ public class XunFragment extends BaseLazyFragment<XunPresenter> implements XunCo
     @BindView(R.id.srl_container)
     SwipeRefreshLayout srlContainer;
     @BindView(R.id.rv_xun_content)
-    RecyclerView rvContent;
+    RecyclerView       rvContent;
 
-    private XunListAdapter mAdapter = null;
-    public final static int TYPE_ARTICLE = 1,
-            TYPE_IMAGE = 2, TYPE_MUSIC = 3,
-            TYPE_FILM = 4, TYPE_APP = 5;
+    private             XunListAdapter mAdapter     = null;
+    public final static int            TYPE_ARTICLE = 1,
+            TYPE_IMAGE                              = 2, TYPE_MUSIC = 3,
+            TYPE_FILM                               = 4, TYPE_APP = 5;
 
     @Override
     public void onFirstUserVisible() {
@@ -111,7 +112,7 @@ public class XunFragment extends BaseLazyFragment<XunPresenter> implements XunCo
     @Override
     public void navToDetail(XunNavigationBean xunNavigationBean) {
         int type = xunNavigationBean.getType();
-        KLog.e("Randy", type);
+        LogUtils.e("Randy", type);
         switch (type) {
             case TYPE_ARTICLE:
                 readyGo(ViewPagerExploreActivity.class);

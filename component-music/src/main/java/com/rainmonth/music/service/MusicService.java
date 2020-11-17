@@ -1,7 +1,7 @@
 package com.rainmonth.music.service;
 
+import com.rainmonth.common.utils.log.LogUtils;
 import com.rainmonth.componentbase.service.music.IMusicService;
-import com.socks.library.KLog;
 
 /**
  * @author 张豪成
@@ -10,11 +10,11 @@ import com.socks.library.KLog;
 public class MusicService implements IMusicService {
     @Override
     public void goMusicMain() {
-        KLog.d("MusicService", "goMusicMain");
+        LogUtils.d("MusicService", "goMusicMain");
     }
 
     @Override
     public void playMusic(String musicUrl) {
-        KLog.d("MusicService", "playMusic with url->" + musicUrl);
+        LogUtils.d("MusicService", "playMusic with url->" + musicUrl);
     }
 }

@@ -6,19 +6,17 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
-
-import com.google.android.material.snackbar.Snackbar;
-
-import androidx.annotation.IntDef;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 
+import androidx.annotation.IntDef;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.snackbar.Snackbar;
 import com.rainmonth.common.R;
 import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.common.eventbus.EventCenter;
@@ -29,20 +27,20 @@ import com.rainmonth.common.utils.ComponentUtils;
 import com.rainmonth.common.utils.NetworkUtils;
 import com.rainmonth.common.utils.SmartBarUtils;
 import com.rainmonth.common.utils.constant.StatusBarConstants;
+import com.rainmonth.common.utils.log.LogUtils;
 import com.rainmonth.common.widgets.loading.VaryViewHelperController;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
-import com.socks.library.KLog;
 
 import butterknife.ButterKnife;
 import de.greenrobot.event.EventBus;
 
 public abstract class BaseAppCompatActivity extends AppCompatActivity {
-    public static final int TRANSITION_MODE_LEFT = 0;
-    public static final int TRANSITION_MODE_RIGHT = 1;
-    public static final int TRANSITION_MODE_TOP = 2;
+    public static final int TRANSITION_MODE_LEFT   = 0;
+    public static final int TRANSITION_MODE_RIGHT  = 1;
+    public static final int TRANSITION_MODE_TOP    = 2;
     public static final int TRANSITION_MODE_BOTTOM = 3;
-    public static final int TRANSITION_MODE_SCALE = 4;
-    public static final int TRANSITION_MODE_FADE = 5;
+    public static final int TRANSITION_MODE_SCALE  = 4;
+    public static final int TRANSITION_MODE_FADE   = 5;
 
     /**
      * Log tag
@@ -53,10 +51,10 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
     /**
      * context
      */
-    protected Context mContext = null;
-    protected Activity mActivity;
+    protected Context      mContext = null;
+    protected Activity     mActivity;
     // 状态栏颜色
-    protected int mStatusBarColor;
+    protected int          mStatusBarColor;
 
     protected ActionBar mActionBar = null;
 
@@ -128,7 +126,7 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
                 parentView.setFitsSystemWindows(true);
             }
         } else if (getContentViewLayoutID() == -1) {
-            KLog.d(TAG, "this activity is without layout resource!");
+            LogUtils.d(TAG, "this activity is without layout resource!");
         } else {
             throw new IllegalArgumentException("You must return a right contentView " +
                     "layout resource Id");

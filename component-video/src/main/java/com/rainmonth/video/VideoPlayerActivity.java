@@ -28,7 +28,7 @@ import com.google.android.exoplayer2.util.EventLogger;
 import com.google.android.exoplayer2.util.Util;
 import com.rainmonth.common.base.BaseActivity;
 import com.rainmonth.common.di.component.AppComponent;
-import com.socks.library.KLog;
+import com.rainmonth.common.utils.log.LogUtils;
 
 import java.util.Arrays;
 import java.util.List;
@@ -48,11 +48,11 @@ import java.util.List;
 public class VideoPlayerActivity extends BaseActivity implements PlayerControlView.VisibilityListener,
         PlaybackPreparer {
     SimpleExoPlayer player;
-    PlayerView playerView;
+    PlayerView      playerView;
 
     DefaultTrackSelector trackSelector;
-    boolean preferExtensionDecoder = false;
-    boolean startAutoPlay = true;
+    boolean              preferExtensionDecoder = false;
+    boolean              startAutoPlay          = true;
 
     @Override
     protected void setupActivityComponent(AppComponent appComponent) {
@@ -162,13 +162,13 @@ public class VideoPlayerActivity extends BaseActivity implements PlayerControlVi
         switch (sourceType) {
             case 0:
             default:
-                KLog.d("Player", "网络文件");
+                LogUtils.d("Player", "网络文件");
                 break;
             case 1:
-                KLog.d("Player", "SD卡文件");
+                LogUtils.d("Player", "SD卡文件");
                 break;
             case 2:
-                KLog.d("Player", "raw文件");
+                LogUtils.d("Player", "raw文件");
                 break;
 
         }
@@ -178,7 +178,7 @@ public class VideoPlayerActivity extends BaseActivity implements PlayerControlVi
 
     @Override
     public void preparePlayback() {
-        KLog.d("preparePlayback");
+        LogUtils.d("preparePlayback");
     }
 
     /**
@@ -187,62 +187,62 @@ public class VideoPlayerActivity extends BaseActivity implements PlayerControlVi
     public class PlayerEventListener implements Player.EventListener {
         @Override
         public void onTimelineChanged(Timeline timeline, @Nullable Object manifest, int reason) {
-            KLog.d("onTimelineChanged");
+            LogUtils.d("onTimelineChanged");
         }
 
         @Override
         public void onTracksChanged(TrackGroupArray trackGroups, TrackSelectionArray trackSelections) {
-            KLog.d("onTracksChanged");
+            LogUtils.d("onTracksChanged");
         }
 
         @Override
         public void onLoadingChanged(boolean isLoading) {
-            KLog.d("onLoadingChanged");
+            LogUtils.d("onLoadingChanged");
         }
 
         @Override
         public void onPlayerStateChanged(boolean playWhenReady, int playbackState) {
-            KLog.d("onPlayerStateChanged");
+            LogUtils.d("onPlayerStateChanged");
         }
 
         @Override
         public void onPlaybackSuppressionReasonChanged(int playbackSuppressionReason) {
-            KLog.d("onPlaybackSuppressionReasonChanged");
+            LogUtils.d("onPlaybackSuppressionReasonChanged");
         }
 
         @Override
         public void onIsPlayingChanged(boolean isPlaying) {
-            KLog.d("onIsPlayingChanged");
+            LogUtils.d("onIsPlayingChanged");
         }
 
         @Override
         public void onRepeatModeChanged(int repeatMode) {
-            KLog.d("onRepeatModeChanged");
+            LogUtils.d("onRepeatModeChanged");
         }
 
         @Override
         public void onShuffleModeEnabledChanged(boolean shuffleModeEnabled) {
-            KLog.d("onShuffleModeEnabledChanged");
+            LogUtils.d("onShuffleModeEnabledChanged");
         }
 
         @Override
         public void onPlayerError(ExoPlaybackException error) {
-            KLog.d("onPlayerError");
+            LogUtils.d("onPlayerError");
         }
 
         @Override
         public void onPositionDiscontinuity(int reason) {
-            KLog.d("onPositionDiscontinuity");
+            LogUtils.d("onPositionDiscontinuity");
         }
 
         @Override
         public void onPlaybackParametersChanged(PlaybackParameters playbackParameters) {
-            KLog.d("onPlaybackParametersChanged");
+            LogUtils.d("onPlaybackParametersChanged");
         }
 
         @Override
         public void onSeekProcessed() {
-            KLog.d("onSeekProcessed");
+            LogUtils.d("onSeekProcessed");
         }
     }
 }

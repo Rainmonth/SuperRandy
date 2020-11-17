@@ -24,14 +24,11 @@ import android.widget.FrameLayout;
 import java.lang.reflect.Field;
 
 /**
- * <pre>
- *     author: Blankj
- *     blog  : http://blankj.com
- *     time  : 2016/08/02
- *     desc  : utils about keyboard
- * </pre>
+ * 软键盘处理工具类
  */
 public final class KeyboardUtils {
+
+    private static final String TAG = KeyboardUtils.class.getSimpleName();
 
     private static final int TAG_ON_GLOBAL_LAYOUT_LISTENER = -8;
 
@@ -179,7 +176,7 @@ public final class KeyboardUtils {
         final View decorView = window.getDecorView();
         final Rect outRect = new Rect();
         decorView.getWindowVisibleDisplayFrame(outRect);
-        Log.d("KeyboardUtils", "getDecorViewInvisibleHeight: "
+        Log.d(TAG, "getDecorViewInvisibleHeight: "
                 + (decorView.getBottom() - outRect.bottom));
         int delta = Math.abs(decorView.getBottom() - outRect.bottom);
         if (delta <= UtilsBridge.getNavBarHeight() + UtilsBridge.getStatusBarHeight()) {
@@ -290,7 +287,7 @@ public final class KeyboardUtils {
         if (contentView == null) return 0;
         final Rect outRect = new Rect();
         contentView.getWindowVisibleDisplayFrame(outRect);
-        Log.d("KeyboardUtils", "getContentViewInvisibleHeight: "
+        Log.d(TAG, "getContentViewInvisibleHeight: "
                 + (contentView.getBottom() - outRect.bottom));
         int delta = Math.abs(contentView.getBottom() - outRect.bottom);
         if (delta <= UtilsBridge.getStatusBarHeight() + UtilsBridge.getNavBarHeight()) {
@@ -339,7 +336,7 @@ public final class KeyboardUtils {
      * <p>Copy the following code in ur activity.</p>
      */
     public static void clickBlankArea2HideSoftInput() {
-        Log.i("KeyboardUtils", "Please refer to the following code.");
+        Log.i(TAG, "Please refer to the following code.");
         /*
         @Override
         public boolean dispatchTouchEvent(MotionEvent ev) {

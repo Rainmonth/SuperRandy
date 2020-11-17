@@ -7,8 +7,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.rainmonth.common.utils.log.LogUtils;
 import com.rainmonth.music.R;
-import com.socks.library.KLog;
 
 /**
  * @author 张豪成
@@ -16,17 +16,17 @@ import com.socks.library.KLog;
  */
 public class MusicMiniBar extends RelativeLayout implements View.OnClickListener {
 
-    public static final String TAG = "MusicMiniBar";
-    public static final int STATE_INIT = 0;
-    public static final int STATE_PLAY = 1;
-    public static final int STATE_PAUSE = 2;
-    public static final int STATE_LOADING = 3;
+    public static final String TAG           = "MusicMiniBar";
+    public static final int    STATE_INIT    = 0;
+    public static final int    STATE_PLAY    = 1;
+    public static final int    STATE_PAUSE   = 2;
+    public static final int    STATE_LOADING = 3;
 
     private int mCurrentState = STATE_INIT;
-    private int mExpectState = STATE_INIT;
+    private int mExpectState  = STATE_INIT;
 
     ImageView cover;
-    TextView title;
+    TextView  title;
 
     ImageView btnState;
     ImageView btnList;
@@ -66,16 +66,16 @@ public class MusicMiniBar extends RelativeLayout implements View.OnClickListener
         switch (mCurrentState) {
             case STATE_INIT:
             default:
-                KLog.d(TAG, "初始化状态");
+                LogUtils.d(TAG, "初始化状态");
                 break;
             case STATE_PLAY:
-                KLog.d(TAG, "播放状态");
+                LogUtils.d(TAG, "播放状态");
                 break;
             case STATE_LOADING:
-                KLog.d(TAG, "加载状态");
+                LogUtils.d(TAG, "加载状态");
                 break;
             case STATE_PAUSE:
-                KLog.d(TAG, "暂停状态");
+                LogUtils.d(TAG, "暂停状态");
                 break;
 
         }

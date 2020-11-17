@@ -3,7 +3,6 @@ package com.rainmonth.image.mvp.ui.widget;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Handler;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -19,12 +18,12 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.rainmonth.common.utils.DensityUtils;
 import com.rainmonth.common.utils.ToastUtils;
+import com.rainmonth.common.utils.log.LogUtils;
 import com.rainmonth.common.widgets.PullToRefreshViewPager;
 import com.rainmonth.common.widgets.library.PullToRefreshBase;
 import com.rainmonth.image.R;
 import com.rainmonth.image.mvp.model.bean.SubscribeBean;
 import com.rainmonth.image.mvp.ui.common.ImageMainActivity;
-import com.socks.library.KLog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,23 +35,23 @@ import java.util.List;
 public class BookShelfView extends ConstraintLayout {
     private static final String TAG = BookShelfView.class.getSimpleName();
 
-    TextView tvLabel;
+    TextView               tvLabel;
     PullToRefreshViewPager ptrVp;
-    ViewPager vpSubscribeList;
-    LinearLayout llIndicatorContainer;
+    ViewPager              vpSubscribeList;
+    LinearLayout           llIndicatorContainer;
     private Context mContext;
 
-    private List<SubscribeBean> mSubscribeList = new ArrayList<>();
+    private List<SubscribeBean>       mSubscribeList      = new ArrayList<>();
     private List<List<SubscribeBean>> mPagedSubscribeList = new ArrayList<>();
-    private int mPageNum = 1;
+    private int                       mPageNum            = 1;
 
     private int mCurrentIndex = 0;
 
     private ViewPagerAdapter mAdapter;
 
-    private boolean mNeedInterceptTouchEvent = false;
-    private boolean mNeedSupportSlideViewMore = false;
-    private ArrayList<View> pageViewList = new ArrayList<>();
+    private boolean         mNeedInterceptTouchEvent  = false;
+    private boolean         mNeedSupportSlideViewMore = false;
+    private ArrayList<View> pageViewList              = new ArrayList<>();
 
     public BookShelfView(Context context) {
         this(context, null);
@@ -170,7 +169,7 @@ public class BookShelfView extends ConstraintLayout {
         }
 
         int rowHeight = (int) (DensityUtils.getScreenWidth(mContext) * 0.2453 * 1.28 + DensityUtils.dip2px(mContext, 17));
-        KLog.e("Randy", rowHeight);
+        LogUtils.e("Randy", rowHeight);
 
         mPageNum = getPageNum(size);
         if (mPageNum == 1 && size < 3) {
@@ -199,7 +198,8 @@ public class BookShelfView extends ConstraintLayout {
         }
         if (mAdapter != null) {
             mAdapter.notifyDataSetChanged();
-        };
+        }
+        ;
     }
 
     private void generateIndicators(int pageNum) {

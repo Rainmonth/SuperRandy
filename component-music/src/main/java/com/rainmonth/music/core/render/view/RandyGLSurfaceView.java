@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.rainmonth.common.utils.FileUtils;
+import com.rainmonth.common.utils.log.LogUtils;
 import com.rainmonth.music.core.helper.MeasureHelper;
 import com.rainmonth.music.core.render.effect.NoEffectShader;
 import com.rainmonth.music.core.render.glrender.GLRenderErrorListener;
@@ -20,7 +21,6 @@ import com.rainmonth.music.core.render.view.listener.GLSurfaceListener;
 import com.rainmonth.music.core.render.view.listener.ShotSaveCallback;
 import com.rainmonth.music.core.render.view.listener.SurfaceListener;
 import com.rainmonth.music.core.render.view.listener.VideoShotListener;
-import com.socks.library.KLog;
 
 import java.io.File;
 
@@ -32,21 +32,21 @@ import java.io.File;
  */
 public class RandyGLSurfaceView extends GLSurfaceView implements IRenderView, GLSurfaceListener,
         MeasureHelper.MeasureFormVideoParamsListener {
-    public static final String TAG = RandyGLSurfaceView.class.getSimpleName();
-    public static final int MEASURE_MODE_LAYOUT_SIZE = 0;   // 基于布局参数测量
-    public static final int MEASURE_MODE_RENDER_SIZE = 1;   // 计入渲染参数测量
+    public static final String TAG                      = RandyGLSurfaceView.class.getSimpleName();
+    public static final int    MEASURE_MODE_LAYOUT_SIZE = 0;   // 基于布局参数测量
+    public static final int    MEASURE_MODE_RENDER_SIZE = 1;   // 计入渲染参数测量
 
     //<editor-fold>成员变量
-    private Context mContext;                               // 上下文
-    private int mMeasureMode = MEASURE_MODE_LAYOUT_SIZE;    // 测量模式
+    private Context                   mContext;                               // 上下文
+    private int                       mMeasureMode  = MEASURE_MODE_LAYOUT_SIZE;    // 测量模式
     private GLSurfaceViewBaseRenderer mRenderer;            // 渲染器
-    private IShader mShaderEffect = new NoEffectShader();   // GL渲染shader
-    private float[] mMvpMatrix;
+    private IShader                   mShaderEffect = new NoEffectShader();   // GL渲染shader
+    private float[]                   mMvpMatrix;
 
-    private MeasureHelper mMeasureHelper;                   // 测量工具类
+    private MeasureHelper                                mMeasureHelper;                   // 测量工具类
     private MeasureHelper.MeasureFormVideoParamsListener mVideoParamsListener;
-    private SurfaceListener mSurfaceListener;               // Surface通用监听器
-    private GLSurfaceListener mGLSurfaceListener;           // GLSurfaceView 特有的监听器
+    private SurfaceListener                              mSurfaceListener;               // Surface通用监听器
+    private GLSurfaceListener                            mGLSurfaceListener;           // GLSurfaceView 特有的监听器
     //</editor-fold>
 
     public RandyGLSurfaceView(Context context) {
@@ -73,7 +73,7 @@ public class RandyGLSurfaceView extends GLSurfaceView implements IRenderView, GL
                                             final IShader shaderEffect, final float[] mvpMatrix,
                                             final GLSurfaceViewBaseRenderer customRender, final int renderMode) {
         if (renderViewParent == null) {
-            KLog.e(TAG, "renderViewContainer is null");
+            LogUtils.e(TAG, "renderViewContainer is null");
             throw new NullPointerException("renderViewContainer is null");
         }
         if (renderViewParent.getChildCount() > 0) {
@@ -135,7 +135,7 @@ public class RandyGLSurfaceView extends GLSurfaceView implements IRenderView, GL
                     this.mRenderer.setCurrentVideoHeight(videoHeight);
                 }
             } catch (Exception e) {
-                KLog.e(TAG, e);
+                LogUtils.e(TAG, e);
             }
         }
     }
@@ -281,13 +281,13 @@ public class RandyGLSurfaceView extends GLSurfaceView implements IRenderView, GL
 
     @Override
     public Bitmap initCover() {
-        KLog.w(TAG, TAG + " not support initCover now!");
+        LogUtils.w(TAG, TAG + " not support initCover now!");
         return null;
     }
 
     @Override
     public Bitmap initCoverHigh() {
-        KLog.w(TAG, TAG + " not support initCoverHigh now!");
+        LogUtils.w(TAG, TAG + " not support initCoverHigh now!");
         return null;
     }
 
@@ -311,7 +311,7 @@ public class RandyGLSurfaceView extends GLSurfaceView implements IRenderView, GL
 
     @Override
     public void setRenderTransform(Matrix transform) {
-        KLog.w(TAG, TAG + " not support setRenderTransform now");
+        LogUtils.w(TAG, TAG + " not support setRenderTransform now");
     }
 
     @Override

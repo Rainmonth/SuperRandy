@@ -34,7 +34,7 @@ import com.google.android.exoplayer2.trackselection.MappingTrackSelector.MappedT
 import com.google.android.exoplayer2.trackselection.TrackSelection;
 import com.google.android.exoplayer2.trackselection.TrackSelectionArray;
 import com.google.android.exoplayer2.video.VideoRendererEventListener;
-import com.socks.library.KLog;
+import com.rainmonth.common.utils.log.LogUtils;
 
 import java.io.IOException;
 import java.text.NumberFormat;
@@ -45,8 +45,8 @@ public final class EventLogger implements Player.EventListener, MetadataOutput,
         AudioRendererEventListener, VideoRendererEventListener, MediaSourceEventListener,
         DefaultDrmSessionEventListener {
 
-    private static final String TAG = "EventLogger";
-    private static final int MAX_TIMELINE_ITEM_LINES = 3;
+    private static final String       TAG                     = "EventLogger";
+    private static final int          MAX_TIMELINE_ITEM_LINES = 3;
     private static final NumberFormat TIME_FORMAT;
 
     static {
@@ -57,9 +57,9 @@ public final class EventLogger implements Player.EventListener, MetadataOutput,
     }
 
     private final MappingTrackSelector trackSelector;
-    private final Timeline.Window window;
-    private final Timeline.Period period;
-    private final long startTimeMs;
+    private final Timeline.Window      window;
+    private final Timeline.Period      period;
+    private final long                 startTimeMs;
 
     public EventLogger(MappingTrackSelector trackSelector) {
         this.trackSelector = trackSelector;
@@ -72,148 +72,148 @@ public final class EventLogger implements Player.EventListener, MetadataOutput,
 
     @Override
     public void onLoadingChanged(boolean isLoading) {
-        KLog.d(TAG, "loading [" + isLoading + "]");
+        LogUtils.d(TAG, "loading [" + isLoading + "]");
     }
 
     @Override
     public void onPlayerStateChanged(boolean playWhenReady, int state) {
-        KLog.d(TAG, "state [" + getSessionTimeString() + ", " + playWhenReady + ", "
+        LogUtils.d(TAG, "state [" + getSessionTimeString() + ", " + playWhenReady + ", "
                 + getStateString(state) + "]");
     }
 
     @Override
     public void onRepeatModeChanged(@Player.RepeatMode int repeatMode) {
-        KLog.d(TAG, "repeatMode [" + getRepeatModeString(repeatMode) + "]");
+        LogUtils.d(TAG, "repeatMode [" + getRepeatModeString(repeatMode) + "]");
     }
 
     @Override
     public void onShuffleModeEnabledChanged(boolean shuffleModeEnabled) {
-        KLog.d(TAG, "shuffleModeEnabled [" + shuffleModeEnabled + "]");
+        LogUtils.d(TAG, "shuffleModeEnabled [" + shuffleModeEnabled + "]");
     }
 
     @Override
     public void onPositionDiscontinuity(@Player.DiscontinuityReason int reason) {
-        KLog.d(TAG, "positionDiscontinuity [" + getDiscontinuityReasonString(reason) + "]");
+        LogUtils.d(TAG, "positionDiscontinuity [" + getDiscontinuityReasonString(reason) + "]");
     }
 
     @Override
     public void onPlaybackParametersChanged(PlaybackParameters playbackParameters) {
-        KLog.d(TAG, "playbackParameters " + String.format(Locale.US,
+        LogUtils.d(TAG, "playbackParameters " + String.format(Locale.US,
                 "[speed=%.2f, pitch=%.2f]", playbackParameters.speed, playbackParameters.pitch));
     }
 
     @Override
     public void onPlayerError(ExoPlaybackException e) {
-        KLog.e(TAG, "playerFailed [" + getSessionTimeString() + "]", e);
+        LogUtils.e(TAG, "playerFailed [" + getSessionTimeString() + "]", e);
     }
 
     @Override
     public void onTracksChanged(TrackGroupArray ignored, TrackSelectionArray trackSelections) {
         MappedTrackInfo mappedTrackInfo = trackSelector.getCurrentMappedTrackInfo();
         if (mappedTrackInfo == null) {
-            KLog.d(TAG, "Tracks []");
+            LogUtils.d(TAG, "Tracks []");
             return;
         }
-        KLog.d(TAG, "Tracks [");
-        // KLog tracks associated to renderers.
+        LogUtils.d(TAG, "Tracks [");
+        // LogUtils tracks associated to renderers.
         for (int rendererIndex = 0; rendererIndex < mappedTrackInfo.length; rendererIndex++) {
             TrackGroupArray rendererTrackGroups = mappedTrackInfo.getTrackGroups(rendererIndex);
             TrackSelection trackSelection = trackSelections.get(rendererIndex);
             if (rendererTrackGroups.length > 0) {
-                KLog.d(TAG, "  Renderer:" + rendererIndex + " [");
+                LogUtils.d(TAG, "  Renderer:" + rendererIndex + " [");
                 for (int groupIndex = 0; groupIndex < rendererTrackGroups.length; groupIndex++) {
                     TrackGroup trackGroup = rendererTrackGroups.get(groupIndex);
                     String adaptiveSupport = getAdaptiveSupportString(trackGroup.length,
                             mappedTrackInfo.getAdaptiveSupport(rendererIndex, groupIndex, false));
-                    KLog.d(TAG, "    Group:" + groupIndex + ", adaptive_supported=" + adaptiveSupport + " [");
+                    LogUtils.d(TAG, "    Group:" + groupIndex + ", adaptive_supported=" + adaptiveSupport + " [");
                     for (int trackIndex = 0; trackIndex < trackGroup.length; trackIndex++) {
                         String status = getTrackStatusString(trackSelection, trackGroup, trackIndex);
                         String formatSupport = getFormatSupportString(
                                 mappedTrackInfo.getTrackFormatSupport(rendererIndex, groupIndex, trackIndex));
-                        KLog.d(TAG, "      " + status + " Track:" + trackIndex + ", "
+                        LogUtils.d(TAG, "      " + status + " Track:" + trackIndex + ", "
                                 + Format.toLogString(trackGroup.getFormat(trackIndex))
                                 + ", supported=" + formatSupport);
                     }
-                    KLog.d(TAG, "    ]");
+                    LogUtils.d(TAG, "    ]");
                 }
-                // KLog metadata for at most one of the tracks selected for the renderer.
+                // LogUtils metadata for at most one of the tracks selected for the renderer.
                 if (trackSelection != null) {
                     for (int selectionIndex = 0; selectionIndex < trackSelection.length(); selectionIndex++) {
                         Metadata metadata = trackSelection.getFormat(selectionIndex).metadata;
                         if (metadata != null) {
-                            KLog.d(TAG, "    Metadata [");
+                            LogUtils.d(TAG, "    Metadata [");
                             printMetadata(metadata, "      ");
-                            KLog.d(TAG, "    ]");
+                            LogUtils.d(TAG, "    ]");
                             break;
                         }
                     }
                 }
-                KLog.d(TAG, "  ]");
+                LogUtils.d(TAG, "  ]");
             }
         }
-        // KLog tracks not associated with a renderer.
+        // LogUtils tracks not associated with a renderer.
         TrackGroupArray unassociatedTrackGroups = mappedTrackInfo.getUnassociatedTrackGroups();
         if (unassociatedTrackGroups.length > 0) {
-            KLog.d(TAG, "  Renderer:None [");
+            LogUtils.d(TAG, "  Renderer:None [");
             for (int groupIndex = 0; groupIndex < unassociatedTrackGroups.length; groupIndex++) {
-                KLog.d(TAG, "    Group:" + groupIndex + " [");
+                LogUtils.d(TAG, "    Group:" + groupIndex + " [");
                 TrackGroup trackGroup = unassociatedTrackGroups.get(groupIndex);
                 for (int trackIndex = 0; trackIndex < trackGroup.length; trackIndex++) {
                     String status = getTrackStatusString(false);
                     String formatSupport = getFormatSupportString(
                             RendererCapabilities.FORMAT_UNSUPPORTED_TYPE);
-                    KLog.d(TAG, "      " + status + " Track:" + trackIndex + ", "
+                    LogUtils.d(TAG, "      " + status + " Track:" + trackIndex + ", "
                             + Format.toLogString(trackGroup.getFormat(trackIndex))
                             + ", supported=" + formatSupport);
                 }
-                KLog.d(TAG, "    ]");
+                LogUtils.d(TAG, "    ]");
             }
-            KLog.d(TAG, "  ]");
+            LogUtils.d(TAG, "  ]");
         }
-        KLog.d(TAG, "]");
+        LogUtils.d(TAG, "]");
     }
 
     @Override
     public void onSeekProcessed() {
-        KLog.d(TAG, "seekProcessed");
+        LogUtils.d(TAG, "seekProcessed");
     }
 
     // MetadataOutput
 
     @Override
     public void onMetadata(Metadata metadata) {
-        KLog.d(TAG, "onMetadata [");
+        LogUtils.d(TAG, "onMetadata [");
         printMetadata(metadata, "  ");
-        KLog.d(TAG, "]");
+        LogUtils.d(TAG, "]");
     }
 
     // AudioRendererEventListener
 
     @Override
     public void onAudioEnabled(DecoderCounters counters) {
-        KLog.d(TAG, "audioEnabled [" + getSessionTimeString() + "]");
+        LogUtils.d(TAG, "audioEnabled [" + getSessionTimeString() + "]");
     }
 
     @Override
     public void onAudioSessionId(int audioSessionId) {
-        KLog.d(TAG, "audioSessionId [" + audioSessionId + "]");
+        LogUtils.d(TAG, "audioSessionId [" + audioSessionId + "]");
     }
 
     @Override
     public void onAudioDecoderInitialized(String decoderName, long elapsedRealtimeMs,
                                           long initializationDurationMs) {
-        KLog.d(TAG, "audioDecoderInitialized [" + getSessionTimeString() + ", " + decoderName + "]");
+        LogUtils.d(TAG, "audioDecoderInitialized [" + getSessionTimeString() + ", " + decoderName + "]");
     }
 
     @Override
     public void onAudioInputFormatChanged(Format format) {
-        KLog.d(TAG, "audioFormatChanged [" + getSessionTimeString() + ", " + Format.toLogString(format)
+        LogUtils.d(TAG, "audioFormatChanged [" + getSessionTimeString() + ", " + Format.toLogString(format)
                 + "]");
     }
 
     @Override
     public void onAudioDisabled(DecoderCounters counters) {
-        KLog.d(TAG, "audioDisabled [" + getSessionTimeString() + "]");
+        LogUtils.d(TAG, "audioDisabled [" + getSessionTimeString() + "]");
     }
 
     @Override
@@ -226,40 +226,40 @@ public final class EventLogger implements Player.EventListener, MetadataOutput,
 
     @Override
     public void onVideoEnabled(DecoderCounters counters) {
-        KLog.d(TAG, "videoEnabled [" + getSessionTimeString() + "]");
+        LogUtils.d(TAG, "videoEnabled [" + getSessionTimeString() + "]");
     }
 
     @Override
     public void onVideoDecoderInitialized(String decoderName, long elapsedRealtimeMs,
                                           long initializationDurationMs) {
-        KLog.d(TAG, "videoDecoderInitialized [" + getSessionTimeString() + ", " + decoderName + "]");
+        LogUtils.d(TAG, "videoDecoderInitialized [" + getSessionTimeString() + ", " + decoderName + "]");
     }
 
     @Override
     public void onVideoInputFormatChanged(Format format) {
-        KLog.d(TAG, "videoFormatChanged [" + getSessionTimeString() + ", " + Format.toLogString(format)
+        LogUtils.d(TAG, "videoFormatChanged [" + getSessionTimeString() + ", " + Format.toLogString(format)
                 + "]");
     }
 
     @Override
     public void onVideoDisabled(DecoderCounters counters) {
-        KLog.d(TAG, "videoDisabled [" + getSessionTimeString() + "]");
+        LogUtils.d(TAG, "videoDisabled [" + getSessionTimeString() + "]");
     }
 
     @Override
     public void onDroppedFrames(int count, long elapsed) {
-        KLog.d(TAG, "droppedFrames [" + getSessionTimeString() + ", " + count + "]");
+        LogUtils.d(TAG, "droppedFrames [" + getSessionTimeString() + ", " + count + "]");
     }
 
     @Override
     public void onVideoSizeChanged(int width, int height, int unappliedRotationDegrees,
                                    float pixelWidthHeightRatio) {
-        KLog.d(TAG, "videoSizeChanged [" + width + ", " + height + "]");
+        LogUtils.d(TAG, "videoSizeChanged [" + width + ", " + height + "]");
     }
 
     @Override
     public void onRenderedFirstFrame(Surface surface) {
-        KLog.d(TAG, "renderedFirstFrame [" + surface + "]");
+        LogUtils.d(TAG, "renderedFirstFrame [" + surface + "]");
     }
 
     // DefaultDrmSessionEventListener
@@ -271,17 +271,17 @@ public final class EventLogger implements Player.EventListener, MetadataOutput,
 
     @Override
     public void onDrmKeysRestored() {
-        KLog.d(TAG, "drmKeysRestored [" + getSessionTimeString() + "]");
+        LogUtils.d(TAG, "drmKeysRestored [" + getSessionTimeString() + "]");
     }
 
     @Override
     public void onDrmKeysRemoved() {
-        KLog.d(TAG, "drmKeysRemoved [" + getSessionTimeString() + "]");
+        LogUtils.d(TAG, "drmKeysRemoved [" + getSessionTimeString() + "]");
     }
 
     @Override
     public void onDrmKeysLoaded() {
-        KLog.d(TAG, "drmKeysLoaded [" + getSessionTimeString() + "]");
+        LogUtils.d(TAG, "drmKeysLoaded [" + getSessionTimeString() + "]");
     }
 
     //MediaSourceEventListener
@@ -290,23 +290,23 @@ public final class EventLogger implements Player.EventListener, MetadataOutput,
     public void onTimelineChanged(Timeline timeline, Object manifest, int reason) {
         int periodCount = timeline.getPeriodCount();
         int windowCount = timeline.getWindowCount();
-        KLog.d(TAG, "sourceInfo [periodCount=" + periodCount + ", windowCount=" + windowCount);
+        LogUtils.d(TAG, "sourceInfo [periodCount=" + periodCount + ", windowCount=" + windowCount);
         for (int i = 0; i < Math.min(periodCount, MAX_TIMELINE_ITEM_LINES); i++) {
             timeline.getPeriod(i, period);
-            KLog.d(TAG, "  " + "period [" + getTimeString(period.getDurationMs()) + "]");
+            LogUtils.d(TAG, "  " + "period [" + getTimeString(period.getDurationMs()) + "]");
         }
         if (periodCount > MAX_TIMELINE_ITEM_LINES) {
-            KLog.d(TAG, "  ...");
+            LogUtils.d(TAG, "  ...");
         }
         for (int i = 0; i < Math.min(windowCount, MAX_TIMELINE_ITEM_LINES); i++) {
             timeline.getWindow(i, window);
-            KLog.d(TAG, "  " + "window [" + getTimeString(window.getDurationMs()) + ", "
+            LogUtils.d(TAG, "  " + "window [" + getTimeString(window.getDurationMs()) + ", "
                     + window.isSeekable + ", " + window.isDynamic + "]");
         }
         if (windowCount > MAX_TIMELINE_ITEM_LINES) {
-            KLog.d(TAG, "  ...");
+            LogUtils.d(TAG, "  ...");
         }
-        KLog.d(TAG, "]");
+        LogUtils.d(TAG, "]");
     }
 
     @Override
@@ -357,7 +357,7 @@ public final class EventLogger implements Player.EventListener, MetadataOutput,
     // Internal methods
 
     private void printInternalError(String type, Exception e) {
-        KLog.e(TAG, "internalError [" + getSessionTimeString() + ", " + type + "]", e);
+        LogUtils.e(TAG, "internalError [" + getSessionTimeString() + ", " + type + "]", e);
     }
 
     private void printMetadata(Metadata metadata, String prefix) {
@@ -365,32 +365,32 @@ public final class EventLogger implements Player.EventListener, MetadataOutput,
             Metadata.Entry entry = metadata.get(i);
             if (entry instanceof TextInformationFrame) {
                 TextInformationFrame textInformationFrame = (TextInformationFrame) entry;
-                KLog.d(TAG, prefix + String.format("%s: value=%s", textInformationFrame.id,
+                LogUtils.d(TAG, prefix + String.format("%s: value=%s", textInformationFrame.id,
                         textInformationFrame.value));
             } else if (entry instanceof UrlLinkFrame) {
                 UrlLinkFrame urlLinkFrame = (UrlLinkFrame) entry;
-                KLog.d(TAG, prefix + String.format("%s: url=%s", urlLinkFrame.id, urlLinkFrame.url));
+                LogUtils.d(TAG, prefix + String.format("%s: url=%s", urlLinkFrame.id, urlLinkFrame.url));
             } else if (entry instanceof PrivFrame) {
                 PrivFrame privFrame = (PrivFrame) entry;
-                KLog.d(TAG, prefix + String.format("%s: owner=%s", privFrame.id, privFrame.owner));
+                LogUtils.d(TAG, prefix + String.format("%s: owner=%s", privFrame.id, privFrame.owner));
             } else if (entry instanceof GeobFrame) {
                 GeobFrame geobFrame = (GeobFrame) entry;
-                KLog.d(TAG, prefix + String.format("%s: mimeType=%s, filename=%s, description=%s",
+                LogUtils.d(TAG, prefix + String.format("%s: mimeType=%s, filename=%s, description=%s",
                         geobFrame.id, geobFrame.mimeType, geobFrame.filename, geobFrame.description));
             } else if (entry instanceof ApicFrame) {
                 ApicFrame apicFrame = (ApicFrame) entry;
-                KLog.d(TAG, prefix + String.format("%s: mimeType=%s, description=%s",
+                LogUtils.d(TAG, prefix + String.format("%s: mimeType=%s, description=%s",
                         apicFrame.id, apicFrame.mimeType, apicFrame.description));
             } else if (entry instanceof CommentFrame) {
                 CommentFrame commentFrame = (CommentFrame) entry;
-                KLog.d(TAG, prefix + String.format("%s: language=%s, description=%s", commentFrame.id,
+                LogUtils.d(TAG, prefix + String.format("%s: language=%s, description=%s", commentFrame.id,
                         commentFrame.language, commentFrame.description));
             } else if (entry instanceof Id3Frame) {
                 Id3Frame id3Frame = (Id3Frame) entry;
-                KLog.d(TAG, prefix + String.format("%s", id3Frame.id));
+                LogUtils.d(TAG, prefix + String.format("%s", id3Frame.id));
             } else if (entry instanceof EventMessage) {
                 EventMessage eventMessage = (EventMessage) entry;
-                KLog.d(TAG, prefix + String.format("EMSG: scheme=%s, id=%d, value=%s",
+                LogUtils.d(TAG, prefix + String.format("EMSG: scheme=%s, id=%d, value=%s",
                         eventMessage.schemeIdUri, eventMessage.id, eventMessage.value));
             }
         }

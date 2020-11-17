@@ -24,10 +24,10 @@ import androidx.annotation.Nullable;
 import com.rainmonth.common.utils.DateUtils;
 import com.rainmonth.common.utils.DensityUtils;
 import com.rainmonth.common.utils.SmartBarUtils;
+import com.rainmonth.common.utils.log.LogUtils;
 import com.rainmonth.music.R;
 import com.rainmonth.music.core.render.view.listener.LockClickListener;
 import com.rainmonth.music.core.render.view.listener.VideoProgressListener;
-import com.socks.library.KLog;
 
 import java.io.File;
 import java.util.Map;
@@ -40,80 +40,80 @@ import java.util.Map;
  */
 public abstract class Layer2PlayerControlLayout extends Layer1PlayerCallbackStateLayout implements
         View.OnClickListener, View.OnTouchListener, SeekBar.OnSeekBarChangeListener {
-    public static final String TAG = Layer2PlayerControlLayout.class.getSimpleName();
+    public static final String  TAG                  = Layer2PlayerControlLayout.class.getSimpleName();
     //<editor-fold>成员变量
     //手指放下的位置
-    protected long mDownPosition;
+    protected           long    mDownPosition;
     //手势调节音量的大小
-    protected int mGestureDownVolume;
+    protected           int     mGestureDownVolume;
     //手势偏差值
-    protected int mThreshold = 80;
+    protected           int     mThreshold           = 80;
     //手动改变滑动的位置
-    protected int mSeekTimePosition;
+    protected           int     mSeekTimePosition;
     //手动滑动的起始偏移位置
-    protected int mSeekEndOffset;
+    protected           int     mSeekEndOffset;
     //退出全屏显示的案件图片
-    protected int mShrinkImageRes = -1;
+    protected           int     mShrinkImageRes      = -1;
     //全屏显示的案件图片
-    protected int mEnlargeImageRes = -1;
+    protected           int     mEnlargeImageRes     = -1;
     //触摸的X
-    protected float mDownX;
+    protected           float   mDownX;
     //触摸的Y
-    protected float mDownY;
+    protected           float   mDownY;
     //移动的Y
-    protected float mMoveY;
+    protected           float   mMoveY;
     //亮度
-    protected float mBrightnessData = -1;
+    protected           float   mBrightnessData      = -1;
     //触摸滑动进度的比例系数
-    protected float mSeekRatio = 1;
+    protected           float   mSeekRatio           = 1;
     //触摸的是否进度条
-    protected boolean mTouchingProgressBar = false;
+    protected           boolean mTouchingProgressBar = false;
     //是否改变音量
-    protected boolean mChangeVolume = false;
+    protected           boolean mChangeVolume        = false;
     //是否改变播放进度
-    protected boolean mChangePosition = false;
+    protected           boolean mChangePosition      = false;
     //触摸显示虚拟按键
-    protected boolean mShowVKey = false;
+    protected           boolean mShowVKey            = false;
     //是否改变亮度
-    protected boolean mBrightness = false;
+    protected           boolean mBrightness          = false;
     //是否首次触摸
-    protected boolean mFirstTouch = false;
+    protected           boolean mFirstTouch          = false;
     //是否隐藏虚拟按键
-    protected boolean mHideKey = true;
+    protected           boolean mHideKey             = true;
     //是否需要显示流量提示
-    protected boolean mNeedShowWifiTip = true;
+    protected           boolean mNeedShowWifiTip     = true;
     //是否支持非全屏滑动触摸有效
-    protected boolean mIsTouchWidget = true;
+    protected           boolean mIsTouchWidget       = true;
     //是否支持全屏滑动触摸有效
-    protected boolean mIsTouchWidgetFull = true;
+    protected           boolean mIsTouchWidgetFull   = true;
     //是否点击封面播放
-    protected boolean mThumbPlay;
+    protected           boolean mThumbPlay;
     //锁定屏幕点击
-    protected boolean mIsCurrentScreenLock;
+    protected           boolean mIsCurrentScreenLock;
     //是否需要锁定屏幕
-    protected boolean mNeedLockFull;
+    protected           boolean mNeedLockFull;
     //lazy的setup
-    protected boolean mSetUpLazy = false;
+    protected           boolean mSetUpLazy           = false;
     //seek touch
-    protected boolean mHadSeekTouch = false;
+    protected           boolean mHadSeekTouch        = false;
 
     //</editor-fold>
 
     //<editor-fold>View成员
-    protected View mStartBtn;
-    protected View mLoadingProgressView;
-    protected SeekBar mProgressBar;
+    protected View      mStartBtn;
+    protected View      mLoadingProgressView;
+    protected SeekBar   mProgressBar;
     protected ImageView mFullscreenBtn;
     protected ImageView mBackBtn;
     protected ImageView mLockScreenBtn;
-    protected TextView mCurrentTimeView, mTotalTimeView;
-    protected TextView mTitleView;
+    protected TextView  mCurrentTimeView, mTotalTimeView;
+    protected TextView  mTitleView;
     protected ViewGroup mTopContainer, mBottomContainer;
-    protected View mThumbImageView;
+    protected View           mThumbImageView;
     protected RelativeLayout mThumbImageContainer;
-    protected ProgressBar mBottomProgressBar;
+    protected ProgressBar    mBottomProgressBar;
 
-    protected LockClickListener mLockClickListener;
+    protected LockClickListener     mLockClickListener;
     protected VideoProgressListener mVideoProgressListener;
 
     //</editor-fold>
@@ -210,7 +210,7 @@ public abstract class Layer2PlayerControlLayout extends Layer1PlayerCallbackStat
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
-        KLog.d(TAG, "onDetachedFromWindow");
+        LogUtils.d(TAG, "onDetachedFromWindow");
         // 资源回收，主要是定时资源的回收
         // 回收更新进度条的time
         cancelProgressTimer();
@@ -243,7 +243,7 @@ public abstract class Layer2PlayerControlLayout extends Layer1PlayerCallbackStat
                 if (percentage != 0) {
                     setProgressAndTime(percentage);
                     mBufferPoint = percentage;
-                    KLog.d(TAG, "Net speed: " + getNetSpeedText() + " percent " + percentage);
+                    LogUtils.d(TAG, "Net speed: " + getNetSpeedText() + " percent " + percentage);
                 }
                 if (mProgressBar == null) {
                     return;
@@ -268,7 +268,7 @@ public abstract class Layer2PlayerControlLayout extends Layer1PlayerCallbackStat
         switch (mCurrentState) {
             case STATE_NORMAL:
                 if (isCurrentPlayerListener()) {
-                    KLog.d(TAG, Layer2PlayerControlLayout.this.hashCode() + "---------dismiss STATE_NORMAL");
+                    LogUtils.d(TAG, Layer2PlayerControlLayout.this.hashCode() + "---------dismiss STATE_NORMAL");
                     cancelProgressTimer();
                     getVideoViewMgrBridge().release();
                     releasePauseCover();
@@ -285,7 +285,7 @@ public abstract class Layer2PlayerControlLayout extends Layer1PlayerCallbackStat
                 break;
             case STATE_PLAYING:
                 if (isCurrentPlayerListener()) {
-                    KLog.d(TAG, Layer2PlayerControlLayout.this.hashCode() + "--------- STATE_PLAYING");
+                    LogUtils.d(TAG, Layer2PlayerControlLayout.this.hashCode() + "--------- STATE_PLAYING");
                     startProgressTimer();
                 }
                 break;
@@ -294,11 +294,11 @@ public abstract class Layer2PlayerControlLayout extends Layer1PlayerCallbackStat
                 break;
             case STATE_PAUSE:
                 if (isCurrentPlayerListener()) {
-                    KLog.d(TAG, Layer2PlayerControlLayout.this.hashCode() + "--------- STATE_PAUSE");
+                    LogUtils.d(TAG, Layer2PlayerControlLayout.this.hashCode() + "--------- STATE_PAUSE");
                 }
                 break;
             case STATE_AUTO_COMPLETE:
-                KLog.d(TAG, Layer2PlayerControlLayout.this.hashCode() + "---------dismiss STATE_NORMAL");
+                LogUtils.d(TAG, Layer2PlayerControlLayout.this.hashCode() + "---------dismiss STATE_NORMAL");
                 cancelProgressTimer();
                 if (mProgressBar != null) {
                     mProgressBar.setProgress(100);
@@ -338,17 +338,17 @@ public abstract class Layer2PlayerControlLayout extends Layer1PlayerCallbackStat
             clickStartIcon();
         } else if (id == R.id.player_render_view_container && mCurrentState == STATE_ERROR) {
             if (mVideoViewCallBack != null) {
-                KLog.d(TAG, "onClickStartError()");
+                LogUtils.d(TAG, "onClickStartError()");
                 mVideoViewCallBack.onClickStartError(mOriginUrl, mTitle, this);
             }
             prepareVideo();
         } else if (id == R.id.player_render_view_container) {
             if (mVideoViewCallBack != null && isCurrentPlayerListener()) {
                 if (mIsCurrentFullscreen) {
-                    KLog.d(TAG, "onClickBlankFullscreen()");
+                    LogUtils.d(TAG, "onClickBlankFullscreen()");
                     mVideoViewCallBack.onClickBlankFullscreen(mOriginUrl, mTitle, Layer2PlayerControlLayout.this);
                 } else {
-                    KLog.d(TAG, "onClickStartError()");
+                    LogUtils.d(TAG, "onClickStartError()");
                     mVideoViewCallBack.onClickStartError(mOriginUrl, mTitle, Layer2PlayerControlLayout.this);
                 }
             }
@@ -358,7 +358,7 @@ public abstract class Layer2PlayerControlLayout extends Layer1PlayerCallbackStat
                 return;
             }
             if (TextUtils.isEmpty(mUrl)) {
-                KLog.d(TAG, "播放地址无效");
+                LogUtils.d(TAG, "播放地址无效");
                 return;
             }
             if (mCurrentState == STATE_NORMAL) {
@@ -415,7 +415,7 @@ public abstract class Layer2PlayerControlLayout extends Layer1PlayerCallbackStat
      */
     protected void clickStartIcon() {
         if (TextUtils.isEmpty(mUrl)) {
-            KLog.e(TAG, "播放地址无效");
+            LogUtils.e(TAG, "播放地址无效");
             return;
         }
         if (mCurrentState == STATE_NORMAL || mCurrentState == STATE_ERROR) {
@@ -428,25 +428,25 @@ public abstract class Layer2PlayerControlLayout extends Layer1PlayerCallbackStat
             try {
                 onVideoPause();
             } catch (Exception e) {
-                KLog.e(TAG, e);
+                LogUtils.e(TAG, e);
             }
             updateStateAndUi(STATE_PAUSE);
             if (mVideoViewCallBack != null && isCurrentPlayerListener()) {
                 if (mIsCurrentFullscreen) {
-                    KLog.d(TAG, "onClickStopFullscreen");
+                    LogUtils.d(TAG, "onClickStopFullscreen");
                     mVideoViewCallBack.onClickStopFullscreen(mOriginUrl, mTitle, this);
                 } else {
-                    KLog.d(TAG, "onClickStop");
+                    LogUtils.d(TAG, "onClickStop");
                     mVideoViewCallBack.onClickStop(mOriginUrl, mTitle, this);
                 }
             }
         } else if (mCurrentState == STATE_PAUSE) {
             if (mVideoViewCallBack != null && isCurrentPlayerListener()) {
                 if (mIsCurrentFullscreen) {
-                    KLog.d(TAG, "onClickStopFullscreen");
+                    LogUtils.d(TAG, "onClickStopFullscreen");
                     mVideoViewCallBack.onClickResumeFullscreen(mOriginUrl, mTitle, this);
                 } else {
-                    KLog.d(TAG, "onClickResume");
+                    LogUtils.d(TAG, "onClickResume");
                     mVideoViewCallBack.onClickResume(mOriginUrl, mTitle, this);
                 }
             }
@@ -456,7 +456,7 @@ public abstract class Layer2PlayerControlLayout extends Layer1PlayerCallbackStat
             try {
                 getVideoViewMgrBridge().start();
             } catch (Exception e) {
-                KLog.e(TAG, e);
+                LogUtils.e(TAG, e);
             }
             updateStateAndUi(STATE_PLAYING);
         } else if (mCurrentState == STATE_AUTO_COMPLETE) {
@@ -480,7 +480,7 @@ public abstract class Layer2PlayerControlLayout extends Layer1PlayerCallbackStat
         if (id == R.id.player_render_view_container) {
             switch (event.getAction()) {
                 case MotionEvent.ACTION_DOWN:
-                    KLog.d(TAG, "View with hashCode " + this.hashCode() + " renderView action down");
+                    LogUtils.d(TAG, "View with hashCode " + this.hashCode() + " renderView action down");
                     touchSurfaceDown(x, y);
                     break;
                 case MotionEvent.ACTION_MOVE:
@@ -498,7 +498,7 @@ public abstract class Layer2PlayerControlLayout extends Layer1PlayerCallbackStat
                     touchSurfaceMove(deltaX, deltaY, y);
                     break;
                 case MotionEvent.ACTION_UP:
-                    KLog.d(TAG, "View with hashCode " + this.hashCode() + " renderView action up");
+                    LogUtils.d(TAG, "View with hashCode " + this.hashCode() + " renderView action up");
                     startWidgetDismissTimer();
                     touchSurfaceUp();
 
@@ -514,7 +514,7 @@ public abstract class Layer2PlayerControlLayout extends Layer1PlayerCallbackStat
             // 移动进度条处理
             switch (event.getAction()) {
                 case MotionEvent.ACTION_DOWN:
-                    KLog.d(TAG, "View with hashCode " + this.hashCode() + " progress action down");
+                    LogUtils.d(TAG, "View with hashCode " + this.hashCode() + " progress action down");
                     cancelWidgetDismissTimer();
                     break;
                 case MotionEvent.ACTION_MOVE:
@@ -527,7 +527,7 @@ public abstract class Layer2PlayerControlLayout extends Layer1PlayerCallbackStat
                     }
                     break;
                 case MotionEvent.ACTION_UP:
-                    KLog.d(TAG, "View with hashCode " + this.hashCode() + " progress action up");
+                    LogUtils.d(TAG, "View with hashCode " + this.hashCode() + " progress action up");
                     startWidgetDismissTimer();
                     startProgressTimer();
                     // 此时需要防止父容器拦截时间
@@ -659,7 +659,7 @@ public abstract class Layer2PlayerControlLayout extends Layer1PlayerCallbackStat
                 // 移动特定位置
                 getVideoViewMgrBridge().seekTo(mSeekTimePosition);
             } catch (Exception e) {
-                KLog.e(TAG, e);
+                LogUtils.e(TAG, e);
             }
             // 同步进度
             long duration = getDuration();
@@ -668,17 +668,17 @@ public abstract class Layer2PlayerControlLayout extends Layer1PlayerCallbackStat
                 mProgressBar.setProgress(progress);
             }
             if (mVideoViewCallBack != null && isCurrentPlayerListener()) {
-                KLog.d(TAG, "onTouchScreenSeekPosition");
+                LogUtils.d(TAG, "onTouchScreenSeekPosition");
                 mVideoViewCallBack.onTouchScreenSeekPosition(mOriginUrl, mTitle, this);
             }
         } else if (mBrightness) {
             if (mVideoViewCallBack != null) {
-                KLog.d(TAG, "onTouchScreenSeekLight");
+                LogUtils.d(TAG, "onTouchScreenSeekLight");
                 mVideoViewCallBack.onTouchScreenSeekLight(mOriginUrl, mTitle, this);
             }
         } else if (mChangeVolume) {
             if (mVideoViewCallBack != null) {
-                KLog.d(TAG, "onTouchScreenSeekVolume");
+                LogUtils.d(TAG, "onTouchScreenSeekVolume");
                 mVideoViewCallBack.onTouchScreenSeekVolume(mOriginUrl, mTitle, this);
             }
         }
@@ -699,10 +699,10 @@ public abstract class Layer2PlayerControlLayout extends Layer1PlayerCallbackStat
     public void onStopTrackingTouch(SeekBar seekBar) {
         if (mVideoViewCallBack != null && isCurrentPlayerListener()) {
             if (isCurrentFullscreen()) {
-                KLog.d(TAG, "onClickSeekbarFullscreen");
+                LogUtils.d(TAG, "onClickSeekbarFullscreen");
                 mVideoViewCallBack.onClickSeekbarFullscreen(mOriginUrl, mTitle, this);
             } else {
-                KLog.d(TAG, "onClickSeekbar");
+                LogUtils.d(TAG, "onClickSeekbar");
                 mVideoViewCallBack.onClickSeekbar(mOriginUrl, mTitle, this);
             }
         }
@@ -711,7 +711,7 @@ public abstract class Layer2PlayerControlLayout extends Layer1PlayerCallbackStat
                 int time = (int) (seekBar.getProgress() * getDuration() / 100);
                 getVideoViewMgrBridge().seekTo(time);
             } catch (Exception e) {
-                KLog.e(TAG, e);
+                LogUtils.e(TAG, e);
             }
         }
         mHadSeekTouch = false;
@@ -886,9 +886,9 @@ public abstract class Layer2PlayerControlLayout extends Layer1PlayerCallbackStat
     }
 
 
-    protected boolean mPostDismiss = false;
+    protected boolean mPostDismiss        = false;
     //触摸显示后隐藏的时间
-    protected int mDismissControlTime = 2500;
+    protected int     mDismissControlTime = 2500;
     Runnable widgetDismissTask = new Runnable() {
         @Override
         public void run() {

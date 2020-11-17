@@ -6,20 +6,20 @@ import android.content.Intent;
 import android.content.IntentFilter;
 
 import com.rainmonth.common.utils.NetworkUtils;
-import com.rainmonth.common.utils.TLog;
+import com.rainmonth.common.utils.log.LogUtils;
 
 import java.util.ArrayList;
 
 public class NetStateReceiver extends BroadcastReceiver {
 
-    public final static String CUSTOM_ANDROID_NET_CHANGE_ACTION = "com.rainmonth.library.net.conn.CONNECTIVITY_CHANGE";
-    private final static String ANDROID_NET_CHANGE_ACTION = "android.net.conn.CONNECTIVITY_CHANGE";
-    private final static String TAG = NetStateReceiver.class.getSimpleName();
+    public final static  String CUSTOM_ANDROID_NET_CHANGE_ACTION = "com.rainmonth.library.net.conn.CONNECTIVITY_CHANGE";
+    private final static String ANDROID_NET_CHANGE_ACTION        = "android.net.conn.CONNECTIVITY_CHANGE";
+    private final static String TAG                              = NetStateReceiver.class.getSimpleName();
 
-    private static boolean isNetAvailable = false;
-    private static NetworkUtils.NetType mNetType;
+    private static boolean                      isNetAvailable      = false;
+    private static NetworkUtils.NetType         mNetType;
     private static ArrayList<NetChangeObserver> mNetChangeObservers = new ArrayList<NetChangeObserver>();
-    private static BroadcastReceiver mBroadcastReceiver;
+    private static BroadcastReceiver            mBroadcastReceiver;
 
     private static BroadcastReceiver getReceiver() {
         if (null == mBroadcastReceiver) {
@@ -37,10 +37,10 @@ public class NetStateReceiver extends BroadcastReceiver {
         mBroadcastReceiver = NetStateReceiver.this;
         if (intent.getAction().equalsIgnoreCase(ANDROID_NET_CHANGE_ACTION) || intent.getAction().equalsIgnoreCase(CUSTOM_ANDROID_NET_CHANGE_ACTION)) {
             if (!NetworkUtils.isNetworkAvailable(context)) {
-                TLog.i(TAG, "<--- network disconnected --->");
+                LogUtils.i(TAG, "<--- network disconnected --->");
                 isNetAvailable = false;
             } else {
-                TLog.i(TAG, "<--- network connected --->");
+                LogUtils.i(TAG, "<--- network connected --->");
                 isNetAvailable = true;
                 mNetType = NetworkUtils.getAPNType(context);
             }
@@ -66,7 +66,7 @@ public class NetStateReceiver extends BroadcastReceiver {
             try {
                 mContext.getApplicationContext().unregisterReceiver(mBroadcastReceiver);
             } catch (Exception e) {
-                TLog.d(TAG, e.getMessage());
+                LogUtils.d(TAG, e.getMessage());
             }
         }
 

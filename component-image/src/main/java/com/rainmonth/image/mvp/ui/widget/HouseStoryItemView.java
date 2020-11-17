@@ -9,11 +9,11 @@ import android.widget.FrameLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.rainmonth.common.utils.log.LogUtils;
 import com.rainmonth.common.widgets.test.BorderRoundItemView;
 import com.rainmonth.common.widgets.test.RandyPercentageLayout;
 import com.rainmonth.image.R;
 import com.rainmonth.image.mvp.model.bean.SubscribeBean;
-import com.socks.library.KLog;
 
 /**
  * @author RandyZhang
@@ -24,7 +24,7 @@ public class HouseStoryItemView extends RandyPercentageLayout {
 
     private Context mContext;
     BorderRoundItemView borderRoundItemView;
-    FrameLayout flRedirectContainer;
+    FrameLayout         flRedirectContainer;
 
     public HouseStoryItemView(@NonNull Context context) {
         this(context, null);
@@ -51,7 +51,7 @@ public class HouseStoryItemView extends RandyPercentageLayout {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        KLog.d("Randy", "mWidthPercentage:" + mWidthPercentage + ", mRate" + mRate);
+        LogUtils.d("Randy", "mWidthPercentage:" + mWidthPercentage + ", mRate" + mRate);
     }
 
     public void update(SubscribeBean subscribeBean) {

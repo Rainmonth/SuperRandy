@@ -6,7 +6,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
 import com.rainmonth.common.R;
 import com.rainmonth.common.adapter.BaseTabViewPagerAdapter;
-import com.socks.library.KLog;
+import com.rainmonth.common.utils.log.LogUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,9 +20,9 @@ public abstract class BaseTabViewPagerActivity extends BaseCleanActivity {
     ViewPager vpMain;
     TabLayout tlMain;
 
-    protected List<Fragment> fragments = new ArrayList<>();
-    protected List<String> titles = new ArrayList<>();
-    protected List<Integer> icons = new ArrayList<>();
+    protected List<Fragment>          fragments = new ArrayList<>();
+    protected List<String>            titles    = new ArrayList<>();
+    protected List<Integer>           icons     = new ArrayList<>();
     protected BaseTabViewPagerAdapter fragmentAdapter;
 
     @Override
@@ -42,12 +42,12 @@ public abstract class BaseTabViewPagerActivity extends BaseCleanActivity {
         bindData();
 
         if (fragments.size() != titles.size() || titles.size() != icons.size()) {
-            KLog.e("数据出错，请检查");
+            LogUtils.e("数据出错，请检查");
             return;
         }
 
         if (fragments.size() == 0) {
-            KLog.e("数据为空，请检查");
+            LogUtils.e("数据为空，请检查");
             return;
         }
         for (int i = 0; i < fragments.size(); i++) {

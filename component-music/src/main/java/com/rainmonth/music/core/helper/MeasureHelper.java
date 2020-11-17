@@ -2,7 +2,7 @@ package com.rainmonth.music.core.helper;
 
 import android.view.View;
 
-import com.socks.library.KLog;
+import com.rainmonth.common.utils.log.LogUtils;
 
 import java.lang.ref.WeakReference;
 
@@ -232,7 +232,7 @@ public final class MeasureHelper {
             try {
                 int videoWidth = mParamsListener.getCurrentVideoWidth();
                 int videoHeight = mParamsListener.getCurrentVideoHeight();
-                KLog.d("MeasureHelper", "videoWidth: " + videoWidth + " videoHeight: " + videoHeight);
+                LogUtils.d("MeasureHelper", "videoWidth: " + videoWidth + " videoHeight: " + videoHeight);
                 int videoSarNum = mParamsListener.getVideoSarNum();
                 int videoSarDen = mParamsListener.getVideoSarDen();
 

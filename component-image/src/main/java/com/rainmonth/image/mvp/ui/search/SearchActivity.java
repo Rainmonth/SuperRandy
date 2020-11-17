@@ -1,14 +1,16 @@
 package com.rainmonth.image.mvp.ui.search;
 
 import android.os.Bundle;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.rainmonth.common.base.BaseActivity;
 import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.common.utils.CommonUtils;
+import com.rainmonth.common.utils.log.LogUtils;
 import com.rainmonth.image.R;
 import com.rainmonth.image.api.Consts;
 import com.rainmonth.image.di.component.DaggerSearchComponent;
@@ -17,7 +19,6 @@ import com.rainmonth.image.mvp.contract.SearchContract;
 import com.rainmonth.image.mvp.model.bean.PhotoBean;
 import com.rainmonth.image.mvp.model.bean.SearchResult;
 import com.rainmonth.image.mvp.presenter.SearchPresenter;
-import com.socks.library.KLog;
 
 /**
  * 搜索中间页
@@ -26,8 +27,8 @@ import com.socks.library.KLog;
  * Created by RandyZhang on 2018/8/14.
  */
 public class SearchActivity extends BaseActivity<SearchPresenter> implements SearchContract.View {
-    private EditText etSearchKeys;
-    private Button btnSearch;
+    private EditText     etSearchKeys;
+    private Button       btnSearch;
     private RecyclerView rvSearchResults;
 
     @Override
@@ -75,8 +76,8 @@ public class SearchActivity extends BaseActivity<SearchPresenter> implements Sea
 
     @Override
     public <T> void initResultList(SearchResult<T> searchResult) {
-        KLog.d(searchResult.toString());
+        LogUtils.d(searchResult.toString());
         SearchResult<PhotoBean> photoBeanSearchResult = (SearchResult<PhotoBean>) searchResult;
-        KLog.d("Randy", photoBeanSearchResult.getResults().size());
+        LogUtils.d("Randy", photoBeanSearchResult.getResults().size());
     }
 }

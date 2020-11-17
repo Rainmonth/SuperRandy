@@ -1,25 +1,26 @@
 package com.rainmonth.common.base;
 
 import android.os.Bundle;
+
 import androidx.appcompat.widget.Toolbar;
 
 import com.rainmonth.common.R;
 import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.common.utils.CommonUtils;
+import com.rainmonth.common.utils.log.LogUtils;
 import com.rainmonth.common.widgets.BrowserLayout;
-import com.socks.library.KLog;
 
 public class BaseWebActivity extends BaseSwipeBackCompatActivity {
 
-    public static final String BUNDLE_KEY_URL = "BUNDLE_KEY_URL";
-    public static final String BUNDLE_KEY_TITLE = "BUNDLE_KEY_TITLE";
+    public static final String BUNDLE_KEY_URL             = "BUNDLE_KEY_URL";
+    public static final String BUNDLE_KEY_TITLE           = "BUNDLE_KEY_TITLE";
     public static final String BUNDLE_KEY_SHOW_BOTTOM_BAR = "BUNDLE_KEY_SHOW_BOTTOM_BAR";
 
-    private String mWebUrl = null;
-    private String mWebTitle = null;
+    private String  mWebUrl         = null;
+    private String  mWebTitle       = null;
     private boolean isShowBottomBar = true;
 
-    private Toolbar mToolBar = null;
+    private Toolbar       mToolBar       = null;
     private BrowserLayout mBrowserLayout = null;
 
     @Override
@@ -43,8 +44,8 @@ public class BaseWebActivity extends BaseSwipeBackCompatActivity {
     protected void initViewsAndEvents() {
         mToolBar = (Toolbar) findViewById(R.id.toolbar);
         mBrowserLayout = (BrowserLayout) findViewById(R.id.common_web_browser_layout);
-        KLog.i("Randy", "title:" + mWebTitle);
-        KLog.i("Randy", "url:" + mWebTitle);
+        LogUtils.i("Randy", "title:" + mWebTitle);
+        LogUtils.i("Randy", "url:" + mWebTitle);
 
         if (!CommonUtils.isEmpty(mWebUrl)) {
             mBrowserLayout.loadUrl(mWebUrl);

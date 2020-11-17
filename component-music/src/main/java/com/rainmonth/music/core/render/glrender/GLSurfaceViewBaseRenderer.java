@@ -1,7 +1,6 @@
 package com.rainmonth.music.core.render.glrender;
 
 import android.graphics.Bitmap;
-import android.graphics.Shader;
 import android.graphics.SurfaceTexture;
 import android.opengl.GLES20;
 import android.opengl.GLException;
@@ -10,9 +9,9 @@ import android.opengl.Matrix;
 import android.os.Handler;
 import android.view.Surface;
 
+import com.rainmonth.common.utils.log.LogUtils;
 import com.rainmonth.music.core.render.view.listener.GLSurfaceListener;
 import com.rainmonth.music.core.render.view.listener.VideoShotListener;
-import com.socks.library.KLog;
 
 import java.nio.IntBuffer;
 
@@ -29,20 +28,20 @@ public abstract class GLSurfaceViewBaseRenderer implements GLSurfaceView.Rendere
 
     public static final String TAG = GLSurfaceViewBaseRenderer.class.getSimpleName();
 
-    protected boolean mIsNeedHightShot = false;             // 是否需要高清截图
-    protected GLSurfaceView mGLSurfaceView;                 // 持有的GLSurfaceView实例
-    protected GLSurfaceListener mGLSurfaceListener;         // GLSurfaceView监听器
+    protected boolean               mIsNeedHightShot = false;             // 是否需要高清截图
+    protected GLSurfaceView         mGLSurfaceView;                 // 持有的GLSurfaceView实例
+    protected GLSurfaceListener     mGLSurfaceListener;         // GLSurfaceView监听器
     protected GLRenderErrorListener mGLRenderErrorListener; // 渲染错误监听器
 
     protected float[] mMvpMatrix = new float[16];           //
-    protected float[] mStMatrix = new float[16];
+    protected float[] mStMatrix  = new float[16];
 
-    protected int mCurrentViewWidth = 0;
-    protected int mCurrentViewHeight = 0;
-    protected int mCurrentVideoWidth = 0;
+    protected int mCurrentViewWidth   = 0;
+    protected int mCurrentViewHeight  = 0;
+    protected int mCurrentVideoWidth  = 0;
     protected int mCurrentVideoHeight = 0;
 
-    protected boolean mChangeProgram = false;
+    protected boolean mChangeProgram             = false;
     protected boolean mChangeProgramSupportError = false;
 
     protected Handler mHandler = new Handler();
@@ -55,7 +54,7 @@ public abstract class GLSurfaceViewBaseRenderer implements GLSurfaceView.Rendere
             Matrix.scaleM(mMvpMatrix, 0, mCurrentViewWidth * 1.0f / mGLSurfaceView.getWidth(),
                     mCurrentViewHeight * 1.0f / mGLSurfaceView.getHeight(), 1);
         } else {
-            KLog.e(TAG, "initRenderSize failed for some args is wrong, please check!!!");
+            LogUtils.e(TAG, "initRenderSize failed for some args is wrong, please check!!!");
         }
     }
 
@@ -89,7 +88,7 @@ public abstract class GLSurfaceViewBaseRenderer implements GLSurfaceView.Rendere
             GLES20.glGetShaderiv(shader, GLES20.GL_COMPILE_STATUS,
                     compiled, 0);
             if (compiled[0] == 0) {
-                KLog.e(TAG, "Could not compile shader " + shaderType + ":" +
+                LogUtils.e(TAG, "Could not compile shader " + shaderType + ":" +
                         GLES20.glGetShaderInfoLog(shader));
                 GLES20.glDeleteShader(shader);
                 shader = 0;
@@ -120,7 +119,7 @@ public abstract class GLSurfaceViewBaseRenderer implements GLSurfaceView.Rendere
             GLES20.glGetProgramiv(program, GLES20.GL_LINK_STATUS,
                     linkStatus, 0);
             if (linkStatus[0] != GLES20.GL_TRUE) {
-                KLog.e(TAG, "Could not link program: " +
+                LogUtils.e(TAG, "Could not link program: " +
                         GLES20.glGetProgramInfoLog(program));
                 GLES20.glDeleteProgram(program);
                 program = 0;
@@ -137,7 +136,7 @@ public abstract class GLSurfaceViewBaseRenderer implements GLSurfaceView.Rendere
     protected void checkGlError(final String op) {
         final int error;
         if ((error = GLES20.glGetError()) != GLES20.GL_NO_ERROR) {
-            KLog.e(TAG, op + ": glError " + error);
+            LogUtils.e(TAG, op + ": glError " + error);
             mHandler.post(new Runnable() {
                 @Override
                 public void run() {
