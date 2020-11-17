@@ -5,10 +5,10 @@ import android.text.TextUtils;
 
 import androidx.annotation.Nullable;
 
-import com.socks.library.klog.BaseLog;
-import com.socks.library.klog.FileLog;
-import com.socks.library.klog.JsonLog;
-import com.socks.library.klog.XmlLog;
+import com.rainmonth.common.utils.log.internal.BaseLog;
+import com.rainmonth.common.utils.log.internal.FileLog;
+import com.rainmonth.common.utils.log.internal.JsonLog;
+import com.rainmonth.common.utils.log.internal.XmlLog;
 
 import java.io.File;
 
