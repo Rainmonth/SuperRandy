@@ -95,8 +95,6 @@ dependencies {
     annotationProcessor rootProject.ext.dependencies["glide-compiler"]
 //    api rootProject.ext.dependencies["glide-compiler"]
 
-    // KLog
-    api rootProject.ext.dependencies["klog"]
     // multidex 解决4.4以下频繁出现的NoClassDefFoundError
     api rootProject.ext.dependencies["multidex"]
 
