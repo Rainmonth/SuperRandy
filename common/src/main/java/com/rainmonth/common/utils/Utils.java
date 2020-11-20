@@ -51,10 +51,14 @@ public final class Utils {
      * @return the Application object
      */
     public static Application getApp() {
-        if (sApp != null) return sApp;
+        if (sApp != null) {
+            System.out.println("app:" + sApp.getClass().getSimpleName());
+            return sApp;
+        }
         init(UtilsBridge.getApplicationByReflect());
         if (sApp == null) throw new NullPointerException("reflect failed.");
         Log.i("Utils", UtilsBridge.getCurrentProcessName() + " reflect app success.");
+        System.out.println("app:" + sApp.getClass().getSimpleName());
         return sApp;
     }
 
