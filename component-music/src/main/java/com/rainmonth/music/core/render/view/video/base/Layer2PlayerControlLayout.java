@@ -243,7 +243,7 @@ public abstract class Layer2PlayerControlLayout extends Layer1PlayerCallbackStat
                 if (percentage != 0) {
                     setProgressAndTime(percentage);
                     mBufferPoint = percentage;
-                    LogUtils.d(TAG, "Net speed: " + getNetSpeedText() + " percent " + percentage);
+                    LogUtils.d(TAG, "Net speed: " + getNetSpeedText() + " percent: " + percentage);
                 }
                 if (mProgressBar == null) {
                     return;

@@ -45,7 +45,6 @@ public abstract class Layer0PlayerDrawLayout extends FrameLayout implements Surf
     //GL的布局模式
     protected int mMode = RandyGLSurfaceView.MEASURE_MODE_LAYOUT_SIZE;
 
-
     public Layer0PlayerDrawLayout(Context context) {
         super(context);
     }

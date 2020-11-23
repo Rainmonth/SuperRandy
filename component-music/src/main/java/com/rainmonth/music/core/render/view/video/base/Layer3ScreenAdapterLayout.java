@@ -42,7 +42,7 @@ public abstract class Layer3ScreenAdapterLayout extends Layer2PlayerControlLayou
     //是否需要在利用window实现全屏幕的时候隐藏actionbar
     protected boolean mActionBar = false;
 
-    //是否需要在利用window实现全屏幕的时候隐藏statusbar
+    //是否需要在利用window实现全屏幕的时候隐藏statusBar
     protected boolean mStatusBar = false;
 
     //是否使用全屏动画效果

@@ -183,6 +183,9 @@ public abstract class Layer1PlayerCallbackStateLayout extends Layer0PlayerDrawLa
     }
 
     protected void initInflate(Context context) {
+        if (getLayoutId() == 0) {
+            throw new RuntimeException("You must apply a layout id for display!");
+        }
         try {
             View.inflate(context, getLayoutId(), this);
         } catch (Exception e) {
@@ -237,7 +240,7 @@ public abstract class Layer1PlayerCallbackStateLayout extends Layer0PlayerDrawLa
     /**
      * 当前的播放监听器是不是自身
      *
-     * @return
+     * @return true if the listener is right
      */
     protected boolean isCurrentPlayerListener() {
         return getVideoViewMgrBridge().listener() != null && getVideoViewMgrBridge().listener() == this;
