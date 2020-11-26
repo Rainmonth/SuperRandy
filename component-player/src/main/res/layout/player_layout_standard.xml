@@ -116,7 +116,7 @@
             android:textSize="18sp" />
     </LinearLayout>
 
-    <com.rainmonth.player.gsy.view.ENDownloadView
+    <com.rainmonth.player.view.ENDownloadView
         android:id="@+id/loading"
         android:layout_width="28dp"
         android:layout_height="28dp"
@@ -124,7 +124,7 @@
         android:layout_centerVertical="true"
         android:visibility="invisible" />
 
-    <com.rainmonth.player.gsy.view.ENPlayView
+    <com.rainmonth.player.view.ENPlayView
         android:id="@+id/start"
         android:layout_width="60dp"
         android:layout_height="60dp"
