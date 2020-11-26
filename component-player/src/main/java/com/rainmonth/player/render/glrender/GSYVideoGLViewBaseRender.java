@@ -1,4 +1,4 @@
-package com.rainmonth.player.gsy.render.glrender;
+package com.rainmonth.player.render.glrender;
 
 import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
@@ -11,9 +11,9 @@ import android.os.Handler;
 import android.view.Surface;
 
 import com.rainmonth.player.listener.GSYVideoShotListener;
-import com.rainmonth.player.gsy.render.view.GSYVideoGLView;
-import com.rainmonth.player.gsy.render.view.listener.GLSurfaceListener;
-import com.rainmonth.player.gsy.render.view.listener.GSYVideoGLRenderErrorListener;
+import com.rainmonth.player.render.view.GSYVideoGLView;
+import com.rainmonth.player.render.view.listener.GLSurfaceListener;
+import com.rainmonth.player.render.view.listener.GSYVideoGLRenderErrorListener;
 import com.rainmonth.player.utils.Debugger;
 
 import java.nio.IntBuffer;

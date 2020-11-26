@@ -8,7 +8,7 @@ import com.rainmonth.player.listener.GSYVideoProgressListener;
 import com.rainmonth.player.listener.LockClickListener;
 import com.rainmonth.player.listener.VideoAllCallBack;
 import com.rainmonth.player.render.effect.NoEffect;
-import com.rainmonth.player.gsy.render.view.GSYVideoGLView;
+import com.rainmonth.player.render.view.GSYVideoGLView;
 import com.rainmonth.player.video.StandardGSYVideoPlayer;
 import com.rainmonth.player.video.base.GSYBaseVideoPlayer;
 

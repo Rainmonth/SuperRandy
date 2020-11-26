@@ -1,4 +1,4 @@
-package com.rainmonth.player.gsy.render;
+package com.rainmonth.player.render;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -11,12 +11,12 @@ import android.widget.RelativeLayout;
 
 import com.rainmonth.player.listener.GSYVideoShotListener;
 import com.rainmonth.player.listener.GSYVideoShotSaveListener;
-import com.rainmonth.player.gsy.render.glrender.GSYVideoGLViewBaseRender;
-import com.rainmonth.player.gsy.render.view.GSYSurfaceView;
-import com.rainmonth.player.gsy.render.view.GSYTextureView;
-import com.rainmonth.player.gsy.render.view.GSYVideoGLView;
-import com.rainmonth.player.gsy.render.view.IGSYRenderView;
-import com.rainmonth.player.gsy.render.view.listener.IGSYSurfaceListener;
+import com.rainmonth.player.render.glrender.GSYVideoGLViewBaseRender;
+import com.rainmonth.player.render.view.GSYSurfaceView;
+import com.rainmonth.player.render.view.GSYTextureView;
+import com.rainmonth.player.render.view.GSYVideoGLView;
+import com.rainmonth.player.render.view.IGSYRenderView;
+import com.rainmonth.player.render.view.listener.IGSYSurfaceListener;
 import com.rainmonth.player.utils.GSYVideoType;
 import com.rainmonth.player.utils.MeasureHelper;
 

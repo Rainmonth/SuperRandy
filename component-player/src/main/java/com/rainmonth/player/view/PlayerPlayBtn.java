@@ -20,7 +20,7 @@ import com.rainmonth.player.R;
 /**
  * 自定义播放按钮View
  */
-public class ENPlayView extends View {
+public class PlayerPlayBtn extends View {
 
     public static int STATE_PLAY = 0;
 
@@ -58,11 +58,11 @@ public class ENPlayView extends View {
 
     private int mDuration;
 
-    public ENPlayView(Context context) {
+    public PlayerPlayBtn(Context context) {
         super(context);
     }
 
-    public ENPlayView(Context context, AttributeSet attrs) {
+    public PlayerPlayBtn(Context context, AttributeSet attrs) {
         super(context, attrs);
 
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.PlayerPlayBtn);

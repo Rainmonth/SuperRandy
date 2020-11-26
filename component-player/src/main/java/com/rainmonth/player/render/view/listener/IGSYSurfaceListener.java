@@ -1,4 +1,4 @@
-package com.rainmonth.player.gsy.render.view.listener;
+package com.rainmonth.player.render.view.listener;
 
 import android.view.Surface;
 

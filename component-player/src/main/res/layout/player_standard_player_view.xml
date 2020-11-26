@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/black">
+    android:background="@android:color/black"
+    tools:ignore="HardcodedText,ContentDescription">
 
     <RelativeLayout
         android:id="@+id/surface_container"
@@ -16,12 +18,10 @@
         android:id="@+id/thumb"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
         android:background="#000000"
         android:scaleType="fitCenter" />
 
@@ -39,7 +39,7 @@
             android:id="@+id/current"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
             android:text="00:00"
             android:textColor="#ffffff" />
 
@@ -53,8 +53,8 @@
             android:max="100"
             android:maxHeight="4dp"
             android:minHeight="4dp"
-            android:paddingBottom="8dp"
             android:paddingTop="8dp"
+            android:paddingBottom="8dp"
             android:progressDrawable="@drawable/player_video_seek_progress"
             android:thumb="@drawable/player_video_seek_thumb" />
 
@@ -62,7 +62,7 @@
             android:id="@+id/total"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="16dp"
+            android:layout_marginEnd="16dp"
             android:text="00:00"
             android:textColor="#ffffff" />
 
@@ -70,7 +70,7 @@
             android:id="@+id/fullscreen"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
-            android:paddingRight="16dp"
+            android:paddingEnd="16dp"
             android:scaleType="center"
             android:src="@drawable/player_enlarge" />
     </LinearLayout>
@@ -103,7 +103,7 @@
             android:id="@+id/back"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:paddingLeft="10dp"
+            android:paddingStart="10dp"
             android:scaleType="centerInside"
             android:src="@drawable/player_back" />
 
@@ -111,12 +111,12 @@
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="10dp"
+            android:paddingStart="10dp"
             android:textColor="@android:color/white"
             android:textSize="18sp" />
     </LinearLayout>
 
-    <com.rainmonth.player.view.ENDownloadView
+    <com.rainmonth.player.view.PlayerDownloadBtn
         android:id="@+id/loading"
         android:layout_width="28dp"
         android:layout_height="28dp"
@@ -124,7 +124,7 @@
         android:layout_centerVertical="true"
         android:visibility="invisible" />
 
-    <com.rainmonth.player.view.ENPlayView
+    <com.rainmonth.player.view.PlayerPlayBtn
         android:id="@+id/start"
         android:layout_width="60dp"
         android:layout_height="60dp"
@@ -137,7 +137,7 @@
         android:id="@+id/small_close"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:paddingLeft="10dp"
+        android:paddingStart="10dp"
         android:paddingTop="10dp"
         android:scaleType="centerInside"
         android:src="@drawable/player_small_close"
@@ -147,11 +147,11 @@
         android:id="@+id/lock_screen"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
-        android:layout_marginRight="50dp"
-        android:visibility="gone"
+        android:layout_marginEnd="50dp"
         android:scaleType="centerInside"
-        android:src="@drawable/player_unlock" />
+        android:src="@drawable/player_unlock"
+        android:visibility="gone" />
 
 </RelativeLayout>

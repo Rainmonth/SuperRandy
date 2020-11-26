@@ -23,19 +23,17 @@ import com.google.android.exoplayer2.audio.AudioAttributes;
 import com.google.android.exoplayer2.decoder.DecoderCounters;
 import com.google.android.exoplayer2.metadata.Metadata;
 import com.google.android.exoplayer2.source.MediaSource;
-import com.google.android.exoplayer2.source.MediaSourceEventListener;
 import com.google.android.exoplayer2.source.TrackGroupArray;
 import com.google.android.exoplayer2.trackselection.MappingTrackSelector;
 import com.google.android.exoplayer2.trackselection.TrackSelectionArray;
+import com.google.android.exoplayer2.util.EventLogger;
 import com.rainmonth.common.utils.log.LogUtils;
 import com.rainmonth.music.BuildConfig;
-import com.rainmonth.music.core.helper.EventLogger;
 import com.rainmonth.music.core.helper.ExoHelper;
 import com.rainmonth.music.core.player.BasePlayer;
 import com.rainmonth.music.core.player.IPlayer;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -55,21 +53,21 @@ public class RandyExoPlayer extends BasePlayer implements Player.EventListener, 
     public static final String Tag = RandyExoPlayer.class.getSimpleName();
 
     private SimpleExoPlayer mInternalPlayer;                    // 内部持有的ExoPlayer对象
-    private Context         mAppContext;                                // context（最好是application的context）
-    private ExoHelper       mHelper;                                  // Exo辅助类
+    private Context mAppContext;                                // context（最好是application的context）
+    private ExoHelper mHelper;                                  // Exo辅助类
 
-    private String              mDataSourcePath;                             //
-    private String              mOverrideExtension;                          //
-    private boolean             mCacheEnable;                               //
-    private File                mCacheDir;                                        // 缓存目录
+    private String mDataSourcePath;                             //
+    private String mOverrideExtension;                          //
+    private boolean mCacheEnable;                               //
+    private File mCacheDir;                                        // 缓存目录
     private Map<String, String> mHeaders = new HashMap<>();     // headers
-    private Surface             mSurface;
-    private int                 mWidth   = 0, mHeight = 0;
-    private MappingTrackSelector    mTrackSelector;
+    private Surface mSurface;
+    private int mWidth = 0, mHeight = 0;
+    private MappingTrackSelector mTrackSelector;
     private DefaultRenderersFactory mRenderersFactory;
-    private EventLogger             mEventLogger;
-    private LoadControl             mLoadControl;
-    private PlaybackParameters      mSpeedPlaybackParameters;
+    private EventLogger mEventLogger;
+    private LoadControl mLoadControl;
+    private PlaybackParameters mSpeedPlaybackParameters;
 
     private MediaSource mMediaSource;
 
@@ -169,7 +167,6 @@ public class RandyExoPlayer extends BasePlayer implements Player.EventListener, 
                 mInternalPlayer = ExoPlayerFactory.newSimpleInstance(
                         mAppContext, mRenderersFactory, mTrackSelector, mLoadControl, null,
                         Looper.getMainLooper());
-                mInternalPlayer.addListener(mEventLogger);
                 mInternalPlayer.addAnalyticsListener(RandyExoPlayer.this);
                 mInternalPlayer.addListener(RandyExoPlayer.this);
 
@@ -394,7 +391,7 @@ public class RandyExoPlayer extends BasePlayer implements Player.EventListener, 
 
     //<editor-fold> Player.AnalyticsListener
     private boolean lastReportedPlayWhenReady;
-    private int     lastPlaybackState;
+    private int lastPlaybackState;
     private boolean isBuffering, isPreparing;
 
     @Override
@@ -494,51 +491,6 @@ public class RandyExoPlayer extends BasePlayer implements Player.EventListener, 
 
     @Override
     public void onTracksChanged(EventTime eventTime, TrackGroupArray trackGroups, TrackSelectionArray trackSelections) {
-
-    }
-
-    @Override
-    public void onLoadStarted(EventTime eventTime, MediaSourceEventListener.LoadEventInfo loadEventInfo, MediaSourceEventListener.MediaLoadData mediaLoadData) {
-
-    }
-
-    @Override
-    public void onLoadCompleted(EventTime eventTime, MediaSourceEventListener.LoadEventInfo loadEventInfo, MediaSourceEventListener.MediaLoadData mediaLoadData) {
-
-    }
-
-    @Override
-    public void onLoadCanceled(EventTime eventTime, MediaSourceEventListener.LoadEventInfo loadEventInfo, MediaSourceEventListener.MediaLoadData mediaLoadData) {
-
-    }
-
-    @Override
-    public void onLoadError(EventTime eventTime, MediaSourceEventListener.LoadEventInfo loadEventInfo, MediaSourceEventListener.MediaLoadData mediaLoadData, IOException error, boolean wasCanceled) {
-
-    }
-
-    @Override
-    public void onDownstreamFormatChanged(EventTime eventTime, MediaSourceEventListener.MediaLoadData mediaLoadData) {
-
-    }
-
-    @Override
-    public void onUpstreamDiscarded(EventTime eventTime, MediaSourceEventListener.MediaLoadData mediaLoadData) {
-
-    }
-
-    @Override
-    public void onMediaPeriodCreated(EventTime eventTime) {
-
-    }
-
-    @Override
-    public void onMediaPeriodReleased(EventTime eventTime) {
-
-    }
-
-    @Override
-    public void onReadingStarted(EventTime eventTime) {
 
     }
 

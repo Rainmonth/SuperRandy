@@ -3,7 +3,7 @@ package com.rainmonth.player.render.effect;
 import android.graphics.Color;
 import android.opengl.GLSurfaceView;
 
-import com.rainmonth.player.gsy.render.view.GSYVideoGLView.ShaderInterface;
+import com.rainmonth.player.render.view.GSYVideoGLView.ShaderInterface;
 
 
 /**

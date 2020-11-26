@@ -20,7 +20,7 @@ import com.rainmonth.player.R;
 /**
  * 自定义下载按钮View
  */
-public class ENDownloadView extends View {
+public class PlayerDownloadBtn extends View {
 
     public static final int STATE_PRE = 0;
 
@@ -80,22 +80,22 @@ public class ENDownloadView extends View {
 
     private float mBaseLength, mCircleRadius, mBaseRippleLength;
 
-    public static enum DownloadUnit {
+    public enum DownloadUnit {
         GB,
         MB,
         KB,
         B,
         NONE;
 
-        private DownloadUnit() {
+        DownloadUnit() {
         }
     }
 
-    public ENDownloadView(Context context) {
+    public PlayerDownloadBtn(Context context) {
         super(context);
     }
 
-    public ENDownloadView(Context context, AttributeSet attrs) {
+    public PlayerDownloadBtn(Context context, AttributeSet attrs) {
         super(context, attrs);
 
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.PlayerDownloadBtn);

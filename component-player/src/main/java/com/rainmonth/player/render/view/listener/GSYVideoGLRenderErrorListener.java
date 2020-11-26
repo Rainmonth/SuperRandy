@@ -1,6 +1,6 @@
-package com.rainmonth.player.gsy.render.view.listener;
+package com.rainmonth.player.render.view.listener;
 
-import com.rainmonth.player.gsy.render.glrender.GSYVideoGLViewBaseRender;
+import com.rainmonth.player.render.glrender.GSYVideoGLViewBaseRender;
 
 /**
  * GL渲染错误

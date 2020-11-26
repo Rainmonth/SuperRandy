@@ -12,11 +12,11 @@ import androidx.annotation.AttrRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.rainmonth.player.gsy.render.GSYRenderView;
+import com.rainmonth.player.render.GSYRenderView;
 import com.rainmonth.player.render.effect.NoEffect;
-import com.rainmonth.player.gsy.render.glrender.GSYVideoGLViewBaseRender;
-import com.rainmonth.player.gsy.render.view.GSYVideoGLView;
-import com.rainmonth.player.gsy.render.view.listener.IGSYSurfaceListener;
+import com.rainmonth.player.render.glrender.GSYVideoGLViewBaseRender;
+import com.rainmonth.player.render.view.GSYVideoGLView;
+import com.rainmonth.player.render.view.listener.IGSYSurfaceListener;
 import com.rainmonth.player.utils.GSYVideoType;
 import com.rainmonth.player.utils.MeasureHelper;
 

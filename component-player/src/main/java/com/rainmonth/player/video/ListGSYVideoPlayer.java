@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import com.rainmonth.player.model.GSYVideoModel;
 import com.rainmonth.player.video.base.GSYBaseVideoPlayer;
 import com.rainmonth.player.video.base.GSYVideoPlayer;
-import com.rainmonth.player.view.ENDownloadView;
+import com.rainmonth.player.view.PlayerDownloadBtn;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -164,8 +164,8 @@ public class ListGSYVideoPlayer extends StandardGSYVideoPlayer {
         super.prepareVideo();
         if (mHadPlay && mPlayPosition < (mUriList.size())) {
             setViewShowState(mLoadingProgressBar, VISIBLE);
-            if (mLoadingProgressBar instanceof ENDownloadView) {
-                ((ENDownloadView) mLoadingProgressBar).start();
+            if (mLoadingProgressBar instanceof PlayerDownloadBtn) {
+                ((PlayerDownloadBtn) mLoadingProgressBar).start();
             }
         }
     }
@@ -187,8 +187,8 @@ public class ListGSYVideoPlayer extends StandardGSYVideoPlayer {
             setViewShowState(mLoadingProgressBar, VISIBLE);
             setViewShowState(mBottomProgressBar, INVISIBLE);
             setViewShowState(mLockScreen, GONE);
-            if (mLoadingProgressBar instanceof ENDownloadView) {
-                ((ENDownloadView) mLoadingProgressBar).start();
+            if (mLoadingProgressBar instanceof PlayerDownloadBtn) {
+                ((PlayerDownloadBtn) mLoadingProgressBar).start();
             }
         }
     }

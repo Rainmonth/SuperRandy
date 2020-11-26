@@ -10,6 +10,7 @@ import com.google.android.exoplayer2.C;
 import com.google.android.exoplayer2.ExoPlaybackException;
 import com.google.android.exoplayer2.ExoPlayer;
 import com.google.android.exoplayer2.ExoPlayerFactory;
+import com.google.android.exoplayer2.MediaItem;
 import com.google.android.exoplayer2.PlaybackParameters;
 import com.google.android.exoplayer2.Player;
 import com.google.android.exoplayer2.Renderer;
@@ -22,6 +23,7 @@ import com.google.android.exoplayer2.source.ProgressiveMediaSource;
 import com.google.android.exoplayer2.source.TrackGroupArray;
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
 import com.google.android.exoplayer2.trackselection.TrackSelectionArray;
+import com.google.android.exoplayer2.trackselection.TrackSelector;
 import com.google.android.exoplayer2.upstream.DataSource;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.upstream.RawResourceDataSource;
@@ -29,6 +31,8 @@ import com.google.android.exoplayer2.util.Util;
 import com.rainmonth.common.utils.log.LogUtils;
 import com.rainmonth.music.config.MusicApplication;
 import com.rainmonth.music.core.player.IRandyAudioPlayer;
+
+import java.util.List;
 
 /**
  * 音频播放器
@@ -43,13 +47,12 @@ public class RandyAudioPlayer implements Player, IRandyAudioPlayer, Player.Event
      * ExoPlayer实例（本质是ExoPlayerImpl）
      */
     private ExoPlayer mInternalPlayer;
-    private Uri       mCurrentUri;
+    private Uri mCurrentUri;
 
     // 当前状态
     private int mCurrentState = Player.STATE_IDLE;
     // 期望达到的状态
-    private int mExpectState  = Player.STATE_IDLE;
-
+    private int mExpectState = Player.STATE_IDLE;
     // 音频解码器
     private Renderer audioRenderer;
 
@@ -517,6 +520,11 @@ public class RandyAudioPlayer implements Player, IRandyAudioPlayer, Player.Event
     }
 
     @Override
+    public long getCurrentLiveOffset() {
+        return mInternalPlayer.getCurrentLiveOffset();
+    }
+
+    @Override
     public boolean isCurrentWindowSeekable() {
         return mInternalPlayer.isCurrentWindowSeekable();
     }
@@ -551,6 +559,134 @@ public class RandyAudioPlayer implements Player, IRandyAudioPlayer, Player.Event
         return mInternalPlayer.getContentBufferedPosition();
     }
 
+    @Nullable
+    @Override
+    public DeviceComponent getDeviceComponent() {
+        return null;
+    }
+
+    @Override
+    public void setMediaItems(List<MediaItem> mediaItems) {
+
+    }
+
+    @Override
+    public void setMediaItems(List<MediaItem> mediaItems, boolean resetPosition) {
+
+    }
+
+    @Override
+    public void setMediaItems(List<MediaItem> mediaItems, int startWindowIndex, long startPositionMs) {
+
+    }
+
+    @Override
+    public void setMediaItem(MediaItem mediaItem) {
+
+    }
+
+    @Override
+    public void setMediaItem(MediaItem mediaItem, long startPositionMs) {
+
+    }
+
+    @Override
+    public void setMediaItem(MediaItem mediaItem, boolean resetPosition) {
+
+    }
+
+    @Override
+    public void addMediaItem(MediaItem mediaItem) {
+
+    }
+
+    @Override
+    public void addMediaItem(int index, MediaItem mediaItem) {
+
+    }
+
+    @Override
+    public void addMediaItems(List<MediaItem> mediaItems) {
+
+    }
+
+    @Override
+    public void addMediaItems(int index, List<MediaItem> mediaItems) {
+
+    }
+
+    @Override
+    public void moveMediaItem(int currentIndex, int newIndex) {
+
+    }
+
+    @Override
+    public void moveMediaItems(int fromIndex, int toIndex, int newIndex) {
+
+    }
+
+    @Override
+    public void removeMediaItem(int index) {
+
+    }
+
+    @Override
+    public void removeMediaItems(int fromIndex, int toIndex) {
+
+    }
+
+    @Override
+    public void clearMediaItems() {
+
+    }
+
+    @Override
+    public void prepare() {
+
+    }
+
+    @Nullable
+    @Override
+    public ExoPlaybackException getPlayerError() {
+        return null;
+    }
+
+    @Override
+    public void play() {
+
+    }
+
+    @Override
+    public void pause() {
+
+    }
+
+    @Nullable
+    @Override
+    public TrackSelector getTrackSelector() {
+        return null;
+    }
+
+    @Nullable
+    @Override
+    public MediaItem getCurrentMediaItem() {
+        return null;
+    }
+
+    @Override
+    public int getMediaItemCount() {
+        return 0;
+    }
+
+    @Override
+    public MediaItem getMediaItemAt(int index) {
+        return null;
+    }
+
+    @Override
+    public boolean isCurrentWindowLive() {
+        return false;
+    }
 
     // <editor-fold>
 

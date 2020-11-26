@@ -2,7 +2,7 @@ package com.rainmonth.player.render.effect;
 
 import android.opengl.GLSurfaceView;
 
-import com.rainmonth.player.gsy.render.view.GSYVideoGLView;
+import com.rainmonth.player.render.view.GSYVideoGLView;
 
 /**
  * 重叠

@@ -9,8 +9,8 @@ import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.rainmonth.player.R;
 import com.rainmonth.player.GSYVideoADManager;
+import com.rainmonth.player.R;
 import com.rainmonth.player.utils.CommonUtil;
 import com.rainmonth.player.video.base.GSYBaseVideoPlayer;
 import com.rainmonth.player.video.base.GSYVideoViewBridge;
@@ -184,7 +184,7 @@ public class GSYADVideoPlayer extends StandardGSYVideoPlayer {
         if (mADTime != null && currentTime > 0) {
             int totalSeconds = totalTime / 1000;
             int currentSeconds = currentTime / 1000;
-            mADTime.setText("" + (totalSeconds - currentSeconds));
+            mADTime.setText(String.valueOf(totalSeconds - currentSeconds));
         }
     }
 

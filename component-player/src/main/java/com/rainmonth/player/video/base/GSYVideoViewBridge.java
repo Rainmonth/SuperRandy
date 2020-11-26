@@ -10,10 +10,8 @@ import java.io.File;
 import java.util.Map;
 
 /**
- * Manager 与 View之间的接口
- * Created by guoshuyu on 2018/1/25.
+ * Manager 与 View 之间的接口
  */
-
 public interface GSYVideoViewBridge {
 
     GSYMediaPlayerListener listener();

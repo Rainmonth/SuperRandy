@@ -24,8 +24,8 @@ import com.rainmonth.player.utils.NetworkUtils;
 
 import com.rainmonth.player.video.base.GSYBaseVideoPlayer;
 import com.rainmonth.player.video.base.GSYVideoPlayer;
-import com.rainmonth.player.view.ENDownloadView;
-import com.rainmonth.player.view.ENPlayView;
+import com.rainmonth.player.view.PlayerDownloadBtn;
+import com.rainmonth.player.view.PlayerPlayBtn;
 
 import java.io.File;
 
@@ -443,8 +443,8 @@ public class StandardGSYVideoPlayer extends GSYVideoPlayer {
         setViewShowState(mLockScreen, (mIfCurrentIsFullscreen && mNeedLockFull) ? VISIBLE : GONE);
 
         updateStartImage();
-        if (mLoadingProgressBar instanceof ENDownloadView) {
-            ((ENDownloadView) mLoadingProgressBar).reset();
+        if (mLoadingProgressBar instanceof PlayerDownloadBtn) {
+            ((PlayerDownloadBtn) mLoadingProgressBar).reset();
         }
     }
 
@@ -460,10 +460,10 @@ public class StandardGSYVideoPlayer extends GSYVideoPlayer {
         setViewShowState(mBottomProgressBar, INVISIBLE);
         setViewShowState(mLockScreen, GONE);
 
-        if (mLoadingProgressBar instanceof ENDownloadView) {
-            ENDownloadView enDownloadView = (ENDownloadView) mLoadingProgressBar;
-            if (enDownloadView.getCurrentState() == ENDownloadView.STATE_PRE) {
-                ((ENDownloadView) mLoadingProgressBar).start();
+        if (mLoadingProgressBar instanceof PlayerDownloadBtn) {
+            PlayerDownloadBtn playerDownloadBtn = (PlayerDownloadBtn) mLoadingProgressBar;
+            if (playerDownloadBtn.getCurrentState() == PlayerDownloadBtn.STATE_PRE) {
+                ((PlayerDownloadBtn) mLoadingProgressBar).start();
             }
         }
     }
@@ -480,8 +480,8 @@ public class StandardGSYVideoPlayer extends GSYVideoPlayer {
         setViewShowState(mBottomProgressBar, INVISIBLE);
         setViewShowState(mLockScreen, (mIfCurrentIsFullscreen && mNeedLockFull) ? VISIBLE : GONE);
 
-        if (mLoadingProgressBar instanceof ENDownloadView) {
-            ((ENDownloadView) mLoadingProgressBar).reset();
+        if (mLoadingProgressBar instanceof PlayerDownloadBtn) {
+            ((PlayerDownloadBtn) mLoadingProgressBar).reset();
         }
         updateStartImage();
     }
@@ -498,8 +498,8 @@ public class StandardGSYVideoPlayer extends GSYVideoPlayer {
         setViewShowState(mBottomProgressBar, INVISIBLE);
         setViewShowState(mLockScreen, (mIfCurrentIsFullscreen && mNeedLockFull) ? VISIBLE : GONE);
 
-        if (mLoadingProgressBar instanceof ENDownloadView) {
-            ((ENDownloadView) mLoadingProgressBar).reset();
+        if (mLoadingProgressBar instanceof PlayerDownloadBtn) {
+            ((PlayerDownloadBtn) mLoadingProgressBar).reset();
         }
         updateStartImage();
         updatePauseCover();
@@ -517,10 +517,10 @@ public class StandardGSYVideoPlayer extends GSYVideoPlayer {
         setViewShowState(mBottomProgressBar, INVISIBLE);
         setViewShowState(mLockScreen, GONE);
 
-        if (mLoadingProgressBar instanceof ENDownloadView) {
-            ENDownloadView enDownloadView = (ENDownloadView) mLoadingProgressBar;
-            if (enDownloadView.getCurrentState() == ENDownloadView.STATE_PRE) {
-                ((ENDownloadView) mLoadingProgressBar).start();
+        if (mLoadingProgressBar instanceof PlayerDownloadBtn) {
+            PlayerDownloadBtn playerDownloadBtn = (PlayerDownloadBtn) mLoadingProgressBar;
+            if (playerDownloadBtn.getCurrentState() == PlayerDownloadBtn.STATE_PRE) {
+                ((PlayerDownloadBtn) mLoadingProgressBar).start();
             }
         }
     }
@@ -537,8 +537,8 @@ public class StandardGSYVideoPlayer extends GSYVideoPlayer {
         setViewShowState(mBottomProgressBar, INVISIBLE);
         setViewShowState(mLockScreen, (mIfCurrentIsFullscreen && mNeedLockFull) ? VISIBLE : GONE);
 
-        if (mLoadingProgressBar instanceof ENDownloadView) {
-            ((ENDownloadView) mLoadingProgressBar).reset();
+        if (mLoadingProgressBar instanceof PlayerDownloadBtn) {
+            ((PlayerDownloadBtn) mLoadingProgressBar).reset();
         }
         updateStartImage();
     }
@@ -555,8 +555,8 @@ public class StandardGSYVideoPlayer extends GSYVideoPlayer {
         setViewShowState(mBottomProgressBar, INVISIBLE);
         setViewShowState(mLockScreen, (mIfCurrentIsFullscreen && mNeedLockFull) ? VISIBLE : GONE);
 
-        if (mLoadingProgressBar instanceof ENDownloadView) {
-            ((ENDownloadView) mLoadingProgressBar).reset();
+        if (mLoadingProgressBar instanceof PlayerDownloadBtn) {
+            ((PlayerDownloadBtn) mLoadingProgressBar).reset();
         }
         updateStartImage();
     }
@@ -662,8 +662,8 @@ public class StandardGSYVideoPlayer extends GSYVideoPlayer {
         setViewShowState(mBottomProgressBar, INVISIBLE);
         setViewShowState(mLockScreen, GONE);
 
-        if (mLoadingProgressBar instanceof ENDownloadView) {
-            ((ENDownloadView) mLoadingProgressBar).reset();
+        if (mLoadingProgressBar instanceof PlayerDownloadBtn) {
+            ((PlayerDownloadBtn) mLoadingProgressBar).reset();
         }
     }
 
@@ -691,10 +691,10 @@ public class StandardGSYVideoPlayer extends GSYVideoPlayer {
         setViewShowState(mBottomProgressBar, VISIBLE);
         setViewShowState(mLockScreen, GONE);
 
-        if (mLoadingProgressBar instanceof ENDownloadView) {
-            ENDownloadView enDownloadView = (ENDownloadView) mLoadingProgressBar;
-            if (enDownloadView.getCurrentState() == ENDownloadView.STATE_PRE) {
-                ((ENDownloadView) mLoadingProgressBar).start();
+        if (mLoadingProgressBar instanceof PlayerDownloadBtn) {
+            PlayerDownloadBtn playerDownloadBtn = (PlayerDownloadBtn) mLoadingProgressBar;
+            if (playerDownloadBtn.getCurrentState() == PlayerDownloadBtn.STATE_PRE) {
+                ((PlayerDownloadBtn) mLoadingProgressBar).start();
             }
         }
         updateStartImage();
@@ -711,8 +711,8 @@ public class StandardGSYVideoPlayer extends GSYVideoPlayer {
         setViewShowState(mBottomProgressBar, INVISIBLE);
         setViewShowState(mLockScreen, GONE);
 
-        if (mLoadingProgressBar instanceof ENDownloadView) {
-            ((ENDownloadView) mLoadingProgressBar).reset();
+        if (mLoadingProgressBar instanceof PlayerDownloadBtn) {
+            ((PlayerDownloadBtn) mLoadingProgressBar).reset();
         }
     }
 
@@ -727,8 +727,8 @@ public class StandardGSYVideoPlayer extends GSYVideoPlayer {
         setViewShowState(mBottomProgressBar, VISIBLE);
         setViewShowState(mLockScreen, (mIfCurrentIsFullscreen && mNeedLockFull) ? VISIBLE : GONE);
 
-        if (mLoadingProgressBar instanceof ENDownloadView) {
-            ((ENDownloadView) mLoadingProgressBar).reset();
+        if (mLoadingProgressBar instanceof PlayerDownloadBtn) {
+            ((PlayerDownloadBtn) mLoadingProgressBar).reset();
         }
         updateStartImage();
     }
@@ -737,15 +737,15 @@ public class StandardGSYVideoPlayer extends GSYVideoPlayer {
      * 定义开始按键显示
      */
     protected void updateStartImage() {
-        if (mStartButton instanceof ENPlayView) {
-            ENPlayView enPlayView = (ENPlayView) mStartButton;
-            enPlayView.setDuration(500);
+        if (mStartButton instanceof PlayerPlayBtn) {
+            PlayerPlayBtn playerPlayBtn = (PlayerPlayBtn) mStartButton;
+            playerPlayBtn.setDuration(500);
             if (mCurrentState == CURRENT_STATE_PLAYING) {
-                enPlayView.play();
+                playerPlayBtn.play();
             } else if (mCurrentState == CURRENT_STATE_ERROR) {
-                enPlayView.pause();
+                playerPlayBtn.pause();
             } else {
-                enPlayView.pause();
+                playerPlayBtn.pause();
             }
         } else if (mStartButton instanceof ImageView) {
             ImageView imageView = (ImageView) mStartButton;
