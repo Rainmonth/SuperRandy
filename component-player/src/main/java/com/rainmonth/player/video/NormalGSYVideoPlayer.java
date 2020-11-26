@@ -26,7 +26,7 @@ public class NormalGSYVideoPlayer extends StandardGSYVideoPlayer {
 
     @Override
     public int getLayoutId() {
-        return R.layout.player_layout_normal;
+        return R.layout.player_normal_player_view;
     }
 
     @Override

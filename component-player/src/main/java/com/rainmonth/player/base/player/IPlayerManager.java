@@ -3,6 +3,7 @@ package com.rainmonth.player.base.player;
 import android.content.Context;
 import android.os.Message;
 
+import com.rainmonth.player.base.cache.ICacheManager;
 import com.rainmonth.player.model.VideoOptionModel;
 
 import java.util.List;

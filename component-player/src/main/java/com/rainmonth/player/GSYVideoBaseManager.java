@@ -11,7 +11,7 @@ import android.view.Surface;
 import androidx.annotation.Nullable;
 
 import com.rainmonth.player.base.cache.CacheFactory;
-import com.rainmonth.player.base.player.ICacheManager;
+import com.rainmonth.player.base.cache.ICacheManager;
 import com.rainmonth.player.listener.GSYMediaPlayerListener;
 import com.rainmonth.player.model.GSYModel;
 import com.rainmonth.player.model.VideoOptionModel;

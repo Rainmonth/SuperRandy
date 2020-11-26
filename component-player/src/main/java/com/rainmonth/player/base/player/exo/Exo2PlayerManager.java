@@ -1,41 +1,42 @@
-package com.rainmonth.player.base.player;
+package com.rainmonth.player.base.player.exo;
 
 import android.content.Context;
 import android.media.AudioManager;
-import android.media.PlaybackParams;
 import android.net.TrafficStats;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Message;
 import android.view.Surface;
 
+import androidx.annotation.Nullable;
+
+import com.google.android.exoplayer2.SeekParameters;
+import com.google.android.exoplayer2.video.DummySurface;
+import com.rainmonth.player.base.player.BasePlayerManager;
+import com.rainmonth.player.base.cache.ICacheManager;
 import com.rainmonth.player.model.GSYModel;
 import com.rainmonth.player.model.VideoOptionModel;
-import com.rainmonth.player.utils.Debugger;
 
 import java.util.List;
 
-import tv.danmaku.ijk.media.player.AndroidMediaPlayer;
 import tv.danmaku.ijk.media.player.IMediaPlayer;
 
 /**
- * 系统播放器，总觉得不好用
+ * EXOPlayer2
  */
-public class SystemPlayerManager extends BasePlayerManager {
+
+public class Exo2PlayerManager extends BasePlayerManager {
 
     private Context context;
 
-    private AndroidMediaPlayer mediaPlayer;
+    private IjkExo2MediaPlayer mediaPlayer;
 
     private Surface surface;
 
-    private boolean release;
+    private DummySurface dummySurface;
 
     private long lastTotalRxBytes = 0;
 
     private long lastTimeStamp = 0;
-
-    private boolean isPlaying = false;
 
     @Override
     public IMediaPlayer getMediaPlayer() {
@@ -45,19 +46,28 @@ public class SystemPlayerManager extends BasePlayerManager {
     @Override
     public void initVideoPlayer(Context context, Message msg, List<VideoOptionModel> optionModelList, ICacheManager cacheManager) {
         this.context = context.getApplicationContext();
-        mediaPlayer = new AndroidMediaPlayer();
+        mediaPlayer = new IjkExo2MediaPlayer(context);
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-        release = false;
+        if (dummySurface == null) {
+            dummySurface = DummySurface.newInstanceV17(context, false);
+        }
+        //使用自己的cache模式
         GSYModel gsyModel = (GSYModel) msg.obj;
         try {
+            mediaPlayer.setLooping(gsyModel.isLooping());
+            mediaPlayer.setPreview(gsyModel.getMapHeadData() != null && gsyModel.getMapHeadData().size() > 0);
             if (gsyModel.isCache() && cacheManager != null) {
+                //通过管理器处理
                 cacheManager.doCacheLogic(context, mediaPlayer, gsyModel.getUrl(), gsyModel.getMapHeadData(), gsyModel.getCachePath());
             } else {
+                //通过自己的内部缓存机制
+                mediaPlayer.setCache(gsyModel.isCache());
+                mediaPlayer.setCacheDir(gsyModel.getCachePath());
+                mediaPlayer.setOverrideExtension(gsyModel.getOverrideExtension());
                 mediaPlayer.setDataSource(context, Uri.parse(gsyModel.getUrl()), gsyModel.getMapHeadData());
             }
-            mediaPlayer.setLooping(gsyModel.isLooping());
             if (gsyModel.getSpeed() != 1 && gsyModel.getSpeed() > 0) {
-                setSpeed(gsyModel.getSpeed());
+                mediaPlayer.setSpeed(gsyModel.getSpeed(), 1);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -66,38 +76,38 @@ public class SystemPlayerManager extends BasePlayerManager {
     }
 
     @Override
-    public void showDisplay(Message msg) {
-        if (msg.obj == null && mediaPlayer != null && !release) {
-            mediaPlayer.setSurface(null);
-        } else if (msg.obj != null) {
+    public void showDisplay(final Message msg) {
+        if (mediaPlayer == null) {
+            return;
+        }
+        if (msg.obj == null) {
+            mediaPlayer.setSurface(dummySurface);
+        } else {
             Surface holder = (Surface) msg.obj;
             surface = holder;
-            if (mediaPlayer != null && holder.isValid() && !release) {
-                mediaPlayer.setSurface(holder);
-            }
-            if (!isPlaying) {
-                pause();
+            mediaPlayer.setSurface(holder);
+        }
+    }
+
+    @Override
+    public void setSpeed(final float speed, final boolean soundTouch) {
+        if (mediaPlayer != null) {
+            try {
+                mediaPlayer.setSpeed(speed, 1);
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
     }
 
     @Override
-    public void setSpeed(float speed, boolean soundTouch) {
-        setSpeed(speed);
-    }
-
-    @Override
-    public void setNeedMute(boolean needMute) {
-        try {
-            if (mediaPlayer != null && !release) {
-                if (needMute) {
-                    mediaPlayer.setVolume(0, 0);
-                } else {
-                    mediaPlayer.setVolume(1, 1);
-                }
+    public void setNeedMute(final boolean needMute) {
+        if (mediaPlayer != null) {
+            if (needMute) {
+                mediaPlayer.setVolume(0, 0);
+            } else {
+                mediaPlayer.setVolume(1, 1);
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 
@@ -119,9 +129,13 @@ public class SystemPlayerManager extends BasePlayerManager {
     @Override
     public void release() {
         if (mediaPlayer != null) {
-            release = true;
+            mediaPlayer.setSurface(null);
             mediaPlayer.release();
             mediaPlayer = null;
+        }
+        if (dummySurface != null) {
+            dummySurface.release();
+            dummySurface = null;
         }
         lastTotalRxBytes = 0;
         lastTimeStamp = 0;
@@ -129,7 +143,10 @@ public class SystemPlayerManager extends BasePlayerManager {
 
     @Override
     public int getBufferedPercentage() {
-        return -1;
+        if (mediaPlayer != null) {
+            return mediaPlayer.getBufferedPercentage();
+        }
+        return 0;
     }
 
     @Override
@@ -139,6 +156,7 @@ public class SystemPlayerManager extends BasePlayerManager {
         }
         return 0;
     }
+
 
     @Override
     public void setSpeedPlaying(float speed, boolean soundTouch) {
@@ -150,7 +168,6 @@ public class SystemPlayerManager extends BasePlayerManager {
     public void start() {
         if (mediaPlayer != null) {
             mediaPlayer.start();
-            isPlaying = true;
         }
     }
 
@@ -158,7 +175,6 @@ public class SystemPlayerManager extends BasePlayerManager {
     public void stop() {
         if (mediaPlayer != null) {
             mediaPlayer.stop();
-            isPlaying = false;
         }
     }
 
@@ -166,7 +182,6 @@ public class SystemPlayerManager extends BasePlayerManager {
     public void pause() {
         if (mediaPlayer != null) {
             mediaPlayer.pause();
-            isPlaying = false;
         }
     }
 
@@ -238,24 +253,16 @@ public class SystemPlayerManager extends BasePlayerManager {
         return false;
     }
 
-    private void setSpeed(float speed) {
-        if (release) {
-            return;
-        }
-        if (mediaPlayer != null && mediaPlayer.getInternalMediaPlayer() != null && mediaPlayer.isPlayable()) {
-            try {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    PlaybackParams playbackParams = new PlaybackParams();
-                    playbackParams.setSpeed(speed);
-                    mediaPlayer.getInternalMediaPlayer().setPlaybackParams(playbackParams);
-                } else {
-                    Debugger.printfError(" not support setSpeed");
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+
+    /**
+     * 设置seek 的临近帧。
+     **/
+    public void setSeekParameter(@Nullable SeekParameters seekParameters) {
+        if (mediaPlayer != null) {
+            mediaPlayer.setSeekParameter(seekParameters);
         }
     }
+
 
     private long getNetSpeed(Context context) {
         if (context == null) {
@@ -273,4 +280,5 @@ public class SystemPlayerManager extends BasePlayerManager {
         lastTotalRxBytes = nowTotalRxBytes;
         return speed;
     }
+
 }

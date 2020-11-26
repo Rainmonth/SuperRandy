@@ -1,7 +1,5 @@
 package com.rainmonth.player.base.cache;
 
-import com.rainmonth.player.base.player.ICacheManager;
-
 /**
  * 缓存到本地服务工厂
  */

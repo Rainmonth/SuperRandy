@@ -20,7 +20,8 @@ ext {
 //            "movie",
 //            "music",
 //            "video",
-//            "read"
+//            "read",
+//            "player"
     ]
 
     // 第三方依赖库版本控制
@@ -129,8 +130,9 @@ ext {
             // 动画兼容库
             "nineoldandroids"           : 'com.nineoldandroids:library:2.4.0',
             "photoview"                 : 'com.github.chrisbanes.photoview:library:1.2.4',
-            "exoplayer"                 : 'com.google.android.exoplayer:exoplayer:2.10.6',
-            "exoplayer-extension-rtmp"  : 'com.google.android.exoplayer:extension-rtmp:2.10.6'
+            "exoplayer"                 : 'com.google.android.exoplayer:exoplayer:2.12.1',
+            "exoplayer-extension-rtmp"  : 'com.google.android.exoplayer:extension-rtmp:2.12.1',
+            "ijkplayer"                 : 'tv.danmaku.ijk.media:ijkplayer-java:0.8.8'
 
     ]
 

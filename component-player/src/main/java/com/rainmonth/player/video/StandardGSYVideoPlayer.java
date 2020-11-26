@@ -118,7 +118,7 @@ public class StandardGSYVideoPlayer extends GSYVideoPlayer {
      */
     @Override
     public int getLayoutId() {
-        return R.layout.player_layout_standard;
+        return R.layout.player_standard_player_view;
     }
 
     /**
@@ -575,7 +575,7 @@ public class StandardGSYVideoPlayer extends GSYVideoPlayer {
      * 有自定义的实现逻辑可重载showProgressDialog方法
      */
     protected int getProgressDialogLayoutId() {
-        return R.layout.player_progress_dialog;
+        return R.layout.player_dialog_progress;
     }
 
     /**
@@ -620,7 +620,7 @@ public class StandardGSYVideoPlayer extends GSYVideoPlayer {
      * 有自定义的实现逻辑可重载showVolumeDialog方法
      */
     protected int getVolumeLayoutId() {
-        return R.layout.player_volume_dialog;
+        return R.layout.player_dalog_volume;
     }
 
     /**
@@ -639,7 +639,7 @@ public class StandardGSYVideoPlayer extends GSYVideoPlayer {
      * 有自定义的实现逻辑可重载showBrightnessDialog方法
      */
     protected int getBrightnessLayoutId() {
-        return R.layout.player_brightness;
+        return R.layout.player_dialog_brightness;
     }
 
     /**

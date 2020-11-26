@@ -67,7 +67,7 @@ public class GSYSampleADVideoPlayer extends ListGSYVideoPlayer {
 
     @Override
     public int getLayoutId() {
-        return R.layout.player_layout_sample_ad;
+        return R.layout.player_sample_ad_player_view;
     }
 
     /**

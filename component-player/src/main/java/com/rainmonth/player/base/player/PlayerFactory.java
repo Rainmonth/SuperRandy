@@ -1,8 +1,9 @@
 package com.rainmonth.player.base.player;
 
+import com.rainmonth.player.base.player.ijk.IjkPlayerManager;
+
 /**
  * 播放内核工厂
- * Created by guoshuyu on 2018/5/21.
  */
 public class PlayerFactory {
 

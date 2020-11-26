@@ -1,4 +1,4 @@
-package com.rainmonth.player.base.player;
+package com.rainmonth.player.base.player.ijk;
 
 import android.content.ContentResolver;
 import android.content.Context;
@@ -10,6 +10,8 @@ import android.os.ParcelFileDescriptor;
 import android.text.TextUtils;
 import android.view.Surface;
 
+import com.rainmonth.player.base.player.BasePlayerManager;
+import com.rainmonth.player.base.cache.ICacheManager;
 import com.rainmonth.player.model.GSYModel;
 import com.rainmonth.player.model.VideoOptionModel;
 import com.rainmonth.player.utils.Debugger;

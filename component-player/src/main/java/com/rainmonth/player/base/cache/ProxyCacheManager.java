@@ -4,7 +4,6 @@ import android.content.Context;
 import android.net.Uri;
 import android.text.TextUtils;
 
-import com.rainmonth.player.base.player.ICacheManager;
 import com.rainmonth.player.cache_proxy.CacheListener;
 import com.rainmonth.player.cache_proxy.HttpProxyCacheServer;
 import com.rainmonth.player.cache_proxy.file.FileNameGenerator;

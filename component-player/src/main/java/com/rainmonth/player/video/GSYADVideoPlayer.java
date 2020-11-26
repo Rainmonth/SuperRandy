@@ -58,7 +58,7 @@ public class GSYADVideoPlayer extends StandardGSYVideoPlayer {
 
     @Override
     public int getLayoutId() {
-        return R.layout.player_layout_ad;
+        return R.layout.player_ad_player_view;
     }
 
     @Override
