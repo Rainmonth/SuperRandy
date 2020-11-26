@@ -9,6 +9,7 @@ include ':common-res',
         ':component-video',
         ':component-app',
         ':component-read',
-        ':component-image'
+        ':component-image',
+        ':component-player'
 
 System.out.println("settingsDir:" + getSettingsDir().toString())

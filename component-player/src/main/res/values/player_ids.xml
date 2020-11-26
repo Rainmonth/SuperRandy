@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="player_full_id" type="id" />
+    <item name="player_small_id" type="id" />
+    <item name="player_ad_full_id" type="id" />
+    <item name="player_ad_small_id" type="id" />
+</resources>
