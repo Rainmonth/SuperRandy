@@ -5,8 +5,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.BaseViewHolder;
+import com.rainmonth.common.adapter.base.BaseQuickAdapter;
+import com.rainmonth.common.adapter.base.BaseViewHolder;
 import com.rainmonth.common.bean.RandyLogicBean;
 import com.rainmonth.common.component.Const;
 import com.rainmonth.common.component.RandyHListItemProvider;

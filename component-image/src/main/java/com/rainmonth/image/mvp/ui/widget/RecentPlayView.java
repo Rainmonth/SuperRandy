@@ -16,8 +16,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.BaseViewHolder;
+import com.rainmonth.common.adapter.base.BaseQuickAdapter;
+import com.rainmonth.common.adapter.base.BaseViewHolder;
 import com.rainmonth.common.utils.DensityUtils;
 import com.rainmonth.common.utils.ToastUtils;
 import com.rainmonth.image.R;

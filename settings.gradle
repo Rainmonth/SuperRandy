@@ -1,5 +1,6 @@
 include ':rainmonth'
 include ':router'
+include ':common-adapter'
 include ':common-res',
         ':common',
         ':component-base',

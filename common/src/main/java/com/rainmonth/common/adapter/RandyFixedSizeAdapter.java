@@ -2,8 +2,8 @@ package com.rainmonth.common.adapter;
 
 import androidx.annotation.NonNull;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.BaseViewHolder;
+import com.rainmonth.common.adapter.base.BaseQuickAdapter;
+import com.rainmonth.common.adapter.base.BaseViewHolder;
 
 import java.util.List;
 

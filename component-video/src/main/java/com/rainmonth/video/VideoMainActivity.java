@@ -10,8 +10,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.BaseViewHolder;
+import com.rainmonth.common.adapter.base.BaseQuickAdapter;
+import com.rainmonth.common.adapter.base.BaseViewHolder;
 import com.rainmonth.common.base.BaseActivity;
 import com.rainmonth.common.bean.ExampleBean;
 import com.rainmonth.common.di.component.AppComponent;

@@ -6,10 +6,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.chad.library.adapter.base.BaseViewHolder;
-import com.chad.library.adapter.base.entity.MultiItemEntity;
-import com.chad.library.adapter.base.provider.BaseItemProvider;
 import com.rainmonth.common.adapter.BaseMultiTypeAdapter;
+import com.rainmonth.common.adapter.entity.MultiItemEntity;
 import com.rainmonth.common.base.BaseLazyFragment;
 import com.rainmonth.common.component.RandyBaseItemProvider;
 import com.rainmonth.common.di.component.AppComponent;

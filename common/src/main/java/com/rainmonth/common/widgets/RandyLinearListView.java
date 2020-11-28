@@ -16,8 +16,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SimpleItemAnimator;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.BaseViewHolder;
+import com.rainmonth.common.adapter.base.BaseQuickAdapter;
+import com.rainmonth.common.adapter.base.BaseViewHolder;
 import com.rainmonth.common.R;
 import com.rainmonth.common.adapter.RandyFixedSizeAdapter;
 import com.rainmonth.common.bean.BaseBean;

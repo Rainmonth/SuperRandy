@@ -1,6 +1,7 @@
 package com.rainmonth.common.bean;
 
-import com.chad.library.adapter.base.entity.MultiItemEntity;
+
+import com.rainmonth.common.adapter.entity.MultiItemEntity;
 
 import java.util.List;
 

@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-import com.chad.library.adapter.base.BaseViewHolder;
+import com.rainmonth.common.adapter.base.BaseViewHolder;
 import com.rainmonth.common.R;
 import com.rainmonth.common.bean.BannerBean;
 import com.rainmonth.common.bean.RandyLogicBean;

@@ -4,9 +4,9 @@ import android.content.Context;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.BaseViewHolder;
 import com.rainmonth.R;
+import com.rainmonth.common.adapter.base.BaseQuickAdapter;
+import com.rainmonth.common.adapter.base.BaseViewHolder;
 import com.rainmonth.common.http.imageloader.ImageLoader;
 import com.rainmonth.common.http.imageloader.glide.GlideImageConfig;
 import com.rainmonth.common.utils.ComponentUtils;

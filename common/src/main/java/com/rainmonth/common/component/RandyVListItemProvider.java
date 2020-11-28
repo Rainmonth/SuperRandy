@@ -2,7 +2,7 @@ package com.rainmonth.common.component;
 
 import androidx.annotation.NonNull;
 
-import com.chad.library.adapter.base.BaseViewHolder;
+import com.rainmonth.common.adapter.base.BaseViewHolder;
 import com.rainmonth.common.bean.BaseBean;
 import com.rainmonth.common.bean.RandyLogicBean;
 import com.rainmonth.common.bean.RandyMultiBean;
