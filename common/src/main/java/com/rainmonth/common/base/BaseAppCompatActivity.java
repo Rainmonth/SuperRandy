@@ -35,12 +35,12 @@ import butterknife.ButterKnife;
 import de.greenrobot.event.EventBus;
 
 public abstract class BaseAppCompatActivity extends AppCompatActivity {
-    public static final int TRANSITION_MODE_LEFT   = 0;
-    public static final int TRANSITION_MODE_RIGHT  = 1;
-    public static final int TRANSITION_MODE_TOP    = 2;
+    public static final int TRANSITION_MODE_LEFT = 0;
+    public static final int TRANSITION_MODE_RIGHT = 1;
+    public static final int TRANSITION_MODE_TOP = 2;
     public static final int TRANSITION_MODE_BOTTOM = 3;
-    public static final int TRANSITION_MODE_SCALE  = 4;
-    public static final int TRANSITION_MODE_FADE   = 5;
+    public static final int TRANSITION_MODE_SCALE = 4;
+    public static final int TRANSITION_MODE_FADE = 5;
 
     /**
      * Log tag
@@ -51,10 +51,10 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
     /**
      * context
      */
-    protected Context      mContext = null;
-    protected Activity     mActivity;
+    protected Context mContext = null;
+    protected Activity mActivity;
     // 状态栏颜色
-    protected int          mStatusBarColor;
+    protected int mStatusBarColor;
 
     protected ActionBar mActionBar = null;
 
@@ -103,7 +103,11 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
                 }
             }
         }
-        super.onCreate(savedInstanceState);
+        try {
+            super.onCreate(savedInstanceState);
+        } catch (Throwable e) {
+            LogUtils.printStackTrace(e);
+        }
         // base setup
         Bundle extras = getIntent().getExtras();
         if (null != extras) {
@@ -182,7 +186,11 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
 
     @Override
     public void finish() {
-        super.finish();
+        try {
+            super.finish();
+        } catch (Throwable e) {
+            LogUtils.printStackTrace(e);
+        }
         mAppComponent.appManager().removeActivity(this);
         if (toggleOverridePendingTransition()) {
             if (getOverridePendingTransitionMode() >= 0) {
@@ -212,11 +220,17 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
-        NetStateReceiver.removeRegisterObserver(mNetChangeObserver);
-        if (isBindEventBusHere()) {
-            EventBus.getDefault().unregister(this);
+        try {
+            super.onDestroy();
+        } catch (Throwable e) {
+            LogUtils.printStackTrace(e);
+        } finally {
+            NetStateReceiver.removeRegisterObserver(mNetChangeObserver);
+            if (isBindEventBusHere()) {
+                EventBus.getDefault().unregister(this);
+            }
         }
+
     }
 
     /**

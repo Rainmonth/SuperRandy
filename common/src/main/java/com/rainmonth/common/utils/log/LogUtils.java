@@ -2,6 +2,7 @@ package com.rainmonth.common.utils.log;
 
 
 import android.text.TextUtils;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 
@@ -29,16 +30,16 @@ import java.io.File;
 public class LogUtils {
 
     public static final String LINE_SEPARATOR = System.getProperty("line.separator");
-    public static final String NULL_TIPS      = "Log with null object";
+    public static final String NULL_TIPS = "Log with null object";
 
     private static final String DEFAULT_MESSAGE = "execute";
-    private static final String PARAM           = "Param";
-    private static final String NULL            = "null";
-    private static final String TAG_DEFAULT     = "KLog";
-    private static final String SUFFIX          = ".java";
+    private static final String PARAM = "Param";
+    private static final String NULL = "null";
+    private static final String TAG_DEFAULT = "KLog";
+    private static final String SUFFIX = ".java";
 
     public static final int JSON_INDENT = 4;
-    public static final int V           = 0x1;
+    public static final int V = 0x1;
 
     public static final int D = 0x2;
     public static final int I = 0x3;
@@ -47,14 +48,14 @@ public class LogUtils {
     public static final int A = 0x6;
 
     private static final int JSON = 0x7;
-    private static final int XML  = 0x8;
+    private static final int XML = 0x8;
 
     private static final int STACK_TRACE_INDEX = 5;
 
-    private static String  mGlobalTag;                  // 全局tag
+    private static String mGlobalTag;                  // 全局tag
     private static boolean mIsGlobalTagEmpty = true;    // 全局tag是否为空
-    private static int     mLogLevel         = A;       // 日志等级
-    private static boolean IS_SHOW_LOG       = true;    // 是否显示Log
+    private static int mLogLevel = A;       // 日志等级
+    private static boolean IS_SHOW_LOG = true;    // 是否显示Log
 
     public static void init(boolean isShowLog) {
         IS_SHOW_LOG = isShowLog;
@@ -270,6 +271,91 @@ public class LogUtils {
             Object object = objects[0];
             return object == null ? NULL : object.toString();
         }
+    }
+
+    public static void printStackTrace(Throwable e) {
+        printStackTrace(E, "Exception", e);
+    }
+
+    public static void printStackTrace(int type, String tag, Throwable e) {
+        StringBuilder sb = new StringBuilder();
+        appendStack(sb);
+        sb.append(e.getMessage());
+        sb.append("\n");
+        if (e != null) {
+            sb.append(Log.getStackTraceString(e)).append("\n");
+        }
+
+        printLog(type, tag, sb.toString());
+    }
+
+    private static final int START_STACK_INDEX = 5;
+    private static final int PRINT_STACK_MAX_COUNT = 2;
+
+    private static void appendStack(StringBuilder sb) {
+        if (PRINT_STACK_MAX_COUNT <= 0) {
+            return;
+        }
+
+        StackTraceElement[] stacks = Thread.currentThread().getStackTrace();
+        if (stacks != null && stacks.length > START_STACK_INDEX) {
+            int lastIndex = Math.min(stacks.length - 1, START_STACK_INDEX + PRINT_STACK_MAX_COUNT);
+            for (int i = lastIndex; i > START_STACK_INDEX; i--) {
+                if (stacks[i] == null) {
+                    continue;
+                }
+
+                String className = stacks[i].getClassName();
+                if (className != null) {
+                    int dotIndx = className.lastIndexOf('.');
+                    if (dotIndx > 0) {
+                        className = className.substring(dotIndx + 1);
+                    }
+                }
+
+                sb.append(className);
+                sb.append('(');
+                sb.append(stacks[i].getLineNumber());
+                sb.append(")");
+                sb.append("->");
+            }
+
+            String className = stacks[START_STACK_INDEX].getClassName();
+            if (className != null) {
+                int dotIndx = className.lastIndexOf('.');
+                if (dotIndx > 0) {
+                    className = className.substring(dotIndx + 1);
+                }
+            }
+
+            sb.append(className);
+            sb.append('#');
+            sb.append(stacks[START_STACK_INDEX].getMethodName());
+            sb.append('(');
+            sb.append(stacks[START_STACK_INDEX].getLineNumber());
+            sb.append(")");
+            sb.append(": ");
+        }
+    }
+
+    public static void stackV() {
+        // todo
+    }
+
+    public static void stackD() {
+        // todo
+    }
+
+    public static void stackI() {
+        // todo
+    }
+
+    public static void stackW() {
+        // todo
+    }
+
+    public static void stackE() {
+        // todo
     }
 
 }

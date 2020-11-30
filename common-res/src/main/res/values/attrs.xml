@@ -40,7 +40,7 @@
         <attr name="extraItemSpace" format="dimension" />
         <attr name="fixedItemSpace" format="dimension" />
         <attr name="retainStart" format="dimension" />
-        <attr name="showItemCount" format="float" />
+        <attr name="showItemCount" format="integer" />
         <attr name="itemSpace" format="dimension" />
         <attr name="rightItemOffset" format="dimension" />
         <attr name="itemWidth" format="dimension" />
