@@ -17,7 +17,7 @@ public class VideoSplashActivity extends BaseActivity {
 
     @Override
     protected int getContentViewLayoutID() {
-        return R.layout.vide;
+        return R.layout.video_activity_splash;
     }
 
     @Override
