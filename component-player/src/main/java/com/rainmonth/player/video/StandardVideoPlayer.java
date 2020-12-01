@@ -22,8 +22,8 @@ import com.rainmonth.player.listener.GSYVideoShotSaveListener;
 import com.rainmonth.player.utils.Debugger;
 import com.rainmonth.player.utils.NetworkUtils;
 
-import com.rainmonth.player.video.base.GSYBaseVideoPlayer;
-import com.rainmonth.player.video.base.GSYVideoPlayer;
+import com.rainmonth.player.video.base.BaseVideoPlayer;
+import com.rainmonth.player.video.base.VideoPlayer;
 import com.rainmonth.player.view.PlayerDownloadBtn;
 import com.rainmonth.player.view.PlayerPlayBtn;
 
@@ -32,7 +32,7 @@ import java.io.File;
 /**
  * 标准播放器，继承之后实现一些ui显示效果，如显示／隐藏ui，播放按键等
  */
-public class StandardGSYVideoPlayer extends GSYVideoPlayer {
+public class StandardVideoPlayer extends VideoPlayer {
 
     //亮度dialog
     protected Dialog mBrightnessDialog;
@@ -78,15 +78,15 @@ public class StandardGSYVideoPlayer extends GSYVideoPlayer {
     /**
      * 1.5.0开始加入，如果需要不同布局区分功能，需要重载
      */
-    public StandardGSYVideoPlayer(Context context, Boolean fullFlag) {
+    public StandardVideoPlayer(Context context, Boolean fullFlag) {
         super(context, fullFlag);
     }
 
-    public StandardGSYVideoPlayer(Context context) {
+    public StandardVideoPlayer(Context context) {
         super(context);
     }
 
-    public StandardGSYVideoPlayer(Context context, AttributeSet attrs) {
+    public StandardVideoPlayer(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
@@ -128,7 +128,7 @@ public class StandardGSYVideoPlayer extends GSYVideoPlayer {
     public void startPlayLogic() {
         if (mVideoAllCallBack != null) {
             Debugger.printfLog("onClickStartThumb");
-            mVideoAllCallBack.onClickStartThumb(mOriginUrl, mTitle, StandardGSYVideoPlayer.this);
+            mVideoAllCallBack.onClickStartThumb(mOriginUrl, mTitle, StandardVideoPlayer.this);
         }
         prepareVideo();
         startDismissControlViewTimer();
@@ -330,10 +330,10 @@ public class StandardGSYVideoPlayer extends GSYVideoPlayer {
     }
 
     @Override
-    protected void cloneParams(GSYBaseVideoPlayer from, GSYBaseVideoPlayer to) {
+    protected void cloneParams(BaseVideoPlayer from, BaseVideoPlayer to) {
         super.cloneParams(from, to);
-        StandardGSYVideoPlayer sf = (StandardGSYVideoPlayer) from;
-        StandardGSYVideoPlayer st = (StandardGSYVideoPlayer) to;
+        StandardVideoPlayer sf = (StandardVideoPlayer) from;
+        StandardVideoPlayer st = (StandardVideoPlayer) to;
         if (st.mProgressBar != null && sf.mProgressBar != null) {
             st.mProgressBar.setProgress(sf.mProgressBar.getProgress());
             st.mProgressBar.setSecondaryProgress(sf.mProgressBar.getSecondaryProgress());
@@ -355,10 +355,10 @@ public class StandardGSYVideoPlayer extends GSYVideoPlayer {
      * @return
      */
     @Override
-    public GSYBaseVideoPlayer startWindowFullscreen(Context context, boolean actionBar, boolean statusBar) {
-        GSYBaseVideoPlayer gsyBaseVideoPlayer = super.startWindowFullscreen(context, actionBar, statusBar);
+    public BaseVideoPlayer startWindowFullscreen(Context context, boolean actionBar, boolean statusBar) {
+        BaseVideoPlayer gsyBaseVideoPlayer = super.startWindowFullscreen(context, actionBar, statusBar);
         if (gsyBaseVideoPlayer != null) {
-            StandardGSYVideoPlayer gsyVideoPlayer = (StandardGSYVideoPlayer) gsyBaseVideoPlayer;
+            StandardVideoPlayer gsyVideoPlayer = (StandardVideoPlayer) gsyBaseVideoPlayer;
             gsyVideoPlayer.setLockClickListener(mLockClickListener);
             gsyVideoPlayer.setNeedLockFull(isNeedLockFull());
             initFullUI(gsyVideoPlayer);
@@ -762,7 +762,7 @@ public class StandardGSYVideoPlayer extends GSYVideoPlayer {
     /**
      * 全屏的UI逻辑
      */
-    private void initFullUI(StandardGSYVideoPlayer standardGSYVideoPlayer) {
+    private void initFullUI(StandardVideoPlayer standardGSYVideoPlayer) {
 
         if (mBottomProgressDrawable != null) {
             standardGSYVideoPlayer.setBottomProgressBarDrawable(mBottomProgressDrawable);

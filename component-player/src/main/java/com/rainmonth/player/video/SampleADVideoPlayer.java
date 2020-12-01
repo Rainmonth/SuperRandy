@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.rainmonth.player.R;
 import com.rainmonth.player.model.GSYVideoModel;
 import com.rainmonth.player.utils.CommonUtil;
-import com.rainmonth.player.video.base.GSYBaseVideoPlayer;
+import com.rainmonth.player.video.base.BaseVideoPlayer;
 
 
 import java.io.File;
@@ -24,7 +24,7 @@ import java.util.Map;
  * 只支持每个片头广告播放的类
  * 其实就是根据实体，判断播放列表中哪个是广告，哪个不是，从而处理不同的UI显示效果
  */
-public class GSYSampleADVideoPlayer extends ListGSYVideoPlayer {
+public class SampleADVideoPlayer extends ListVideoPlayer {
 
     protected View mJumpAd;
 
@@ -36,15 +36,15 @@ public class GSYSampleADVideoPlayer extends ListGSYVideoPlayer {
 
     protected boolean isFirstPrepared = false;
 
-    public GSYSampleADVideoPlayer(Context context, Boolean fullFlag) {
+    public SampleADVideoPlayer(Context context, Boolean fullFlag) {
         super(context, fullFlag);
     }
 
-    public GSYSampleADVideoPlayer(Context context) {
+    public SampleADVideoPlayer(Context context) {
         super(context);
     }
 
-    public GSYSampleADVideoPlayer(Context context, AttributeSet attrs) {
+    public SampleADVideoPlayer(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
@@ -232,10 +232,10 @@ public class GSYSampleADVideoPlayer extends ListGSYVideoPlayer {
     }
 
     @Override
-    protected void cloneParams(GSYBaseVideoPlayer from, GSYBaseVideoPlayer to) {
+    protected void cloneParams(BaseVideoPlayer from, BaseVideoPlayer to) {
         super.cloneParams(from, to);
-        GSYSampleADVideoPlayer sf = (GSYSampleADVideoPlayer) from;
-        GSYSampleADVideoPlayer st = (GSYSampleADVideoPlayer) to;
+        SampleADVideoPlayer sf = (SampleADVideoPlayer) from;
+        SampleADVideoPlayer st = (SampleADVideoPlayer) to;
         st.isAdModel = sf.isAdModel;
         st.isFirstPrepared = sf.isFirstPrepared;
         st.changeAdUIState();

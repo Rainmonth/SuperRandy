@@ -23,7 +23,7 @@ import com.rainmonth.player.utils.MeasureHelper;
 /**
  * 绘制View
  */
-public abstract class GSYTextureRenderView extends FrameLayout implements IGSYSurfaceListener, MeasureHelper.MeasureFormVideoParamsListener {
+public abstract class TextureRenderView extends FrameLayout implements IGSYSurfaceListener, MeasureHelper.MeasureFormVideoParamsListener {
 
     //native绘制
     protected Surface mSurface;
@@ -52,15 +52,15 @@ public abstract class GSYTextureRenderView extends FrameLayout implements IGSYSu
     //GL的布局模式
     protected int mMode = GSYVideoGLView.MODE_LAYOUT_SIZE;
 
-    public GSYTextureRenderView(@NonNull Context context) {
+    public TextureRenderView(@NonNull Context context) {
         super(context);
     }
 
-    public GSYTextureRenderView(@NonNull Context context, @Nullable AttributeSet attrs) {
+    public TextureRenderView(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public GSYTextureRenderView(@NonNull Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr) {
+    public TextureRenderView(@NonNull Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 

@@ -10,7 +10,7 @@ import android.view.OrientationEventListener;
 import android.view.Surface;
 
 
-import com.rainmonth.player.video.base.GSYBaseVideoPlayer;
+import com.rainmonth.player.video.base.BaseVideoPlayer;
 
 import java.lang.ref.WeakReference;
 
@@ -24,7 +24,7 @@ public class OrientationUtils {
     private static final int LAND_TYPE_REVERSE = 2;
 
     private WeakReference<Activity> mActivity;
-    private GSYBaseVideoPlayer mVideoPlayer;
+    private BaseVideoPlayer mVideoPlayer;
     private OrientationEventListener mOrientationEventListener;
     private OrientationOption mOrientationOption;
 
@@ -46,11 +46,11 @@ public class OrientationUtils {
      * @param activity
      * @param gsyVideoPlayer
      */
-    public OrientationUtils(Activity activity, GSYBaseVideoPlayer gsyVideoPlayer) {
+    public OrientationUtils(Activity activity, BaseVideoPlayer gsyVideoPlayer) {
         this(activity, gsyVideoPlayer, null);
     }
 
-    public OrientationUtils(Activity activity, GSYBaseVideoPlayer gsyVideoPlayer, OrientationOption orientationOption) {
+    public OrientationUtils(Activity activity, BaseVideoPlayer gsyVideoPlayer, OrientationOption orientationOption) {
         this.mActivity = new WeakReference(activity);
         this.mVideoPlayer = gsyVideoPlayer;
         if (orientationOption == null) {

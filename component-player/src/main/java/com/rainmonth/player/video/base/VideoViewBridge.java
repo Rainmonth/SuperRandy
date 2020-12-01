@@ -12,7 +12,7 @@ import java.util.Map;
 /**
  * Manager 与 View 之间的接口
  */
-public interface GSYVideoViewBridge {
+public interface VideoViewBridge {
 
     GSYMediaPlayerListener listener();
 

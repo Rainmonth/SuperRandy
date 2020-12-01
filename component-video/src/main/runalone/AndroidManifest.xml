@@ -22,21 +22,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".VideoSplashActivity" android:theme="@style/VideoSplashTheme">
+
+        <activity
+            android:name="com.rainmonth.video.VideoSplashActivity"
+            android:theme="@style/VideoSplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".GlobalVideoPlayerActivity" />
-        <activity android:name=".ConfigVideoPlayActivity" />
-        <activity android:name=".DetailVideoPlayActivity" />
-        <activity android:name=".DyVideoPlayActivity" />
-        <activity android:name=".FloatVideoPlayerActivity" />
-        <activity android:name=".ListFocusVideoPlayActivity" />
-        <activity android:name=".VideoMainActivity" />
-        <activity android:name=".VideoPlayerActivity" />
     </application>
 
 </manifest>

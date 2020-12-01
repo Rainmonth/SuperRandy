@@ -9,17 +9,17 @@ import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.rainmonth.player.GSYVideoADManager;
+import com.rainmonth.player.VideoADManager;
 import com.rainmonth.player.R;
 import com.rainmonth.player.utils.CommonUtil;
-import com.rainmonth.player.video.base.GSYBaseVideoPlayer;
-import com.rainmonth.player.video.base.GSYVideoViewBridge;
+import com.rainmonth.player.video.base.BaseVideoPlayer;
+import com.rainmonth.player.video.base.VideoViewBridge;
 
 
 /**
  * 带广告的视频播放
  */
-public class GSYADVideoPlayer extends StandardGSYVideoPlayer {
+public class GSYADVideoPlayer extends StandardVideoPlayer {
 
     protected View mJumpAd;
 
@@ -62,29 +62,29 @@ public class GSYADVideoPlayer extends StandardGSYVideoPlayer {
     }
 
     @Override
-    public GSYVideoViewBridge getGSYVideoManager() {
-        GSYVideoADManager.instance().initContext(getContext().getApplicationContext());
-        return GSYVideoADManager.instance();
+    public VideoViewBridge getGSYVideoManager() {
+        VideoADManager.instance().initContext(getContext().getApplicationContext());
+        return VideoADManager.instance();
     }
 
     @Override
     protected boolean backFromFull(Context context) {
-        return GSYVideoADManager.backFromWindowFull(context);
+        return VideoADManager.backFromWindowFull(context);
     }
 
     @Override
     protected void releaseVideos() {
-        GSYVideoADManager.releaseAllVideos();
+        VideoADManager.releaseAllVideos();
     }
 
     @Override
     protected int getFullId() {
-        return GSYVideoADManager.FULLSCREEN_ID;
+        return VideoADManager.FULLSCREEN_ID;
     }
 
     @Override
     protected int getSmallId() {
-        return GSYVideoADManager.SMALL_ID;
+        return VideoADManager.SMALL_ID;
     }
 
     @Override
@@ -189,7 +189,7 @@ public class GSYADVideoPlayer extends StandardGSYVideoPlayer {
     }
 
     @Override
-    protected void cloneParams(GSYBaseVideoPlayer from, GSYBaseVideoPlayer to) {
+    protected void cloneParams(BaseVideoPlayer from, BaseVideoPlayer to) {
         super.cloneParams(from, to);
         GSYADVideoPlayer sf = (GSYADVideoPlayer) from;
         GSYADVideoPlayer st = (GSYADVideoPlayer) to;

@@ -1,4 +1,4 @@
-package com.rainmonth.video;
+package com.rainmonth.player.activity;
 
 import android.net.Uri;
 
@@ -29,6 +29,7 @@ import com.google.android.exoplayer2.util.Util;
 import com.rainmonth.common.base.BaseActivity;
 import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.common.utils.log.LogUtils;
+import com.rainmonth.player.R;
 
 import java.util.Arrays;
 import java.util.List;
@@ -66,7 +67,7 @@ public class VideoPlayerActivity extends BaseActivity implements PlayerControlVi
 
     @Override
     protected int getContentViewLayoutID() {
-        return R.layout.video_activity_video_player;
+        return R.layout.player_activity_player_player;
     }
 
     @Override
@@ -124,7 +125,7 @@ public class VideoPlayerActivity extends BaseActivity implements PlayerControlVi
     }
 
     private MediaSource getMediaSource() {
-        List<String> mediaList = Arrays.asList(getResources().getStringArray(R.array.video_media_source_list));
+        List<String> mediaList = Arrays.asList(getResources().getStringArray(R.array.player_media_source_list));
 //        Uri uri = Uri.parse("https://storage.googleapis.com/exoplayer-test-media-1/gen-3/screens/dash-vod-single-segment/audio-141.mp4");
         Uri uri = Uri.parse("https://storage.googleapis.com/exoplayer-test-media-1/gen-3/screens/dash-vod-single-segment/video-137.mp4");
         DataSource.Factory dataSource = new DefaultDataSourceFactory(mContext, Util.getUserAgent(mContext, mContext.getPackageName()));

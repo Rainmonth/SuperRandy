@@ -9,14 +9,14 @@ import android.view.ViewGroup;
 import android.view.Window;
 
 import com.rainmonth.player.utils.CommonUtil;
-import com.rainmonth.player.video.base.GSYVideoPlayer;
+import com.rainmonth.player.video.base.VideoPlayer;
 
 import static com.rainmonth.player.utils.CommonUtil.hideNavKey;
 
 /**
  * 视频管理，单例
  */
-public class GSYVideoADManager extends GSYVideoBaseManager {
+public class VideoADManager extends VideoBaseManager {
 
     public static final int SMALL_ID = R.id.player_ad_small_id;
 
@@ -25,19 +25,19 @@ public class GSYVideoADManager extends GSYVideoBaseManager {
     public static String TAG = "GSYVideoADManager";
 
     @SuppressLint("StaticFieldLeak")
-    private static GSYVideoADManager videoManager;
+    private static VideoADManager videoManager;
 
 
-    private GSYVideoADManager() {
+    private VideoADManager() {
         init();
     }
 
     /**
      * 单例管理器
      */
-    public static synchronized GSYVideoADManager instance() {
+    public static synchronized VideoADManager instance() {
         if (videoManager == null) {
-            videoManager = new GSYVideoADManager();
+            videoManager = new VideoADManager();
         }
         return videoManager;
     }
@@ -55,8 +55,8 @@ public class GSYVideoADManager extends GSYVideoBaseManager {
         if (oldF != null) {
             backFrom = true;
             hideNavKey(context);
-            if (GSYVideoADManager.instance().lastListener() != null) {
-                GSYVideoADManager.instance().lastListener().onBackFullscreen();
+            if (VideoADManager.instance().lastListener() != null) {
+                VideoADManager.instance().lastListener().onBackFullscreen();
             }
         }
         return backFrom;
@@ -66,10 +66,10 @@ public class GSYVideoADManager extends GSYVideoBaseManager {
      * 页面销毁了记得调用是否所有的video
      */
     public static void releaseAllVideos() {
-        if (GSYVideoADManager.instance().listener() != null) {
-            GSYVideoADManager.instance().listener().onCompletion();
+        if (VideoADManager.instance().listener() != null) {
+            VideoADManager.instance().listener().onCompletion();
         }
-        GSYVideoADManager.instance().releaseMediaPlayer();
+        VideoADManager.instance().releaseMediaPlayer();
     }
 
 
@@ -77,8 +77,8 @@ public class GSYVideoADManager extends GSYVideoBaseManager {
      * 暂停播放
      */
     public static void onPause() {
-        if (GSYVideoADManager.instance().listener() != null) {
-            GSYVideoADManager.instance().listener().onVideoPause();
+        if (VideoADManager.instance().listener() != null) {
+            VideoADManager.instance().listener().onVideoPause();
         }
     }
 
@@ -86,8 +86,8 @@ public class GSYVideoADManager extends GSYVideoBaseManager {
      * 恢复播放
      */
     public static void onResume() {
-        if (GSYVideoADManager.instance().listener() != null) {
-            GSYVideoADManager.instance().listener().onVideoResume();
+        if (VideoADManager.instance().listener() != null) {
+            VideoADManager.instance().listener().onVideoResume();
         }
     }
 
@@ -98,8 +98,8 @@ public class GSYVideoADManager extends GSYVideoBaseManager {
      * @param seek 是否产生seek动作,直播设置为false
      */
     public static void onResume(boolean seek) {
-        if (GSYVideoManager.instance().listener() != null) {
-            GSYVideoManager.instance().listener().onVideoResume(seek);
+        if (VideoManager.instance().listener() != null) {
+            VideoManager.instance().listener().onVideoResume(seek);
         }
     }
 
@@ -112,9 +112,9 @@ public class GSYVideoADManager extends GSYVideoBaseManager {
     public static boolean isFullState(Activity activity) {
         ViewGroup vp = (ViewGroup) (CommonUtil.scanForActivity(activity)).findViewById(Window.ID_ANDROID_CONTENT);
         final View full = vp.findViewById(FULLSCREEN_ID);
-        GSYVideoPlayer gsyVideoPlayer = null;
+        VideoPlayer gsyVideoPlayer = null;
         if (full != null) {
-            gsyVideoPlayer = (GSYVideoPlayer) full;
+            gsyVideoPlayer = (VideoPlayer) full;
         }
         return gsyVideoPlayer != null;
     }

@@ -10,17 +10,17 @@ import com.rainmonth.player.R;
 /**
  * 使用正常播放按键和loading的播放器
  */
-public class NormalGSYVideoPlayer extends StandardGSYVideoPlayer {
+public class NormalVideoPlayer extends StandardVideoPlayer {
 
-    public NormalGSYVideoPlayer(Context context, Boolean fullFlag) {
+    public NormalVideoPlayer(Context context, Boolean fullFlag) {
         super(context, fullFlag);
     }
 
-    public NormalGSYVideoPlayer(Context context) {
+    public NormalVideoPlayer(Context context) {
         super(context);
     }
 
-    public NormalGSYVideoPlayer(Context context, AttributeSet attrs) {
+    public NormalVideoPlayer(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 

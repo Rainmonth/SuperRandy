@@ -8,14 +8,14 @@ import com.rainmonth.player.listener.GSYSampleCallBack;
 import com.rainmonth.player.utils.OrientationOption;
 import com.rainmonth.player.utils.OrientationUtils;
 import com.rainmonth.player.video.GSYADVideoPlayer;
-import com.rainmonth.player.video.base.GSYBaseVideoPlayer;
-import com.rainmonth.player.video.base.GSYVideoPlayer;
-import com.rainmonth.player.video.base.GSYVideoView;
+import com.rainmonth.player.video.base.BaseVideoPlayer;
+import com.rainmonth.player.video.base.VideoPlayer;
+import com.rainmonth.player.video.base.VideoView;
 
 /**
  * 详情AD模式播放页面基础类
  */
-public abstract class GSYBaseADActivityDetail<T extends GSYBaseVideoPlayer, R extends GSYADVideoPlayer> extends GSYBaseActivityDetail<T> {
+public abstract class GSYBaseADActivityDetail<T extends BaseVideoPlayer, R extends GSYADVideoPlayer> extends GSYBaseActivityDetail<T> {
 
     protected OrientationUtils mADOrientationUtils;
 
@@ -103,7 +103,7 @@ public abstract class GSYBaseADActivityDetail<T extends GSYBaseVideoPlayer, R ex
         if (mADOrientationUtils != null) {
             mADOrientationUtils.backToProtVideo();
         }
-        if (GSYVideoADManager.backFromWindowFull(this)) {
+        if (VideoADManager.backFromWindowFull(this)) {
             return;
         }
         super.onBackPressed();
@@ -112,19 +112,19 @@ public abstract class GSYBaseADActivityDetail<T extends GSYBaseVideoPlayer, R ex
     @Override
     protected void onPause() {
         super.onPause();
-        GSYVideoADManager.onPause();
+        VideoADManager.onPause();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        GSYVideoADManager.onResume();
+        VideoADManager.onResume();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        GSYVideoADManager.releaseAllVideos();
+        VideoADManager.releaseAllVideos();
         if (mADOrientationUtils != null)
             mADOrientationUtils.releaseListener();
     }
@@ -164,7 +164,7 @@ public abstract class GSYBaseADActivityDetail<T extends GSYBaseVideoPlayer, R ex
     public void onEnterFullscreen(String url, Object... objects) {
         super.onEnterFullscreen(url, objects);
         //隐藏调全屏对象的返回按键
-        GSYVideoPlayer gsyVideoPlayer = (GSYVideoPlayer) objects[1];
+        VideoPlayer gsyVideoPlayer = (VideoPlayer) objects[1];
         gsyVideoPlayer.getBackButton().setVisibility(View.GONE);
     }
 
@@ -180,8 +180,8 @@ public abstract class GSYBaseADActivityDetail<T extends GSYBaseVideoPlayer, R ex
 
     protected boolean isADStarted() {
         return getGSYADVideoPlayer().getCurrentPlayer().getCurrentState() >= 0 &&
-                getGSYADVideoPlayer().getCurrentPlayer().getCurrentState() != GSYVideoView.CURRENT_STATE_NORMAL
-                && getGSYADVideoPlayer().getCurrentPlayer().getCurrentState() != GSYVideoView.CURRENT_STATE_AUTO_COMPLETE;
+                getGSYADVideoPlayer().getCurrentPlayer().getCurrentState() != VideoView.CURRENT_STATE_NORMAL
+                && getGSYADVideoPlayer().getCurrentPlayer().getCurrentState() != VideoView.CURRENT_STATE_AUTO_COMPLETE;
     }
 
     /**

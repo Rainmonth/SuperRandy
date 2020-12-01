@@ -20,6 +20,7 @@ import androidx.annotation.AttrRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.rainmonth.common.utils.log.LogUtils;
 import com.rainmonth.player.R;
 import com.rainmonth.player.listener.GSYMediaPlayerListener;
 import com.rainmonth.player.listener.VideoAllCallBack;
@@ -36,7 +37,7 @@ import static com.rainmonth.player.utils.CommonUtil.getTextSpeed;
 /**
  * 视频回调与状态处理等相关层
  */
-public abstract class GSYVideoView extends GSYTextureRenderView implements GSYMediaPlayerListener {
+public abstract class VideoView extends TextureRenderView implements GSYMediaPlayerListener {
 
     //正常
     public static final int CURRENT_STATE_NORMAL = 0;
@@ -155,22 +156,22 @@ public abstract class GSYVideoView extends GSYTextureRenderView implements GSYMe
     //网络监听
     protected NetInfoModule mNetInfoModule;
 
-    public GSYVideoView(@NonNull Context context) {
+    public VideoView(@NonNull Context context) {
         super(context);
         init(context);
     }
 
-    public GSYVideoView(@NonNull Context context, @Nullable AttributeSet attrs) {
+    public VideoView(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         init(context);
     }
 
-    public GSYVideoView(@NonNull Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr) {
+    public VideoView(@NonNull Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context);
     }
 
-    public GSYVideoView(Context context, Boolean fullFlag) {
+    public VideoView(Context context, Boolean fullFlag) {
         super(context);
         mIfCurrentIsFullscreen = fullFlag;
         init(context);
@@ -206,7 +207,7 @@ public abstract class GSYVideoView extends GSYTextureRenderView implements GSYMe
                 mFullPauseBitmap = null;
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.printStackTrace(e);
         }
     }
 
@@ -247,7 +248,7 @@ public abstract class GSYVideoView extends GSYTextureRenderView implements GSYMe
             try {
                 initCover();
             } catch (Exception e) {
-                e.printStackTrace();
+                LogUtils.printStackTrace(e);
                 mFullPauseBitmap = null;
             }
         }
@@ -288,10 +289,10 @@ public abstract class GSYVideoView extends GSYTextureRenderView implements GSYMe
                         "****  Attention  ***\n" +
                         "*Please remove GSYImageCover from Layout in this Version\n" +
                         "********************\n");
-                e.printStackTrace();
+                LogUtils.printStackTrace(e);
                 throw new InflateException("该版本需要清除布局文件中的GSYImageCover，please remove GSYImageCover from your layout");
             } else {
-                e.printStackTrace();
+                LogUtils.printStackTrace(e);
             }
         }
     }
@@ -335,7 +336,7 @@ public abstract class GSYVideoView extends GSYTextureRenderView implements GSYMe
                 ((Activity) mContext).getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.printStackTrace(e);
         }
         mBackUpPlayingBufferState = -1;
         getGSYVideoManager().prepare(mUrl, (mMapHeadData == null) ? new HashMap<String, String>() : mMapHeadData, mLooping, mSpeed, mCache, mCachePath, mOverrideExtension);
@@ -377,10 +378,10 @@ public abstract class GSYVideoView extends GSYTextureRenderView implements GSYMe
     protected void onLossAudio() {
         new Handler(Looper.getMainLooper()).post(new Runnable() {
             public void run() {
-                if (GSYVideoView.this.mReleaseWhenLossAudio) {
-                    GSYVideoView.this.releaseVideos();
+                if (VideoView.this.mReleaseWhenLossAudio) {
+                    VideoView.this.releaseVideos();
                 } else {
-                    GSYVideoView.this.onVideoPause();
+                    VideoView.this.onVideoPause();
                 }
 
             }
@@ -393,8 +394,8 @@ public abstract class GSYVideoView extends GSYTextureRenderView implements GSYMe
     protected void onLossTransientAudio() {
         try {
             this.onVideoPause();
-        } catch (Exception var2) {
-            var2.printStackTrace();
+        } catch (Exception e) {
+            LogUtils.printStackTrace(e);
         }
 
     }
@@ -505,7 +506,7 @@ public abstract class GSYVideoView extends GSYTextureRenderView implements GSYMe
                     getGSYVideoManager().pause();
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.printStackTrace(e);
         }
     }
 
@@ -539,7 +540,7 @@ public abstract class GSYVideoView extends GSYTextureRenderView implements GSYMe
                     mCurrentPosition = 0;
                 }
             } catch (Exception e) {
-                e.printStackTrace();
+                LogUtils.printStackTrace(e);
             }
         }
     }
@@ -648,7 +649,7 @@ public abstract class GSYVideoView extends GSYTextureRenderView implements GSYMe
             try {
                 ((Activity) mContext).getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
             } catch (Exception e) {
-                e.printStackTrace();
+                LogUtils.printStackTrace(e);
             }
         }
 
@@ -775,7 +776,7 @@ public abstract class GSYVideoView extends GSYTextureRenderView implements GSYMe
         try {
             duration = (int) getGSYVideoManager().getDuration();
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.printStackTrace(e);
             return duration;
         }
         return duration;
@@ -813,7 +814,7 @@ public abstract class GSYVideoView extends GSYTextureRenderView implements GSYMe
                 mSeekOnStart = 0;
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.printStackTrace(e);
         }
 
         addTextureView();
@@ -910,7 +911,7 @@ public abstract class GSYVideoView extends GSYTextureRenderView implements GSYMe
     /**
      * 获取管理器桥接的实现
      */
-    public abstract GSYVideoViewBridge getGSYVideoManager();
+    public abstract VideoViewBridge getGSYVideoManager();
 
     /**
      * 当前UI
@@ -1067,7 +1068,7 @@ public abstract class GSYVideoView extends GSYTextureRenderView implements GSYMe
     /**
      * 播放中生效的播放数据
      *
-     * @param speed
+     * @param speed      播放速度
      * @param soundTouch
      */
     public void setSpeedPlaying(float speed, boolean soundTouch) {

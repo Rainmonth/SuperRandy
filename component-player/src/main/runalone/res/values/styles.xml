@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="PlayerAppTheme" parent="BaseTheme">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="PlayerSplashTheme" parent="SplashTheme">
+        <item name="android:windowBackground">@drawable/player_activity_splash_bg</item>
+    </style>
+</resources>

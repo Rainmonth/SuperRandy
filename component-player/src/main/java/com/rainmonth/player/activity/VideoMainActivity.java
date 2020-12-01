@@ -1,10 +1,11 @@
-package com.rainmonth.video;
+package com.rainmonth.player.activity;
 
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,6 +18,7 @@ import com.rainmonth.common.bean.ExampleBean;
 import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.common.utils.log.LogUtils;
 import com.rainmonth.componentbase.ServiceFactory;
+import com.rainmonth.player.R;
 import com.rainmonth.router.RouterConstant;
 
 import java.util.ArrayList;
@@ -30,7 +32,7 @@ import java.util.List;
  */
 @Route(path = RouterConstant.PATH_VIDEO_HOME)
 public class VideoMainActivity extends BaseActivity {
-    RecyclerView                                  rvAudioVideoExample;
+    RecyclerView rvAudioVideoExample;
     BaseQuickAdapter<ExampleBean, BaseViewHolder> exampleAdapter;
 
     @Override
@@ -45,7 +47,7 @@ public class VideoMainActivity extends BaseActivity {
 
     @Override
     protected int getContentViewLayoutID() {
-        return R.layout.video_activity_video_main;
+        return R.layout.player_activity_player_main;
     }
 
     @Override
@@ -54,12 +56,12 @@ public class VideoMainActivity extends BaseActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
         DividerItemDecoration itemDecoration = new DividerItemDecoration(mContext, LinearLayout.HORIZONTAL);
         // todo 这个目前无效，稍后查找原因
-        itemDecoration.setDrawable(getResources().getDrawable(R.drawable.video_example_list_item_decoration_bg));
+//        itemDecoration.setDrawable(getResources().getDrawable(R.drawable.video_example_list_item_decoration_bg));
         rvAudioVideoExample.addItemDecoration(itemDecoration);
         rvAudioVideoExample.setLayoutManager(layoutManager);
-        exampleAdapter = new BaseQuickAdapter<ExampleBean, BaseViewHolder>(R.layout.video_example_list_item_view) {
+        exampleAdapter = new BaseQuickAdapter<ExampleBean, BaseViewHolder>(R.layout.player_example_list_item_view) {
             @Override
-            protected void convert(BaseViewHolder helper, ExampleBean item) {
+            protected void convert(@NonNull BaseViewHolder helper, ExampleBean item) {
                 TextView tvExName = helper.getView(R.id.tv_example_name);
                 TextView tvExDes = helper.getView(R.id.tv_example_des);
                 TextView tvStatus = helper.getView(R.id.tv_status);

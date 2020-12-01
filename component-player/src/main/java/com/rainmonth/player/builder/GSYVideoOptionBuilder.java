@@ -9,8 +9,8 @@ import com.rainmonth.player.listener.LockClickListener;
 import com.rainmonth.player.listener.VideoAllCallBack;
 import com.rainmonth.player.render.effect.NoEffect;
 import com.rainmonth.player.render.view.GSYVideoGLView;
-import com.rainmonth.player.video.StandardGSYVideoPlayer;
-import com.rainmonth.player.video.base.GSYBaseVideoPlayer;
+import com.rainmonth.player.video.StandardVideoPlayer;
+import com.rainmonth.player.video.base.BaseVideoPlayer;
 
 import java.io.File;
 import java.util.Map;
@@ -586,7 +586,7 @@ public class GSYVideoOptionBuilder {
         return this;
     }
 
-    public void build(StandardGSYVideoPlayer gsyVideoPlayer) {
+    public void build(StandardVideoPlayer gsyVideoPlayer) {
         if (mBottomShowProgressDrawable != null && mBottomShowProgressThumbDrawable != null) {
             gsyVideoPlayer.setBottomShowProgressBarDrawable(mBottomShowProgressDrawable, mBottomShowProgressThumbDrawable);
         }
@@ -605,10 +605,10 @@ public class GSYVideoOptionBuilder {
             gsyVideoPlayer.setDialogProgressColor(mDialogProgressHighLightColor, mDialogProgressNormalColor);
         }
 
-        build((GSYBaseVideoPlayer) gsyVideoPlayer);
+        build((BaseVideoPlayer) gsyVideoPlayer);
     }
 
-    public void build(GSYBaseVideoPlayer gsyVideoPlayer) {
+    public void build(BaseVideoPlayer gsyVideoPlayer) {
         gsyVideoPlayer.setPlayTag(mPlayTag);
         gsyVideoPlayer.setPlayPosition(mPlayPosition);
 

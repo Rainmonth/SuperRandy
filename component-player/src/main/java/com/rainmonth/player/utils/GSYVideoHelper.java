@@ -19,9 +19,9 @@ import com.rainmonth.player.listener.GSYVideoProgressListener;
 import com.rainmonth.player.listener.LockClickListener;
 import com.rainmonth.player.listener.VideoAllCallBack;
 import com.rainmonth.player.render.view.GSYVideoGLView;
-import com.rainmonth.player.video.StandardGSYVideoPlayer;
-import com.rainmonth.player.video.base.GSYBaseVideoPlayer;
-import com.rainmonth.player.video.base.GSYVideoPlayer;
+import com.rainmonth.player.video.StandardVideoPlayer;
+import com.rainmonth.player.video.base.BaseVideoPlayer;
+import com.rainmonth.player.video.base.VideoPlayer;
 
 import java.io.File;
 import java.util.Map;
@@ -44,7 +44,7 @@ public class GSYVideoHelper {
     /**
      * 播放器
      */
-    private StandardGSYVideoPlayer mGsyVideoPlayer;
+    private StandardVideoPlayer mGsyVideoPlayer;
     /**
      * 全屏承载布局
      */
@@ -108,10 +108,10 @@ public class GSYVideoHelper {
 
 
     public GSYVideoHelper(Context context) {
-        this(context, new StandardGSYVideoPlayer(context));
+        this(context, new StandardVideoPlayer(context));
     }
 
-    public GSYVideoHelper(Context context, StandardGSYVideoPlayer player) {
+    public GSYVideoHelper(Context context, StandardVideoPlayer player) {
         mGsyVideoPlayer = player;
         this.mContext = context;
         this.mWindowViewContainer = (ViewGroup) (CommonUtil.scanForActivity(context)).findViewById(Window.ID_ANDROID_CONTENT);
@@ -212,7 +212,7 @@ public class GSYVideoHelper {
     /**
      * 如果是5.0的，要从原位置过度到全屏位置
      */
-    private void resolveMaterialFullVideoShow(GSYBaseVideoPlayer gsyVideoPlayer) {
+    private void resolveMaterialFullVideoShow(BaseVideoPlayer gsyVideoPlayer) {
         FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) gsyVideoPlayer.getLayoutParams();
         lp.setMargins(0, 0, 0, 0);
         lp.height = ViewGroup.LayoutParams.MATCH_PARENT;
@@ -268,7 +268,7 @@ public class GSYVideoHelper {
     /**
      * 动画回到正常效果
      */
-    private void resolveMaterialToNormal(final GSYVideoPlayer gsyVideoPlayer) {
+    private void resolveMaterialToNormal(final VideoPlayer gsyVideoPlayer) {
         if (mVideoOptionBuilder.isShowFullAnimation() && mFullViewContainer instanceof FrameLayout) {
             int delay = mOrientationUtils.backToProtVideo();
             mHandler.postDelayed(new Runnable() {
@@ -495,7 +495,7 @@ public class GSYVideoHelper {
      * @param statusBar 是否有状态栏
      */
     public void showSmallVideo(Point size, final boolean actionBar, final boolean statusBar) {
-        if (mGsyVideoPlayer.getCurrentState() == GSYVideoPlayer.CURRENT_STATE_PLAYING) {
+        if (mGsyVideoPlayer.getCurrentState() == VideoPlayer.CURRENT_STATE_PLAYING) {
             mGsyVideoPlayer.showSmallVideo(size, actionBar, statusBar);
             isSmall = true;
         }
@@ -561,7 +561,7 @@ public class GSYVideoHelper {
     /**
      * 获取播放器,直接拿播放器，根据需要自定义配置
      */
-    public StandardGSYVideoPlayer getGsyVideoPlayer() {
+    public StandardVideoPlayer getGsyVideoPlayer() {
         return mGsyVideoPlayer;
     }
 

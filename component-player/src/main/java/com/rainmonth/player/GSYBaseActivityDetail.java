@@ -10,12 +10,12 @@ import com.rainmonth.player.builder.GSYVideoOptionBuilder;
 import com.rainmonth.player.listener.VideoAllCallBack;
 import com.rainmonth.player.utils.OrientationOption;
 import com.rainmonth.player.utils.OrientationUtils;
-import com.rainmonth.player.video.base.GSYBaseVideoPlayer;
+import com.rainmonth.player.video.base.BaseVideoPlayer;
 
 /**
  * 详情模式播放页面基础类
  */
-public abstract class GSYBaseActivityDetail<T extends GSYBaseVideoPlayer> extends AppCompatActivity implements VideoAllCallBack {
+public abstract class GSYBaseActivityDetail<T extends BaseVideoPlayer> extends AppCompatActivity implements VideoAllCallBack {
 
     protected boolean isPlay;
 
@@ -73,7 +73,7 @@ public abstract class GSYBaseActivityDetail<T extends GSYBaseVideoPlayer> extend
         if (orientationUtils != null) {
             orientationUtils.backToProtVideo();
         }
-        if (GSYVideoManager.backFromWindowFull(this)) {
+        if (VideoManager.backFromWindowFull(this)) {
             return;
         }
         super.onBackPressed();

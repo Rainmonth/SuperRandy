@@ -1,4 +1,4 @@
-package com.rainmonth.video;
+package com.rainmonth.player.activity;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -7,7 +7,8 @@ import com.rainmonth.common.adapter.base.BaseQuickAdapter;
 import com.rainmonth.common.adapter.base.BaseViewHolder;
 import com.rainmonth.common.base.BaseActivity;
 import com.rainmonth.common.di.component.AppComponent;
-import com.rainmonth.video.bean.VideoListBean;
+import com.rainmonth.player.R;
+import com.rainmonth.player.model.VideoListBean;
 
 /**
  * 视频列表焦点播放
@@ -34,14 +35,14 @@ public class ListFocusVideoPlayActivity extends BaseActivity {
 
     @Override
     protected int getContentViewLayoutID() {
-        return R.layout.video_activity_list_focus_video_play;
+        return R.layout.player_activity_list_focus_player_play;
     }
 
     @Override
     protected void initViewsAndEvents() {
         rvVideoList = findViewById(R.id.rv_video_list);
         rvVideoList.setLayoutManager(new LinearLayoutManager(mContext));
-        videoListAdapter = new BaseQuickAdapter<VideoListBean, BaseViewHolder>(R.layout.video_activity_list_focus_list_item) {
+        videoListAdapter = new BaseQuickAdapter<VideoListBean, BaseViewHolder>(R.layout.player_activity_list_focus_list_item) {
 
             @Override
             protected void convert(BaseViewHolder helper, VideoListBean item) {

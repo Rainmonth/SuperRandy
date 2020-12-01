@@ -4,19 +4,32 @@
     package="com.rainmonth.player">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:name=".PlayerApplication"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/player_app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
+        android:theme="@style/PlayerAppTheme"
         tools:ignore="AllowBackup">
-        <activity android:name=".PlayerMainActivity">
+        <activity
+            android:name="com.rainmonth.player.VideoSplashActivity"
+            android:theme="@style/PlayerSplashTheme">
             <intent-filter>
-                <category android:name="android.intent.category.LAUNCHER" />
                 <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.rainmonth.player.activity.GlobalVideoPlayerActivity" />
+        <activity android:name="com.rainmonth.player.activity.ConfigVideoPlayActivity" />
+        <activity android:name="com.rainmonth.player.activity.DetailVideoPlayActivity" />
+        <activity android:name="com.rainmonth.player.activity.DyVideoPlayActivity" />
+        <activity android:name="com.rainmonth.player.activity.FloatVideoPlayerActivity" />
+        <activity android:name="com.rainmonth.player.activity.ListFocusVideoPlayActivity" />
+        <activity android:name="com.rainmonth.player.activity.VideoMainActivity" />
+        <activity android:name="com.rainmonth.player.activity.VideoPlayerActivity" />
     </application>
 
 </manifest>

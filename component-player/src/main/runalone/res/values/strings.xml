@@ -1,3 +1,14 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="player_app_name" translatable="false">播放器</string>
+    <string-array name="player_media_source_list">
+        <item>111</item>
+        <item>222</item>
+
+    </string-array>
+
+    <!--SmoothStreaming格式的视频-->
+    <string-array name="ss_media_source_list" tools:ignore="ResourceName">
+        <item>11</item>
+        <item>22</item>
+    </string-array>
 </resources>

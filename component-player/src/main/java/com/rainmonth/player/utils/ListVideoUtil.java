@@ -14,9 +14,9 @@ import android.widget.FrameLayout;
 import androidx.transition.TransitionManager;
 
 import com.rainmonth.player.listener.VideoAllCallBack;
-import com.rainmonth.player.video.StandardGSYVideoPlayer;
-import com.rainmonth.player.video.base.GSYBaseVideoPlayer;
-import com.rainmonth.player.video.base.GSYVideoPlayer;
+import com.rainmonth.player.video.StandardVideoPlayer;
+import com.rainmonth.player.video.base.BaseVideoPlayer;
+import com.rainmonth.player.video.base.VideoPlayer;
 
 import java.io.File;
 import java.util.Map;
@@ -38,7 +38,7 @@ public class ListVideoUtil {
      * 该类从该版本开始不再维护，望悉知
      */
     private String TAG = "NULL"; //播放的标志
-    private StandardGSYVideoPlayer gsyVideoPlayer;
+    private StandardVideoPlayer gsyVideoPlayer;
     private ViewGroup fullViewContainer;
     private ViewGroup listParent;//记录列表中item的父布局
     private ViewGroup.LayoutParams listParams;
@@ -77,7 +77,7 @@ public class ListVideoUtil {
 
 
     public ListVideoUtil(Context context) {
-        gsyVideoPlayer = new StandardGSYVideoPlayer(context);
+        gsyVideoPlayer = new StandardVideoPlayer(context);
         this.context = context;
     }
 
@@ -255,7 +255,7 @@ public class ListVideoUtil {
     /**
      * 如果是5.0的，要从原位置过度到全屏位置
      */
-    private void resolveMaterialFullVideoShow(GSYBaseVideoPlayer gsyVideoPlayer) {
+    private void resolveMaterialFullVideoShow(BaseVideoPlayer gsyVideoPlayer) {
         FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) gsyVideoPlayer.getLayoutParams();
         lp.setMargins(0, 0, 0, 0);
         lp.height = ViewGroup.LayoutParams.MATCH_PARENT;
@@ -302,7 +302,7 @@ public class ListVideoUtil {
     /**
      * 动画回到正常效果
      */
-    private void resolveMaterialToNormal(final GSYVideoPlayer gsyVideoPlayer) {
+    private void resolveMaterialToNormal(final VideoPlayer gsyVideoPlayer) {
         if (showFullAnimation && fullViewContainer instanceof FrameLayout) {
             int delay = orientationUtils.backToProtVideo();
             handler.postDelayed(new Runnable() {
@@ -414,7 +414,7 @@ public class ListVideoUtil {
      * @param statusBar 是否有状态栏
      */
     public void showSmallVideo(Point size, final boolean actionBar, final boolean statusBar) {
-        if (gsyVideoPlayer.getCurrentState() == GSYVideoPlayer.CURRENT_STATE_PLAYING) {
+        if (gsyVideoPlayer.getCurrentState() == VideoPlayer.CURRENT_STATE_PLAYING) {
             gsyVideoPlayer.showSmallVideo(size, actionBar, statusBar);
             isSmall = true;
         }
@@ -603,7 +603,7 @@ public class ListVideoUtil {
     /**
      * 获取播放器,直接拿播放器，根据需要自定义配置
      */
-    public StandardGSYVideoPlayer getGsyVideoPlayer() {
+    public StandardVideoPlayer getGsyVideoPlayer() {
         return gsyVideoPlayer;
     }
 

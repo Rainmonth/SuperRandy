@@ -6,7 +6,7 @@ import android.media.ThumbnailUtils;
 
 import com.rainmonth.player.listener.GSYVideoGifSaveListener;
 import com.rainmonth.player.listener.GSYVideoShotSaveListener;
-import com.rainmonth.player.video.StandardGSYVideoPlayer;
+import com.rainmonth.player.video.StandardVideoPlayer;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -24,7 +24,7 @@ public class GifCreateHelper {
 
     private boolean mSaveShotBitmapSuccess = true;
 
-    private StandardGSYVideoPlayer mPlayer;
+    private StandardVideoPlayer mPlayer;
 
     private TaskLocal mTimerTask;
 
@@ -48,7 +48,7 @@ public class GifCreateHelper {
     //截图频率，毫秒
     private int mFrequencyCount = 50;
 
-    public GifCreateHelper(StandardGSYVideoPlayer standardGSYVideoPlayer, GSYVideoGifSaveListener gsyVideoGifSaveListener) {
+    public GifCreateHelper(StandardVideoPlayer standardGSYVideoPlayer, GSYVideoGifSaveListener gsyVideoGifSaveListener) {
         this(standardGSYVideoPlayer, gsyVideoGifSaveListener, 0, 1, 5, 50);
     }
 
@@ -58,7 +58,7 @@ public class GifCreateHelper {
      * @param scaleSize      缩减尺寸比例，对生成的截图进行缩减，越大图片越模糊，需要处理的时长越短
      * @param frequencyCount 截图频率，毫秒，用在定时获取帧图片，越大获取的越少
      */
-    public GifCreateHelper(StandardGSYVideoPlayer standardGSYVideoPlayer, GSYVideoGifSaveListener gsyVideoGifSaveListener,
+    public GifCreateHelper(StandardVideoPlayer standardGSYVideoPlayer, GSYVideoGifSaveListener gsyVideoGifSaveListener,
                            int delay, int inSampleSize, int scaleSize, int frequencyCount) {
         mPlayer = standardGSYVideoPlayer;
         mGSYVideoGifSaveListener = gsyVideoGifSaveListener;

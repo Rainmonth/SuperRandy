@@ -20,7 +20,7 @@ import com.rainmonth.player.base.player.IPlayerInitSuccessListener;
 import com.rainmonth.player.base.player.IPlayerManager;
 import com.rainmonth.player.base.player.PlayerFactory;
 import com.rainmonth.player.utils.Debugger;
-import com.rainmonth.player.video.base.GSYVideoViewBridge;
+import com.rainmonth.player.video.base.VideoViewBridge;
 
 import java.io.File;
 import java.lang.ref.WeakReference;
@@ -33,9 +33,9 @@ import tv.danmaku.ijk.media.player.IMediaPlayer;
  * 基类管理器
  * GSYVideoViewBridge接口说明可以查阅GSYVideoViewBridge类
  */
-public abstract class GSYVideoBaseManager implements IMediaPlayer.OnPreparedListener, IMediaPlayer.OnCompletionListener,
+public abstract class VideoBaseManager implements IMediaPlayer.OnPreparedListener, IMediaPlayer.OnCompletionListener,
         IMediaPlayer.OnBufferingUpdateListener, IMediaPlayer.OnSeekCompleteListener, IMediaPlayer.OnErrorListener,
-        IMediaPlayer.OnVideoSizeChangedListener, IMediaPlayer.OnInfoListener, ICacheManager.ICacheAvailableListener, GSYVideoViewBridge {
+        IMediaPlayer.OnVideoSizeChangedListener, IMediaPlayer.OnInfoListener, ICacheManager.ICacheAvailableListener, VideoViewBridge {
 
     public static String TAG = "GSYVideoBaseManager";
 
