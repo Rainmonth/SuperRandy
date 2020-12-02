@@ -6,6 +6,7 @@ import com.rainmonth.player.activity.DyVideoPlayActivity;
 import com.rainmonth.player.activity.FloatVideoPlayerActivity;
 import com.rainmonth.player.activity.GlobalVideoPlayerActivity;
 import com.rainmonth.player.activity.ListPlayDemoListActivity;
+import com.rainmonth.player.activity.NormalDetailVideoPlayActivity;
 import com.rainmonth.player.activity.SimplePlayDemoListActivity;
 import com.rainmonth.player.activity.VideoPlayerActivity;
 import com.rainmonth.player.model.DetailPlayExampleBean;
@@ -36,7 +37,7 @@ public class DemoDataFactory {
     public static List<DetailPlayExampleBean> getDetailPlayExampleList() {
         List<DetailPlayExampleBean> exampleBeans = new ArrayList<>();
         exampleBeans.add(new DetailPlayExampleBean("详情播放", "采用ExoPlayer内核，同时采用ExoPlayer2提供的PlayerView", ExampleBean.STATE_TODO, VideoPlayerActivity.class));
-        exampleBeans.add(new DetailPlayExampleBean("详情播放", "仅仅播放控件", ExampleBean.STATE_FINISH, DetailPlayDemoListActivity.class));
+        exampleBeans.add(new DetailPlayExampleBean("详情播放", "普通的详情播放", ExampleBean.STATE_FINISH, NormalDetailVideoPlayActivity.class));
         return exampleBeans;
     }
 

@@ -6,6 +6,8 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.rainmonth.common.base.BaseActivity;
+import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.player.builder.GSYVideoOptionBuilder;
 import com.rainmonth.player.listener.VideoAllCallBack;
 import com.rainmonth.player.utils.OrientationOption;
@@ -15,7 +17,7 @@ import com.rainmonth.player.video.base.BaseVideoPlayer;
 /**
  * 详情模式播放页面基础类
  */
-public abstract class BaseActivityDetail<T extends BaseVideoPlayer> extends AppCompatActivity implements VideoAllCallBack {
+public abstract class BaseActivityDetail<T extends BaseVideoPlayer> extends BaseActivity implements VideoAllCallBack {
 
     protected boolean isPlay;
 
@@ -26,6 +28,16 @@ public abstract class BaseActivityDetail<T extends BaseVideoPlayer> extends AppC
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+    }
+
+    @Override
+    protected void setupActivityComponent(AppComponent appComponent) {
+
+    }
+
+    @Override
+    public void initToolbar(int colorResId) {
 
     }
 

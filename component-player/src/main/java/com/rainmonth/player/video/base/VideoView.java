@@ -268,7 +268,7 @@ public abstract class VideoView extends TextureRenderView implements GSYMediaPla
 
         initInflate(mContext);
 
-        mTextureViewContainer = (ViewGroup) findViewById(R.id.surface_container);
+        mTextureViewContainer = (ViewGroup) findViewById(R.id.player_surface_container);
         if (isInEditMode())
             return;
         mScreenWidth = mContext.getResources().getDisplayMetrics().widthPixels;

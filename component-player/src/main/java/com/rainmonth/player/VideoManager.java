@@ -24,7 +24,7 @@ public class VideoManager extends VideoBaseManager {
 
     public static final int FULLSCREEN_ID = R.id.player_full_id;
 
-    public static String TAG = "GSYVideoManager";
+    public static String TAG = VideoManager.class.getSimpleName();
 
     @SuppressLint("StaticFieldLeak")
     private static VideoManager videoManager;

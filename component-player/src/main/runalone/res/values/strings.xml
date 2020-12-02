@@ -11,4 +11,14 @@
         <item>11</item>
         <item>22</item>
     </string-array>
+
+    <string name="player_detail_sample_detail_text" translatable="false">
+        Dagger是一个编译时依赖注入框架。实现原理是在编译的时候根据注解生成相应的Java源代码，然后在利用这些源代码进行程序的处理，所以并不会降低程序运行时的性能。
+        Dagger解决了什么问题呢？就是对象之间的耦合。将直接的组合方式造成的耦合，改为间接的依赖关系，从而降低耦合。
+        既然是实现原理是基于Java编译时注解，所以需要先掌握一点Java编译时注解的知识，可以参考Java注解。Dagger用到的注解主要有以下几个：
+            @Inject，具体使用的地方，添加该注解的就可以通过Dagger来获取到相应的对象，不用自己实例化；
+            @Provides，在@Module中使用，用来表示该方法可以向外部提供一个其注解方法返回的对象；
+            @Module，用来定义一个模块，这个模块中可以使用@Providers注解来想外部提供相应的对象供外部调用，主要是为了解决依赖第三方库时不能修改其源码导致无法直接注入的问题；
+            @Component，连接依赖需求方和依赖对象提供方的桥梁，依赖需求方指的就是实例对象最终要被注入的地方（在Android开发场景下一般有Activity、Fragment等，无特殊要求）；依赖提供方可以是采用@Module注解的类或采用@Inject注解的实例类的构造函数，可以提供需要注入的对象的实例。@Component注解的modules参数代表的就是依赖提供方，而其注解的类里面定义的inject方法的参数代表的就是依赖需求方；
+    </string>
 </resources>

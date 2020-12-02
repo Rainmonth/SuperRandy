@@ -37,6 +37,7 @@ import static com.rainmonth.player.utils.CommonUtil.hideNavKey;
  * 播放UI的显示、控制层、手势处理等
  */
 public abstract class VideoControlView extends VideoView implements View.OnClickListener, View.OnTouchListener, SeekBar.OnSeekBarChangeListener {
+    private static final String TAG = VideoControlView.class.getSimpleName();
 
     //手指放下的位置
     protected int mDownPosition;
@@ -126,47 +127,22 @@ public abstract class VideoControlView extends VideoView implements View.OnClick
     protected boolean mPostDismiss = false;
     protected boolean isShowDragProgressTextOnSeekBar = false;
 
-    //播放按键
-    protected View mStartButton;
-
-    //封面
-    protected View mThumbImageView;
-
-    //loading view
-    protected View mLoadingProgressBar;
-
-    //进度条
-    protected SeekBar mProgressBar;
-
-    //全屏按键
-    protected ImageView mFullscreenButton;
-
-    //返回按键
-    protected ImageView mBackButton;
-
-    //锁定图标
-    protected ImageView mLockScreen;
-
-    //时间显示
-    protected TextView mCurrentTimeTextView, mTotalTimeTextView;
-
-    //title
-    protected TextView mTitleTextView;
-
-    //顶部和底部区域
-    protected ViewGroup mTopContainer, mBottomContainer;
-
-    //封面父布局
-    protected RelativeLayout mThumbImageViewLayout;
-
-    //底部进度调
-    protected ProgressBar mBottomProgressBar;
+    protected View mStartButton;                                    //播放按键
+    protected View mThumbImageView;                                 //封面
+    protected View mLoadingProgressBar;                             //loading view
+    protected SeekBar mProgressBar;                                 //进度条
+    protected ImageView mFullscreenButton;                          //全屏按键
+    protected ImageView mBackButton;                                //返回按键
+    protected ImageView mLockScreen;                                //锁定图标
+    protected TextView mCurrentTimeTextView, mTotalTimeTextView;    //时间显示
+    protected TextView mTitleTextView;                              //title
+    protected ViewGroup mTopContainer, mBottomContainer;            //顶部和底部区域
+    protected RelativeLayout mThumbImageViewLayout;                 //封面父布局
+    protected ProgressBar mBottomProgressBar;                       //底部进度调
 
     //点击锁屏的回调
     protected LockClickListener mLockClickListener;
-
     protected GSYStateUiListener mGsyStateUiListener;
-
     protected GSYVideoProgressListener mGSYVideoProgressListener;
 
     public VideoControlView(@NonNull Context context) {
@@ -188,21 +164,23 @@ public abstract class VideoControlView extends VideoView implements View.OnClick
     protected void init(Context context) {
         super.init(context);
 
-        mStartButton = findViewById(R.id.start);
-        mTitleTextView = (TextView) findViewById(R.id.title);
-        mBackButton = (ImageView) findViewById(R.id.back);
-        mFullscreenButton = (ImageView) findViewById(R.id.fullscreen);
-        mProgressBar = (SeekBar) findViewById(R.id.progress);
-        mCurrentTimeTextView = (TextView) findViewById(R.id.current);
-        mTotalTimeTextView = (TextView) findViewById(R.id.total);
-        mBottomContainer = (ViewGroup) findViewById(R.id.layout_bottom);
-        mTopContainer = (ViewGroup) findViewById(R.id.layout_top);
-        mBottomProgressBar = (ProgressBar) findViewById(R.id.bottom_progressbar);
-        mThumbImageViewLayout = (RelativeLayout) findViewById(R.id.thumb);
-        mLockScreen = (ImageView) findViewById(R.id.lock_screen);
+        mStartButton = findViewById(R.id.player_start);
+        mTitleTextView = (TextView) findViewById(R.id.player_title);
+        mBackButton = (ImageView) findViewById(R.id.player_back);
+        mFullscreenButton = (ImageView) findViewById(R.id.player_fullscreen);
+        mProgressBar = (SeekBar) findViewById(R.id.player_progress);
+        mCurrentTimeTextView = (TextView) findViewById(R.id.player_current_time);
+        mTotalTimeTextView = (TextView) findViewById(R.id.player_total_time);
+        mBottomContainer = (ViewGroup) findViewById(R.id.player_bottom_container);
+        mTopContainer = (ViewGroup) findViewById(R.id.player_top_container);
+        mBottomProgressBar = (ProgressBar) findViewById(R.id.player_bottom_progress);
+        mThumbImageViewLayout = (RelativeLayout) findViewById(R.id.player_thumb);
+        mLockScreen = (ImageView) findViewById(R.id.player_lock_screen);
 
-        mLoadingProgressBar = findViewById(R.id.loading);
+        mLoadingProgressBar = findViewById(R.id.player_loading);
 
+        // todo
+        viewCheck();
 
         if (isInEditMode())
             return;
@@ -265,6 +243,30 @@ public abstract class VideoControlView extends VideoView implements View.OnClick
         if (getActivityContext() != null) {
             mSeekEndOffset = CommonUtil.dip2px(getActivityContext(), 50);
         }
+    }
+
+    private boolean isViewNull(View view) {
+        return view == null;
+    }
+
+    private void viewCheck() {
+        if (isViewNull(mStartButton)) Debugger.printfError(TAG, "mStartButton is null");
+        if (isViewNull(mThumbImageView)) Debugger.printfError(TAG, "mThumbImageView is null");
+        if (isViewNull(mLoadingProgressBar))
+            Debugger.printfError(TAG, "mLoadingProgressBar is null");
+        if (isViewNull(mProgressBar)) Debugger.printfError(TAG, "mProgressBar is null");
+        if (isViewNull(mFullscreenButton)) Debugger.printfError(TAG, "mFullscreenButton is null");
+        if (isViewNull(mBackButton)) Debugger.printfError(TAG, "mBackButton is null");
+        if (isViewNull(mLockScreen)) Debugger.printfError(TAG, "mLockScreen is null");
+        if (isViewNull(mCurrentTimeTextView))
+            Debugger.printfError(TAG, "mCurrentTimeTextView is null");
+        if (isViewNull(mTotalTimeTextView)) Debugger.printfError(TAG, "mTotalTimeTextView is null");
+        if (isViewNull(mTitleTextView)) Debugger.printfError(TAG, "mTitleTextView is null");
+        if (isViewNull(mTopContainer)) Debugger.printfError(TAG, "mTopContainer is null");
+        if (isViewNull(mBottomContainer)) Debugger.printfError(TAG, "mBottomContainer is null");
+        if (isViewNull(mThumbImageViewLayout))
+            Debugger.printfError(TAG, "mThumbImageViewLayout is null");
+        if (isViewNull(mBottomProgressBar)) Debugger.printfError(TAG, "mBottomProgressBar is null");
     }
 
     @Override
@@ -376,15 +378,15 @@ public abstract class VideoControlView extends VideoView implements View.OnClick
         if (mHideKey && mIfCurrentIsFullscreen) {
             hideNavKey(mContext);
         }
-        if (i == R.id.start) {
+        if (i == R.id.player_start) {
             clickStartIcon();
-        } else if (i == R.id.surface_container && mCurrentState == CURRENT_STATE_ERROR) {
+        } else if (i == R.id.player_surface_container && mCurrentState == CURRENT_STATE_ERROR) {
             if (mVideoAllCallBack != null) {
                 Debugger.printfLog("onClickStartError");
                 mVideoAllCallBack.onClickStartError(mOriginUrl, mTitle, this);
             }
             prepareVideo();
-        } else if (i == R.id.thumb) {
+        } else if (i == R.id.player_thumb) {
             if (!mThumbPlay) {
                 return;
             }
@@ -402,7 +404,7 @@ public abstract class VideoControlView extends VideoView implements View.OnClick
             } else if (mCurrentState == CURRENT_STATE_AUTO_COMPLETE) {
                 onClickUiToggle();
             }
-        } else if (i == R.id.surface_container) {
+        } else if (i == R.id.player_surface_container) {
             if (mVideoAllCallBack != null && isCurrentMediaListener()) {
                 if (mIfCurrentIsFullscreen) {
                     Debugger.printfLog("onClickBlankFullscreen");
@@ -413,6 +415,8 @@ public abstract class VideoControlView extends VideoView implements View.OnClick
                 }
             }
             startDismissControlViewTimer();
+        } else {
+            Debugger.printfWarning(TAG, "点击事件对应的点击事件未处理，或者被子类覆盖");
         }
     }
 
@@ -457,11 +461,11 @@ public abstract class VideoControlView extends VideoView implements View.OnClick
             return true;
         }
 
-        if (id == R.id.fullscreen) {
+        if (id == R.id.player_fullscreen) {
             return false;
         }
 
-        if (id == R.id.surface_container) {
+        if (id == R.id.player_surface_container) {
             switch (event.getAction()) {
                 case MotionEvent.ACTION_DOWN:
 
@@ -501,7 +505,7 @@ public abstract class VideoControlView extends VideoView implements View.OnClick
                     break;
             }
             gestureDetector.onTouchEvent(event);
-        } else if (id == R.id.progress) {
+        } else if (id == R.id.player_progress) {
             switch (event.getAction()) {
                 case MotionEvent.ACTION_DOWN:
                     cancelDismissControlViewTimer();
