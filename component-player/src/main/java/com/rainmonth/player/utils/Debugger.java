@@ -5,6 +5,8 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.rainmonth.common.utils.log.LogUtils;
+
 /**
  * 用于调试控制
  */
@@ -29,7 +31,7 @@ public class Debugger {
     public static void printfLog(String tag, String log) {
         if (DEBUG_TAG && log != null) {
             if (!TextUtils.isEmpty(log))
-                Log.i(tag, log);
+                LogUtils.i(tag, log);
         }
     }
 
@@ -40,7 +42,7 @@ public class Debugger {
     public static void printfWarning(String tag, String log) {
         if (DEBUG_TAG && log != null) {
             if (!TextUtils.isEmpty(log))
-                Log.w(tag, log);
+                LogUtils.w(tag, log);
         }
     }
 
@@ -51,21 +53,21 @@ public class Debugger {
     public static void printfError(String log) {
         if (DEBUG_TAG) {
             if (!TextUtils.isEmpty(log))
-                Log.e(LOG_TAG, log);
+                LogUtils.e(LOG_TAG, log);
         }
     }
 
     public static void printfError(String Tag, String log) {
         if (DEBUG_TAG) {
             if (!TextUtils.isEmpty(log))
-                Log.e(Tag, log);
+                LogUtils.e(Tag, log);
         }
     }
 
     public static void printfError(String log, Exception e) {
         if (DEBUG_TAG) {
             if (!TextUtils.isEmpty(log))
-                Log.e(LOG_TAG, log);
+                LogUtils.e(LOG_TAG, log);
             e.printStackTrace();
         }
     }
