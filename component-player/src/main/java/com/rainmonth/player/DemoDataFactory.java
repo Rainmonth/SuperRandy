@@ -1,16 +1,16 @@
 package com.rainmonth.player;
 
 import com.rainmonth.common.bean.ExampleBean;
-import com.rainmonth.player.activity.ConfigVideoPlayActivity;
 import com.rainmonth.player.activity.DetailPlayDemoListActivity;
-import com.rainmonth.player.activity.DetailVideoPlayActivity;
 import com.rainmonth.player.activity.DyVideoPlayActivity;
 import com.rainmonth.player.activity.FloatVideoPlayerActivity;
 import com.rainmonth.player.activity.GlobalVideoPlayerActivity;
-import com.rainmonth.player.activity.ListFocusVideoPlayActivity;
 import com.rainmonth.player.activity.ListPlayDemoListActivity;
+import com.rainmonth.player.activity.SimplePlayDemoListActivity;
 import com.rainmonth.player.activity.VideoPlayerActivity;
 import com.rainmonth.player.model.DetailPlayExampleBean;
+import com.rainmonth.player.model.ListPlayExampleBean;
+import com.rainmonth.player.model.SimplePlayExampleBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +24,7 @@ import java.util.List;
 public class DemoDataFactory {
     public static List<ExampleBean> getExampleDataList() {
         List<ExampleBean> exampleBeans = new ArrayList<>();
-        exampleBeans.add(new ExampleBean("简单播放", "简单调用播放场景示例", ExampleBean.STATE_TODO, VideoPlayerActivity.class));
+        exampleBeans.add(new ExampleBean("简单播放", "简单调用播放场景示例", ExampleBean.STATE_TODO, SimplePlayDemoListActivity.class));
         exampleBeans.add(new ExampleBean("详情播放", "各种详情播放场景示例", ExampleBean.STATE_TODO, DetailPlayDemoListActivity.class));
         exampleBeans.add(new ExampleBean("列表播放", "各种列表播放场景示例", ExampleBean.STATE_TODO, ListPlayDemoListActivity.class));
         exampleBeans.add(new ExampleBean("抖音式播放", "类似于抖音的那种播放效果", ExampleBean.STATE_TODO, DyVideoPlayActivity.class));
@@ -33,11 +33,26 @@ public class DemoDataFactory {
         return exampleBeans;
     }
 
-    public static List<DetailPlayExampleBean> getDetailPlayExampleBean() {
+    public static List<DetailPlayExampleBean> getDetailPlayExampleList() {
         List<DetailPlayExampleBean> exampleBeans = new ArrayList<>();
-        exampleBeans.add(new DetailPlayExampleBean("详情播放", "采用ExoPlayer内核，同时采用ExoPlayer2提供的PlayerView", DetailPlayExampleBean.STATE_TODO, VideoPlayerActivity.class));
-        exampleBeans.add(new DetailPlayExampleBean("详情播放", "仅仅播放控件", DetailPlayExampleBean.STATE_FINISH, DetailPlayDemoListActivity.class));
+        exampleBeans.add(new DetailPlayExampleBean("详情播放", "采用ExoPlayer内核，同时采用ExoPlayer2提供的PlayerView", ExampleBean.STATE_TODO, VideoPlayerActivity.class));
+        exampleBeans.add(new DetailPlayExampleBean("详情播放", "仅仅播放控件", ExampleBean.STATE_FINISH, DetailPlayDemoListActivity.class));
+        return exampleBeans;
+    }
 
+    public static List<SimplePlayExampleBean> getSimplePlayExampleList() {
+        List<SimplePlayExampleBean> exampleBeans = new ArrayList<>();
+        exampleBeans.add(new SimplePlayExampleBean("简单播放", "采用ExoPlayer内核，同时采用ExoPlayer2提供的PlayerView", ExampleBean.STATE_TODO, VideoPlayerActivity.class));
+        exampleBeans.add(new SimplePlayExampleBean("简单播放", "打开本地视频", ExampleBean.STATE_TODO, VideoPlayerActivity.class));
+        exampleBeans.add(new SimplePlayExampleBean("简单播放", "打开Url播放", ExampleBean.STATE_TODO, VideoPlayerActivity.class));
+        return exampleBeans;
+    }
+
+    public static List<ListPlayExampleBean> getListPlayExampleList() {
+        List<ListPlayExampleBean> exampleBeans = new ArrayList<>();
+        exampleBeans.add(new ListPlayExampleBean("列表播放", "采用ExoPlayer内核，同时采用ExoPlayer2提供的PlayerView", ExampleBean.STATE_TODO, VideoPlayerActivity.class));
+        exampleBeans.add(new ListPlayExampleBean("列表播放", "打开本地视频", ExampleBean.STATE_TODO, VideoPlayerActivity.class));
+        exampleBeans.add(new ListPlayExampleBean("列表播放", "打开Url播放", ExampleBean.STATE_TODO, VideoPlayerActivity.class));
         return exampleBeans;
     }
 }
