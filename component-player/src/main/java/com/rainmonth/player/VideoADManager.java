@@ -22,7 +22,7 @@ public class VideoADManager extends VideoBaseManager {
 
     public static final int FULLSCREEN_ID = R.id.player_ad_full_id;
 
-    public static String TAG = "GSYVideoADManager";
+    public static String TAG = VideoADManager.class.getSimpleName();
 
     @SuppressLint("StaticFieldLeak")
     private static VideoADManager videoManager;

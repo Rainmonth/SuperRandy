@@ -37,7 +37,7 @@ public abstract class VideoBaseManager implements IMediaPlayer.OnPreparedListene
         IMediaPlayer.OnBufferingUpdateListener, IMediaPlayer.OnSeekCompleteListener, IMediaPlayer.OnErrorListener,
         IMediaPlayer.OnVideoSizeChangedListener, IMediaPlayer.OnInfoListener, ICacheManager.ICacheAvailableListener, VideoViewBridge {
 
-    public static String TAG = "GSYVideoBaseManager";
+    public static String TAG = VideoBaseManager.class.getSimpleName();
 
     protected static final int HANDLER_PREPARE = 0;
 
