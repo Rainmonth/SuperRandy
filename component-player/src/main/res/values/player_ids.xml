@@ -1,5 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--播放器相关的id-->
+    <!--渲染视图容器-->
+    <item name="player_surface_container" type="id" />
+    <!--播放/暂停-->
+    <item name="player_start" type="id" />
+    <!--标题-->
+    <item name="player_title" type="id" />
+    <!--返回-->
+    <item name="player_back" type="id" />
+    <!--全屏按钮-->
+    <item name="player_fullscreen" type="id" />
+    <!--播放进度-->
+    <item name="player_progress" type="id" />
+    <!--播放进度（屏幕底部）-->
+    <item name="player_bottom_progress" type="id" />
+    <!--锁定播放按钮-->
+    <item name="player_lock_screen" type="id" />
+    <!--当前时间-->
+    <item name="player_current_time" type="id" />
+    <!--总时间-->
+    <item name="player_total_time" type="id" />
+    <!--播放视频之前显示的那张图-->
+    <item name="player_thumb" type="id" />
+    <!--显示thumb的容器-->
+    <item name="player_thumb_container" type="id" />
+    <!--顶部容器-->
+    <item name="player_top_container" type="id" />
+    <!--底部容器-->
+    <item name="player_bottom_container" type="id" />
+    <!--加载视图-->
+    <item name="player_loading_view" type="id" />
+    <!--小窗口关闭按钮id-->
+    <item name="player_small_close" type="id" />
+
     <item name="player_full_id" type="id" />
     <item name="player_small_id" type="id" />
     <item name="player_ad_full_id" type="id" />
