@@ -5,8 +5,8 @@ package com.rainmonth.player.model;
  */
 public class GSYVideoModel {
 
-    private String mUrl;
-    private String mTitle;
+    private String mUrl;                // 视频地址
+    private String mTitle;              // 视频标题
 
     public GSYVideoModel(String url, String title) {
         mUrl = url;

@@ -1,31 +1,32 @@
 package com.rainmonth.player.activity;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.TextView;
 
-import com.alibaba.android.arouter.facade.annotation.Route;
 import com.rainmonth.common.adapter.base.BaseViewHolder;
 import com.rainmonth.common.base.BaseListActivity;
 import com.rainmonth.common.bean.ExampleBean;
 import com.rainmonth.common.utils.log.LogUtils;
-import com.rainmonth.componentbase.ServiceFactory;
 import com.rainmonth.player.DemoDataFactory;
 import com.rainmonth.player.R;
-import com.rainmonth.router.RouterConstant;
+import com.rainmonth.player.model.DetailPlayExampleBean;
+import com.rainmonth.player.model.VideoListBean;
 
 /**
- * 视频播放主界面
+ * 详情播放示例列表
  *
- * @author 张豪成
- * @date 2019-05-15 12:37
+ * @author RandyZhang
+ * @date 2020/12/02
  */
-@Route(path = RouterConstant.PATH_VIDEO_HOME)
-public class VideoMainActivity extends BaseListActivity<ExampleBean> {
+public class DetailPlayDemoListActivity extends BaseListActivity<DetailPlayExampleBean> {
+
 
     @Override
     protected void initLocalData() {
-        super.initLocalData();
-        datas = DemoDataFactory.getExampleDataList();
+        datas = DemoDataFactory.getDetailPlayExampleBean();
     }
 
     @Override
@@ -40,7 +41,7 @@ public class VideoMainActivity extends BaseListActivity<ExampleBean> {
     }
 
     @Override
-    protected void bindItem(BaseViewHolder holder, ExampleBean item) {
+    protected void bindItem(BaseViewHolder holder, DetailPlayExampleBean item) {
         TextView tvExName = holder.getView(R.id.tv_example_name);
         TextView tvExDes = holder.getView(R.id.tv_example_des);
         TextView tvStatus = holder.getView(R.id.tv_status);
@@ -70,11 +71,8 @@ public class VideoMainActivity extends BaseListActivity<ExampleBean> {
     }
 
     @Override
-    protected void onListItemClick(ExampleBean baseBean, int position) {
+    protected void onListItemClick(DetailPlayExampleBean baseBean, int position) {
         super.onListItemClick(baseBean, position);
-        if (position == 1) {
-            ServiceFactory.getInstance().getMusicService().playMusic("https://www.baidu.com/test.mp3");
-        }
         if (datas.size() == 0) {
             return;
         }

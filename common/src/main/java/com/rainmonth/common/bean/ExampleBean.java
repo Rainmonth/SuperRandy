@@ -8,7 +8,7 @@ import java.io.Serializable;
  * @author 张豪成
  * @date 2019-05-15 13:03
  */
-public class ExampleBean implements Serializable {
+public class ExampleBean extends BaseBean {
 
     public static final int STATE_TODO = 0;         // 等待完成
     public static final int STATE_UNDER = 1;        // 正在做

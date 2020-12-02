@@ -49,11 +49,11 @@ import java.util.List;
 public class VideoPlayerActivity extends BaseActivity implements PlayerControlView.VisibilityListener,
         PlaybackPreparer {
     SimpleExoPlayer player;
-    PlayerView      playerView;
+    PlayerView playerView;
 
     DefaultTrackSelector trackSelector;
-    boolean              preferExtensionDecoder = false;
-    boolean              startAutoPlay          = true;
+    boolean preferExtensionDecoder = false;
+    boolean startAutoPlay = true;
 
     @Override
     protected void setupActivityComponent(AppComponent appComponent) {

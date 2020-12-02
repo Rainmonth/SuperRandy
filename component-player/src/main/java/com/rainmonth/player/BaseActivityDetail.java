@@ -15,7 +15,7 @@ import com.rainmonth.player.video.base.BaseVideoPlayer;
 /**
  * 详情模式播放页面基础类
  */
-public abstract class GSYBaseActivityDetail<T extends BaseVideoPlayer> extends AppCompatActivity implements VideoAllCallBack {
+public abstract class BaseActivityDetail<T extends BaseVideoPlayer> extends AppCompatActivity implements VideoAllCallBack {
 
     protected boolean isPlay;
 
@@ -64,7 +64,7 @@ public abstract class GSYBaseActivityDetail<T extends BaseVideoPlayer> extends A
             orientationUtils.resolveByClick();
         }
         //第一个true是否需要隐藏actionbar，第二个true是否需要隐藏statusbar
-        getGSYVideoPlayer().startWindowFullscreen(GSYBaseActivityDetail.this, hideActionBarWhenFull(), hideStatusBarWhenFull());
+        getGSYVideoPlayer().startWindowFullscreen(BaseActivityDetail.this, hideActionBarWhenFull(), hideStatusBarWhenFull());
 
     }
 

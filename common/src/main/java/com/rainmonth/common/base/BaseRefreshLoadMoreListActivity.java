@@ -21,8 +21,9 @@ import java.util.List;
  * @author 张豪成
  * @date 2019-11-06 10:06
  */
-public abstract class BaseListActivity<T extends BaseBean> extends BaseActivity {
-    RecyclerView rvList;
+public abstract class BaseRefreshLoadMoreListActivity<T extends BaseBean> extends BaseActivity {
+    protected SwipeRefreshLayout srlContainer;
+    protected RecyclerView rvList;
     protected BaseQuickAdapter<T, BaseViewHolder> adapter;
     protected List<T> datas = new ArrayList<>();
 
@@ -33,26 +34,52 @@ public abstract class BaseListActivity<T extends BaseBean> extends BaseActivity 
 
     @Override
     protected int getContentViewLayoutID() {
-        return R.layout.common_base_list_activity;
+        return R.layout.common_base_refresh_load_more_list_activity;
     }
 
     @Override
     protected void initViewsAndEvents() {
+        srlContainer = findViewById(R.id.srl_container);
         rvList = findViewById(R.id.rl_list);
+
 
         // todo
         initLocalData();
 
+        configRefresh();
+        initSwipeRefreshLayout();
         initRecyclerView();
         configLoadMore();
+    }
+
+    protected void configRefresh() {
+
     }
 
     protected void configLoadMore() {
 
     }
 
+    private void initSwipeRefreshLayout() {
+        srlContainer.setOnRefreshListener(this::onSwipeRefresh);
+    }
+
     protected void initLocalData() {
 
+    }
+
+    /**
+     * 下拉刷新处理
+     */
+    protected void onSwipeRefresh() {
+        srlContainer.setRefreshing(true);
+    }
+
+    /**
+     * 停止下拉刷新
+     */
+    protected void stopSwipeRefresh() {
+        srlContainer.setRefreshing(false);
     }
 
     /**

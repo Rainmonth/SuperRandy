@@ -14,22 +14,25 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:theme="@style/PlayerAppTheme"
         tools:ignore="AllowBackup">
+        <activity android:name=".activity.DetailPlayDemoListActivity" />
+        <activity android:name=".activity.ListPlayDemoListActivity" />
         <activity
-            android:name="com.rainmonth.player.VideoSplashActivity"
+            android:name=".VideoSplashActivity"
             android:theme="@style/PlayerSplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.rainmonth.player.activity.GlobalVideoPlayerActivity" />
-        <activity android:name="com.rainmonth.player.activity.ConfigVideoPlayActivity" />
-        <activity android:name="com.rainmonth.player.activity.DetailVideoPlayActivity" />
-        <activity android:name="com.rainmonth.player.activity.DyVideoPlayActivity" />
-        <activity android:name="com.rainmonth.player.activity.FloatVideoPlayerActivity" />
-        <activity android:name="com.rainmonth.player.activity.ListFocusVideoPlayActivity" />
-        <activity android:name="com.rainmonth.player.activity.VideoMainActivity" />
-        <activity android:name="com.rainmonth.player.activity.VideoPlayerActivity" />
+        <activity android:name=".activity.GlobalVideoPlayerActivity" />
+        <activity android:name=".activity.ConfigVideoPlayActivity" />
+        <activity android:name=".activity.DetailVideoPlayActivity" />
+        <activity android:name=".activity.DyVideoPlayActivity" />
+        <activity android:name=".activity.FloatVideoPlayerActivity" />
+        <activity android:name=".activity.ListFocusVideoPlayActivity" />
+        <activity android:name=".activity.VideoMainActivity" />
+        <activity android:name=".activity.VideoPlayerActivity" />
     </application>
 
 </manifest>

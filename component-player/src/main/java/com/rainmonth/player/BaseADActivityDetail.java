@@ -15,7 +15,7 @@ import com.rainmonth.player.video.base.VideoView;
 /**
  * 详情AD模式播放页面基础类
  */
-public abstract class GSYBaseADActivityDetail<T extends BaseVideoPlayer, R extends GSYADVideoPlayer> extends GSYBaseActivityDetail<T> {
+public abstract class BaseADActivityDetail<T extends BaseVideoPlayer, R extends GSYADVideoPlayer> extends BaseActivityDetail<T> {
 
     protected OrientationUtils mADOrientationUtils;
 
@@ -203,7 +203,7 @@ public abstract class GSYBaseADActivityDetail<T extends BaseVideoPlayer, R exten
         if (mADOrientationUtils.getIsLand() != 1) {
             mADOrientationUtils.resolveByClick();
         }
-        getGSYADVideoPlayer().startWindowFullscreen(GSYBaseADActivityDetail.this, hideActionBarWhenFull(), hideStatusBarWhenFull());
+        getGSYADVideoPlayer().startWindowFullscreen(BaseADActivityDetail.this, hideActionBarWhenFull(), hideStatusBarWhenFull());
     }
 
     /**
