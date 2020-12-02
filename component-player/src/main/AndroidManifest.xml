@@ -6,7 +6,9 @@
     <application>
         <activity android:name="com.rainmonth.player.activity.GlobalVideoPlayerActivity" />
         <activity android:name="com.rainmonth.player.activity.ConfigVideoPlayActivity" />
-        <activity android:name="com.rainmonth.player.activity.DetailVideoPlayActivity" />
+        <activity
+            android:name="com.rainmonth.player.activity.NormalDetailVideoPlayActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode" />
         <activity android:name="com.rainmonth.player.activity.DyVideoPlayActivity" />
         <activity android:name="com.rainmonth.player.activity.FloatVideoPlayerActivity" />
         <activity android:name="com.rainmonth.player.activity.ListFocusVideoPlayActivity" />

@@ -7,12 +7,14 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
+    <!--todo 去掉 usesCleartextTraffic 的使用-->
     <application
         android:name=".PlayerApplication"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/player_app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:theme="@style/PlayerAppTheme"
+        android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup">
         <activity android:name=".activity.SimplePlayDemoListActivity" />
         <activity android:name=".activity.DetailPlayDemoListActivity" />
@@ -28,7 +30,9 @@
         </activity>
         <activity android:name=".activity.GlobalVideoPlayerActivity" />
         <activity android:name=".activity.ConfigVideoPlayActivity" />
-        <activity android:name=".activity.DetailVideoPlayActivity" />
+        <activity
+            android:name=".activity.NormalDetailVideoPlayActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode" />
         <activity android:name=".activity.DyVideoPlayActivity" />
         <activity android:name=".activity.FloatVideoPlayerActivity" />
         <activity android:name=".activity.ListFocusVideoPlayActivity" />
