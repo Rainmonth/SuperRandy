@@ -1,4 +1,4 @@
-package com.rainmonth.player.activity;
+package com.rainmonth.player.activity.list;
 
 import com.rainmonth.common.base.BaseActivity;
 import com.rainmonth.common.di.component.AppComponent;

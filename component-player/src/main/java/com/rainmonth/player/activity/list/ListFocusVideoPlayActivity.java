@@ -1,4 +1,4 @@
-package com.rainmonth.player.activity;
+package com.rainmonth.player.activity.list;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;

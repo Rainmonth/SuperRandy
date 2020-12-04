@@ -105,7 +105,7 @@ public abstract class BaseVideoPlayer extends VideoControlView {
     @Override
     protected void init(Context context) {
         super.init(context);
-        mSmallClose = findViewById(R.id.small_close);
+        mSmallClose = findViewById(R.id.player_small_close);
     }
 
 

@@ -1,8 +1,7 @@
-package com.rainmonth.player.activity;
+package com.rainmonth.player.activity.detail;
 
 import android.content.res.Configuration;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
@@ -15,11 +14,10 @@ import com.rainmonth.player.VideoManager;
 import com.rainmonth.player.base.player.exo.Exo2PlayerManager;
 import com.rainmonth.player.builder.GSYVideoOptionBuilder;
 import com.rainmonth.player.listener.GSYSampleCallBack;
-import com.rainmonth.player.listener.LockClickListener;
 import com.rainmonth.player.utils.Debugger;
 import com.rainmonth.player.utils.OrientationUtils;
 import com.rainmonth.player.video.base.VideoPlayer;
-import com.rainmonth.player.view.LandLayoutVideo;
+import com.rainmonth.player.view.LandLayoutPlayerView;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -37,8 +35,7 @@ import java.util.Map;
  */
 public class NormalDetailVideoPlayActivity extends BaseActivity {
     NestedScrollView mNestedScrollView;
-    LandLayoutVideo mDetailPlayer;
-    Button mOpenBtn;
+    LandLayoutPlayerView mDetailPlayer;
 
     private boolean isPlay;
     private boolean isPause;
@@ -54,7 +51,6 @@ public class NormalDetailVideoPlayActivity extends BaseActivity {
     protected void initViewsAndEvents() {
         mNestedScrollView = findViewById(R.id.post_detail_nested_scroll);
         mDetailPlayer = findViewById(R.id.detail_player);
-        mOpenBtn = findViewById(R.id.open_btn);
 
         ImageView thumbImage = new ImageView(this);
         thumbImage.setScaleType(ImageView.ScaleType.CENTER_CROP);

@@ -174,12 +174,11 @@ public abstract class VideoControlView extends VideoView implements View.OnClick
         mBottomContainer = (ViewGroup) findViewById(R.id.player_bottom_container);
         mTopContainer = (ViewGroup) findViewById(R.id.player_top_container);
         mBottomProgressBar = (ProgressBar) findViewById(R.id.player_bottom_progress);
-        mThumbImageViewLayout = (RelativeLayout) findViewById(R.id.player_thumb);
+        mThumbImageViewLayout = (RelativeLayout) findViewById(R.id.player_thumb_container);
         mLockScreen = (ImageView) findViewById(R.id.player_lock_screen);
 
         mLoadingProgressBar = findViewById(R.id.player_loading);
 
-        // todo
         viewCheck();
 
         if (isInEditMode())

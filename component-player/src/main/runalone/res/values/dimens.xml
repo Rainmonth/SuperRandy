@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="player_detail_play_view_height">200dp</dimen>
+    <dimen name="player_detail_play_bottom_container_height">40dp</dimen>
+    <dimen name="player_detail_play_top_container_height">48dp</dimen>
+    <dimen name="player_detail_play_bottom_progress_height">1.5dp</dimen>
 
     <dimen name="player_seek_bar_image">150dp</dimen>
 </resources>

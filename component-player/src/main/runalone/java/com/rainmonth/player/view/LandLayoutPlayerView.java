@@ -15,22 +15,22 @@ import com.rainmonth.player.video.base.VideoPlayer;
 /**
  * 支持全屏时直接切换的播放器
  */
-public class LandLayoutVideo extends StandardVideoPlayer {
+public class LandLayoutPlayerView extends StandardVideoPlayer {
 
     private boolean isLinkScroll = false;
 
     /**
      * 1.5.0开始加入，如果需要不同布局区分功能，需要重载
      */
-    public LandLayoutVideo(Context context, Boolean fullFlag) {
+    public LandLayoutPlayerView(Context context, Boolean fullFlag) {
         super(context, fullFlag);
     }
 
-    public LandLayoutVideo(Context context) {
+    public LandLayoutPlayerView(Context context) {
         super(context);
     }
 
-    public LandLayoutVideo(Context context, AttributeSet attrs) {
+    public LandLayoutPlayerView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
@@ -113,10 +113,10 @@ public class LandLayoutVideo extends StandardVideoPlayer {
 
     @Override
     protected void resolveNormalVideoShow(View oldF, ViewGroup vp, VideoPlayer gsyVideoPlayer) {
-        LandLayoutVideo landLayoutVideo = (LandLayoutVideo) gsyVideoPlayer;
-        landLayoutVideo.dismissProgressDialog();
-        landLayoutVideo.dismissVolumeDialog();
-        landLayoutVideo.dismissBrightnessDialog();
+        LandLayoutPlayerView landLayoutPlayerView = (LandLayoutPlayerView) gsyVideoPlayer;
+        landLayoutPlayerView.dismissProgressDialog();
+        landLayoutPlayerView.dismissVolumeDialog();
+        landLayoutPlayerView.dismissBrightnessDialog();
         super.resolveNormalVideoShow(oldF, vp, gsyVideoPlayer);
     }
 

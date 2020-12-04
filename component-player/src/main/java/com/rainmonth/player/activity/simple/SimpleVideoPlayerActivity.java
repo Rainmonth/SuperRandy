@@ -1,4 +1,4 @@
-package com.rainmonth.player.activity;
+package com.rainmonth.player.activity.simple;
 
 import android.net.Uri;
 
@@ -46,7 +46,7 @@ import java.util.List;
  * @author: randy
  * @description: 视频播放器
  */
-public class VideoPlayerActivity extends BaseActivity implements PlayerControlView.VisibilityListener,
+public class SimpleVideoPlayerActivity extends BaseActivity implements PlayerControlView.VisibilityListener,
         PlaybackPreparer {
     SimpleExoPlayer player;
     PlayerView playerView;

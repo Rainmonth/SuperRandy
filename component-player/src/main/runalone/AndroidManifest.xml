@@ -16,9 +16,6 @@
         android:theme="@style/PlayerAppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup">
-        <activity android:name=".activity.SimplePlayDemoListActivity" />
-        <activity android:name=".activity.DetailPlayDemoListActivity" />
-        <activity android:name=".activity.ListPlayDemoListActivity" />
         <activity
             android:name=".VideoSplashActivity"
             android:theme="@style/PlayerSplashTheme">
@@ -28,16 +25,59 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.GlobalVideoPlayerActivity" />
-        <activity android:name=".activity.ConfigVideoPlayActivity" />
+
         <activity
-            android:name=".activity.NormalDetailVideoPlayActivity"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode" />
-        <activity android:name=".activity.DyVideoPlayActivity" />
-        <activity android:name=".activity.FloatVideoPlayerActivity" />
-        <activity android:name=".activity.ListFocusVideoPlayActivity" />
-        <activity android:name=".activity.VideoMainActivity" />
-        <activity android:name=".activity.VideoPlayerActivity" />
+            android:name=".activity.VideoMainActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
+            android:theme="@style/PlayerDemoActivityTheme" />
+
+        <activity
+            android:name=".activity.simple.SimplePlayDemoListActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
+            android:theme="@style/PlayerDemoActivityTheme" />
+        <activity
+            android:name=".activity.simple.LocalPlayerActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
+            android:theme="@style/PlayerDemoActivityTheme" />
+        <activity
+            android:name=".activity.simple.SimpleVideoPlayerActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
+            android:theme="@style/PlayerDemoActivityTheme" />
+
+        <activity
+            android:name=".activity.detail.DetailPlayDemoListActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
+            android:theme="@style/PlayerDemoActivityTheme" />
+        <activity
+            android:name=".activity.detail.NormalDetailVideoPlayActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
+            android:theme="@style/PlayerDemoActivityTheme" />
+        <activity
+            android:name=".activity.detail.ConfigDetailVideoPlayerActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
+            android:theme="@style/PlayerDemoActivityTheme" />
+
+        <activity
+            android:name=".activity.list.ListPlayDemoListActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
+            android:theme="@style/PlayerDemoActivityTheme" />
+        <activity
+            android:name=".activity.list.ListFocusVideoPlayActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
+            android:theme="@style/PlayerDemoActivityTheme" />
+        <activity
+            android:name=".activity.GlobalVideoPlayerActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
+            android:theme="@style/PlayerDemoActivityTheme" />
+        <activity
+            android:name=".activity.list.DyVideoPlayActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
+            android:theme="@style/PlayerDemoActivityTheme" />
+        <activity
+            android:name=".activity.FloatVideoPlayerActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
+            android:theme="@style/PlayerDemoActivityTheme" />
+
     </application>
 
 </manifest>

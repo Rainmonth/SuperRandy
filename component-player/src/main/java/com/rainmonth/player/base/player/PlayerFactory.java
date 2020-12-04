@@ -1,5 +1,6 @@
 package com.rainmonth.player.base.player;
 
+import com.rainmonth.player.base.player.exo.Exo2PlayerManager;
 import com.rainmonth.player.base.player.ijk.IjkPlayerManager;
 
 /**
@@ -15,7 +16,7 @@ public class PlayerFactory {
 
     public static IPlayerManager getPlayManager() {
         if (sPlayerManager == null) {
-            sPlayerManager = IjkPlayerManager.class;
+            sPlayerManager = Exo2PlayerManager.class;
         }
         try {
             return sPlayerManager.newInstance();

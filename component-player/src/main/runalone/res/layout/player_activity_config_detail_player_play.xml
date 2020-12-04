@@ -29,7 +29,7 @@
 
     </androidx.core.widget.NestedScrollView>
 
-    <com.rainmonth.player.view.LandLayoutPlayerView
+    <com.rainmonth.player.view.ConfigVideoPlayerView
         android:id="@+id/detail_player"
         android:layout_width="match_parent"
         android:layout_height="@dimen/player_detail_play_view_height" />

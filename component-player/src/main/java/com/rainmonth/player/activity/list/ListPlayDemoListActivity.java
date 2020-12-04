@@ -1,4 +1,4 @@
-package com.rainmonth.player.activity;
+package com.rainmonth.player.activity.list;
 
 import android.text.TextUtils;
 import android.widget.TextView;
@@ -9,21 +9,15 @@ import com.rainmonth.common.bean.ExampleBean;
 import com.rainmonth.common.utils.log.LogUtils;
 import com.rainmonth.player.DemoDataFactory;
 import com.rainmonth.player.R;
-import com.rainmonth.player.model.DetailPlayExampleBean;
+import com.rainmonth.player.model.ListPlayExampleBean;
 
 /**
- * 详情播放示例列表
+ * 列表播放示例列表
  *
  * @author RandyZhang
  * @date 2020/12/02
  */
-public class DetailPlayDemoListActivity extends BaseListActivity<DetailPlayExampleBean> {
-
-
-    @Override
-    protected void initLocalData() {
-        datas = DemoDataFactory.getDetailPlayExampleList();
-    }
+public class ListPlayDemoListActivity extends BaseListActivity<ListPlayExampleBean> {
 
     @Override
     protected void configLoadMore() {
@@ -32,12 +26,18 @@ public class DetailPlayDemoListActivity extends BaseListActivity<DetailPlayExamp
     }
 
     @Override
+    protected void initLocalData() {
+        super.initLocalData();
+        datas = DemoDataFactory.getListPlayExampleList();
+    }
+
+    @Override
     protected int getItemViewLayoutId() {
         return R.layout.player_example_list_item_view;
     }
 
     @Override
-    protected void bindItem(BaseViewHolder holder, DetailPlayExampleBean item) {
+    protected void bindItem(BaseViewHolder holder, ListPlayExampleBean item) {
         TextView tvExName = holder.getView(R.id.tv_example_name);
         TextView tvExDes = holder.getView(R.id.tv_example_des);
         TextView tvStatus = holder.getView(R.id.tv_status);
@@ -67,7 +67,7 @@ public class DetailPlayDemoListActivity extends BaseListActivity<DetailPlayExamp
     }
 
     @Override
-    protected void onListItemClick(DetailPlayExampleBean baseBean, int position) {
+    protected void onListItemClick(ListPlayExampleBean baseBean, int position) {
         super.onListItemClick(baseBean, position);
         if (datas.size() == 0) {
             return;

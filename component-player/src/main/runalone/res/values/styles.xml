@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <style name="PlayerAppTheme" parent="BaseTheme">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
@@ -9,5 +10,16 @@
 
     <style name="PlayerSplashTheme" parent="SplashTheme">
         <item name="android:windowBackground">@drawable/player_activity_splash_bg</item>
+    </style>
+
+    <style name="PlayerDemoActivityTheme" parent="PlayerAppTheme">
+        <item name="android:configChanges">
+            keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode
+        </item>
+    </style>
+
+    <style name="PlayerSwitchDialogStyle" parent="@android:style/Theme.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
     </style>
 </resources>

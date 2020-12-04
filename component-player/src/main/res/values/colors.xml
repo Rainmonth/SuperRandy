@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="player_style_color">#005fff</color><!--主题色-->
+    <color name="player_view_bg">@android:color/black</color>
+    <color name="player_thumb_container_bg">@android:color/black</color>
     <color name="player_bottom_container_bg">#99000000</color><!--主题色-->
 </resources>
