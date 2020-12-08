@@ -19,7 +19,7 @@ import com.rainmonth.player.video.base.VideoViewBridge;
 /**
  * 带广告的视频播放
  */
-public class GSYADVideoPlayer extends StandardVideoPlayer {
+public class ADVideoPlayer extends StandardVideoPlayer {
 
     protected View mJumpAd;
 
@@ -27,15 +27,15 @@ public class GSYADVideoPlayer extends StandardVideoPlayer {
 
     protected boolean isFirstPrepared;
 
-    public GSYADVideoPlayer(Context context, Boolean fullFlag) {
+    public ADVideoPlayer(Context context, Boolean fullFlag) {
         super(context, fullFlag);
     }
 
-    public GSYADVideoPlayer(Context context) {
+    public ADVideoPlayer(Context context) {
         super(context);
     }
 
-    public GSYADVideoPlayer(Context context, AttributeSet attrs) {
+    public ADVideoPlayer(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
@@ -191,8 +191,8 @@ public class GSYADVideoPlayer extends StandardVideoPlayer {
     @Override
     protected void cloneParams(BaseVideoPlayer from, BaseVideoPlayer to) {
         super.cloneParams(from, to);
-        GSYADVideoPlayer sf = (GSYADVideoPlayer) from;
-        GSYADVideoPlayer st = (GSYADVideoPlayer) to;
+        ADVideoPlayer sf = (ADVideoPlayer) from;
+        ADVideoPlayer st = (ADVideoPlayer) to;
         st.isFirstPrepared = sf.isFirstPrepared;
         st.changeAdUIState();
     }

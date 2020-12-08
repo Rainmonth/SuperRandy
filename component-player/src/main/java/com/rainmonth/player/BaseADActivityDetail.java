@@ -7,7 +7,7 @@ import com.rainmonth.player.builder.GSYVideoOptionBuilder;
 import com.rainmonth.player.listener.GSYSampleCallBack;
 import com.rainmonth.player.utils.OrientationOption;
 import com.rainmonth.player.utils.OrientationUtils;
-import com.rainmonth.player.video.GSYADVideoPlayer;
+import com.rainmonth.player.video.ADVideoPlayer;
 import com.rainmonth.player.video.base.BaseVideoPlayer;
 import com.rainmonth.player.video.base.VideoPlayer;
 import com.rainmonth.player.video.base.VideoView;
@@ -15,7 +15,7 @@ import com.rainmonth.player.video.base.VideoView;
 /**
  * 详情AD模式播放页面基础类
  */
-public abstract class BaseADActivityDetail<T extends BaseVideoPlayer, R extends GSYADVideoPlayer> extends BaseActivityDetail<T> {
+public abstract class BaseADActivityDetail<T extends BaseVideoPlayer, R extends ADVideoPlayer> extends BaseActivityDetail<T> {
 
     protected OrientationUtils mADOrientationUtils;
 

@@ -7,7 +7,7 @@
     tools:ignore="ContentDescription, HardcodedText">
 
     <RelativeLayout
-        android:id="@+id/surface_container"
+        android:id="@+id/player_surface_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center">
@@ -34,7 +34,7 @@
             android:paddingBottom="8dp" />
 
         <ImageView
-            android:id="@+id/fullscreen"
+            android:id="@+id/player_fullscreen"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:paddingRight="16dp"
@@ -43,7 +43,7 @@
     </LinearLayout>
 
     <ProgressBar
-        android:id="@+id/loading"
+        android:id="@+id/player_loading"
         style="?android:attr/progressBarStyleLarge"
         android:layout_width="28dp"
         android:layout_height="28dp"
@@ -52,7 +52,7 @@
         android:visibility="invisible" />
 
     <ImageView
-        android:id="@+id/start"
+        android:id="@+id/player_start"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_centerHorizontal="true"
