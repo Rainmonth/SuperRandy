@@ -35,8 +35,9 @@ public class LogUtils {
     private static final String DEFAULT_MESSAGE = "execute";
     private static final String PARAM = "Param";
     private static final String NULL = "null";
-    private static final String TAG_DEFAULT = "KLog";
+    private static final String TAG_DEFAULT = "RdLog";
     private static final String SUFFIX = ".java";
+    private static final String PREFIX = "Rd_";      // tag 前缀
 
     public static final int JSON_INDENT = 4;
     public static final int V = 0x1;
@@ -246,6 +247,8 @@ public class LogUtils {
         } else if (!mIsGlobalTagEmpty) {
             tag = mGlobalTag;
         }
+
+        tag = PREFIX + tag;
 
         String msg = (objects == null) ? NULL_TIPS : getObjectsString(objects);
         String headString = "[ (" + className + ":" + lineNumber + ")#" + methodNameShort + " ] ";
