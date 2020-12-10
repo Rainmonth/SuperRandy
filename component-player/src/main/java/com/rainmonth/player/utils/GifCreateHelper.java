@@ -4,6 +4,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.ThumbnailUtils;
 
+import com.rainmonth.common.utils.FileUtils;
+import com.rainmonth.common.utils.PathUtils;
 import com.rainmonth.player.listener.GSYVideoGifSaveListener;
 import com.rainmonth.player.listener.GSYVideoShotSaveListener;
 import com.rainmonth.player.video.StandardVideoPlayer;
@@ -33,6 +35,7 @@ public class GifCreateHelper {
     private List<String> mPicList = new ArrayList<>();
 
     private File mTmpPath;
+    private String mTempPrefix = "Randy-Temp-Frame";
 
     private GSYVideoGifSaveListener mGSYVideoGifSaveListener;
 
@@ -119,7 +122,7 @@ public class GifCreateHelper {
      */
     private void startSaveBitmap() {
         // 保存的文件路径，请确保文件夹目录已经创建
-        File file = new File(mTmpPath, "GSY-TMP-FRAME" + System.currentTimeMillis() + ".tmp");
+        File file = new File(mTmpPath, mTempPrefix + System.currentTimeMillis() + ".tmp");
         mPlayer.saveFrame(file, new GSYVideoShotSaveListener() {
             @Override
             public void result(boolean success, final File file) {
@@ -192,5 +195,9 @@ public class GifCreateHelper {
                 startSaveBitmap();
             }
         }
+    }
+
+    public void clearTempFiles() {
+        FileUtils.deleteAllInDir(PathUtils.getExternalAppVideoRecordTempPath());
     }
 }

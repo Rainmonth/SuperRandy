@@ -4,12 +4,18 @@ import android.os.Build;
 import android.os.Environment;
 import android.text.TextUtils;
 
+import com.rainmonth.common.utils.log.LogUtils;
+
 import java.io.File;
 
 /**
  * 系统路径工具类
  */
 public final class PathUtils {
+    private static final String SCREEN_SHOT = "ScreenShot";
+    private static final String VIDEO_RECORD = "VideoRecord";
+    private static final String AUDIO_RECORD = "AudioRecord";
+    private static final String DIR_TEMP = "temp";
 
     private static final char SEP = File.separatorChar;
 
@@ -292,6 +298,60 @@ public final class PathUtils {
         File externalCacheDir = Utils.getApp().getExternalCacheDir();
         if (externalCacheDir == null) return "";
         return getAbsolutePath(externalCacheDir.getParentFile());
+    }
+
+    /**
+     * 获取应用的截屏目录
+     *
+     * @return 应用包名 + /ScreenShot
+     */
+    public static String getExternalAppScreenShotPath() {
+        if (!UtilsBridge.isSDCardEnableByEnvironment()) return "";
+        File externalCacheDir = Utils.getApp().getExternalCacheDir();
+        if (externalCacheDir == null) return "";
+        File screenShotDir = new File(externalCacheDir.getParentFile(), SCREEN_SHOT);
+        return getAbsolutePath(screenShotDir);
+    }
+
+    /**
+     * 获取应用的录屏目录
+     *
+     * @return 应用包名 + /VideoRecord
+     */
+    public static String getExternalAppVideoRecordPath() {
+        if (!UtilsBridge.isSDCardEnableByEnvironment()) return "";
+        File externalCacheDir = Utils.getApp().getExternalCacheDir();
+        if (externalCacheDir == null) return "";
+        File videoRecordDir = new File(externalCacheDir.getParentFile(), VIDEO_RECORD);
+        return getAbsolutePath(videoRecordDir);
+    }
+
+    /**
+     * 获取应用的录音目录
+     *
+     * @return 应用包名 + /AudioRecord
+     */
+    public static String getExternalAppAudioRecordPath() {
+        if (!UtilsBridge.isSDCardEnableByEnvironment()) return "";
+        File externalCacheDir = Utils.getApp().getExternalCacheDir();
+        if (externalCacheDir == null) return "";
+        File videoRecordDir = new File(externalCacheDir.getParentFile(), AUDIO_RECORD);
+        return getAbsolutePath(videoRecordDir);
+    }
+
+    /**
+     * 获取应用的录屏目录
+     *
+     * @return 应用包名 + /VideoRecord
+     */
+    public static String getExternalAppVideoRecordTempPath() {
+        if (!UtilsBridge.isSDCardEnableByEnvironment()) return "";
+        File externalCacheDir = Utils.getApp().getExternalCacheDir();
+        if (externalCacheDir == null) return "";
+        File videoRecordDir = new File(externalCacheDir.getParentFile() + File.separator + VIDEO_RECORD, DIR_TEMP);
+        String path = getAbsolutePath(videoRecordDir);
+        LogUtils.d("PathUtils", path);
+        return path;
     }
 
     /**

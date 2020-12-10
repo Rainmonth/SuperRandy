@@ -5,7 +5,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <application>
         <activity
-            android:name=".activity.simple.LocalPlayerActivity"
+            android:name=".activity.simple.LocalVideoPlayerActivity"
             android:theme="@style/PlayerDemoActivityTheme" />
         <activity
             android:name="com.rainmonth.player.activity.GlobalVideoPlayerActivity"
@@ -17,6 +17,10 @@
             android:theme="@style/PlayerDemoActivityTheme" />
         <activity
             android:name=".activity.detail.ConfigDetailVideoPlayerActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
+            android:theme="@style/PlayerDemoActivityTheme" />
+        <activity
+            android:name=".activity.detail.ControlDetailVideoPlayerActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
             android:theme="@style/PlayerDemoActivityTheme" />
         <activity
@@ -36,7 +40,7 @@
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
             android:theme="@style/PlayerDemoActivityTheme" />
         <activity
-            android:name="com.rainmonth.player.activity.simple.SimpleVideoPlayerActivity"
+            android:name="com.rainmonth.player.activity.simple.ExoSimpleVideoPlayerActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
             android:theme="@style/PlayerDemoActivityTheme" />
     </application>

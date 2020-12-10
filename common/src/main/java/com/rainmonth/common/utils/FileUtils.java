@@ -1545,6 +1545,12 @@ public final class FileUtils {
         return true;
     }
 
+
+    public static File makeDirs(String filePath) {
+        File file = new File(filePath);
+        return makeDirs(file);
+    }
+
     /**
      * 创建未存在的文件夹
      */

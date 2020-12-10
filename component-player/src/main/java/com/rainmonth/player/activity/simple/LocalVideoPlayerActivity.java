@@ -9,7 +9,7 @@ import com.rainmonth.common.base.BaseActivity;
  * @author RandyZhang
  * @date 2020/12/3 10:08 AM
  */
-public class LocalPlayerActivity extends BaseActivity {
+public class LocalVideoPlayerActivity extends BaseActivity {
     @Override
     public void initToolbar(int colorResId) {
 

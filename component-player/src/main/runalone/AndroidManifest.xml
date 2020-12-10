@@ -36,11 +36,11 @@
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
             android:theme="@style/PlayerDemoActivityTheme" />
         <activity
-            android:name=".activity.simple.LocalPlayerActivity"
+            android:name=".activity.simple.LocalVideoPlayerActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
             android:theme="@style/PlayerDemoActivityTheme" />
         <activity
-            android:name=".activity.simple.SimpleVideoPlayerActivity"
+            android:name=".activity.simple.ExoSimpleVideoPlayerActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
             android:theme="@style/PlayerDemoActivityTheme" />
 
@@ -54,6 +54,10 @@
             android:theme="@style/PlayerDemoActivityTheme" />
         <activity
             android:name=".activity.detail.ConfigDetailVideoPlayerActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
+            android:theme="@style/PlayerDemoActivityTheme" />
+        <activity
+            android:name=".activity.detail.ControlDetailVideoPlayerActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
             android:theme="@style/PlayerDemoActivityTheme" />
 

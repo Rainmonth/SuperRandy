@@ -46,7 +46,7 @@ import java.util.List;
  * @author: randy
  * @description: 视频播放器
  */
-public class SimpleVideoPlayerActivity extends BaseActivity implements PlayerControlView.VisibilityListener,
+public class ExoSimpleVideoPlayerActivity extends BaseActivity implements PlayerControlView.VisibilityListener,
         PlaybackPreparer {
     SimpleExoPlayer player;
     PlayerView playerView;

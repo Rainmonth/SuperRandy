@@ -32,6 +32,11 @@ import java.util.List;
  * {@link android.view.TextureView} 支持，{@link android.view.SurfaceView}、{@link android.opengl.GLSurfaceView} 不支持
  * 4. 清晰度切换就是同一个视频内容，不同的播放源（url）
  *
+ * 5. 倍速播放
+ * 6. 滤镜播放
+ * 7. 声音调节
+ * 8. 亮度调节
+ *
  * @author RandyZhang
  * @date 2020/12/3 10:31 AM
  */
