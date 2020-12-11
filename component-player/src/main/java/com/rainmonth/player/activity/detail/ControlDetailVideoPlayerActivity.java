@@ -2,36 +2,31 @@ package com.rainmonth.player.activity.detail;
 
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.media.MediaMetadataRetriever;
+import android.opengl.Matrix;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import androidx.annotation.NonNull;
 import androidx.core.widget.NestedScrollView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.rainmonth.common.base.BaseActivity;
 import com.rainmonth.common.utils.FileUtils;
 import com.rainmonth.common.utils.ImageUtils;
 import com.rainmonth.common.utils.PathUtils;
 import com.rainmonth.common.utils.PermissionUtils;
 import com.rainmonth.common.utils.ToastUtils;
 import com.rainmonth.common.utils.constant.PermissionConstants;
-import com.rainmonth.common.utils.log.LogUtils;
-import com.rainmonth.player.DemoDataFactory;
 import com.rainmonth.player.R;
-import com.rainmonth.player.VideoManager;
 import com.rainmonth.player.builder.GSYVideoOptionBuilder;
-import com.rainmonth.player.listener.GSYSampleCallBack;
 import com.rainmonth.player.listener.GSYVideoGifSaveListener;
 import com.rainmonth.player.listener.GSYVideoShotListener;
-import com.rainmonth.player.model.GSYVideoModel;
-import com.rainmonth.player.model.VideoListBean;
 import com.rainmonth.player.render.effect.AutoFixEffect;
 import com.rainmonth.player.render.effect.BarrelBlurEffect;
+import com.rainmonth.player.render.effect.BitmapIconEffect;
 import com.rainmonth.player.render.effect.BlackAndWhiteEffect;
 import com.rainmonth.player.render.effect.BrightnessEffect;
 import com.rainmonth.player.render.effect.ContrastEffect;
@@ -56,20 +51,21 @@ import com.rainmonth.player.render.effect.SharpnessEffect;
 import com.rainmonth.player.render.effect.TemperatureEffect;
 import com.rainmonth.player.render.effect.TintEffect;
 import com.rainmonth.player.render.effect.VignetteEffect;
+import com.rainmonth.player.render.glrender.GSYVideoGLViewCustomRender;
 import com.rainmonth.player.render.view.GSYVideoGLView;
 import com.rainmonth.player.utils.Debugger;
 import com.rainmonth.player.utils.GSYVideoType;
 import com.rainmonth.player.utils.GifCreateHelper;
-import com.rainmonth.player.utils.OrientationUtils;
 import com.rainmonth.player.video.StandardVideoPlayer;
 import com.rainmonth.player.video.base.VideoPlayer;
 import com.rainmonth.player.view.ConfigVideoPlayerView;
 
 import java.io.File;
 import java.util.HashMap;
-import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
-import butterknife.BindView;
+import static com.rainmonth.common.utils.SizeUtils.dp2px;
 
 /**
  * 带控制的视频播放
@@ -78,6 +74,8 @@ import butterknife.BindView;
  * - 可以跳转
  * - 可以录制gif
  * - 添加滤镜效果，注意：如果应用滤镜效果，需要使用{@link android.opengl.GLSurfaceView}
+ * - 支持水印效果，需要使用{@link android.opengl.GLSurfaceView}
+ * - 支持自定义渲染器，需要使用{@link android.opengl.GLSurfaceView}
  *
  * @author RandyZhang
  * @date 2020/12/2 6:19 PM
@@ -92,6 +90,7 @@ public class ControlDetailVideoPlayerActivity extends BaseDetailVideoPlayerActiv
     Button startGif;
     Button stopGif;
     Button changeFilter;
+    Button glAnimation;
     View loadingView;
 
     private String mPlayUrl = "http://9890.vod.myqcloud.com/9890_4e292f9a3dd011e6b4078980237cc3d3.f20.mp4";
@@ -105,6 +104,14 @@ public class ControlDetailVideoPlayerActivity extends BaseDetailVideoPlayerActiv
     private int mFilterType = 0;                        // 路径类型
     private final float deep = 0.8f;                    // 某些shader的控制参数
     private int mRenderViewType;                        // 渲染视图类型
+    private int percentage = 1;                         // GLSurfaceView 参数
+    private int percentageType = 1;                     // GLSurfaceView 对应的动画类型
+    private Timer mGlAnimateTimer = new Timer();
+    private MatrixRotateTask mGlAnimateTask;
+    private WaterMarkAnimTask mWaterMarkTask;
+    private boolean mMoveWaterMark = false;
+    private BitmapIconEffect mWaterMarkEffect;
+    private GSYVideoGLViewCustomRender mCustomRender;
 
     @Override
     protected int getContentViewLayoutID() {
@@ -121,9 +128,9 @@ public class ControlDetailVideoPlayerActivity extends BaseDetailVideoPlayerActiv
         startGif = findViewById(R.id.start_gif);
         stopGif = findViewById(R.id.stop_gif);
         changeFilter = findViewById(R.id.change_filter);
+        glAnimation = findViewById(R.id.gl_animation);
         loadingView = findViewById(R.id.loadingView);
 
-        mRenderViewType = GSYVideoType.getRenderType();
         changeSpeed.setOnClickListener(v -> onChangeSpeedClick());
 
         jump.setOnClickListener(v -> onJumpClick());
@@ -136,10 +143,36 @@ public class ControlDetailVideoPlayerActivity extends BaseDetailVideoPlayerActiv
 
         changeFilter.setOnClickListener(v -> onChangeFilterClick());
 
+        glAnimation.setOnClickListener(v -> onGlAnimationClick());
+
+        mRenderViewType = GSYVideoType.getRenderType();
+        GSYVideoType.setRenderType(GSYVideoType.GLSURFACE);
+
         resolveNormalVideoUI();
         initVideoBuilderMode();
-
         initGifHelper();
+
+        //自定义render需要在播放器开始播放之前，播放过程中不允许切换render
+
+        //水印图效果
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
+        mCustomRender = new GSYVideoGLViewCustomRender();
+        mWaterMarkEffect = new BitmapIconEffect(bitmap, dp2px(50), dp2px(50), 0.6f);
+        mCustomRender.setBitmapEffect(mWaterMarkEffect);
+        mDetailPlayer.setCustomGLRenderer(mCustomRender);
+        mDetailPlayer.setGLRenderMode(GSYVideoGLView.MODE_RENDER_SIZE);
+
+        //多窗口播放效果
+        //mDetailPlayer.setEffectFilter(new GammaEffect(0.8f));
+        //mDetailPlayer.setCustomGLRenderer(new GSYVideoGLViewCustomRender2());
+
+        //图片穿孔透视播放
+        //mDetailPlayer.setCustomGLRenderer(new GSYVideoGLViewCustomRender3());
+
+        //高斯拉伸视频铺满背景，替换黑色，前台正常比例播放
+//        mDetailPlayer.setEffectFilter(new GaussianBlurEffect(6.0f, GaussianBlurEffect.TYPEXY));
+        //mDetailPlayer.setCustomGLRenderer(new GSYVideoGLViewCustomRender4());
+        //mDetailPlayer.setGLRenderMode(GSYVideoGLView.MODE_RENDER_SIZE);
 
 //        List<VideoListBean> clarityList = DemoDataFactory.getSwitchClarityPlayList();
 //        mDetailPlayer.setUp(clarityList, true, "");
@@ -209,7 +242,7 @@ public class ControlDetailVideoPlayerActivity extends BaseDetailVideoPlayerActiv
     }
 
     private void onChangeFilterClick() {
-        if (mRenderViewType != GSYVideoType.GLSURFACE) {
+        if (GSYVideoType.getRenderType() != GSYVideoType.GLSURFACE) {
             ToastUtils.showLong("mRenderViewType 必须为 GLSurfaceView类型的才能应用该效果");
             // todo 切换RenderView 动态替换RenderView
 //            mDetailPlayer.getRenderProxy().addView(this, );
@@ -284,7 +317,7 @@ public class ControlDetailVideoPlayerActivity extends BaseDetailVideoPlayerActiv
                 effect = new VignetteEffect(deep);
                 break;
             case 22:
-                effect = new NoEffect();
+                effect = new GaussianBlurEffect(6.0f, GaussianBlurEffect.TYPEXY);
                 break;
             case 23:
                 effect = new OverlayEffect();
@@ -293,8 +326,6 @@ public class ControlDetailVideoPlayerActivity extends BaseDetailVideoPlayerActiv
                 effect = new SampleBlurEffect(4.0f);
                 break;
             case 25:
-                effect = new GaussianBlurEffect(6.0f, GaussianBlurEffect.TYPEXY);
-                break;
             default:
                 effect = new NoEffect();
                 break;
@@ -303,6 +334,104 @@ public class ControlDetailVideoPlayerActivity extends BaseDetailVideoPlayerActiv
         mFilterType++;
         if (mFilterType > 25) {
             mFilterType = mFilterType % 26;
+        }
+    }
+
+    /**
+     * {@link GSYVideoGLView} 才支持的OpenGL动画
+     */
+    private void onGlAnimationClick() {
+        cancelAnimateTask();
+        mGlAnimateTask = new MatrixRotateTask();
+        mGlAnimateTimer.schedule(mGlAnimateTask, 0, 50);
+        percentageType++;
+        if (percentageType > 4) {
+            percentageType = 1;
+        }
+
+        // 水印移动
+        cancelWaterMarkTask();
+        mWaterMarkTask = new WaterMarkAnimTask();
+        mGlAnimateTimer.schedule(mWaterMarkTask, 0, 400);
+        mMoveWaterMark = !mMoveWaterMark;
+    }
+
+    private void cancelAnimateTask() {
+        if (mGlAnimateTask != null) {
+            mGlAnimateTask.cancel();
+            mGlAnimateTask = null;
+        }
+    }
+
+    private void cancelWaterMarkTask() {
+        if (mWaterMarkTask != null) {
+            mWaterMarkTask.cancel();
+            mWaterMarkTask = null;
+        }
+    }
+
+    /**
+     * GLSurfaceView 矩阵选择 TimerTask
+     * 设置GLRender的VertexShader的transformMatrix
+     * 注意，这是android.opengl.Matrix
+     */
+    private class MatrixRotateTask extends TimerTask {
+        @Override
+        public void run() {
+            float[] transform = new float[16];
+            switch (percentageType) {
+                default:
+                case 1:
+                    //给予x变化
+                    Matrix.setRotateM(transform, 0, 360 * percentage / 100f, 1.0f, 0, 0.0f);
+                    break;
+                case 2:
+                    //给予y变化
+                    Matrix.setRotateM(transform, 0, 360 * percentage / 100f, 0.0f, 1.0f, 0.0f);
+                    break;
+                case 3:
+                    //给予z变化
+                    Matrix.setRotateM(transform, 0, 360 * percentage / 100f, 0.0f, 0, 1.0f);
+                    break;
+                case 4:
+                    Matrix.setRotateM(transform, 0, 360, 0.0f, 0, 1.0f);
+                    break;
+            }
+            //设置渲染transform
+            mDetailPlayer.setMatrixGL(transform);
+            percentage++;
+            if (percentage > 100) {
+                percentage = 1;
+            }
+        }
+    }
+
+    /**
+     * 视频水印移动 TimerTask
+     */
+    private class WaterMarkAnimTask extends TimerTask {
+
+        @Override
+        public void run() {
+            float[] transform = new float[16];
+            //旋转到正常角度
+            Matrix.setRotateM(transform, 0, 180f, 0.0f, 0, 1.0f);
+            //调整大小比例
+            Matrix.scaleM(transform, 0, mWaterMarkEffect.getScaleW(), mWaterMarkEffect.getScaleH(), 1);
+            if (mMoveWaterMark) {
+                //调整位置
+                Matrix.translateM(transform, 0, mWaterMarkEffect.getPositionX(), mWaterMarkEffect.getPositionY(), 0f);
+            } else {
+                float maxX = mWaterMarkEffect.getMaxPositionX();
+                float minX = mWaterMarkEffect.getMinPositionX();
+                float maxY = mWaterMarkEffect.getMaxPositionY();
+                float minY = mWaterMarkEffect.getMinPositionY();
+                float x = (float) Math.random() * (maxX - minX) + minX;
+                float y = (float) Math.random() * (maxY - minY) + minY;
+                //调整位置
+                Matrix.translateM(transform, 0, x, y, 0f);
+                mCustomRender.setCurrentMVPMatrix(transform);
+            }
         }
     }
 
