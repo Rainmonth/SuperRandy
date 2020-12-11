@@ -7,13 +7,18 @@ import android.view.View;
 import com.rainmonth.common.base.BaseActivity;
 import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.player.VideoManager;
-import com.rainmonth.player.builder.GSYVideoOptionBuilder;
+import com.rainmonth.player.builder.VideoPlayerConfigBuilder;
 import com.rainmonth.player.listener.VideoAllCallBack;
 import com.rainmonth.player.utils.OrientationOption;
 import com.rainmonth.player.utils.OrientationUtils;
 import com.rainmonth.player.video.base.BaseVideoPlayer;
 
 /**
+ * 详情播放基类
+ * 子类需要实现：
+ * 1. 提供播放器示例，{@link #getVideoPlayer()}
+ * 2. 提供播放器配置，{@link #getVideoPlayerConfigBuilder()}
+ *
  * @author RandyZhang
  * @date 2020/12/10 11:13 AM
  */
@@ -27,7 +32,6 @@ public abstract class BaseDetailVideoPlayerActivity<T extends BaseVideoPlayer> e
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -45,11 +49,11 @@ public abstract class BaseDetailVideoPlayerActivity<T extends BaseVideoPlayer> e
      */
     public void initVideo() {
         //外部辅助的旋转，帮助全屏
-        mOrientationUtils = new OrientationUtils(this, getGSYVideoPlayer(), getOrientationOption());
+        mOrientationUtils = new OrientationUtils(this, getVideoPlayer(), getOrientationOption());
         //初始化不打开外部的旋转
         mOrientationUtils.setEnable(false);
-        if (getGSYVideoPlayer().getFullscreenButton() != null) {
-            getGSYVideoPlayer().getFullscreenButton().setOnClickListener(new View.OnClickListener() {
+        if (getVideoPlayer().getFullscreenButton() != null) {
+            getVideoPlayer().getFullscreenButton().setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     showFull();
@@ -64,9 +68,9 @@ public abstract class BaseDetailVideoPlayerActivity<T extends BaseVideoPlayer> e
      */
     public void initVideoBuilderMode() {
         initVideo();
-        getGSYVideoOptionBuilder().
+        getVideoPlayerConfigBuilder().
                 setVideoAllCallBack(this)
-                .build(getGSYVideoPlayer());
+                .build(getVideoPlayer());
     }
 
     public void showFull() {
@@ -75,7 +79,7 @@ public abstract class BaseDetailVideoPlayerActivity<T extends BaseVideoPlayer> e
             mOrientationUtils.resolveByClick();
         }
         //第一个true是否需要隐藏actionbar，第二个true是否需要隐藏statusbar
-        getGSYVideoPlayer().startWindowFullscreen(this, hideActionBarWhenFull(), hideStatusBarWhenFull());
+        getVideoPlayer().startWindowFullscreen(this, hideActionBarWhenFull(), hideStatusBarWhenFull());
 
     }
 
@@ -94,7 +98,7 @@ public abstract class BaseDetailVideoPlayerActivity<T extends BaseVideoPlayer> e
     @Override
     protected void onPause() {
         super.onPause();
-        getGSYVideoPlayer().getCurrentPlayer().onVideoPause();
+        getVideoPlayer().getCurrentPlayer().onVideoPause();
         if (mOrientationUtils != null) {
             mOrientationUtils.setIsPause(true);
         }
@@ -104,7 +108,7 @@ public abstract class BaseDetailVideoPlayerActivity<T extends BaseVideoPlayer> e
     @Override
     protected void onResume() {
         super.onResume();
-        getGSYVideoPlayer().getCurrentPlayer().onVideoResume();
+        getVideoPlayer().getCurrentPlayer().onVideoResume();
         if (mOrientationUtils != null) {
             mOrientationUtils.setIsPause(false);
         }
@@ -115,7 +119,7 @@ public abstract class BaseDetailVideoPlayerActivity<T extends BaseVideoPlayer> e
     protected void onDestroy() {
         super.onDestroy();
         if (isPlay) {
-            getGSYVideoPlayer().getCurrentPlayer().release();
+            getVideoPlayer().getCurrentPlayer().release();
         }
         if (mOrientationUtils != null)
             mOrientationUtils.releaseListener();
@@ -129,7 +133,7 @@ public abstract class BaseDetailVideoPlayerActivity<T extends BaseVideoPlayer> e
         super.onConfigurationChanged(newConfig);
         //如果旋转了就全屏
         if (isPlay && !isPause) {
-            getGSYVideoPlayer().onConfigurationChanged(this, newConfig, mOrientationUtils, hideActionBarWhenFull(), hideStatusBarWhenFull());
+            getVideoPlayer().onConfigurationChanged(this, newConfig, mOrientationUtils, hideActionBarWhenFull(), hideStatusBarWhenFull());
         }
     }
 
@@ -274,12 +278,12 @@ public abstract class BaseDetailVideoPlayerActivity<T extends BaseVideoPlayer> e
     /**
      * 播放控件
      */
-    public abstract T getGSYVideoPlayer();
+    public abstract T getVideoPlayer();
 
     /**
      * 配置播放器
      */
-    public abstract GSYVideoOptionBuilder getGSYVideoOptionBuilder();
+    public abstract VideoPlayerConfigBuilder getVideoPlayerConfigBuilder();
 
     /**
      * 点击了全屏

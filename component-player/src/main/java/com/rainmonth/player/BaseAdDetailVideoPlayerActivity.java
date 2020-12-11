@@ -3,7 +3,8 @@ package com.rainmonth.player;
 import android.content.res.Configuration;
 import android.view.View;
 
-import com.rainmonth.player.builder.GSYVideoOptionBuilder;
+import com.rainmonth.player.activity.detail.BaseDetailVideoPlayerActivity;
+import com.rainmonth.player.builder.VideoPlayerConfigBuilder;
 import com.rainmonth.player.listener.GSYSampleCallBack;
 import com.rainmonth.player.utils.OrientationOption;
 import com.rainmonth.player.utils.OrientationUtils;
@@ -13,9 +14,17 @@ import com.rainmonth.player.video.base.VideoPlayer;
 import com.rainmonth.player.video.base.VideoView;
 
 /**
- * 详情AD模式播放页面基础类
+ * 广告详情播放基类
+ * 实现原理就是 在详情播放的基础上 添加一个播放器，一个用于辅助广告播放旋转的{@link OrientationUtils}，子类需要
+ * 提供以下内容：
+ * 1. 广告的开始播放的逻辑判断，{@link #isNeedAdOnStart()}；
+ * 2. 用于播放广告的播放器，{@link #getAdVideoPlayer()}
+ * 3. 如何构建广告播放器，{@link #getAdPlayerConfigBuilder()}
+ *
+ * @param <T> 主题内容视频播放器，继承自{@link BaseVideoPlayer}
+ * @param <R> 广告内容视频播放器，继承自{@link ADVideoPlayer}
  */
-public abstract class BaseADActivityDetail<T extends BaseVideoPlayer, R extends ADVideoPlayer> extends BaseActivityDetail<T> {
+public abstract class BaseAdDetailVideoPlayerActivity<T extends BaseVideoPlayer, R extends ADVideoPlayer> extends BaseDetailVideoPlayerActivity<T> {
 
     protected OrientationUtils mADOrientationUtils;
 
@@ -23,11 +32,11 @@ public abstract class BaseADActivityDetail<T extends BaseVideoPlayer, R extends 
     public void initVideo() {
         super.initVideo();
         //外部辅助的旋转，帮助全屏
-        mADOrientationUtils = new OrientationUtils(this, getGSYADVideoPlayer(), getOrientationOption());
+        mADOrientationUtils = new OrientationUtils(this, getAdVideoPlayer(), getOrientationOption());
         //初始化不打开外部的旋转
         mADOrientationUtils.setEnable(false);
-        if (getGSYADVideoPlayer().getFullscreenButton() != null) {
-            getGSYADVideoPlayer().getFullscreenButton().setOnClickListener(new View.OnClickListener() {
+        if (getAdVideoPlayer().getFullscreenButton() != null) {
+            getAdVideoPlayer().getFullscreenButton().setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     //直接横屏
@@ -44,7 +53,7 @@ public abstract class BaseADActivityDetail<T extends BaseVideoPlayer, R extends 
     @Override
     public void initVideoBuilderMode() {
         super.initVideoBuilderMode();
-        getGSYADVideoOptionBuilder()
+        getAdPlayerConfigBuilder()
                 .setVideoAllCallBack(new GSYSampleCallBack() {
 
                     @Override
@@ -57,16 +66,16 @@ public abstract class BaseADActivityDetail<T extends BaseVideoPlayer, R extends 
                     @Override
                     public void onAutoComplete(String url, Object... objects) {
                         //广告结束，释放
-                        getGSYADVideoPlayer().getCurrentPlayer().release();
-                        getGSYADVideoPlayer().onVideoReset();
-                        getGSYADVideoPlayer().setVisibility(View.GONE);
+                        getAdVideoPlayer().getCurrentPlayer().release();
+                        getAdVideoPlayer().onVideoReset();
+                        getAdVideoPlayer().setVisibility(View.GONE);
                         //开始播放原视频，根据是否处于全屏状态判断
-                        getGSYVideoPlayer().getCurrentPlayer().startAfterPrepared();
-                        if (getGSYADVideoPlayer().getCurrentPlayer().isIfCurrentIsFullscreen()) {
-                            getGSYADVideoPlayer().removeFullWindowViewOnly();
-                            if (!getGSYVideoPlayer().getCurrentPlayer().isIfCurrentIsFullscreen()) {
+                        getVideoPlayer().getCurrentPlayer().startAfterPrepared();
+                        if (getAdVideoPlayer().getCurrentPlayer().isIfCurrentIsFullscreen()) {
+                            getAdVideoPlayer().removeFullWindowViewOnly();
+                            if (!getVideoPlayer().getCurrentPlayer().isIfCurrentIsFullscreen()) {
                                 showFull();
-                                getGSYVideoPlayer().setSaveBeforeFullSystemUiVisibility(getGSYADVideoPlayer().getSaveBeforeFullSystemUiVisibility());
+                                getVideoPlayer().setSaveBeforeFullSystemUiVisibility(getAdVideoPlayer().getSaveBeforeFullSystemUiVisibility());
                             }
                         }
                     }
@@ -77,13 +86,13 @@ public abstract class BaseADActivityDetail<T extends BaseVideoPlayer, R extends 
                         if (mADOrientationUtils != null) {
                             mADOrientationUtils.backToProtVideo();
                         }
-                        if (getGSYVideoPlayer().getCurrentPlayer().isIfCurrentIsFullscreen()) {
-                            getGSYVideoPlayer().onBackFullscreen();
+                        if (getVideoPlayer().getCurrentPlayer().isIfCurrentIsFullscreen()) {
+                            getVideoPlayer().onBackFullscreen();
                         }
                     }
 
                 })
-                .build(getGSYADVideoPlayer());
+                .build(getAdVideoPlayer());
     }
 
     /**
@@ -91,11 +100,11 @@ public abstract class BaseADActivityDetail<T extends BaseVideoPlayer, R extends 
      */
     @Override
     public void showFull() {
-        if (orientationUtils.getIsLand() != 1) {
+        if (mOrientationUtils.getIsLand() != 1) {
             //直接横屏
-            orientationUtils.resolveByClick();
+            mOrientationUtils.resolveByClick();
         }
-        getGSYVideoPlayer().startWindowFullscreen(this, hideActionBarWhenFull(), hideStatusBarWhenFull());
+        getVideoPlayer().startWindowFullscreen(this, hideActionBarWhenFull(), hideStatusBarWhenFull());
     }
 
     @Override
@@ -136,10 +145,10 @@ public abstract class BaseADActivityDetail<T extends BaseVideoPlayer, R extends 
     public void onConfigurationChanged(Configuration newConfig) {
         //如果旋转了就全屏
         boolean backUpIsPlay = isPlay;
-        if (!isPause && getGSYADVideoPlayer().getVisibility() == View.VISIBLE) {
+        if (!isPause && getAdVideoPlayer().getVisibility() == View.VISIBLE) {
             if (isADStarted()) {
                 isPlay = false;
-                getGSYADVideoPlayer().getCurrentPlayer().onConfigurationChanged(this, newConfig, mADOrientationUtils, hideActionBarWhenFull(), hideStatusBarWhenFull());
+                getAdVideoPlayer().getCurrentPlayer().onConfigurationChanged(this, newConfig, mADOrientationUtils, hideActionBarWhenFull(), hideStatusBarWhenFull());
             }
         }
         super.onConfigurationChanged(newConfig);
@@ -179,20 +188,20 @@ public abstract class BaseADActivityDetail<T extends BaseVideoPlayer, R extends 
     }
 
     protected boolean isADStarted() {
-        return getGSYADVideoPlayer().getCurrentPlayer().getCurrentState() >= 0 &&
-                getGSYADVideoPlayer().getCurrentPlayer().getCurrentState() != VideoView.CURRENT_STATE_NORMAL
-                && getGSYADVideoPlayer().getCurrentPlayer().getCurrentState() != VideoView.CURRENT_STATE_AUTO_COMPLETE;
+        return getAdVideoPlayer().getCurrentPlayer().getCurrentState() >= 0 &&
+                getAdVideoPlayer().getCurrentPlayer().getCurrentState() != VideoView.CURRENT_STATE_NORMAL
+                && getAdVideoPlayer().getCurrentPlayer().getCurrentState() != VideoView.CURRENT_STATE_AUTO_COMPLETE;
     }
 
     /**
      * 显示播放广告
      */
     public void startAdPlay() {
-        getGSYADVideoPlayer().setVisibility(View.VISIBLE);
-        getGSYADVideoPlayer().startPlayLogic();
-        if (getGSYVideoPlayer().getCurrentPlayer().isIfCurrentIsFullscreen()) {
+        getAdVideoPlayer().setVisibility(View.VISIBLE);
+        getAdVideoPlayer().startPlayLogic();
+        if (getVideoPlayer().getCurrentPlayer().isIfCurrentIsFullscreen()) {
             showADFull();
-            getGSYADVideoPlayer().setSaveBeforeFullSystemUiVisibility(getGSYVideoPlayer().getSaveBeforeFullSystemUiVisibility());
+            getAdVideoPlayer().setSaveBeforeFullSystemUiVisibility(getVideoPlayer().getSaveBeforeFullSystemUiVisibility());
         }
     }
 
@@ -203,7 +212,7 @@ public abstract class BaseADActivityDetail<T extends BaseVideoPlayer, R extends 
         if (mADOrientationUtils.getIsLand() != 1) {
             mADOrientationUtils.resolveByClick();
         }
-        getGSYADVideoPlayer().startWindowFullscreen(BaseADActivityDetail.this, hideActionBarWhenFull(), hideStatusBarWhenFull());
+        getAdVideoPlayer().startWindowFullscreen(BaseAdDetailVideoPlayerActivity.this, hideActionBarWhenFull(), hideStatusBarWhenFull());
     }
 
     /**
@@ -214,16 +223,16 @@ public abstract class BaseADActivityDetail<T extends BaseVideoPlayer, R extends 
     }
 
 
-    public abstract R getGSYADVideoPlayer();
+    public abstract R getAdVideoPlayer();
 
     /**
      * 配置AD播放器
      */
-    public abstract GSYVideoOptionBuilder getGSYADVideoOptionBuilder();
+    public abstract VideoPlayerConfigBuilder getAdPlayerConfigBuilder();
 
     /**
      * 是否播放开始广告
-     * 如果返回 false ，setStartAfterPrepared 需要设置为 ture
+     * 如果返回 false ，setStartAfterPrepared 需要设置为 true
      */
     public abstract boolean isNeedAdOnStart();
 }

@@ -12,7 +12,7 @@ import com.rainmonth.common.base.BaseActivity;
 import com.rainmonth.player.R;
 import com.rainmonth.player.VideoManager;
 import com.rainmonth.player.base.player.exo.Exo2PlayerManager;
-import com.rainmonth.player.builder.GSYVideoOptionBuilder;
+import com.rainmonth.player.builder.VideoPlayerConfigBuilder;
 import com.rainmonth.player.listener.GSYSampleCallBack;
 import com.rainmonth.player.utils.Debugger;
 import com.rainmonth.player.utils.OrientationUtils;
@@ -67,7 +67,7 @@ public class NormalDetailVideoPlayActivity extends BaseActivity {
         Map<String, String> header = new HashMap<>();
         header.put("ee", "33");
         header.put("allowCrossProtocolRedirects", "true");
-        GSYVideoOptionBuilder builder = new GSYVideoOptionBuilder();
+        VideoPlayerConfigBuilder builder = new VideoPlayerConfigBuilder();
         builder.setThumbImageView(thumbImage)
                 .setIsTouchWiget(true)
                 .setRotateViewAuto(false)

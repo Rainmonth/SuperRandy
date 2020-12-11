@@ -1,12 +1,13 @@
 package com.rainmonth.player;
 
 import com.rainmonth.common.bean.ExampleBean;
+import com.rainmonth.player.activity.detail.AdDetailVideoPlayerActivity;
 import com.rainmonth.player.activity.detail.ConfigDetailVideoPlayerActivity;
 import com.rainmonth.player.activity.detail.ControlDetailVideoPlayerActivity;
 import com.rainmonth.player.activity.detail.DetailPlayDemoListActivity;
 import com.rainmonth.player.activity.list.DyVideoPlayActivity;
-import com.rainmonth.player.activity.FloatVideoPlayerActivity;
-import com.rainmonth.player.activity.GlobalVideoPlayerActivity;
+import com.rainmonth.player.activity.other.FloatVideoPlayerActivity;
+import com.rainmonth.player.activity.other.GlobalVideoPlayerActivity;
 import com.rainmonth.player.activity.list.ListPlayDemoListActivity;
 import com.rainmonth.player.activity.detail.NormalDetailVideoPlayActivity;
 import com.rainmonth.player.activity.simple.SimplePlayDemoListActivity;
@@ -29,11 +30,12 @@ public class DemoDataFactory {
     public static List<ExampleBean> getExampleDataList() {
         List<ExampleBean> exampleBeans = new ArrayList<>();
         exampleBeans.add(new ExampleBean("简单播放", "简单调用播放场景示例", ExampleBean.STATE_TODO, SimplePlayDemoListActivity.class));
-        exampleBeans.add(new ExampleBean("详情播放", "各种详情播放场景示例", ExampleBean.STATE_TODO, DetailPlayDemoListActivity.class));
+        exampleBeans.add(new ExampleBean("详情播放", "各种详情播放场景示例", ExampleBean.STATE_UNDER, DetailPlayDemoListActivity.class));
         exampleBeans.add(new ExampleBean("列表播放", "各种列表播放场景示例", ExampleBean.STATE_TODO, ListPlayDemoListActivity.class));
         exampleBeans.add(new ExampleBean("抖音式播放", "类似于抖音的那种播放效果", ExampleBean.STATE_TODO, DyVideoPlayActivity.class));
         exampleBeans.add(new ExampleBean("支持回退时悬浮窗播放", "很多游戏直播软件在退出播放页后仍可以小窗播放", ExampleBean.STATE_TODO, FloatVideoPlayerActivity.class));
         exampleBeans.add(new ExampleBean("全局悬浮窗播放场景示例", "全局浮窗播放", ExampleBean.STATE_TODO, GlobalVideoPlayerActivity.class));
+        exampleBeans.add(new ExampleBean("多动进度条预览播放", "全局浮窗播放", ExampleBean.STATE_TODO, GlobalVideoPlayerActivity.class));
         return exampleBeans;
     }
 
@@ -50,7 +52,8 @@ public class DemoDataFactory {
         exampleBeans.add(new DetailPlayExampleBean("详情播放", "采用ExoPlayer内核，同时采用ExoPlayer2提供的PlayerView", ExampleBean.STATE_FINISH, ExoSimpleVideoPlayerActivity.class));
         exampleBeans.add(new DetailPlayExampleBean("详情播放", "普通的详情播放", ExampleBean.STATE_FINISH, NormalDetailVideoPlayActivity.class));
         exampleBeans.add(new DetailPlayExampleBean("详情播放", "支持配置项的详情播放，如切换清晰度、切换显示比例等", ExampleBean.STATE_FINISH, ConfigDetailVideoPlayerActivity.class));
-        exampleBeans.add(new DetailPlayExampleBean("详情播放", "支持配置项的详情播放，如清晰度、显示比例、播放速度、视频截图、gif生成等", ExampleBean.STATE_FINISH, ControlDetailVideoPlayerActivity.class));
+        exampleBeans.add(new DetailPlayExampleBean("使用GLSurfaceView详情播放", "支持配置项的详情播放，如清晰度、显示比例、播放速度、视频截图、gif生成等", ExampleBean.STATE_FINISH, ControlDetailVideoPlayerActivity.class));
+        exampleBeans.add(new DetailPlayExampleBean("带广告的详情播放", "支持配置广告，先播放广告，在播放主题内容，广告支持跳过", ExampleBean.STATE_UNDER, AdDetailVideoPlayerActivity.class));
         return exampleBeans;
     }
 

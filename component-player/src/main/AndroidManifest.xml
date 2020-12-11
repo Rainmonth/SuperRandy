@@ -8,7 +8,7 @@
             android:name=".activity.simple.LocalVideoPlayerActivity"
             android:theme="@style/PlayerDemoActivityTheme" />
         <activity
-            android:name="com.rainmonth.player.activity.GlobalVideoPlayerActivity"
+            android:name="com.rainmonth.player.activity.other.GlobalVideoPlayerActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
             android:theme="@style/PlayerDemoActivityTheme" />
         <activity
@@ -23,12 +23,15 @@
             android:name=".activity.detail.ControlDetailVideoPlayerActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
             android:theme="@style/PlayerDemoActivityTheme" />
+        <activity android:name=".activity.detail.AdDetailVideoPlayerActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
+            android:theme="@style/PlayerDemoActivityTheme"/>
         <activity
             android:name="com.rainmonth.player.activity.list.DyVideoPlayActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
             android:theme="@style/PlayerDemoActivityTheme" />
         <activity
-            android:name="com.rainmonth.player.activity.FloatVideoPlayerActivity"
+            android:name="com.rainmonth.player.activity.other.FloatVideoPlayerActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
             android:theme="@style/PlayerDemoActivityTheme" />
         <activity

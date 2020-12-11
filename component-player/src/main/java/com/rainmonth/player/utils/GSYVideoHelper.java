@@ -14,7 +14,7 @@ import android.widget.FrameLayout;
 
 import androidx.transition.TransitionManager;
 
-import com.rainmonth.player.builder.GSYVideoOptionBuilder;
+import com.rainmonth.player.builder.VideoPlayerConfigBuilder;
 import com.rainmonth.player.listener.GSYVideoProgressListener;
 import com.rainmonth.player.listener.LockClickListener;
 import com.rainmonth.player.listener.VideoAllCallBack;
@@ -72,7 +72,7 @@ public class GSYVideoHelper {
     /**
      * 播放配置
      */
-    private GSYVideoHelperBuilder mVideoOptionBuilder;
+    private VideoHelperBuilder mVideoOptionBuilder;
     /**
      * 上下文
      */
@@ -538,11 +538,11 @@ public class GSYVideoHelper {
     /**
      * 设置配置
      */
-    public void setGsyVideoOptionBuilder(GSYVideoHelperBuilder mVideoOptionBuilder) {
+    public void setGsyVideoOptionBuilder(VideoHelperBuilder mVideoOptionBuilder) {
         this.mVideoOptionBuilder = mVideoOptionBuilder;
     }
 
-    public GSYVideoOptionBuilder getGsyVideoOptionBuilder() {
+    public VideoPlayerConfigBuilder getGsyVideoOptionBuilder() {
         return mVideoOptionBuilder;
     }
 
@@ -568,7 +568,7 @@ public class GSYVideoHelper {
     /**
      * 配置
      */
-    public static class GSYVideoHelperBuilder extends GSYVideoOptionBuilder {
+    public static class VideoHelperBuilder extends VideoPlayerConfigBuilder {
 
         protected boolean mHideActionBar;
 
@@ -578,7 +578,7 @@ public class GSYVideoHelper {
             return mHideActionBar;
         }
 
-        public GSYVideoHelperBuilder setHideActionBar(boolean hideActionBar) {
+        public VideoHelperBuilder setHideActionBar(boolean hideActionBar) {
             this.mHideActionBar = hideActionBar;
             return this;
         }
@@ -587,7 +587,7 @@ public class GSYVideoHelper {
             return mHideStatusBar;
         }
 
-        public GSYVideoHelperBuilder setHideStatusBar(boolean hideStatusBar) {
+        public VideoHelperBuilder setHideStatusBar(boolean hideStatusBar) {
             this.mHideStatusBar = hideStatusBar;
             return this;
         }

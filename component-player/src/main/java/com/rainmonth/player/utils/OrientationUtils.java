@@ -23,8 +23,8 @@ public class OrientationUtils {
     private static final int LAND_TYPE_NORMAL = 1;
     private static final int LAND_TYPE_REVERSE = 2;
 
-    private WeakReference<Activity> mActivity;
-    private BaseVideoPlayer mVideoPlayer;
+    private final WeakReference<Activity> mActivity;
+    private final BaseVideoPlayer mVideoPlayer;
     private OrientationEventListener mOrientationEventListener;
     private OrientationOption mOrientationOption;
 

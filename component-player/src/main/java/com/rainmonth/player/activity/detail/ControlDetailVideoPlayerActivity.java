@@ -21,7 +21,7 @@ import com.rainmonth.common.utils.PermissionUtils;
 import com.rainmonth.common.utils.ToastUtils;
 import com.rainmonth.common.utils.constant.PermissionConstants;
 import com.rainmonth.player.R;
-import com.rainmonth.player.builder.GSYVideoOptionBuilder;
+import com.rainmonth.player.builder.VideoPlayerConfigBuilder;
 import com.rainmonth.player.listener.GSYVideoGifSaveListener;
 import com.rainmonth.player.listener.GSYVideoShotListener;
 import com.rainmonth.player.render.effect.AutoFixEffect;
@@ -461,16 +461,16 @@ public class ControlDetailVideoPlayerActivity extends BaseDetailVideoPlayerActiv
 
 
     @Override
-    public StandardVideoPlayer getGSYVideoPlayer() {
+    public StandardVideoPlayer getVideoPlayer() {
         return mDetailPlayer;
     }
 
     @Override
-    public GSYVideoOptionBuilder getGSYVideoOptionBuilder() {
+    public VideoPlayerConfigBuilder getVideoPlayerConfigBuilder() {
         //内置封面可参考SampleCoverVideo
         mCoverImage = new ImageView(this);
         loadCover(mCoverImage, mPlayUrl);
-        return new GSYVideoOptionBuilder()
+        return new VideoPlayerConfigBuilder()
                 .setThumbImageView(mCoverImage)
                 .setUrl(mPlayUrl)
                 .setCacheWithPlay(true)
@@ -535,12 +535,12 @@ public class ControlDetailVideoPlayerActivity extends BaseDetailVideoPlayerActiv
     public void initVideo() {
         super.initVideo();
         //重载后实现点击，不横屏
-        if (getGSYVideoPlayer().getFullscreenButton() != null) {
-            getGSYVideoPlayer().getFullscreenButton().setOnClickListener(new View.OnClickListener() {
+        if (getVideoPlayer().getFullscreenButton() != null) {
+            getVideoPlayer().getFullscreenButton().setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     //第一个true是否需要隐藏actionbar，第二个true是否需要隐藏statusbar
-                    getGSYVideoPlayer().startWindowFullscreen(mContext, true, true);
+                    getVideoPlayer().startWindowFullscreen(mContext, true, true);
                 }
             });
         }

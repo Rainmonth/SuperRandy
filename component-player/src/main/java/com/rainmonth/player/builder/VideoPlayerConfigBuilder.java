@@ -16,14 +16,9 @@ import java.io.File;
 import java.util.Map;
 
 /**
- * <p>
- * 配置工具类
- * <p>
- * 不是一个正常的Builder,这只是集合了所有设置配置而已.
- * 每个配置其实可以在对应的video接口中找到单独设置
- * 这只是方便使用
+ * 视频播放器配置工具类
  */
-public class GSYVideoOptionBuilder {
+public class VideoPlayerConfigBuilder {
 
     //退出全屏显示的案件图片
     protected int mShrinkImageRes = -1;
@@ -174,7 +169,7 @@ public class GSYVideoOptionBuilder {
      *
      * @param autoFullWithSize 默认false
      */
-    public GSYVideoOptionBuilder setAutoFullWithSize(boolean autoFullWithSize) {
+    public VideoPlayerConfigBuilder setAutoFullWithSize(boolean autoFullWithSize) {
         this.mAutoFullWithSize = autoFullWithSize;
         return this;
     }
@@ -184,7 +179,7 @@ public class GSYVideoOptionBuilder {
      *
      * @param showFullAnimation 是否使用全屏动画效果
      */
-    public GSYVideoOptionBuilder setShowFullAnimation(boolean showFullAnimation) {
+    public VideoPlayerConfigBuilder setShowFullAnimation(boolean showFullAnimation) {
         this.mShowFullAnimation = showFullAnimation;
         return this;
     }
@@ -192,7 +187,7 @@ public class GSYVideoOptionBuilder {
     /**
      * 设置循环
      */
-    public GSYVideoOptionBuilder setLooping(boolean looping) {
+    public VideoPlayerConfigBuilder setLooping(boolean looping) {
         this.mLooping = looping;
         return this;
     }
@@ -203,7 +198,7 @@ public class GSYVideoOptionBuilder {
      *
      * @param mVideoAllCallBack
      */
-    public GSYVideoOptionBuilder setVideoAllCallBack(VideoAllCallBack mVideoAllCallBack) {
+    public VideoPlayerConfigBuilder setVideoAllCallBack(VideoAllCallBack mVideoAllCallBack) {
         this.mVideoAllCallBack = mVideoAllCallBack;
         return this;
     }
@@ -211,7 +206,7 @@ public class GSYVideoOptionBuilder {
     /**
      * 是否开启自动旋转
      */
-    public GSYVideoOptionBuilder setRotateViewAuto(boolean rotateViewAuto) {
+    public VideoPlayerConfigBuilder setRotateViewAuto(boolean rotateViewAuto) {
         this.mRotateViewAuto = rotateViewAuto;
         return this;
     }
@@ -219,7 +214,7 @@ public class GSYVideoOptionBuilder {
     /**
      * 一全屏就锁屏横屏，默认false竖屏，可配合setRotateViewAuto使用
      */
-    public GSYVideoOptionBuilder setLockLand(boolean lockLand) {
+    public VideoPlayerConfigBuilder setLockLand(boolean lockLand) {
         this.mLockLand = lockLand;
         return this;
     }
@@ -227,7 +222,7 @@ public class GSYVideoOptionBuilder {
     /**
      * 播放速度
      */
-    public GSYVideoOptionBuilder setSpeed(float speed) {
+    public VideoPlayerConfigBuilder setSpeed(float speed) {
         this.mSpeed = speed;
         return this;
     }
@@ -236,7 +231,7 @@ public class GSYVideoOptionBuilder {
     /**
      * 变声不变调
      */
-    public GSYVideoOptionBuilder setSoundTouch(boolean soundTouch) {
+    public VideoPlayerConfigBuilder setSoundTouch(boolean soundTouch) {
         this.mSounchTouch = soundTouch;
         return this;
     }
@@ -244,7 +239,7 @@ public class GSYVideoOptionBuilder {
     /**
      * 全屏隐藏虚拟按键，默认打开
      */
-    public GSYVideoOptionBuilder setHideKey(boolean hideKey) {
+    public VideoPlayerConfigBuilder setHideKey(boolean hideKey) {
         this.mHideKey = hideKey;
         return this;
     }
@@ -253,7 +248,7 @@ public class GSYVideoOptionBuilder {
      * 是否可以滑动界面改变进度，声音等
      * 默认true
      */
-    public GSYVideoOptionBuilder setIsTouchWiget(boolean isTouchWiget) {
+    public VideoPlayerConfigBuilder setIsTouchWiget(boolean isTouchWiget) {
         this.mIsTouchWiget = isTouchWiget;
         return this;
     }
@@ -262,7 +257,7 @@ public class GSYVideoOptionBuilder {
      * 是否可以全屏滑动界面改变进度，声音等
      * 默认 true
      */
-    public GSYVideoOptionBuilder setIsTouchWigetFull(boolean isTouchWigetFull) {
+    public VideoPlayerConfigBuilder setIsTouchWigetFull(boolean isTouchWigetFull) {
         this.mIsTouchWigetFull = isTouchWigetFull;
         return this;
     }
@@ -271,7 +266,7 @@ public class GSYVideoOptionBuilder {
     /**
      * 是否需要显示流量提示,默认true
      */
-    public GSYVideoOptionBuilder setNeedShowWifiTip(boolean needShowWifiTip) {
+    public VideoPlayerConfigBuilder setNeedShowWifiTip(boolean needShowWifiTip) {
         this.mNeedShowWifiTip = needShowWifiTip;
         return this;
     }
@@ -281,7 +276,7 @@ public class GSYVideoOptionBuilder {
      * 必须在setUp之前设置
      * 不设置使用默认
      */
-    public GSYVideoOptionBuilder setEnlargeImageRes(int mEnlargeImageRes) {
+    public VideoPlayerConfigBuilder setEnlargeImageRes(int mEnlargeImageRes) {
         this.mEnlargeImageRes = mEnlargeImageRes;
         return this;
     }
@@ -291,7 +286,7 @@ public class GSYVideoOptionBuilder {
      * 必须在setUp之前设置
      * 不设置使用默认
      */
-    public GSYVideoOptionBuilder setShrinkImageRes(int mShrinkImageRes) {
+    public VideoPlayerConfigBuilder setShrinkImageRes(int mShrinkImageRes) {
         this.mShrinkImageRes = mShrinkImageRes;
         return this;
     }
@@ -304,7 +299,7 @@ public class GSYVideoOptionBuilder {
      *
      * @param showPauseCover 默认true
      */
-    public GSYVideoOptionBuilder setShowPauseCover(boolean showPauseCover) {
+    public VideoPlayerConfigBuilder setShowPauseCover(boolean showPauseCover) {
         this.mShowPauseCover = showPauseCover;
         return this;
     }
@@ -314,7 +309,7 @@ public class GSYVideoOptionBuilder {
      *
      * @param seekRatio 滑动快进的比例，默认1。数值越大，滑动的产生的seek越小
      */
-    public GSYVideoOptionBuilder setSeekRatio(float seekRatio) {
+    public VideoPlayerConfigBuilder setSeekRatio(float seekRatio) {
         if (seekRatio < 0) {
             return this;
         }
@@ -327,7 +322,7 @@ public class GSYVideoOptionBuilder {
      *
      * @param rotateWithSystem 默认true
      */
-    public GSYVideoOptionBuilder setRotateWithSystem(boolean rotateWithSystem) {
+    public VideoPlayerConfigBuilder setRotateWithSystem(boolean rotateWithSystem) {
         this.mRotateWithSystem = rotateWithSystem;
         return this;
     }
@@ -337,7 +332,7 @@ public class GSYVideoOptionBuilder {
      *
      * @param playTag 保证不重复就好
      */
-    public GSYVideoOptionBuilder setPlayTag(String playTag) {
+    public VideoPlayerConfigBuilder setPlayTag(String playTag) {
         this.mPlayTag = playTag;
         return this;
     }
@@ -346,7 +341,7 @@ public class GSYVideoOptionBuilder {
     /**
      * 设置播放位置防止错位
      */
-    public GSYVideoOptionBuilder setPlayPosition(int playPosition) {
+    public VideoPlayerConfigBuilder setPlayPosition(int playPosition) {
         this.mPlayPosition = playPosition;
         return this;
     }
@@ -356,7 +351,7 @@ public class GSYVideoOptionBuilder {
      * 目前有时候前几秒有跳动问题，毫秒
      * 需要在startPlayLogic之前，即播放开始之前
      */
-    public GSYVideoOptionBuilder setSeekOnStart(long seekOnStart) {
+    public VideoPlayerConfigBuilder setSeekOnStart(long seekOnStart) {
         this.mSeekOnStart = seekOnStart;
         return this;
     }
@@ -366,7 +361,7 @@ public class GSYVideoOptionBuilder {
      *
      * @param url
      */
-    public GSYVideoOptionBuilder setUrl(String url) {
+    public VideoPlayerConfigBuilder setUrl(String url) {
         this.mUrl = url;
         return this;
     }
@@ -376,7 +371,7 @@ public class GSYVideoOptionBuilder {
      *
      * @param videoTitle
      */
-    public GSYVideoOptionBuilder setVideoTitle(String videoTitle) {
+    public VideoPlayerConfigBuilder setVideoTitle(String videoTitle) {
         this.mVideoTitle = videoTitle;
         return this;
     }
@@ -386,7 +381,7 @@ public class GSYVideoOptionBuilder {
      *
      * @param cacheWithPlay
      */
-    public GSYVideoOptionBuilder setCacheWithPlay(boolean cacheWithPlay) {
+    public VideoPlayerConfigBuilder setCacheWithPlay(boolean cacheWithPlay) {
         this.mCacheWithPlay = cacheWithPlay;
         return this;
     }
@@ -396,7 +391,7 @@ public class GSYVideoOptionBuilder {
      *
      * @param startAfterPrepared 默认true，false的时候需要在prepared后调用startAfterPrepared()
      */
-    public GSYVideoOptionBuilder setStartAfterPrepared(boolean startAfterPrepared) {
+    public VideoPlayerConfigBuilder setStartAfterPrepared(boolean startAfterPrepared) {
         this.mStartAfterPrepared = startAfterPrepared;
         return this;
     }
@@ -407,7 +402,7 @@ public class GSYVideoOptionBuilder {
      *
      * @param releaseWhenLossAudio 默认true，false的时候只会暂停
      */
-    public GSYVideoOptionBuilder setReleaseWhenLossAudio(boolean releaseWhenLossAudio) {
+    public VideoPlayerConfigBuilder setReleaseWhenLossAudio(boolean releaseWhenLossAudio) {
         this.mReleaseWhenLossAudio = releaseWhenLossAudio;
         return this;
     }
@@ -417,7 +412,7 @@ public class GSYVideoOptionBuilder {
      *
      * @param cachePath
      */
-    public GSYVideoOptionBuilder setCachePath(File cachePath) {
+    public VideoPlayerConfigBuilder setCachePath(File cachePath) {
         this.mCachePath = cachePath;
         return this;
     }
@@ -427,7 +422,7 @@ public class GSYVideoOptionBuilder {
      *
      * @param mapHeadData
      */
-    public GSYVideoOptionBuilder setMapHeadData(Map<String, String> mapHeadData) {
+    public VideoPlayerConfigBuilder setMapHeadData(Map<String, String> mapHeadData) {
         this.mMapHeadData = mapHeadData;
         return this;
     }
@@ -436,7 +431,7 @@ public class GSYVideoOptionBuilder {
     /**
      * 进度回调
      */
-    public GSYVideoOptionBuilder setGSYVideoProgressListener(GSYVideoProgressListener videoProgressListener) {
+    public VideoPlayerConfigBuilder setGSYVideoProgressListener(GSYVideoProgressListener videoProgressListener) {
         this.mGSYVideoProgressListener = videoProgressListener;
         return this;
     }
@@ -445,7 +440,7 @@ public class GSYVideoOptionBuilder {
     /***
      * 设置封面
      */
-    public GSYVideoOptionBuilder setThumbImageView(View view) {
+    public VideoPlayerConfigBuilder setThumbImageView(View view) {
         mThumbImageView = view;
         return this;
     }
@@ -454,7 +449,7 @@ public class GSYVideoOptionBuilder {
     /**
      * 底部进度条-弹出的
      */
-    public GSYVideoOptionBuilder setBottomShowProgressBarDrawable(Drawable drawable, Drawable thumb) {
+    public VideoPlayerConfigBuilder setBottomShowProgressBarDrawable(Drawable drawable, Drawable thumb) {
         mBottomShowProgressDrawable = drawable;
         mBottomShowProgressThumbDrawable = thumb;
         return this;
@@ -463,7 +458,7 @@ public class GSYVideoOptionBuilder {
     /**
      * 底部进度条-非弹出
      */
-    public GSYVideoOptionBuilder setBottomProgressBarDrawable(Drawable drawable) {
+    public VideoPlayerConfigBuilder setBottomProgressBarDrawable(Drawable drawable) {
         mBottomProgressDrawable = drawable;
         return this;
     }
@@ -471,7 +466,7 @@ public class GSYVideoOptionBuilder {
     /**
      * 声音进度条
      */
-    public GSYVideoOptionBuilder setDialogVolumeProgressBar(Drawable drawable) {
+    public VideoPlayerConfigBuilder setDialogVolumeProgressBar(Drawable drawable) {
         mVolumeProgressDrawable = drawable;
         return this;
     }
@@ -480,7 +475,7 @@ public class GSYVideoOptionBuilder {
     /**
      * 中间进度条
      */
-    public GSYVideoOptionBuilder setDialogProgressBar(Drawable drawable) {
+    public VideoPlayerConfigBuilder setDialogProgressBar(Drawable drawable) {
         mDialogProgressBarDrawable = drawable;
         return this;
     }
@@ -488,7 +483,7 @@ public class GSYVideoOptionBuilder {
     /**
      * 中间进度条字体颜色
      */
-    public GSYVideoOptionBuilder setDialogProgressColor(int highLightColor, int normalColor) {
+    public VideoPlayerConfigBuilder setDialogProgressColor(int highLightColor, int normalColor) {
         mDialogProgressHighLightColor = highLightColor;
         mDialogProgressNormalColor = normalColor;
         return this;
@@ -497,7 +492,7 @@ public class GSYVideoOptionBuilder {
     /**
      * 是否点击封面可以播放
      */
-    public GSYVideoOptionBuilder setThumbPlay(boolean thumbPlay) {
+    public VideoPlayerConfigBuilder setThumbPlay(boolean thumbPlay) {
         this.mThumbPlay = thumbPlay;
         return this;
     }
@@ -506,7 +501,7 @@ public class GSYVideoOptionBuilder {
      * 是否需要全屏锁定屏幕功能
      * 如果单独使用请设置setIfCurrentIsFullscreen为true
      */
-    public GSYVideoOptionBuilder setNeedLockFull(boolean needLoadFull) {
+    public VideoPlayerConfigBuilder setNeedLockFull(boolean needLoadFull) {
         this.mNeedLockFull = needLoadFull;
         return this;
     }
@@ -514,7 +509,7 @@ public class GSYVideoOptionBuilder {
     /**
      * 锁屏点击
      */
-    public GSYVideoOptionBuilder setLockClickListener(LockClickListener lockClickListener) {
+    public VideoPlayerConfigBuilder setLockClickListener(LockClickListener lockClickListener) {
         this.mLockClickListener = lockClickListener;
         return this;
     }
@@ -524,7 +519,7 @@ public class GSYVideoOptionBuilder {
      *
      * @param dismissControlTime 毫秒，默认2500
      */
-    public GSYVideoOptionBuilder setDismissControlTime(int dismissControlTime) {
+    public VideoPlayerConfigBuilder setDismissControlTime(int dismissControlTime) {
         this.mDismissControlTime = dismissControlTime;
         return this;
     }
@@ -532,7 +527,7 @@ public class GSYVideoOptionBuilder {
     /**
      * 设置滤镜效果
      */
-    public GSYVideoOptionBuilder setEffectFilter(GSYVideoGLView.ShaderInterface effectFilter) {
+    public VideoPlayerConfigBuilder setEffectFilter(GSYVideoGLView.ShaderInterface effectFilter) {
         this.mEffectFilter = effectFilter;
         return this;
     }
@@ -542,18 +537,18 @@ public class GSYVideoOptionBuilder {
      *
      * @param overrideExtension 比如传入 m3u8,mp4,avi 等类型
      */
-    public GSYVideoOptionBuilder setOverrideExtension(String overrideExtension) {
+    public VideoPlayerConfigBuilder setOverrideExtension(String overrideExtension) {
         this.mOverrideExtension = overrideExtension;
         return this;
     }
 
 
-    public GSYVideoOptionBuilder setOnlyRotateLand(boolean onlyRotateLand) {
+    public VideoPlayerConfigBuilder setOnlyRotateLand(boolean onlyRotateLand) {
         this.mIsOnlyRotateLand = onlyRotateLand;
         return this;
     }
 
-    public GSYVideoOptionBuilder setShowDragProgressTextOnSeekBar(boolean isShowDragProgressTextOnSeekBar) {
+    public VideoPlayerConfigBuilder setShowDragProgressTextOnSeekBar(boolean isShowDragProgressTextOnSeekBar) {
         this.isShowDragProgressTextOnSeekBar = isShowDragProgressTextOnSeekBar;
         return this;
     }
@@ -563,17 +558,17 @@ public class GSYVideoOptionBuilder {
      * 目前弃用，请使用正常setup
      */
     @Deprecated
-    public GSYVideoOptionBuilder setSetUpLazy(boolean setUpLazy) {
+    public VideoPlayerConfigBuilder setSetUpLazy(boolean setUpLazy) {
         this.mSetUpLazy = setUpLazy;
         return this;
     }
 
-    public GSYVideoOptionBuilder setFullHideActionBar(boolean actionBar) {
+    public VideoPlayerConfigBuilder setFullHideActionBar(boolean actionBar) {
         this.mActionBar = actionBar;
         return this;
     }
 
-    public GSYVideoOptionBuilder setFullHideStatusBar(boolean statusBar) {
+    public VideoPlayerConfigBuilder setFullHideStatusBar(boolean statusBar) {
         this.mStatusBar = statusBar;
         return this;
     }
@@ -581,7 +576,7 @@ public class GSYVideoOptionBuilder {
     /***
      * 状态监听
      */
-    public GSYVideoOptionBuilder setGSYStateUiListener(GSYStateUiListener gsyStateUiListener) {
+    public VideoPlayerConfigBuilder setGSYStateUiListener(GSYStateUiListener gsyStateUiListener) {
         this.mGSYStateUiListener = gsyStateUiListener;
         return this;
     }
