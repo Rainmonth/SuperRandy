@@ -10,6 +10,7 @@ import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.rainmonth.common.utils.ToastUtils;
 import com.rainmonth.player.listener.GSYVideoShotListener;
 import com.rainmonth.player.listener.GSYVideoShotSaveListener;
 import com.rainmonth.player.render.GSYRenderView;
@@ -197,21 +198,25 @@ public class GSYTextureView extends TextureView implements TextureView.SurfaceTe
     @Override
     public void onRenderResume() {
         Debugger.printfLog(getClass().getSimpleName() + " not support onRenderResume now");
+        ToastUtils.showLong(getClass().getSimpleName() + " not support onRenderResume now");
     }
 
     @Override
     public void onRenderPause() {
         Debugger.printfLog(getClass().getSimpleName() + " not support onRenderPause now");
+        ToastUtils.showLong(getClass().getSimpleName() + " not support onRenderPause now");
     }
 
     @Override
     public void releaseRenderAll() {
         Debugger.printfLog(getClass().getSimpleName() + " not support releaseRenderAll now");
+        ToastUtils.showLong(getClass().getSimpleName() + " not support releaseRenderAll now");
     }
 
     @Override
     public void setRenderMode(int mode) {
         Debugger.printfLog(getClass().getSimpleName() + " not support setRenderMode now");
+        ToastUtils.showLong(getClass().getSimpleName() + " not support setRenderMode now");
     }
 
     @Override
@@ -222,11 +227,13 @@ public class GSYTextureView extends TextureView implements TextureView.SurfaceTe
     @Override
     public void setGLRenderer(GSYVideoGLViewBaseRender renderer) {
         Debugger.printfLog(getClass().getSimpleName() + " not support setGLRenderer now");
+        ToastUtils.showLong(getClass().getSimpleName() + " not support setGLRenderer now");
     }
 
     @Override
     public void setGLMVPMatrix(float[] MVPMatrix) {
         Debugger.printfLog(getClass().getSimpleName() + " not support setGLMVPMatrix now");
+        ToastUtils.showLong(getClass().getSimpleName() + " not support setGLMVPMatrix now");
     }
 
     /**
@@ -235,6 +242,7 @@ public class GSYTextureView extends TextureView implements TextureView.SurfaceTe
     @Override
     public void setGLEffectFilter(GSYVideoGLView.ShaderInterface effectFilter) {
         Debugger.printfLog(getClass().getSimpleName() + " not support setGLEffectFilter now");
+        ToastUtils.showLong(getClass().getSimpleName() + " not support setGLEffectFilter now");
     }
 
 

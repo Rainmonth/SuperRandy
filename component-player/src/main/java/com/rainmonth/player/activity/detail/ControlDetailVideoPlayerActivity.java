@@ -2,6 +2,7 @@ package com.rainmonth.player.activity.detail;
 
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.media.MediaMetadataRetriever;
 import android.view.View;
 import android.widget.Button;
@@ -27,8 +28,37 @@ import com.rainmonth.player.builder.GSYVideoOptionBuilder;
 import com.rainmonth.player.listener.GSYSampleCallBack;
 import com.rainmonth.player.listener.GSYVideoGifSaveListener;
 import com.rainmonth.player.listener.GSYVideoShotListener;
+import com.rainmonth.player.model.GSYVideoModel;
 import com.rainmonth.player.model.VideoListBean;
+import com.rainmonth.player.render.effect.AutoFixEffect;
+import com.rainmonth.player.render.effect.BarrelBlurEffect;
+import com.rainmonth.player.render.effect.BlackAndWhiteEffect;
+import com.rainmonth.player.render.effect.BrightnessEffect;
+import com.rainmonth.player.render.effect.ContrastEffect;
+import com.rainmonth.player.render.effect.CrossProcessEffect;
+import com.rainmonth.player.render.effect.DocumentaryEffect;
+import com.rainmonth.player.render.effect.DuotoneEffect;
+import com.rainmonth.player.render.effect.FillLightEffect;
+import com.rainmonth.player.render.effect.GammaEffect;
+import com.rainmonth.player.render.effect.GaussianBlurEffect;
+import com.rainmonth.player.render.effect.GrainEffect;
+import com.rainmonth.player.render.effect.HueEffect;
+import com.rainmonth.player.render.effect.InvertColorsEffect;
+import com.rainmonth.player.render.effect.LamoishEffect;
+import com.rainmonth.player.render.effect.NoEffect;
+import com.rainmonth.player.render.effect.OverlayEffect;
+import com.rainmonth.player.render.effect.PixelationEffect;
+import com.rainmonth.player.render.effect.PosterizeEffect;
+import com.rainmonth.player.render.effect.SampleBlurEffect;
+import com.rainmonth.player.render.effect.SaturationEffect;
+import com.rainmonth.player.render.effect.SepiaEffect;
+import com.rainmonth.player.render.effect.SharpnessEffect;
+import com.rainmonth.player.render.effect.TemperatureEffect;
+import com.rainmonth.player.render.effect.TintEffect;
+import com.rainmonth.player.render.effect.VignetteEffect;
+import com.rainmonth.player.render.view.GSYVideoGLView;
 import com.rainmonth.player.utils.Debugger;
+import com.rainmonth.player.utils.GSYVideoType;
 import com.rainmonth.player.utils.GifCreateHelper;
 import com.rainmonth.player.utils.OrientationUtils;
 import com.rainmonth.player.video.StandardVideoPlayer;
@@ -47,6 +77,7 @@ import butterknife.BindView;
  * - 可以截图
  * - 可以跳转
  * - 可以录制gif
+ * - 添加滤镜效果，注意：如果应用滤镜效果，需要使用{@link android.opengl.GLSurfaceView}
  *
  * @author RandyZhang
  * @date 2020/12/2 6:19 PM
@@ -60,6 +91,7 @@ public class ControlDetailVideoPlayerActivity extends BaseDetailVideoPlayerActiv
     Button shot;
     Button startGif;
     Button stopGif;
+    Button changeFilter;
     View loadingView;
 
     private String mPlayUrl = "http://9890.vod.myqcloud.com/9890_4e292f9a3dd011e6b4078980237cc3d3.f20.mp4";
@@ -69,7 +101,10 @@ public class ControlDetailVideoPlayerActivity extends BaseDetailVideoPlayerActiv
     ImageView mCoverImage;
     MediaMetadataRetriever mCoverRetriever;
     private GifCreateHelper mGifCreateHelper;
-    private float mSpeed = 1;                         // 倍速播放
+    private float mSpeed = 1;                           // 倍速播放
+    private int mFilterType = 0;                        // 路径类型
+    private final float deep = 0.8f;                    // 某些shader的控制参数
+    private int mRenderViewType;                        // 渲染视图类型
 
     @Override
     protected int getContentViewLayoutID() {
@@ -85,43 +120,21 @@ public class ControlDetailVideoPlayerActivity extends BaseDetailVideoPlayerActiv
         shot = findViewById(R.id.shot);
         startGif = findViewById(R.id.start_gif);
         stopGif = findViewById(R.id.stop_gif);
+        changeFilter = findViewById(R.id.change_filter);
         loadingView = findViewById(R.id.loadingView);
 
-        changeSpeed.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onChangeSpeedClick();
-            }
-        });
+        mRenderViewType = GSYVideoType.getRenderType();
+        changeSpeed.setOnClickListener(v -> onChangeSpeedClick());
 
-        jump.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                readyGo(ControlDetailVideoPlayerActivity.class);
-            }
-        });
+        jump.setOnClickListener(v -> onJumpClick());
 
-        shot.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onScreenShotClick();
-            }
-        });
+        shot.setOnClickListener(v -> onScreenShotClick());
 
-        startGif.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onStartGifClick();
-            }
-        });
+        startGif.setOnClickListener(v -> onStartGifClick());
 
-        stopGif.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onStopGifClick();
-            }
-        });
+        stopGif.setOnClickListener(v -> onStopGifClick());
 
+        changeFilter.setOnClickListener(v -> onChangeFilterClick());
 
         resolveNormalVideoUI();
         initVideoBuilderMode();
@@ -149,6 +162,10 @@ public class ControlDetailVideoPlayerActivity extends BaseDetailVideoPlayerActiv
         }
         changeSpeed.setText("播放速度：" + mSpeed);
         mDetailPlayer.setSpeedPlaying(mSpeed, true);
+    }
+
+    private void onJumpClick() {
+        readyGo(ControlDetailVideoPlayerActivity.class);
     }
 
     private void onScreenShotClick() {
@@ -191,6 +208,104 @@ public class ControlDetailVideoPlayerActivity extends BaseDetailVideoPlayerActiv
         }
     }
 
+    private void onChangeFilterClick() {
+        if (mRenderViewType != GSYVideoType.GLSURFACE) {
+            ToastUtils.showLong("mRenderViewType 必须为 GLSurfaceView类型的才能应用该效果");
+            // todo 切换RenderView 动态替换RenderView
+//            mDetailPlayer.getRenderProxy().addView(this, );
+            return;
+        }
+        GSYVideoGLView.ShaderInterface effect;
+        switch (mFilterType) {
+            case 0:
+                effect = new AutoFixEffect(deep);
+                break;
+            case 1:
+                effect = new PixelationEffect();
+                break;
+            case 2:
+                effect = new BlackAndWhiteEffect();
+                break;
+            case 3:
+                effect = new ContrastEffect(deep);
+                break;
+            case 4:
+                effect = new CrossProcessEffect();
+                break;
+            case 5:
+                effect = new DocumentaryEffect();
+                break;
+            case 6:
+                effect = new DuotoneEffect(Color.BLUE, Color.YELLOW);
+                break;
+            case 7:
+                effect = new FillLightEffect(deep);
+                break;
+            case 8:
+                effect = new GammaEffect(deep);
+                break;
+            case 9:
+                effect = new GrainEffect(deep);
+                break;
+            case 10:
+                effect = new BrightnessEffect(deep);
+                break;
+            case 11:
+                effect = new HueEffect(deep);
+                break;
+            case 12:
+                effect = new InvertColorsEffect();
+                break;
+            case 13:
+                effect = new LamoishEffect();
+                break;
+            case 14:
+                effect = new PosterizeEffect();
+                break;
+            case 15:
+                effect = new BarrelBlurEffect();
+                break;
+            case 16:
+                effect = new SaturationEffect(deep);
+                break;
+            case 17:
+                effect = new SepiaEffect();
+                break;
+            case 18:
+                effect = new SharpnessEffect(deep);
+                break;
+            case 19:
+                effect = new TemperatureEffect(deep);
+                break;
+            case 20:
+                effect = new TintEffect(Color.GREEN);
+                break;
+            case 21:
+                effect = new VignetteEffect(deep);
+                break;
+            case 22:
+                effect = new NoEffect();
+                break;
+            case 23:
+                effect = new OverlayEffect();
+                break;
+            case 24:
+                effect = new SampleBlurEffect(4.0f);
+                break;
+            case 25:
+                effect = new GaussianBlurEffect(6.0f, GaussianBlurEffect.TYPEXY);
+                break;
+            default:
+                effect = new NoEffect();
+                break;
+        }
+        mDetailPlayer.setEffectFilter(effect);
+        mFilterType++;
+        if (mFilterType > 25) {
+            mFilterType = mFilterType % 26;
+        }
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -228,10 +343,8 @@ public class ControlDetailVideoPlayerActivity extends BaseDetailVideoPlayerActiv
     }
 
     private void loadCover(ImageView imageView, String url) {
-
         imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
         imageView.setImageResource(R.drawable.player_sample_thumb1);
-
         Glide.with(this.getApplicationContext())
                 .setDefaultRequestOptions(
                         new RequestOptions()

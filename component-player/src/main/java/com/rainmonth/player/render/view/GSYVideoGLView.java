@@ -10,6 +10,7 @@ import android.view.Surface;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.rainmonth.common.utils.ToastUtils;
 import com.rainmonth.player.listener.GSYVideoShotListener;
 import com.rainmonth.player.listener.GSYVideoShotSaveListener;
 import com.rainmonth.player.render.GSYRenderView;
@@ -135,12 +136,14 @@ public class GSYVideoGLView extends GLSurfaceView implements GLSurfaceListener, 
     @Override
     public Bitmap initCover() {
         Debugger.printfLog(getClass().getSimpleName() + " not support initCover now");
+        ToastUtils.showLong(getClass().getSimpleName() + " not support initCover now");
         return null;
     }
 
     @Override
     public Bitmap initCoverHigh() {
         Debugger.printfLog(getClass().getSimpleName() + " not support initCoverHigh now");
+        ToastUtils.showLong(getClass().getSimpleName() + " not support initCoverHigh now");
         return null;
     }
 
@@ -215,6 +218,7 @@ public class GSYVideoGLView extends GLSurfaceView implements GLSurfaceListener, 
     @Override
     public void setRenderTransform(Matrix transform) {
         Debugger.printfLog(getClass().getSimpleName() + " not support setRenderTransform now");
+        ToastUtils.showLong(getClass().getSimpleName() + " not support setRenderTransform now");
     }
 
     @Override

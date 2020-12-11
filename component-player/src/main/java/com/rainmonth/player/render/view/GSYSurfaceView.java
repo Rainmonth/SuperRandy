@@ -9,6 +9,7 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.rainmonth.common.utils.ToastUtils;
 import com.rainmonth.player.listener.GSYVideoShotListener;
 import com.rainmonth.player.listener.GSYVideoShotSaveListener;
 import com.rainmonth.player.render.GSYRenderView;
@@ -116,6 +117,7 @@ public class GSYSurfaceView extends SurfaceView implements SurfaceHolder.Callbac
      */
     public void taskShotPic(GSYVideoShotListener gsyVideoShotListener, boolean shotHigh) {
         Debugger.printfLog(getClass().getSimpleName() + " not support taskShotPic now");
+        ToastUtils.showLong(getClass().getSimpleName() + " not support taskShotPic now");
     }
 
     /**
@@ -125,6 +127,7 @@ public class GSYSurfaceView extends SurfaceView implements SurfaceHolder.Callbac
      */
     public void saveFrame(final File file, final boolean high, final GSYVideoShotSaveListener gsyVideoShotSaveListener) {
         Debugger.printfLog(getClass().getSimpleName() + " not support saveFrame now");
+        ToastUtils.showLong(getClass().getSimpleName() + " not support saveFrame now");
     }
 
     @Override
@@ -135,37 +138,44 @@ public class GSYSurfaceView extends SurfaceView implements SurfaceHolder.Callbac
     @Override
     public void onRenderResume() {
         Debugger.printfLog(getClass().getSimpleName() + " not support onRenderResume now");
+        ToastUtils.showLong(getClass().getSimpleName() + " not support onRenderResume now");
     }
 
     @Override
     public void onRenderPause() {
         Debugger.printfLog(getClass().getSimpleName() + " not support onRenderPause now");
+        ToastUtils.showLong(getClass().getSimpleName() + " not support onRenderPause now");
     }
 
     @Override
     public void releaseRenderAll() {
         Debugger.printfLog(getClass().getSimpleName() + " not support releaseRenderAll now");
+        ToastUtils.showLong(getClass().getSimpleName() + " not support releaseRenderAll now");
     }
 
     @Override
     public void setRenderMode(int mode) {
         Debugger.printfLog(getClass().getSimpleName() + " not support setRenderMode now");
+        ToastUtils.showLong(getClass().getSimpleName() + " not support setRenderMode now");
     }
 
 
     @Override
     public void setRenderTransform(Matrix transform) {
         Debugger.printfLog(getClass().getSimpleName() + " not support setRenderTransform now");
+        ToastUtils.showLong(this.getClass().getSimpleName() + " not support setRenderTransform now");
     }
 
     @Override
     public void setGLRenderer(GSYVideoGLViewBaseRender renderer) {
         Debugger.printfLog(getClass().getSimpleName() + " not support setGLRenderer now");
+        ToastUtils.showLong(this.getClass().getSimpleName() + " not support setGLRenderer now");
     }
 
     @Override
     public void setGLMVPMatrix(float[] MVPMatrix) {
         Debugger.printfLog(getClass().getSimpleName() + " not support setGLMVPMatrix now");
+        ToastUtils.showLong(getClass().getSimpleName() + " not support setGLMVPMatrix now");
     }
 
     /**
@@ -174,6 +184,7 @@ public class GSYSurfaceView extends SurfaceView implements SurfaceHolder.Callbac
     @Override
     public void setGLEffectFilter(GSYVideoGLView.ShaderInterface effectFilter) {
         Debugger.printfLog(getClass().getSimpleName() + " not support setGLEffectFilter now");
+        ToastUtils.showLong(getClass().getSimpleName() + " not support setGLEffectFilter now");
     }
 
 

@@ -87,6 +87,14 @@
             android:layout_margin="10dp"
             android:layout_toRightOf="@+id/start_gif"
             android:text="停止gif" />
+
+        <Button
+            android:id="@+id/change_filter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_toRightOf="@+id/stop_gif"
+            android:text="切换效果" />
     </RelativeLayout>
 
     <RelativeLayout
