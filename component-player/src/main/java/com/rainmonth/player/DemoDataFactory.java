@@ -39,7 +39,7 @@ public class DemoDataFactory {
 
     public static List<SimplePlayExampleBean> getSimplePlayExampleList() {
         List<SimplePlayExampleBean> exampleBeans = new ArrayList<>();
-        exampleBeans.add(new SimplePlayExampleBean("简单播放——Exo的PlayerView", "采用ExoPlayer内核，同时采用ExoPlayer2提供的PlayerView", ExampleBean.STATE_TODO, ExoSimpleVideoPlayerActivity.class));
+        exampleBeans.add(new SimplePlayExampleBean("简单播放——Exo的PlayerView", "采用ExoPlayer内核，同时采用ExoPlayer2提供的PlayerView", ExampleBean.STATE_FINISH, ExoSimpleVideoPlayerActivity.class));
         exampleBeans.add(new SimplePlayExampleBean("简单播放——Ijk", "打开本地视频", ExampleBean.STATE_TODO, ExoSimpleVideoPlayerActivity.class));
         exampleBeans.add(new SimplePlayExampleBean("简单播放——系统MediaPlayer", "打开Url播放", ExampleBean.STATE_TODO, ExoSimpleVideoPlayerActivity.class));
         return exampleBeans;

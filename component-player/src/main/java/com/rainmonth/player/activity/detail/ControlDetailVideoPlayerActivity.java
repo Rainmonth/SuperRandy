@@ -224,14 +224,20 @@ public class ControlDetailVideoPlayerActivity extends BaseDetailVideoPlayerActiv
     }
 
     private void onStartGifClick() {
-        if (mGifCreateHelper != null) {
-            File tempFile = FileUtils.makeDirs(PathUtils.getExternalAppVideoRecordTempPath());
-//            if (tempFile != null && !tempFile.exists()) {
-//                boolean success = tempFile.mkdir();
-//                LogUtils.d(TAG, "success: " + success);
-//            }
-            mGifCreateHelper.startGif(tempFile);
-        }
+        PermissionUtils.permission(PermissionConstants.STORAGE).callback(new PermissionUtils.SimpleCallback() {
+            @Override
+            public void onGranted() {
+                if (mGifCreateHelper != null) {
+                    File tempFile = FileUtils.makeDirs(PathUtils.getExternalAppVideoRecordTempPath());
+                    mGifCreateHelper.startGif(tempFile);
+                }
+            }
+
+            @Override
+            public void onDenied() {
+                ToastUtils.showLong("您拒绝了存储权限，无法进行gif录制");
+            }
+        });
     }
 
     private void onStopGifClick() {
@@ -349,11 +355,15 @@ public class ControlDetailVideoPlayerActivity extends BaseDetailVideoPlayerActiv
             percentageType = 1;
         }
 
-        // 水印移动
-        cancelWaterMarkTask();
-        mWaterMarkTask = new WaterMarkAnimTask();
-        mGlAnimateTimer.schedule(mWaterMarkTask, 0, 400);
-        mMoveWaterMark = !mMoveWaterMark;
+        if (mWaterMarkEffect != null && mWaterMarkEffect.getBindGLSurfaceView() != null) {
+            // 水印移动
+            cancelWaterMarkTask();
+            mWaterMarkTask = new WaterMarkAnimTask();
+            mGlAnimateTimer.schedule(mWaterMarkTask, 0, 400);
+            mMoveWaterMark = !mMoveWaterMark;
+        } else {
+            ToastUtils.showLong("尚未开始播放，无法应用水印效果");
+        }
     }
 
     private void cancelAnimateTask() {
@@ -445,6 +455,8 @@ public class ControlDetailVideoPlayerActivity extends BaseDetailVideoPlayerActiv
         if (mGifCreateHelper != null) {
             mGifCreateHelper.cancelTask();
         }
+        // 恢复渲染视图的全局配置
+        GSYVideoType.setRenderType(mRenderViewType);
     }
 
 

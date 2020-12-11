@@ -139,4 +139,8 @@ public class BitmapIconEffect implements GSYVideoGLView.ShaderInterface {
     public Bitmap getBitmap() {
         return mBitmap;
     }
+
+    public GLSurfaceView getBindGLSurfaceView() {
+        return mGlSurfaceViewl;
+    }
 }
