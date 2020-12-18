@@ -29,8 +29,13 @@
 
     </androidx.core.widget.NestedScrollView>
 
+    <com.rainmonth.player.video.NormalVideoPlayer
+        android:id="@+id/content_player"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/player_detail_play_view_height" />
+
     <com.rainmonth.player.video.ADListVideoPlayer
-        android:id="@+id/detail_player"
+        android:id="@+id/ad_player"
         android:layout_width="match_parent"
         android:layout_height="@dimen/player_detail_play_view_height" />
 

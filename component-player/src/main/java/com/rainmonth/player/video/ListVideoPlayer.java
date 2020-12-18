@@ -18,7 +18,10 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 列表播放支持
+ * 可以播放一个列表的播放器
+ *
+ * @author RandyZhang
+ * @date 2020/12/12
  */
 public class ListVideoPlayer extends StandardVideoPlayer {
 

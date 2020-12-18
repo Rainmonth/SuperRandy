@@ -1,9 +1,9 @@
-package com.rainmonth.player;
+package com.rainmonth.player.activity.detail;
 
 import android.content.res.Configuration;
 import android.view.View;
 
-import com.rainmonth.player.activity.detail.BaseDetailVideoPlayerActivity;
+import com.rainmonth.player.VideoADManager;
 import com.rainmonth.player.builder.VideoPlayerConfigBuilder;
 import com.rainmonth.player.listener.GSYSampleCallBack;
 import com.rainmonth.player.utils.OrientationOption;
@@ -15,8 +15,11 @@ import com.rainmonth.player.video.base.VideoView;
 
 /**
  * 广告详情播放基类
- * 实现原理就是 在详情播放的基础上 添加一个播放器，一个用于辅助广告播放旋转的{@link OrientationUtils}，子类需要
- * 提供以下内容：
+ * 实现方法
+ * 实现方式1：一个播放器，播放一个列表，列表内容包括 广告视频资源、内容视频资源，这种方式广告的位置是固定的，要么片头，要么片尾
+ * 实现方式2： 在详情播放的基础上 添加一个播放器，一个用于辅助广告播放旋转的{@link OrientationUtils}，这种方式广告的位置可以是任意位置
+ * <p>
+ * 子类需要提供以下内容：
  * 1. 广告的开始播放的逻辑判断，{@link #isNeedAdOnStart()}；
  * 2. 用于播放广告的播放器，{@link #getAdVideoPlayer()}
  * 3. 如何构建广告播放器，{@link #getAdPlayerConfigBuilder()}

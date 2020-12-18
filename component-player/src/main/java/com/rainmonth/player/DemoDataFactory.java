@@ -2,6 +2,7 @@ package com.rainmonth.player;
 
 import com.rainmonth.common.bean.ExampleBean;
 import com.rainmonth.player.activity.detail.AdDetailVideoPlayerActivity;
+import com.rainmonth.player.activity.detail.ConfigAdDetailVideoPlayerActivity;
 import com.rainmonth.player.activity.detail.ConfigDetailVideoPlayerActivity;
 import com.rainmonth.player.activity.detail.ControlDetailVideoPlayerActivity;
 import com.rainmonth.player.activity.detail.DetailPlayDemoListActivity;
@@ -53,7 +54,8 @@ public class DemoDataFactory {
         exampleBeans.add(new DetailPlayExampleBean("详情播放", "普通的详情播放", ExampleBean.STATE_FINISH, NormalDetailVideoPlayActivity.class));
         exampleBeans.add(new DetailPlayExampleBean("详情播放", "支持配置项的详情播放，如切换清晰度、切换显示比例等", ExampleBean.STATE_FINISH, ConfigDetailVideoPlayerActivity.class));
         exampleBeans.add(new DetailPlayExampleBean("使用GLSurfaceView详情播放", "支持配置项的详情播放，如清晰度、显示比例、播放速度、视频截图、gif生成等", ExampleBean.STATE_FINISH, ControlDetailVideoPlayerActivity.class));
-        exampleBeans.add(new DetailPlayExampleBean("带广告的详情播放", "支持配置广告，先播放广告，在播放主题内容，广告支持跳过", ExampleBean.STATE_UNDER, AdDetailVideoPlayerActivity.class));
+        exampleBeans.add(new DetailPlayExampleBean("带广告的详情播放1", "支持配置广告，先播放广告，在播放主题内容，广告支持跳过", ExampleBean.STATE_FINISH, AdDetailVideoPlayerActivity.class));
+        exampleBeans.add(new DetailPlayExampleBean("带广告的详情播放2", "支持配置广告，广告和内容分别采用单独的播放器，这样就可以在视频播放任意位置进行广告播放", ExampleBean.STATE_FINISH, ConfigAdDetailVideoPlayerActivity.class));
         return exampleBeans;
     }
 

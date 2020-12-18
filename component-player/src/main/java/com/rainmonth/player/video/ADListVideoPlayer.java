@@ -21,10 +21,10 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 只支持每个片头广告播放的类
+ * 只支持每个片头片尾广告播放的类
  * 其实就是根据实体，判断播放列表中哪个是广告，哪个不是，从而处理不同的UI显示效果
  */
-public class SampleADVideoPlayer extends ListVideoPlayer {
+public class ADListVideoPlayer extends ListVideoPlayer {
 
     protected View mJumpAd;
 
@@ -36,15 +36,15 @@ public class SampleADVideoPlayer extends ListVideoPlayer {
 
     protected boolean isFirstPrepared = false;
 
-    public SampleADVideoPlayer(Context context, Boolean fullFlag) {
+    public ADListVideoPlayer(Context context, Boolean fullFlag) {
         super(context, fullFlag);
     }
 
-    public SampleADVideoPlayer(Context context) {
+    public ADListVideoPlayer(Context context) {
         super(context);
     }
 
-    public SampleADVideoPlayer(Context context, AttributeSet attrs) {
+    public ADListVideoPlayer(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
@@ -234,8 +234,8 @@ public class SampleADVideoPlayer extends ListVideoPlayer {
     @Override
     protected void cloneParams(BaseVideoPlayer from, BaseVideoPlayer to) {
         super.cloneParams(from, to);
-        SampleADVideoPlayer sf = (SampleADVideoPlayer) from;
-        SampleADVideoPlayer st = (SampleADVideoPlayer) to;
+        ADListVideoPlayer sf = (ADListVideoPlayer) from;
+        ADListVideoPlayer st = (ADListVideoPlayer) to;
         st.isAdModel = sf.isAdModel;
         st.isFirstPrepared = sf.isFirstPrepared;
         st.changeAdUIState();

@@ -7,7 +7,6 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
-    <!--todo 去掉 usesCleartextTraffic 的使用-->
     <application
         android:name=".PlayerApplication"
         android:icon="@mipmap/ic_launcher"
@@ -25,12 +24,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".activity.VideoMainActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
             android:theme="@style/PlayerDemoActivityTheme" />
-
         <activity
             android:name=".activity.simple.SimplePlayDemoListActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
@@ -60,9 +57,14 @@
             android:name=".activity.detail.ControlDetailVideoPlayerActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
             android:theme="@style/PlayerDemoActivityTheme" />
-        <activity android:name=".activity.detail.AdDetailVideoPlayerActivity"
+        <activity
+            android:name=".activity.detail.AdDetailVideoPlayerActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
-            android:theme="@style/PlayerDemoActivityTheme"/>
+            android:theme="@style/PlayerDemoActivityTheme" />
+        <activity
+            android:name=".activity.detail.ConfigAdDetailVideoPlayerActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
+            android:theme="@style/PlayerDemoActivityTheme" />
         <activity
             android:name=".activity.list.ListPlayDemoListActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
@@ -83,7 +85,6 @@
             android:name=".activity.other.FloatVideoPlayerActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
             android:theme="@style/PlayerDemoActivityTheme" />
-
     </application>
 
 </manifest>

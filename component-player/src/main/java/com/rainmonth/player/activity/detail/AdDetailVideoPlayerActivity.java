@@ -1,27 +1,16 @@
 package com.rainmonth.player.activity.detail;
 
-import android.content.res.Configuration;
-import android.media.MediaMetadataRetriever;
 import android.view.View;
 import android.widget.ImageView;
 
-import androidx.annotation.NonNull;
 import androidx.core.widget.NestedScrollView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
-import com.rainmonth.common.base.BaseActivity;
-import com.rainmonth.player.DemoDataFactory;
 import com.rainmonth.player.R;
-import com.rainmonth.player.VideoManager;
-import com.rainmonth.player.listener.GSYSampleCallBack;
-import com.rainmonth.player.model.VideoListBean;
-import com.rainmonth.player.utils.OrientationUtils;
-import com.rainmonth.player.video.base.VideoPlayer;
-import com.rainmonth.player.view.ConfigVideoPlayerView;
+import com.rainmonth.player.builder.VideoPlayerConfigBuilder;
+import com.rainmonth.player.listener.LockClickListener;
+import com.rainmonth.player.video.ADListVideoPlayer;
 
-import java.util.HashMap;
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  * 带广告的详情播放
@@ -31,203 +20,90 @@ import java.util.List;
  * @author RandyZhang
  * @date 2020/12/2 6:19 PM
  */
-public class AdDetailVideoPlayerActivity extends BaseActivity {
+public class AdDetailVideoPlayerActivity extends BaseDetailVideoPlayerActivity<ADListVideoPlayer> {
 
     NestedScrollView mNestedScrollView;
-    ConfigVideoPlayerView mDetailPlayer;
-
-    ImageView mCoverImage;
-    MediaMetadataRetriever mCoverRetriever;
-    OrientationUtils mOrientationUtils;
-
-    private boolean isPlay;
-    private boolean isPause;
-    private boolean isRelease;
+    ADListVideoPlayer mDetailPlayer;
 
     @Override
-    public void initToolbar(int colorResId) {
+    public ADListVideoPlayer getVideoPlayer() {
+        return mDetailPlayer;
+    }
+
+    @Override
+    public VideoPlayerConfigBuilder getVideoPlayerConfigBuilder() {
+        return null;
+    }
+
+    @Override
+    public void clickForFullScreen() {
 
     }
 
     @Override
+    public boolean getDetailOrientationRotateAuto() {
+        return true;
+    }
+
+    @Override
     protected int getContentViewLayoutID() {
-        return R.layout.player_activity_config_detail_player_play;
+        return R.layout.player_activity_ad_detail_player_play;
     }
 
     @Override
     protected void initViewsAndEvents() {
         mNestedScrollView = findViewById(R.id.post_detail_nested_scroll);
         mDetailPlayer = findViewById(R.id.detail_player);
+        //普通模式
+        initVideo();
 
+        ArrayList<ADListVideoPlayer.GSYADVideoModel> urls = new ArrayList<>();
+        //广告1
+        urls.add(new ADListVideoPlayer.GSYADVideoModel("http://7xjmzj.com1.z0.glb.clouddn.com/20171026175005_JObCxCE2.mp4",
+                "", ADListVideoPlayer.GSYADVideoModel.TYPE_AD));
+        //正式内容1
+        urls.add(new ADListVideoPlayer.GSYADVideoModel("http://9890.vod.myqcloud.com/9890_4e292f9a3dd011e6b4078980237cc3d3.f20.mp4",
+                "正文1标题", ADListVideoPlayer.GSYADVideoModel.TYPE_NORMAL));
+        //广告2
+        urls.add(new ADListVideoPlayer.GSYADVideoModel("http://7xjmzj.com1.z0.glb.clouddn.com/20171026175005_JObCxCE2.mp4",
+                "", ADListVideoPlayer.GSYADVideoModel.TYPE_AD, true));
+        //正式内容2
+        urls.add(new ADListVideoPlayer.GSYADVideoModel("http://9890.vod.myqcloud.com/9890_4e292f9a3dd011e6b4078980237cc3d3.f30.mp4",
+                "正文2标题", ADListVideoPlayer.GSYADVideoModel.TYPE_NORMAL));
 
-        List<VideoListBean> clarityList = DemoDataFactory.getSwitchClarityPlayList();
-        mDetailPlayer.setUp(clarityList, true, "");
-        mCoverImage = new ImageView(this);
-        mCoverImage.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        mDetailPlayer.setThumbImageView(mCoverImage);
+        mDetailPlayer.setAdUp(urls, true, 0);
 
-        mDetailPlayer.getTitleTextView().setVisibility(View.GONE);
-        mDetailPlayer.getBackButton().setVisibility(View.GONE);
+        //增加封面
+        ImageView imageView = new ImageView(this);
+        imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        imageView.setImageResource(R.drawable.sample_cover_1);
+        mDetailPlayer.setThumbImageView(imageView);
 
-        mOrientationUtils = new OrientationUtils(this, mDetailPlayer);
-        mOrientationUtils.setEnable(false);
+        resolveNormalVideoUI();
 
-        mDetailPlayer.setIsTouchWiget(false);// 初始时不能通过滑动改变进度
-        mDetailPlayer.setRotateViewAuto(false);// 不能自动旋转
-        mDetailPlayer.setShowFullAnimation(true);// 打开全屏动画
+        mDetailPlayer.setIsTouchWiget(true);
+        //关闭自动旋转
+        mDetailPlayer.setRotateViewAuto(false);
+        mDetailPlayer.setLockLand(false);
+        mDetailPlayer.setShowFullAnimation(false);
         mDetailPlayer.setNeedLockFull(true);
-        mDetailPlayer.setSeekRatio(1);
-        mDetailPlayer.getFullscreenButton().setOnClickListener(new View.OnClickListener() {
+
+        mDetailPlayer.setVideoAllCallBack(this);
+
+        mDetailPlayer.setLockClickListener(new LockClickListener() {
             @Override
-            public void onClick(View v) {
-                mDetailPlayer.startWindowFullscreen(mContext, true, true);
-            }
-        });
-        mDetailPlayer.setVideoAllCallBack(new GSYSampleCallBack() {
-            @Override
-            public void onPrepared(String url, Object... objects) {
-                super.onPrepared(url, objects);
-                //开始播放了才能旋转和全屏
-                //orientationUtils.setEnable(true);
-                mOrientationUtils.setEnable(mDetailPlayer.isRotateWithSystem());
-                isPlay = true;
-            }
-
-            @Override
-            public void onAutoComplete(String url, Object... objects) {
-                super.onAutoComplete(url, objects);
-            }
-
-            @Override
-            public void onClickStartError(String url, Object... objects) {
-                super.onClickStartError(url, objects);
-            }
-
-            @Override
-            public void onQuitFullscreen(String url, Object... objects) {
-                super.onQuitFullscreen(url, objects);
-                //屏蔽，实现竖屏全屏
-                //if (orientationUtils != null) {
-                //orientationUtils.backToProtVideo();
-                //}
-            }
-        });
-
-        if (clarityList != null && clarityList.size() > 0) {
-            loadFirstFrameCover(clarityList.get(0).getUrl());
-        }
-    }
-
-    @Override
-    protected void onResume() {
-        getCurrentPlayer().onVideoResume(true);
-        super.onResume();
-        isPause = false;
-    }
-
-    @Override
-    protected void onPause() {
-        getCurrentPlayer().onVideoPause();
-        super.onPause();
-        isPause = true;
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        isRelease = true;
-        if (isPlay) {
-            getCurrentPlayer().release();
-        }
-        if (mOrientationUtils != null) {
-            mOrientationUtils.releaseListener();
-        }
-        if (mCoverRetriever != null) {
-            mCoverRetriever.release();
-            mCoverRetriever = null;
-        }
-
-    }
-
-    @Override
-    public void onBackPressed() {
-        if (mOrientationUtils != null) {
-            mOrientationUtils.backToProtVideo();
-        }
-        if (VideoManager.backFromWindowFull(this)) {
-            return;
-        }
-        super.onBackPressed();
-    }
-
-    @Override
-    public void onConfigurationChanged(@NonNull Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        //如果旋转了就全屏
-        if (isPlay && !isPause) {
-            mDetailPlayer.onConfigurationChanged(this, newConfig, mOrientationUtils, true, true);
-        }
-        //竖屏全屏
-        mOrientationUtils.setEnable(false);
-    }
-
-    /**
-     * 这里只是演示，并不建议直接这么做
-     * MediaMetadataRetriever最好做一个独立的管理器
-     * 使用缓存
-     * 注意资源的开销和异步等
-     *
-     * @param url
-     */
-    public void loadFirstFrameCover(String url) {
-
-        //原始方法
-        /*final MediaMetadataRetriever mediaMetadataRetriever = getMediaMetadataRetriever(url);
-        //获取帧图片
-        if (getMediaMetadataRetriever(url) != null) {
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    final Bitmap bitmap = mediaMetadataRetriever
-                            .getFrameAtTime(1000, MediaMetadataRetriever.OPTION_CLOSEST);
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            if (bitmap != null && !isRelease) {
-                                Debuger.printfLog("time " + System.currentTimeMillis());
-                                //显示
-                                coverImageView.setImageBitmap(bitmap);
-                            }
-                        }
-                    });
+            public void onClick(View view, boolean lock) {
+                if (mOrientationUtils != null) {
+                    //配合下方的onConfigurationChanged
+                    mOrientationUtils.setEnable(!lock);
                 }
-            }).start();
-        }*/
-
-        //可以参考Glide，内部也是封装了MediaMetadataRetriever
-        Glide.with(this.getApplicationContext())
-                .setDefaultRequestOptions(
-                        new RequestOptions()
-                                .frame(1000000)
-                                .centerCrop()
-                                .error(R.drawable.player_sample_thumb1)
-                                .placeholder(R.drawable.player_sample_thumb1))
-                .load(url)
-                .into(mCoverImage);
+            }
+        });
     }
 
-    public MediaMetadataRetriever getMediaMetadataRetriever(String url) {
-        if (mCoverRetriever == null) {
-            mCoverRetriever = new MediaMetadataRetriever();
-        }
-        mCoverRetriever.setDataSource(url, new HashMap<String, String>());
-        return mCoverRetriever;
-    }
-
-    private VideoPlayer getCurrentPlayer() {
-        if (mDetailPlayer.getFullWindowPlayer() != null) {
-            return mDetailPlayer.getFullWindowPlayer();
-        }
-        return mDetailPlayer;
+    private void resolveNormalVideoUI() {
+        //增加title
+        mDetailPlayer.getTitleTextView().setVisibility(View.VISIBLE);
+        mDetailPlayer.getBackButton().setVisibility(View.VISIBLE);
     }
 }

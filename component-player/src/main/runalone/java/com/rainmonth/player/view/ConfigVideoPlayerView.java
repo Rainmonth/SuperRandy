@@ -31,7 +31,7 @@ import java.util.List;
  * 3.画面镜像，最懂调用的时{@link android.view.TextureView#setTransform(Matrix)}，这个目前只有
  * {@link android.view.TextureView} 支持，{@link android.view.SurfaceView}、{@link android.opengl.GLSurfaceView} 不支持
  * 4. 清晰度切换就是同一个视频内容，不同的播放源（url）
- *
+ * <p>
  * 5. 倍速播放
  * 6. 滤镜播放
  * 7. 声音调节
@@ -94,11 +94,10 @@ public class ConfigVideoPlayerView extends StandardVideoPlayer {
                 }
                 if (mTextureView.getRotation() - mRotate == 270) {
                     mTextureView.setRotation(mRotate);
-                    mTextureView.requestLayout();
                 } else {
                     mTextureView.setRotation(mTextureView.getRotation() + 90);
-                    mTextureView.requestLayout();
                 }
+                mTextureView.requestLayout();
             }
         });
 
