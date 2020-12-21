@@ -249,23 +249,48 @@ public abstract class VideoControlView extends VideoView implements View.OnClick
     }
 
     private void viewCheck() {
-        if (isViewNull(mStartButton)) Debugger.printfError(TAG, "mStartButton is null");
-        if (isViewNull(mThumbImageView)) Debugger.printfError(TAG, "mThumbImageView is null");
-        if (isViewNull(mLoadingProgressBar))
-            Debugger.printfError(TAG, "mLoadingProgressBar is null");
-        if (isViewNull(mProgressBar)) Debugger.printfError(TAG, "mProgressBar is null");
-        if (isViewNull(mFullscreenButton)) Debugger.printfError(TAG, "mFullscreenButton is null");
-        if (isViewNull(mBackButton)) Debugger.printfError(TAG, "mBackButton is null");
-        if (isViewNull(mLockScreen)) Debugger.printfError(TAG, "mLockScreen is null");
-        if (isViewNull(mCurrentTimeTextView))
-            Debugger.printfError(TAG, "mCurrentTimeTextView is null");
-        if (isViewNull(mTotalTimeTextView)) Debugger.printfError(TAG, "mTotalTimeTextView is null");
-        if (isViewNull(mTitleTextView)) Debugger.printfError(TAG, "mTitleTextView is null");
-        if (isViewNull(mTopContainer)) Debugger.printfError(TAG, "mTopContainer is null");
-        if (isViewNull(mBottomContainer)) Debugger.printfError(TAG, "mBottomContainer is null");
-        if (isViewNull(mThumbImageViewLayout))
-            Debugger.printfError(TAG, "mThumbImageViewLayout is null");
-        if (isViewNull(mBottomProgressBar)) Debugger.printfError(TAG, "mBottomProgressBar is null");
+        if (isViewNull(mStartButton)) {
+            Debugger.printfError(TAG, "mStartButton is null");
+        }
+        if (isViewNull(mThumbImageView)) {
+            Debugger.printfWarning(TAG, "mThumbImageView is null");
+        }
+        if (isViewNull(mLoadingProgressBar)) {
+            Debugger.printfWarning(TAG, "mLoadingProgressBar is null");
+        }
+        if (isViewNull(mProgressBar)) {
+            Debugger.printfWarning(TAG, "mProgressBar is null");
+        }
+        if (isViewNull(mFullscreenButton)) {
+            Debugger.printfWarning(TAG, "mFullscreenButton is null");
+        }
+        if (isViewNull(mBackButton)) {
+            Debugger.printfWarning(TAG, "mBackButton is null");
+        }
+        if (isViewNull(mLockScreen)) {
+            Debugger.printfWarning(TAG, "mLockScreen is null");
+        }
+        if (isViewNull(mCurrentTimeTextView)) {
+            Debugger.printfWarning(TAG, "mCurrentTimeTextView is null");
+        }
+        if (isViewNull(mTotalTimeTextView)) {
+            Debugger.printfWarning(TAG, "mTotalTimeTextView is null");
+        }
+        if (isViewNull(mTitleTextView)) {
+            Debugger.printfWarning(TAG, "mTitleTextView is null");
+        }
+        if (isViewNull(mTopContainer)) {
+            Debugger.printfWarning(TAG, "mTopContainer is null");
+        }
+        if (isViewNull(mBottomContainer)) {
+            Debugger.printfWarning(TAG, "mBottomContainer is null");
+        }
+        if (isViewNull(mThumbImageViewLayout)) {
+            Debugger.printfWarning(TAG, "mThumbImageViewLayout is null");
+        }
+        if (isViewNull(mBottomProgressBar)) {
+            Debugger.printfWarning(TAG, "mBottomProgressBar is null");
+        }
     }
 
     @Override

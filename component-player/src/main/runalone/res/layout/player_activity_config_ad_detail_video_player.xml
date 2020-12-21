@@ -37,6 +37,7 @@
     <com.rainmonth.player.video.ADVideoPlayer
         android:id="@+id/ad_player"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/player_detail_play_view_height" />
+        android:layout_height="@dimen/player_detail_play_view_height"
+        android:visibility="gone" />
 
 </RelativeLayout>
