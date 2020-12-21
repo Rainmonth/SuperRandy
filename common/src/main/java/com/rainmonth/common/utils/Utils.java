@@ -3,10 +3,11 @@ package com.rainmonth.common.utils;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Application;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.Lifecycle;
+
+import com.rainmonth.common.utils.log.LogUtils;
 
 /**
  *
@@ -28,7 +29,7 @@ public final class Utils {
      */
     public static void init(final Application app) {
         if (app == null) {
-            Log.e("Utils", "app is null.");
+            LogUtils.e("Utils", "app is null.");
             return;
         }
         if (sApp == null) {
@@ -57,7 +58,7 @@ public final class Utils {
         }
         init(UtilsBridge.getApplicationByReflect());
         if (sApp == null) throw new NullPointerException("reflect failed.");
-        Log.i("Utils", UtilsBridge.getCurrentProcessName() + " reflect app success.");
+        LogUtils.i("Utils", UtilsBridge.getCurrentProcessName() + " reflect app success.");
         System.out.println("app:" + sApp.getClass().getSimpleName());
         return sApp;
     }
