@@ -71,91 +71,91 @@ public class LogUtils {
     }
 
     public static void v() {
-        printLog(V, null, DEFAULT_MESSAGE);
+        printLog(V, null, true, DEFAULT_MESSAGE);
     }
 
     public static void v(Object msg) {
-        printLog(V, null, msg);
+        printLog(V, null, true, msg);
     }
 
     public static void v(String tag, Object... objects) {
-        printLog(V, tag, objects);
+        printLog(V, tag, true, objects);
     }
 
     public static void d() {
-        printLog(D, null, DEFAULT_MESSAGE);
+        printLog(D, null, true, DEFAULT_MESSAGE);
     }
 
     public static void d(Object msg) {
-        printLog(D, null, msg);
+        printLog(D, null, true, msg);
     }
 
     public static void d(String tag, Object... objects) {
-        printLog(D, tag, objects);
+        printLog(D, tag, true, objects);
     }
 
     public static void i() {
-        printLog(I, null, DEFAULT_MESSAGE);
+        printLog(I, null, true, DEFAULT_MESSAGE);
     }
 
     public static void i(Object msg) {
-        printLog(I, null, msg);
+        printLog(I, null, true, msg);
     }
 
     public static void i(String tag, Object... objects) {
-        printLog(I, tag, objects);
+        printLog(I, tag, true, objects);
     }
 
     public static void w() {
-        printLog(W, null, DEFAULT_MESSAGE);
+        printLog(W, null, true, DEFAULT_MESSAGE);
     }
 
     public static void w(Object msg) {
-        printLog(W, null, msg);
+        printLog(W, null, true, msg);
     }
 
     public static void w(String tag, Object... objects) {
-        printLog(W, tag, objects);
+        printLog(W, tag, true, objects);
     }
 
     public static void e() {
-        printLog(E, null, DEFAULT_MESSAGE);
+        printLog(E, null, true, DEFAULT_MESSAGE);
     }
 
     public static void e(Object msg) {
-        printLog(E, null, msg);
+        printLog(E, null, true, msg);
     }
 
     public static void e(String tag, Object... objects) {
-        printLog(E, tag, objects);
+        printLog(E, tag, true, objects);
     }
 
     public static void a() {
-        printLog(A, null, DEFAULT_MESSAGE);
+        printLog(A, null, true, DEFAULT_MESSAGE);
     }
 
     public static void a(Object msg) {
-        printLog(A, null, msg);
+        printLog(A, null, true, msg);
     }
 
     public static void a(String tag, Object... objects) {
-        printLog(A, tag, objects);
+        printLog(A, tag, true, objects);
     }
 
     public static void json(String jsonFormat) {
-        printLog(JSON, null, jsonFormat);
+        printLog(JSON, null, true, jsonFormat);
     }
 
     public static void json(String tag, String jsonFormat) {
-        printLog(JSON, tag, jsonFormat);
+        printLog(JSON, tag, true, jsonFormat);
     }
 
     public static void xml(String xml) {
-        printLog(XML, null, xml);
+        printLog(XML, null, true, xml);
     }
 
     public static void xml(String tag, String xml) {
-        printLog(XML, tag, xml);
+        printLog(XML, tag, true, xml);
     }
 
     public static void file(File targetDirectory, Object msg) {
@@ -170,13 +170,14 @@ public class LogUtils {
         printFile(tag, targetDirectory, fileName, msg);
     }
 
-    private static void printLog(int type, String tagStr, Object... objects) {
+    private static void printLog(int type, String tagStr, boolean defaultWrap, Object... objects) {
 
         if (!IS_SHOW_LOG) {
             return;
         }
-
-        String[] contents = wrapperContent(tagStr, objects);
+        // json 形式的不打印方法堆栈
+        defaultWrap = (type == JSON || type == XML) || defaultWrap;
+        String[] contents = wrapperContent(tagStr, defaultWrap, objects);
         String tag = contents[0];
         String msg = contents[1];
         String headString = contents[2];
@@ -216,10 +217,13 @@ public class LogUtils {
         FileLog.printFile(tag, targetDirectory, fileName, headString, msg);
     }
 
-    private static String[] wrapperContent(String tagStr, Object... objects) {
-
+    /**
+     * @param tagStr      tag
+     * @param defaultWrap 是否采用默认的信息包装方式，true表示采用默认的，false表示采用打印调用堆栈的
+     * @param objects     要包装的信息
+     */
+    private static String[] wrapperContent(String tagStr, boolean defaultWrap, Object... objects) {
         StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
-
         StackTraceElement targetElement = stackTrace[STACK_TRACE_INDEX];
         String className = targetElement.getClassName();
         String[] classNameInfo = className.split("\\.");
@@ -232,16 +236,49 @@ public class LogUtils {
         }
 
         String methodName = targetElement.getMethodName();
+        String methodNameShort = methodName.substring(0, 1).toUpperCase() + methodName.substring(1);
         int lineNumber = targetElement.getLineNumber();
 
         if (lineNumber < 0) {
             lineNumber = 0;
         }
 
-        String methodNameShort = methodName.substring(0, 1).toUpperCase() + methodName.substring(1);
+        String tag = getTag(tagStr);
+        String msg = (objects == null) ? NULL_TIPS : getObjectsString(objects);
 
+        if (defaultWrap) {
+            String headString = "[ (" + className + ":" + lineNumber + ")#" + methodNameShort + " ] ";
+            return new String[]{tag, msg, headString};
+        } else {
+            StringBuilder sb = new StringBuilder();
+            appendStack(sb);
+            return new String[]{tag, msg, sb.toString()};
+        }
+    }
+
+    private static String[] wrapperContent(String tagStr, Object... objects) {
+        return wrapperContent(tagStr, true, objects);
+    }
+
+    /**
+     * 获取 正确的tag
+     *
+     * @param tagStr 传递过来的饿tag
+     * @return 包装后的tag
+     */
+    private static String getTag(String tagStr) {
+        StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
+        StackTraceElement targetElement = stackTrace[STACK_TRACE_INDEX];
+        String className = targetElement.getClassName();
+        String[] classNameInfo = className.split("\\.");
+        if (classNameInfo.length > 0) {
+            className = classNameInfo[classNameInfo.length - 1] + SUFFIX;
+        }
+
+        if (className.contains("$")) {
+            className = className.split("\\$")[0] + SUFFIX;
+        }
         String tag = (tagStr == null ? className : tagStr);
-
         if (mIsGlobalTagEmpty && TextUtils.isEmpty(tag)) {
             tag = TAG_DEFAULT;
         } else if (!mIsGlobalTagEmpty) {
@@ -249,11 +286,7 @@ public class LogUtils {
         }
 
         tag = PREFIX + tag;
-
-        String msg = (objects == null) ? NULL_TIPS : getObjectsString(objects);
-        String headString = "[ (" + className + ":" + lineNumber + ")#" + methodNameShort + " ] ";
-
-        return new String[]{tag, msg, headString};
+        return tag;
     }
 
     private static String getObjectsString(Object... objects) {
@@ -289,7 +322,7 @@ public class LogUtils {
             sb.append(Log.getStackTraceString(e)).append("\n");
         }
 
-        printLog(type, tag, sb.toString());
+        printLog(type, tag, true, sb.toString());
     }
 
     private static final int START_STACK_INDEX = 5;
@@ -341,24 +374,24 @@ public class LogUtils {
         }
     }
 
-    public static void stackV() {
-        // todo
+    public static void stackV(String tag, Object... objects) {
+        printLog(V, tag, false, objects);
     }
 
-    public static void stackD() {
-        // todo
+    public static void stackD(String tag, Object... objects) {
+        printLog(D, tag, false, objects);
     }
 
-    public static void stackI() {
-        // todo
+    public static void stackI(String tag, Object... objects) {
+        printLog(I, tag, false, objects);
     }
 
-    public static void stackW() {
-        // todo
+    public static void stackW(String tag, Object... objects) {
+        printLog(W, tag, false, objects);
     }
 
-    public static void stackE() {
-        // todo
+    public static void stackE(String tag, Object... objects) {
+        printLog(E, tag, false, objects);
     }
 
 }

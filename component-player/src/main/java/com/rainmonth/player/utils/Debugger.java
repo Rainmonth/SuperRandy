@@ -31,7 +31,7 @@ public class Debugger {
     public static void printfLog(String tag, String log) {
         if (DEBUG_TAG && log != null) {
             if (!TextUtils.isEmpty(log))
-                LogUtils.i(tag, log);
+                LogUtils.stackI(tag, log);
         }
     }
 
@@ -42,7 +42,7 @@ public class Debugger {
     public static void printfWarning(String tag, String log) {
         if (DEBUG_TAG && log != null) {
             if (!TextUtils.isEmpty(log))
-                LogUtils.w(tag, log);
+                LogUtils.stackW(tag, log);
         }
     }
 
@@ -53,21 +53,21 @@ public class Debugger {
     public static void printfError(String log) {
         if (DEBUG_TAG) {
             if (!TextUtils.isEmpty(log))
-                LogUtils.e(LOG_TAG, log);
+                LogUtils.stackE(LOG_TAG, log);
         }
     }
 
     public static void printfError(String Tag, String log) {
         if (DEBUG_TAG) {
             if (!TextUtils.isEmpty(log))
-                LogUtils.e(Tag, log);
+                LogUtils.stackE(Tag, log);
         }
     }
 
     public static void printfError(String log, Exception e) {
         if (DEBUG_TAG) {
             if (!TextUtils.isEmpty(log))
-                LogUtils.e(LOG_TAG, log);
+                LogUtils.stackE(LOG_TAG, log);
             e.printStackTrace();
         }
     }

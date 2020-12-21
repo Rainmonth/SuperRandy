@@ -15,7 +15,7 @@ import com.rainmonth.player.render.glrender.GSYVideoGLViewBaseRender;
 import com.rainmonth.player.render.view.GSYSurfaceView;
 import com.rainmonth.player.render.view.GSYTextureView;
 import com.rainmonth.player.render.view.GSYVideoGLView;
-import com.rainmonth.player.render.view.IGSYRenderView;
+import com.rainmonth.player.render.view.IRenderView;
 import com.rainmonth.player.render.view.listener.IGSYSurfaceListener;
 import com.rainmonth.player.utils.GSYVideoType;
 import com.rainmonth.player.utils.MeasureHelper;
@@ -27,7 +27,7 @@ import java.io.File;
  */
 public class GSYRenderView {
 
-    protected IGSYRenderView mShowView;
+    protected IRenderView mShowView;
 
     /*************************RenderView function start *************************/
     public void requestLayout() {

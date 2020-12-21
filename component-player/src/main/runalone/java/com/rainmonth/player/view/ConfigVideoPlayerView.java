@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.rainmonth.player.R;
 import com.rainmonth.player.dialog.SwitchVideoTypeDialog;
 import com.rainmonth.player.model.VideoListBean;
+import com.rainmonth.player.render.view.IRenderView;
 import com.rainmonth.player.utils.GSYVideoType;
 import com.rainmonth.player.video.StandardVideoPlayer;
 import com.rainmonth.player.video.base.BaseVideoPlayer;
@@ -27,7 +28,7 @@ import java.util.List;
  * 配置项包括：
  * 画面旋转、画面比例、画面镜像、清晰度
  * 1.画面旋转，最终调用的是{@link View#setRotation(float)} 方法
- * 2.画面比例，这个设置最终影响的是 {@link com.rainmonth.player.render.view.IGSYRenderView} 的实现类的 onMeasure 执行
+ * 2.画面比例，这个设置最终影响的是 {@link IRenderView} 的实现类的 onMeasure 执行
  * 3.画面镜像，最懂调用的时{@link android.view.TextureView#setTransform(Matrix)}，这个目前只有
  * {@link android.view.TextureView} 支持，{@link android.view.SurfaceView}、{@link android.opengl.GLSurfaceView} 不支持
  * 4. 清晰度切换就是同一个视频内容，不同的播放源（url）

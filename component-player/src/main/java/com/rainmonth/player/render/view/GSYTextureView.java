@@ -28,7 +28,7 @@ import java.io.File;
  * Created by shuyu on 2016/11/11.
  */
 
-public class GSYTextureView extends TextureView implements TextureView.SurfaceTextureListener, IGSYRenderView, MeasureHelper.MeasureFormVideoParamsListener {
+public class GSYTextureView extends TextureView implements TextureView.SurfaceTextureListener, IRenderView, MeasureHelper.MeasureFormVideoParamsListener {
 
     private IGSYSurfaceListener mIGSYSurfaceListener;
 

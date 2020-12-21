@@ -23,7 +23,7 @@ import java.io.File;
 /**
  * SurfaceView
  */
-public class GSYSurfaceView extends SurfaceView implements SurfaceHolder.Callback2, IGSYRenderView, MeasureHelper.MeasureFormVideoParamsListener {
+public class GSYSurfaceView extends SurfaceView implements SurfaceHolder.Callback2, IRenderView, MeasureHelper.MeasureFormVideoParamsListener {
 
     private IGSYSurfaceListener mIGSYSurfaceListener;
 

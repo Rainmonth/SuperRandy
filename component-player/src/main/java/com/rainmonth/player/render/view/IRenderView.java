@@ -14,10 +14,10 @@ import com.rainmonth.player.utils.MeasureHelper;
 import java.io.File;
 
 /**
- * Created by guoshuyu on 2018/1/29.
+ * 用于视频渲染视图的通用接口
+ * {@link GSYVideoGLView}、{@link GSYTextureView}、{@link GSYSurfaceView}
  */
-
-public interface IGSYRenderView {
+public interface IRenderView {
 
     IGSYSurfaceListener getIGSYSurfaceListener();
 
