@@ -30,7 +30,7 @@ public abstract class VideoPlayer extends BaseVideoPlayer {
     /*******************************下面方法为管理器和播放控件交互的方法****************************************/
 
     @Override
-    public VideoViewBridge getGSYVideoManager() {
+    public VideoViewBridge getVideoManager() {
         VideoManager.instance().initContext(getContext().getApplicationContext());
         return VideoManager.instance();
     }

@@ -313,6 +313,10 @@ public class LogUtils {
         printStackTrace(E, "Exception", e);
     }
 
+    public static void printStackTrace(String tag, Throwable e) {
+        printStackTrace(E, tag, e);
+    }
+
     public static void printStackTrace(int type, String tag, Throwable e) {
         StringBuilder sb = new StringBuilder();
         appendStack(sb);

@@ -90,8 +90,8 @@ public class NormalDetailVideoPlayActivity extends BaseActivity {
                         isPlay = true;
 
                         //设置 seek 的临近帧。
-                        if (mDetailPlayer.getGSYVideoManager().getPlayer() instanceof Exo2PlayerManager) {
-                            ((Exo2PlayerManager) mDetailPlayer.getGSYVideoManager().getPlayer()).setSeekParameter(SeekParameters.NEXT_SYNC);
+                        if (mDetailPlayer.getVideoManager().getPlayer() instanceof Exo2PlayerManager) {
+                            ((Exo2PlayerManager) mDetailPlayer.getVideoManager().getPlayer()).setSeekParameter(SeekParameters.NEXT_SYNC);
                             Debugger.printfError("***** setSeekParameter **** ");
                         }
                     }

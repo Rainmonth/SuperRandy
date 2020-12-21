@@ -286,7 +286,7 @@ public class ConfigVideoPlayerView extends StandardVideoPlayer {
                         final String url = mUrlList.get(position).getUrl();
                         onVideoPause();
                         final long currentPosition = mCurrentPosition;
-                        getGSYVideoManager().releaseMediaPlayer();
+                        getVideoManager().releaseMediaPlayer();
                         cancelProgressTimer();
                         hideAllWidget();
                         new Handler().postDelayed(new Runnable() {

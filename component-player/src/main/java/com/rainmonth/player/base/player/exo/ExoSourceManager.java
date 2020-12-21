@@ -226,9 +226,9 @@ public class ExoSourceManager {
     /**
      * Cache需要release之后才能clear
      *
-     * @param context
-     * @param cacheDir
-     * @param url
+     * @param context  ctx
+     * @param cacheDir 缓存目录
+     * @param url      缓存对应的key
      */
     public static void clearCache(Context context, File cacheDir, String url) {
         try {

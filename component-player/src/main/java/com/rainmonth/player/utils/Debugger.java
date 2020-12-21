@@ -72,6 +72,18 @@ public class Debugger {
         }
     }
 
+    public static void printStackTrace(Throwable e) {
+        if (DEBUG_TAG) {
+            LogUtils.printStackTrace(LOG_TAG, e);
+        }
+    }
+
+    public static void printStackTrace(String tag, Throwable e) {
+        if (DEBUG_TAG) {
+            LogUtils.printStackTrace(tag, e);
+        }
+    }
+
     public static void Toast(Activity activity, String log) {
         if (DEBUG_TAG) {
             if (!TextUtils.isEmpty(log))

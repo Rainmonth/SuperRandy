@@ -25,9 +25,7 @@ import java.io.File;
 
 /**
  * 用于显示video的，做了横屏与竖屏的匹配，还有需要rotation需求的
- * Created by shuyu on 2016/11/11.
  */
-
 public class GSYTextureView extends TextureView implements TextureView.SurfaceTextureListener, IRenderView, MeasureHelper.MeasureFormVideoParamsListener {
 
     private IGSYSurfaceListener mIGSYSurfaceListener;

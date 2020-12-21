@@ -170,7 +170,7 @@ public abstract class BaseVideoPlayer extends VideoControlView {
     @Override
     public void onInfo(int what, int extra) {
         super.onInfo(what, extra);
-        if (what == getGSYVideoManager().getRotateInfoFlag()) {
+        if (what == getVideoManager().getRotateInfoFlag()) {
             checkAutoFullSizeWhenFull();
         }
     }
@@ -362,7 +362,7 @@ public abstract class BaseVideoPlayer extends VideoControlView {
             ViewGroup viewGroup = (ViewGroup) oldF.getParent();
             vp.removeView(viewGroup);
         }
-        mCurrentState = getGSYVideoManager().getLastState();
+        mCurrentState = getVideoManager().getLastState();
         if (gsyVideoPlayer != null) {
             cloneParams(gsyVideoPlayer, this);
         }
@@ -370,8 +370,8 @@ public abstract class BaseVideoPlayer extends VideoControlView {
                 || mCurrentState != CURRENT_STATE_AUTO_COMPLETE) {
             createNetWorkState();
         }
-        getGSYVideoManager().setListener(getGSYVideoManager().lastListener());
-        getGSYVideoManager().setLastListener(null);
+        getVideoManager().setListener(getVideoManager().lastListener());
+        getVideoManager().setLastListener(null);
         setStateAndUi(mCurrentState);
         addTextureView();
         mSaveChangeViewTIme = System.currentTimeMillis();
@@ -729,8 +729,8 @@ public abstract class BaseVideoPlayer extends VideoControlView {
 
             gsyVideoPlayer.startProgressTimer();
 
-            getGSYVideoManager().setLastListener(this);
-            getGSYVideoManager().setListener(gsyVideoPlayer);
+            getVideoManager().setLastListener(this);
+            getVideoManager().setListener(gsyVideoPlayer);
 
             checkoutState();
             return gsyVideoPlayer;
@@ -790,8 +790,8 @@ public abstract class BaseVideoPlayer extends VideoControlView {
             gsyVideoPlayer.setVideoAllCallBack(mVideoAllCallBack);
             gsyVideoPlayer.setSmallVideoTextureView(new SmallVideoTouch(gsyVideoPlayer, marginLeft, marginTop));
 
-            getGSYVideoManager().setLastListener(this);
-            getGSYVideoManager().setListener(gsyVideoPlayer);
+            getVideoManager().setLastListener(this);
+            getVideoManager().setListener(gsyVideoPlayer);
             if (mVideoAllCallBack != null) {
                 Debugger.printfError("onEnterSmallWidget");
                 mVideoAllCallBack.onEnterSmallWidget(mOriginUrl, mTitle, gsyVideoPlayer);
@@ -812,12 +812,12 @@ public abstract class BaseVideoPlayer extends VideoControlView {
         final ViewGroup vp = getViewGroup();
         VideoPlayer gsyVideoPlayer = (VideoPlayer) vp.findViewById(getSmallId());
         removeVideo(vp, getSmallId());
-        mCurrentState = getGSYVideoManager().getLastState();
+        mCurrentState = getVideoManager().getLastState();
         if (gsyVideoPlayer != null) {
             cloneParams(gsyVideoPlayer, this);
         }
-        getGSYVideoManager().setListener(getGSYVideoManager().lastListener());
-        getGSYVideoManager().setLastListener(null);
+        getVideoManager().setListener(getVideoManager().lastListener());
+        getVideoManager().setLastListener(null);
         setStateAndUi(mCurrentState);
         addTextureView();
         mSaveChangeViewTIme = System.currentTimeMillis();

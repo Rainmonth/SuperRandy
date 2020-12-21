@@ -15,6 +15,7 @@ import com.rainmonth.player.base.player.BasePlayerManager;
 import com.rainmonth.player.base.cache.ICacheManager;
 import com.rainmonth.player.model.GSYModel;
 import com.rainmonth.player.model.VideoOptionModel;
+import com.rainmonth.player.utils.Debugger;
 
 import java.util.List;
 
@@ -22,10 +23,10 @@ import tv.danmaku.ijk.media.player.IMediaPlayer;
 
 /**
  * EXOPlayer2
+ * Exo 内核实现的播放器
  */
-
 public class Exo2PlayerManager extends BasePlayerManager {
-
+    private static final String TAG = Exo2PlayerManager.class.getSimpleName();
     private Context context;
 
     private IjkExo2MediaPlayer mediaPlayer;
@@ -70,7 +71,7 @@ public class Exo2PlayerManager extends BasePlayerManager {
                 mediaPlayer.setSpeed(gsyModel.getSpeed(), 1);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            Debugger.printStackTrace(TAG, e);
         }
         initSuccess(gsyModel);
     }
@@ -95,7 +96,7 @@ public class Exo2PlayerManager extends BasePlayerManager {
             try {
                 mediaPlayer.setSpeed(speed, 1);
             } catch (Exception e) {
-                e.printStackTrace();
+                Debugger.printStackTrace(TAG, e);
             }
         }
     }
@@ -120,6 +121,7 @@ public class Exo2PlayerManager extends BasePlayerManager {
 
     @Override
     public void releaseSurface() {
+        Debugger.printfLog(TAG, "releaseSurface()");
         if (surface != null) {
             //surface.release();
             surface = null;
@@ -128,6 +130,7 @@ public class Exo2PlayerManager extends BasePlayerManager {
 
     @Override
     public void release() {
+        Debugger.printfLog(TAG, "release()");
         if (mediaPlayer != null) {
             mediaPlayer.setSurface(null);
             mediaPlayer.release();
@@ -166,6 +169,7 @@ public class Exo2PlayerManager extends BasePlayerManager {
 
     @Override
     public void start() {
+        Debugger.printfLog(TAG, "start()");
         if (mediaPlayer != null) {
             mediaPlayer.start();
         }
@@ -173,6 +177,7 @@ public class Exo2PlayerManager extends BasePlayerManager {
 
     @Override
     public void stop() {
+        Debugger.printfLog(TAG, "stop()");
         if (mediaPlayer != null) {
             mediaPlayer.stop();
         }
@@ -180,6 +185,7 @@ public class Exo2PlayerManager extends BasePlayerManager {
 
     @Override
     public void pause() {
+        Debugger.printfLog(TAG, "pause()");
         if (mediaPlayer != null) {
             mediaPlayer.pause();
         }

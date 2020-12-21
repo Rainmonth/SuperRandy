@@ -338,7 +338,7 @@ public abstract class VideoControlView extends VideoView implements View.OnClick
                 if (isCurrentMediaListener()) {
                     Debugger.printfLog(VideoControlView.this.hashCode() + "------------------------------ dismiss CURRENT_STATE_NORMAL");
                     cancelProgressTimer();
-                    getGSYVideoManager().releaseMediaPlayer();
+                    getVideoManager().releaseMediaPlayer();
                     releasePauseCover();
                     mBufferPoint = 0;
                     mSaveChangeViewTIme = 0;
@@ -363,7 +363,7 @@ public abstract class VideoControlView extends VideoView implements View.OnClick
                 break;
             case CURRENT_STATE_ERROR:
                 if (isCurrentMediaListener()) {
-                    getGSYVideoManager().releaseMediaPlayer();
+                    getVideoManager().releaseMediaPlayer();
                 }
                 break;
             case CURRENT_STATE_AUTO_COMPLETE:
@@ -624,10 +624,10 @@ public abstract class VideoControlView extends VideoView implements View.OnClick
                 mVideoAllCallBack.onClickSeekbar(mOriginUrl, mTitle, this);
             }
         }
-        if (getGSYVideoManager() != null && mHadPlay) {
+        if (getVideoManager() != null && mHadPlay) {
             try {
                 int time = seekBar.getProgress() * getDuration() / 100;
-                getGSYVideoManager().seekTo(time);
+                getVideoManager().seekTo(time);
             } catch (Exception e) {
                 Debugger.printfWarning(e.toString());
             }
@@ -781,9 +781,9 @@ public abstract class VideoControlView extends VideoView implements View.OnClick
         dismissProgressDialog();
         dismissVolumeDialog();
         dismissBrightnessDialog();
-        if (mChangePosition && getGSYVideoManager() != null && (mCurrentState == CURRENT_STATE_PLAYING || mCurrentState == CURRENT_STATE_PAUSE)) {
+        if (mChangePosition && getVideoManager() != null && (mCurrentState == CURRENT_STATE_PLAYING || mCurrentState == CURRENT_STATE_PAUSE)) {
             try {
-                getGSYVideoManager().seekTo(mSeekTimePosition);
+                getVideoManager().seekTo(mSeekTimePosition);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -910,7 +910,7 @@ public abstract class VideoControlView extends VideoView implements View.OnClick
             }
 
             try {
-                getGSYVideoManager().start();
+                getVideoManager().start();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -971,8 +971,8 @@ public abstract class VideoControlView extends VideoView implements View.OnClick
         if (!mTouchingProgressBar) {
             if (progress != 0 || forceChange) mProgressBar.setProgress(progress);
         }
-        if (getGSYVideoManager().getBufferedPercentage() > 0) {
-            secProgress = getGSYVideoManager().getBufferedPercentage();
+        if (getVideoManager().getBufferedPercentage() > 0) {
+            secProgress = getVideoManager().getBufferedPercentage();
         }
         if (secProgress > 94) secProgress = 100;
         setSecondaryProgress(secProgress);
@@ -988,12 +988,12 @@ public abstract class VideoControlView extends VideoView implements View.OnClick
 
     protected void setSecondaryProgress(int secProgress) {
         if (mProgressBar != null) {
-            if (secProgress != 0 && !getGSYVideoManager().isCacheFile()) {
+            if (secProgress != 0 && !getVideoManager().isCacheFile()) {
                 mProgressBar.setSecondaryProgress(secProgress);
             }
         }
         if (mBottomProgressBar != null) {
-            if (secProgress != 0 && !getGSYVideoManager().isCacheFile()) {
+            if (secProgress != 0 && !getVideoManager().isCacheFile()) {
                 mBottomProgressBar.setSecondaryProgress(secProgress);
             }
         }
@@ -1084,7 +1084,7 @@ public abstract class VideoControlView extends VideoView implements View.OnClick
 
     protected boolean isShowNetConfirm() {
         return !mOriginUrl.startsWith("file") && !mOriginUrl.startsWith("android.resource") && !CommonUtil.isWifiConnected(getContext())
-                && mNeedShowWifiTip && !getGSYVideoManager().cachePreview(mContext.getApplicationContext(), mCachePath, mOriginUrl);
+                && mNeedShowWifiTip && !getVideoManager().cachePreview(mContext.getApplicationContext(), mCachePath, mOriginUrl);
     }
 
     Runnable progressTask = new Runnable() {

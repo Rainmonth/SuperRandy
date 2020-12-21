@@ -48,8 +48,8 @@ public class ADVideoPlayer extends StandardVideoPlayer {
             mJumpAd.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (getGSYVideoManager().listener() != null) {
-                        getGSYVideoManager().listener().onAutoCompletion();
+                    if (getVideoManager().listener() != null) {
+                        getVideoManager().listener().onAutoCompletion();
                     }
                 }
             });
@@ -62,7 +62,7 @@ public class ADVideoPlayer extends StandardVideoPlayer {
     }
 
     @Override
-    public VideoViewBridge getGSYVideoManager() {
+    public VideoViewBridge getVideoManager() {
         VideoADManager.instance().initContext(getContext().getApplicationContext());
         return VideoADManager.instance();
     }

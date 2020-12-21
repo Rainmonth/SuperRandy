@@ -22,8 +22,11 @@ import tv.danmaku.ijk.media.player.IMediaPlayer;
 
 /**
  * 系统播放器，总觉得不好用
+ * 系统内核实现的播放器
  */
 public class SystemPlayerManager extends BasePlayerManager {
+
+    private static final String TAG = SystemPlayerManager.class.getSimpleName();
 
     private Context context;
 
@@ -62,7 +65,7 @@ public class SystemPlayerManager extends BasePlayerManager {
                 setSpeed(gsyModel.getSpeed());
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            Debugger.printStackTrace(TAG, e);
         }
         initSuccess(gsyModel);
     }
@@ -112,6 +115,7 @@ public class SystemPlayerManager extends BasePlayerManager {
 
     @Override
     public void releaseSurface() {
+        Debugger.printfLog(TAG, "releaseSurface()");
         if (surface != null) {
             //surface.release();
             surface = null;
@@ -120,6 +124,7 @@ public class SystemPlayerManager extends BasePlayerManager {
 
     @Override
     public void release() {
+        Debugger.printfLog(TAG, "release()");
         if (mediaPlayer != null) {
             release = true;
             mediaPlayer.release();
@@ -150,6 +155,7 @@ public class SystemPlayerManager extends BasePlayerManager {
 
     @Override
     public void start() {
+        Debugger.printfLog(TAG, "start()");
         if (mediaPlayer != null) {
             mediaPlayer.start();
             isPlaying = true;
@@ -158,6 +164,7 @@ public class SystemPlayerManager extends BasePlayerManager {
 
     @Override
     public void stop() {
+        Debugger.printfLog(TAG, "stop()");
         if (mediaPlayer != null) {
             mediaPlayer.stop();
             isPlaying = false;
@@ -166,6 +173,7 @@ public class SystemPlayerManager extends BasePlayerManager {
 
     @Override
     public void pause() {
+        Debugger.printfLog(TAG, "pause()");
         if (mediaPlayer != null) {
             mediaPlayer.pause();
             isPlaying = false;
@@ -254,7 +262,7 @@ public class SystemPlayerManager extends BasePlayerManager {
                     Debugger.printfError(" not support setSpeed");
                 }
             } catch (Exception e) {
-                e.printStackTrace();
+                Debugger.printStackTrace(TAG, e);
             }
         }
     }

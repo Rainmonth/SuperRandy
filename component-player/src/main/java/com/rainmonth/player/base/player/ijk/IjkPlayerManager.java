@@ -29,6 +29,7 @@ import tv.danmaku.ijk.media.player.IjkMediaPlayer;
 
 /**
  * IJKPLayer
+ * Ijk 播放内核实现的播放器
  */
 public class IjkPlayerManager extends BasePlayerManager {
 

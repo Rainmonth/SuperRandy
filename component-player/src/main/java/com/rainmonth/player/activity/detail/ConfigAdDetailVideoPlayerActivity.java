@@ -94,6 +94,11 @@ public class ConfigAdDetailVideoPlayerActivity extends BaseAdDetailVideoPlayerAc
     }
 
     @Override
+    public void clickForFullScreen() {
+
+    }
+
+    @Override
     public boolean isNeedAdOnStart() {
         return true;
     }
