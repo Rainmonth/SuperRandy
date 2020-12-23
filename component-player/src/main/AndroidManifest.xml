@@ -8,7 +8,7 @@
             android:name=".activity.simple.LocalVideoPlayerActivity"
             android:theme="@style/PlayerDemoActivityTheme" />
         <activity
-            android:name="com.rainmonth.player.activity.other.GlobalVideoPlayerActivity"
+            android:name="com.rainmonth.player.activity.other.AudioBasicLearnActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
             android:theme="@style/PlayerDemoActivityTheme" />
         <activity
@@ -41,6 +41,26 @@
             android:theme="@style/PlayerDemoActivityTheme" />
         <activity
             android:name="com.rainmonth.player.activity.list.ListFocusVideoPlayActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
+            android:theme="@style/PlayerDemoActivityTheme" />
+        <activity
+            android:name=".activity.other.AudioBasicLearnActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
+            android:theme="@style/PlayerDemoActivityTheme" />
+        <activity
+            android:name=".activity.other.AudioRecordExampleActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
+            android:theme="@style/PlayerDemoActivityTheme" />
+        <activity
+            android:name=".activity.other.AudioChangeVoiceWithSoundTouchActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
+            android:theme="@style/PlayerDemoActivityTheme" />
+        <activity
+            android:name=".activity.other.VideoBasicLearnActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
+            android:theme="@style/PlayerDemoActivityTheme" />
+        <activity
+            android:name=".VideoRecordExampleActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
             android:theme="@style/PlayerDemoActivityTheme" />
         <activity

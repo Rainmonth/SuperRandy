@@ -7,8 +7,10 @@ import com.rainmonth.player.activity.detail.ConfigDetailVideoPlayerActivity;
 import com.rainmonth.player.activity.detail.ControlDetailVideoPlayerActivity;
 import com.rainmonth.player.activity.detail.DetailPlayDemoListActivity;
 import com.rainmonth.player.activity.list.DyVideoPlayActivity;
+import com.rainmonth.player.activity.other.AudioChangeVoiceWithSoundTouchActivity;
+import com.rainmonth.player.activity.other.AudioRecordExampleActivity;
 import com.rainmonth.player.activity.other.FloatVideoPlayerActivity;
-import com.rainmonth.player.activity.other.GlobalVideoPlayerActivity;
+import com.rainmonth.player.activity.other.AudioBasicLearnActivity;
 import com.rainmonth.player.activity.list.ListPlayDemoListActivity;
 import com.rainmonth.player.activity.detail.NormalDetailVideoPlayActivity;
 import com.rainmonth.player.activity.simple.SimplePlayDemoListActivity;
@@ -35,8 +37,8 @@ public class DemoDataFactory {
         exampleBeans.add(new ExampleBean("列表播放", "各种列表播放场景示例", ExampleBean.STATE_TODO, ListPlayDemoListActivity.class));
         exampleBeans.add(new ExampleBean("抖音式播放", "类似于抖音的那种播放效果", ExampleBean.STATE_TODO, DyVideoPlayActivity.class));
         exampleBeans.add(new ExampleBean("支持回退时悬浮窗播放", "很多游戏直播软件在退出播放页后仍可以小窗播放", ExampleBean.STATE_TODO, FloatVideoPlayerActivity.class));
-        exampleBeans.add(new ExampleBean("全局悬浮窗播放场景示例", "全局浮窗播放", ExampleBean.STATE_TODO, GlobalVideoPlayerActivity.class));
-        exampleBeans.add(new ExampleBean("多动进度条预览播放", "全局浮窗播放", ExampleBean.STATE_TODO, GlobalVideoPlayerActivity.class));
+        exampleBeans.add(new ExampleBean("音频基础学习", "Android音频相关的API学习（AudioRecord、AudioTrack），Demo演示", ExampleBean.STATE_TODO, AudioBasicLearnActivity.class));
+        exampleBeans.add(new ExampleBean("视频基础学习", "Android视频相关的API学习（CameraAPI、MediaExtractor和MediaMuxer），Demo演示", ExampleBean.STATE_TODO, AudioBasicLearnActivity.class));
         return exampleBeans;
     }
 
@@ -87,5 +89,24 @@ public class DemoDataFactory {
         listBeans.add(new VideoListBean("", source1, "普通"));
         listBeans.add(new VideoListBean("", source2, "清晰"));
         return listBeans;
+    }
+
+    /**
+     * 音频学习列表
+     */
+    public static List<ExampleBean> getAudioLearnList() {
+        List<ExampleBean> exampleBeans = new ArrayList<>();
+        exampleBeans.add(new ExampleBean("音频录制", "Android 音频录制实现",ExampleBean.STATE_TODO, AudioRecordExampleActivity.class));
+        exampleBeans.add(new ExampleBean("利用SoundTouch实现变声", "Android 利用SoundTouch实现音频的变声",ExampleBean.STATE_TODO, AudioChangeVoiceWithSoundTouchActivity.class));
+        return exampleBeans;
+    }
+
+    /**
+     * 视频学习列表
+     */
+    public static List<ExampleBean> getVideoLearnList() {
+        List<ExampleBean> exampleBeans = new ArrayList<>();
+        exampleBeans.add(new ExampleBean("视频录制", "Android 视频录制实现",ExampleBean.STATE_TODO, VideoRecordExampleActivity.class));
+        return exampleBeans;
     }
 }

@@ -10,7 +10,7 @@ import com.rainmonth.player.R;
  * @author 张豪成
  * @date 2019-11-01 15:13
  */
-public class GlobalVideoPlayerActivity extends BaseActivity {
+public class VideoBasicLearnActivity extends BaseActivity {
     @Override
     protected void setupActivityComponent(AppComponent appComponent) {
 
