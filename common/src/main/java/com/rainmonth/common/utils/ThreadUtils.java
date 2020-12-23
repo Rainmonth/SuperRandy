@@ -27,7 +27,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
- *
+ * 线程工具类
  */
 public final class ThreadUtils {
 
@@ -37,13 +37,18 @@ public final class ThreadUtils {
 
     private static final Map<Task, ExecutorService> TASK_POOL_MAP = new ConcurrentHashMap<>();
 
-    private static final int   CPU_COUNT = Runtime.getRuntime().availableProcessors();
-    private static final Timer TIMER     = new Timer();
+    private static final int CPU_COUNT = Runtime.getRuntime().availableProcessors();
+    private static final Timer TIMER = new Timer();
 
     private static final byte TYPE_SINGLE = -1;
     private static final byte TYPE_CACHED = -2;
-    private static final byte TYPE_IO     = -4;
-    private static final byte TYPE_CPU    = -8;
+    private static final byte TYPE_IO = -4;
+    private static final byte TYPE_CPU = -8;
+
+    private static final String PREFIX_SINGLE = "single";
+    private static final String PREFIX_CACHED = "cached";
+    private static final String PREFIX_IO = "io";
+    private static final String PREFIX_CPU = "cpu";
 
     private static Executor sDeliver;
 
@@ -992,31 +997,36 @@ public final class ThreadUtils {
 
     static final class ThreadPoolExecutor4Util extends ThreadPoolExecutor {
 
+        /**
+         * @param type     < 0 时表示特定类型的线程池，> 0 表示核心线程和最大线程数都为type的线程池
+         * @param priority 优先级
+         */
         private static ExecutorService createPool(final int type, final int priority) {
+            String prefix = getPrefixByPoolType(type);
             switch (type) {
                 case TYPE_SINGLE:
                     return new ThreadPoolExecutor4Util(1, 1,
                             0L, TimeUnit.MILLISECONDS,
                             new LinkedBlockingQueue4Util(),
-                            new UtilsThreadFactory("single", priority)
+                            new UtilsThreadFactory(prefix, priority)
                     );
                 case TYPE_CACHED:
                     return new ThreadPoolExecutor4Util(0, 128,
                             60L, TimeUnit.SECONDS,
                             new LinkedBlockingQueue4Util(true),
-                            new UtilsThreadFactory("cached", priority)
+                            new UtilsThreadFactory(prefix, priority)
                     );
                 case TYPE_IO:
                     return new ThreadPoolExecutor4Util(2 * CPU_COUNT + 1, 2 * CPU_COUNT + 1,
                             30, TimeUnit.SECONDS,
                             new LinkedBlockingQueue4Util(),
-                            new UtilsThreadFactory("io", priority)
+                            new UtilsThreadFactory(prefix, priority)
                     );
                 case TYPE_CPU:
                     return new ThreadPoolExecutor4Util(CPU_COUNT + 1, 2 * CPU_COUNT + 1,
                             30, TimeUnit.SECONDS,
                             new LinkedBlockingQueue4Util(true),
-                            new UtilsThreadFactory("cpu", priority)
+                            new UtilsThreadFactory(prefix, priority)
                     );
                 default:
                     return new ThreadPoolExecutor4Util(type, type,
@@ -1025,6 +1035,28 @@ public final class ThreadUtils {
                             new UtilsThreadFactory("fixed(" + type + ")", priority)
                     );
             }
+        }
+
+        private static String getPrefixByPoolType(int poolType) {
+            String prefix;
+            switch (poolType) {
+                case TYPE_SINGLE:
+                    prefix = PREFIX_SINGLE;
+                    break;
+                case TYPE_CACHED:
+                    prefix = PREFIX_CACHED;
+                    break;
+                case TYPE_IO:
+                    prefix = PREFIX_IO;
+                    break;
+                case TYPE_CPU:
+                    prefix = PREFIX_CPU;
+                    break;
+                default:
+                    prefix = "fixed(" + poolType + ")";
+                    break;
+            }
+            return prefix;
         }
 
         private final AtomicInteger mSubmittedCount = new AtomicInteger();
@@ -1104,11 +1136,11 @@ public final class ThreadUtils {
 
     static final class UtilsThreadFactory extends AtomicLong
             implements ThreadFactory {
-        private static final AtomicInteger POOL_NUMBER      = new AtomicInteger(1);
-        private static final long          serialVersionUID = -9209200509960368598L;
-        private final        String        namePrefix;
-        private final        int           priority;
-        private final        boolean       isDaemon;
+        private static final AtomicInteger POOL_NUMBER = new AtomicInteger(1);
+        private static final long serialVersionUID = -9209200509960368598L;
+        private final String namePrefix;
+        private final int priority;
+        private final boolean isDaemon;
 
         UtilsThreadFactory(String prefix, int priority) {
             this(prefix, priority, false);
@@ -1162,21 +1194,21 @@ public final class ThreadUtils {
 
     public abstract static class Task<T> implements Runnable {
 
-        private static final int NEW         = 0;
-        private static final int RUNNING     = 1;
+        private static final int NEW = 0;
+        private static final int RUNNING = 1;
         private static final int EXCEPTIONAL = 2;
-        private static final int COMPLETING  = 3;
-        private static final int CANCELLED   = 4;
+        private static final int COMPLETING = 3;
+        private static final int CANCELLED = 4;
         private static final int INTERRUPTED = 5;
-        private static final int TIMEOUT     = 6;
+        private static final int TIMEOUT = 6;
 
         private final AtomicInteger state = new AtomicInteger(NEW);
 
         private volatile boolean isSchedule;
-        private volatile Thread  runner;
+        private volatile Thread runner;
 
-        private Timer             mTimer;
-        private long              mTimeoutMillis;
+        private Timer mTimer;
+        private long mTimeoutMillis;
         private OnTimeoutListener mTimeoutListener;
 
         private Executor deliver;
@@ -1338,8 +1370,8 @@ public final class ThreadUtils {
     public static class SyncValue<T> {
 
         private CountDownLatch mLatch = new CountDownLatch(1);
-        private AtomicBoolean  mFlag  = new AtomicBoolean();
-        private T              mValue;
+        private AtomicBoolean mFlag = new AtomicBoolean();
+        private T mValue;
 
         public void setValue(T value) {
             if (mFlag.compareAndSet(false, true)) {
