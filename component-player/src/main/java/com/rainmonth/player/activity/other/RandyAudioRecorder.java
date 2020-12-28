@@ -68,11 +68,11 @@ public class RandyAudioRecorder {
         this.srcFileName = builder.srcFileName;
         this.disFileName = builder.disFileName;
 
-        int bufferSizeInBytes = AudioRecord.getMinBufferSize(sampleRateInHz, channelConfig, audioFormat);
+        mBufferedSizeInBytes = AudioRecord.getMinBufferSize(sampleRateInHz, channelConfig, audioFormat);
         if (mBufferedSizeInBytes <= 0) {
             throw new IllegalArgumentException("AudioRecord can not be created due to mBufferedSizeInBytes(need great than 0), mBufferedSizeInBytes: " + mBufferedSizeInBytes);
         }
-        mAudioRecord = new AudioRecord(audioSource, sampleRateInHz, channelConfig, audioFormat, bufferSizeInBytes);
+        mAudioRecord = new AudioRecord(audioSource, sampleRateInHz, channelConfig, audioFormat, mBufferedSizeInBytes);
         mRecordState = STATE_INIT;
     }
 

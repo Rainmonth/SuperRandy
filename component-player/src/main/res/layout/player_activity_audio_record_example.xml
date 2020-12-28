@@ -23,4 +23,24 @@
         app:layout_constraintStart_toEndOf="@+id/tv_start_record"
         app:layout_constraintTop_toTopOf="parent" />
 
+
+    <TextView
+        android:id="@+id/tv_start_record1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:text="MediaRecorder开始录音"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_start_record" />
+
+    <TextView
+        android:id="@+id/tv_stop_record1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:text="MediaRecorder结束录音"
+        app:layout_constraintStart_toEndOf="@+id/tv_start_record1"
+        app:layout_constraintTop_toBottomOf="@+id/tv_start_record" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
