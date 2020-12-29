@@ -15,10 +15,10 @@ public class SrThreadService implements IThread {
 
     private static SrThreadService sInstance;
 
-    public static SrThreadService get() {
-        if (sInstance == null) {
-            synchronized (SrThreadService.class) {
-                if (sInstance == null) {
+    public static SrThreadService getInstance() {
+        synchronized (SrThreadService.class) {
+            if (sInstance == null) {
+                synchronized (SrThreadService.class) {
                     sInstance = new SrThreadService();
                 }
             }
@@ -26,8 +26,8 @@ public class SrThreadService implements IThread {
         return sInstance;
     }
 
-
     private SrThreadService() {
+
     }
 
     /**

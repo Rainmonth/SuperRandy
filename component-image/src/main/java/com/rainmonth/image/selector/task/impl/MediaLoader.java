@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.provider.MediaStore;
 import android.util.Log;
 
+import com.rainmonth.common.thread.SrThreadService;
 import com.rainmonth.image.selector.bean.MediaFileBean;
 import com.rainmonth.image.selector.task.IMediaLoader;
 import com.rainmonth.image.selector.task.callback.IMediaTaskCallback;
@@ -249,8 +250,14 @@ public class MediaLoader implements IMediaLoader {
         if (cr == null) {
             return;
         }
-
         Cursor cursor = null;
+        SrThreadService.getInstance().executeDaemonTask(new Runnable() {
+            @Override
+            public void run() {
+
+            }
+        }, "loadAudiosRunnable");
+
         try {
             cursor = cr.query(audioUri, AUDIO_PROJECTION, null, null, null);
             if (cursor != null) {
@@ -260,17 +267,6 @@ public class MediaLoader implements IMediaLoader {
                     cursor.moveToFirst();
                     do {
                         MediaFileBean mediaFileBean = new MediaFileBean();
-//                        MediaStore.MediaColumns._ID,
-////            MediaStore.MediaColumns._COUNT,
-//                                MediaStore.Audio.Media.ALBUM,
-//                                MediaStore.Audio.Media.ALBUM_ID,
-//                                MediaStore.Audio.Media.DURATION,
-//                                MediaStore.MediaColumns.DISPLAY_NAME,
-//                                MediaStore.MediaColumns.SIZE,
-//                                MediaStore.MediaColumns.DATA,
-//                                MediaStore.MediaColumns.DATE_ADDED,
-//                                MediaStore.MediaColumns.DATE_MODIFIED,
-//                                MediaStore.MediaColumns.MIME_TYPE
                         long id = cursor.getLong(cursor.getColumnIndex(AUDIO_PROJECTION[0]));
                         String album = cursor.getString(cursor.getColumnIndex(AUDIO_PROJECTION[1]));
                         long albumId = cursor.getLong(cursor.getColumnIndex(AUDIO_PROJECTION[2]));
@@ -286,9 +282,10 @@ public class MediaLoader implements IMediaLoader {
                         mediaFileBean.fileName = displayName;
                         mediaFileBean.size = size;
                         mediaFileBean.path = url;
-                        mediaFileBeans.add(mediaFileBean);
 
                         Log.d(TAG, mediaFileBean.toString());
+
+                        mediaFileBeans.add(mediaFileBean);
                     } while (cursor.moveToNext());
                 }
                 if (callback != null) {
