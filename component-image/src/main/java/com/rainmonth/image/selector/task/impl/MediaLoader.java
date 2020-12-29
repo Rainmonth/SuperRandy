@@ -5,9 +5,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.MediaStore;
-import android.util.Log;
 
 import com.rainmonth.common.thread.SrThreadService;
+import com.rainmonth.common.utils.log.LogUtils;
 import com.rainmonth.image.selector.bean.MediaFileBean;
 import com.rainmonth.image.selector.task.IMediaLoader;
 import com.rainmonth.image.selector.task.callback.IMediaTaskCallback;
@@ -16,6 +16,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 参考项目
+ * https://github.com/LuckSiege/PictureSelector.git
+ *
  * MediaStore 里面有四张表：
  * - video，对应的表字段{@link MediaStore.Video.VideoColumns}
  * - audio, 对应的表字段{@link MediaStore.Audio.AudioColumns}
@@ -28,10 +31,54 @@ import java.util.List;
 public class MediaLoader implements IMediaLoader {
     public static final String TAG = MediaLoader.class.getSimpleName();
 
-    private Uri videoUri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI;
-    private Uri imageUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
-    private Uri audioUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
-    private Uri fileUri = MediaStore.Files.getContentUri("external");
+    public static final int LOAD_TYPE_COMMON = 0;           // 加载普通文件
+    public static final int LOAD_TYPE_IMAGE = 1;            // 加载图片
+    public static final int LOAD_TYPE_VIDEO = 2;            // 加载视频
+    public static final int LOAD_TYPE_AUDIO = 3;            // 加载音频
+
+    // 视频表uri
+    private Uri tableVideoUri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI;
+    // 图像表uri
+    private Uri tableImageUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
+    // 音频表Uri
+    private Uri tableAudioUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
+    // 文件表Uri
+    private Uri tableFileUri = MediaStore.Files.getContentUri("external");
+
+
+    public void loadByType(ContentResolver cr, int type, String... formatTypes) {
+
+    }
+
+    /**
+     * 加载指定文件类型的文件
+     *
+     * @param cr          ContentResolver
+     * @param formatTypes 文件类型
+     */
+    public void loadFileByType(ContentResolver cr, String... formatTypes) {
+
+    }
+
+    public void loadImageByType(ContentResolver cr, String... formatTypes) {
+
+    }
+
+    public void loadAudioByType(ContentResolver cr, String... formatTypes) {
+
+    }
+
+    public void loadVideoByType(ContentResolver cr, String... formatTypes) {
+
+    }
+
+    public String[] getProjectByType(int loadType) {
+        return new String[]{};
+    }
+
+    public void getSelectionByType(int loadType) {
+
+    }
 
     /**
      * 图片文件要获取的属性
@@ -162,8 +209,8 @@ public class MediaLoader implements IMediaLoader {
         Cursor cursor = null;
         try {
             String selection = getSelectionForAllMediaType();
-            Log.d(TAG, "#load, selection:" + selection);
-            cursor = cr.query(imageUri, IMAGE_PROJECTION, null, null, null);
+            LogUtils.d(TAG, "#load, selection:" + selection);
+            cursor = cr.query(tableImageUri, IMAGE_PROJECTION, null, null, null);
 
             // todo 处理数据，先拿到文件夹，再拿文件
             if (cursor != null) {
@@ -188,13 +235,13 @@ public class MediaLoader implements IMediaLoader {
                         mediaFileBean.path = url;
                         mediaFileBeans.add(mediaFileBean);
 
-                        Log.d(TAG, mediaFileBean.toString());
+                        LogUtils.d(TAG, mediaFileBean.toString());
                     } while (cursor.moveToNext());
                 }
             }
 
         } catch (Exception e) {
-            Log.e(TAG, e.getMessage());
+            LogUtils.e(TAG, e.getMessage());
         } finally {
             if (cursor != null && !cursor.isClosed()) {
                 cursor.close();
@@ -209,7 +256,7 @@ public class MediaLoader implements IMediaLoader {
 
         Cursor cursor = null;
         try {
-            cursor = cr.query(videoUri, VIDEO_PROJECTION, null, null, null);
+            cursor = cr.query(tableVideoUri, VIDEO_PROJECTION, null, null, null);
             if (cursor != null) {
                 int count = cursor.getCount();
                 List<MediaFileBean> mediaFileBeans = new ArrayList<>();
@@ -232,12 +279,12 @@ public class MediaLoader implements IMediaLoader {
                         mediaFileBean.path = url;
                         mediaFileBeans.add(mediaFileBean);
 
-                        Log.d(TAG, mediaFileBean.toString());
+                        LogUtils.d(TAG, mediaFileBean.toString());
                     } while (cursor.moveToNext());
                 }
             }
         } catch (Exception e) {
-            Log.d(TAG, e.getMessage());
+            LogUtils.d(TAG, e.getMessage());
         } finally {
             if (cursor != null && !cursor.isClosed()) {
                 cursor.close();
@@ -259,7 +306,7 @@ public class MediaLoader implements IMediaLoader {
         }, "loadAudiosRunnable");
 
         try {
-            cursor = cr.query(audioUri, AUDIO_PROJECTION, null, null, null);
+            cursor = cr.query(tableAudioUri, AUDIO_PROJECTION, null, null, null);
             if (cursor != null) {
                 int count = cursor.getCount();
                 List<MediaFileBean> mediaFileBeans = new ArrayList<>();
@@ -283,7 +330,7 @@ public class MediaLoader implements IMediaLoader {
                         mediaFileBean.size = size;
                         mediaFileBean.path = url;
 
-                        Log.d(TAG, mediaFileBean.toString());
+                        LogUtils.d(TAG, mediaFileBean.toString());
 
                         mediaFileBeans.add(mediaFileBean);
                     } while (cursor.moveToNext());
@@ -293,7 +340,7 @@ public class MediaLoader implements IMediaLoader {
                 }
             }
         } catch (Exception e) {
-            Log.d(TAG, e.getMessage());
+            LogUtils.d(TAG, e.getMessage());
         } finally {
             if (cursor != null && !cursor.isClosed()) {
                 cursor.close();
@@ -371,17 +418,17 @@ public class MediaLoader implements IMediaLoader {
             case TABLE_ALBUMS:
             case TABLE_ARTIST:
                 // uri = MediaStore.Images.Media.getContentUri()
-                uri = imageUri;
+                uri = tableImageUri;
                 break;
             case TABLE_AUDIO:
-                uri = audioUri;
+                uri = tableAudioUri;
                 break;
             case TABLE_VIDEO:
-                uri = videoUri;
+                uri = tableVideoUri;
                 break;
             case TABLE_FILE:
             default:
-                uri = fileUri;
+                uri = tableFileUri;
                 break;
         }
         printTableInfo(cr, uri);
@@ -401,11 +448,11 @@ public class MediaLoader implements IMediaLoader {
                 cursor.moveToFirst();
                 String[] columns = cursor.getColumnNames();
                 for (String string : columns) {
-                    Log.d(TAG, cursor.getColumnIndex(string) + " = " + string);
+                    LogUtils.d(TAG, cursor.getColumnIndex(string) + " = " + string);
                 }
             }
         } catch (Exception e) {
-            Log.d(TAG, e.getMessage());
+            LogUtils.d(TAG, e.getMessage());
         } finally {
             if (cursor != null && !cursor.isClosed()) {
                 cursor.close();
