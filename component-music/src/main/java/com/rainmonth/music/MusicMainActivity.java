@@ -7,7 +7,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.google.android.material.tabs.TabLayout;
-import com.rainmonth.common.adapter.BaseTabViewPagerAdapter;
+import com.rainmonth.adapter.BaseTabViewPagerAdapter;
 import com.rainmonth.common.base.BaseActivity;
 import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.music.fragment.main.DynamicsFragment;

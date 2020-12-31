@@ -2,8 +2,8 @@ package com.rainmonth.common.component;
 
 import androidx.annotation.NonNull;
 
-import com.rainmonth.common.adapter.base.BaseViewHolder;
-import com.rainmonth.common.adapter.provider.BaseItemProvider;
+import com.rainmonth.adapter.base.BaseViewHolder;
+import com.rainmonth.adapter.provider.BaseItemProvider;
 import com.rainmonth.common.bean.RandyLogicBean;
 
 /**

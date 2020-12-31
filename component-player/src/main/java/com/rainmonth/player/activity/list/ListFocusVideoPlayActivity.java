@@ -3,8 +3,8 @@ package com.rainmonth.player.activity.list;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.rainmonth.common.adapter.base.BaseQuickAdapter;
-import com.rainmonth.common.adapter.base.BaseViewHolder;
+import com.rainmonth.adapter.base.BaseQuickAdapter;
+import com.rainmonth.adapter.base.BaseViewHolder;
 import com.rainmonth.common.base.BaseActivity;
 import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.player.R;

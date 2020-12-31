@@ -1,10 +1,10 @@
-package com.rainmonth.common.adapter;
+package com.rainmonth.adapter;
 
 import androidx.annotation.Nullable;
 
-import com.rainmonth.common.adapter.base.BaseViewHolder;
-import com.rainmonth.common.adapter.base.MultipleItemRvAdapter;
-import com.rainmonth.common.adapter.entity.MultiItemEntity;
+import com.rainmonth.adapter.base.BaseViewHolder;
+import com.rainmonth.adapter.base.MultipleItemRvAdapter;
+import com.rainmonth.adapter.entity.MultiItemEntity;
 import com.rainmonth.common.component.RandyBaseItemProvider;
 
 import java.util.List;

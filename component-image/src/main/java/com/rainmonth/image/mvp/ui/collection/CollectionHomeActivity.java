@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.View;
 
-import com.rainmonth.common.adapter.base.BaseQuickAdapter;
+import com.rainmonth.adapter.base.BaseQuickAdapter;
 import com.rainmonth.common.base.BaseActivity;
 import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.image.R;

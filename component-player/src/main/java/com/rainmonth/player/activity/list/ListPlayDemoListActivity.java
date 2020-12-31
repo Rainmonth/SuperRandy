@@ -3,7 +3,7 @@ package com.rainmonth.player.activity.list;
 import android.text.TextUtils;
 import android.widget.TextView;
 
-import com.rainmonth.common.adapter.base.BaseViewHolder;
+import com.rainmonth.adapter.base.BaseViewHolder;
 import com.rainmonth.common.base.BaseListActivity;
 import com.rainmonth.common.bean.ExampleBean;
 import com.rainmonth.utils.log.LogUtils;

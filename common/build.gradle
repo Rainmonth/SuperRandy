@@ -40,7 +40,6 @@ android {
 
 dependencies {
     //res
-    api project(":common-adapter")
     api project(":common-res")
     api project(":router")
     api project(":component-base")
@@ -102,5 +101,5 @@ dependencies {
     testImplementation rootProject.ext.dependencies['junit']
     testImplementation rootProject.ext.dependencies['robolectric']
 
-    api 'com.github.Rainmonth:RandyJitPack:1.0.2'
+    api 'com.github.Rainmonth:RandyJitPack:1.0.4'
 }

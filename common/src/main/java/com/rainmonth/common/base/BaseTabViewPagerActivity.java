@@ -5,7 +5,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 import com.rainmonth.common.R;
-import com.rainmonth.common.adapter.BaseTabViewPagerAdapter;
+import com.rainmonth.adapter.BaseTabViewPagerAdapter;
 import com.rainmonth.utils.log.LogUtils;
 
 import java.util.ArrayList;

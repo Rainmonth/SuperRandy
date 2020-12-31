@@ -5,8 +5,8 @@ import androidx.annotation.Nullable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.rainmonth.common.adapter.base.BaseQuickAdapter;
-import com.rainmonth.common.adapter.base.BaseViewHolder;
+import com.rainmonth.adapter.base.BaseQuickAdapter;
+import com.rainmonth.adapter.base.BaseViewHolder;
 import com.rainmonth.common.http.imageloader.ImageLoader;
 import com.rainmonth.common.http.imageloader.glide.GlideImageConfig;
 import com.rainmonth.common.utils.ComponentUtils;

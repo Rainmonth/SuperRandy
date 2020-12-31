@@ -5,8 +5,8 @@ import android.view.View;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 
-import com.rainmonth.common.adapter.base.BaseQuickAdapter;
-import com.rainmonth.common.adapter.base.BaseViewHolder;
+import com.rainmonth.adapter.base.BaseQuickAdapter;
+import com.rainmonth.adapter.base.BaseViewHolder;
 import com.rainmonth.common.R;
 import com.rainmonth.common.bean.BaseBean;
 import com.rainmonth.common.bean.RandyLogicBean;

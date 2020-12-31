@@ -1,4 +1,4 @@
-package com.rainmonth.common.adapter;
+package com.rainmonth.adapter;
 
 import android.view.ViewGroup;
 

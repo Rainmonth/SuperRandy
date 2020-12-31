@@ -1,4 +1,4 @@
-package com.rainmonth.common.adapter;
+package com.rainmonth.adapter;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
