@@ -1,4 +1,4 @@
-package com.rainmonth.utils;
+package com.rainmonth.common.utils;
 
 import org.reactivestreams.Publisher;
 
