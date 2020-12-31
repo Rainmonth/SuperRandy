@@ -10,7 +10,7 @@ import com.rainmonth.R;
 import com.rainmonth.common.base.BaseLazyFragment;
 import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.common.http.PageData;
-import com.rainmonth.common.utils.log.LogUtils;
+import com.rainmonth.utils.log.LogUtils;
 import com.rainmonth.di.component.DaggerPursueComponent;
 import com.rainmonth.di.module.PursueModule;
 import com.rainmonth.mvp.contract.PursueContract;

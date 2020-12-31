@@ -10,8 +10,8 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.rainmonth.common.base.BaseActivity;
 import com.rainmonth.common.di.component.AppComponent;
-import com.rainmonth.common.utils.ToastUtils;
-import com.rainmonth.common.utils.log.LogUtils;
+import com.rainmonth.utils.ToastUtils;
+import com.rainmonth.utils.log.LogUtils;
 import com.rainmonth.common.widgets.PullToRefreshViewPager;
 import com.rainmonth.common.widgets.library.PullToRefreshBase;
 import com.rainmonth.image.R;

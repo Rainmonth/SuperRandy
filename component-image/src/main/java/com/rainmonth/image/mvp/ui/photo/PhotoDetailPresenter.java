@@ -3,8 +3,8 @@ package com.rainmonth.image.mvp.ui.photo;
 import com.rainmonth.common.base.mvp.BasePresenter;
 import com.rainmonth.common.di.scope.ActivityScope;
 import com.rainmonth.common.http.CommonSubscriber;
-import com.rainmonth.common.utils.RxUtils;
-import com.rainmonth.common.utils.log.LogUtils;
+import com.rainmonth.utils.RxUtils;
+import com.rainmonth.utils.log.LogUtils;
 import com.rainmonth.image.mvp.model.bean.PhotoBean;
 
 import java.util.List;

@@ -1,7 +1,7 @@
 package com.rainmonth.app.mvp.ui;
 
+import android.content.Context;
 import android.os.Bundle;
-import androidx.annotation.Nullable;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,14 +10,15 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
+
 import com.rainmonth.app.R;
 import com.rainmonth.app.mvp.model.bean.CardBean;
 import com.rainmonth.common.base.BaseLazyFragment;
 import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.common.eventbus.EventCenter;
-import com.rainmonth.common.utils.CommonUtils;
-import com.rainmonth.common.utils.DensityUtils;
 import com.rainmonth.common.widgets.HtmlTextView;
+import com.rainmonth.utils.DensityUtils;
 
 import butterknife.ButterKnife;
 
@@ -80,8 +81,12 @@ public class CardFragment extends BaseLazyFragment {
         ViewGroup.LayoutParams localLayoutParams = this.mCoverImageView.getLayoutParams();
         localLayoutParams.height = Float.valueOf(coverHeight).intValue();
         //加载图片
-        int picResource = CommonUtils.getDrawableIdByName(getActivity(), mCardBean.getCoverImageUrl());
+        int picResource = getDrawableIdByName(getActivity(), mCardBean.getCoverImageUrl());
         mCoverImageView.setBackgroundResource(picResource);
+    }
+
+    public static int getDrawableIdByName(Context context, String drawableName) {
+        return context.getResources().getIdentifier(drawableName, "drawable", context.getPackageName());
     }
 
     protected void initData() {

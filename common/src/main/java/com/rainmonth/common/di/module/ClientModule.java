@@ -1,7 +1,6 @@
 package com.rainmonth.common.di.module;
 
-
-import com.rainmonth.common.utils.FileUtils;
+import com.rainmonth.utils.FileUtils;
 
 import java.io.File;
 import java.util.List;

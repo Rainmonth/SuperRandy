@@ -8,7 +8,7 @@ import android.content.Intent;
 import android.view.View;
 
 import com.google.android.material.snackbar.Snackbar;
-import com.rainmonth.common.utils.log.LogUtils;
+import com.rainmonth.utils.log.LogUtils;
 
 import java.util.Iterator;
 import java.util.LinkedList;

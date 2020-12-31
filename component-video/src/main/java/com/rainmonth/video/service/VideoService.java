@@ -1,6 +1,6 @@
 package com.rainmonth.video.service;
 
-import com.rainmonth.common.utils.log.LogUtils;
+import com.rainmonth.utils.log.LogUtils;
 import com.rainmonth.componentbase.service.video.IVideoService;
 
 /**

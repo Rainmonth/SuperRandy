@@ -10,7 +10,7 @@ import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.rainmonth.common.utils.ToastUtils;
+import com.rainmonth.utils.ToastUtils;
 import com.rainmonth.player.listener.GSYVideoShotListener;
 import com.rainmonth.player.listener.GSYVideoShotSaveListener;
 import com.rainmonth.player.render.GSYRenderView;

@@ -2,7 +2,7 @@ package com.rainmonth.music.core.helper;
 
 import android.view.View;
 
-import com.rainmonth.common.utils.log.LogUtils;
+import com.rainmonth.utils.log.LogUtils;
 
 import java.lang.ref.WeakReference;
 

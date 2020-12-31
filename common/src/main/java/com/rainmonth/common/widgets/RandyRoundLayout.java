@@ -18,7 +18,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 
 import com.rainmonth.common.R;
-import com.rainmonth.common.utils.DensityUtils;
+import com.rainmonth.utils.DensityUtils;
 
 /**
  * 本身背景不会有圆角

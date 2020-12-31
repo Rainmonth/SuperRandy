@@ -3,7 +3,7 @@ package com.rainmonth.mvp.presenter;
 import com.rainmonth.common.di.scope.ActivityScope;
 import com.rainmonth.common.http.CommonSubscriber;
 import com.rainmonth.common.http.Result;
-import com.rainmonth.common.utils.RxUtils;
+import com.rainmonth.utils.RxUtils;
 import com.rainmonth.mvp.contract.UserContract;
 import com.rainmonth.common.base.mvp.BasePresenter;
 

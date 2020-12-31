@@ -9,8 +9,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.rainmonth.common.base.BaseActivity;
 import com.rainmonth.common.di.component.AppComponent;
-import com.rainmonth.common.utils.CommonUtils;
-import com.rainmonth.common.utils.log.LogUtils;
+import com.rainmonth.utils.StringUtils;
+import com.rainmonth.utils.log.LogUtils;
 import com.rainmonth.image.R;
 import com.rainmonth.image.api.Consts;
 import com.rainmonth.image.di.component.DaggerSearchComponent;
@@ -60,7 +60,7 @@ public class SearchActivity extends BaseActivity<SearchPresenter> implements Sea
             @Override
             public void onClick(View v) {
                 String searchKey = etSearchKeys.getText().toString();
-                if (CommonUtils.isNullOrEmpty(searchKey)) {
+                if (StringUtils.isEmpty(searchKey)) {
                     showToast("搜索关键词为空！");
                     return;
                 }

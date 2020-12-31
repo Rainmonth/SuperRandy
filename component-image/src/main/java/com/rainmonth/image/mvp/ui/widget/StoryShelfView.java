@@ -15,9 +15,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.rainmonth.common.utils.DensityUtils;
-import com.rainmonth.common.utils.ToastUtils;
-import com.rainmonth.common.utils.log.LogUtils;
+import com.rainmonth.utils.DensityUtils;
+import com.rainmonth.utils.ToastUtils;
+import com.rainmonth.utils.log.LogUtils;
 import com.rainmonth.image.R;
 import com.rainmonth.image.mvp.model.bean.SubscribeBean;
 

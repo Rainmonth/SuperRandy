@@ -15,10 +15,10 @@ import com.rainmonth.common.bean.RandyLogicBean;
 import com.rainmonth.common.bean.RandyMultiBean;
 import com.rainmonth.common.http.imageloader.glide.GlideImageConfig;
 import com.rainmonth.common.utils.ComponentUtils;
-import com.rainmonth.common.utils.log.LogUtils;
 import com.rainmonth.common.widgets.RandyViewPager;
 import com.rainmonth.router.RouterConstant;
 import com.rainmonth.router.RouterUtils;
+import com.rainmonth.utils.log.LogUtils;
 
 /**
  * @author 张豪成

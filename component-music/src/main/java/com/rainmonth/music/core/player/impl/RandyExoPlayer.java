@@ -27,7 +27,7 @@ import com.google.android.exoplayer2.source.TrackGroupArray;
 import com.google.android.exoplayer2.trackselection.MappingTrackSelector;
 import com.google.android.exoplayer2.trackselection.TrackSelectionArray;
 import com.google.android.exoplayer2.util.EventLogger;
-import com.rainmonth.common.utils.log.LogUtils;
+import com.rainmonth.utils.log.LogUtils;
 import com.rainmonth.music.BuildConfig;
 import com.rainmonth.music.core.helper.ExoHelper;
 import com.rainmonth.music.core.player.BasePlayer;

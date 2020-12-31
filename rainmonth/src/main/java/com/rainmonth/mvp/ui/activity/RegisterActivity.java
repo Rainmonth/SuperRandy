@@ -9,7 +9,7 @@ import com.rainmonth.R;
 import com.rainmonth.common.base.BaseActivity;
 import com.rainmonth.common.base.mvp.BaseResponse;
 import com.rainmonth.common.di.component.AppComponent;
-import com.rainmonth.common.utils.ToastUtils;
+import com.rainmonth.utils.ToastUtils;
 import com.rainmonth.mvp.contract.RegisterContract;
 import com.rainmonth.mvp.model.bean.UserBean;
 import com.rainmonth.mvp.presenter.RegisterPresenter;

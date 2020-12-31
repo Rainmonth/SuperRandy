@@ -7,7 +7,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.rainmonth.common.adapter.base.BaseViewHolder;
 import com.rainmonth.common.base.BaseListActivity;
 import com.rainmonth.common.bean.ExampleBean;
-import com.rainmonth.common.utils.log.LogUtils;
+import com.rainmonth.utils.log.LogUtils;
 import com.rainmonth.componentbase.ServiceFactory;
 import com.rainmonth.player.DemoDataFactory;
 import com.rainmonth.player.R;

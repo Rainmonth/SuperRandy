@@ -15,7 +15,7 @@ import com.bumptech.glide.load.engine.cache.MemorySizeCalculator;
 import com.bumptech.glide.load.model.GlideUrl;
 import com.bumptech.glide.module.AppGlideModule;
 import com.rainmonth.common.utils.ComponentUtils;
-import com.rainmonth.common.utils.FileUtils;
+import com.rainmonth.utils.FileUtils;
 
 import java.io.File;
 import java.io.InputStream;

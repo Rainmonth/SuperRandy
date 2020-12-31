@@ -6,9 +6,9 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.rainmonth.common.R;
 import com.rainmonth.common.di.component.AppComponent;
-import com.rainmonth.common.utils.CommonUtils;
-import com.rainmonth.common.utils.log.LogUtils;
 import com.rainmonth.common.widgets.BrowserLayout;
+import com.rainmonth.utils.StringUtils;
+import com.rainmonth.utils.log.LogUtils;
 
 public class BaseWebActivity extends BaseSwipeBackCompatActivity {
 
@@ -47,7 +47,7 @@ public class BaseWebActivity extends BaseSwipeBackCompatActivity {
         LogUtils.i("Randy", "title:" + mWebTitle);
         LogUtils.i("Randy", "url:" + mWebTitle);
 
-        if (!CommonUtils.isEmpty(mWebUrl)) {
+        if (!StringUtils.isEmpty(mWebUrl)) {
             mBrowserLayout.loadUrl(mWebUrl);
         } else {
             showToast("获取URL地址失败");
@@ -67,7 +67,7 @@ public class BaseWebActivity extends BaseSwipeBackCompatActivity {
             mToolBar.setBackgroundColor(getResources().getColor(colorResId));
             mActionBar = getSupportActionBar();
             if (null != mActionBar) {
-                if (!CommonUtils.isEmpty(mWebTitle)) {
+                if (!StringUtils.isEmpty(mWebTitle)) {
                     mToolBar.setTitle(mWebTitle);
                 }
                 mActionBar.setHomeButtonEnabled(true);

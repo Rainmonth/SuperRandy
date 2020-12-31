@@ -8,12 +8,12 @@ import android.text.format.DateFormat;
 import android.widget.TextView;
 
 import com.rainmonth.common.base.BaseActivity;
-import com.rainmonth.common.utils.FileUtils;
-import com.rainmonth.common.utils.PathUtils;
-import com.rainmonth.common.utils.PermissionUtils;
-import com.rainmonth.common.utils.ToastUtils;
-import com.rainmonth.common.utils.constant.PermissionConstants;
-import com.rainmonth.common.utils.log.LogUtils;
+import com.rainmonth.utils.FileUtils;
+import com.rainmonth.utils.PathUtils;
+import com.rainmonth.utils.PermissionUtils;
+import com.rainmonth.utils.ToastUtils;
+import com.rainmonth.utils.constant.PermissionConstants;
+import com.rainmonth.utils.log.LogUtils;
 import com.rainmonth.player.R;
 
 import java.io.File;

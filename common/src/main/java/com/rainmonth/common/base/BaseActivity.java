@@ -10,8 +10,8 @@ import com.rainmonth.common.base.mvp.BasePresenter;
 import com.rainmonth.common.base.mvp.IBaseView;
 import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.common.eventbus.EventCenter;
-import com.rainmonth.common.utils.NetworkUtils;
-import com.rainmonth.common.utils.SafeHandler;
+import com.rainmonth.utils.NetworkUtils;
+import com.rainmonth.utils.SafeHandler;
 
 import javax.inject.Inject;
 

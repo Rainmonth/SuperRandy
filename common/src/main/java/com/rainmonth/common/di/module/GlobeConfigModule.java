@@ -4,8 +4,8 @@ import android.app.Application;
 import android.text.TextUtils;
 
 import com.rainmonth.common.http.GlobalHttpHandler;
-import com.rainmonth.common.utils.FileUtils;
-import com.rainmonth.common.utils.constant.StatusBarConstants;
+import com.rainmonth.utils.FileUtils;
+import com.rainmonth.utils.constant.StatusBarConstants;
 
 import java.io.File;
 import java.util.ArrayList;

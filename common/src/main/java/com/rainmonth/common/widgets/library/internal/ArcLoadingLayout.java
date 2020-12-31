@@ -9,8 +9,8 @@ import android.graphics.Path;
 import android.graphics.PointF;
 import android.graphics.drawable.Drawable;
 
-import com.rainmonth.common.utils.DensityUtils;
-import com.rainmonth.common.utils.log.LogUtils;
+import com.rainmonth.utils.DensityUtils;
+import com.rainmonth.utils.log.LogUtils;
 import com.rainmonth.common.widgets.library.PullToRefreshBase;
 
 /**

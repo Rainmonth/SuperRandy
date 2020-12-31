@@ -1,6 +1,6 @@
 package com.rainmonth.music.service;
 
-import com.rainmonth.common.utils.log.LogUtils;
+import com.rainmonth.utils.log.LogUtils;
 import com.rainmonth.componentbase.service.music.IMusicService;
 
 /**

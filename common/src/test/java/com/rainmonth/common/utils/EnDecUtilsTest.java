@@ -1,4 +1,4 @@
-package com.rainmonth.common.utils;
+package com.rainmonth.utils;
 
 import org.junit.After;
 import org.junit.Before;

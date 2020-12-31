@@ -16,7 +16,7 @@ import com.rainmonth.common.adapter.BaseViewPagerAdapter;
 import com.rainmonth.common.base.BaseActivity;
 import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.common.eventbus.EventCenter;
-import com.rainmonth.common.utils.ToastUtils;
+import com.rainmonth.utils.ToastUtils;
 import com.rainmonth.music.R;
 import com.rainmonth.music.fragment.player.SongAnimFragment;
 import com.rainmonth.music.fragment.player.SongLyricFragment;

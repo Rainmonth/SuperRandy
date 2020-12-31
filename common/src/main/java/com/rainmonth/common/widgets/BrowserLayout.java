@@ -16,7 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
 import com.rainmonth.common.R;
-import com.rainmonth.common.utils.CommonUtils;
+import com.rainmonth.utils.StringUtils;
 
 public class BrowserLayout extends LinearLayout {
 
@@ -129,7 +129,7 @@ public class BrowserLayout extends LinearLayout {
 
             @Override
             public void onClick(View v) {
-                if (!CommonUtils.isEmpty(mLoadUrl)) {
+                if (!StringUtils.isEmpty(mLoadUrl)) {
                     Intent intent = new Intent(Intent.ACTION_VIEW);
                     intent.setData(Uri.parse(mLoadUrl));
                     mContext.startActivity(intent);

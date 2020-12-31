@@ -12,7 +12,7 @@ import com.rainmonth.common.bean.RandyLogicBean;
 import com.rainmonth.common.component.Const;
 import com.rainmonth.common.component.RandyHListItemProvider;
 import com.rainmonth.music.R;
-import com.rainmonth.common.utils.log.LogUtils;
+import com.rainmonth.utils.log.LogUtils;
 
 /**
  * 功能分类Item提供者

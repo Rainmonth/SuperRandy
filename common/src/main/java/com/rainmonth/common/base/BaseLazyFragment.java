@@ -8,7 +8,7 @@ import androidx.annotation.Nullable;
 import com.rainmonth.common.base.mvp.BasePresenter;
 import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.common.eventbus.EventCenter;
-import com.rainmonth.common.utils.log.LogUtils;
+import com.rainmonth.utils.log.LogUtils;
 
 import javax.inject.Inject;
 

@@ -10,7 +10,7 @@ import com.rainmonth.R;
 import com.rainmonth.common.base.BaseActivity;
 import com.rainmonth.common.base.BaseLazyFragment;
 import com.rainmonth.common.di.component.AppComponent;
-import com.rainmonth.common.utils.SmartBarUtils;
+import com.rainmonth.utils.SmartBarUtils;
 import com.rainmonth.di.component.DaggerMainComponent;
 import com.rainmonth.di.module.MainModule;
 import com.rainmonth.mvp.contract.MainContract;

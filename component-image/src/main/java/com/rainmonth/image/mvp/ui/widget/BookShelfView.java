@@ -16,9 +16,9 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import com.rainmonth.common.utils.DensityUtils;
-import com.rainmonth.common.utils.ToastUtils;
-import com.rainmonth.common.utils.log.LogUtils;
+import com.rainmonth.utils.DensityUtils;
+import com.rainmonth.utils.ToastUtils;
+import com.rainmonth.utils.log.LogUtils;
 import com.rainmonth.common.widgets.PullToRefreshViewPager;
 import com.rainmonth.common.widgets.library.PullToRefreshBase;
 import com.rainmonth.image.R;

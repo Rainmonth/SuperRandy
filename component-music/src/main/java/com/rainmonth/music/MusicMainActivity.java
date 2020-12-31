@@ -17,7 +17,7 @@ import com.rainmonth.music.fragment.main.RecommendFragment;
 import com.rainmonth.music.widget.MusicMiniBar;
 import com.rainmonth.router.RouterConstant;
 import com.rainmonth.router.RouterUtils;
-import com.rainmonth.common.utils.log.LogUtils;
+import com.rainmonth.utils.log.LogUtils;
 
 import java.util.ArrayList;
 import java.util.List;

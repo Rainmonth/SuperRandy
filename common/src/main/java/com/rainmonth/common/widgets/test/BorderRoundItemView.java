@@ -19,8 +19,8 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 
 import com.rainmonth.common.R;
-import com.rainmonth.common.utils.DensityUtils;
-import com.rainmonth.common.utils.log.LogUtils;
+import com.rainmonth.utils.DensityUtils;
+import com.rainmonth.utils.log.LogUtils;
 
 /**
  * @author RandyZhang

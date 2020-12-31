@@ -6,7 +6,7 @@ import android.widget.TextView;
 import com.rainmonth.common.adapter.base.BaseViewHolder;
 import com.rainmonth.common.base.BaseListActivity;
 import com.rainmonth.common.bean.ExampleBean;
-import com.rainmonth.common.utils.log.LogUtils;
+import com.rainmonth.utils.log.LogUtils;
 import com.rainmonth.player.R;
 
 import java.util.List;

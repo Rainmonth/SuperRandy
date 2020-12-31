@@ -5,7 +5,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.rainmonth.common.R;
-import com.rainmonth.common.utils.CommonUtils;
+import com.rainmonth.utils.StringUtils;
 
 public class VaryViewHelperController {
 
@@ -38,7 +38,7 @@ public class VaryViewHelperController {
     public void showError(String errorMsg, View.OnClickListener onClickListener) {
         View layout = helper.inflate(R.layout.message);
         TextView textView = (TextView) layout.findViewById(R.id.message_info);
-        if (!CommonUtils.isEmpty(errorMsg)) {
+        if (!StringUtils.isEmpty(errorMsg)) {
             textView.setText(errorMsg);
         } else {
             textView.setText(helper.getContext().getResources().getString(R.string.common_error_msg));
@@ -57,7 +57,7 @@ public class VaryViewHelperController {
     public void showEmpty(String emptyMsg, View.OnClickListener onClickListener) {
         View layout = helper.inflate(R.layout.message);
         TextView textView = (TextView) layout.findViewById(R.id.message_info);
-        if (!CommonUtils.isEmpty(emptyMsg)) {
+        if (!StringUtils.isEmpty(emptyMsg)) {
             textView.setText(emptyMsg);
         } else {
             textView.setText(helper.getContext().getResources().getString(R.string.common_empty_msg));
@@ -75,7 +75,7 @@ public class VaryViewHelperController {
 
     public void showLoading(String msg) {
         View layout = helper.inflate(R.layout.loading);
-        if (!CommonUtils.isEmpty(msg)) {
+        if (!StringUtils.isEmpty(msg)) {
             TextView textView = (TextView) layout.findViewById(R.id.loading_msg);
             textView.setText(msg);
         }

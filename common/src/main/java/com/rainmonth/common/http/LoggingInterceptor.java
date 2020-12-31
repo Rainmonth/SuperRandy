@@ -1,7 +1,7 @@
 package com.rainmonth.common.http;
 
-import com.rainmonth.common.utils.ZipHelper;
-import com.rainmonth.common.utils.log.LogUtils;
+import com.rainmonth.utils.ZipHelper;
+import com.rainmonth.utils.log.LogUtils;
 
 import java.io.IOException;
 import java.nio.charset.Charset;

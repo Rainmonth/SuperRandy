@@ -4,7 +4,7 @@ import com.rainmonth.common.base.mvp.BasePresenter;
 import com.rainmonth.common.di.scope.ActivityScope;
 import com.rainmonth.common.http.CommonSubscriber;
 import com.rainmonth.common.utils.ComponentUtils;
-import com.rainmonth.common.utils.RxUtils;
+import com.rainmonth.utils.RxUtils;
 import com.rainmonth.image.api.Consts;
 import com.rainmonth.image.mvp.model.bean.CollectionBean;
 import com.rainmonth.image.mvp.model.bean.PhotoBean;

@@ -8,7 +8,7 @@ import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.view.View;
 
-import com.rainmonth.common.utils.DensityUtils;
+import com.rainmonth.utils.DensityUtils;
 
 public class RoundRectsActivity extends Activity {
     private int leftPadding, rightPadding;

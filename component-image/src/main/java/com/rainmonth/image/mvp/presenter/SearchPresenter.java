@@ -2,13 +2,13 @@ package com.rainmonth.image.mvp.presenter;
 
 import com.rainmonth.common.base.mvp.BasePresenter;
 import com.rainmonth.common.http.CommonSubscriber;
-import com.rainmonth.common.utils.CommonUtils;
-import com.rainmonth.common.utils.RxUtils;
+import com.rainmonth.utils.RxUtils;
 import com.rainmonth.image.mvp.contract.SearchContract;
 import com.rainmonth.image.mvp.model.bean.CollectionBean;
 import com.rainmonth.image.mvp.model.bean.PhotoBean;
 import com.rainmonth.image.mvp.model.bean.SearchResult;
 import com.rainmonth.image.mvp.model.bean.UserBean;
+import com.rainmonth.utils.StringUtils;
 
 import javax.inject.Inject;
 
@@ -57,7 +57,7 @@ public class SearchPresenter extends BasePresenter<SearchContract.Model, SearchC
                         }
                     }));
         } else {
-            if (CommonUtils.isNullOrEmpty(orientation))
+            if (StringUtils.isEmpty(orientation))
                 orientation = "landscape";
             addSubscribe(mModel.searchPhotos(keys, page, perPage, collectionIds, orientation)
                     .compose(RxUtils.<SearchResult<PhotoBean>>getObservableTransformer())

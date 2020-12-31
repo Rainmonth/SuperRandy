@@ -1,6 +1,6 @@
 package com.rainmonth.common.netstatus;
 
-import com.rainmonth.common.utils.NetworkUtils;
+import com.rainmonth.utils.NetworkUtils;
 
 public class NetChangeObserver {
 

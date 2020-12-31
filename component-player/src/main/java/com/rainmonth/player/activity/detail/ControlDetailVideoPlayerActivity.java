@@ -14,12 +14,12 @@ import androidx.core.widget.NestedScrollView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.rainmonth.common.utils.FileUtils;
-import com.rainmonth.common.utils.ImageUtils;
-import com.rainmonth.common.utils.PathUtils;
-import com.rainmonth.common.utils.PermissionUtils;
-import com.rainmonth.common.utils.ToastUtils;
-import com.rainmonth.common.utils.constant.PermissionConstants;
+import com.rainmonth.utils.FileUtils;
+import com.rainmonth.utils.ImageUtils;
+import com.rainmonth.utils.PathUtils;
+import com.rainmonth.utils.PermissionUtils;
+import com.rainmonth.utils.ToastUtils;
+import com.rainmonth.utils.constant.PermissionConstants;
 import com.rainmonth.player.R;
 import com.rainmonth.player.builder.VideoPlayerConfigBuilder;
 import com.rainmonth.player.listener.GSYVideoGifSaveListener;
@@ -65,7 +65,7 @@ import java.util.HashMap;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import static com.rainmonth.common.utils.SizeUtils.dp2px;
+import static com.rainmonth.utils.SizeUtils.dp2px;
 
 /**
  * 带控制的视频播放

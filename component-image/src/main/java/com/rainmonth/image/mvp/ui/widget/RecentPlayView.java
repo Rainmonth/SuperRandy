@@ -18,8 +18,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.rainmonth.common.adapter.base.BaseQuickAdapter;
 import com.rainmonth.common.adapter.base.BaseViewHolder;
-import com.rainmonth.common.utils.DensityUtils;
-import com.rainmonth.common.utils.ToastUtils;
+import com.rainmonth.utils.DensityUtils;
+import com.rainmonth.utils.ToastUtils;
 import com.rainmonth.image.R;
 
 import java.util.ArrayList;

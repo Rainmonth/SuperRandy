@@ -18,11 +18,11 @@ import com.rainmonth.common.R;
 import com.rainmonth.common.base.mvp.IBaseView;
 import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.common.eventbus.EventCenter;
-import com.rainmonth.common.utils.CommonUtils;
 import com.rainmonth.common.utils.ComponentUtils;
-import com.rainmonth.common.utils.log.LogUtils;
 import com.rainmonth.common.widgets.ProgressHUD;
 import com.rainmonth.common.widgets.loading.VaryViewHelperController;
+import com.rainmonth.utils.StringUtils;
+import com.rainmonth.utils.log.LogUtils;
 
 import java.lang.reflect.Field;
 
@@ -46,8 +46,8 @@ public abstract class BaseSupportFragment extends Fragment implements IBaseView 
      */
     protected Context mContext = null;
 
-    private   VaryViewHelperController mVaryViewHelperController = null;
-    protected Handler                  mHandler                  = new Handler();
+    private VaryViewHelperController mVaryViewHelperController = null;
+    protected Handler mHandler = new Handler();
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
@@ -254,7 +254,7 @@ public abstract class BaseSupportFragment extends Fragment implements IBaseView 
      * @param msg toast msg
      */
     protected void showToast(String msg) {
-        if (null != msg && !CommonUtils.isEmpty(msg)) {
+        if (!StringUtils.isEmpty(msg)) {
             Snackbar.make(((Activity) mContext).getWindow().getDecorView(), msg, Snackbar.LENGTH_SHORT).show();
         }
     }

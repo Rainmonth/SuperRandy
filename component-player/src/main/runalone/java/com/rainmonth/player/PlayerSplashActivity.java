@@ -4,9 +4,9 @@ import android.os.Handler;
 
 import com.rainmonth.common.base.BaseActivity;
 import com.rainmonth.common.di.component.AppComponent;
-import com.rainmonth.common.utils.PermissionUtils;
-import com.rainmonth.common.utils.constant.PermissionConstants;
-import com.rainmonth.common.utils.log.LogUtils;
+import com.rainmonth.utils.PermissionUtils;
+import com.rainmonth.utils.constant.PermissionConstants;
+import com.rainmonth.utils.log.LogUtils;
 import com.rainmonth.player.activity.VideoMainActivity;
 
 /**

@@ -20,7 +20,7 @@ import androidx.annotation.AttrRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.rainmonth.common.utils.log.LogUtils;
+import com.rainmonth.utils.log.LogUtils;
 import com.rainmonth.player.R;
 import com.rainmonth.player.listener.GSYMediaPlayerListener;
 import com.rainmonth.player.listener.VideoAllCallBack;

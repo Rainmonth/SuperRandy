@@ -7,7 +7,7 @@ import android.net.Uri;
 import android.provider.MediaStore;
 
 import com.rainmonth.common.thread.SrThreadService;
-import com.rainmonth.common.utils.log.LogUtils;
+import com.rainmonth.utils.log.LogUtils;
 import com.rainmonth.image.selector.bean.MediaFileBean;
 import com.rainmonth.image.selector.task.IMediaLoader;
 import com.rainmonth.image.selector.task.callback.IMediaTaskCallback;

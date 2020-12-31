@@ -3,8 +3,8 @@ package com.rainmonth.player;
 import android.widget.TextView;
 
 import com.rainmonth.common.base.BaseActivity;
-import com.rainmonth.common.utils.PermissionUtils;
-import com.rainmonth.common.utils.constant.PermissionConstants;
+import com.rainmonth.utils.PermissionUtils;
+import com.rainmonth.utils.constant.PermissionConstants;
 
 /**
  * @author RandyZhang

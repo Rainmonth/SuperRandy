@@ -5,11 +5,11 @@ import android.media.AudioRecord;
 import android.media.MediaRecorder;
 import android.text.TextUtils;
 
-import com.rainmonth.common.utils.FileUtils;
-import com.rainmonth.common.utils.PathUtils;
-import com.rainmonth.common.utils.ThreadUtils;
-import com.rainmonth.common.utils.log.LogUtils;
-import com.rainmonth.common.utils.MediaUtils;
+import com.rainmonth.utils.FileUtils;
+import com.rainmonth.utils.PathUtils;
+import com.rainmonth.utils.ThreadUtils;
+import com.rainmonth.utils.log.LogUtils;
+import com.rainmonth.utils.MediaUtils;
 
 import java.io.BufferedOutputStream;
 import java.io.File;

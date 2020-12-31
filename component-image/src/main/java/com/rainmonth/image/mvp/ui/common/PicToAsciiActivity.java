@@ -16,9 +16,9 @@ import android.widget.ImageView;
 
 import com.rainmonth.common.base.BaseActivity;
 import com.rainmonth.common.di.component.AppComponent;
-import com.rainmonth.common.utils.FileUtils;
+import com.rainmonth.utils.FileUtils;
 import com.rainmonth.image.R;
-import com.rainmonth.common.utils.log.LogUtils;
+import com.rainmonth.utils.log.LogUtils;
 
 /**
  * 实现效果:将视频逐帧取出，转化成Ascii图像连续播放

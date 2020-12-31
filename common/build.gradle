@@ -101,4 +101,6 @@ dependencies {
     releaseApi rootProject.ext.dependencies['leakcanary-no-op']
     testImplementation rootProject.ext.dependencies['junit']
     testImplementation rootProject.ext.dependencies['robolectric']
+
+    api 'com.github.Rainmonth:RandyJitPack:1.0.2'
 }

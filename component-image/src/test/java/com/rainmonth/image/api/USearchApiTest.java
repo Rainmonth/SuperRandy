@@ -8,7 +8,7 @@ import com.rainmonth.image.mvp.model.bean.CollectionBean;
 import com.rainmonth.image.mvp.model.bean.PhotoBean;
 import com.rainmonth.image.mvp.model.bean.UserBean;
 import com.rainmonth.image.mvp.model.bean.SearchResult;
-import com.rainmonth.common.utils.log.LogUtils;
+import com.rainmonth.utils.log.LogUtils;
 
 import org.junit.Before;
 import org.junit.Test;

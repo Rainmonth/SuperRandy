@@ -4,8 +4,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.ThumbnailUtils;
 
-import com.rainmonth.common.utils.FileUtils;
-import com.rainmonth.common.utils.PathUtils;
+import com.rainmonth.utils.FileUtils;
+import com.rainmonth.utils.PathUtils;
 import com.rainmonth.player.listener.GSYVideoGifSaveListener;
 import com.rainmonth.player.listener.GSYVideoShotSaveListener;
 import com.rainmonth.player.video.StandardVideoPlayer;

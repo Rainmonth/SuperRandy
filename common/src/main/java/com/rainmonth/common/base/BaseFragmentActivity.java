@@ -22,9 +22,9 @@ import com.rainmonth.common.utils.ComponentUtils;
 import com.rainmonth.common.widgets.loading.VaryViewHelperController;
 import com.rainmonth.common.netstatus.NetChangeObserver;
 import com.rainmonth.common.netstatus.NetStateReceiver;
-import com.rainmonth.common.utils.CommonUtils;
-import com.rainmonth.common.utils.NetworkUtils;
-import com.rainmonth.common.utils.SmartBarUtils;
+import com.rainmonth.utils.NetworkUtils;
+import com.rainmonth.utils.SmartBarUtils;
+import com.rainmonth.utils.StringUtils;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 import de.greenrobot.event.EventBus;
@@ -363,7 +363,7 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
      * @param msg msg to show
      */
     protected void showToast(String msg) {
-        if (null != msg && !CommonUtils.isEmpty(msg)) {
+        if (null != msg && !StringUtils.isEmpty(msg)) {
             Snackbar.make(getWindow().getDecorView(), msg, Snackbar.LENGTH_SHORT).show();
         }
     }

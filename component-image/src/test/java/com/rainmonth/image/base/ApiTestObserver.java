@@ -1,6 +1,6 @@
 package com.rainmonth.image.base;
 
-import com.rainmonth.common.utils.log.LogUtils;
+import com.rainmonth.utils.log.LogUtils;
 
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;

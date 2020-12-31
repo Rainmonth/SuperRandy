@@ -22,13 +22,13 @@ import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.common.eventbus.EventCenter;
 import com.rainmonth.common.netstatus.NetChangeObserver;
 import com.rainmonth.common.netstatus.NetStateReceiver;
-import com.rainmonth.common.utils.CommonUtils;
 import com.rainmonth.common.utils.ComponentUtils;
-import com.rainmonth.common.utils.NetworkUtils;
-import com.rainmonth.common.utils.SmartBarUtils;
-import com.rainmonth.common.utils.constant.StatusBarConstants;
-import com.rainmonth.common.utils.log.LogUtils;
 import com.rainmonth.common.widgets.loading.VaryViewHelperController;
+import com.rainmonth.utils.NetworkUtils;
+import com.rainmonth.utils.SmartBarUtils;
+import com.rainmonth.utils.StringUtils;
+import com.rainmonth.utils.constant.StatusBarConstants;
+import com.rainmonth.utils.log.LogUtils;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 import butterknife.ButterKnife;
@@ -387,7 +387,7 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
      */
     protected void showToast(String msg) {
         //防止遮盖虚拟按键
-        if (null != msg && !CommonUtils.isEmpty(msg)) {
+        if (!StringUtils.isEmpty(msg)) {
             if (getLoadingTargetView() != null) {
                 Snackbar.make(getLoadingTargetView(), msg, Snackbar.LENGTH_SHORT).show();
             } else {

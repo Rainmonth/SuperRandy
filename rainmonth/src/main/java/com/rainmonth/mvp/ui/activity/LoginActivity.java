@@ -9,7 +9,7 @@ import com.rainmonth.R;
 import com.rainmonth.common.base.BaseActivity;
 import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.common.http.Result;
-import com.rainmonth.common.utils.ToastUtils;
+import com.rainmonth.utils.ToastUtils;
 import com.rainmonth.common.widgets.ClearEditText;
 import com.rainmonth.di.component.DaggerLoginComponent;
 import com.rainmonth.di.module.LoginModule;

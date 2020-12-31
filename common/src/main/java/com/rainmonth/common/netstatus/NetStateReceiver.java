@@ -5,21 +5,21 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 
-import com.rainmonth.common.utils.NetworkUtils;
-import com.rainmonth.common.utils.log.LogUtils;
+import com.rainmonth.utils.NetworkUtils;
+import com.rainmonth.utils.log.LogUtils;
 
 import java.util.ArrayList;
 
 public class NetStateReceiver extends BroadcastReceiver {
 
-    public final static  String CUSTOM_ANDROID_NET_CHANGE_ACTION = "com.rainmonth.library.net.conn.CONNECTIVITY_CHANGE";
-    private final static String ANDROID_NET_CHANGE_ACTION        = "android.net.conn.CONNECTIVITY_CHANGE";
-    private final static String TAG                              = NetStateReceiver.class.getSimpleName();
+    public final static String CUSTOM_ANDROID_NET_CHANGE_ACTION = "com.rainmonth.library.net.conn.CONNECTIVITY_CHANGE";
+    private final static String ANDROID_NET_CHANGE_ACTION = "android.net.conn.CONNECTIVITY_CHANGE";
+    private final static String TAG = NetStateReceiver.class.getSimpleName();
 
-    private static boolean                      isNetAvailable      = false;
-    private static NetworkUtils.NetType         mNetType;
+    private static boolean isNetAvailable = false;
+    private static NetworkUtils.NetType mNetType;
     private static ArrayList<NetChangeObserver> mNetChangeObservers = new ArrayList<NetChangeObserver>();
-    private static BroadcastReceiver            mBroadcastReceiver;
+    private static BroadcastReceiver mBroadcastReceiver;
 
     private static BroadcastReceiver getReceiver() {
         if (null == mBroadcastReceiver) {

@@ -4,10 +4,10 @@ import com.rainmonth.common.base.mvp.BasePresenter;
 import com.rainmonth.common.di.scope.ActivityScope;
 import com.rainmonth.common.http.BaseResponse;
 import com.rainmonth.common.http.CommonSubscriber;
-import com.rainmonth.common.utils.RxUtils;
+import com.rainmonth.utils.RxUtils;
 import com.rainmonth.image.mvp.contract.UnsplashUserContract;
 import com.rainmonth.image.mvp.model.bean.UserBean;
-import com.rainmonth.common.utils.log.LogUtils;
+import com.rainmonth.utils.log.LogUtils;
 
 import javax.inject.Inject;
 

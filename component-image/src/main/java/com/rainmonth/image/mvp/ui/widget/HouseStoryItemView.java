@@ -9,7 +9,7 @@ import android.widget.FrameLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.rainmonth.common.utils.log.LogUtils;
+import com.rainmonth.utils.log.LogUtils;
 import com.rainmonth.common.widgets.test.BorderRoundItemView;
 import com.rainmonth.common.widgets.test.RandyPercentageLayout;
 import com.rainmonth.image.R;

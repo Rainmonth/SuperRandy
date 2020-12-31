@@ -4,7 +4,7 @@ import com.rainmonth.R;
 import com.rainmonth.common.base.mvp.BaseModel;
 import com.rainmonth.common.di.scope.ActivityScope;
 import com.rainmonth.common.integration.IRepositoryManager;
-import com.rainmonth.common.utils.DateUtils;
+import com.rainmonth.utils.DateUtils;
 import com.rainmonth.mvp.contract.SplashContract;
 import com.rainmonth.mvp.model.bean.SplashBean;
 

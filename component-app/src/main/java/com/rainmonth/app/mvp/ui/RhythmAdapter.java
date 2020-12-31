@@ -10,10 +10,11 @@ import android.widget.RelativeLayout;
 
 import com.rainmonth.app.R;
 import com.rainmonth.app.mvp.model.bean.CardBean;
-import com.rainmonth.common.utils.CommonUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.rainmonth.app.mvp.ui.CardFragment.getDrawableIdByName;
 
 public class RhythmAdapter extends BaseAdapter {
 
@@ -86,7 +87,7 @@ public class RhythmAdapter extends BaseAdapter {
         iconParams.height = iconSize;
         imageIcon.setLayoutParams(iconParams);
         //设置背景图片
-        imageIcon.setBackgroundResource(CommonUtils.getDrawableIdByName(mContext, mCardBeanList.get(position).getIconUrl()));
+        imageIcon.setBackgroundResource(getDrawableIdByName(mContext, mCardBeanList.get(position).getIconUrl()));
 
         return relativeLayout;
     }

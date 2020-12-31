@@ -9,7 +9,7 @@ import android.view.SurfaceHolder;
 
 import com.rainmonth.music.core.player.BasePlayer;
 import com.rainmonth.music.core.player.IPlayer;
-import com.rainmonth.common.utils.log.LogUtils;
+import com.rainmonth.utils.log.LogUtils;
 
 import java.io.IOException;
 import java.lang.ref.WeakReference;

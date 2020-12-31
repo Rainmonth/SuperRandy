@@ -5,7 +5,7 @@ import com.rainmonth.common.di.scope.FragmentScope;
 import com.rainmonth.common.http.CommonSubscriber;
 import com.rainmonth.common.http.PageResult;
 import com.rainmonth.common.http.Result;
-import com.rainmonth.common.utils.RxUtils;
+import com.rainmonth.utils.RxUtils;
 import com.rainmonth.mvp.contract.RenContract;
 import com.rainmonth.mvp.model.bean.ArticleBean;
 import com.rainmonth.mvp.model.bean.BannerBean;

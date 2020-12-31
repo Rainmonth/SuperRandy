@@ -20,13 +20,13 @@ import com.rainmonth.app.mvp.model.bean.CardBean;
 import com.rainmonth.common.base.BaseLazyFragment;
 import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.common.eventbus.EventCenter;
-import com.rainmonth.common.utils.AnimatorUtils;
-import com.rainmonth.common.utils.HexUtils;
-import com.rainmonth.common.utils.NetworkUtils;
+import com.rainmonth.utils.AnimatorUtils;
+import com.rainmonth.utils.HexUtils;
 import com.rainmonth.common.widgets.ProgressHUD;
 import com.rainmonth.common.widgets.PullToRefreshViewPager;
 import com.rainmonth.common.widgets.ViewPagerScroller;
 import com.rainmonth.common.widgets.library.PullToRefreshBase;
+import com.rainmonth.utils.NetworkUtils;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;

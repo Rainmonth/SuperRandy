@@ -1,7 +1,7 @@
 package com.rainmonth.image.api;
 
 import com.rainmonth.common.BuildConfig;
-import com.rainmonth.common.utils.log.LogUtils;
+import com.rainmonth.utils.log.LogUtils;
 import com.rainmonth.image.base.ApiTestHelper;
 import com.rainmonth.image.base.ApiTestObserver;
 import com.rainmonth.image.base.BaseApiTest;
