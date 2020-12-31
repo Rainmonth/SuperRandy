@@ -28,6 +28,10 @@ import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * 线程工具类
+ * 1. 支持主线程判断、主线程切换
+ * 2. 支持不同类型线程池的获取
+ * 3. 支持在指定线程池运行任务
+ * 4. 支持指定任务的取消与执行
  */
 public final class ThreadUtils {
 
