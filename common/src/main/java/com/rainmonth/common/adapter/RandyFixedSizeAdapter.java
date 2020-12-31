@@ -1,4 +1,4 @@
-package com.rainmonth.adapter;
+package com.rainmonth.common.adapter;
 
 import androidx.annotation.NonNull;
 
