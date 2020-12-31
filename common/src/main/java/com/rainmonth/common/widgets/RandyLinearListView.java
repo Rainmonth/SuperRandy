@@ -19,7 +19,7 @@ import androidx.recyclerview.widget.SimpleItemAnimator;
 import com.rainmonth.adapter.base.BaseQuickAdapter;
 import com.rainmonth.adapter.base.BaseViewHolder;
 import com.rainmonth.common.R;
-import com.rainmonth.adapter.RandyFixedSizeAdapter;
+import com.rainmonth.common.adapter.RandyFixedSizeAdapter;
 import com.rainmonth.common.bean.BaseBean;
 
 import java.util.ArrayList;
