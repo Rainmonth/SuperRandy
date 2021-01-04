@@ -4,7 +4,7 @@ import com.rainmonth.common.base.mvp.BasePresenter;
 import com.rainmonth.common.di.scope.FragmentScope;
 import com.rainmonth.common.http.CommonSubscriber;
 import com.rainmonth.common.http.PageResult;
-import com.rainmonth.utils.RxUtils;
+import com.rainmonth.common.utils.RxUtils;
 import com.rainmonth.mvp.contract.PursueContract;
 import com.rainmonth.mvp.model.bean.PursueBean;
 

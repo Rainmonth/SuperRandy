@@ -3,7 +3,7 @@ package com.rainmonth.mvp.presenter;
 import com.rainmonth.common.base.mvp.BasePresenter;
 import com.rainmonth.common.http.CommonSubscriber;
 import com.rainmonth.common.http.PageResult;
-import com.rainmonth.utils.RxUtils;
+import com.rainmonth.common.utils.RxUtils;
 import com.rainmonth.mvp.contract.RanContract;
 import com.rainmonth.mvp.model.bean.MemAlbumBean;
 
