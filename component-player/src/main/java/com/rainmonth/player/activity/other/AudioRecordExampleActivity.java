@@ -3,18 +3,17 @@ package com.rainmonth.player.activity.other;
 import android.media.AudioFormat;
 import android.media.AudioRecord;
 import android.media.MediaRecorder;
-import android.os.Environment;
 import android.text.format.DateFormat;
 import android.widget.TextView;
 
 import com.rainmonth.common.base.BaseActivity;
+import com.rainmonth.player.R;
 import com.rainmonth.utils.FileUtils;
 import com.rainmonth.utils.PathUtils;
 import com.rainmonth.utils.PermissionUtils;
 import com.rainmonth.utils.ToastUtils;
 import com.rainmonth.utils.constant.PermissionConstants;
 import com.rainmonth.utils.log.LogUtils;
-import com.rainmonth.player.R;
 
 import java.io.File;
 import java.util.Calendar;
@@ -33,6 +32,9 @@ public class AudioRecordExampleActivity extends BaseActivity {
 
     private TextView tvMedeaRecorderStart;
     private TextView tvMediaRecorderStop;
+
+    private TextView tvAudioTrackStart;
+    private TextView tvAudioTrackStop;
 
     private RandyAudioRecorder mRecorder;
 
@@ -66,11 +68,17 @@ public class AudioRecordExampleActivity extends BaseActivity {
         tvMedeaRecorderStart = findViewById(R.id.tv_start_record1);
         tvMediaRecorderStop = findViewById(R.id.tv_stop_record1);
 
+        tvAudioTrackStart = findViewById(R.id.tv_start_record2);
+        tvAudioTrackStop = findViewById(R.id.tv_stop_record2);
+
         tvStartRecord.setOnClickListener(v -> onStartRecordClick());
         tvStopRecord.setOnClickListener(v -> onStopRecordClick());
 
         tvMedeaRecorderStart.setOnClickListener(v -> onMediaRecorderStartClick());
         tvMediaRecorderStop.setOnClickListener(v -> onMediaRecorderStopClick());
+
+        tvAudioTrackStart.setOnClickListener(v -> onAudioTrackStartClick());
+        tvAudioTrackStop.setOnClickListener(v -> onAudioTrackStopClick());
     }
 
 
@@ -92,13 +100,9 @@ public class AudioRecordExampleActivity extends BaseActivity {
         mRecorder.stopRecord();
     }
 
-    private void onMediaRecorderStartClick() {
-        startMediaRecorderRecord();
-    }
-
     private File outPutFile;
 
-    private void startMediaRecorderRecord() {
+    private void onMediaRecorderStartClick() {
         if (mMediaRecorder == null) {
             mMediaRecorder = new MediaRecorder();
         }
@@ -119,10 +123,6 @@ public class AudioRecordExampleActivity extends BaseActivity {
     }
 
     private void onMediaRecorderStopClick() {
-        stopMediaRecorderRecord();
-    }
-
-    private void stopMediaRecorderRecord() {
         try {
             if (mMediaRecorder != null) {
                 mMediaRecorder.stop();
@@ -140,4 +140,13 @@ public class AudioRecordExampleActivity extends BaseActivity {
             FileUtils.deleteFile(outPutFile);
         }
     }
+
+    private void onAudioTrackStartClick() {
+
+    }
+
+    private void onAudioTrackStopClick() {
+
+    }
+
 }
