@@ -101,5 +101,5 @@ dependencies {
     testImplementation rootProject.ext.dependencies['junit']
     testImplementation rootProject.ext.dependencies['robolectric']
 
-    api 'com.github.Rainmonth:RandyJitPack:1.0.4'
+    api 'com.github.Rainmonth:RandyJitPack:1.0.5'
 }
