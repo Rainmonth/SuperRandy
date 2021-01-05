@@ -203,10 +203,9 @@ dependencies {
     annotationProcessor rootProject.ext.dependencies["butterknife-compiler"]
     annotationProcessor rootProject.ext.dependencies["router-compiler"]
     //可选，用于生成application类
-    implementation("com.tencent.tinker:tinker-android-lib:${TINKER_VERSION}") { changing = true }
+//    implementation("com.tencent.tinker:tinker-android-lib:${TINKER_VERSION}") { changing = true }
     //tinker的核心库
-    compileOnly("com.tencent.tinker:tinker-android-anno:${TINKER_VERSION}") { changing = true }
-    annotationProcessor("com.tencent.tinker:tinker-android-anno:${TINKER_VERSION}")
+//    annotationProcessor("com.tencent.tinker:tinker-android-anno:${TINKER_VERSION}")
     androidTestImplementation rootProject.ext.dependencies["junit"]
     androidTestImplementation rootProject.ext.dependencies["android_junit"]
     // kotlin
