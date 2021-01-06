@@ -1,6 +1,7 @@
 package com.rainmonth.player.activity.other;
 
 import android.media.AudioFormat;
+import android.media.AudioManager;
 import android.media.AudioRecord;
 import android.media.MediaRecorder;
 import android.text.format.DateFormat;
@@ -40,6 +41,11 @@ public class AudioRecordExampleActivity extends BaseActivity {
 
     private MediaRecorder mMediaRecorder;
 
+    private RandyAudioTrack mRandyAudioTrack;     // 直接读取播放录制的PCM文件
+
+    private File pcmOutputFile;
+    private String pcmFileName;
+
     @Override
     public void initToolbar(int colorResId) {
 
@@ -52,15 +58,18 @@ public class AudioRecordExampleActivity extends BaseActivity {
 
     @Override
     protected void initViewsAndEvents() {
+        pcmFileName = "test_" + System.currentTimeMillis() + ".pcm";
         mRecorder = new RandyAudioRecorder.Builder()
                 .audioSource(MediaRecorder.AudioSource.MIC)
                 .sampleRate(8000)
                 .channel(AudioFormat.CHANNEL_IN_MONO)
                 .audioFormat(AudioFormat.ENCODING_PCM_16BIT)
                 .dirPath(PathUtils.getExternalAppAudioRecordPath())
-                .srcFileName("test_" + System.currentTimeMillis() + ".pcm")
+                .srcFileName(pcmFileName)
                 .disFileName("test_" + System.currentTimeMillis() + ".wav")
                 .build();
+
+        pcmOutputFile = new File(PathUtils.getExternalAppAudioRecordPath(), pcmFileName);
 
         tvStartRecord = findViewById(R.id.tv_start_record);
         tvStopRecord = findViewById(R.id.tv_stop_record);
@@ -143,6 +152,18 @@ public class AudioRecordExampleActivity extends BaseActivity {
 
     private void onAudioTrackStartClick() {
 
+        if (mRandyAudioTrack == null) {
+            mRandyAudioTrack = new RandyAudioTrack.Builder()
+                    .setStreamType(AudioManager.STREAM_MUSIC)
+                    .setSampleRateInHz(44100)
+                    .setChannelConfig(AudioFormat.CHANNEL_IN_MONO)
+                    .setAudioFormat(AudioFormat.ENCODING_PCM_16BIT)
+                    .build();
+        }
+
+        // 设置PCM数据文件的路径
+        // 将PCM数据读入到InputStream
+        // 利用AudioTrack播放 上面的InputStream
     }
 
     private void onAudioTrackStopClick() {
