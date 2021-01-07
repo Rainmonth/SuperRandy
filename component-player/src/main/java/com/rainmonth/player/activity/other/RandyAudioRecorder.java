@@ -104,9 +104,13 @@ public class RandyAudioRecorder {
             LogUtils.w(TAG, "can not startRecord due to mAudioRecord is null or mRecordState is wrong");
             return;
         }
-        mAudioRecord.startRecording();
-        mRecordState = STATE_RECORDING;
-        ThreadUtils.getIoPool().execute(this::writeAudioDataToFile);
+        try {
+            mAudioRecord.startRecording();
+            mRecordState = STATE_RECORDING;
+            ThreadUtils.getIoPool().execute(this::writeAudioDataToFile);
+        } catch (Exception e) {
+            LogUtils.printStackTrace(TAG, e);
+        }
     }
 
     public void startRecord(String recordFileName) {
