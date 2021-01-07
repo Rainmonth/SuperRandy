@@ -140,7 +140,7 @@ public class AudioRecordExampleActivity extends BaseActivity {
             public void onDenied() {
                 ToastUtils.showLong("您拒绝了录音权限，无法录音！");
             }
-        });
+        }).request();
 
     }
 
@@ -189,7 +189,7 @@ public class AudioRecordExampleActivity extends BaseActivity {
             public void onDenied() {
                 ToastUtils.showLong("您拒绝了录音权限，无法录音！");
             }
-        });
+        }).request();
     }
 
     private void onAudioTrackStopClick() {
