@@ -7,8 +7,6 @@ import android.media.AudioTrack;
 
 import androidx.annotation.IntRange;
 
-import com.rainmonth.common.thread.NamedRunnable;
-import com.rainmonth.common.thread.SrThreadService;
 import com.rainmonth.utils.CloseUtils;
 import com.rainmonth.utils.ThreadUtils;
 import com.rainmonth.utils.log.LogUtils;
@@ -16,8 +14,6 @@ import com.rainmonth.utils.log.LogUtils;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 
 /**
  * AudioTrack 封装
@@ -38,6 +34,8 @@ public class RandyAudioTrack {
      * See {@link AudioTrack#MODE_STATIC} and {@link AudioTrack#MODE_STREAM}.
      */
     private int mode = AudioTrack.MODE_STREAM;
+
+    private File pcmFile;
 
 
     public RandyAudioTrack() {
@@ -96,6 +94,7 @@ public class RandyAudioTrack {
             LogUtils.e(TAG, "pcmFile is null or not exists!!!");
             return;
         }
+        this.pcmFile = pcmFile;
         LogUtils.d(TAG, "start(), pcmFile: " + pcmFile.getPath());
         if (mode == AudioTrack.MODE_STREAM) {
             playByStream(pcmFile);
@@ -104,41 +103,24 @@ public class RandyAudioTrack {
         }
     }
 
-    private ReadNamedRunnable mReadRunnable;
-
     /**
      * 流模式，数据会从 Java 层传输到底层，并排队阻塞等待播放
-     * todo 1、所以这里需要开启线程独立播放
+     * 1、所以这里需要开启线程独立播放
      * 2、为保证能重复使用，需要对状态进行控制
      *
      * @param pcmFile pcm 文件
      */
     private void playByStream(File pcmFile) {
-        LogUtils.d(TAG, "playByStream(), pcmFile: " + pcmFile.getPath());
-        mReadRunnable = new ReadNamedRunnable(pcmFile);
-        // 线程管理 先停止或取消之前的线程，在开启新的线程
-        mAudioTrack.play();
-        SrThreadService.getInstance().executeDaemonTask(mReadRunnable, "AudioTrackStreamRunnable");
+        LogUtils.d(TAG, "playByStream()");
+        // 先取消
+        ThreadUtils.cancel(readPcmFileTask);
+        ThreadUtils.executeByIo(readPcmFileTask);
     }
 
-    private void startSteamPlayThread(File pcmFile) {
 
-    }
-
-    private void cancelStreamPlayThread(File pcmFile) {
-
-    }
-
-    class ReadNamedRunnable implements Runnable {
-
-        private File pcmFile;
-
-        public ReadNamedRunnable(File pcmFile) {
-            this.pcmFile = pcmFile;
-        }
-
+    private ThreadUtils.Task<Object> readPcmFileTask = new ThreadUtils.SimpleTask<Object>() {
         @Override
-        public void run() {
+        public Object doInBackground() throws Throwable {
             FileInputStream inputStream = null;
             try {
                 inputStream = new FileInputStream(pcmFile);
@@ -151,44 +133,54 @@ public class RandyAudioTrack {
                 }
                 mAudioTrack.stop();
                 mAudioTrack.release();
-            } catch (IOException e) {
+            } catch (Exception e) {
                 LogUtils.printStackTrace(e);
             } finally {
                 CloseUtils.closeIOQuietly(inputStream);
             }
+            return null;
         }
-    }
+
+        @Override
+        public void onSuccess(Object result) {
+            LogUtils.d(TAG, "pcm文件读取完毕");
+        }
+    };
 
     /**
      * 一次性读写 PCM 数据到buffer中进行播放
-     * todo 读取数据放到子线程
      *
      * @param pcmFile pcm 文件
      */
     private void playByStatic(File pcmFile) {
-        LogUtils.d(TAG, "playByStatic(), pcmFile: " + pcmFile.getPath());
-        FileInputStream inputStream = null;
-        ByteArrayOutputStream outputStream = null;
+        LogUtils.d(TAG, "playByStatic()");
+        Runnable runnable = () -> {
+            FileInputStream inputStream = null;
+            ByteArrayOutputStream outputStream = null;
 
-        try {
-            inputStream = new FileInputStream(pcmFile);
-            outputStream = new ByteArrayOutputStream();
-            int len;
-            byte[] buffer = new byte[1024];
-            // 从 pcm 文件中读取数据 并写到 outputStream 中，
-            // 然后 从 outputStream 中获取数据共 AudioTrack 播放
-            while ((len = inputStream.read(buffer)) > 0) {
-                outputStream.write(buffer, 0, len);
+            try {
+                inputStream = new FileInputStream(pcmFile);
+                outputStream = new ByteArrayOutputStream();
+                int len;
+                byte[] buffer = new byte[1024];
+                // 从 pcm 文件中读取数据 并写到 outputStream 中，
+                // 然后 从 outputStream 中获取数据共 AudioTrack 播放
+                while ((len = inputStream.read(buffer)) > 0) {
+                    outputStream.write(buffer, 0, len);
+                }
+                byte[] bytes = outputStream.toByteArray();
+                if (mAudioTrack != null) {
+                    mAudioTrack.write(bytes, 0, bytes.length);
+                    mAudioTrack.play();
+                }
+            } catch (Exception e) {
+                LogUtils.printStackTrace(e);
+            } finally {
+                CloseUtils.closeIOQuietly(outputStream, inputStream);
             }
-            byte[] bytes = outputStream.toByteArray();
-            mAudioTrack.write(bytes, 0, bytes.length);
-            mAudioTrack.play();
-        } catch (IOException e) {
-            LogUtils.printStackTrace(e);
-        } finally {
-            CloseUtils.closeIOQuietly(outputStream, inputStream);
-        }
+        };
 
+        ThreadUtils.getIoPool().execute(runnable);
     }
 
     public void pause() {
