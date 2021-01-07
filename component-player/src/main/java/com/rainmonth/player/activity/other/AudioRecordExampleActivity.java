@@ -35,11 +35,11 @@ public class AudioRecordExampleActivity extends BaseActivity {
 
     private TextView tvAudioTrackStart;
     private TextView tvAudioTrackStop;
-
+    //注意： 初始化要放在权限请求之后，否则会抱java.lang.IllegalStateException: startRecording() called on an uninitialized AudioRecord.
     private RandyAudioRecorder mRecorder;
-
+    //注意： 初始化要放在权限请求之后
     private MediaRecorder mMediaRecorder;
-
+    //注意： 初始化要放在权限请求之后
     private RandyAudioTrack mRandyAudioTrack;     // 直接读取播放录制的PCM文件
 
     private File pcmOutputFile;
@@ -173,7 +173,7 @@ public class AudioRecordExampleActivity extends BaseActivity {
                     mRandyAudioTrack = new RandyAudioTrack.Builder()
                             .setStreamType(AudioManager.STREAM_MUSIC)
                             .setSampleRateInHz(44100)
-                            .setChannelConfig(AudioFormat.CHANNEL_OUT_MONO)
+                            .setChannelConfig(AudioFormat.CHANNEL_OUT_MONO) // 这里需要使用CHANNEL_OUT_MONO，而不是CHANNEL_IN_MONO
                             .setAudioFormat(AudioFormat.ENCODING_PCM_16BIT)
                             .setMode(AudioTrack.MODE_STATIC)
                             .build();
