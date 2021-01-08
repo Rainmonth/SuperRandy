@@ -9,18 +9,19 @@
 
     <TextView
         android:id="@+id/tv_start_record"
+        style="@style/GreenButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="8dp"
         android:text="开始录音"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_stop_record"
+        style="@style/RedButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="8dp"
+        android:layout_marginStart="4dp"
         android:text="结束录音"
         app:layout_constraintStart_toEndOf="@+id/tv_start_record"
         app:layout_constraintTop_toTopOf="parent" />
@@ -28,39 +29,43 @@
 
     <TextView
         android:id="@+id/tv_start_record1"
+        style="@style/GreenButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="8dp"
-        android:text="MediaRecorder 开始录音"
+        android:layout_marginTop="4dp"
+        android:text="MediaRecorder\n开始录音"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_start_record" />
 
     <TextView
         android:id="@+id/tv_stop_record1"
+        style="@style/RedButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="8dp"
-        android:text="MediaRecorder 结束录音"
+        android:layout_marginStart="4dp"
+        android:text="MediaRecorder\n结束录音"
         app:layout_constraintStart_toEndOf="@+id/tv_start_record1"
-        app:layout_constraintTop_toBottomOf="@+id/tv_start_record" />
+        app:layout_constraintTop_toTopOf="@+id/tv_start_record1" />
 
     <TextView
         android:id="@+id/tv_start_record2"
+        style="@style/GreenButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="8dp"
-        android:text="AudioTrack 开始录音"
+        android:layout_marginTop="4dp"
+        android:text="AudioTrack\n开始录音"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_start_record1" />
 
     <TextView
         android:id="@+id/tv_stop_record2"
+        style="@style/RedButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="8dp"
-        android:text="AudioTrack 结束录音"
+        android:layout_marginStart="4dp"
+        android:text="AudioTrack\n结束录音"
         app:layout_constraintStart_toEndOf="@+id/tv_start_record2"
-        app:layout_constraintTop_toBottomOf="@+id/tv_start_record1" />
+        app:layout_constraintTop_toTopOf="@+id/tv_start_record2" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
