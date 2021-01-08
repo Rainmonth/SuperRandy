@@ -13,6 +13,8 @@ import com.rainmonth.player.activity.other.FloatVideoPlayerActivity;
 import com.rainmonth.player.activity.other.AudioBasicLearnActivity;
 import com.rainmonth.player.activity.list.ListPlayDemoListActivity;
 import com.rainmonth.player.activity.detail.NormalDetailVideoPlayActivity;
+import com.rainmonth.player.activity.other.video.VideoBasicLearnListActivity;
+import com.rainmonth.player.activity.other.video.VideoGetDataExampleActivity;
 import com.rainmonth.player.activity.simple.SimplePlayDemoListActivity;
 import com.rainmonth.player.activity.simple.ExoSimpleVideoPlayerActivity;
 import com.rainmonth.player.model.DetailPlayExampleBean;
@@ -38,7 +40,7 @@ public class DemoDataFactory {
         exampleBeans.add(new ExampleBean("抖音式播放", "类似于抖音的那种播放效果", ExampleBean.STATE_TODO, DyVideoPlayActivity.class));
         exampleBeans.add(new ExampleBean("支持回退时悬浮窗播放", "很多游戏直播软件在退出播放页后仍可以小窗播放", ExampleBean.STATE_TODO, FloatVideoPlayerActivity.class));
         exampleBeans.add(new ExampleBean("音频基础学习", "Android音频相关的API学习（AudioRecord、AudioTrack），Demo演示", ExampleBean.STATE_TODO, AudioBasicLearnActivity.class));
-        exampleBeans.add(new ExampleBean("视频基础学习", "Android视频相关的API学习（CameraAPI、MediaExtractor和MediaMuxer），Demo演示", ExampleBean.STATE_TODO, AudioBasicLearnActivity.class));
+        exampleBeans.add(new ExampleBean("视频基础学习", "Android视频相关的API学习（CameraAPI、MediaExtractor和MediaMuxer），Demo演示", ExampleBean.STATE_TODO, VideoBasicLearnListActivity.class));
         return exampleBeans;
     }
 
@@ -106,7 +108,7 @@ public class DemoDataFactory {
      */
     public static List<ExampleBean> getVideoLearnList() {
         List<ExampleBean> exampleBeans = new ArrayList<>();
-        exampleBeans.add(new ExampleBean("视频录制", "Android 视频录制实现",ExampleBean.STATE_TODO, VideoRecordExampleActivity.class));
+        exampleBeans.add(new ExampleBean("视频录制", "Android 视频录制实现",ExampleBean.STATE_TODO, VideoGetDataExampleActivity.class));
         return exampleBeans;
     }
 }

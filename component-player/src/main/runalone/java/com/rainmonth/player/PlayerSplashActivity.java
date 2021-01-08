@@ -28,7 +28,9 @@ public class PlayerSplashActivity extends BaseActivity {
     @Override
     protected void initViewsAndEvents() {
         mHandler = new Handler();
-        PermissionUtils.permission(PermissionConstants.STORAGE).callback(new PermissionUtils.SimpleCallback() {
+        PermissionUtils.permission(PermissionConstants.STORAGE,
+                PermissionConstants.MICROPHONE,
+                PermissionConstants.CAMERA).callback(new PermissionUtils.SimpleCallback() {
             @Override
             public void onGranted() {
                 LogUtils.d(TAG, "onGranted: " + PermissionConstants.STORAGE);

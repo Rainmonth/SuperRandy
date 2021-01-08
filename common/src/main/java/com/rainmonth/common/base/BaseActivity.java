@@ -54,7 +54,9 @@ public abstract class BaseActivity<P extends BasePresenter> extends BaseAppCompa
 
     }
 
-    public abstract void initToolbar(int colorResId);
+    public void initToolbar(int colorResId) {
+
+    }
 
     @Override
     protected void onDestroy() {

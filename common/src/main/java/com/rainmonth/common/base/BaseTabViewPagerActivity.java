@@ -20,9 +20,9 @@ public abstract class BaseTabViewPagerActivity extends BaseCleanActivity {
     ViewPager vpMain;
     TabLayout tlMain;
 
-    protected List<Fragment>          fragments = new ArrayList<>();
-    protected List<String>            titles    = new ArrayList<>();
-    protected List<Integer>           icons     = new ArrayList<>();
+    protected List<Fragment> fragments = new ArrayList<>();
+    protected List<String> titles = new ArrayList<>();
+    protected List<Integer> icons = new ArrayList<>();
     protected BaseTabViewPagerAdapter fragmentAdapter;
 
     @Override
@@ -37,13 +37,19 @@ public abstract class BaseTabViewPagerActivity extends BaseCleanActivity {
         vpMain = findViewById(R.id.vp_music_main);
         tlMain = findViewById(R.id.tl_music_main);
 
+        bindFragmentsAndTitles();
         initViewPager();
 
-        bindData();
-
-        if (fragments.size() != titles.size() || titles.size() != icons.size()) {
+        if (fragments.size() != titles.size()) {
             LogUtils.e("数据出错，请检查");
             return;
+        }
+
+        if (isNeedShowTabIcon()) {
+            if (titles.size() != icons.size()) {
+                LogUtils.e("数据出错，请检查");
+                return;
+            }
         }
 
         if (fragments.size() == 0) {
@@ -53,8 +59,12 @@ public abstract class BaseTabViewPagerActivity extends BaseCleanActivity {
         for (int i = 0; i < fragments.size(); i++) {
             TabLayout.Tab tab = tlMain.getTabAt(i);
             if (tab != null) {
-                tab.setIcon(icons.get(i));
+                tab.setText(titles.get(i));
+                if (isNeedShowTabIcon()) {
+                    tab.setIcon(icons.get(i));
+                }
             }
+
         }
     }
 
@@ -65,6 +75,15 @@ public abstract class BaseTabViewPagerActivity extends BaseCleanActivity {
         tlMain.setupWithViewPager(vpMain);
     }
 
-    public abstract void bindData();
+    /**
+     * 是否需要显示tabIcon
+     *
+     * @return true if need show tabIcon, default is false
+     */
+    protected boolean isNeedShowTabIcon() {
+        return false;
+    }
+
+    public abstract void bindFragmentsAndTitles();
 
 }

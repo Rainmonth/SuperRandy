@@ -56,11 +56,11 @@
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
             android:theme="@style/PlayerDemoActivityTheme" />
         <activity
-            android:name=".activity.other.VideoBasicLearnActivity"
+            android:name=".activity.other.video.VideoBasicLearnListActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
             android:theme="@style/PlayerDemoActivityTheme" />
         <activity
-            android:name=".VideoRecordExampleActivity"
+            android:name=".activity.other.video.VideoGetDataExampleActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
             android:theme="@style/PlayerDemoActivityTheme" />
         <activity
