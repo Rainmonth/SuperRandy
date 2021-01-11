@@ -10,8 +10,6 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.rainmonth.common.base.BaseLazyFragment;
-import com.rainmonth.common.di.component.AppComponent;
-import com.rainmonth.player.BaseCleanFragment;
 import com.rainmonth.player.R;
 import com.rainmonth.utils.BarUtils;
 import com.rainmonth.utils.PathUtils;
@@ -45,7 +43,6 @@ public class CameraFragment extends BaseLazyFragment {
 
     @Override
     protected void initViewsAndEvents(View view) {
-        TAG = "Camera";
         LogUtils.d(TAG, "initViewsAndEvents");
         mSurfaceWidth = ScreenUtils.getScreenWidth();
         mSurfaceHeight = ScreenUtils.getScreenHeight() - BarUtils.getStatusBarHeight() - SizeUtils.dp2px(48);
@@ -61,11 +58,15 @@ public class CameraFragment extends BaseLazyFragment {
 
     private void initCameraAfterSurfaceAvailable() {
         LogUtils.d(TAG, "initCameraAfterSurfaceAvailable");
-        mCamera = Camera.open();
-        mCamera.setDisplayOrientation(90);
         if (mCamera == null) {
+            mCamera = Camera.open();
+        }
+        if (mCamera == null) {
+            LogUtils.w(TAG, "调用Camera.open()后mCamera仍未空");
             return;
         }
+        mCamera.setDisplayOrientation(90);
+
         try {
             Camera.Parameters parameters = mCamera.getParameters();
             // 设置预览照片大小
@@ -130,7 +131,6 @@ public class CameraFragment extends BaseLazyFragment {
                 mSurfaceCreated = false;
                 if (mCamera != null) {
                     mCamera.stopPreview();
-                    mCamera = null;
                 }
             }
         });
@@ -139,17 +139,23 @@ public class CameraFragment extends BaseLazyFragment {
     @Override
     protected void onUserVisible() {
         LogUtils.d(TAG, "onUserVisible");
+        if (mCamera != null) {
+            mCamera.startPreview();
+        }
     }
 
     @Override
     protected void onUserInvisible() {
         LogUtils.d(TAG, "onUserInvisible");
+        if (mCamera != null) {
+            mCamera.stopPreview();
+        }
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        LogUtils.d(TAG, "onDestroyView");
+        LogUtils.d(TAG, "onDestroyView, mCamera==null: " + (mCamera == null));
         if (mCamera != null) {
             mCamera.stopPreview();
             mCamera = null;
@@ -190,10 +196,17 @@ public class CameraFragment extends BaseLazyFragment {
             //
             LogUtils.d(TAG, "output onPictureTaken");
             Bitmap resource = BitmapFactory.decodeByteArray(data, 0, data.length);
-
+//            final Matrix matrix = new Matrix();
+//            matrix.setRotate(90);
             try {
                 FileOutputStream outputStream = new FileOutputStream(PathUtils.getExternalDcimPath() + File.separator + TimeUtils.getNowString() + ".jpg");
                 resource.compress(Bitmap.CompressFormat.JPEG, 85, outputStream);
+
+                LogUtils.d(TAG, "Camera1拍照成功");
+                if (mCamera != null) {
+                    mCamera.stopPreview();
+                    mCamera.startPreview();
+                }
             } catch (FileNotFoundException e) {
                 LogUtils.printStackTrace(TAG, e);
             }

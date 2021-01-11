@@ -67,7 +67,6 @@ public class Camera2Fragment extends BaseLazyFragment {
 
     @Override
     protected void initViewsAndEvents(View view) {
-        TAG = "Camera2";
         LogUtils.d(TAG, "initViewsAndEvents");
         svPreview = view.findViewById(R.id.sv_preview);
         tvStartRecord = view.findViewById(R.id.tv_start_record);
@@ -121,7 +120,7 @@ public class Camera2Fragment extends BaseLazyFragment {
             try {
                 FileOutputStream outputStream = new FileOutputStream(PathUtils.getExternalDcimPath() + File.separator + TimeUtils.getNowString() + ".jpg");
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 85, outputStream);
-                LogUtils.d(TAG, "拍照成功");
+                LogUtils.d(TAG, "Camera2拍照成功");
             } catch (FileNotFoundException e) {
                 LogUtils.printStackTrace(TAG, e);
             }
@@ -282,12 +281,29 @@ public class Camera2Fragment extends BaseLazyFragment {
 
     @Override
     protected void onUserVisible() {
-        LogUtils.d(TAG, "onUserVisible");
+        LogUtils.d(TAG, "onUserVisible, mSurfaceCreated: " + mSurfaceCreated);
+        if (mSurfaceCreated) {
+            initCamera2AfterSurfaceAvailable();
+        }
     }
 
     @Override
     protected void onUserInvisible() {
-        LogUtils.d(TAG, "onUserInvisible");
+        LogUtils.d(TAG, "onUserInvisible, mSurfaceCreated: " + mSurfaceCreated);
+        if (mCameraDevice != null) {
+            LogUtils.d(TAG, "onUserInvisible, mCameraDevice.close()");
+            mCameraDevice.close();
+        }
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        LogUtils.d(TAG, "onDestroyView, mCameraDevice==null: " + (mCameraDevice == null));
+        if (mCameraDevice != null) {
+            mCameraDevice.close();
+            mCameraDevice = null;
+        }
     }
 
     private void onSurfaceViewClick() {
