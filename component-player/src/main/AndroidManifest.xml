@@ -3,6 +3,10 @@
     package="com.rainmonth.player">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!--声明需要使用相机功能-->
+    <uses-feature
+        android:name="android.hardware.Camera"
+        android:required="true" />
     <application>
         <activity
             android:name=".activity.simple.LocalVideoPlayerActivity"

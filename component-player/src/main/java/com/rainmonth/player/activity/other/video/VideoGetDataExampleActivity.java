@@ -19,15 +19,21 @@ public class VideoGetDataExampleActivity extends BaseTabViewPagerActivity {
 
     @Override
     public void bindFragmentsAndTitles() {
-        fragments.add(new CameraFragment());
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        if (isSupportCamera2()) {
             fragments.add(new Camera2Fragment());
+        } else {
+            fragments.add(new CameraFragment());
         }
         fragments.add(new CameraXFragment());
-        titles.add("Camera");
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        if (isSupportCamera2()) {
             titles.add("Camera2");
+        } else {
+            titles.add("Camera");
         }
         titles.add("CameraX");
+    }
+
+    private boolean isSupportCamera2() {
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP;
     }
 }

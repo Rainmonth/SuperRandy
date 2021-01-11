@@ -118,7 +118,9 @@ public abstract class BaseLazyFragment<T extends BasePresenter> extends BaseSupp
      */
     protected abstract void onUserInvisible();
 
-    protected abstract void setupFragmentComponent(AppComponent appComponent);
+    protected void setupFragmentComponent(AppComponent appComponent) {
+
+    }
 
     /**
      * init all views and add events
