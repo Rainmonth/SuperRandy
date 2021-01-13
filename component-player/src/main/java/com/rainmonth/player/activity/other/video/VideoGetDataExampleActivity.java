@@ -34,6 +34,6 @@ public class VideoGetDataExampleActivity extends BaseTabViewPagerActivity {
     }
 
     private boolean isSupportCamera2() {
-        return false;
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP;
     }
 }
