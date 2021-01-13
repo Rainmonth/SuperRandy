@@ -383,11 +383,12 @@ public class Camera2Fragment extends BaseLazyFragment {
      */
     private void updatePreview() {
         try {
-            // 自动对焦
-            mPreviewBuilder.set(CaptureRequest.CONTROL_AF_MODE, CaptureRequest.CONTROL_AF_MODE_CONTINUOUS_PICTURE);
-            // 打开闪光灯
-            mPreviewBuilder.set(CaptureRequest.CONTROL_AE_MODE, CaptureRequest.CONTROL_AE_MODE_ON_AUTO_FLASH);
+//            // 自动对焦
+//            mPreviewBuilder.set(CaptureRequest.CONTROL_AF_MODE, CaptureRequest.CONTROL_AF_MODE_CONTINUOUS_PICTURE);
+//            // 打开闪光灯
+//            mPreviewBuilder.set(CaptureRequest.CONTROL_AE_MODE, CaptureRequest.CONTROL_AE_MODE_ON_AUTO_FLASH);
 
+            mPreviewBuilder.set(CaptureRequest.CONTROL_MODE, CameraMetadata.CONTROL_MODE_AUTO);
             // 显示预览
             mCameraPreviewCaptureSession.setRepeatingRequest(mPreviewBuilder.build(), null, mChildHandler);
         } catch (CameraAccessException e) {
@@ -532,7 +533,7 @@ public class Camera2Fragment extends BaseLazyFragment {
             List<Surface> surfaces = new ArrayList<>();
             // Set up Surface for the camera preview
             mPreviewBuilder.addTarget(mSurfaceHolder.getSurface());
-
+            surfaces.add(mSurfaceHolder.getSurface());
             // Set up Surface for the MediaRecorder
             Surface recorderSurface = mMediaRecorder.getSurface();
             surfaces.add(recorderSurface);
