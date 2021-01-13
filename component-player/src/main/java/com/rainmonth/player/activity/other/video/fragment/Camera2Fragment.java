@@ -175,7 +175,7 @@ public class Camera2Fragment extends BaseLazyFragment {
             mBackgroundThread = null;
             mChildHandler = null;
         } catch (InterruptedException e) {
-
+            LogUtils.printStackTrace(TAG, e);
         }
     }
 
@@ -193,6 +193,7 @@ public class Camera2Fragment extends BaseLazyFragment {
                 FileOutputStream outputStream = new FileOutputStream(PathUtils.getExternalDcimPath() + File.separator + TimeUtils.getNowString() + ".jpg");
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 85, outputStream);
                 LogUtils.d(TAG, "Camera2拍照成功");
+                ToastUtils.showLong("Image saved to " + PathUtils.getExternalDcimPath() + File.separator + TimeUtils.getNowString() + ".jpg");
             } catch (FileNotFoundException e) {
                 LogUtils.printStackTrace(TAG, e);
             }
@@ -405,25 +406,67 @@ public class Camera2Fragment extends BaseLazyFragment {
 
     // 拍照
     private void onTakePhoto() {
-        if (mCameraDevice == null) {
+        if (mCameraDevice == null || !mSurfaceCreated || mImageReader == null) {
             return;
         }
-        final CaptureRequest.Builder captureBuilder;
+        if (mIsRecording) {
+            closePreviewSession();
+        }
+        // todo 状态处理
+        prepareImageReader();
+
         try {
-            captureBuilder = mCameraDevice.createCaptureRequest(CameraDevice.TEMPLATE_STILL_CAPTURE);
-            // 设置谱表
-            captureBuilder.addTarget(mImageReader.getSurface());
+            mPreviewBuilder = mCameraDevice.createCaptureRequest(CameraDevice.TEMPLATE_STILL_CAPTURE);
+            List<Surface> surfaces = new ArrayList<>();
+            mPreviewBuilder.addTarget(mSurfaceHolder.getSurface());
+            mPreviewBuilder.addTarget(mImageReader.getSurface());
+
+            surfaces.add(mSurfaceHolder.getSurface());
+            surfaces.add(mImageReader.getSurface());
+
             // 自动对焦
-            captureBuilder.set(CaptureRequest.CONTROL_AF_MODE, CaptureRequest.CONTROL_AF_MODE_CONTINUOUS_PICTURE);
+
+            if (mCameraPreviewCaptureSession == null) {
+                mCameraDevice.createCaptureSession(surfaces, new CameraCaptureSession.StateCallback() {
+                    @Override
+                    public void onConfigured(@NonNull CameraCaptureSession session) {
+                        mCameraPreviewCaptureSession = session;
+                        updateTakePhotoPreview();
+                    }
+
+                    @Override
+                    public void onConfigureFailed(@NonNull CameraCaptureSession session) {
+                        LogUtils.d(TAG, "createCaptureSession, onConfigureFailed");
+                    }
+                }, mChildHandler);
+            } else {
+                mCameraPreviewCaptureSession.capture(mPreviewBuilder.build(), null, mChildHandler);
+            }
+
+        } catch (CameraAccessException e) {
+            LogUtils.printStackTrace(TAG, e);
+        }
+    }
+
+    private void updateTakePhotoPreview() {
+        LogUtils.d(TAG, "updateTakePhotoPreview");
+        try {
+            mPreviewBuilder.set(CaptureRequest.CONTROL_AF_MODE, CaptureRequest.CONTROL_AF_MODE_CONTINUOUS_PICTURE);
             // 打开闪光灯
-            captureBuilder.set(CaptureRequest.CONTROL_AE_MODE, CaptureRequest.CONTROL_AE_MODE_ON_AUTO_FLASH);
+            mPreviewBuilder.set(CaptureRequest.CONTROL_AE_MODE, CaptureRequest.CONTROL_AE_MODE_ON_AUTO_FLASH);
             // 获取手机的方向
             if (getActivity() != null) {
                 int rotation = getActivity().getWindowManager().getDefaultDisplay().getRotation();
-                captureBuilder.set(CaptureRequest.JPEG_ORIENTATION, rotation);
+                switch (mSensorOrientation) {
+                    case SENSOR_ORIENTATION_DEFAULT_DEGREES:
+                        mPreviewBuilder.set(CaptureRequest.JPEG_ORIENTATION, DEFAULT_ORIENTATIONS.get(rotation));
+                        break;
+                    case SENSOR_ORIENTATION_INVERSE_DEGREES:
+                        mPreviewBuilder.set(CaptureRequest.JPEG_ORIENTATION, INVERSE_ORIENTATIONS.get(rotation));
+                        break;
+                }
             }
-            CaptureRequest captureRequest = captureBuilder.build();
-            mCameraPreviewCaptureSession.capture(captureRequest, null, mChildHandler);
+            mCameraPreviewCaptureSession.capture(mPreviewBuilder.build(), null, mChildHandler);
         } catch (CameraAccessException e) {
             LogUtils.printStackTrace(TAG, e);
         }
@@ -502,9 +545,7 @@ public class Camera2Fragment extends BaseLazyFragment {
     }
 
     private void onTakePhotoClick() {
-        // todo 拍照
-        closePreviewSession();
-//        onTakePhoto();
+        onTakePhoto();
     }
 
     private void onStartRecordClick() {
