@@ -548,8 +548,8 @@ public class Camera2Fragment extends BaseLazyFragment {
                         mIsRecording = true;
                         mMediaRecorder.start();
 
+                        tvStartRecord.setBackground(ResUtil.getDrawable(R.drawable.common_shape_16round_red));
                         tvStartRecord.setText("结束录制");
-                        tvStartRecord.setBackground(ResUtil.getDrawable(R.drawable.common_shape_16round_green));
                     });
                 }
 
@@ -568,7 +568,7 @@ public class Camera2Fragment extends BaseLazyFragment {
     private void stopRecord() {
         LogUtils.d(TAG, "stopRecord, mIsRecording: " + mIsRecording);
         tvStartRecord.setText("开始录制");
-        tvStartRecord.setBackground(ResUtil.getDrawable(R.drawable.common_shape_16round_red));
+        tvStartRecord.setBackground(ResUtil.getDrawable(R.drawable.common_shape_16round_green));
         if (mMediaRecorder != null) {
             mIsRecording = false;
             mMediaRecorder.stop();

@@ -2,6 +2,7 @@ package com.rainmonth.player;
 
 import com.rainmonth.common.base.BaseApplication;
 import com.rainmonth.player.utils.Debugger;
+import com.rainmonth.utils.ResUtil;
 
 /**
  * @author RandyZhang
@@ -15,6 +16,7 @@ public class PlayerApplication extends BaseApplication {
         if (BuildConfig.DEBUG) {
             Debugger.enable();
         }
+        ResUtil.init(this);
     }
 
     @Override
