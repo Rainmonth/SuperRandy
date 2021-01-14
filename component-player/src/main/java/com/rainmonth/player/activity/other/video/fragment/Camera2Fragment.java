@@ -732,17 +732,14 @@ public class Camera2Fragment extends BaseLazyFragment {
 
     }
 
-    private boolean isFlashUnitAvailable() {
+    private Boolean isFlashUnitAvailable() {
 
         try {
             if (mCameraManager != null) {
                 CameraCharacteristics characteristics = mCameraManager.getCameraCharacteristics(mCameraId);
                 return characteristics.get(CameraCharacteristics.FLASH_INFO_AVAILABLE);
             }
-        } catch (CameraAccessException e) {
-            LogUtils.printStackTrace(TAG, e);
-            return false;
-        } catch (NullPointerException e) {
+        } catch (CameraAccessException | NullPointerException e) {
             LogUtils.printStackTrace(TAG, e);
             return false;
         }

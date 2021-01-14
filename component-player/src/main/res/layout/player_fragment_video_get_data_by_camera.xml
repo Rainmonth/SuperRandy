@@ -12,23 +12,46 @@
         android:layout_height="match_parent" />
 
     <TextView
-        android:id="@+id/tv_start_record"
+        android:id="@+id/tv_record"
         style="@style/GreenButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
         android:layout_margin="16dp"
         android:text="开始录屏"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/tv_stop_record"
+        android:id="@+id/tv_flash_light"
         style="@style/RedButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
         android:layout_margin="16dp"
-        android:text="结束录屏"
+        android:text="开启闪光灯"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+
+    <TextView
+        android:id="@+id/tv_change_camera"
+        style="@style/BlueButton"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_margin="16dp"
+        android:text="切换摄像头"
+        app:layout_constraintBottom_toTopOf="@+id/tv_take_photo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_take_photo"
+        style="@style/BlueButton"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_margin="16dp"
+        android:text="拍照"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

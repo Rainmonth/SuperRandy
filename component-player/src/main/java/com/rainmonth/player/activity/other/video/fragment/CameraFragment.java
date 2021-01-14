@@ -4,6 +4,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.ImageFormat;
 import android.hardware.Camera;
+import android.media.CamcorderProfile;
+import android.media.MediaRecorder;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
@@ -11,11 +13,16 @@ import android.widget.TextView;
 
 import com.rainmonth.common.base.BaseLazyFragment;
 import com.rainmonth.player.R;
+import com.rainmonth.utils.AppUtils;
 import com.rainmonth.utils.BarUtils;
+import com.rainmonth.utils.FileUtils;
 import com.rainmonth.utils.PathUtils;
+import com.rainmonth.utils.ResUtil;
 import com.rainmonth.utils.ScreenUtils;
 import com.rainmonth.utils.SizeUtils;
+import com.rainmonth.utils.StringUtils;
 import com.rainmonth.utils.TimeUtils;
+import com.rainmonth.utils.ToastUtils;
 import com.rainmonth.utils.log.LogUtils;
 
 import java.io.File;
@@ -28,13 +35,22 @@ import java.io.IOException;
  */
 public class CameraFragment extends BaseLazyFragment {
     private SurfaceView svPreview;
-    private TextView tvStartRecord;
-    private TextView tvStopRecord;
+    private TextView tvRecord;
+    private TextView tvFlashLight;
+    private TextView tvChangeCamera;
+    private TextView tvTakePhoto;
 
     private Camera mCamera;
     private SurfaceHolder mSurfaceHolder;
     private int mSurfaceWidth, mSurfaceHeight;
     private boolean mSurfaceCreated;
+    private boolean mIsRecording = false;
+
+    private MediaRecorder mMediaRecorder;
+    private String mOutputVideoFile;
+    private boolean mIsFlashOn = false;
+
+    private int mCameraId = Camera.CameraInfo.CAMERA_FACING_BACK;
 
     @Override
     protected int getContentViewLayoutID() {
@@ -47,19 +63,28 @@ public class CameraFragment extends BaseLazyFragment {
         mSurfaceWidth = ScreenUtils.getScreenWidth();
         mSurfaceHeight = ScreenUtils.getScreenHeight() - BarUtils.getStatusBarHeight() - SizeUtils.dp2px(48);
         svPreview = view.findViewById(R.id.sv_preview);
-        tvStartRecord = view.findViewById(R.id.tv_start_record);
-        tvStopRecord = view.findViewById(R.id.tv_stop_record);
+        tvRecord = view.findViewById(R.id.tv_record);
+        tvFlashLight = view.findViewById(R.id.tv_flash_light);
+        tvChangeCamera = view.findViewById(R.id.tv_change_camera);
+        tvTakePhoto = view.findViewById(R.id.tv_take_photo);
 
-        svPreview.setOnClickListener(v -> onSurfaceClick());
-        tvStartRecord.setOnClickListener(v -> onStartRecordClick());
-        tvStopRecord.setOnClickListener(v -> onStopRecordClick());
-
+        tvTakePhoto.setOnClickListener(v -> onTakePhotoClick());
+        tvRecord.setOnClickListener(v -> onRecordClick());
+        tvFlashLight.setOnClickListener(v -> onFlashLightClick());
+        tvChangeCamera.setOnClickListener(v -> onChangeCameraClick());
     }
 
     private void initCameraAfterSurfaceAvailable() {
         LogUtils.d(TAG, "initCameraAfterSurfaceAvailable");
+        openCamera();
+    }
+
+    private void openCamera() {
+        if (!mSurfaceCreated || mSurfaceHolder == null) {
+            return;
+        }
         if (mCamera == null) {
-            mCamera = Camera.open();
+            mCamera = Camera.open(mCameraId);
         }
         if (mCamera == null) {
             LogUtils.w(TAG, "调用Camera.open()后mCamera仍未空");
@@ -80,8 +105,6 @@ public class CameraFragment extends BaseLazyFragment {
 //        parameters.set("jpeg-quality", 90)
             // 设置照片大小
             parameters.setPictureSize(mSurfaceWidth, mSurfaceHeight);
-            // todo 设置自动对焦
-            // todo 设置闪光等
             // 设置目标
             mCamera.setPreviewDisplay(mSurfaceHolder);
             // 开始预览
@@ -91,19 +114,26 @@ public class CameraFragment extends BaseLazyFragment {
         }
     }
 
+    private void closeCamera() {
+        if (mCamera != null) {
+            mCamera.stopPreview();
+            mCamera.release();
+            mCamera = null;
+        }
+    }
+
     @Override
     public void onResume() {
         super.onResume();
         LogUtils.d(TAG, "onResume, mCamera==null: " + (mCamera == null) + ", mSurfaceHolder==null: " + (mSurfaceHolder == null));
+        openCamera();
     }
 
     @Override
     public void onPause() {
         super.onPause();
         LogUtils.d(TAG, "onPause");
-        if (mCamera != null) {
-            mCamera.stopPreview();
-        }
+        closeCamera();
     }
 
     @Override
@@ -139,6 +169,7 @@ public class CameraFragment extends BaseLazyFragment {
     @Override
     protected void onUserVisible() {
         LogUtils.d(TAG, "onUserVisible");
+
         if (mCamera != null) {
             mCamera.startPreview();
         }
@@ -162,8 +193,8 @@ public class CameraFragment extends BaseLazyFragment {
         }
     }
 
-    private void onSurfaceClick() {
-        LogUtils.i(TAG, "onSurfaceClick");
+    private void onTakePhotoClick() {
+        LogUtils.i(TAG, "onTakePhotoClick");
         if (mCamera == null) {
             return;
         }
@@ -213,12 +244,92 @@ public class CameraFragment extends BaseLazyFragment {
         }
     };
 
-    private void onStartRecordClick() {
-
+    private void onRecordClick() {
+        if (mCamera == null || !mSurfaceCreated || mSurfaceHolder == null) {
+            return;
+        }
+        if (mIsRecording) { // 正在录制
+            mIsRecording = false;
+            tvRecord.setBackground(ResUtil.getDrawable(R.drawable.common_shape_16round_green));
+            tvRecord.setText("开始录制");
+            if (mMediaRecorder != null) {
+                mMediaRecorder.stop();
+                mMediaRecorder.release();
+                mMediaRecorder = null;
+            }
+            mOutputVideoFile = null;
+            mCamera.lock();
+            mCamera.startPreview();
+        } else {
+            if (StringUtils.isEmpty(mOutputVideoFile)) {
+                mOutputVideoFile = getOutputFilePath();
+            }
+            mIsRecording = true;
+            tvRecord.setBackground(ResUtil.getDrawable(R.drawable.common_shape_16round_red));
+            tvRecord.setText("结束录制");
+            mCamera.stopPreview();
+            mCamera.unlock();
+            mMediaRecorder = new MediaRecorder();
+            mMediaRecorder.setCamera(mCamera);
+            mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+            mMediaRecorder.setVideoSource(MediaRecorder.VideoSource.CAMERA);
+            CamcorderProfile profile = CamcorderProfile.get(CamcorderProfile.QUALITY_LOW);
+            mMediaRecorder.setProfile(profile);
+            mMediaRecorder.setOutputFile(mOutputVideoFile);
+            mMediaRecorder.setPreviewDisplay(mSurfaceHolder.getSurface());
+            try {
+                mMediaRecorder.prepare();
+                mMediaRecorder.start();
+            } catch (Exception e) {
+                LogUtils.printStackTrace(TAG, e);
+            }
+        }
     }
 
-    private void onStopRecordClick() {
+    private String getOutputFilePath() {
+        File dir = FileUtils.makeDirs(PathUtils.getExternalDcimPath() + File.separator + AppUtils.getAppPackageName());
+        return dir.getPath() + File.separator + "camera_vid_" + TimeUtils.getNowString() + ".mp4";
+    }
 
+    private void onFlashLightClick() {
+        if (mCamera == null) {
+            return;
+        }
+
+        if (!isSupportFlashLight()) {
+            LogUtils.w(TAG, "当前设备不支持闪光灯");
+            return;
+        }
+
+        Camera.Parameters parameters = mCamera.getParameters();
+        if (mIsFlashOn) {
+            mIsFlashOn = false;
+            ToastUtils.showShort("闪光灯关闭");
+            parameters.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
+        } else {
+            mIsFlashOn = true;
+            ToastUtils.showShort("闪光灯开启");
+            parameters.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
+        }
+        mCamera.setParameters(parameters);
+    }
+
+    private boolean isSupportFlashLight() {
+        if (mCamera == null) {
+            return false;
+        }
+
+        return mCamera.getParameters().getSupportedFlashModes() != null;
+    }
+
+    private void onChangeCameraClick() {
+        if (mCameraId == Camera.CameraInfo.CAMERA_FACING_BACK) {
+            mCameraId = Camera.CameraInfo.CAMERA_FACING_FRONT;
+        } else {
+            mCameraId = Camera.CameraInfo.CAMERA_FACING_BACK;
+        }
+        closeCamera();
+        openCamera();
     }
 
 }
