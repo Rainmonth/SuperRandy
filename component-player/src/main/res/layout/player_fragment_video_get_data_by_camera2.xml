@@ -22,12 +22,12 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/tv_stop_record"
+        android:id="@+id/tv_flash_light"
         style="@style/RedButton"
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:layout_margin="16dp"
-        android:text="结束录屏"
+        android:text="开启闪光灯"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

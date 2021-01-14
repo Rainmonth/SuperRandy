@@ -15,7 +15,6 @@ import android.hardware.camera2.CameraManager;
 import android.hardware.camera2.CameraMetadata;
 import android.hardware.camera2.CaptureRequest;
 import android.hardware.camera2.params.StreamConfigurationMap;
-import android.media.CamcorderProfile;
 import android.media.Image;
 import android.media.ImageReader;
 import android.media.MediaRecorder;
@@ -67,6 +66,11 @@ import java.util.concurrent.TimeUnit;
 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
 public class Camera2Fragment extends BaseLazyFragment {
 
+    private static final int FLASH_MODE_OFF = 0;
+    private static final int FLASH_MODE_ON = 1;
+
+    private int mFlashMode = FLASH_MODE_OFF;
+
     private final int SENSOR_ORIENTATION_DEFAULT_DEGREES = 90;
     private final int SENSOR_ORIENTATION_INVERSE_DEGREES = 270;
 
@@ -95,7 +99,7 @@ public class Camera2Fragment extends BaseLazyFragment {
     private SurfaceView svPreview;
     private TextView tvStartRecord;
     private TextView tvChangeCamera;
-    private TextView tvStopRecord;
+    private TextView tvFlashLight;
     private TextView tvTakePhoto;
 
     private SurfaceHolder mSurfaceHolder;
@@ -131,23 +135,25 @@ public class Camera2Fragment extends BaseLazyFragment {
         svPreview = view.findViewById(R.id.sv_preview);
         tvStartRecord = view.findViewById(R.id.tv_start_record);
         tvChangeCamera = view.findViewById(R.id.tv_change_camera);
-        tvStopRecord = view.findViewById(R.id.tv_stop_record);
+        tvFlashLight = view.findViewById(R.id.tv_flash_light);
         tvTakePhoto = view.findViewById(R.id.tv_take_photo);
 
         tvTakePhoto.setOnClickListener(v -> onTakePhotoClick());
         tvStartRecord.setOnClickListener(v -> onStartRecordClick());
         tvChangeCamera.setOnClickListener(v -> onChangeCameraClick());
-        tvStopRecord.setOnClickListener(v -> onStopRecordClick());
+        tvFlashLight.setOnClickListener(v -> onFlashLightClick());
     }
 
     private void checkCameraIds() {
         LogUtils.d(TAG, "checkCameraIds");
         String[] cameraIds = null;
         try {
-            cameraIds = mCameraManager.getCameraIdList();
-            CameraCharacteristics characteristics = mCameraManager.getCameraCharacteristics(String.valueOf(mCameraId));
-            StreamConfigurationMap map = characteristics.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP);
-            mSensorOrientation = characteristics.get(CameraCharacteristics.SENSOR_ORIENTATION);
+            if (mCameraManager != null) {
+                cameraIds = mCameraManager.getCameraIdList();
+                CameraCharacteristics characteristics = mCameraManager.getCameraCharacteristics(String.valueOf(mCameraId));
+                StreamConfigurationMap map = characteristics.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP);
+                mSensorOrientation = characteristics.get(CameraCharacteristics.SENSOR_ORIENTATION);
+            }
         } catch (CameraAccessException e) {
             LogUtils.printStackTrace(TAG, e);
             ToastUtils.showShort("获取cameraIds失败");
@@ -180,6 +186,7 @@ public class Camera2Fragment extends BaseLazyFragment {
     }
 
     private void prepareImageReader() {
+        closeImageReader();
         mImageReader = ImageReader.newInstance(1080, 1920, ImageFormat.JPEG, 1);
         mImageReader.setOnImageAvailableListener(reader -> {
             // 拿到拍照照片数据
@@ -198,6 +205,36 @@ public class Camera2Fragment extends BaseLazyFragment {
                 LogUtils.printStackTrace(TAG, e);
             }
         }, mMainHandler);
+    }
+
+    private void handleFlashLight(CaptureRequest.Builder requestBuilder, int mFlashMode) {
+        switch (mFlashMode) {
+            case FLASH_MODE_OFF:
+            default:
+                requestBuilder.set(CaptureRequest.FLASH_MODE, CaptureRequest.FLASH_MODE_OFF);
+                requestBuilder.set(CaptureRequest.CONTROL_AE_MODE, CaptureRequest.CONTROL_AE_MODE_ON);
+                break;
+            case FLASH_MODE_ON:
+                // 打开闪光灯
+                requestBuilder.set(CaptureRequest.FLASH_MODE, CaptureRequest.FLASH_MODE_TORCH);
+                requestBuilder.set(CaptureRequest.CONTROL_AE_MODE, CaptureRequest.CONTROL_AE_MODE_ON);
+                break;
+        }
+        try {
+            if (mCameraPreviewCaptureSession != null) {
+                mCameraPreviewCaptureSession.setRepeatingRequest(requestBuilder.build(), null, mChildHandler);
+            }
+        } catch (CameraAccessException e) {
+            LogUtils.printStackTrace(TAG, e);
+        }
+
+    }
+
+    private void closeImageReader() {
+        if (mImageReader != null) {
+            mImageReader.close();
+            mImageReader = null;
+        }
     }
 
     /**
@@ -220,7 +257,6 @@ public class Camera2Fragment extends BaseLazyFragment {
             if (!mCameraOpenCloseLock.tryAcquire(2500, TimeUnit.MILLISECONDS)) {
                 throw new RuntimeException("Time out waiting to lock camera opening.");
             }
-            mCameraId = mCameraManager.getCameraIdList()[0]; // 默认后置摄像头
             CameraCharacteristics characteristics = mCameraManager.getCameraCharacteristics(mCameraId);
             StreamConfigurationMap streamConfigurationMap = characteristics.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP);
             if (streamConfigurationMap == null) {
@@ -262,7 +298,7 @@ public class Camera2Fragment extends BaseLazyFragment {
     }
 
     private Size chooseOptimalSize(Size[] choices, int width, int height, Size aspectRatio) {
-// Collect the supported resolutions that are at least as big as the preview Surface
+        // Collect the supported resolutions that are at least as big as the preview Surface
         List<Size> bigEnough = new ArrayList<>();
         int w = aspectRatio.getWidth();
         int h = aspectRatio.getHeight();
@@ -343,6 +379,7 @@ public class Camera2Fragment extends BaseLazyFragment {
                 mMediaRecorder.release();
                 mMediaRecorder = null;
             }
+            closeImageReader();
         } catch (InterruptedException e) {
             throw new RuntimeException("Interrupted while trying to lock camera closing.");
         } finally {
@@ -383,6 +420,7 @@ public class Camera2Fragment extends BaseLazyFragment {
      * 更改预览配置
      */
     private void updatePreview() {
+        LogUtils.d(TAG, "updatePreview");
         try {
 //            // 自动对焦
 //            mPreviewBuilder.set(CaptureRequest.CONTROL_AF_MODE, CaptureRequest.CONTROL_AF_MODE_CONTINUOUS_PICTURE);
@@ -398,6 +436,7 @@ public class Camera2Fragment extends BaseLazyFragment {
     }
 
     private void closePreviewSession() {
+        LogUtils.d(TAG, "closePreviewSession");
         if (mCameraPreviewCaptureSession != null) {
             mCameraPreviewCaptureSession.close();
             mCameraPreviewCaptureSession = null;
@@ -406,13 +445,12 @@ public class Camera2Fragment extends BaseLazyFragment {
 
     // 拍照
     private void onTakePhoto() {
-        if (mCameraDevice == null || !mSurfaceCreated || mImageReader == null) {
+        if (mCameraDevice == null || !mSurfaceCreated) {
             return;
         }
-        if (mIsRecording) {
-            closePreviewSession();
-        }
-        // todo 状态处理
+//        if (mIsRecording) {
+        closePreviewSession();
+//        }
         prepareImageReader();
 
         try {
@@ -432,6 +470,7 @@ public class Camera2Fragment extends BaseLazyFragment {
                     public void onConfigured(@NonNull CameraCaptureSession session) {
                         mCameraPreviewCaptureSession = session;
                         updateTakePhotoPreview();
+                        startPreview();
                     }
 
                     @Override
@@ -441,6 +480,7 @@ public class Camera2Fragment extends BaseLazyFragment {
                 }, mChildHandler);
             } else {
                 mCameraPreviewCaptureSession.capture(mPreviewBuilder.build(), null, mChildHandler);
+                startPreview();
             }
 
         } catch (CameraAccessException e) {
@@ -452,8 +492,6 @@ public class Camera2Fragment extends BaseLazyFragment {
         LogUtils.d(TAG, "updateTakePhotoPreview");
         try {
             mPreviewBuilder.set(CaptureRequest.CONTROL_AF_MODE, CaptureRequest.CONTROL_AF_MODE_CONTINUOUS_PICTURE);
-            // 打开闪光灯
-            mPreviewBuilder.set(CaptureRequest.CONTROL_AE_MODE, CaptureRequest.CONTROL_AE_MODE_ON_AUTO_FLASH);
             // 获取手机的方向
             if (getActivity() != null) {
                 int rotation = getActivity().getWindowManager().getDefaultDisplay().getRotation();
@@ -665,14 +703,49 @@ public class Camera2Fragment extends BaseLazyFragment {
     private void onChangeCameraClick() {
         if (String.valueOf(CameraCharacteristics.LENS_FACING_BACK).equals(mCameraId)) {
             mCameraId = String.valueOf(CameraCharacteristics.LENS_FACING_FRONT); // 后置摄像头
+            closeCamera();
+            openCamera();
         } else {
             mCameraId = String.valueOf(CameraCharacteristics.LENS_FACING_BACK); // 前置摄像头
+            closeCamera();
+            openCamera();
         }
-
-        // todo 相机的切换
     }
 
-    private void onStopRecordClick() {
+    private void onFlashLightClick() {
+        if (!isFlashUnitAvailable()) {
+            LogUtils.w(TAG, "当前设备不支持闪光灯");
+            return;
+        }
 
+        if (mPreviewBuilder == null) {
+            return;
+        }
+        if (mFlashMode == FLASH_MODE_OFF) {
+            mFlashMode = FLASH_MODE_ON;
+            ToastUtils.showShort("闪光灯开启");
+        } else {
+            mFlashMode = FLASH_MODE_OFF;
+            ToastUtils.showShort("闪光灯关闭");
+        }
+        handleFlashLight(mPreviewBuilder, mFlashMode);
+
+    }
+
+    private boolean isFlashUnitAvailable() {
+
+        try {
+            if (mCameraManager != null) {
+                CameraCharacteristics characteristics = mCameraManager.getCameraCharacteristics(mCameraId);
+                return characteristics.get(CameraCharacteristics.FLASH_INFO_AVAILABLE);
+            }
+        } catch (CameraAccessException e) {
+            LogUtils.printStackTrace(TAG, e);
+            return false;
+        } catch (NullPointerException e) {
+            LogUtils.printStackTrace(TAG, e);
+            return false;
+        }
+        return false;
     }
 }
