@@ -111,6 +111,7 @@ public class RandyAudioTrack {
      * @param pcmFile pcm 文件
      */
     private void playByStream(File pcmFile) {
+        this.pcmFile = pcmFile;
         LogUtils.d(TAG, "playByStream()");
         // 先取消
         ThreadUtils.cancel(readPcmFileTask);

@@ -12,6 +12,10 @@
         <item name="android:windowBackground">@drawable/player_activity_splash_bg</item>
     </style>
 
+    <style name="PlayerFullScreeTheme" parent="BaseTheme.FullScreen">
+
+    </style>
+
     <style name="PlayerDemoActivityTheme" parent="PlayerAppTheme">
         <item name="android:configChanges">
             keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode

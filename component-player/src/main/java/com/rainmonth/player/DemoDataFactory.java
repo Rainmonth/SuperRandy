@@ -14,6 +14,7 @@ import com.rainmonth.player.activity.other.AudioBasicLearnActivity;
 import com.rainmonth.player.activity.list.ListPlayDemoListActivity;
 import com.rainmonth.player.activity.detail.NormalDetailVideoPlayActivity;
 import com.rainmonth.player.activity.other.video.VideoBasicLearnListActivity;
+import com.rainmonth.player.activity.other.video.VideoFileExtractorAndMuxerActivity;
 import com.rainmonth.player.activity.other.video.VideoGetDataExampleActivity;
 import com.rainmonth.player.activity.simple.SimplePlayDemoListActivity;
 import com.rainmonth.player.activity.simple.ExoSimpleVideoPlayerActivity;
@@ -108,7 +109,8 @@ public class DemoDataFactory {
      */
     public static List<ExampleBean> getVideoLearnList() {
         List<ExampleBean> exampleBeans = new ArrayList<>();
-        exampleBeans.add(new ExampleBean("视频录制", "Android 视频录制实现",ExampleBean.STATE_TODO, VideoGetDataExampleActivity.class));
+        exampleBeans.add(new ExampleBean("视频录制，拍照", "Android 视频录制拍照实现",ExampleBean.STATE_FINISH, VideoGetDataExampleActivity.class));
+        exampleBeans.add(new ExampleBean("解析封装mp4文件", "Android 使用MediaExtractor 和 MediaMuxer API 解析和封装 mp4 文件",ExampleBean.STATE_UNDER, VideoFileExtractorAndMuxerActivity.class));
         return exampleBeans;
     }
 }
