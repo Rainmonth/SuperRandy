@@ -98,7 +98,7 @@
         <activity
             android:name=".activity.other.video.VideoFileExtractorAndMuxerActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
-            android:theme="@style/PlayerDemoActivityTheme" />
+            android:theme="@style/PlayerFullScreeTheme" />
         <activity
             android:name=".activity.list.DyVideoPlayActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
