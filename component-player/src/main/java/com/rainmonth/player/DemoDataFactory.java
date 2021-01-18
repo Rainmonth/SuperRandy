@@ -16,6 +16,7 @@ import com.rainmonth.player.activity.detail.NormalDetailVideoPlayActivity;
 import com.rainmonth.player.activity.other.video.VideoBasicLearnListActivity;
 import com.rainmonth.player.activity.other.video.VideoFileExtractorAndMuxerActivity;
 import com.rainmonth.player.activity.other.video.VideoGetDataExampleActivity;
+import com.rainmonth.player.activity.other.video.VideoMediaCodecApiActivity;
 import com.rainmonth.player.activity.simple.SimplePlayDemoListActivity;
 import com.rainmonth.player.activity.simple.ExoSimpleVideoPlayerActivity;
 import com.rainmonth.player.model.DetailPlayExampleBean;
@@ -99,8 +100,8 @@ public class DemoDataFactory {
      */
     public static List<ExampleBean> getAudioLearnList() {
         List<ExampleBean> exampleBeans = new ArrayList<>();
-        exampleBeans.add(new ExampleBean("音频录制", "Android 音频录制实现",ExampleBean.STATE_TODO, AudioRecordExampleActivity.class));
-        exampleBeans.add(new ExampleBean("利用SoundTouch实现变声", "Android 利用SoundTouch实现音频的变声",ExampleBean.STATE_TODO, AudioChangeVoiceWithSoundTouchActivity.class));
+        exampleBeans.add(new ExampleBean("音频录制", "Android 音频录制实现", ExampleBean.STATE_TODO, AudioRecordExampleActivity.class));
+        exampleBeans.add(new ExampleBean("利用SoundTouch实现变声", "Android 利用SoundTouch实现音频的变声", ExampleBean.STATE_TODO, AudioChangeVoiceWithSoundTouchActivity.class));
         return exampleBeans;
     }
 
@@ -109,8 +110,9 @@ public class DemoDataFactory {
      */
     public static List<ExampleBean> getVideoLearnList() {
         List<ExampleBean> exampleBeans = new ArrayList<>();
-        exampleBeans.add(new ExampleBean("视频录制，拍照", "Android 视频录制拍照实现",ExampleBean.STATE_FINISH, VideoGetDataExampleActivity.class));
-        exampleBeans.add(new ExampleBean("解析封装mp4文件", "Android 使用MediaExtractor 和 MediaMuxer API 解析和封装 mp4 文件",ExampleBean.STATE_UNDER, VideoFileExtractorAndMuxerActivity.class));
+        exampleBeans.add(new ExampleBean("视频录制，拍照", "Android 视频录制拍照实现", ExampleBean.STATE_FINISH, VideoGetDataExampleActivity.class));
+        exampleBeans.add(new ExampleBean("解析封装mp4文件", "Android 使用MediaExtractor 和 MediaMuxer API 解析和封装 mp4 文件", ExampleBean.STATE_FINISH, VideoFileExtractorAndMuxerActivity.class));
+        exampleBeans.add(new ExampleBean("MediaCodec API使用", "使用MediaCodec API完成AAC文件的硬解和H.264文件的硬解", ExampleBean.STATE_UNDER, VideoMediaCodecApiActivity.class));
         return exampleBeans;
     }
 }
