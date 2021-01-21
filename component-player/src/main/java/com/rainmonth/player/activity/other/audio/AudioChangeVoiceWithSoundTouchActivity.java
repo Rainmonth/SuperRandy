@@ -1,4 +1,4 @@
-package com.rainmonth.player.activity.other;
+package com.rainmonth.player.activity.other.audio;
 
 import com.rainmonth.common.base.BaseActivity;
 import com.rainmonth.player.R;

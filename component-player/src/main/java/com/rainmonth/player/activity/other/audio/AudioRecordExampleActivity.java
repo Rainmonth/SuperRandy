@@ -1,4 +1,4 @@
-package com.rainmonth.player.activity.other;
+package com.rainmonth.player.activity.other.audio;
 
 import android.media.AudioFormat;
 import android.media.AudioManager;
@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import com.rainmonth.common.base.BaseActivity;
 import com.rainmonth.player.R;
+import com.rainmonth.player.activity.other.audio.RandyAudioRecorder;
+import com.rainmonth.player.activity.other.audio.RandyAudioTrack;
 import com.rainmonth.utils.FileUtils;
 import com.rainmonth.utils.PathUtils;
 import com.rainmonth.utils.PermissionUtils;

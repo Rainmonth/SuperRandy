@@ -76,15 +76,15 @@
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
             android:theme="@style/PlayerDemoActivityTheme" />
         <activity
-            android:name=".activity.other.AudioBasicLearnActivity"
+            android:name=".activity.other.audio.AudioBasicLearnActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
             android:theme="@style/PlayerDemoActivityTheme" />
         <activity
-            android:name=".activity.other.AudioRecordExampleActivity"
+            android:name=".activity.other.audio.AudioRecordExampleActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
             android:theme="@style/PlayerDemoActivityTheme" />
         <activity
-            android:name=".activity.other.AudioChangeVoiceWithSoundTouchActivity"
+            android:name=".activity.other.audio.AudioChangeVoiceWithSoundTouchActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
             android:theme="@style/PlayerFullScreeTheme" />
         <activity

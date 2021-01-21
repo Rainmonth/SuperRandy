@@ -1,4 +1,4 @@
-package com.rainmonth.player.activity.other;
+package com.rainmonth.player.activity.other.audio;
 
 import android.media.AudioFormat;
 import android.media.AudioRecord;

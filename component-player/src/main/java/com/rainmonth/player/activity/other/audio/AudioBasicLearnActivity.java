@@ -1,4 +1,4 @@
-package com.rainmonth.player.activity.other;
+package com.rainmonth.player.activity.other.audio;
 
 import com.rainmonth.common.bean.ExampleBean;
 import com.rainmonth.player.DemoDataFactory;

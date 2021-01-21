@@ -273,7 +273,7 @@ public class CameraFragment extends BaseLazyFragment {
             mMediaRecorder.setCamera(mCamera);
             mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
             mMediaRecorder.setVideoSource(MediaRecorder.VideoSource.CAMERA);
-            CamcorderProfile profile = CamcorderProfile.get(CamcorderProfile.QUALITY_LOW);
+            CamcorderProfile profile = CamcorderProfile.get(CamcorderProfile.QUALITY_HIGH);
             mMediaRecorder.setProfile(profile);
             mMediaRecorder.setOutputFile(mOutputVideoFile);
             mMediaRecorder.setPreviewDisplay(mSurfaceHolder.getSurface());
