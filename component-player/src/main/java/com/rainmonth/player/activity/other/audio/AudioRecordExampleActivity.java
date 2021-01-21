@@ -9,8 +9,6 @@ import android.widget.TextView;
 
 import com.rainmonth.common.base.BaseActivity;
 import com.rainmonth.player.R;
-import com.rainmonth.player.activity.other.audio.RandyAudioRecorder;
-import com.rainmonth.player.activity.other.audio.RandyAudioTrack;
 import com.rainmonth.utils.FileUtils;
 import com.rainmonth.utils.PathUtils;
 import com.rainmonth.utils.PermissionUtils;
@@ -38,11 +36,11 @@ public class AudioRecordExampleActivity extends BaseActivity {
     private TextView tvAudioTrackStart;
     private TextView tvAudioTrackStop;
     //注意： 初始化要放在权限请求之后，否则会抱java.lang.IllegalStateException: startRecording() called on an uninitialized AudioRecord.
-    private RandyAudioRecorder mRecorder;
+    private AudioRecordWrapper mRecorder;
     //注意： 初始化要放在权限请求之后
     private MediaRecorder mMediaRecorder;
     //注意： 初始化要放在权限请求之后
-    private RandyAudioTrack mRandyAudioTrack;     // 直接读取播放录制的PCM文件
+    private AudioTrackWrapper mAudioTrackWrapper;     // 直接读取播放录制的PCM文件
 
     private File pcmOutputFile;
     private String pcmFileName;
@@ -89,7 +87,7 @@ public class AudioRecordExampleActivity extends BaseActivity {
             @Override
             public void onGranted() {
                 if (mRecorder == null) {
-                    mRecorder = new RandyAudioRecorder.Builder()
+                    mRecorder = new AudioRecordWrapper.Builder()
                             .audioSource(MediaRecorder.AudioSource.MIC)
                             .sampleRate(8000)
                             .channel(AudioFormat.CHANNEL_IN_MONO)
@@ -171,8 +169,8 @@ public class AudioRecordExampleActivity extends BaseActivity {
         PermissionUtils.permission(PermissionConstants.MICROPHONE).callback(new PermissionUtils.SimpleCallback() {
             @Override
             public void onGranted() {
-                if (mRandyAudioTrack == null) {
-                    mRandyAudioTrack = new RandyAudioTrack.Builder()
+                if (mAudioTrackWrapper == null) {
+                    mAudioTrackWrapper = new AudioTrackWrapper.Builder()
                             .setStreamType(AudioManager.STREAM_MUSIC)
                             .setSampleRateInHz(44100)
                             .setChannelConfig(AudioFormat.CHANNEL_OUT_MONO) // 这里需要使用CHANNEL_OUT_MONO，而不是CHANNEL_IN_MONO
@@ -184,7 +182,7 @@ public class AudioRecordExampleActivity extends BaseActivity {
                 // 设置PCM数据文件的路径
                 // 将PCM数据读入到InputStream
                 // 利用AudioTrack播放 上面的InputStream
-                mRandyAudioTrack.start(pcmOutputFile);
+                mAudioTrackWrapper.start(pcmOutputFile);
             }
 
             @Override
@@ -196,8 +194,8 @@ public class AudioRecordExampleActivity extends BaseActivity {
 
     private void onAudioTrackStopClick() {
         LogUtils.d(TAG, "onAudioTrackStopClick");
-        if (mRandyAudioTrack != null) {
-            mRandyAudioTrack.stop();
+        if (mAudioTrackWrapper != null) {
+            mAudioTrackWrapper.stop();
         }
     }
 

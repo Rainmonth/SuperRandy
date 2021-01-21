@@ -22,10 +22,10 @@ import java.io.FileInputStream;
  * @author randy
  * @date 2021/01/06
  */
-public class RandyAudioTrack {
-    private static final String TAG = "RandyAudioTrack";
+public class AudioTrackWrapper {
+    private static final String TAG = "AudioTrackWrapper";
 
-    private AudioTrack mAudioTrack;
+    private final AudioTrack mAudioTrack;
     private int streamType = AudioManager.STREAM_MUSIC;
     private int sampleRateInHz = 44100;
     private int channelConfig = AudioFormat.CHANNEL_IN_MONO;
@@ -38,7 +38,10 @@ public class RandyAudioTrack {
     private File pcmFile;
 
 
-    public RandyAudioTrack() {
+    /**
+     * 默认构造行数
+     */
+    public AudioTrackWrapper() {
         int minBufferSize = AudioTrack.getMinBufferSize(sampleRateInHz, channelConfig, audioFormat);
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
@@ -60,7 +63,43 @@ public class RandyAudioTrack {
         }
     }
 
-    public RandyAudioTrack(Builder builder) {
+    /**
+     * 传参构造器
+     *
+     * @param streamType     流类型
+     * @param sampleRateInHz 采样率
+     * @param channelConfig  声道配置
+     * @param audioFormat    音频数据的呈现格式 8位、16位还是浮点
+     * @param mode           模式（static or stream)
+     */
+    public AudioTrackWrapper(int streamType, int sampleRateInHz, int channelConfig, int audioFormat, int mode) {
+        int minBufferSize = AudioTrack.getMinBufferSize(sampleRateInHz, channelConfig, audioFormat);
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            AudioAttributes audioAttributes;
+            AudioFormat format;
+            int sessionId = AudioManager.AUDIO_SESSION_ID_GENERATE;
+            audioAttributes = new AudioAttributes.Builder()
+                    .setLegacyStreamType(streamType)
+                    .build();
+            format = new AudioFormat.Builder()
+                    .setChannelMask(channelConfig)
+                    .setEncoding(audioFormat)
+                    .setSampleRate(sampleRateInHz)
+                    .build();
+
+            mAudioTrack = new AudioTrack(audioAttributes, format, minBufferSize, mode, sessionId);
+        } else {
+            mAudioTrack = new AudioTrack(streamType, sampleRateInHz, channelConfig, audioFormat, minBufferSize, mode);
+        }
+    }
+
+    /**
+     * 构造器构造
+     *
+     * @param builder 构造器
+     */
+    public AudioTrackWrapper(Builder builder) {
         this.streamType = builder.streamType;
         this.sampleRateInHz = builder.sampleRateInHz;
         this.channelConfig = builder.channelConfig;
@@ -72,6 +111,8 @@ public class RandyAudioTrack {
     }
 
     /**
+     * 开始播放
+     *
      * @param pcmPath pcm 所在目录路径
      * @param pcmName pcm 文件名
      */
@@ -80,6 +121,8 @@ public class RandyAudioTrack {
     }
 
     /**
+     * 开始播放
+     *
      * @param pcmDir  pcm 所在目录
      * @param pcmName pcm 文件名
      */
@@ -88,6 +131,11 @@ public class RandyAudioTrack {
         start(pcmFile);
     }
 
+    /**
+     * 开始播放
+     *
+     * @param pcmFile 要播放的pcm文件
+     */
     public void start(File pcmFile) {
 
         if (pcmFile == null || !pcmFile.exists()) {
@@ -119,7 +167,7 @@ public class RandyAudioTrack {
     }
 
 
-    private ThreadUtils.Task<Object> readPcmFileTask = new ThreadUtils.SimpleTask<Object>() {
+    private final ThreadUtils.Task<Object> readPcmFileTask = new ThreadUtils.SimpleTask<Object>() {
         @Override
         public Object doInBackground() throws Throwable {
             FileInputStream inputStream = null;
@@ -184,24 +232,36 @@ public class RandyAudioTrack {
         ThreadUtils.getIoPool().execute(runnable);
     }
 
+    /**
+     * 暂停播放
+     */
     public void pause() {
         if (mAudioTrack != null) {
             mAudioTrack.pause();
         }
     }
 
+    /**
+     * 停止播放
+     */
     public void stop() {
         if (mAudioTrack != null) {
             mAudioTrack.stop();
         }
     }
 
+    /**
+     * 释放资源
+     */
     public void release() {
         if (mAudioTrack != null) {
             mAudioTrack.release();
         }
     }
 
+    /**
+     * AudioTrack构造器
+     */
     static class Builder {
         private int streamType = AudioManager.STREAM_MUSIC;
         private int sampleRateInHz = 44100;
@@ -234,8 +294,8 @@ public class RandyAudioTrack {
             return this;
         }
 
-        public RandyAudioTrack build() {
-            return new RandyAudioTrack(this);
+        public AudioTrackWrapper build() {
+            return new AudioTrackWrapper(this);
         }
     }
 
