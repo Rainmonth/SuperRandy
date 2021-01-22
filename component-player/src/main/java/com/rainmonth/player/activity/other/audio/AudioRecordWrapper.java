@@ -17,16 +17,16 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 /**
- * AudioRecord 录音封装
+ * {@link AudioRecord}AudioRecord 录音封装
  * <p>
  * 使用建造者模式
  *
  * @author RandyZhang
  * @date 2020/12/22 11:29 AM
  */
-public class RandyAudioRecorder {
+public class AudioRecordWrapper {
 
-    private static final String TAG = "RandyAudioRecorder";
+    private static final String TAG = "AudioRecordWrapper";
 
     private static final int STATE_INIT = 0;                            // 初始化状态
     private static final int STATE_RECORDING = 1;                       // 录制状态
@@ -54,12 +54,12 @@ public class RandyAudioRecorder {
     private AudioRecord mAudioRecord;                                   // 用来音频录制的AudioRecord
     private int mBufferedSizeInBytes;                                   // 音频录制的最小缓冲值
 
-    public RandyAudioRecorder() {
+    public AudioRecordWrapper() {
         int bufferSizeInBytes = AudioRecord.getMinBufferSize(sampleRateInHz, channelConfig, audioFormat);
         mAudioRecord = new AudioRecord(audioSource, sampleRateInHz, channelConfig, audioFormat, bufferSizeInBytes);
     }
 
-    public RandyAudioRecorder(Builder builder) {
+    public AudioRecordWrapper(Builder builder) {
         this.audioSource = builder.audioSource;
         this.sampleRateInHz = builder.sampleRateInHz;
         this.channelConfig = builder.channelConfig;
@@ -192,6 +192,9 @@ public class RandyAudioRecorder {
         });
     }
 
+    /**
+     * AudioRecorderWrapper构造器
+     */
     static class Builder {
         private int audioSource;            // 录音硬件来源
         private int sampleRateInHz;         // 采样率
@@ -236,8 +239,8 @@ public class RandyAudioRecorder {
             return this;
         }
 
-        public RandyAudioRecorder build() {
-            return new RandyAudioRecorder(this);
+        public AudioRecordWrapper build() {
+            return new AudioRecordWrapper(this);
         }
     }
 }
