@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".activity.other.opengl.OpenGlDemoActivity">
 
-    <com.rainmonth.player.activity.other.opengl.RandyGlSurfaceView
+    <com.rainmonth.player.activity.other.opengl.OpenGlDemoActivity.RandyGlSurfaceView
         android:id="@+id/gl_surface_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
