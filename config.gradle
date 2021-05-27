@@ -22,6 +22,7 @@ ext {
 //            "video",
 //            "read",
 //            "player"
+//            "avsample"
     ]
 
     // 第三方依赖库版本控制

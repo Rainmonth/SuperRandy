@@ -13,3 +13,4 @@ include ':common-res',
         ':component-player'
 
 System.out.println("settingsDir:" + getSettingsDir().toString())
+include ':component-avsample'

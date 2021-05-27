@@ -1,0 +1,11 @@
+apply from: "../base_component.gradle"
+apply from: "../base_component_compiler.gradle"
+
+dependencies {
+    api rootProject.ext.dependencies["exoplayer"]
+    api rootProject.ext.dependencies["exoplayer-extension-rtmp"]
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    api rootProject.ext.dependencies["ijkplayer"]
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+}
