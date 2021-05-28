@@ -24,7 +24,7 @@ public abstract class BaseActivity<P extends BasePresenter> extends BaseAppCompa
     @Inject
     protected P mPresenter;
 
-    private SafeHandler mHandler = null;
+    private volatile SafeHandler mHandler = null;
 
     public SafeHandler getSafeHandler() {
         if (mHandler == null) {

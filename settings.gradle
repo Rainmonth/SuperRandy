@@ -10,7 +10,8 @@ include ':common-res',
         ':component-app',
         ':component-read',
         ':component-image',
-        ':component-player'
+        ':component-player',
+        ':component-avsample',
+         ':component-notebook'
 
 System.out.println("settingsDir:" + getSettingsDir().toString())
-include ':component-avsample'

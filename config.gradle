@@ -23,6 +23,7 @@ ext {
 //            "read",
 //            "player"
 //            "avsample"
+//            "notebook"
     ]
 
     // 第三方依赖库版本控制
