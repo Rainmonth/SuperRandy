@@ -12,8 +12,8 @@ import com.rainmonth.R;
 import com.rainmonth.common.http.imageloader.ImageLoader;
 import com.rainmonth.common.http.imageloader.glide.GlideImageConfig;
 import com.rainmonth.common.utils.ComponentUtils;
-import com.rainmonth.common.widgets.RandyViewPager;
-import com.rainmonth.common.widgets.RandyViewPager.ViewHolder;
+import com.rainmonth.common.widgets.viewpager.RandyViewPager;
+import com.rainmonth.common.widgets.viewpager.RandyViewPager.ViewHolder;
 import com.rainmonth.mvp.model.bean.PursueBean;
 import com.rainmonth.mvp.model.bean.PursueGroupBean;
 

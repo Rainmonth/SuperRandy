@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <com.rainmonth.common.widgets.RandyViewPager
+    <com.rainmonth.common.widgets.viewpager.RandyViewPager
         android:id="@+id/vp_banner"
         android:layout_width="match_parent"
         android:layout_height="200dp"

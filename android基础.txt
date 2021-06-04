@@ -1,4 +1,10 @@
 Android基础
 1. 四大组件（Activity、Service、ContentProvider、BroadcastReceiver）
+    - Activity的启动
+    - Service两种方式的启动：startService和bindService
 2. Fragment
-3. Android 应用的启动过程
+3. Android 应用的启动过程：涉及到进程的创建、Activity的启动
+4. View事件分发
+5. View自定义
+6. Handler机制
+7. SQLite的基本使用方法

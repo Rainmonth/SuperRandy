@@ -16,7 +16,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.rainmonth.common.widgets.RandyViewPager
+    <com.rainmonth.common.widgets.viewpager.RandyViewPager
         android:id="@+id/rvp_pursue_album"
         android:layout_width="0dp"
         android:layout_height="120dp"

@@ -165,7 +165,7 @@ public class BrowserLayout extends LinearLayout {
     }
 
     public WebView getWebView() {
-        return mWebView != null ? mWebView : null;
+        return mWebView;
     }
 
     public void hideBrowserController() {

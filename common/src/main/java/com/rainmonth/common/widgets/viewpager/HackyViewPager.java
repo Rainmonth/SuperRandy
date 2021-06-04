@@ -1,4 +1,4 @@
-package com.rainmonth.common.widgets;
+package com.rainmonth.common.widgets.viewpager;
 
 import android.content.Context;
 

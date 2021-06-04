@@ -19,7 +19,7 @@ import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.common.http.PageData;
 import com.rainmonth.common.http.imageloader.glide.GlideImageConfig;
 import com.rainmonth.utils.log.LogUtils;
-import com.rainmonth.common.widgets.RandyViewPager;
+import com.rainmonth.common.widgets.viewpager.RandyViewPager;
 import com.rainmonth.di.component.DaggerRenComponent;
 import com.rainmonth.di.module.RenModule;
 import com.rainmonth.mvp.contract.RenContract;
