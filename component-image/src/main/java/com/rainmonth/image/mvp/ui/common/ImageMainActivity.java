@@ -10,6 +10,7 @@ import com.rainmonth.common.base.BaseWebActivity;
 import com.rainmonth.common.di.component.AppComponent;
 import com.rainmonth.image.R;
 import com.rainmonth.image.api.Consts;
+import com.rainmonth.image.mvp.demo.DecorationDemoActivity;
 import com.rainmonth.image.mvp.ui.collection.CollectionHomeActivity;
 import com.rainmonth.image.mvp.ui.photo.PhotoHomeActivity;
 import com.rainmonth.image.mvp.ui.search.SearchActivity;
@@ -64,7 +65,8 @@ public class ImageMainActivity extends BaseActivity {
         imageBtnPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                readyGo(PhotoHomeActivity.class);
+                readyGo(DecorationDemoActivity.class);
+//                readyGo(PhotoHomeActivity.class);
             }
         });
         imageBtnCollection.setOnClickListener(new View.OnClickListener() {

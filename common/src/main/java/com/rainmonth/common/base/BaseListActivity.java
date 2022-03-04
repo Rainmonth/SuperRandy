@@ -3,14 +3,16 @@ package com.rainmonth.common.base;
 import android.view.View;
 
 import androidx.annotation.LayoutRes;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.rainmonth.common.R;
 import com.rainmonth.adapter.base.BaseQuickAdapter;
 import com.rainmonth.adapter.base.BaseViewHolder;
+import com.rainmonth.common.R;
 import com.rainmonth.common.bean.BaseBean;
+import com.rainmonth.common.decoration.CombineGridItemDecoration;
+import com.rainmonth.utils.DensityUtils;
+import com.rainmonth.utils.log.LogUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,8 +60,8 @@ public abstract class BaseListActivity<T extends BaseBean> extends BaseActivity 
     /**
      * RecyclerView初始化
      */
-    private void initRecyclerView() {
-        rvList.setLayoutManager(new LinearLayoutManager(mContext));
+    protected void initRecyclerView() {
+        rvList.setLayoutManager(new GridLayoutManager(mContext, getSpanCount()));
         adapter = new BaseQuickAdapter<T, BaseViewHolder>(getItemViewLayoutId(), datas) {
             @Override
             protected void convert(BaseViewHolder helper, T item) {
@@ -73,6 +75,29 @@ public abstract class BaseListActivity<T extends BaseBean> extends BaseActivity 
             adapter.setEnableLoadMore(true);
             adapter.setOnLoadMoreListener(this::onListLoadMore, rvList);
         }
+        int boundSpace = DensityUtils.dip2px(mContext, 20);
+        int space = DensityUtils.dip2px(mContext, 10);
+        try {
+            rvList.addItemDecoration(new CombineGridItemDecoration(
+                    new CombineGridItemDecoration.Builder()
+                            .spanCount(getSpanCount())
+                            .totalCount(datas.size())
+                            .enableFirstLeft(true, boundSpace)
+                            .enableLastRight(true, boundSpace)
+                            .enableFirstTop(true, boundSpace)
+                            .enableLastBottom(true, boundSpace)
+                            .left(space)
+                            .right(space)
+                            .top(space)
+                            .bottom(space)
+                            .build()));
+        } catch (Exception e) {
+            LogUtils.printStackTrace(e);
+        }
+    }
+
+    protected int getSpanCount() {
+        return 4;
     }
 
     private void onListItemClick(BaseQuickAdapter adapter, View view, int position) {
