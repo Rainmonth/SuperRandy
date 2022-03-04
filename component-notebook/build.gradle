@@ -1,8 +1,19 @@
 apply from: "../base_component.gradle"
+apply plugin: 'org.greenrobot.greendao' // apply plugin
 apply from: "../base_component_compiler.gradle"
+
+greendao {
+    schemaVersion 1
+    // 指定dao包名
+    daoPackage 'com.rainmonth.notebook.dao'
+    targetGenDir 'src/main/java'
+}
 
 dependencies {
     api rootProject.ext.dependencies["exoplayer"]
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation rootProject.ext.dependencies['greenDAO']
+    implementation 'androidx.test:monitor:1.3.0'
+    implementation 'androidx.test.ext:junit:1.1.3'
 }
