@@ -2,4 +2,17 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.rainmonth.notebook">
 
+    <application
+        android:label="@string/notebook_app_name"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".NotebookMainActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize|fontScale|locale"
+            android:theme="@style/AppTheme">
+            <intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+    </application>
 </manifest>

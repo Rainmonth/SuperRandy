@@ -1,0 +1,21 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+<!--    &lt;!&ndash; Base application theme. &ndash;&gt;-->
+<!--    <style name="NotebookAppTheme" parent="Theme.AppCompat.Light.NoActionBar">-->
+<!--        &lt;!&ndash; Customize your theme here. &ndash;&gt;-->
+<!--        <item name="colorPrimary">@color/colorPrimary</item>-->
+<!--        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>-->
+<!--        <item name="colorAccent">@color/colorAccent</item>-->
+<!--        &lt;!&ndash;加上就去掉了Window你的背景，但容易引发问题&ndash;&gt;-->
+<!--        &lt;!&ndash;        <item name="android:windowBackground">@null</item>&ndash;&gt;-->
+<!--    </style>-->
+
+<!--    <style name="NotebookFullscreen" parent="NotebookAppTheme">-->
+<!--        &lt;!&ndash;        <item name="windowActionBar">false</item>&ndash;&gt;-->
+<!--        &lt;!&ndash;        <item name="windowNoTitle">true</item>&ndash;&gt;-->
+<!--        &lt;!&ndash;        <item name="android:windowFullscreen">true</item>&ndash;&gt;-->
+<!--        <item name="android:screenOrientation">portrait</item>-->
+<!--        <item name="android:configChanges">orientation|screenSize|fontScale</item>-->
+<!--    </style>-->
+
+</resources>

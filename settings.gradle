@@ -12,6 +12,6 @@ include ':common-res',
         ':component-image',
         ':component-player',
         ':component-avsample',
-         ':component-notebook'
+        ':component-notebook'
 
 System.out.println("settingsDir:" + getSettingsDir().toString())
